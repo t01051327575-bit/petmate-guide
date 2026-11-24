@@ -1726,9 +1726,9 @@
       var name = cleanProduct(rec.n);
       var qty = rec.q && rec.q > 1 ? ' ' + rec.q + '개' : '';
       if(sameDay){
-        L.push('· ' + name + qty);
+        L.push('• ' + name + qty);
       } else {
-        L.push('· ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
+        L.push('• ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
       }
     });
     L.push('');
