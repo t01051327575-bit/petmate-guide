@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🛒 동물병원 재구매 안내 · 이전 구매이력 조회 &amp; 문구 만들기</title>
+<meta name="description" content="판매내역 엑셀만 올리면 보호자·아이별 이전 구매이력을 찾아 재구매 안내 카톡 문구까지 1분 만에 완성됩니다. 서버 전송 없이 우리 병원 기기 안에서만 처리되는 범용 도구입니다.">
+
+<!-- Open Graph (카카오톡 공유 카드) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="🛒 동물병원 재구매 안내 · 이전 구매이력 조회 &amp; 문구 만들기">
+<meta property="og:description" content="판매내역 엑셀 + 보호자·아이 이름만 있으면 재구매 안내문 완성. 구매이력 조회부터 문구 복사까지 한 페이지에서.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/rebuy.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+<meta property="og:image:secure_url" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="동물병원 재구매 안내 문구 만들기">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🛒 동물병원 재구매 안내 · 이전 구매이력 조회 &amp; 문구 만들기">
+<meta name="twitter:description" content="판매내역 엑셀 + 보호자·아이 이름만 있으면 재구매 안내문 완성.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+
+<style>
+  :root{
+    --ink:#1b2a2f;
+    --ink-soft:#4b6068;
+    --muted:#6b8087;
+    --line:#e2ebee;
+    --mint:#0f9d8f;
+    --mint-d:#0a7a6f;
+    --mint-l:#e6f7f4;
+    --cream:#fffaf2;
+    --card:#ffffff;
+    --shadow:0 1px 2px rgba(16,45,52,.05), 0 8px 24px rgba(16,45,52,.07);
+    --radius:18px;
+    --hosp-bg:#ecf8f5;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  [hidden]{display:none!important}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 520px at 8% -10%, #d9f4ee 0%, rgba(217,244,238,0) 62%),
+      radial-gradient(900px 460px at 100% 0%, #fff1d8 0%, rgba(255,241,216,0) 55%),
+      #f6faf9;
+    background-attachment:fixed;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:22px 16px 56px}
+
+  /* ---------- header ---------- */
+  header.hero{
+    background:linear-gradient(150deg,#0f9d8f 0%,#12b3a2 52%,#3fc9b0 100%);
+    color:#fff;border-radius:22px;padding:26px 22px 24px;
+    box-shadow:0 10px 30px rgba(15,157,143,.24);
+    position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-46px;top:-58px;width:190px;height:190px;
+    background:rgba(255,255,255,.13);border-radius:50%;
+  }
+  header.hero::before{
+    content:"";position:absolute;right:34px;bottom:-72px;width:120px;height:120px;
+    background:rgba(255,255,255,.10);border-radius:50%;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.34);
+    color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.2px;
+    padding:5px 11px;border-radius:999px;margin-bottom:12px;position:relative;z-index:1;
+  }
+  h1{
+    font-size:clamp(21px,5.4vw,29px);line-height:1.34;margin:0 0 8px;
+    letter-spacing:-.4px;font-weight:800;position:relative;z-index:1;
+  }
+  .hero .sub{
+    margin:0;font-size:14px;color:rgba(255,255,255,.94);position:relative;z-index:1;
+  }
+  h1 .brk{display:none}
+  .hero .sub strong{font-weight:700;border-bottom:2px solid rgba(255,255,255,.5);padding-bottom:1px}
+
+  /* ---------- flow strip ---------- */
+  .flow{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 0;
+  }
+  .flow.four{grid-template-columns:repeat(4,1fr)}
+  .flow div{
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;padding:9px 8px;text-align:center;
+    font-size:12px;font-weight:700;color:#fff;line-height:1.35;position:relative;z-index:1;
+  }
+  .flow div span{display:block;font-size:15px;opacity:.85;margin-bottom:2px}
+
+  /* ---------- step card ---------- */
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 18px;margin-top:16px;
+  }
+  .step-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+  .num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:11px;
+    background:var(--mint-l);color:var(--mint-d);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;
+  }
+  .step-head h2{
+    font-size:17.5px;margin:5px 0 0;letter-spacing:-.3px;font-weight:800;line-height:1.4;
+  }
+  .step-head .hint{display:block;font-size:12.5px;color:var(--muted);font-weight:500;margin-top:3px}
+  .step-body{padding-left:0;margin-top:14px;font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---------- step 1 items ---------- */
+  .mat{
+    display:flex;gap:12px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#fbfdfd;
+    margin-bottom:10px;
+  }
+  .mat:last-child{margin-bottom:0}
+  .mat .tag{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#fff;border:1.5px solid var(--mint);
+    color:var(--mint-d);font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .mat .txt{flex:1;min-width:0}
+  .mat b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+  .mat p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+  .mat code, code.k{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:#eef5f6;border:1px solid #dde9ec;border-radius:6px;
+    padding:1px 6px;font-size:12.5px;color:#26454d;word-break:break-all;
+  }
+  .linkbtn{
+    display:inline-flex;align-items:center;gap:7px;margin-top:9px;
+    background:var(--mint);color:#fff;text-decoration:none;
+    font-size:13px;font-weight:700;padding:9px 14px;border-radius:10px;
+    box-shadow:0 2px 8px rgba(15,157,143,.25);
+  }
+  .linkbtn:active{transform:translateY(1px)}
+  .reset{
+    background:#fff;border:1px solid var(--line);color:var(--muted);
+    font-family:inherit;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .reset:active{transform:translateY(1px)}
+
+  /* ---------- 파일 올리기 ---------- */
+  .drop{
+    margin-top:6px;display:flex;align-items:center;gap:10px;
+    border:1.5px dashed #c9dedb;border-radius:12px;background:#f7fcfb;
+    padding:11px 12px;cursor:pointer;color:var(--muted);font-size:12.2px;line-height:1.5;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .drop:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+  .drop.over{border-color:var(--mint);background:var(--mint-l)}
+  .drop .ic{flex:0 0 auto;font-size:19px;line-height:1}
+  .drop b{display:block;color:var(--ink-soft);font-size:13px;margin-bottom:2px}
+  .xlsxrow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:9px}
+  .xlsxbtn{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#fff;border:1.5px solid #cfe7e3;color:var(--mint-d);
+    font-family:inherit;font-size:12.4px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .xlsxbtn:active{transform:translateY(1px)}
+  .xlsxbtn[disabled]{opacity:.55;cursor:default}
+  .xlsxbtn .opt{font-weight:600;color:var(--muted);font-size:11px;margin-left:2px}
+  .xlsxstatus{margin-top:7px;font-size:11.6px;color:var(--muted);line-height:1.55}
+  .xlsxstatus b{display:inline;font-size:inherit;color:var(--mint-d)}
+  .xlsxstatus.err{color:#9c2b23;font-weight:700}
+  .xlsxstatus.err b{color:#9c2b23}
+
+  /* ---------- 데이터 요약 카드 ---------- */
+  .dstat{
+    margin-top:10px;border:1px solid #d7ebe7;border-radius:14px;background:#f7fcfa;padding:11px 12px;
+    display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;
+  }
+  .dstat .cell{min-width:0}
+  .dstat .cell span{display:block;font-size:10.8px;font-weight:800;color:var(--muted);letter-spacing:-.1px}
+  .dstat .cell b{
+    display:block;font-size:12.6px;color:var(--ink);font-weight:800;line-height:1.45;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .dstat .cell b.wrap{white-space:normal;overflow:visible}
+  .dstat .wide{grid-column:1 / -1}
+  .dstat .sbadge{
+    display:inline-block;vertical-align:middle;margin-left:5px;
+    background:#f4ecd8;border:1px solid #ecdcb9;color:#8a6520;
+    font-size:10.4px;font-weight:800;border-radius:999px;padding:1px 7px;
+  }
+
+  /* ---------- 검색 ---------- */
+  .sbox{margin-top:2px}
+  .sbox input[type=search]{
+    width:100%;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);
+    background:#fff;border:1.5px solid #d8e7e7;border-radius:12px;padding:12px 13px;outline:none;
+    -webkit-appearance:none;transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .sbox input[type=search]:focus{border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .sbox input[type=search]::placeholder{color:#a6b8bc;font-weight:500}
+  .slist{margin-top:8px;display:flex;flex-direction:column;gap:5px;max-height:290px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .sitem{
+    display:flex;align-items:center;gap:9px;width:100%;text-align:left;
+    background:#fff;border:1px solid #e4eef0;border-radius:11px;padding:9px 11px;
+    font-family:inherit;font-size:13.2px;color:var(--ink-soft);cursor:pointer;line-height:1.4;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .sitem:hover{background:#f7fcfb;border-color:#cfe7e3}
+  .sitem.on{background:#f1faf8;border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.1)}
+  .sitem .who{flex:1;min-width:0}
+  .sitem .who b{color:var(--ink);font-weight:800}
+  .sitem .who .pet{color:var(--mint-d);font-weight:800}
+  .sitem .who .met{display:block;font-size:11.2px;color:var(--muted);font-weight:600;margin-top:2px}
+  .sitem .go{flex:0 0 auto;font-size:11.6px;font-weight:800;color:var(--mint-d)}
+  .snone{padding:12px 3px;font-size:12.6px;color:var(--muted);line-height:1.6}
+  .smore{font-size:11.4px;color:var(--muted);padding:4px 3px}
+
+  /* ---------- 선택한 보호자 ---------- */
+  .pairhead{
+    margin-top:13px;border:1.5px solid #cfe7e3;border-radius:14px;
+    background:linear-gradient(180deg,#fbfdfc,#eef9f6);padding:12px 13px;
+  }
+  .pairhead .ttl{font-size:14.6px;font-weight:800;color:var(--ink);line-height:1.45}
+  .pairhead .ttl .pd{color:var(--mint-d)}
+  .pairhead .met{margin-top:3px;font-size:11.8px;color:var(--muted);font-weight:600;line-height:1.5}
+  .petrow{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;align-items:center}
+  .petrow .plabel{font-size:10.8px;font-weight:800;color:var(--muted);margin-right:1px}
+  .pchip{
+    background:#fff;border:1px solid #d8e7e7;color:var(--ink-soft);
+    font-family:inherit;font-size:11.6px;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .pchip.on{background:var(--mint-d);border-color:var(--mint-d);color:#fff}
+  .pchip:active{transform:translateY(1px)}
+
+  .selbar{
+    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+    margin-top:11px;padding:9px 11px;border-radius:11px;background:#f1faf8;border:1px solid #d9ece8;
+  }
+  .selbar .cnt{font-size:12px;font-weight:800;color:var(--mint-d);line-height:1.4}
+  .selbar .sp{flex:1}
+  .selbar button{
+    background:#fff;border:1px solid #cfe7e3;color:var(--mint-d);
+    font-family:inherit;font-size:11.4px;font-weight:800;padding:5px 10px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .selbar button:active{transform:translateY(1px)}
+
+  /* ---------- 구매이력 ---------- */
+  .hlist{margin-top:9px;display:flex;flex-direction:column;gap:6px}
+  .hrow{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #e4eef0;border-radius:12px;background:#fff;padding:10px 11px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .hrow:hover{border-color:#cfe7e3;background:#fbfefd}
+  .hrow.on{border-color:var(--mint);background:#f4fcfa;box-shadow:0 0 0 2px rgba(15,157,143,.08)}
+  .hrow input[type=checkbox]{
+    flex:0 0 auto;width:19px;height:19px;margin:2px 0 0;accent-color:#0f9d8f;cursor:pointer;
+  }
+  .hmain{flex:1;min-width:0}
+  .hline1{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.6px;color:var(--muted);font-weight:700}
+  .hline1 .dt{color:var(--ink-soft);font-weight:800}
+  .hline1 .el{color:#8a9ba1;font-weight:600}
+  .hname{display:block;font-size:13.4px;font-weight:800;color:var(--ink);line-height:1.45;margin-top:2px}
+  .hraw{display:block;font-size:11px;color:#9aabb0;font-weight:500;line-height:1.45;margin-top:2px;word-break:break-all}
+  .hqty{font-size:11.6px;color:var(--ink-soft);font-weight:800;margin-left:4px}
+  .rp{
+    display:inline-block;background:#eaf8f4;border:1px solid #c9eae3;color:#0a7a6f;
+    font-size:10.6px;font-weight:800;border-radius:999px;padding:1px 8px;line-height:1.55;
+  }
+  .rp.cat{background:#fff6e6;border-color:#f0dcb6;color:#8a6520}
+  .hmore{font-size:11.4px;color:var(--muted);padding:5px 3px}
+  .empbox{
+    margin-top:10px;border:1.5px dashed #d5e7e5;border-radius:12px;background:#fafefd;
+    padding:13px;font-size:12.4px;color:#8aa0a5;line-height:1.6;text-align:center;
+  }
+
+  /* ---------- 4단계 ---------- */
+  .mk-go{
+    width:100%;border:0;cursor:pointer;font-family:inherit;
+    background:linear-gradient(180deg,#12b3a2,#0d9488);color:#fff;
+    font-size:16.4px;font-weight:800;letter-spacing:-.3px;padding:16px 16px;border-radius:14px;
+    box-shadow:0 6px 18px rgba(13,148,136,.3);-webkit-tap-highlight-color:transparent;
+    transition:transform .08s ease, box-shadow .15s ease;
+  }
+  .mk-go:hover{box-shadow:0 8px 22px rgba(13,148,136,.38)}
+  .mk-go:active{transform:translateY(1px)}
+  .pv-empty{
+    margin-top:11px;border:1.5px dashed #d5e7e5;border-radius:12px;background:#fafefd;
+    padding:12px;font-size:12.4px;color:#8aa0a5;line-height:1.55;text-align:center;
+  }
+  .result{margin-top:14px;border-top:1px dashed #d9eaea;padding-top:14px}
+  .pv-head{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+  .pv-head > span:first-child{font-size:12.6px;font-weight:800;color:var(--ink-soft)}
+  .cnt-badge{
+    margin-left:auto;font-size:11.6px;font-weight:800;border-radius:999px;padding:3px 10px;
+    background:#eaf8f4;color:#0a7a6f;border:1px solid #cfeae5;white-space:nowrap;
+  }
+  .cnt-badge.tight{background:#fff4e2;color:#9a6a12;border-color:#f2dfbc}
+  .cnt-badge.over{background:#fdeceb;color:#9c2b23;border-color:#f6cfcb}
+  .whoami{
+    margin:0 2px 10px;font-size:11.8px;font-weight:800;color:var(--mint-d);line-height:1.5;
+    background:#f1faf8;border:1px solid #d9ece8;border-radius:9px;padding:7px 10px;
+  }
+  .bubble{
+    background:#fef7c9;border-radius:14px 14px 14px 4px;padding:13px 14px;
+    font-size:13.4px;line-height:1.72;color:#20282a;
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+    white-space:pre-wrap;word-break:break-word;
+  }
+  .pv-note{margin:8px 2px 0;font-size:11.6px;color:var(--muted);line-height:1.55}
+  .pv-note b{display:inline;font-size:inherit;color:var(--mint-d)}
+  .pv-copy{
+    width:100%;margin-top:11px;cursor:pointer;font-family:inherit;border:0;
+    background:linear-gradient(180deg,#12b3a2,#0d9488);color:#fff;
+    font-size:15.6px;font-weight:800;letter-spacing:-.2px;padding:14px 14px;border-radius:13px;
+    box-shadow:0 5px 14px rgba(13,148,136,.26);-webkit-tap-highlight-color:transparent;
+  }
+  .pv-copy:active{transform:translateY(1px)}
+  .pv-copy.done{background:linear-gradient(180deg,#3fbf8f,#1f9d6b);box-shadow:0 5px 14px rgba(31,157,107,.26)}
+
+  .tip{
+    display:flex;gap:10px;margin-top:14px;background:var(--cream);
+    border:1px solid #f3e4c6;border-radius:14px;padding:12px 13px;font-size:13px;color:#6b5527;
+  }
+  .tip .ic{flex:0 0 auto;font-size:15px;line-height:1.4}
+  .tip b{color:#7a5c17}
+
+  ul.mini{margin:10px 0 0;padding-left:18px;font-size:13px;color:var(--muted)}
+  ul.mini li{margin:4px 0}
+
+  footer{
+    margin-top:22px;text-align:center;font-size:12px;color:#8a9ba1;line-height:1.7;
+  }
+  footer b{color:#5c7379}
+
+  /* ---------- toast ---------- */
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:#12333a;color:#fff;font-size:14px;font-weight:700;
+    padding:12px 18px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.28);
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
+    z-index:99;max-width:calc(100vw - 32px);text-align:center;line-height:1.5;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ---------- 1단계 · 우리 병원 ---------- */
+  .hosp{
+    border:1.5px solid #cfe7e3;border-radius:14px;padding:13px 14px;margin-bottom:12px;
+    background:linear-gradient(180deg,#fbfdfc,var(--hosp-bg,#ecf8f5));
+  }
+  .hosp-label{
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+    font-size:13.2px;font-weight:800;color:var(--mint-d);margin:0 0 7px;line-height:1.4;
+  }
+  .hosp-label .opt{font-weight:600;color:var(--muted);font-size:11px}
+  .hosp input[type=text], .hosp input[type=url]{
+    width:100%;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);
+    background:#fff;border:1.5px solid #d8e7e7;border-radius:11px;padding:10px 12px;outline:none;
+    -webkit-appearance:none;transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .hosp input[type=url]{font-size:12.8px;font-weight:600}
+  .hosp input[type=text]:focus, .hosp input[type=url]:focus{border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .hosp input::placeholder{color:#a6b8bc;font-weight:500}
+  .hosp-hint{margin:6px 1px 0;font-size:11.4px;color:var(--muted);line-height:1.55}
+  .hosp-hint b{display:inline;font-size:inherit;color:var(--mint-d)}
+  .hosp-note{
+    margin:7px 1px 0;padding:7px 9px;border-radius:9px;
+    background:#f1faf8;border:1px solid #d9ece8;
+    font-size:11.3px;font-weight:700;color:var(--mint-d);line-height:1.55;
+  }
+  .hosp-sub{margin-top:11px}
+  .hosp-sub .hosp-label{margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;
+    background:#fff;border:1.5px solid #d8e7e7;color:var(--ink-soft);
+    font-family:inherit;font-size:11.8px;font-weight:700;line-height:1;
+    padding:7px 10px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chip:active{transform:translateY(1px)}
+  .chip .sw{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.12);flex:0 0 auto}
+  .chip.on{border-color:var(--mint);color:var(--mint-d);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .chip.custom{padding:4px 8px 4px 10px;gap:6px}
+  .chip.custom input{
+    width:24px;height:24px;padding:0;border:none;background:none;cursor:pointer;
+    -webkit-appearance:none;appearance:none;
+  }
+  .chip.custom input::-webkit-color-swatch-wrapper{padding:0}
+  .chip.custom input::-webkit-color-swatch{border:1px solid rgba(0,0,0,.12);border-radius:6px}
+  .chip.custom input::-moz-color-swatch{border:1px solid rgba(0,0,0,.12);border-radius:6px}
+
+  /* ---------- 경고 배너 ---------- */
+  .warnbox{
+    display:flex;gap:9px;align-items:flex-start;margin:9px 0 0;
+    background:#fff6e8;border:1.5px solid #f0d6a8;border-radius:12px;
+    padding:10px 11px;font-size:12.4px;line-height:1.58;color:#7a5a16;
+  }
+  .warnbox .wico{flex:0 0 auto;font-size:15px;line-height:1.35}
+  .warnbox .wtxt{flex:1;min-width:0;font-weight:600}
+
+  /* ---------- 프라이버시 배지 ---------- */
+  .privacy{
+    display:flex;align-items:flex-start;gap:11px;flex-wrap:wrap;
+    margin-top:12px;padding:13px 14px 12px 15px;border-radius:14px;
+    background:#fff;border:1px solid #d7ebe7;border-left:4px solid var(--mint);
+    box-shadow:0 1px 2px rgba(16,45,52,.04);
+    font-size:12.4px;line-height:1.55;color:#2f4b52;
+  }
+  .privacy .ptxt{flex:1;min-width:180px}
+  .privacy .ptitle{display:block;font-size:13px;font-weight:800;color:var(--mint-d);letter-spacing:-.2px;line-height:1.45}
+  .privacy b{display:inline;font-size:inherit;color:var(--mint-d);font-weight:800}
+  .privacy .psub{display:block;margin-top:3px;font-size:11.6px;color:#4b6068;font-weight:600;line-height:1.55}
+  .privacy .prule{display:block;margin-top:6px;padding-top:6px;border-top:1px dashed #e2ebee;font-size:11.1px;color:var(--muted);font-weight:500;line-height:1.6}
+  .wipe{
+    flex:0 0 auto;margin-left:auto;background:#fff5f4;border:1px solid #f0cdc9;color:#a4402f;
+    font-family:inherit;font-size:11.4px;font-weight:800;padding:7px 11px;border-radius:10px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wipe:active{transform:translateY(1px)}
+
+  @media (max-width:430px){
+    .privacy{padding:12px 12px 11px 13px}
+    .privacy .ptitle{font-size:12.4px}
+    .wipe{margin-left:0;width:100%;text-align:center;padding:9px 11px}
+    .wrap{padding:14px 12px 44px}
+    h1 .brk{display:block}
+    h1 .sep{display:none}
+    header.hero{padding:22px 17px 20px;border-radius:18px}
+    .step{padding:17px 14px;border-radius:16px}
+    .step-head h2{font-size:16.5px}
+    .bubble{font-size:13px}
+    .flow div{font-size:11px;padding:8px 5px}
+    .flow.four{grid-template-columns:repeat(2,1fr)}
+    .mk-go{font-size:15.4px;padding:15px 14px}
+    .pv-copy{font-size:14.8px;padding:13px}
+    .dstat{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+  @media print{
+    body{background:#fff}
+    .mk-go,.pv-copy,.linkbtn,#toast,.wipe,.xlsxrow,.sbox,.drop{display:none}
+    .step{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="badge">🐾 다른 병원에서도 그대로 쓰는 재구매 안내</div>
+    <h1>이전 구매이력 조회 <span class="sep">·</span><br class="brk">재구매 안내 문구 만들기</h1>
+    <p class="sub">판매내역 엑셀만 올리면 <strong>보호자·아이별 구매이력</strong>을 찾아 재구매 안내문까지 1분 만에 완성됩니다.</p>
+    <div class="flow four">
+      <div><span>①</span>병원 세팅</div>
+      <div><span>②</span>판매내역 올리기</div>
+      <div><span>③</span>보호자·아이 조회</div>
+      <div><span>④</span>문구 복사 → 카톡</div>
+    </div>
+  </header>
+
+  <div class="privacy">
+    <div class="ptxt">
+      <strong class="ptitle" id="confidTitle">🔒 우리 병원 내부 전용 · 자료 외부 유출 금지</strong>
+      <span class="psub">🔒 서버 전송 없음 · 판매내역과 조회 내용은 <b>이 기기 브라우저 안에서만</b> 처리돼요. 병원 이름별로 따로 저장되어 다른 병원 자료와 섞이지 않습니다.</span>
+      <span class="prule">이 페이지의 판매내역·보호자 정보는 해당 병원 내부 업무 전용입니다. 화면 캡처, 개인 메신저/SNS 전송, 파일 무단 반출 등 외부 유출을 금지합니다. (입력·업로드 내용은 서버로 전송되지 않습니다.)</span>
+    </div>
+    <button type="button" class="wipe" id="wipeBtn">🗑️ 이 기기 저장 정보 모두 지우기</button>
+  </div>
+
+  <!-- STEP 1 -->
+  <section class="step" id="step1">
+    <div class="step-head">
+      <div class="num">1</div>
+      <div>
+        <h2>우리 병원 맞춤 세팅</h2>
+        <span class="hint">병원 이름만 적으면 4단계 문구에 그대로 들어갑니다. 30초면 끝나요.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="hosp">
+        <label class="hosp-label" for="hospitalName">🏥 우리 병원 이름 <span class="opt">여기만 바꾸면 병원별 완성</span></label>
+        <input type="text" id="hospitalName" maxlength="40" autocomplete="off" spellcheck="false"
+               placeholder="예: 굿모닝펫동물병원">
+
+        <div class="hosp-sub">
+          <label class="hosp-label" for="hospitalSlogan">✒️ 병원 슬로건 <span class="opt">(선택)</span></label>
+          <input type="text" id="hospitalSlogan" maxlength="40" autocomplete="off" spellcheck="false"
+                 placeholder="예: since 2003 · 평생 함께하는 주치의">
+          <p class="hosp-hint">적으면 인사말이 <b>「굿모닝펫동물병원입니다. (since 2003)」</b>처럼 나갑니다.</p>
+        </div>
+
+        <div class="hosp-sub">
+          <label class="hosp-label" id="themeLabel">🎨 배경 색상 <span class="opt">병원 분위기대로</span></label>
+          <div class="chips" id="themeChips" role="group" aria-labelledby="themeLabel">
+            <button type="button" class="chip on" data-theme="mint" aria-pressed="true"><span class="sw" style="background:#d9f4ee"></span>민트</button>
+            <button type="button" class="chip" data-theme="ivory" aria-pressed="false"><span class="sw" style="background:#ffeccb"></span>아이보리</button>
+            <button type="button" class="chip" data-theme="sky" aria-pressed="false"><span class="sw" style="background:#d8ecff"></span>스카이</button>
+            <button type="button" class="chip" data-theme="lavender" aria-pressed="false"><span class="sw" style="background:#e4daff"></span>라벤더</button>
+            <button type="button" class="chip" data-theme="peach" aria-pressed="false"><span class="sw" style="background:#ffdcd2"></span>피치</button>
+            <button type="button" class="chip" data-theme="sage" aria-pressed="false"><span class="sw" style="background:#dcead0"></span>세이지</button>
+            <label class="chip custom" for="themeColor" title="직접 고르기">
+              <span class="sw" style="background:linear-gradient(135deg,#ffb4a2,#a5b4fc,#a7f3d0)"></span>직접
+              <input type="color" id="themeColor" value="#f6faf9" aria-label="배경 색상 직접 고르기">
+            </label>
+          </div>
+          <p class="hosp-hint">누르면 바로 바뀌고, 고른 색은 <b>이 병원 이름으로 저장</b>돼 다음에 열어도 그대로예요.</p>
+        </div>
+
+        <div class="hosp-sub">
+          <label class="hosp-label" for="orderUrl">🛒 병원 구매요청 받을 링크 <span class="opt">(선택)</span></label>
+          <input type="url" id="orderUrl" inputmode="url" autocomplete="off" spellcheck="false"
+                 placeholder="예: https://pf.kakao.com/_xxxxx · 네이버 폼 · 구글 폼 주소">
+          <p class="hosp-hint">링크를 넣으면 안내문 아래에 <b>「🛒 바로 재구매 요청하기」 + 주소</b>가 자동으로 붙습니다. 비워 두면 <b>「이 카톡방으로 편하게 말씀해 주세요」</b>로 나가요.</p>
+        </div>
+
+        <p class="hosp-hint">이 이름으로 이름·슬로건·배경 색·링크가 저장되고, <b>병원 이름을 바꾸면 그 병원 칸의 판매내역이 따로 불러와집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="step2">
+    <div class="step-head">
+      <div class="num">2</div>
+      <div>
+        <h2>판매 데이터 올리기</h2>
+        <span class="hint">인투펫 판매내역(.xls) 그대로 올리면 됩니다. 다른 프로그램 엑셀도 컬럼 이름을 보고 자동으로 찾아요.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mat">
+        <div class="tag">①</div>
+        <div class="txt">
+          <b>우리 병원 판매내역 파일</b>
+          <p>날짜·보호자(고객명)·아이(동물명)·상품명·수량이 들어 있는 파일이면 됩니다. 파일은 이 브라우저 밖으로 나가지 않아요.</p>
+
+          <div class="drop" id="dataDrop" role="button" tabindex="0" aria-label="판매내역 파일 올리기">
+            <span class="ic">📊</span>
+            <span>
+              <b>파일 올리기 (.xls · .xlsx · .csv)</b>
+              눌러서 고르기 · 끌어다 놓기 · 여러 시트도 한 번에
+            </span>
+          </div>
+          <input type="file" id="dataInput" accept=".xls,.xlsx,.csv" hidden>
+
+          <div class="xlsxrow">
+            <button type="button" class="xlsxbtn" id="sampleBtn">🧪 샘플 데이터로 먼저 써보기</button>
+            <button type="button" class="reset" id="dataDel" hidden>올린 데이터 지우기</button>
+          </div>
+          <div class="xlsxstatus" id="dataStatus" role="status" aria-live="polite"></div>
+
+          <div class="dstat" id="dstat" hidden></div>
+
+          <div class="warnbox" id="dataWarn" hidden>
+            <span class="wico">⚠️</span>
+            <span class="wtxt" id="dataWarnText"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" id="step3">
+    <div class="step-head">
+      <div class="num">3</div>
+      <div>
+        <h2>보호자 · 아이 찾기 &amp; 이전 구매이력</h2>
+        <span class="hint">이름 일부만 쳐도 됩니다(예: ‘주원’, ‘몽’). 보호자·아이를 고르면 구매이력이 최신순으로 나옵니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="sbox">
+        <input type="search" id="searchInput" autocomplete="off" spellcheck="false"
+               placeholder="보호자 이름 또는 아이 이름 검색 (예: 김주원, 몽이)">
+        <div class="slist" id="searchList"></div>
+      </div>
+      <div id="pairWrap" hidden>
+        <div class="pairhead" id="pairHead"></div>
+        <div class="selbar" id="selBar">
+          <span class="cnt" id="selCnt">0개 선택</span>
+          <span class="sp"></span>
+          <button type="button" id="selDue">재구매 시기만</button>
+          <button type="button" id="selAll">전체</button>
+          <button type="button" id="selNone">선택 해제</button>
+        </div>
+        <div class="hlist" id="histList"></div>
+        <div class="hmore" id="histNote" hidden></div>
+      </div>
+      <div class="empbox" id="searchEmpty">판매내역을 올리면 보호자·아이 목록이 여기에 나타납니다.</div>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step" id="step4">
+    <div class="step-head">
+      <div class="num">4</div>
+      <div>
+        <h2>재구매 안내 문구 만들기</h2>
+        <span class="hint">선택한 품목과 병원 정보로 카톡에 붙여넣을 문구를 만듭니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <button type="button" class="mk-go" id="makeBtn">✨ 재구매 안내 문구 만들기</button>
+      <div class="pv-empty" id="pvEmpty">3단계에서 보호자·아이를 고르고 품목을 선택한 뒤 버튼을 누르면 완성된 문구가 여기에 나타납니다.</div>
+
+      <div class="result" id="result" hidden>
+        <div class="whoami" id="whoami"></div>
+        <div class="pv-head">
+          <span>보호자에게 보낼 문구</span>
+          <span class="cnt-badge" id="charBadge">0자</span>
+        </div>
+        <div class="bubble" id="previewText"></div>
+        <p class="pv-note" id="pvNote"></p>
+        <button type="button" class="pv-copy" id="copyMsg">📋 문구 복사하기</button>
+      </div>
+
+      <div class="tip">
+        <div class="ic">💡</div>
+        <div><b>팁.</b> 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다. 구매한 지 30일이 지났거나 사료·유산균·영양제·예방약이면 이력에 <b>재구매 시기</b> 배지가 붙어요.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>굿모닝펫동물병원</b> 실전 노하우로 만든 재구매 안내 도구입니다.<br>
+    병원 내부 교육용으로 자유롭게 공유하실 수 있어요. 🐾
+  </footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function pad2(n){ return n<10 ? '0'+n : ''+n; }
+
+  /* ---------- 저장소 도우미 (사생활 보호 모드 · file:// 에서도 안전) ---------- */
+  var K_HOSP    = 'rebuy_hospital';           /* 이 기기에 마지막으로 쓴 병원 이름 */
+  var P_PROFILE = 'rebuy_profile::';          /* 병원별 이름·슬로건·배경색·링크 */
+  var P_DATA    = 'rebuy_data::';             /* 병원별 판매내역 */
+  var K_PREFIX  = 'rebuy_';
+
+  function lsGet(k){ try{ return window.localStorage.getItem(k); } catch(e){ return null; } }
+  function lsSet(k,v){ try{ window.localStorage.setItem(k,v); return true; } catch(e){ return false; } }
+  function lsDel(k){ try{ window.localStorage.removeItem(k); } catch(e){} }
+  function cleanName(s){
+    return String(s==null?'':s).replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim().slice(0,40);
+  }
+
+  var toast = $('toast'), toastT = null;
+  function say(msg){
+    if(!toast) return;
+    toast.textContent = msg;
+    toast.className = 'show';
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toast.className = ''; }, 2600);
+  }
+
+  /* ---------- 한글 조사 ---------- */
+  function hasJong(word){
+    var s = String(word||'').trim();
+    if(!s) return false;
+    var c = s.charCodeAt(s.length-1);
+    if(c < 0xAC00 || c > 0xD7A3) return false;
+    return ((c - 0xAC00) % 28) > 0;
+  }
+  function withJosa(word, jong, noJong){ return (word||'') + (hasJong(word) ? jong : noJong); }
+
+  /* ---------- 날짜 ---------- */
+  var TODAY = (function(){ var d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); })();
+  function isoOf(y,m,d){ return y + '-' + pad2(m) + '-' + pad2(d); }
+  function dateToIso(dt){ return isoOf(dt.getFullYear(), dt.getMonth()+1, dt.getDate()); }
+  function isoToDate(iso){
+    var m = String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!m) return null;
+    return new Date(+m[1], +m[2]-1, +m[3]);
+  }
+  function daysSince(iso){
+    var d = isoToDate(iso);
+    if(!d) return 0;
+    return Math.round((TODAY - d) / 86400000);
+  }
+  function mdOf(iso){
+    var d = isoToDate(iso);
+    if(!d) return iso || '';
+    return (d.getMonth()+1) + '월 ' + d.getDate() + '일';
+  }
+  function daysText(n){
+    if(n <= 0) return '오늘';
+    if(n === 1) return '어제';
+    return n + '일 지남';
+  }
+  function shortDate(iso){
+    var m = String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!m) return iso || '-';
+    return m[1] === String(TODAY.getFullYear()) ? (m[2] + '-' + m[3]) : (m[1].slice(2) + '-' + m[2] + '-' + m[3]);
+  }
+
+  function parseDateValue(v, strict){
+    if(v == null || v === '') return null;
+    if(Object.prototype.toString.call(v) === '[object Date]'){
+      if(!isNaN(v.getTime())) return dateToIso(v);
+      return null;
+    }
+    if(typeof v === 'number' || /^\d+(\.\d+)?$/.test(String(v).trim())){
+      var num = typeof v === 'number' ? v : parseFloat(String(v).trim());
+      /* 엑셀 일련번호(1900 체계) */
+      if(!strict && num > 20000 && num < 80000){
+        var ms = Math.round((num - 25569) * 86400000);
+        var dt = new Date(ms);
+        return isoOf(dt.getUTCFullYear(), dt.getUTCMonth()+1, dt.getUTCDate());
+      }
+      return null;
+    }
+    if(Object.prototype.toString.call(v) !== '[object String]') return null;
+    var s = v.replace(/\u00a0/g,' ').trim();
+    if(!s) return null;
+    var m = s.match(/^(\d{4})\s*[.\-\/년]\s*(\d{1,2})\s*[.\-\/월]\s*(\d{1,2})\s*일?/);
+    if(m){
+      var y = +m[1], mo = +m[2], da = +m[3];
+      if(mo >= 1 && mo <= 12 && da >= 1 && da <= 31) return isoOf(y, mo, da);
+    }
+    if(!strict){
+      var m2 = s.match(/^(\d{4})(\d{2})(\d{2})$/);
+      if(m2){
+        var y2 = +m2[1], mo2 = +m2[2], da2 = +m2[3];
+        if(mo2 >= 1 && mo2 <= 12 && da2 >= 1 && da2 <= 31) return isoOf(y2, mo2, da2);
+      }
+    }
+    return null;
+  }
+
+  /* ===================== ① 병원 이름·슬로건·배경 색 ===================== */
+  var hospInput  = $('hospitalName');
+  var slogInput  = $('hospitalSlogan');
+  var orderInput = $('orderUrl');
+  var themeChips = $('themeChips');
+  var themeColor = $('themeColor');
+  var confidEl   = $('confidTitle');
+
+  var THEMES = {
+    mint:     { base:'#f6faf9', g1:'#d9f4ee', g2:'#fff1d8' },
+    ivory:    { base:'#fffaf0', g1:'#ffeccb', g2:'#fdeedd' },
+    sky:      { base:'#f2f8ff', g1:'#d8ecff', g2:'#e9f3ff' },
+    lavender: { base:'#f7f4ff', g1:'#e4daff', g2:'#f2ecff' },
+    peach:    { base:'#fff5f3', g1:'#ffdcd2', g2:'#ffeee4' },
+    sage:     { base:'#f5f9f1', g1:'#dcead0', g2:'#eef5e4' }
+  };
+  var curTheme = { theme:'mint', color:'' };
+
+  function hex2rgb(h){
+    h = String(h || '').replace('#','');
+    if(h.length === 3) h = h.charAt(0)+h.charAt(0)+h.charAt(1)+h.charAt(1)+h.charAt(2)+h.charAt(2);
+    var n = parseInt(h, 16);
+    if(isNaN(n)) return { r:246, g:250, b:249 };
+    return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 };
+  }
+  function to2(v){ var s = v.toString(16); return s.length < 2 ? '0'+s : s; }
+  function mixHex(a,b,t){
+    var A = hex2rgb(a), B = hex2rgb(b);
+    function m(x,y){ return Math.round(x + (y-x)*t); }
+    return '#' + to2(m(A.r,B.r)) + to2(m(A.g,B.g)) + to2(m(A.b,B.b));
+  }
+  function fadeOf(hex){ var c = hex2rgb(hex); return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',0)'; }
+
+  function applyTheme(t){
+    t = (t && typeof t === 'object') ? t : {};
+    var base, g1, g2, activeKey;
+    if(t.color && /^#[0-9a-fA-F]{6}$/.test(t.color)){
+      base = mixHex(t.color, '#ffffff', 0.93);
+      g1   = mixHex(t.color, '#ffffff', 0.80);
+      g2   = mixHex(t.color, '#fff1d8', 0.86);
+      activeKey = 'custom';
+      curTheme = { theme:'custom', color:t.color.toLowerCase() };
+    } else {
+      var k = (t.theme && THEMES[t.theme]) ? t.theme : 'mint';
+      base = THEMES[k].base; g1 = THEMES[k].g1; g2 = THEMES[k].g2;
+      activeKey = k;
+      curTheme = { theme:k, color:'' };
+    }
+    if(document.documentElement && document.documentElement.style && document.documentElement.style.setProperty){
+      document.documentElement.style.setProperty('--page-bg', base);
+      document.documentElement.style.setProperty('--glow1', g1);
+      document.documentElement.style.setProperty('--glow2', g2);
+      document.documentElement.style.setProperty('--hosp-bg', mixHex(g1, '#ffffff', 0.55));
+    }
+    if(document.body && document.body.style){
+      document.body.style.background =
+        'radial-gradient(1100px 520px at 8% -10%, ' + g1 + ' 0%, ' + fadeOf(g1) + ' 62%), ' +
+        'radial-gradient(900px 460px at 100% 0%, ' + g2 + ' 0%, ' + fadeOf(g2) + ' 55%), ' + base;
+    }
+    if(themeChips && themeChips.querySelectorAll){
+      Array.prototype.forEach.call(themeChips.querySelectorAll('.chip[data-theme]'), function(b){
+        var on = b.getAttribute('data-theme') === activeKey;
+        if(b.classList) b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var cst = themeChips.querySelector('.chip.custom');
+      if(cst && cst.classList) cst.classList.toggle('on', activeKey === 'custom');
+    }
+    if(themeColor) themeColor.value = curTheme.color || (THEMES[activeKey] ? THEMES[activeKey].base : '#f6faf9');
+  }
+
+  var curHospital = '';
+
+  function profileKey(name){ return P_PROFILE + cleanName(name); }
+  function readProfile(name){
+    var raw = lsGet(profileKey(name));
+    if(!raw) return null;
+    try { var p = JSON.parse(raw); if(p && typeof p === 'object') return p; } catch(e){}
+    return null;
+  }
+  function writeProfile(){
+    if(!curHospital) return;
+    lsSet(profileKey(curHospital), JSON.stringify({
+      slogan: cleanSlogan(slogInput.value),
+      theme: curTheme.theme,
+      color: curTheme.color,
+      orderUrl: String(orderInput.value || '').trim().slice(0, 300)
+    }));
+  }
+  function cleanSlogan(s){
+    return String(s==null?'':s)
+      .replace(/\u00a0/g,' ')
+      .replace(/\s+/g,' ')
+      .replace(/^[\s"'“”‘’\[\]()（）]+|[\s"'“”‘’\[\]()（）]+$/g, '')
+      .replace(/\s*(입니다|이에요|예요)\.?$/, '')
+      .replace(/[\s.]+$/, '')
+      .trim()
+      .slice(0, 40);
+  }
+  function applyProfile(p){
+    p = p || {};
+    slogInput.value = p.slogan || '';
+    orderInput.value = p.orderUrl || '';
+    applyTheme((p.theme || p.color) ? { theme:p.theme, color:p.color } : null);
+    renderLinkState();
+  }
+  function syncConfid(name){
+    var who = name ? name : '우리 병원';
+    confidEl.textContent = '🔒 ' + who + ' 내부 전용 · 자료 외부 유출 금지';
+    document.title = '🛒 ' + who + ' 재구매 안내 · 이전 구매이력 조회 & 문구 만들기';
+  }
+
+  var hospTimer = null;
+  hospInput.addEventListener('input', function(){
+    var n = cleanName(hospInput.value);
+    syncConfid(n);
+    clearTimeout(hospTimer);
+    hospTimer = setTimeout(function(){ switchHospital(cleanName(hospInput.value)); }, 550);
+  });
+  hospInput.addEventListener('blur', function(){
+    clearTimeout(hospTimer);
+    switchHospital(cleanName(hospInput.value));
+  });
+  slogInput.addEventListener('input', function(){ writeProfile(); });
+  slogInput.addEventListener('blur', function(){ writeProfile(); });
+  orderInput.addEventListener('input', function(){ writeProfile(); renderLinkState(); });
+  orderInput.addEventListener('blur', function(){ writeProfile(); renderLinkState(); });
+
+  themeChips.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest ? e.target.closest('.chip[data-theme]') : null;
+    if(!btn) return;
+    applyTheme({ theme: btn.getAttribute('data-theme'), color:'' });
+    writeProfile();
+  });
+  themeColor.addEventListener('input', function(){
+    applyTheme({ color: themeColor.value });
+    writeProfile();
+  });
+
+  function switchHospital(name){
+    name = cleanName(name);
+    if(name === curHospital){ writeProfile(); return; }
+    curHospital = name;
+    lsSet(K_HOSP, name);
+    if(name){ applyProfile(readProfile(name)); }
+    else { applyProfile(null); }
+    loadDataFor(name);
+    renderLinkState();
+  }
+
+  /* ===================== ② 판매 데이터 ===================== */
+  var DATA = { file:'', at:0, sample:false, records:[], columns:'', skipped:0, kiosk:0 };
+
+  function dataKey(name){ return P_DATA + cleanName(name); }
+
+  function saveData(){
+    if(!curHospital) return 'nohosp';
+    var payload = JSON.stringify({
+      file: DATA.file, at: DATA.at, sample: DATA.sample ? 1 : 0,
+      columns: DATA.columns, skipped: DATA.skipped, kiosk: DATA.kiosk,
+      records: DATA.records
+    });
+    if(payload.length > 4000000){
+      return 'toobig';
+    }
+    return lsSet(dataKey(curHospital), payload) ? 'ok' : 'quota';
+  }
+
+  function loadDataFor(name){
+    DATA = { file:'', at:0, sample:false, records:[], columns:'', skipped:0, kiosk:0 };
+    if(name){
+      var raw = lsGet(dataKey(name));
+      if(raw){
+        try {
+          var d = JSON.parse(raw);
+          if(d && d.records && d.records.length){
+            DATA = {
+              file: d.file || '', at: d.at || 0, sample: !!d.sample,
+              records: d.records, columns: d.columns || '',
+              skipped: d.skipped || 0, kiosk: d.kiosk || 0
+            };
+          }
+        } catch(e){}
+      }
+    }
+    resetSearch();
+    renderDataState();
+  }
+
+  function renderDataState(){
+    var has = DATA.records.length > 0;
+    $('dataDel').hidden = !has;
+    $('dstat').hidden = !has;
+    $('searchEmpty').hidden = has;
+    $('pairWrap').hidden = true;
+    $('result').hidden = true;
+    $('pvEmpty').hidden = false;
+    hideWarn();
+
+    if(!has){
+      $('dstat').innerHTML = '';
+      return;
+    }
+    var minD = '', maxD = '';
+    var gset = {}, pset = {};
+    DATA.records.forEach(function(r){
+      if(!minD || r.d < minD) minD = r.d;
+      if(!maxD || r.d > maxD) maxD = r.d;
+      if(r.g) gset[r.g] = 1;
+      if(r.p) pset[r.p + '|' + r.g] = 1;
+    });
+    var gN = Object.keys(gset).length;
+    var pN = Object.keys(pset).length;
+    $('dstat').innerHTML =
+      '<div class="cell"><span>파일</span><b title="' + esc(DATA.file) + '">' + esc(DATA.file || '판매내역') +
+        (DATA.sample ? '<span class="sbadge">샘플</span>' : '') + '</b></div>' +
+      '<div class="cell"><span>기간</span><b>' + esc(minD) + ' ~ ' + esc(maxD) + '</b></div>' +
+      '<div class="cell"><span>구매 기록</span><b>' + DATA.records.length.toLocaleString() + '건</b></div>' +
+      '<div class="cell"><span>보호자 · 아이</span><b>' + gN + '명 · ' + pN + '마리</b></div>' +
+      '<div class="cell wide"><span>자동으로 찾은 컬럼</span><b class="wrap">' + esc(DATA.columns || '날짜 · 상품명 · 보호자 · 아이 · 수량') + '</b></div>';
+
+    var parts = [];
+    if(DATA.sample) parts.push('지금은 <b>샘플 데이터</b>(가상의 보호자·아이)입니다. 실제 사용 전에 우리 병원 판매내역을 올려 주세요.');
+    else if(DATA.file) parts.push('<b>' + esc(DATA.file) + '</b>을(를) 이 기기에 저장했어요. 창을 닫아도 다음에 그대로 불러옵니다.');
+    if(DATA.kiosk) parts.push('보호자 없이 찍힌 <b>키오스크 매출 ' + DATA.kiosk + '행</b>은 목록에서 뺐습니다.');
+    if(DATA.skipped) parts.push('보호자·아이를 읽지 못한 <b>' + DATA.skipped + '행</b>은 건너뛰었습니다.');
+    $('dataStatus').className = 'xlsxstatus';
+    $('dataStatus').innerHTML = parts.join('<br>');
+  }
+
+  function showWarn(msg){
+    $('dataWarnText').innerHTML = msg;
+    $('dataWarn').hidden = false;
+  }
+  function hideWarn(){ $('dataWarn').hidden = true; }
+
+  /* ---------- 상품명 다듬기 (문구·목록 표시용) ---------- */
+  function cleanProduct(raw){
+    var src = String(raw == null ? '' : raw).replace(/\u00a0/g,' ').trim();
+    var s = src;
+    s = s.replace(/^#+\s*[A-Za-z0-9._\-]*\s*/, '');
+    s = s.replace(/^k#\s*[A-Za-z0-9._\-]*\s*/i, '');
+    s = s.replace(/^\[[^\]]{1,26}\]\s*/, '');
+    s = s.replace(/\(단품\)/g, ' ');
+    s = s.replace(/\s*\/\s*\d+\s*$/, '');
+    s = s.replace(/\s*\(박스[^)]*\)\s*$/, '');
+    s = s.replace(/｜.*$/, '');
+    s = s.replace(/\s+/g, ' ').trim();
+    s = s.replace(/^[\-·:：]+|[\-·:：]+$/g, '').trim();
+    return s || src;
+  }
+
+  /* ---------- 재구매 분류 ---------- */
+  var RP_CATS = ['사료','유산균','영양제','예방약'];
+  function rpCategory(rec){
+    var s = String(rec.n || '') + ' ' + String(rec.c || '');
+    if(/사료|키블|화식|습식|건식/.test(s)) return '사료';
+    if(/유산균|프로바이오|엠바이옴|락토|장유산균/.test(s)) return '유산균';
+    if(/영양제|비타민|오메가|관절|콘드로이친|글루코사민|칼슘|오메가3/.test(s)) return '영양제';
+    if(/사상충|예방약|백신|구충|넥스가드|브라벡토|하트가드|레볼루션|심패리|프론트라인|접종/.test(s)) return '예방약';
+    return '';
+  }
+  function isDue(rec){
+    var d = daysSince(rec.d);
+    return d >= 30 || !!rpCategory(rec);
+  }
+  function dueLabel(rec){
+    var cat = rpCategory(rec);
+    if(cat) return '재구매 시기 · ' + cat;
+    if(daysSince(rec.d) >= 30) return '재구매 시기';
+    return '';
+  }
+
+  /* ===================== ③ 엑셀 파싱 ===================== */
+  var ALIAS = {
+    date:     ['날짜','판매일','판매일자','구매일','구매일자','거래일','거래일자','일자','date'],
+    guardian: ['보호자','보호자명','고객명','고객','성명','고객이름','보호자이름','owner','customer','guardian'],
+    pet:      ['동물명','동물','환자명','환자','아이명','아이','반려동물','반려동물명','펫이름','pet','patient','animal'],
+    product:  ['상품명','상품','품목명','품목','제품명','제품','item','product'],
+    qty:      ['낱개판매량','수량','판매수량','판매량','개수','수량(개)','qty','quantity'],
+    amount:   ['총판매액','판매금액','금액','합계','amount','total'],
+    category: ['구분','분류','카테고리','category','품목구분']
+  };
+  var FIELD_LABEL = { date:'날짜', guardian:'보호자', pet:'아이', product:'상품명', qty:'수량', amount:'금액' };
+
+  function normKey(s){
+    return String(s == null ? '' : s).replace(/[\s_\-()\[\]{}·.]/g, '').toLowerCase();
+  }
+  function cellText(row, col){
+    if(col == null || !row) return '';
+    var v = row[col];
+    if(v == null) return '';
+    if(Object.prototype.toString.call(v) === '[object Date]') return dateToIso(v);
+    return String(v).replace(/\u00a0/g,' ').trim();
+  }
+  function cellNum(row, col){
+    if(col == null || !row) return null;
+    var v = row[col];
+    if(v == null || v === '') return null;
+    if(typeof v === 'number') return v;
+    var s = String(v).replace(/[,\s원₩]/g,'');
+    if(!s || !/^-?\d+(\.\d+)?$/.test(s)) return null;
+    return parseFloat(s);
+  }
+
+  function detectHeader(aoa){
+    var best = null;
+    var limit = Math.min(aoa.length, 40);
+    for(var r = 0; r < limit; r++){
+      var row = aoa[r] || [];
+      var map = {}, hits = 0;
+      for(var c = 0; c < row.length; c++){
+        var key = normKey(row[c]);
+        if(!key || key.length > 20) continue;
+        for(var f in ALIAS){
+          if(!ALIAS.hasOwnProperty(f) || map[f] != null) continue;
+          var list = ALIAS[f];
+          for(var k = 0; k < list.length; k++){
+            if(key === normKey(list[k])){ map[f] = c; hits++; break; }
+          }
+        }
+      }
+      var score = hits * 2;
+      if(map.product != null) score += 3;
+      if(map.guardian != null || map.pet != null) score += 3;
+      if(map.date != null) score += 2;
+      if(!best || score > best.score) best = { row:r, map:map, score:score, hits:hits };
+    }
+    if(best && best.map.product != null && (best.map.guardian != null || best.map.pet != null)) return best;
+    return null;
+  }
+
+  /* 헤더가 없거나 낯선 형식일 때: 값 생김새로 컬럼 추정 */
+  function inferColumns(aoa){
+    var start = 0, sampleEnd = Math.min(aoa.length, 120);
+    var cols = [];
+    for(var r = start; r < sampleEnd; r++){
+      var row = aoa[r] || [];
+      for(var c = 0; c < row.length; c++){
+        if(!cols[c]) cols[c] = { dates:0, nums:0, lenSum:0, n:0, uniq:{} };
+        var v = row[c];
+        if(v == null || v === '') continue;
+        cols[c].n++;
+        cols[c].lenSum += String(v).length;
+        if(parseDateValue(v, false)) cols[c].dates++;
+        else if(typeof v === 'number') cols[c].nums++;
+        cols[c].uniq[String(v)] = 1;
+      }
+    }
+    var dateCol = null, bestD = 0;
+    var others = [];
+    for(var i = 0; i < cols.length; i++){
+      var cc = cols[i];
+      if(!cc || !cc.n) continue;
+      var dateRatio = cc.dates / cc.n;
+      if(dateRatio >= 0.5 && cc.dates >= 3 && cc.dates > bestD){ bestD = cc.dates; dateCol = i; }
+      else if(cc.dates / cc.n < 0.2) others.push(i);
+    }
+    var avg = function(i){ return cols[i] ? cols[i].lenSum / Math.max(1, cols[i].n) : 0; };
+    var productCol = null, bestLen = 0;
+    others.forEach(function(i){ if(i !== dateCol && avg(i) > bestLen){ bestLen = avg(i); productCol = i; } });
+    var shortCols = others.filter(function(i){ return i !== productCol && i !== dateCol && avg(i) <= 12; })
+                          .sort(function(a,b){ return a - b; });
+    return { date: dateCol, guardian: shortCols.length ? shortCols[0] : null,
+             pet: shortCols.length > 1 ? shortCols[1] : null,
+             product: productCol, qty: null, amount: null };
+  }
+
+  function pickDate(row, col){
+    if(col != null){
+      var v = parseDateValue(row[col], false);
+      if(v) return v;
+    }
+    var lim = Math.min(row.length, 8);
+    for(var c = 0; c < lim; c++){
+      if(c === col) continue;
+      var v2 = parseDateValue(row[c], true);
+      if(v2) return v2;
+    }
+    return null;
+  }
+
+  function cleanPerson(s){
+    return String(s == null ? '' : s)
+      .replace(/[\|\]\[》>»\s]+$/g, '')
+      .replace(/^[\|\[\s]+/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 30);
+  }
+  function cleanPetName(s){
+    return String(s == null ? '' : s)
+      .replace(/[\|\]\[》>»\s]+$/g, '')
+      .replace(/^[\|\[\s]+/g, '')
+      .replace(/\s*\(\s*\d{1,2}\s*[\/.]\s*\d{1,2}\s*\)\s*$/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 30);
+  }
+
+  function parseAOA(aoa, ctx){
+    var head = detectHeader(aoa);
+    var map = head ? head.map : inferColumns(aoa);
+    var start = head ? head.row + 1 : 0;
+    var section = '';
+    var found = 0, skipped = 0, kiosk = 0;
+    var used = {};
+
+    for(var f in map){ if(map.hasOwnProperty(f) && map[f] != null) used[f] = 1; }
+
+    if(head){
+      ['date','guardian','pet','product','qty'].forEach(function(f){ if(map[f] != null) ctx.cols[f] = 1; });
+    } else {
+      ['date','guardian','pet','product'].forEach(function(f){ if(map[f] != null) ctx.cols[f] = 1; });
+      ctx.inferred = true;
+    }
+
+    for(var r = start; r < aoa.length; r++){
+      var row = aoa[r];
+      if(!row || !row.length) continue;
+      var line = row.join(' ');
+      if(/재고\s*구분/.test(line)){
+        var mm = line.match(/재고\s*구분\s*[:：]\s*([^\s]+)/);
+        section = mm ? mm[1] : '';
+        continue;
+      }
+      var d = pickDate(row, map.date);
+      if(!d) continue;
+      var product = cellText(row, map.product);
+      var g = cleanPerson(cellText(row, map.guardian));
+      var p = cleanPetName(cellText(row, map.pet));
+      if(!product){
+        /* 헤더 없이 읽을 때: 상품명 컬럼을 못 찾았으면 가장 긴 텍스트를 상품으로 */
+        if(!head){
+          var longest = '';
+          for(var c2 = 0; c2 < row.length; c2++){
+            if(c2 === map.date || c2 === map.guardian || c2 === map.pet) continue;
+            var t2 = String(row[c2] == null ? '' : row[c2]).trim();
+            if(t2.length > longest.length) longest = t2;
+          }
+          product = longest;
+        }
+        if(!product){ skipped++; continue; }
+      }
+      if(!g && !p){ skipped++; continue; }
+      if(/키오스크/.test(g) || /키오스크/.test(p)){ kiosk++; continue; }
+
+      var qty = cellNum(row, map.qty);
+      if(qty == null) qty = 1;
+      var amount = cellNum(row, map.amount);
+
+      var key = g + '\u0001' + p + '\u0001' + product + '\u0001' + d;
+      var prev = ctx.net[key];
+      if(prev){
+        prev.q += qty;
+        prev.a += (amount || 0);
+      } else {
+        ctx.net[key] = { g:g, p:p, n:product, d:d, q:qty, a:amount || 0, c:section };
+      }
+      found++;
+    }
+    ctx.found += found;
+    ctx.skipped += skipped;
+    ctx.kiosk += kiosk;
+  }
+
+  function buildRecords(net){
+    var out = [];
+    for(var k in net){
+      if(!net.hasOwnProperty(k)) continue;
+      var rec = net[k];
+      if(!rec.q || rec.q <= 0) continue;   /* 반품만 있는 건은 제외 */
+      out.push({ g: rec.g, p: rec.p, n: rec.n, d: rec.d, q: rec.q, a: rec.a || 0, c: rec.c || '' });
+    }
+    out.sort(function(a, b){
+      if(a.d === b.d) return String(a.n).localeCompare(String(b.n));
+      return a.d < b.d ? 1 : -1;
+    });
+    return out;
+  }
+
+  function parseWorkbook(wb){
+    var ctx = { net:{}, found:0, skipped:0, kiosk:0, cols:{}, inferred:false };
+    var sheetCount = 0;
+    wb.SheetNames.forEach(function(nm){
+      var ws = wb.Sheets[nm];
+      if(!ws) return;
+      var aoa = null;
+      try {
+        aoa = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'', blankrows:false });
+      } catch(e){ return; }
+      if(!aoa || aoa.length < 2) return;
+      sheetCount++;
+      parseAOA(aoa, ctx);
+    });
+    var columns = [];
+    ['date','guardian','pet','product','qty','amount'].forEach(function(f){
+      if(ctx.cols[f]) columns.push(FIELD_LABEL[f]);
+    });
+    return {
+      records: buildRecords(ctx.net),
+      columns: columns.join(' · ') + (ctx.inferred ? ' (자동 추정)' : ''),
+      skipped: ctx.skipped,
+      kiosk: ctx.kiosk,
+      sheets: sheetCount
+    };
+  }
+
+  /* ---------- 샘플 데이터 (가상의 보호자·아이) ---------- */
+  var SAMPLES = [
+    { g:'김민지', p:'누아', items:[['하트가드 블루 ~11kg',30],['로얄캐닌 미니 어덜트 2kg',42],['유산균 프로바이오 30포',30]] },
+    { g:'이서준', p:'보리', items:[['넥스가드 스펙트라 2~3.5kg',30],['관절 영양제 조인트',55]] },
+    { g:'박지훈', p:'콩이', items:[['심패리카트리오 츄어블정 5~10kg',30],['사료 로얄캐닌 푸들 어덜트 3kg',35]] },
+    { g:'최유진', p:'두부', items:[['레볼루션 ~2.5kg',30],['유산균 장유산균 60캡슐',45]] },
+    { g:'정하늘', p:'마루', items:[['브라벡토 소형 4.5~10kg',90],['오메가3 영양제',60]] },
+    { g:'강도윤', p:'탄이', items:[['하트가드 블루 11~22kg',30]] },
+    { g:'윤서연', p:'라떼', items:[['넥스가드 스펙트라 10~25kg',30],['사료 힐스 사이언스 다이어트 3.85kg',40]] },
+    { g:'한지우', p:'메리', items:[['심패리카트리오 츄어블정 2.5~5kg',30],['영양제 비타민 60정',50]] },
+    { g:'오세훈', p:'호두', items:[['프론트라인 플러스 20~40kg',30]] },
+    { g:'임다은', p:'치즈', items:[['하트가드 블루 ~11kg',30],['유산균 프로바이오 30포',30]] },
+    { g:'배준호', p:'망고', items:[['넥스가드 스펙트라 2~3.5kg',30],['관절 영양제 조인트',55]] },
+    { g:'신예린', p:'보리', items:[['레볼루션 2.5~7.5kg',30],['사료 로얄캐닌 키튼 2kg',38]] }
+  ];
+
+  function makeSample(){
+    var recs = [];
+    SAMPLES.forEach(function(s){
+      s.items.forEach(function(it){
+        var name = it[0], cycle = it[1];
+        for(var k = 1; k <= 3; k++){
+          var ago = cycle * k;
+          if(ago > 200) break;
+          var dt = new Date(TODAY.getTime() - ago * 86400000);
+          recs.push({ g:s.g, p:s.p, n:name, d:dateToIso(dt), q:1, a:0, c:/사료/.test(name) ? '용품' : '백신' });
+        }
+      });
+    });
+    recs.sort(function(a, b){ return a.d < b.d ? 1 : (a.d > b.d ? -1 : 0); });
+    return recs;
+  }
+
+  /* ---------- 파일 읽기 ---------- */
+  function loadSheetJS(){
+    return new Promise(function(resolve, reject){
+      if(window.XLSX) return resolve(window.XLSX);
+      var s = document.createElement('script');
+      s.src = 'https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js';
+      s.onload = function(){ window.XLSX ? resolve(window.XLSX) : reject(new Error('엑셀 엔진을 불러오지 못했어요.')); };
+      s.onerror = function(){ reject(new Error('엑셀 엔진을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function readFileAsSheets(file){
+    return new Promise(function(resolve, reject){
+      var fr = new FileReader();
+      fr.onerror = function(){ reject(new Error('파일을 읽지 못했어요.')); };
+      fr.onload = function(){
+        try {
+          var buf = fr.result;
+          var name = String(file.name || '').toLowerCase();
+          var wb;
+          if(/\.csv$/.test(name)){
+            var text = new TextDecoder('utf-8').decode(new Uint8Array(buf));
+            if(text.indexOf('\uFFFD') >= 0){
+              try { text = new TextDecoder('euc-kr').decode(new Uint8Array(buf)); } catch(e){}
+            }
+            wb = XLSX.read(text, { type:'string', cellDates:true });
+          } else {
+            wb = XLSX.read(new Uint8Array(buf), { type:'array', cellDates:true });
+          }
+          resolve(wb);
+        } catch(e){ reject(e); }
+      };
+      fr.readAsArrayBuffer(file);
+    });
+  }
+
+  function handleFile(file){
+    if(!file) return;
+    var st = $('dataStatus');
+    st.className = 'xlsxstatus';
+    st.innerHTML = '⏳ <b>' + esc(file.name) + '</b> 읽는 중…';
+    hideWarn();
+    loadSheetJS().then(function(){ return readFileAsSheets(file); }).then(function(wb){
+      var res = parseWorkbook(wb);
+      if(!res.records.length){
+        st.className = 'xlsxstatus err';
+        st.innerHTML = '파일에서 판매 기록을 찾지 못했어요. <b>날짜·보호자(고객명)·아이(동물명)·상품명</b> 컬럼이 있는 판매내역인지 확인해 주세요.';
+        showWarn('엑셀 첫 줄에 컬럼 이름이 있어야 자동으로 찾을 수 있어요. 컬럼 이름을 그대로 둔 채 다시 올려 주세요.');
+        return;
+      }
+      applyDataset({
+        file: file.name,
+        sample: false,
+        records: res.records,
+        columns: res.columns,
+        skipped: res.skipped,
+        kiosk: res.kiosk
+      });
+      say(res.records.length.toLocaleString() + '건의 구매이력을 읽었어요');
+    }).catch(function(err){
+      st.className = 'xlsxstatus err';
+      st.innerHTML = '⚠️ ' + esc(err && err.message ? err.message : '파일을 읽지 못했어요') + ' (.xls · .xlsx · .csv 파일인지 확인해 주세요)';
+    });
+  }
+
+  function applyDataset(d){
+    DATA = {
+      file: d.file || '', at: Date.now(), sample: !!d.sample,
+      records: d.records, columns: d.columns || '',
+      skipped: d.skipped || 0, kiosk: d.kiosk || 0
+    };
+    var saved = saveData();
+    resetSearch();
+    renderDataState();
+    if(saved === 'quota' || saved === 'toobig'){
+      showWarn('판매내역이 커서 이 기기에 저장하지 못했어요. <b>이번 화면에서만</b> 쓰실 수 있고, 창을 닫으면 사라집니다. (필요한 기간만 잘라 올리시면 저장됩니다.)');
+    } else if(saved === 'nohosp'){
+      showWarn('병원 이름을 먼저 적으면 이 판매내역이 <b>병원별로 저장</b>됩니다. 지금은 창을 닫으면 사라져요.');
+    }
+  }
+
+  /* ---------- 파일 드롭 · 선택 ---------- */
+  var dataDrop = $('dataDrop'), dataInput = $('dataInput');
+
+  dataDrop.addEventListener('click', function(){ dataInput.click(); });
+  dataDrop.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); dataInput.click(); }
+  });
+  ['dragenter','dragover'].forEach(function(ev){
+    dataDrop.addEventListener(ev, function(e){ e.preventDefault(); dataDrop.classList.add('over'); });
+  });
+  ['dragleave','drop'].forEach(function(ev){
+    dataDrop.addEventListener(ev, function(e){ e.preventDefault(); dataDrop.classList.remove('over'); });
+  });
+  dataDrop.addEventListener('drop', function(e){
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if(f) handleFile(f);
+  });
+  dataInput.addEventListener('change', function(){
+    var f = dataInput.files && dataInput.files[0];
+    if(f) handleFile(f);
+    dataInput.value = '';
+  });
+
+  $('sampleBtn').addEventListener('click', function(){
+    if(DATA.records.length && !DATA.sample){
+      if(!window.confirm('지금 올린 판매내역을 샘플 데이터로 바꿀까요? (우리 병원 데이터는 지워집니다)')) return;
+    }
+    applyDataset({
+      file: '샘플 데이터 (가상의 보호자·아이)',
+      sample: true,
+      records: makeSample(),
+      columns: '날짜 · 보호자 · 아이 · 상품명 · 수량',
+      skipped: 0, kiosk: 0
+    });
+    say('샘플 데이터로 시작합니다. 실제 사용 전에 우리 병원 판매내역을 올려 주세요.');
+  });
+
+  $('dataDel').addEventListener('click', function(){
+    if(!window.confirm('올린 판매내역을 이 기기에서 지울까요?')) return;
+    DATA = { file:'', at:0, sample:false, records:[], columns:'', skipped:0, kiosk:0 };
+    if(curHospital) lsDel(dataKey(curHospital));
+    resetSearch();
+    renderDataState();
+    $('dataStatus').className = 'xlsxstatus';
+    $('dataStatus').textContent = '판매내역을 지웠어요. 새 파일을 올려 주세요.';
+    say('판매내역을 지웠어요');
+  });
+
+  /* ===================== ④ 검색 · 구매이력 ===================== */
+  var searchInput = $('searchInput');
+  var searchList = $('searchList');
+  var pairWrap = $('pairWrap');
+  var pairHead = $('pairHead');
+  var histList = $('histList');
+  var selBar = $('selBar');
+
+  var PAIRS = [];        /* [{g,p,recs,last,n}] */
+  var curPair = null;    /* 선택한 pair */
+  var selected = {};     /* key -> rec */
+  var pairCacheKey = '';
+
+  function normName(s){
+    return String(s == null ? '' : s).toLowerCase()
+      .replace(/[\s|\[\](){}<>·.,'"’”“\-_/]/g, '');
+  }
+
+  function buildPairs(){
+    var map = {};
+    DATA.records.forEach(function(rec){
+      var key = rec.g + '\u0001' + rec.p;
+      var it = map[key];
+      if(!it){ it = map[key] = { g:rec.g, p:rec.p, recs:[] }; }
+      it.recs.push(rec);
+    });
+    PAIRS = [];
+    for(var k in map){
+      if(!map.hasOwnProperty(k)) continue;
+      var it = map[k];
+      it.recs.sort(function(a, b){ return a.d < b.d ? 1 : (a.d > b.d ? -1 : 0); });
+      it.last = it.recs[0] ? it.recs[0].d : '';
+      it.n = it.recs.length;
+      PAIRS.push(it);
+    }
+    PAIRS.sort(function(a, b){ return a.last < b.last ? 1 : (a.last > b.last ? -1 : 0); });
+  }
+
+  function resetSearch(){
+    PAIRS = []; curPair = null; selected = {}; pairCacheKey = '';
+    searchInput.value = '';
+    searchList.innerHTML = '';
+    pairWrap.hidden = true;
+    histList.innerHTML = '';
+    buildPairs();
+    renderSearch();
+  }
+
+  function renderSearch(){
+    if(!DATA.records.length){
+      searchList.innerHTML = '';
+      $('searchEmpty').hidden = false;
+      return;
+    }
+    $('searchEmpty').hidden = true;
+    var q = normName(searchInput.value);
+    var list = PAIRS;
+    if(q){
+      list = PAIRS.filter(function(it){
+        return normName(it.g).indexOf(q) >= 0 || normName(it.p).indexOf(q) >= 0;
+      });
+    }
+    var total = list.length;
+    var shown = list.slice(0, 40);
+    if(!shown.length){
+      searchList.innerHTML = '<div class="snone">‘' + esc(searchInput.value) + '’로 찾은 보호자·아이가 없어요. 이름을 줄여서 다시 쳐 보세요. (판매내역 기간 안에 구매가 있어야 나옵니다.)</div>';
+      return;
+    }
+    var head = q ? '찾은 보호자·아이 ' + total + '명' : '최근 구매한 보호자·아이 ' + total + '명';
+    var html = '<div class="smore">' + head + (q ? '' : ' · 이름을 치면 바로 찾아요') + '</div>';
+    shown.forEach(function(it, i){
+      var on = curPair && curPair.g === it.g && curPair.p === it.p;
+      var petLabel = it.p ? it.p : '아이 이름 미기재';
+      html += '<button type="button" class="sitem' + (on ? ' on' : '') + '" data-i="' + i + '">' +
+        '<span class="who"><b>' + esc(it.g || '보호자 미기재') + '</b> 보호자 · <span class="pet">' + esc(petLabel) + '</span>' +
+        '<span class="met">구매 ' + it.n + '건 · 최근 ' + esc(shortDate(it.last)) + '</span></span>' +
+        '<span class="go">이력 보기 ›</span></button>';
+    });
+    if(total > shown.length) html += '<div class="smore">…외 ' + (total - shown.length) + '명은 이름을 더 쳐서 찾아 주세요.</div>';
+    searchList.innerHTML = html;
+
+    Array.prototype.forEach.call(searchList.querySelectorAll('.sitem'), function(btn){
+      btn.addEventListener('click', function(){
+        var idx = parseInt(btn.getAttribute('data-i'), 10);
+        selectPair(list[idx]);
+      });
+    });
+  }
+
+  searchInput.addEventListener('input', renderSearch);
+
+  function selectPair(pair){
+    if(!pair) return;
+    if(curPair && curPair.g === pair.g && curPair.p === pair.p) return;
+    curPair = pair;
+    selected = {};
+    pairWrap.hidden = false;
+    renderPairHead();
+    renderHistory();
+    renderSearch();
+    pairWrap.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function petsOfGuardian(g){
+    return PAIRS.filter(function(it){ return it.g === g; });
+  }
+
+  function renderPairHead(){
+    if(!curPair) return;
+    var g = curPair.g || '보호자 미기재';
+    var p = curPair.p;
+    var its = curPair.recs;
+    var first = its[0];
+    var html = '<div class="ttl">' + esc(g) + ' 보호자님 · ' +
+      (p ? '<span class="pd">' + esc(p) + '</span> 아이' : '아이 이름 미기재') + '</div>' +
+      '<div class="met">구매 ' + its.length + '건 · 최근 구매 ' + esc(first.d) + ' (' + esc(daysText(daysSince(first.d))) + ')</div>';
+
+    var sibs = petsOfGuardian(curPair.g);
+    if(sibs.length > 1){
+      html += '<div class="petrow"><span class="plabel">같은 보호자의 다른 아이</span>';
+      sibs.forEach(function(it){
+        var name = it.p || '이름 미기재';
+        var on = it.p === curPair.p;
+        html += '<button type="button" class="pchip' + (on ? ' on' : '') + '" data-pet="' + esc(it.p) + '">' +
+          esc(name) + ' · ' + it.n + '건</button>';
+      });
+      html += '</div>';
+    }
+    pairHead.innerHTML = html;
+
+    Array.prototype.forEach.call(pairHead.querySelectorAll('.pchip'), function(b){
+      b.addEventListener('click', function(){
+        var petName = b.getAttribute('data-pet');
+        var target = null;
+        sibs.forEach(function(it){ if(it.p === petName) target = it; });
+        if(target){
+          curPair = target;
+          selected = {};
+          renderPairHead();
+          renderHistory();
+        }
+      });
+    });
+  }
+
+  function recKey(rec){ return rec.g + '\u0001' + rec.p + '\u0001' + rec.n + '\u0001' + rec.d; }
+
+  function renderHistory(){
+    if(!curPair) return;
+    var recs = curPair.recs;
+    var html = '';
+    recs.forEach(function(rec, i){
+      var days = daysSince(rec.d);
+      var bad = dueLabel(rec);
+      var name = cleanProduct(rec.n);
+      var raw = name !== rec.n ? rec.n : '';
+      var on = !!selected[recKey(rec)];
+      html += '<label class="hrow' + (on ? ' on' : '') + '">' +
+        '<input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '>' +
+        '<span class="hmain">' +
+          '<span class="hline1"><span class="dt">' + esc(rec.d) + '</span>' +
+            '<span class="el">' + esc(daysText(days)) + '</span>' +
+            '<span class="hqty">' + (rec.q ? rec.q + '개' : '') + '</span>' +
+            (bad ? '<span class="rp' + (bad.indexOf('·') >= 0 ? ' cat' : '') + '">' + esc(bad) + '</span>' : '') +
+          '</span>' +
+          '<b class="hname">' + esc(name) + '</b>' +
+          (raw ? '<span class="hraw">원본: ' + esc(raw) + '</span>' : '') +
+        '</span></label>';
+    });
+    histList.innerHTML = html;
+    Array.prototype.forEach.call(histList.querySelectorAll('input[type=checkbox]'), function(cb){
+      cb.addEventListener('change', function(){
+        var idx = parseInt(cb.getAttribute('data-i'), 10);
+        var rec = recs[idx];
+        if(!rec) return;
+        var k = recKey(rec);
+        if(cb.checked) selected[k] = rec; else delete selected[k];
+        var row = cb.closest ? cb.closest('.hrow') : null;
+        if(row && row.classList) row.classList.toggle('on', cb.checked);
+        renderSelBar();
+      });
+    });
+    renderSelBar();
+  }
+
+  function selList(){
+    var out = [];
+    for(var k in selected){ if(selected.hasOwnProperty(k)) out.push(selected[k]); }
+    out.sort(function(a, b){ return a.d < b.d ? 1 : (a.d > b.d ? -1 : 0); });
+    return out;
+  }
+
+  function renderSelBar(){
+    var n = selList().length;
+    $('selCnt').textContent = n ? n + '개 품목 선택됨' : '아래에서 재구매할 품목을 골라 주세요';
+    selBar.className = n ? 'selbar' : 'selbar';
+  }
+
+  function setAll(kind){
+    if(!curPair) return;
+    selected = {};
+    if(kind !== 'none'){
+      curPair.recs.forEach(function(rec){
+        if(kind === 'due' && !isDue(rec)) return;
+        selected[recKey(rec)] = rec;
+      });
+    }
+    renderHistory();
+    if(kind === 'due' && !selList().length) say('지금은 재구매 시기에 들어온 품목이 없어요. 직접 골라 주세요.');
+  }
+  $('selDue').addEventListener('click', function(){ setAll('due'); });
+  $('selAll').addEventListener('click', function(){ setAll('all'); });
+  $('selNone').addEventListener('click', function(){ setAll('none'); });
+
+  /* ===================== ⑤ 문구 만들기 ===================== */
+  var lastMessage = '';
+
+  function urlInfo(){
+    var v = String(orderInput.value || '').trim();
+    if(!v) return { kind:'', value:'' };
+    if(/^https?:\/\//i.test(v)) return { kind:'url', value:v };
+    if(/^[\w.-]+\.[a-z]{2,}(\/|$)/i.test(v)) return { kind:'url', value:'https://' + v };
+    if(/^(카톡|카카오|네이버|문자|전화)/.test(v)) return { kind:'text', value:v };
+    return { kind:'text', value:v };
+  }
+
+  function renderLinkState(){
+    var has = !!urlInfo().kind;
+    var note = $('pvNote');
+    if(note && !$('result').hidden){
+      note.innerHTML = has
+        ? '🛒 <b>구매요청 링크가 문구에 들어갔어요.</b> 1단계에서 언제든 바꿀 수 있습니다.'
+        : '링크가 비어 있어 <b>「이 카톡방으로 편하게 말씀해 주세요」</b> 안내로 나갑니다. 1단계에서 링크를 넣으면 바로 버튼이 붙어요.';
+    }
+  }
+
+  var WARM = [
+    function(p){ return withJosa(p,'과','와') + ' 오늘도 건강하고 행복한 하루 보내세요 🍀'; },
+    function(p){ return withJosa(p,'이','가') + ' 오늘도 신나게 뛰어놀 수 있도록 저희가 함께 챙길게요 🐾'; },
+    function(p){ return '늘 ' + p + '의 건강을 응원하고 있어요. 오늘도 좋은 하루 보내세요 ☀️'; },
+    function(p){ return withJosa(p,'과','와') + ' 함께하는 하루가 늘 따뜻하길 바라요 💛'; }
+  ];
+
+  function hashStr(s){
+    var h = 0;
+    for(var i = 0; i < s.length; i++){ h = (h * 31 + s.charCodeAt(i)) | 0; }
+    return Math.abs(h);
+  }
+
+  function buildMessage(){
+    var hosp = curHospital || '○○동물병원';
+    var slogan = cleanSlogan(slogInput.value);
+    var g = curPair.g || '';
+    var p = curPair.p || '';
+    var items = selList().reverse(); /* 최신순으로 정리된 것을 오래된 것부터 */
+
+    var L = [];
+    if(g){
+      L.push('안녕하세요, ' + g + ' 보호자님 🐾');
+    } else {
+      L.push('안녕하세요, ' + (p ? p + ' 아이' : '보호자') + '님 🐾');
+    }
+    L.push(hosp + '입니다.' + (slogan ? ' (' + slogan + ')' : ''));
+    L.push('');
+    L.push(p ? ('지난번에 ' + p + ' 아이가 챙겨 간') : '지난번에 챙겨 가신');
+    items.forEach(function(rec){
+      var name = cleanProduct(rec.n);
+      var qty = rec.q && rec.q > 1 ? ' ' + rec.q + '개' : '';
+      L.push('· ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
+    });
+    L.push('요즘 슬슬 떨어져 갈 때가 되었어요.');
+    L.push('');
+    L.push('같은 제품으로 미리 준비해 두시면 마음이 놓이실 거예요.');
+
+    var u = urlInfo();
+    if(u.kind === 'url'){
+      L.push('필요하시면 아래로 편하게 요청해 주세요 😊');
+      L.push('');
+      L.push('🛒 바로 재구매 요청하기');
+      L.push(u.value);
+    } else if(u.kind === 'text'){
+      L.push('필요하시면 ' + u.value + '에 편하게 말씀해 주세요 😊');
+    } else {
+      L.push('필요하시면 이 카톡방으로 편하게 말씀해 주세요 😊');
+    }
+
+    L.push('');
+    var who = p || g || '아이';
+    var warm = WARM[hashStr(who + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
+    L.push(warm(who));
+    return L.join('\n');
+  }
+
+  function onMake(){
+    if(!curPair){
+      say('3단계에서 보호자·아이를 먼저 골라 주세요');
+      return;
+    }
+    var items = selList();
+    if(!items.length){
+      say('재구매할 품목을 1개 이상 선택해 주세요');
+      return;
+    }
+    lastMessage = buildMessage();
+    $('previewText').textContent = lastMessage;
+    $('whoami').textContent = '👤 ' + (curPair.g || '보호자 미기재') + ' 보호자님 · ' + (curPair.p || '아이 이름 미기재') +
+      ' · 선택한 품목 ' + items.length + '개';
+    var n = lastMessage.length;
+    var badge = $('charBadge');
+    badge.textContent = '공백 포함 ' + n + '자';
+    badge.className = 'cnt-badge' + (n >= 900 ? ' over' : (n >= 300 ? ' tight' : ''));
+    $('result').hidden = false;
+    $('pvEmpty').hidden = true;
+    renderLinkState();
+    var cp = $('copyMsg');
+    cp.className = 'pv-copy';
+    cp.textContent = '📋 문구 복사하기';
+  }
+  $('makeBtn').addEventListener('click', onMake);
+
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(t);
+    }
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement('textarea');
+      ta.value = t;
+      ta.setAttribute('readonly','');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('copy failed'));
+    });
+  }
+
+  $('copyMsg').addEventListener('click', function(){
+    if(!lastMessage) return;
+    var btn = this;
+    copyText(lastMessage).then(function(){
+      btn.className = 'pv-copy done';
+      btn.textContent = '✅ 복사했어요 · 카톡에 붙여넣기';
+      say('문구를 복사했어요. 카톡방에 붙여넣기만 하면 됩니다.');
+    }).catch(function(){
+      /* 마지막 수단: 문구 전체 선택 */
+      var el = $('previewText');
+      if(window.getSelection && document.createRange){
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      say('자동 복사가 안 되면 위 문구를 길게 눌러 직접 복사해 주세요');
+    });
+  });
+
+  /* ===================== ⑥ 이 기기 저장 정보 지우기 ===================== */
+  $('wipeBtn').addEventListener('click', function(){
+    if(!window.confirm('이 기기에 저장된 병원 이름·슬로건·판매내역·조회 내용을 모두 지울까요? 되돌릴 수 없습니다.')) return;
+    try {
+      var dels = [];
+      for(var i = 0; i < window.localStorage.length; i++){
+        var k = window.localStorage.key(i);
+        if(k && k.indexOf(K_PREFIX) === 0) dels.push(k);
+      }
+      dels.forEach(function(k){ lsDel(k); });
+    } catch(e){}
+    DATA = { file:'', at:0, sample:false, records:[], columns:'', skipped:0, kiosk:0 };
+    curHospital = '';
+    hospInput.value = '';
+    applyProfile(null);
+    resetSearch();
+    renderDataState();
+    $('dataStatus').className = 'xlsxstatus';
+    $('dataStatus').textContent = '이 기기에 저장된 정보를 모두 지웠어요. 병원 이름부터 다시 적어 주세요.';
+    searchList.innerHTML = '';
+    histList.innerHTML = '';
+    $('result').hidden = true;
+    $('pvEmpty').hidden = false;
+    syncConfid('');
+    say('이 기기 저장 정보를 모두 지웠어요');
+  });
+
+  /* ===================== 시작 ===================== */
+  (function init(){
+    var lastName = cleanName(lsGet(K_HOSP) || '');
+    if(lastName){
+      hospInput.value = lastName;
+      curHospital = lastName;
+      applyProfile(readProfile(lastName));
+    } else {
+      curHospital = '';
+      applyProfile(null);
+    }
+    syncConfid(curHospital);
+    loadDataFor(curHospital);
+    renderLinkState();
+  })();
+
+})();
+</script>
+</body>
+</html>
