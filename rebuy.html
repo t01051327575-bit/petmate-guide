@@ -1020,7 +1020,7 @@
   var RP_CATS = ['사료','유산균','영양제','예방약'];
   function rpCategory(rec){
     var s = String(rec.n || '') + ' ' + String(rec.c || '');
-    if(/사료|키블|화식|습식|건식/.test(s)) return '사료';
+    if(/사료|키블|화식|습식|건식|로얄캐닌|힐스|오리젠|아카나|퓨리나|이즈칸|웰니스|뉴트리나/i.test(s)) return '사료';
     if(/유산균|프로바이오|엠바이옴|락토|장유산균/.test(s)) return '유산균';
     if(/영양제|비타민|오메가|관절|콘드로이친|글루코사민|칼슘|오메가3/.test(s)) return '영양제';
     if(/사상충|예방약|백신|구충|넥스가드|브라벡토|하트가드|레볼루션|심패리|프론트라인|접종/.test(s)) return '예방약';
@@ -1307,7 +1307,7 @@
           var ago = cycle * k;
           if(ago > 200) break;
           var dt = new Date(TODAY.getTime() - ago * 86400000);
-          recs.push({ g:s.g, p:s.p, n:name, d:dateToIso(dt), q:1, a:0, c:/사료/.test(name) ? '용품' : '백신' });
+          recs.push({ g:s.g, p:s.p, n:name, d:dateToIso(dt), q:1, a:0, c:'' });
         }
       });
     });
