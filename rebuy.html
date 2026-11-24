@@ -657,7 +657,7 @@
 
       <div class="tip">
         <div class="ic">💡</div>
-        <div><b>팁.</b> 문구를 받은 보호자는 링크를 눌러 <b>자기 아이의 구매이력·심장사상충 예방일·다음 예약일</b>을 확인하고, 필요한 품목을 <b>체크해서 바로 주문</b>할 수 있어요. 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다. 같은 품목을 여러 번 샀다면 <b>가장 최근 1건</b>만 보고, 예방약은 <b>30일 × 구매 개수</b>(브라벡토는 90일 × 개수)가 지났을 때 <b>재구매 시기</b>로 표시해요.</div>
+        <div><b>팁.</b> 문구를 받은 보호자는 링크를 눌러 <b>자기 아이의 구매이력·심장사상충 예방일·다음 예약일</b>을 확인하고, 필요한 품목을 <b>체크해서 바로 주문</b>할 수 있어요. 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다. 같은 품목을 여러 번 샀다면 <b>가장 최근 1건</b>만 보고, 예방약은 <b>30일 × 구매 개수</b>(브라벡토는 90일 × 개수)가 지났을 때 <b>재구매 시기</b>로 표시해요. <b>백신·접종</b>(광견병·종합(DHPPL)·켄넬코프·인플루엔자·코로나·부스터)은 <b>1년(365일)</b>이 지나야 <b>접종 시기</b>로 표시해요.</div>
       </div>
     </div>
   </section>
@@ -1058,6 +1058,14 @@
   function isTestItem(s){ return /검사|키트|패널|진단|초음파|엑스레이|x-ray|방사선|현미경/i.test(String(s||'')); }
   /* 예방약(기생충·심장사상충·백신) 이름·구분에 걸리는 낱말 */
   var RP_PREV = /사상충|예방약|백신|구충|넥스가드|브라벡토|하트가드|레볼루션|심패리|심파리|애드보킷|캐치올|프론트라인|프로하트|접종/i;
+  /* 백신·접종(1년 주기) 이름에 걸리는 낱말. 구분 칸의 '백신'은 재고 구역 이름이라
+     같은 구역에 넥스가드·영양제가 함께 들어 있어 쓰지 않고, 상품명만 본다. */
+  var RP_VACC = /광견병|백신|DHPPL|DAPP|켄넬|인플루엔자|부스터|booster|코로나|corona|접종/i;
+  function rpIsVaccine(rec){
+    var n = String(rec && rec.n || '');
+    if(isTestItem(n)) return false;          /* 항체가검사 같은 검사는 계속 제외 */
+    return RP_VACC.test(n);
+  }
   function rpCategory(rec){
     var s = String(rec.n || '') + ' ' + String(rec.c || '');
     if(isTestItem(s)) return '';
@@ -1094,13 +1102,15 @@
     return q > 60 ? 60 : q;      /* 오입력(재고 수량 등)으로 주기가 끝없이 늘지 않게 */
   }
   function rpIsPreventive(rec){
+    if(rpIsVaccine(rec)) return true;
     var s = String(rec.n || '') + ' ' + String(rec.c || '');
     if(isTestItem(s)) return false;
     return RP_PREV.test(s);
   }
-  /* 예방약 주기: 브라벡토 90일 × 개수, 그 밖의 예방약 30일 × 개수 (최소 1회분) */
+  /* 주기: 백신·접종은 1년(365일 × 개수), 브라벡토 90일 × 개수, 그 밖의 예방약 30일 × 개수 */
   function rpCycleDays(rec){
     var q = rpQty(rec);
+    if(rpIsVaccine(rec)) return 365 * q;
     if(/브라벡토/i.test(String(rec.n || '') + ' ' + String(rec.c || ''))) return 90 * q;
     return 30 * q;
   }
@@ -1131,6 +1141,10 @@
     if(isTestItem(rec.n)) return '';
     if(!isLatestOf(rec, newest)) return '';
     var d = daysSince(rec.d);
+    if(rpIsVaccine(rec)){
+      if(d < rpCycleDays(rec)) return '';
+      return '접종 시기 · 백신(1년)';
+    }
     if(rpIsPreventive(rec)){
       if(d < rpCycleDays(rec)) return '';
       return '재구매 시기 · ' + (rpCategory(rec) || '예방약');
