@@ -183,7 +183,7 @@
       var g = ($('#guardian').value || '').trim() || '보호자';
       var p = ($('#pet').value || '').trim() || '우리 아이';
       var extra = ($('#extra').value || '').trim();
-      var head = '🐾 ' + g + '님, ' + p + ' 상태는 ' + s.t + '로 지금 내원이 필요합니다.\n\n';
+      var head = '🐾 ' + g + '님, ' + G.josa(p, '은', '는') + ' 지금 바로 내원이 필요합니다.\n증상: ' + s.t + '\n\n';
       var body = '오시는 길에 ' + s.doit + '\n' +
         (extra ? '· ' + extra + '\n' : '') +
         '\n도착하면 바로 진료합니다. 오는 시간을 전화로 알려 주세요.\n' +
