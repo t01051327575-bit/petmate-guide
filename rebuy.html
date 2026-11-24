@@ -657,7 +657,7 @@
 
       <div class="tip">
         <div class="ic">💡</div>
-        <div><b>팁.</b> 문구를 받은 보호자는 링크를 눌러 <b>자기 아이의 구매이력·심장사상충 예방일·다음 예약일</b>을 확인하고, 필요한 품목을 <b>체크해서 바로 주문</b>할 수 있어요. 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다.</div>
+        <div><b>팁.</b> 문구를 받은 보호자는 링크를 눌러 <b>자기 아이의 구매이력·심장사상충 예방일·다음 예약일</b>을 확인하고, 필요한 품목을 <b>체크해서 바로 주문</b>할 수 있어요. 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다. 같은 품목을 여러 번 샀다면 <b>가장 최근 1건</b>만 보고, 예방약은 <b>30일 × 구매 개수</b>(브라벡토는 90일 × 개수)가 지났을 때 <b>재구매 시기</b>로 표시해요.</div>
       </div>
     </div>
   </section>
@@ -1056,26 +1056,88 @@
   var RP_CATS = ['사료','유산균','영양제','예방약'];
   /* 검사·키트·진단 항목은 재구매 주기 품목이 아니므로 '예방약'으로 분류하지 않는다 */
   function isTestItem(s){ return /검사|키트|패널|진단|초음파|엑스레이|x-ray|방사선|현미경/i.test(String(s||'')); }
+  /* 예방약(기생충·심장사상충·백신) 이름·구분에 걸리는 낱말 */
+  var RP_PREV = /사상충|예방약|백신|구충|넥스가드|브라벡토|하트가드|레볼루션|심패리|심파리|애드보킷|캐치올|프론트라인|프로하트|접종/i;
   function rpCategory(rec){
     var s = String(rec.n || '') + ' ' + String(rec.c || '');
     if(isTestItem(s)) return '';
     if(/사료|키블|화식|습식|건식|로얄캐닌|힐스|오리젠|아카나|퓨리나|이즈칸|웰니스|뉴트리나/i.test(s)) return '사료';
     if(/유산균|프로바이오|엠바이옴|락토|장유산균/.test(s)) return '유산균';
     if(/영양제|비타민|오메가|관절|콘드로이친|글루코사민|칼슘|오메가3/.test(s)) return '영양제';
-    if(/사상충|예방약|백신|구충|넥스가드|브라벡토|하트가드|레볼루션|심패리|프론트라인|접종/.test(s)) return '예방약';
+    if(RP_PREV.test(s)) return '예방약';
     return '';
   }
-  function isDue(rec){
+
+  /* ---------- 재구매 주기 (수량 반영) ---------- */
+  /* 같은 품목인지 묶어 볼 때 쓰는 이름: 괄호 설명·크기·용량·포장 수를 걷어낸다.
+     예) 'XS 넥스가드 2~3.5kg (NEXGARD SPECTRA)' → '넥스가드' */
+  function rpNormName(raw){
+    var s = cleanProduct(raw).replace(/\([^)]*\)/g, ' ');
+    /* 무게·용량·함량·포장 수 걷어내기 */
+    s = s.replace(/\d+(?:\.\d+)?\s*(?:~|-|∼)\s*\d+(?:\.\d+)?\s*(?:kg|g|ml|l)\b/gi, ' ');
+    s = s.replace(/\d+(?:\.\d+)?\s*(?:kg|g|ml|l)\b/gi, ' ');
+    s = s.replace(/\d+(?:\.\d+)?\s*(?:mg|정|캡슐|포|팩|개|병|매|ea)\b/gi, ' ');
+    s = s.replace(/[0-9]+/g, ' ');
+    /* 크기 구분 낱말 */
+    s = s.replace(/(?:초소형|특대형|소형|중형|대형)/g, ' ');
+    var out = s.replace(/[^0-9A-Za-z가-힣]/g, '').toLowerCase();
+    /* 맨 앞에 붙은 크기 표시(XS넥스가드 · S브라벡토 · L하트가드) */
+    out = out.replace(/^[a-z]{1,2}(?=[가-힣])/, '');
+    if(!out) out = String(raw == null ? '' : raw).replace(/[^0-9A-Za-z가-힣]/g, '').toLowerCase();
+    return out;
+  }
+  /* 구매 수량(q). 없거나 0 이하면 1개로 본다 */
+  function rpQty(rec){
+    var q = Number(rec && rec.q);
+    if(!isFinite(q) || q < 1) q = 1;
+    q = Math.floor(q);
+    return q > 60 ? 60 : q;      /* 오입력(재고 수량 등)으로 주기가 끝없이 늘지 않게 */
+  }
+  function rpIsPreventive(rec){
+    var s = String(rec.n || '') + ' ' + String(rec.c || '');
+    if(isTestItem(s)) return false;
+    return RP_PREV.test(s);
+  }
+  /* 예방약 주기: 브라벡토 90일 × 개수, 그 밖의 예방약 30일 × 개수 (최소 1회분) */
+  function rpCycleDays(rec){
+    var q = rpQty(rec);
+    if(/브라벡토/i.test(String(rec.n || '') + ' ' + String(rec.c || ''))) return 90 * q;
+    return 30 * q;
+  }
+
+  /* 같은 품목(normalize한 이름)은 가장 최근 1건만 재구매 시기로 본다. */
+  function latestByName(recs){
+    var m = {};
+    if(!recs) return m;
+    for(var i = 0; i < recs.length; i++){
+      var k = rpNormName(recs[i].n);
+      if(!m.hasOwnProperty(k) || String(recs[i].d) > String(m[k].d)) m[k] = recs[i];
+    }
+    return m;
+  }
+  function isLatestOf(rec, newest){
+    if(!newest) return true;
+    var top = newest[rpNormName(rec.n)];
+    return !top || top === rec;
+  }
+  function isDue(rec, newest){
     if(isTestItem(rec.n)) return false;
+    if(!isLatestOf(rec, newest)) return false;
     var d = daysSince(rec.d);
-    return d >= 30 || !!rpCategory(rec);
+    if(rpIsPreventive(rec)) return d >= rpCycleDays(rec);
+    return d >= 30;
   }
-  function dueLabel(rec){
+  function dueLabel(rec, newest){
     if(isTestItem(rec.n)) return '';
+    if(!isLatestOf(rec, newest)) return '';
+    var d = daysSince(rec.d);
+    if(rpIsPreventive(rec)){
+      if(d < rpCycleDays(rec)) return '';
+      return '재구매 시기 · ' + (rpCategory(rec) || '예방약');
+    }
+    if(d < 30) return '';
     var cat = rpCategory(rec);
-    if(cat) return '재구매 시기 · ' + cat;
-    if(daysSince(rec.d) >= 30) return '재구매 시기';
-    return '';
+    return cat ? ('재구매 시기 · ' + cat) : '재구매 시기';
   }
 
   /* ===================== ③ 엑셀 파싱 ===================== */
@@ -1639,10 +1701,11 @@
   function renderHistory(){
     if(!curPair) return;
     var recs = curPair.recs;
+    var newest = latestByName(recs);      /* 같은 품목은 최신 1건만 재구매 시기 */
     var html = '';
     recs.forEach(function(rec, i){
       var days = daysSince(rec.d);
-      var bad = dueLabel(rec);
+      var bad = dueLabel(rec, newest);
       var name = cleanProduct(rec.n);
       var raw = name !== rec.n ? rec.n : '';
       var on = !!selected[recKey(rec)];
@@ -1691,8 +1754,9 @@
     if(!curPair) return;
     selected = {};
     if(kind !== 'none'){
+      var newest = latestByName(curPair.recs);
       curPair.recs.forEach(function(rec){
-        if(kind === 'due' && !isDue(rec)) return;
+        if(kind === 'due' && !isDue(rec, newest)) return;
         selected[recKey(rec)] = rec;
       });
     }
