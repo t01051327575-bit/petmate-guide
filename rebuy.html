@@ -1762,9 +1762,19 @@
     if(!note) return;
     if($('result').hidden) return;
     var hasPair = !!curPair && selList().length > 0;
+    var shortOk = false;
+    if(hasPair){
+      var li = (linkItems && linkItems.length && linkPairKey === pairKeyOf()) ? linkItems : selList();
+      if(li.length){
+        var lg = longOrderUrl(li, {});
+        shortOk = !!(lg && SHORT_CACHE[lg]);
+      }
+    }
     var html = hasPair
       ? '🛒 <b>보호자 전용 구매이력·주문 링크가 문구 끝에 들어갔어요.</b> 링크를 받은 보호자는 자기 아이 이력만 보고, 체크해서 바로 주문할 수 있습니다.'
       : '보호자를 고르면 <b>보호자 전용 구매이력·주문 링크</b>가 문구 끝에 자동으로 붙습니다.';
+    if(hasPair && !shortOk) html += '<br>🔗 링크를 짧게 줄이는 중이에요 · 줄어들면 문구를 다시 맞춥니다.';
+    if(hasPair && shortOk) html += '<br>🔗 카톡에서 한 줄로 보이도록 <b>짧은 링크(is.gd)</b>로 바꿔 넣었어요.';
     if(!urlInfo().kind) html += '<br>1단계에 병원 카톡 주소를 넣으면 보호자 화면에 <b>「카톡방 열기」 버튼</b>까지 생깁니다.';
     if(fit && fit.note) html += '<br>' + fit.note;
     note.innerHTML = html;
@@ -1879,7 +1889,7 @@
     return best;
   }
 
-  function buildOrderUrl(items, cfg){
+  function longOrderUrl(items, cfg){
     if(!curPair || !items || !items.length) return '';
     cfg = cfg || {};
     var slogan = cfg.noSlogan ? '' : cleanSlogan(slogInput.value);
@@ -1894,6 +1904,71 @@
       return payName(rec.n, max) + ',' + dCode(rec.d) + ',' + (rec.q || 1) + ',' + purposeCat(rec.n);
     });
     return ORDER_BASE + packStr(head.join('|') + '|' + rows.join(';'));
+  }
+
+  /* ---------- 링크 자동 단축 (is.gd · JSONP) ---------- */
+  var SHORT_CACHE = {};        /* 긴 링크 -> 단축 링크 (메모리 캐시) */
+  var linkItems = null;        /* 이번 문구의 링크에 담을 품목(고정) */
+  var linkPairKey = '';
+  var shortWait = null;
+
+  function pairKeyOf(){
+    return curPair ? ((curPair.g || '') + '\u0001' + (curPair.p || '')) : '';
+  }
+
+  function buildOrderUrl(){
+    if(!curPair) return '';
+    var items = (linkItems && linkItems.length && linkPairKey === pairKeyOf()) ? linkItems : selList();
+    if(!items.length) return '';
+    var long = longOrderUrl(items, {});
+    return SHORT_CACHE[long] || long;
+  }
+
+  function shortenUrl(longUrl){
+    return new Promise(function(resolve, reject){
+      if(SHORT_CACHE[longUrl]){ resolve(SHORT_CACHE[longUrl]); return; }
+      var cb = 'pmShort' + Math.floor(Math.random() * 1e9);
+      var el = document.createElement('script');
+      var done = false;
+      var timer = setTimeout(function(){ finish(new Error('timeout')); }, 2500);
+
+      function cleanup(){
+        clearTimeout(timer);
+        try { if(el.parentNode) el.parentNode.removeChild(el); } catch(e){}
+        try { delete window[cb]; } catch(e){ window[cb] = undefined; }
+      }
+      function finish(err, val){
+        if(done) return;
+        done = true;
+        cleanup();
+        if(err) reject(err); else resolve(val);
+      }
+
+      window[cb] = function(res){
+        var u = res && (res.shorturl || res.short_url);
+        if(u && /^https?:\/\//.test(u)) finish(null, u);
+        else finish(new Error('no short url'));
+      };
+      el.onerror = function(){ finish(new Error('load error')); };
+      el.src = 'https://is.gd/create.php?format=json&callback=' + cb +
+        '&url=' + encodeURIComponent(longUrl);
+      document.head.appendChild(el);
+    });
+  }
+
+  /* 현재 링크가 아직 단축 안 된 링크면 조용히 단축해 두고, 되면 문구를 다시 맞춘다 */
+  function ensureShortLink(){
+    if(!curPair || !selList().length) return;
+    var items = (linkItems && linkItems.length && linkPairKey === pairKeyOf()) ? linkItems : selList();
+    var long = longOrderUrl(items, {});
+    if(!long || SHORT_CACHE[long]) return;
+    clearTimeout(shortWait);
+    shortWait = setTimeout(function(){
+      shortenUrl(long).then(function(short){
+        SHORT_CACHE[long] = short;
+        refreshMessageIfOpen();
+      }).catch(function(){});
+    }, 700);
   }
 
   /* ---------- 400자 맞춤: 상품명 축약 도우미 ---------- */
@@ -1954,7 +2029,7 @@
     if(!cfg.compact) L.push('');
 
     /* 보호자 전용 구매이력·주문 링크 (선택한 품목 그대로 담는다) */
-    var orderUrl = cfg.noOrder ? '' : buildOrderUrl(items, cfg);
+    var orderUrl = cfg.noOrder ? '' : buildOrderUrl();
     var u = orderUrl ? { kind:'order', value:orderUrl } : urlInfo();
 
     var sameDay = items.length > 0;
@@ -1995,7 +2070,7 @@
           L.push(WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length](warmWho));
         }
       }
-      return L.join('\n') + (cfg.compact ? '\n' : '\n\n') +
+      return L.join('\n') + '\n\n' +
         '📋 ' + (p || '아이') + ' 구매이력 · 재구매 주문\n' + u.value;
     }
 
@@ -2096,13 +2171,40 @@
       say('재구매할 품목을 1개 이상 선택해 주세요');
       return;
     }
-    renderMessage();
+
+    /* 링크에 담을 품목은 이때 고정한다(최대 5개) — 단축 링크가 그대로 유지되도록 */
+    linkItems = items.slice(0, 5);
+    linkPairKey = pairKeyOf();
+    var long = longOrderUrl(linkItems, {});
+    var btn = $('makeBtn');
+
+    if(!long || SHORT_CACHE[long]){
+      renderMessage();
+      return;
+    }
+
+    renderMessage();                    /* 일단 긴 링크로 먼저 보여 준다 */
+    if(btn) btn.disabled = true;
+    if(btn) btn.textContent = '🔗 링크 줄이는 중…';
+
+    shortenUrl(long).then(function(short){
+      SHORT_CACHE[long] = short;
+      renderMessage();                  /* 단축된 만큼 문구를 다시 맞춘다 */
+      say('링크를 짧게 줄였어요 · ' + short.replace(/^https?:\/\//, ''));
+    }).catch(function(){
+      /* 단축 실패 → 예전처럼 품목 수 축약이 링크 길이도 줄이도록 */
+      linkItems = null;
+      renderMessage();
+    }).then(function(){
+      if(btn){ btn.disabled = false; btn.textContent = '✨ 재구매 안내 문구 만들기'; }
+    });
   }
 
   /* 문구가 이미 열려 있으면 병원 정보·링크가 바뀔 때 바로 다시 만든다 */
   function refreshMessageIfOpen(){
     if($('result').hidden || !curPair || !selList().length) return;
     renderMessage();
+    ensureShortLink();
   }
 
   function renderMessage(){
