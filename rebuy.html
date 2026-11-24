@@ -1709,12 +1709,27 @@
     }
     L.push(hosp + '입니다.' + (slogan ? ' (' + slogan + ')' : ''));
     L.push('');
-    L.push(p ? ('지난번에 ' + p + ' 아이가 챙겨 간') : '지난번에 챙겨 가신');
+
+    var sameDay = items.length > 0;
+    var d0 = items.length ? items[0].d : '';
+    items.forEach(function(r){ if(r.d !== d0) sameDay = false; });
+    var many = items.length > 1 ? '제품들이에요.' : '제품이에요.';
+    var who = p ? (p + ' 아이가 ') : '';
+    if(sameDay){
+      L.push('지난번(' + mdOf(d0) + ')에 ' + who + '챙겨 간 ' + many);
+    } else {
+      L.push('지난번에 ' + who + '챙겨 간 ' + many);
+    }
     items.forEach(function(rec){
       var name = cleanProduct(rec.n);
       var qty = rec.q && rec.q > 1 ? ' ' + rec.q + '개' : '';
-      L.push('· ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
+      if(sameDay){
+        L.push('· ' + name + qty);
+      } else {
+        L.push('· ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
+      }
     });
+    L.push('');
     L.push('요즘 슬슬 떨어져 갈 때가 되었어요.');
     L.push('');
     L.push('같은 제품으로 미리 준비해 두시면 마음이 놓이실 거예요.');
@@ -1732,9 +1747,9 @@
     }
 
     L.push('');
-    var who = p || g || '아이';
-    var warm = WARM[hashStr(who + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
-    L.push(warm(who));
+    var warmWho = p || g || '아이';
+    var warm = WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
+    L.push(warm(warmWho));
     return L.join('\n');
   }
 
