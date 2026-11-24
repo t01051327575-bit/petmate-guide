@@ -181,16 +181,17 @@
     var list = rows();
     var years = ageYears();
     var host = $('#plan');
+    var ageRow = years != null
+      ? '<div class="kv"><span class="k">나이</span><span class="v">' + years + '살' + (years >= 6 ? ' · 6세 이상 · 검진 6개월 주기' : '') + '</span></div>'
+      : '';
     if (!list.length) {
-      host.innerHTML = '<p class="note">마지막 접종일을 넣으면 여기에 일정이 표시됩니다.</p>';
+      host.innerHTML = ageRow + '<p class="note">마지막 접종일을 넣으면 여기에 일정이 표시됩니다.</p>';
     } else {
-      host.innerHTML =
-        (years != null ? '<div class="kv"><span class="k">나이</span><span class="v">' + years + '살' + (years >= 6 ? ' · 6세 이상' : '') + '</span></div>' : '') +
-        list.map(function (x) {
-          var dd = G.dday(G.isoDate(x.d));
-          var cls = dd === '오늘' ? 'warn' : (dd.indexOf('D+') === 0 ? 'bad' : '');
-          return '<div class="kv"><span class="k">' + G.esc(x.k) + '</span><span class="v ' + cls + '">' + G.fmtDate(x.d) + ' · ' + dd + '</span></div>';
-        }).join('');
+      host.innerHTML = ageRow + list.map(function (x) {
+        var dd = G.dday(G.isoDate(x.d));
+        var cls = dd === '오늘' ? 'warn' : (dd.indexOf('D+') === 0 ? 'bad' : '');
+        return '<div class="kv"><span class="k">' + G.esc(x.k) + '</span><span class="v ' + cls + '">' + G.fmtDate(x.d) + ' · ' + dd + '</span></div>';
+      }).join('');
     }
     if (kit) kit.refresh();
   }
