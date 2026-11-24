@@ -290,6 +290,7 @@ var G = (function () {
       ta.value = opts.build(state);
       dirty = false;
       updateCount();
+      if (typeof opts.onRefresh === 'function') opts.onRefresh(state);
       if (opts.autoShort && typeof opts.link === 'function') scheduleShort();
     }
     function scheduleShort() {

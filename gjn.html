@@ -128,7 +128,7 @@
       giftCustom = $('#giftCustom'), giftWrap = $('#giftCustomWrap');
   var cardPrev = $('#cardPrev');
   var lastShort = '';
-  var DEFAULT_NOTE = '우리 아이의 생일을 진심으로 축하합니다. 늘 건강하게, 함께 오래오래 걸어가요!';
+  var DEFAULT_NOTE = '올해도 건강하게, 많이 웃으며 함께해요. 늘 사랑받는 하루 보내렴!';
 
   gift.addEventListener('change', function () {
     giftWrap.style.display = gift.value === '__custom' ? '' : 'none';
@@ -192,7 +192,7 @@
           '<div class="cake" aria-hidden="true">🎂</div>' +
           '<h1>' + G.esc(d.g) + '님께 드리는 생일 엽서</h1>' +
           '<div class="pet"><span>' + G.esc(d.p) + '</span><em>♡</em></div>' +
-          '<div class="msg">' + G.esc(d.m) + '</div>' +
+          '<div class="letter">' + G.esc(d.m) + '</div>' +
           '<div class="gift"><div class="t">작은 선물</div><div class="v">🎁 ' + G.esc(d.gift) + '</div></div>' +
           (when ? '<div class="from" style="margin-top:12px">' + G.esc(when) + ' · ' + G.esc(d.p) + '의 생일</div>' : '') +
           '<div class="from"><b>' + G.esc(d.h) + '</b><br>' + G.esc(d.s || '') + '</div>' +
@@ -230,8 +230,7 @@
         document.body.classList.add('cardmode');
         document.title = d.p + '의 생일 엽서 | ' + (d.h || '굿모닝펫동물병원');
         var wrap = $('.wrap');
-        wrap.innerHTML = cardHTML(d, false) +
-          '<div class="center" style="margin-top:14px"><a class="chip-link" href="gjn.html">나도 생일 엽서 만들기</a></div>';
+        wrap.innerHTML = cardHTML(d, false);
         var sh = $('#cardShare');
         if (sh) sh.addEventListener('click', function () {
           if (navigator.share) {
@@ -257,8 +256,9 @@
       var body = room > 12 ? G.cut(d.m, room) + '\n\n' : '';
       return head + body + tail;
     },
-    link: function (state) { return state.short ? null : cardUrl(); },
-    autoShort: true
+    link: function (state) { return cardUrl(); },
+    autoShort: true,
+    onRefresh: function () { refreshLinkChip(); }
   });
 
   function refreshLinkChip() {
@@ -268,11 +268,6 @@
     a.style.display = '';
     a.textContent = kit.state.short ? '엽서 열어보기 (짧은 링크)' : '엽서 열어보기';
   }
-  var origRefresh = kit.refresh;
-  kit.refresh = function (force) {
-    origRefresh(force);
-    refreshLinkChip();
-  };
   var shortBtn = $('#short');
   shortBtn.addEventListener('click', function () {
     setTimeout(function () {
