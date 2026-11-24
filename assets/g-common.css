@@ -75,7 +75,7 @@ b,strong{color:var(--ink)}
   backdrop-filter:saturate(140%) blur(10px);
   border-bottom:1px solid var(--line);
 }
-.g-top .bar{max-width:760px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:9px}
+.g-top .bar{max-width:760px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:9px;height:auto;background:transparent;border-radius:0;overflow:visible}
 .g-logo{
   flex:0 0 auto;width:32px;height:32px;border-radius:10px;
   background:linear-gradient(135deg,var(--soft),var(--soft2));
