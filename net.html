@@ -75,20 +75,20 @@
   position:absolute;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
   -webkit-clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
 }
-.hex .ring{inset:1px;background:#dbeaf2;transition:background .16s ease}
+.hex .ring{inset:1px;background:#c6e3f2;transition:background .16s ease}
 .hex .face{inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 5px;text-align:center;transition:filter .16s ease}
 .hex .hc{font-weight:900;letter-spacing:.02em;line-height:1.05;color:#1f6f96}
 .hex .hl{font-weight:800;line-height:1.16;letter-spacing:-.02em;color:#5d727d;margin-top:2px;max-width:96%}
-.hex.t-care .face{background:linear-gradient(165deg,#f0f9fe 0%,#ffffff 78%)}
-.hex.t-care .ring{background:#cfe8f5}
-.hex.t-clinic .face{background:linear-gradient(165deg,#ecfaf6 0%,#ffffff 78%)}
-.hex.t-clinic .ring{background:#c7e9df}
+.hex.t-care .face{background:linear-gradient(160deg,#f7fcff 0%,#e8f5fd 100%)}
+.hex.t-care .ring{background:#c6e3f2}
+.hex.t-clinic .face{background:linear-gradient(160deg,#f5fdfa 0%,#e2f6f0 100%)}
+.hex.t-clinic .ring{background:#bfe6da}
 .hex.t-clinic .hc{color:#0d7462}
-.hex.t-stock .face{background:linear-gradient(165deg,#fdf6e8 0%,#ffffff 78%)}
-.hex.t-stock .ring{background:#f0e2c4}
+.hex.t-stock .face{background:linear-gradient(160deg,#fffcf3 0%,#fbf0d9 100%)}
+.hex.t-stock .ring{background:#ecdcb8}
 .hex.t-stock .hc{color:#8a631f}
-.hex.t-admin .face{background:linear-gradient(165deg,#f4f1fc 0%,#ffffff 78%)}
-.hex.t-admin .ring{background:#ddd6f2}
+.hex.t-admin .face{background:linear-gradient(160deg,#faf8fe 0%,#efeafb 100%)}
+.hex.t-admin .ring{background:#d8d0ef}
 .hex.t-admin .hc{color:#5b4a9a}
 .hex:hover{transform:translateY(-2px)}
 .hex:hover .face{filter:brightness(1.03) saturate(1.06)}
@@ -401,14 +401,14 @@ html.sheet-open body{overflow:hidden}
     var C = w < 480 ? 4 : (w < 780 ? 5 : 6);
     var plan = ROWPLAN[C], maxN = 0, r, j, n;
     for (r = 0; r < plan.length; r++) { if (plan[r] > maxN) maxN = plan[r]; }
-    var W = w / (maxN + 1);
+    var W = (w - 2) / (maxN + 1);
     var H = W * 1.1547;
     comb.style.height = Math.ceil((plan.length - 1) * 0.75 * H + H) + 'px';
 
     var i = 0, html = '';
     for (r = 0; r < plan.length; r++) {
       n = plan[r];
-      var left = (w - maxN * W) / 2 + (maxN - n) * W / 2 + (r % 2 ? W / 2 : 0);
+      var left = (w - maxN * W) / 2 + (r % 2 ? W / 2 : 0) + Math.floor((maxN - n) / 2) * W;
       var cells = '';
       for (j = 0; j < n && i < HEXES.length; j++, i++) { cells += hexHTML(HEXES[i], W, H); }
       html += '<div class="comb-row" style="left:' + left.toFixed(2) + 'px;top:' + (r * 0.75 * H).toFixed(2) +
