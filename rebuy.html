@@ -974,7 +974,7 @@
 
     var parts = [];
     if(DATA.sample) parts.push('지금은 <b>샘플 데이터</b>(가상의 보호자·아이)입니다. 실제 사용 전에 우리 병원 판매내역을 올려 주세요.');
-    else if(DATA.file) parts.push('<b>' + esc(DATA.file) + '</b>을(를) 이 기기에 저장했어요. 창을 닫아도 다음에 그대로 불러옵니다.');
+    else if(DATA.file) parts.push('판매내역을 이 기기에 저장했어요. 창을 닫아도 다음에 그대로 불러옵니다.');
     if(DATA.kiosk) parts.push('보호자 없이 찍힌 <b>키오스크·병원 내부 계정 ' + DATA.kiosk + '행</b>은 목록에서 뺐습니다.');
     if(DATA.skipped) parts.push('보호자·아이를 읽지 못한 <b>' + DATA.skipped + '행</b>은 건너뛰었습니다.');
     $('dataStatus').className = 'xlsxstatus';
