@@ -2009,7 +2009,10 @@
     var slogan = cfg.noSlogan ? '' : cleanSlogan(slogInput.value);
     var g = curPair ? (curPair.g || '') : '';
     var p = curPair ? (curPair.p || '') : '';
-    var all = selList().reverse();          /* 가장 오래전(급한) 품목부터 */
+    /* 링크에 담은 품목과 문구에 적는 품목을 같게 유지한다 */
+    var all = (linkItems && linkItems.length && linkPairKey === pairKeyOf())
+      ? linkItems.slice(0)
+      : selList().reverse();          /* 가장 오래전(급한) 품목부터 */
     var total = all.length;
     var lim = cfg.maxItems || 0;
     var items = (lim && total > lim) ? all.slice(0, lim) : all;
