@@ -188,7 +188,7 @@
     display:block;font-size:12.6px;color:var(--ink);font-weight:800;line-height:1.45;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .dstat .cell b.wrap{white-space:normal;overflow:visible}
+  .dstat .cell b.full{white-space:normal;overflow:visible}
   .dstat .wide{grid-column:1 / -1}
   .dstat .sbadge{
     display:inline-block;vertical-align:middle;margin-left:5px;
@@ -972,7 +972,7 @@
       '<div class="cell"><span>기간</span><b>' + esc(minD) + ' ~ ' + esc(maxD) + '</b></div>' +
       '<div class="cell"><span>구매 기록</span><b>' + DATA.records.length.toLocaleString() + '건</b></div>' +
       '<div class="cell"><span>보호자 · 아이</span><b>' + gN + '명 · ' + pN + '마리</b></div>' +
-      '<div class="cell wide"><span>자동으로 찾은 컬럼</span><b class="wrap">' + esc(DATA.columns || '날짜 · 상품명 · 보호자 · 아이 · 수량') + '</b></div>';
+      '<div class="cell wide"><span>자동으로 찾은 컬럼</span><b class="full">' + esc(DATA.columns || '날짜 · 상품명 · 보호자 · 아이 · 수량') + '</b></div>';
 
     var parts = [];
     if(DATA.sample) parts.push('지금은 <b>샘플 데이터</b>(가상의 보호자·아이)입니다. 실제 사용 전에 우리 병원 판매내역을 올려 주세요.');
@@ -1783,7 +1783,7 @@
     var n = lastMessage.length;
     var badge = $('charBadge');
     badge.textContent = '공백 포함 ' + n + '자';
-    badge.className = 'cnt-badge' + (n >= 900 ? ' over' : (n >= 300 ? ' tight' : ''));
+    badge.className = 'cnt-badge' + (n >= 900 ? ' over' : (n >= 450 ? ' tight' : ''));
     $('result').hidden = false;
     $('pvEmpty').hidden = true;
     renderLinkState();
