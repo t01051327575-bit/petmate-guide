@@ -874,10 +874,10 @@
     clearTimeout(hospTimer);
     switchHospital(cleanName(hospInput.value));
   });
-  slogInput.addEventListener('input', function(){ writeProfile(); });
-  slogInput.addEventListener('blur', function(){ writeProfile(); });
-  orderInput.addEventListener('input', function(){ writeProfile(); renderLinkState(); });
-  orderInput.addEventListener('blur', function(){ writeProfile(); renderLinkState(); });
+  slogInput.addEventListener('input', function(){ writeProfile(); refreshMessageIfOpen(); });
+  slogInput.addEventListener('blur', function(){ writeProfile(); refreshMessageIfOpen(); });
+  orderInput.addEventListener('input', function(){ writeProfile(); renderLinkState(); refreshMessageIfOpen(); });
+  orderInput.addEventListener('blur', function(){ writeProfile(); renderLinkState(); refreshMessageIfOpen(); });
 
   themeChips.addEventListener('click', function(e){
     var btn = e.target && e.target.closest ? e.target.closest('.chip[data-theme]') : null;
@@ -1763,6 +1763,17 @@
       say('재구매할 품목을 1개 이상 선택해 주세요');
       return;
     }
+    renderMessage();
+  }
+
+  /* 문구가 이미 열려 있으면 병원 정보·링크가 바뀔 때 바로 다시 만든다 */
+  function refreshMessageIfOpen(){
+    if($('result').hidden || !curPair || !selList().length) return;
+    renderMessage();
+  }
+
+  function renderMessage(){
+    var items = selList();
     lastMessage = buildMessage();
     $('previewText').textContent = lastMessage;
     $('whoami').textContent = '👤 ' + (curPair.g || '보호자 미기재') + ' 보호자님 · ' + (curPair.p || '아이 이름 미기재') +
