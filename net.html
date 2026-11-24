@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템 | 26칸 벌집 포털</title>
+<meta name="description" content="굿모닝펫 A~Z 그물망 시리즈 26칸 벌집 포털 — 직원도 편하고, 보호자도 편하고, 병원에도 좋은 보호자 이탈 없는 평생 주치의 그물망. 칸을 누르면 바로 열립니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="굿모닝펫 A~Z 그물망 시리즈 · 26칸 벌집 포털">
+<meta property="og:description" content="직원도 편하고, 보호자도 편하고, 병원에도 좋은 — 보호자 이탈 없는 평생 주치의 그물망. 벌집 26칸을 누르면 바로 열립니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/net.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="굿모닝펫 A~Z 그물망 시리즈 · 26칸 벌집 포털">
+<meta name="twitter:description" content="직원도 편하고, 보호자도 편하고, 병원에도 좋은 — 평생 주치의 그물망. 26칸을 누르면 바로 열립니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* ===== 넷 포털 전용 ===== */
+.netw{max-width:1040px}
+.g-top .bar{max-width:1040px}
+#g-map-btn,#g-map{display:none !important}
+.netw .page-hero{margin-bottom:14px}
+.page-hero h1 .h1sub{display:block;font-size:.58em;letter-spacing:-.01em;color:var(--accent-d);margin-top:5px}
+.netw #g-footer{margin:24px 0 6px;text-align:center;font-size:11.5px;line-height:1.75;color:var(--muted)}
+.netw #g-footer .b{font-weight:800;color:var(--ink-soft);font-size:12.5px;margin-bottom:2px}
+
+/* 필터 · 검색 */
+.honey-card{padding:16px 13px 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  appearance:none;font-family:inherit;cursor:pointer;
+  font-size:12.5px;font-weight:800;color:var(--ink-soft);
+  background:var(--bg);border:1px solid var(--line);border-radius:999px;
+  padding:8px 12px;min-height:38px;
+}
+.chip[aria-pressed="true"]{background:var(--soft);border-color:var(--brand);color:var(--brand-d);box-shadow:inset 0 0 0 1px var(--badge-line)}
+.chip .n{font-weight:900;opacity:.75;margin-left:3px}
+.searchrow{display:flex;gap:7px;margin-top:9px}
+.searchrow input{
+  flex:1 1 auto;min-width:0;font-family:inherit;font-size:15px;color:var(--ink);
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;min-height:46px;
+}
+.searchrow input::placeholder{color:#9fb0b9}
+.searchrow input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(47,134,181,.12)}
+.searchrow .mini{flex:0 0 auto}
+.mini{
+  appearance:none;font-family:inherit;cursor:pointer;font-size:12px;font-weight:800;
+  color:var(--brand-d);background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:0 12px;min-height:42px;
+}
+.mini:active{transform:scale(.98)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:11px 2px 2px}
+.legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted)}
+.legend i{width:9px;height:9px;border-radius:50%;display:block}
+.d-care{background:#9fd3ea}
+.d-clinic{background:#8fd8c6}
+.d-stock{background:#ecc98a}
+.d-admin{background:#c3b8e6}
+.setline{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin:9px 2px 0}
+.setline b{color:var(--ink-soft);font-weight:800}
+.linkbtn{appearance:none;border:0;background:none;font-family:inherit;font-size:11.5px;font-weight:800;color:var(--brand-d);text-decoration:underline;cursor:pointer;padding:2px 2px}
+
+/* ===== 벌집 ===== */
+.comb{position:relative;width:100%;margin:10px auto 4px}
+.comb-row{position:absolute;display:flex;align-items:flex-start}
+.hex{
+  position:relative;flex:0 0 auto;padding:0;border:0;background:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:transform .14s ease;
+}
+.hex .ring,.hex .face{
+  position:absolute;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  -webkit-clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.hex .ring{inset:1px;background:#dbeaf2;transition:background .16s ease}
+.hex .face{inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 5px;text-align:center;transition:filter .16s ease}
+.hex .hc{font-weight:900;letter-spacing:.02em;line-height:1.05;color:#1f6f96}
+.hex .hl{font-weight:800;line-height:1.16;letter-spacing:-.02em;color:#5d727d;margin-top:2px;max-width:96%}
+.hex.t-care .face{background:linear-gradient(165deg,#f0f9fe 0%,#ffffff 78%)}
+.hex.t-care .ring{background:#cfe8f5}
+.hex.t-clinic .face{background:linear-gradient(165deg,#ecfaf6 0%,#ffffff 78%)}
+.hex.t-clinic .ring{background:#c7e9df}
+.hex.t-clinic .hc{color:#0d7462}
+.hex.t-stock .face{background:linear-gradient(165deg,#fdf6e8 0%,#ffffff 78%)}
+.hex.t-stock .ring{background:#f0e2c4}
+.hex.t-stock .hc{color:#8a631f}
+.hex.t-admin .face{background:linear-gradient(165deg,#f4f1fc 0%,#ffffff 78%)}
+.hex.t-admin .ring{background:#ddd6f2}
+.hex.t-admin .hc{color:#5b4a9a}
+.hex:hover{transform:translateY(-2px)}
+.hex:hover .face{filter:brightness(1.03) saturate(1.06)}
+.hex:active{transform:scale(.97)}
+.hex.sel .ring{background:var(--brand)}
+.hex.sel .face{filter:saturate(1.1)}
+.hex.sel .hc{color:var(--brand-d)}
+.hex.dim{opacity:.22;filter:grayscale(.55)}
+.hex:focus-visible{outline:none;transform:translateY(-2px)}
+.hex:focus-visible .ring{background:var(--brand)}
+.comb-note{font-size:11.5px;color:var(--muted);text-align:center;margin:12px 0 0;font-weight:700}
+
+/* ===== 쓰는 법 ===== */
+.how{display:grid;grid-template-columns:1fr;gap:8px;margin-top:2px}
+.how>div{border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--bg)}
+.how b{display:block;font-size:12.5px;color:var(--brand-d);font-weight:900;margin-bottom:3px}
+.how p{margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-soft)}
+
+/* ===== 상세 시트 ===== */
+.sheet-back{position:fixed;inset:0;z-index:70;background:rgba(13,34,44,.44);opacity:0;pointer-events:none;transition:opacity .22s}
+.sheet-back.show{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:71;background:var(--card);
+  border-radius:24px 24px 0 0;padding:8px 18px calc(20px + env(safe-area-inset-bottom));
+  max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  transform:translateY(103%);transition:transform .28s cubic-bezier(.22,.8,.24,1);
+  box-shadow:0 -10px 44px rgba(10,35,48,.22);
+}
+.sheet.show{transform:none}
+.sheet-grip{width:42px;height:4px;border-radius:999px;background:var(--line);margin:2px auto 10px}
+.sheet-x{
+  position:absolute;right:10px;top:8px;appearance:none;border:1px solid var(--line);background:var(--bg);
+  color:var(--ink-soft);width:36px;height:36px;border-radius:50%;font-size:15px;font-weight:900;cursor:pointer;
+}
+.sh-head{display:flex;align-items:center;gap:11px;padding-right:42px}
+.sh-code{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:58px;height:58px;border-radius:16px;font-size:15px;font-weight:900;letter-spacing:.01em;
+  background:linear-gradient(150deg,var(--soft),var(--soft2));border:1px solid var(--badge-line);color:var(--brand-d);
+}
+.sh-id{min-width:0}
+.sh-id h2{font-size:19px;line-height:1.28}
+.sh-id p{margin:3px 0 0;font-size:12.5px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+.sh-prog{
+  display:flex;align-items:baseline;gap:8px;margin:12px 0 4px;padding:9px 12px;
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;font-size:12.5px;
+}
+.sh-prog span{color:var(--muted);font-weight:800;flex:0 0 auto}
+.sh-prog b{color:var(--ink);font-weight:900}
+.sh-h{font-size:13px;margin:16px 0 7px;color:var(--brand-d);font-weight:900;letter-spacing:-.01em}
+.sh-ben{display:grid;gap:6px}
+.sh-ben .b{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:#fff}
+.sh-ben .b .ic{flex:0 0 auto;font-size:15px;line-height:1.5}
+.sh-ben .b .tx{font-size:13px;line-height:1.55;color:var(--ink-soft)}
+.sh-ben .b .tx b{display:block;font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.04em;margin-bottom:1px}
+.sh-steps{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:s}
+.sh-steps li{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.sh-steps .n{
+  flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--soft);color:var(--brand-d);
+  font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.sh-target{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:14px 0 6px;font-size:11.5px;color:var(--muted);font-weight:700}
+.sh-target b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:3px 8px}
+.sh-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.sh-nav .btn{padding:8px 12px;min-height:40px;font-size:12.5px}
+.sh-nav span{font-size:11.5px;font-weight:800;color:var(--muted)}
+@media (min-width:680px){
+  .sheet{left:50%;right:auto;bottom:auto;top:50%;width:560px;max-height:86vh;border-radius:22px;
+    transform:translate(-50%,-44%) scale(.98);opacity:0;transition:transform .22s,opacity .22s;padding-bottom:20px}
+  .sheet.show{transform:translate(-50%,-50%);opacity:1}
+  .sheet-grip{display:none}
+  .how{grid-template-columns:repeat(3,1fr)}
+}
+html.sheet-open body{overflow:hidden}
+
+/* ===== 공유 ===== */
+.share-url{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 10px;font-size:11.5px;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:7px 9px}
+.share-url code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--ink-soft);word-break:break-all;flex:1 1 160px;min-width:0}
+.msg{width:100%;min-height:170px;font-family:inherit;font-size:13px;line-height:1.62;color:var(--ink);
+  background:#fffdf6;border:1px solid #f0e6c8;border-radius:14px;padding:12px 13px;resize:vertical}
+.msg:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(47,134,181,.12)}
+.count{font-size:11.5px;font-weight:800;color:var(--muted)}
+.count b{color:var(--ok)}
+.count.over b{color:var(--danger)}
+</style>
+</head>
+<body data-code="NET">
+<div id="g-top"></div>
+
+<div class="wrap netw">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">G · NET</span>
+      <span class="eng-chip">A~Z · 26 HEX</span>
+    </div>
+    <h1 id="heroTitle">굿모닝펫 A~Z 그물망 시리즈<span class="h1sub">평생 주치의 시스템</span></h1>
+    <p id="heroCopy">직원도 편하고, 보호자도 편하고, 병원에도 좋은 — 보호자 이탈 없는 평생 주치의 그물망</p>
+    <div class="marks"><span>26칸 벌집</span><span>한 번 눌러 바로 열기</span><span>병원 이름만 바꿔 그대로</span></div>
+  </header>
+
+  <section class="card honey-card">
+    <div class="chips" id="chips" role="group" aria-label="역할별 필터">
+      <button class="chip" type="button" data-cat="all" aria-pressed="true">전체 <span class="n">26</span>종</button>
+      <button class="chip" type="button" data-cat="guardian" aria-pressed="false">보호자용 <span class="n">13</span></button>
+      <button class="chip" type="button" data-cat="clinic" aria-pressed="false">진료·검사 <span class="n">5</span></button>
+      <button class="chip" type="button" data-cat="admin" aria-pressed="false">원무·운영 <span class="n">8</span></button>
+    </div>
+    <div class="searchrow">
+      <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="코드·이름으로 찾기 (예: GJN, 생일, 사료)" aria-label="26칸 검색">
+      <button class="mini" id="qClear" type="button" aria-label="검색어 지우기">✕</button>
+    </div>
+    <div class="legend">
+      <span><i class="d-care"></i>보호자 케어·접점</span>
+      <span><i class="d-clinic"></i>진료·검사·처방</span>
+      <span><i class="d-stock"></i>재고·재구매·사입</span>
+      <span><i class="d-admin"></i>원무·매뉴얼·운영</span>
+    </div>
+    <p class="setline">지금 세팅 · <b id="setText">—</b> <button class="linkbtn" id="setOpen" type="button">바꾸기</button></p>
+
+    <div class="comb" id="comb" role="group" aria-label="G-시리즈 26칸 벌집 그물망"></div>
+    <p class="comb-note" id="combNote">26칸 전체</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>쓰는 방법은 세 가지뿐<small>세팅 한 번 → 벌집 한 번 → 문구 복사</small></h2></div>
+    <div class="how">
+      <div><b>① ⚙ 세팅</b><p>병원명·슬로건·카톡 주소·배경 테마를 한 번 저장하면 26칸 전부에 그대로 적용됩니다.</p></div>
+      <div><b>② 벌집 클릭</b><p>필요한 칸을 누르면 누구에게 무엇이 좋은지와 3단계가 뜨고, 🚀 페이지 열기로 바로 넘어갑니다.</p></div>
+      <div><b>③ 문구 복사</b><p>각 페이지가 만든 400자 카톡 문구를 붙여넣기만 하면 끝. 링크는 자동으로 짧게 줄어듭니다.</p></div>
+    </div>
+  </section>
+
+  <section class="card" id="share">
+    <div class="sec-head"><span class="num">↗</span><h2>다른 병원 원장님께 포털 공유하기<small>병원 이름만 바꿔 그대로 쓰는 26칸</small></h2></div>
+    <p>아래 문구는 <b>지금 세팅된 병원명</b>으로 만들어집니다. 짧은 링크까지 넣어 <b>400자 이내</b>로 카톡에 붙여넣으시면 됩니다.</p>
+    <div class="share-url"><code id="shareUrlText">—</code><button class="mini" id="shareUrlCopy" type="button">주소 복사</button></div>
+    <textarea class="msg" id="shareMsg" spellcheck="false" aria-label="다른 병원 원장님께 보낼 카톡 소개 문구"></textarea>
+    <div class="msg-foot"><div class="count"><b id="shareCnt">0</b> / 400자</div><span class="note" id="shareShortNote"></span></div>
+    <div class="btns">
+      <button class="btn primary" id="shareCopy" type="button">📋 문구 복사</button>
+      <button class="btn ghost" id="shareShort" type="button">🔗 짧은 링크</button>
+      <button class="btn ghost wide" id="shareKakao" type="button">카톡으로 공유</button>
+    </div>
+  </section>
+
+  <div id="g-footer"></div>
+</div>
+
+<div class="sheet-back" id="sheetBack"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle" aria-hidden="true">
+  <div class="sheet-grip"></div>
+  <button class="sheet-x" id="sheetX" type="button" aria-label="닫기">✕</button>
+  <div class="sh-head">
+    <span class="sh-code" id="shCode">GAN</span>
+    <div class="sh-id">
+      <h2 id="shTitle">사입·정산</h2>
+      <p id="shSub">A · Accounting</p>
+    </div>
+  </div>
+  <div class="sh-prog"><span>프로그램</span><b id="shProg">—</b></div>
+  <div class="sh-ben" id="shBen"></div>
+  <h3 class="sh-h">범용 사용 방법 3단계</h3>
+  <ol class="sh-steps" id="shSteps"></ol>
+  <div class="sh-target"><span>지금 세팅(병원명·슬로건·테마)이 주소에 담겨 열립니다</span><b id="shTarget">gan.html</b></div>
+  <a class="btn solid wide" id="shOpen" href="#" target="_blank" rel="noopener">🚀 페이지 열기</a>
+  <div class="sh-nav">
+    <button class="btn ghost" id="shPrev" type="button">◀ 이전</button>
+    <span id="shPos">1 / 26</span>
+    <button class="btn ghost" id="shNext" type="button">다음 ▶</button>
+  </div>
+</section>
+
+<script src="assets/g-common.js?v=20261125a"></script>
+<script>
+(function () {
+  var $ = G.q;
+
+  /* ---------- 26칸 데이터 ---------- */
+  var HEXES = [
+    { code:'GAN', letter:'A', eng:'Accounting', ko:'사입·정산', short:'사입정산', program:'사입·정산 계산기', cat:'admin', tint:'stock', href:'gan.html',
+      b:['품목·수량·단가만 넣으면 사입액·판매액·마진이 바로 계산됩니다.','정확한 가격 기준이 잡혀 안내가 흔들리지 않습니다.','마진율이 보여 손해 보는 사입품이 바로 드러납니다.'],
+      s:['품목·수량·사입단가·판매단가 입력','계산을 누르면 사입액·판매액·마진율 표시','거래처 발주 문구를 복사해 전달'] },
+    { code:'GBN', letter:'B', eng:'Beauty', ko:'미용·피부', short:'미용피부', program:'미용 전 피부 체크 → 진료 연결', cat:'guardian', tint:'care', href:'gbn.html',
+      b:['미용 전 12가지 체크로 놓치던 피부·귀·눈 이상을 잡습니다.','미용하다 발견한 이상을 그 자리에서 진료로 이어 안내합니다.','미용 후 생기는 뒤늦은 컴플레인을 미리 막습니다.'],
+      s:['미용 전 12항목 체크','이상 부위 선택(귀·눈·피부·치아·혹)','진료 연결 판단과 보호자 안내 문구 복사'] },
+    { code:'GCN', letter:'C', eng:'Care', ko:'진료보드', short:'진료보드', program:'진료보드·하루 요약', cat:'clinic', tint:'clinic', href:'gcn.html',
+      b:['예약·내원·미내원·검사대기를 한 화면에서 확인합니다.','대기 없이 정리된 순서로 안내받습니다.','내원율과 미내원이 숫자로 남아 다음 날로 이어집니다.'],
+      s:['공식 진료보드 열기','예약·내원·미내원·검사대기 입력','원장님 요약 문구 복사'] },
+    { code:'GDN', letter:'D', eng:'Diagnostic', ko:'검사해설', short:'검사해설', program:'검사 결과 해설', cat:'clinic', tint:'clinic', href:'gdn.html',
+      b:['주요 10항목 참고치가 표로 있어 수치를 바로 대조합니다.','어려운 수치를 보호자 언어로 설명해 드립니다.','검사 설명이 사람마다 달라지지 않습니다.'],
+      s:['검사 항목과 수치 입력','참고치와 대조해 소견 작성','보호자용 400자 해설 복사'] },
+    { code:'GEN', letter:'E', eng:'Education', ko:'참관·교육', short:'참관교육', program:'참관·교육 신청', cat:'guardian', tint:'care', href:'gen.html',
+      b:['참관 신청부터 확정 안내·준비물까지 한 번에 정리됩니다.','오시는 시간과 준비물을 정확히 안내받습니다.','참관 응대가 표준화돼 첫인상이 좋아집니다.'],
+      s:['참관 신청 링크 열기','일시·인원·준비물 확정','확정 안내 문구 복사'] },
+    { code:'GFN', letter:'F', eng:'Feed', ko:'맞춤 사료', short:'맞춤사료', program:'맞춤 사료·급여량 계산', cat:'guardian', tint:'care', href:'gfn.html',
+      b:['체중과 상태만 넣으면 하루 칼로리·급여량이 계산됩니다.','우리 아이에게 맞는 양을 숫자로 안내받습니다.','사료 상담이 매번 같은 기준으로 이뤄집니다.'],
+      s:['체중·중성화·활동량 입력','RER/DER로 하루 kcal·g 계산','한 끼 양과 감량 기간 문구 복사'] },
+    { code:'GGN', letter:'G', eng:'Guide', ko:'이용 가이드', short:'이용가이드', program:'이용 가이드·오시는 길', cat:'guardian', tint:'care', href:'welcome.html',
+      b:['진료 시간·오시는 길·준비사항을 링크 하나로 안내합니다.','처음 오는 날에도 헤매지 않습니다.','같은 질문 전화를 크게 줄입니다.'],
+      s:['안내 링크 열기','진료 시간·주차·준비사항 확인','보호자에게 링크 그대로 전달'] },
+    { code:'GHN', letter:'H', eng:'Health', ko:'건강관리표', short:'건강표', program:'내원 전 건강관리표', cat:'guardian', tint:'care', href:'ghn.html',
+      b:['8항목 건강관리표를 복사용 표로 만들어 드립니다.','내원 전 상태를 미리 적어 오면 진료가 짧아집니다.','문진 시간이 줄고 기록이 남습니다.'],
+      s:['식욕·음수·배변·구토·기침·활동·복약·생리 8항목 작성','건강관리표 복사','내원 전 안내 문구와 함께 발송'] },
+    { code:'GIN', letter:'I', eng:'Import', ko:'질문수첩', short:'질문수첩', program:'자료 정리·질문 수첩', cat:'clinic', tint:'clinic', href:'gin.html',
+      b:['파일명 규칙과 질문→근거→답변 틀을 그대로 씁니다.','질문에 근거까지 붙은 답을 받습니다.','자료가 흩어지지 않고 폴더 규칙이 지켜집니다.'],
+      s:['날짜_보호자_아이_검사 형식으로 파일명 생성','질문·근거·답변 입력','문구 복사 후 자료 폴더에 저장'] },
+    { code:'GJN', letter:'J', eng:'Journey', ko:'생일엽서', short:'생일엽서', program:'진심충전·생애주기', cat:'guardian', tint:'care', href:'gjn.html',
+      b:['이름과 한마디만 넣으면 엽서와 문구가 완성됩니다.','생일날 병원에서 온 엽서와 음료 한 잔을 받습니다.','생일 한 번이 다음 내원과 재구매로 이어집니다.'],
+      s:['보호자·아이 이름, 축하 메시지 입력','선물(음료·커피·간식·미용할인) 선택','엽서 링크와 400자 문구를 복사해 카톡 발송'] },
+    { code:'GKN', letter:'K', eng:'Kit', ko:'처방복약', short:'처방복약', program:'처방 해설·복약 안내', cat:'guardian', tint:'clinic', href:'gkn.html',
+      b:['약별 용량·횟수·일수만 넣으면 총 투약량과 안내가 나옵니다.','언제 몇 알 먹이는지 헷갈리지 않습니다.','복약 문의 전화가 줄고 오투약이 줄어듭니다.'],
+      s:['약 이름·용량·횟수·일수 입력','총 투약량·복약 안내 확인','상비약 주의표와 함께 문구 복사'] },
+    { code:'GLN', letter:'L', eng:'Lab', ko:'검사루틴', short:'검사루틴', program:'검사실 12단계 루틴', cat:'clinic', tint:'clinic', href:'gln.html',
+      b:['12단계 체크가 날짜별로 저장돼 인계가 정확합니다.','검사가 같은 순서로 진행돼 기다림이 짧습니다.','빠뜨린 단계가 없어 재검·클레임이 줄어듭니다.'],
+      s:['그날 검사 목록 확인','12단계 체크(날짜별 자동 저장)','미완료 포함 인계 문구 복사'] },
+    { code:'GMN', letter:'M', eng:'Manual', ko:'온보딩', short:'온보딩', program:'신규 직원 매뉴얼·온보딩', cat:'admin', tint:'admin', href:'gmn.html',
+      b:['신규 직원 12단계를 이름별로 체크하고 저장합니다.','새 직원도 같은 기준으로 응대합니다.','교육이 사람마다 달라지지 않습니다.'],
+      s:['직원 이름 입력','첫 주 12단계 체크(이름별 저장)','첫 주 안내 문구 복사'] },
+    { code:'GNN', letter:'N', eng:'Neural', ko:'AI자동화', short:'AI자동화', program:'누아·피클 AI 자동화 루틴', cat:'admin', tint:'admin', href:'gnn.html',
+      b:['트리거·할 일·결과물만 정하면 AI 지시문이 완성됩니다.','안내·리마인드가 빠짐없이 도착합니다.','반복 업무가 자동으로 돌아갑니다.'],
+      s:['자동화할 일 고르기(프리셋 4종)','트리거·할 일·결과물 입력','AI에 붙여넣을 지시문 복사'] },
+    { code:'GON', letter:'O', eng:'Origin', ko:'개원스토리', short:'개원스토리', program:'개원 스토리·진심 철학', cat:'admin', tint:'admin', href:'gon.html',
+      b:['2003년부터의 이야기를 한 장으로 설명합니다.','왜 이 병원을 믿을 수 있는지 알게 됩니다.','브랜드와 철학이 말이 아니라 자료로 남습니다.'],
+      s:['타임라인 확인','대상(보호자·직원·거래처) 선택','소개 문구 복사'] },
+    { code:'GPN', letter:'P', eng:'Position', ko:'일일마감', short:'일일마감', program:'포지션·일일 마감 보고', cat:'admin', tint:'admin', href:'gpn.html',
+      b:['2인 체제 포지션과 마감 보고가 한 장에 정리됩니다.','누가 봐도 같은 안내를 받습니다.','마감 누락이 사라집니다.'],
+      s:['매출·환자·미내원 입력','포지션 카드 확인','마감 보고 문구 복사'] },
+    { code:'GQN', letter:'Q', eng:'Quiz', ko:'보고퀴즈', short:'보고퀴즈', program:'보고 퀴즈·행운의 7', cat:'admin', tint:'admin', href:'gqn.html',
+      b:['문제·정답을 넣으면 직원용 문제와 해설이 나뉩니다.','직원이 최신 기준으로 안내합니다.','교육이 놀이처럼 이어집니다.'],
+      s:['문제·정답·오답·힌트 입력','직원용 문제 복사','정답·해설 따로 복사'] },
+    { code:'GRN', letter:'R', eng:'Recruit', ko:'채용면접', short:'채용면접', program:'채용 공고·면접 체크', cat:'admin', tint:'admin', href:'grn.html',
+      b:['모집 조건만 넣으면 공고와 면접 체크가 완성됩니다.','응대하는 직원의 기준이 일정합니다.','면접이 기억에 의존하지 않습니다.'],
+      s:['모집 조건 입력','채용 공고 복사','면접 체크 8·질문 5로 평가'] },
+    { code:'GSN', letter:'S', eng:'Stock', ko:'재구매', short:'재구매', program:'구매이력·재구매 체크주문', cat:'guardian', tint:'stock', href:'rebuy.html',
+      b:['판매 엑셀을 올리면 재구매 시기 아이를 바로 찾습니다.','지난 구매이력을 보고 필요한 것만 체크해 주문합니다.','재구매 안내가 추측이 아니라 기록으로 나갑니다.'],
+      s:['병원 정보·카톡 주소 세팅','판매내역 엑셀 업로드','보호자·아이 조회 후 400자 문구·주문 링크 복사'] },
+    { code:'GTN', letter:'T', eng:'Talk', ko:'카톡안내', short:'카톡안내', program:'진료 코멘트 400자 안내', cat:'guardian', tint:'care', href:'universal.html',
+      b:['메모만 넣으면 400자 보호자 문구가 완성됩니다.','짧고 정중한 안내를 카톡으로 받습니다.','직원마다 다른 말투가 사라집니다.'],
+      s:['병원명·슬로건·배경색 세팅','진료 메모 입력','400자 문구 복사·카톡 발송'] },
+    { code:'GUN', letter:'U', eng:'Urgent', ko:'응급대처', short:'응급대처', program:'응급 대처·내원 판단', cat:'guardian', tint:'care', href:'gun.html',
+      b:['12증상별로 지금·당일·관찰을 바로 판단합니다.','전화로 물어보지 않아도 대처법을 안내받습니다.','응급 대응이 늦지 않습니다.'],
+      s:['증상 선택(12종)','지금·당일·관찰 판단 확인','오는 길 대처·금지사항과 안내 문구 복사'] },
+    { code:'GVN', letter:'V', eng:'Visit', ko:'진료신청', short:'진료신청', program:'진료 신청·접수 확인', cat:'guardian', tint:'care', href:'gvn.html',
+      b:['신청 링크와 접수 확인 문구를 함께 보냅니다.','카톡으로 바로 진료를 신청합니다.','전화 접수 부담이 줄어듭니다.'],
+      s:['진료 신청 링크 열기','접수 시간·비대기 여부 확인','확인 문구 복사'] },
+    { code:'GWN', letter:'W', eng:'Weight', ko:'체중관리', short:'체중관리', program:'체중 기록·만성질환 관리', cat:'guardian', tint:'care', href:'gwn.html',
+      b:['체중을 기록하면 추이 그래프와 목표까지 남은 양이 보입니다.','우리 아이가 얼마나 줄었는지 눈으로 확인합니다.','만성질환 관리가 숫자로 이어집니다.'],
+      s:['체중·날짜 기록(자동 저장)','추이 그래프 확인','안전 감량 속도·목표 문구 복사'] },
+    { code:'GXN', letter:'X', eng:'eXit', ko:'미내원', short:'미내원', program:'미내원 관리·03 마감', cat:'admin', tint:'admin', href:'gxn.html',
+      b:['연락 횟수별 1·2·3차 문구를 바로 씁니다.','잊고 있던 예약을 정중히 다시 안내받습니다.','미내원이 03 마감까지 정리됩니다.'],
+      s:['미내원 아이 목록 확인','연락 차수 선택','문구 복사 후 03 마감 체크'] },
+    { code:'GYN', letter:'Y', eng:'Yearly', ko:'백신검진', short:'백신검진', program:'연간 백신·건강검진 플래너', cat:'guardian', tint:'care', href:'gyn.html',
+      b:['마지막 접종일만 넣으면 다음 날짜가 D-day로 나옵니다.','접종일을 놓치지 않습니다.','예방 중심 진료가 반복 매출로 이어집니다.'],
+      s:['마지막 접종일 입력','다음 접종·심장사상충·검진 D-day 확인','안내 문구 복사'] },
+    { code:'GZN', letter:'Z', eng:'Zero', ko:'제로청소', short:'제로청소', program:'수술실·마감 제로 체크', cat:'clinic', tint:'clinic', href:'gzn.html',
+      b:['18항목을 날짜별로 체크하고 마감 보고까지 만듭니다.','위생이 매일 같은 기준으로 지켜집니다.','감염·사고 위험이 줄어듭니다.'],
+      s:['수술실·장비 18항목 체크(자동 저장)','미완료 항목 확인','마감 보고 문구 복사'] }
+  ];
+
+  var ROWPLAN = { 4:[4,3,4,3,4,4,4], 5:[5,4,5,4,4,4], 6:[6,5,6,5,4] };
+  var comb = $('#comb'), chips = $('#chips'), qEl = $('#q'), noteEl = $('#combNote');
+  var filterCat = 'all', query = '', selCode = '';
+  var sheet = $('#sheet'), back = $('#sheetBack');
+
+  function byCode(code) {
+    for (var i = 0; i < HEXES.length; i++) { if (HEXES[i].code === code) return HEXES[i]; }
+    return null;
+  }
+  function idxOf(code) {
+    for (var i = 0; i < HEXES.length; i++) { if (HEXES[i].code === code) return i; }
+    return -1;
+  }
+  function brand(name) {
+    var n = String(name || '').trim();
+    n = n.replace(/\s*동물병원$/, '').replace(/\s*병원$/, '');
+    return n || String(name || '굿모닝펫');
+  }
+  function portalUrl() { return window.location.origin + window.location.pathname; }
+
+  function pageHref(x) {
+    var s = G.settings();
+    var sp = new URLSearchParams();
+    sp.set('hospital', s.hospital);
+    if (s.slogan) sp.set('slogan', s.slogan);
+    sp.set('theme', s.theme);
+    if (s.kakao) {
+      sp.set('kakao', s.kakao);
+      if (x.href === 'rebuy.html') sp.set('link', s.kakao);
+    }
+    if (s.phone) sp.set('phone', s.phone);
+    return x.href + '?' + sp.toString();
+  }
+
+  /* ---------- 벌집 그리기 ---------- */
+  function hexHTML(x, W, H) {
+    var fs = Math.max(9, Math.min(18, Math.round(W * 0.16)));
+    var ls = Math.max(7.5, Math.min(12, Math.round(W * 0.105)));
+    return '<button class="hex t-' + x.tint + '" type="button" data-code="' + x.code + '"' +
+      ' style="width:' + W.toFixed(2) + 'px;height:' + H.toFixed(2) + 'px"' +
+      ' aria-label="' + x.code + ' ' + G.esc(x.ko) + ' — 상세 보기">' +
+      '<span class="ring"></span><span class="face">' +
+      '<span class="hc" style="font-size:' + fs + 'px">' + x.code + '</span>' +
+      '<span class="hl" style="font-size:' + ls + 'px">' + G.esc(x.short) + '</span>' +
+      '</span></button>';
+  }
+
+  function build() {
+    var w = comb.clientWidth;
+    if (!w) return;
+    var C = w < 480 ? 4 : (w < 780 ? 5 : 6);
+    var plan = ROWPLAN[C], maxN = 0, r, j, n;
+    for (r = 0; r < plan.length; r++) { if (plan[r] > maxN) maxN = plan[r]; }
+    var W = w / (maxN + 1);
+    var H = W * 1.1547;
+    comb.style.height = Math.ceil((plan.length - 1) * 0.75 * H + H) + 'px';
+
+    var i = 0, html = '';
+    for (r = 0; r < plan.length; r++) {
+      n = plan[r];
+      var left = (w - maxN * W) / 2 + (maxN - n) * W / 2 + (r % 2 ? W / 2 : 0);
+      var cells = '';
+      for (j = 0; j < n && i < HEXES.length; j++, i++) { cells += hexHTML(HEXES[i], W, H); }
+      html += '<div class="comb-row" style="left:' + left.toFixed(2) + 'px;top:' + (r * 0.75 * H).toFixed(2) +
+        'px;width:' + (n * W).toFixed(2) + 'px;height:' + H.toFixed(2) + 'px">' + cells + '</div>';
+    }
+    comb.innerHTML = html;
+    applyFilter();
+    if (selCode) markSel(selCode);
+  }
+
+  function markSel(code) {
+    G.qa('.hex', comb).forEach(function (el) {
+      el.classList.toggle('sel', el.getAttribute('data-code') === code);
+    });
+  }
+
+  function matches(x) {
+    if (filterCat !== 'all' && x.cat !== filterCat) return false;
+    if (!query) return true;
+    var hay = (x.code + ' ' + x.letter + ' ' + x.eng + ' ' + x.ko + ' ' + x.short + ' ' + x.program).toLowerCase();
+    return hay.indexOf(query) >= 0;
+  }
+  function applyFilter() {
+    var shown = 0;
+    G.qa('.hex', comb).forEach(function (el) {
+      var x = byCode(el.getAttribute('data-code'));
+      var ok = x ? matches(x) : true;
+      el.classList.toggle('dim', !ok);
+      if (ok) shown++;
+    });
+    if (shown === HEXES.length) noteEl.textContent = '26칸 전체 · 칸을 누르면 상세가 열립니다';
+    else if (shown) noteEl.textContent = shown + '칸 표시 중 · 칸을 누르면 상세가 열립니다';
+    else noteEl.textContent = '조건에 맞는 칸이 없습니다 — 코드(GJN)나 이름(생일)으로 다시 찾아보세요';
+  }
+
+  /* ---------- 필터 · 검색 ---------- */
+  G.qa('.chip', chips).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterCat = btn.getAttribute('data-cat');
+      G.qa('.chip', chips).forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      applyFilter();
+    });
+  });
+  qEl.addEventListener('input', function () {
+    query = qEl.value.trim().toLowerCase().replace(/\s+/g, '');
+    applyFilter();
+  });
+  $('#qClear').addEventListener('click', function () {
+    qEl.value = ''; query = ''; applyFilter(); qEl.focus();
+  });
+
+  /* ---------- 상세 시트 ---------- */
+  function benRow(icon, label, text) {
+    return '<div class="b"><span class="ic">' + icon + '</span><span class="tx"><b>' + label + '</b>' + G.esc(text) + '</span></div>';
+  }
+  function openSheet(code) {
+    var idx = idxOf(code);
+    if (idx < 0) return;
+    var x = HEXES[idx];
+    selCode = code;
+    markSel(code);
+    $('#shCode').textContent = x.code;
+    $('#shTitle').textContent = x.ko;
+    $('#shSub').textContent = x.letter + ' · ' + x.eng;
+    $('#shProg').textContent = x.program;
+    $('#shBen').innerHTML = benRow('👩‍⚕️', '직원', x.b[0]) + benRow('🐶', '보호자', x.b[1]) + benRow('🏥', '병원', x.b[2]);
+    $('#shSteps').innerHTML = x.s.map(function (t, k) {
+      return '<li><span class="n">' + (k + 1) + '</span><span>' + G.esc(t) + '</span></li>';
+    }).join('');
+    $('#shTarget').textContent = x.href;
+    var a = $('#shOpen');
+    a.href = pageHref(x);
+    a.textContent = x.href === 'welcome.html' ? '🚀 이용 가이드 열기'
+      : x.href === 'universal.html' ? '🚀 카톡 안내 도구 열기'
+      : x.href === 'rebuy.html' ? '🚀 재구매 수첩 열기'
+      : '🚀 페이지 열기';
+    $('#shPos').textContent = (idx + 1) + ' / ' + HEXES.length;
+    sheet.scrollTop = 0;
+    sheet.classList.add('show');
+    back.classList.add('show');
+    sheet.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('sheet-open');
+    if ('inert' in sheet) sheet.inert = false;
+    $('#sheetX').focus();
+  }
+  function closeSheet() {
+    sheet.classList.remove('show');
+    back.classList.remove('show');
+    sheet.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('sheet-open');
+  }
+  comb.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('.hex') : null;
+    if (!el) return;
+    openSheet(el.getAttribute('data-code'));
+  });
+  $('#sheetX').addEventListener('click', closeSheet);
+  back.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) {
+    if (!sheet.classList.contains('show')) return;
+    if (e.key === 'Escape') closeSheet();
+    if (e.key === 'ArrowRight') $('#shNext').click();
+    if (e.key === 'ArrowLeft') $('#shPrev').click();
+  });
+  $('#shPrev').addEventListener('click', function () {
+    var i = idxOf(selCode); if (i < 0) return;
+    openSheet(HEXES[(i + HEXES.length - 1) % HEXES.length].code);
+  });
+  $('#shNext').addEventListener('click', function () {
+    var i = idxOf(selCode); if (i < 0) return;
+    openSheet(HEXES[(i + 1) % HEXES.length].code);
+  });
+
+  /* ---------- 상단 텍스트 · 세팅 ---------- */
+  function paint() {
+    var s = G.settings();
+    var b = brand(s.hospital);
+    var h1 = $('#heroTitle');
+    if (h1) h1.innerHTML = G.esc(b) + ' A~Z 그물망 시리즈<span class="h1sub">평생 주치의 시스템</span>';
+    document.title = b + ' A~Z 그물망 시리즈 · 평생 주치의 시스템 | 26칸 벌집 포털';
+    var themeName = '하늘';
+    G.THEMES.forEach(function (t) { if (t.id === s.theme) themeName = t.name; });
+    $('#setText').textContent = s.hospital + (s.slogan ? ' · ' + s.slogan : '') + ' · ' + themeName;
+    $('#shareUrlText').textContent = portalUrl();
+  }
+  $('#setOpen').addEventListener('click', function () {
+    var btn = document.getElementById('g-set-btn');
+    if (btn) { btn.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
+
+  /* ---------- 공유 문구 ---------- */
+  function shareText(st) {
+    var s = G.settings();
+    var url = (st && st.short) || portalUrl();
+    var body = [
+      '원장님, ' + s.hospital + '에서 만든 「G-시리즈 A~Z 그물망」 포털입니다.',
+      '벌집 26칸을 누르면 사입·정산, 검사 해설, 생일 엽서, 재구매 수첩까지 바로 열립니다.',
+      '직원도 편하고 보호자도 편하고 병원에도 좋은 — 보호자 이탈 없는 평생 주치의 시스템.',
+      '병원 이름만 바꾸면 그대로 쓰실 수 있어요.'
+    ];
+    var tail = ['', '▶ ' + url];
+    while (body.length > 2 && G.count(body.concat(tail).join('\n')) > 400) body.pop();
+    return body.concat(tail).join('\n');
+  }
+  var kit = G.msgKit({
+    msg: '#shareMsg', copy: '#shareCopy', short: '#shareShort', share: '#shareKakao',
+    count: '#shareCnt', counter: '.count',
+    build: shareText, link: portalUrl, autoShort: true
+  });
+  $('#shareShort').addEventListener('click', function () {
+    setTimeout(function () {
+      var n = $('#shareShortNote');
+      n.textContent = kit.state.short ? '짧은 링크 ' + kit.state.short : '짧은 링크를 만들지 못했어요 — 긴 주소 그대로도 열립니다';
+    }, 320);
+  });
+  $('#shareUrlCopy').addEventListener('click', function () {
+    G.copy(portalUrl()).then(function (ok) { G.toast(ok ? '포털 주소를 복사했습니다' : '복사가 막혔어요 — 주소를 길게 눌러 복사해 주세요'); });
+  });
+  document.addEventListener('g-settings', function () { paint(); kit.refresh(true); });
+
+  /* ---------- 시작 ---------- */
+  function init() {
+    paint();
+    build();
+    kit.refresh();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  var rt = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(build, 160);
+  });
+})();
+</script>
+</body>
+</html>
