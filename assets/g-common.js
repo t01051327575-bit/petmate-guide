@@ -427,6 +427,7 @@ var G = (function () {
       if (nameEl) nameEl.textContent = cur.hospital;
       panel.classList.remove('open');
       toast('저장했습니다 — 모든 페이지에 함께 적용됩니다');
+      footer();
       document.dispatchEvent(new CustomEvent('g-settings', { detail: cur }));
     });
     q('#g-reset').addEventListener('click', function () {
@@ -436,6 +437,7 @@ var G = (function () {
       if (nameEl) nameEl.textContent = DEFAULTS.hospital;
       qa('.sw', th).forEach(function (x, i) { x.setAttribute('aria-pressed', THEMES[i].id === DEFAULTS.theme ? 'true' : 'false'); });
       toast('기본값으로 되돌렸습니다');
+      footer();
       document.dispatchEvent(new CustomEvent('g-settings', { detail: DEFAULTS }));
     });
 
@@ -465,7 +467,7 @@ var G = (function () {
     if (!host) return;
     var s = settings();
     host.innerHTML =
-      '<div class="b">' + esc(s.hospital) + ' · 굿모닝펫 A~Z 그물망 시리즈</div>' +
+      '<div class="b">' + esc(s.hospital) + ' · G-시리즈 A~Z 그물망</div>' +
       '직원도 편하고 · 보호자도 편하고 · 병원에도 좋은 평생 주치의 시스템<br>' +
       '<span class="small">G = Goodmorningpet · A~Z = 26개 연결 · N = Net(그물망)</span>';
   }
