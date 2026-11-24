@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드</title>
+<meta name="description" content="Petmate Aftercare 전체 콘텐츠 엑셀과 원장님 코멘트만 있으면, 300자 미만 보호자 카톡 안내문이 1분 만에 완성됩니다. AI 지시문 원클릭 복사 가이드.">
+
+<!-- Open Graph (카카오톡 공유 카드) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드">
+<meta property="og:description" content="펫메이트 엑셀 + 원장님 코멘트만 있으면 300자 미만 보호자 안내문 완성. 지시문은 버튼 한 번으로 복사하세요.">
+<meta property="og:url" content="https://petmateaftercare.github.io/Test/">
+<meta property="og:image" content="https://petmateaftercare.github.io/Test/og-card.png">
+<meta property="og:image:secure_url" content="https://petmateaftercare.github.io/Test/og-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="동물병원 보호자 카톡 안내 1분 작성 가이드">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드">
+<meta name="twitter:description" content="펫메이트 엑셀 + 원장님 코멘트만 있으면 300자 미만 보호자 안내문 완성.">
+<meta name="twitter:image" content="https://petmateaftercare.github.io/Test/og-card.png">
+
+<style>
+  :root{
+    --ink:#1b2a2f;
+    --ink-soft:#4b6068;
+    --muted:#6b8087;
+    --line:#e2ebee;
+    --mint:#0f9d8f;
+    --mint-d:#0a7a6f;
+    --mint-l:#e6f7f4;
+    --cream:#fffaf2;
+    --card:#ffffff;
+    --shadow:0 1px 2px rgba(16,45,52,.05), 0 8px 24px rgba(16,45,52,.07);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  [hidden]{display:none!important}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 520px at 8% -10%, #d9f4ee 0%, rgba(217,244,238,0) 62%),
+      radial-gradient(900px 460px at 100% 0%, #fff1d8 0%, rgba(255,241,216,0) 55%),
+      #f6faf9;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:22px 16px 56px}
+
+  /* ---------- header ---------- */
+  header.hero{
+    background:linear-gradient(150deg,#0f9d8f 0%,#12b3a2 52%,#3fc9b0 100%);
+    color:#fff;border-radius:22px;padding:26px 22px 24px;
+    box-shadow:0 10px 30px rgba(15,157,143,.24);
+    position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-46px;top:-58px;width:190px;height:190px;
+    background:rgba(255,255,255,.13);border-radius:50%;
+  }
+  header.hero::before{
+    content:"";position:absolute;right:34px;bottom:-72px;width:120px;height:120px;
+    background:rgba(255,255,255,.10);border-radius:50%;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.34);
+    color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.2px;
+    padding:5px 11px;border-radius:999px;margin-bottom:12px;position:relative;z-index:1;
+  }
+  h1{
+    font-size:clamp(21px,5.4vw,29px);line-height:1.34;margin:0 0 8px;
+    letter-spacing:-.4px;font-weight:800;position:relative;z-index:1;
+  }
+  .hero .sub{
+    margin:0;font-size:14px;color:rgba(255,255,255,.94);position:relative;z-index:1;
+  }
+  h1 .brk{display:none}
+  .hero .sub strong{font-weight:700;border-bottom:2px solid rgba(255,255,255,.5);padding-bottom:1px}
+
+  /* ---------- flow strip ---------- */
+  .flow{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 0;
+  }
+  .flow div{
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;padding:9px 8px;text-align:center;
+    font-size:12px;font-weight:700;color:#fff;line-height:1.35;position:relative;z-index:1;
+  }
+  .flow div span{display:block;font-size:15px;opacity:.85;margin-bottom:2px}
+
+  /* ---------- step card ---------- */
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 18px;margin-top:16px;
+  }
+  .step-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+  .num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:11px;
+    background:var(--mint-l);color:var(--mint-d);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;
+  }
+  .step-head h2{
+    font-size:17.5px;margin:5px 0 0;letter-spacing:-.3px;font-weight:800;line-height:1.4;
+  }
+  .step-head .hint{display:block;font-size:12.5px;color:var(--muted);font-weight:500;margin-top:3px}
+  .step-body{padding-left:0;margin-top:14px;font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---------- step 1 items ---------- */
+  .mat{
+    display:flex;gap:12px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#fbfdfd;
+    margin-bottom:10px;
+  }
+  .mat:last-child{margin-bottom:0}
+  .mat .tag{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#fff;border:1.5px solid var(--mint);
+    color:var(--mint-d);font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .mat .txt{flex:1;min-width:0}
+  .mat b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+  .mat p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+  .mat code, code.k{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:#eef5f6;border:1px solid #dde9ec;border-radius:6px;
+    padding:1px 6px;font-size:12.5px;color:#26454d;word-break:break-all;
+  }
+  .linkbtn{
+    display:inline-flex;align-items:center;gap:7px;margin-top:9px;
+    background:var(--mint);color:#fff;text-decoration:none;
+    font-size:13px;font-weight:700;padding:9px 14px;border-radius:10px;
+    box-shadow:0 2px 8px rgba(15,157,143,.25);
+  }
+  .linkbtn:active{transform:translateY(1px)}
+
+  /* ---------- step 1-② 메모 · 텍스트 파일 ---------- */
+  .memo{margin-top:13px}
+  .memo-label{
+    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+    font-size:12.4px;font-weight:700;color:var(--mint-d);margin-bottom:7px;line-height:1.45;
+  }
+  .memo-label .cnt{margin-left:auto;font-weight:600;color:var(--muted);font-size:11.5px}
+  .memo-label b{display:inline;font-size:inherit;line-height:inherit;color:var(--mint-d);margin:0}
+  textarea#commentInput{
+    width:100%;display:block;resize:vertical;min-height:82px;
+    font-family:inherit;font-size:13.5px;line-height:1.62;color:var(--ink);
+    background:#fff;border:1.5px solid #d8e7e7;border-radius:12px;
+    padding:11px 12px;outline:none;-webkit-appearance:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  textarea#commentInput:focus{border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  textarea#commentInput::placeholder{color:#a6b8bc}
+  .memo-foot{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .memo-foot:has(.reset[hidden]){display:none}
+  .reset{
+    margin-left:auto;background:#fff;border:1px solid var(--line);color:var(--muted);
+    font-family:inherit;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .reset:active{transform:translateY(1px)}
+  .drop{
+    margin-top:6px;display:flex;align-items:center;gap:10px;
+    border:1.5px dashed #c9dedb;border-radius:12px;background:#f7fcfb;
+    padding:11px 12px;cursor:pointer;color:var(--muted);font-size:12.2px;line-height:1.5;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .drop:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+  .drop.over{border-color:var(--mint);background:var(--mint-l)}
+  .drop .ic{flex:0 0 auto;font-size:19px;line-height:1}
+  .drop b{display:block;color:var(--ink-soft);font-size:13px;margin-bottom:2px}
+  .filecard{
+    margin-top:6px;display:flex;gap:10px;align-items:center;
+    border:1px solid #cfe6e2;background:#f2fbf9;border-radius:12px;padding:9px 10px;
+  }
+  .filecard .fic{flex:0 0 auto;font-size:18px;line-height:1}
+  .filemeta{flex:1;min-width:0}
+  .filemeta .fname{
+    display:block;font-size:12.5px;font-weight:700;color:var(--ink-soft);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .filemeta .fsize{display:block;font-size:11.2px;color:var(--muted);margin-top:3px;line-height:1.45}
+  .filedel{
+    flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);
+    background:#fff;color:#8a9ba1;font-size:13px;line-height:1;cursor:pointer;font-family:inherit;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .filedel:active{transform:translateY(1px)}
+  .entrybox{margin-top:10px}
+  .entryhead{font-size:11.8px;font-weight:800;color:var(--mint-d);line-height:1.5;margin-bottom:7px}
+  .entrylist{display:flex;flex-wrap:wrap;gap:6px}
+  .echip{
+    display:inline-flex;align-items:baseline;gap:4px;
+    background:#fff;border:1px solid #d3e8e4;color:var(--ink-soft);
+    font-family:inherit;font-size:12.9px;font-weight:800;padding:7px 12px;border-radius:999px;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;line-height:1.3;
+  }
+  .echip .eg{font-weight:600;color:var(--muted);font-size:11.6px}
+  .echip:active{transform:translateY(1px)}
+  .echip.on{background:var(--mint-d);border-color:var(--mint-d);color:#fff}
+  .echip.on .eg{color:#d6f1ec}
+
+  /* ---------- step 2 · 만들기 ---------- */
+  .mk-go{
+    width:100%;border:0;cursor:pointer;font-family:inherit;
+    background:linear-gradient(180deg,#12b3a2,#0d9488);color:#fff;
+    font-size:16.4px;font-weight:800;letter-spacing:-.3px;padding:16px 16px;border-radius:14px;
+    box-shadow:0 6px 18px rgba(13,148,136,.3);-webkit-tap-highlight-color:transparent;
+    transition:transform .08s ease, box-shadow .15s ease;
+  }
+  .mk-go:hover{box-shadow:0 8px 22px rgba(13,148,136,.38)}
+  .mk-go:active{transform:translateY(1px)}
+
+  .pv-empty{
+    margin-top:11px;border:1.5px dashed #d5e7e5;border-radius:12px;background:#fafefd;
+    padding:12px;font-size:12.4px;color:#8aa0a5;line-height:1.55;text-align:center;
+  }
+
+  /* 결과 */
+  .result{margin-top:14px;border-top:1px dashed #d9eaea;padding-top:14px}
+  .pv-head{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+  .pv-head > span:first-child{font-size:12.6px;font-weight:800;color:var(--ink-soft)}
+  .cnt-badge{
+    margin-left:auto;font-size:11.6px;font-weight:800;border-radius:999px;padding:3px 10px;
+    background:#eaf8f4;color:#0a7a6f;border:1px solid #cfeae5;white-space:nowrap;
+  }
+  .cnt-badge.tight{background:#fff4e2;color:#9a6a12;border-color:#f2dfbc}
+  .cnt-badge.over{background:#fdeceb;color:#9c2b23;border-color:#f6cfcb}
+  .bubble{
+    background:#fef7c9;border-radius:14px 14px 14px 4px;padding:13px 14px;
+    font-size:13.4px;line-height:1.72;color:#20282a;
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+    white-space:pre-wrap;word-break:break-word;
+  }
+  .bubble .lnk{color:#0b6ea8;text-decoration:underline;word-break:break-all}
+
+  .match{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+  .match-tag{flex:1;min-width:0;font-size:11.8px;font-weight:700;color:var(--mint-d);line-height:1.4}
+  .match-btn{
+    flex:0 0 auto;background:#f2faf8;border:1px solid #d5e9e5;color:var(--mint-d);
+    font-family:inherit;font-size:11.6px;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .match-btn:active{transform:translateY(1px)}
+  .picker{margin-top:10px;border-top:1px dashed #d9eaea;padding-top:10px;width:100%}
+  .picker input[type=search]{
+    width:100%;font-family:inherit;font-size:13px;color:var(--ink);
+    background:#f8fcfb;border:1px solid #dbe9e9;border-radius:10px;padding:9px 11px;outline:none;
+    -webkit-appearance:none;
+  }
+  .picker input[type=search]:focus{border-color:var(--mint);background:#fff}
+  .picker-list{max-height:220px;overflow-y:auto;-webkit-overflow-scrolling:touch;margin-top:7px}
+  .pitem{
+    display:flex;gap:7px;align-items:flex-start;width:100%;text-align:left;
+    background:#fff;border:0;border-bottom:1px solid #eef4f4;padding:9px 3px;
+    font-family:inherit;font-size:12.8px;line-height:1.45;color:var(--ink-soft);cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .pitem:last-child{border-bottom:0}
+  .pitem:hover{background:#f6fcfb}
+  .pitem.on{color:var(--mint-d);font-weight:800;background:#f1faf8}
+  .pitem .sp{flex:0 0 auto;font-size:11px}
+  .pitem .auto{color:var(--mint-d);font-weight:800}
+  .pnone{padding:10px 3px;font-size:12.4px;color:var(--muted)}
+
+  .pv-note{margin:8px 2px 0;font-size:11.6px;color:var(--muted);line-height:1.55}
+  .pv-copy{
+    width:100%;margin-top:11px;cursor:pointer;font-family:inherit;border:0;
+    background:linear-gradient(180deg,#12b3a2,#0d9488);color:#fff;
+    font-size:15.6px;font-weight:800;letter-spacing:-.2px;padding:14px 14px;border-radius:13px;
+    box-shadow:0 5px 14px rgba(13,148,136,.26);-webkit-tap-highlight-color:transparent;
+  }
+  .pv-copy:active{transform:translateY(1px)}
+  .pv-copy.done{background:linear-gradient(180deg,#3fbf8f,#1f9d6b);box-shadow:0 5px 14px rgba(31,157,107,.26)}
+
+  /* 결과 상단 · 누구 이름으로 만든 문구인지 */
+  .whoami{
+    margin:0 2px 10px;font-size:11.8px;font-weight:800;color:var(--mint-d);line-height:1.5;
+    background:#f1faf8;border:1px solid #d9ece8;border-radius:9px;padding:7px 10px;
+  }
+  .whoami.miss{background:#f8fafb;border-color:#e6eef0;color:var(--muted);font-weight:600}
+
+  /* ---------- prompt box ---------- */
+  .prompt-top{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:#0f2c31;color:#cfe7e3;border-radius:14px 14px 0 0;
+    padding:10px 14px;font-size:12.5px;font-weight:700;
+  }
+  .prompt-top .dots{display:flex;gap:5px}
+  .prompt-top .dots i{width:8px;height:8px;border-radius:50%;background:#3d6b70;display:block}
+  pre.prompt{
+    margin:0;background:#10363c;color:#e8f5f2;
+    border-radius:0 0 14px 14px;padding:14px 15px 16px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DungGeunMo",monospace;
+    font-size:12.6px;line-height:1.75;white-space:pre-wrap;word-break:break-word;
+    overflow-x:auto;
+  }
+
+  /* ---------- step 3 example ---------- */
+  .chatwrap{
+    background:#b9cec6;border-radius:16px;padding:14px 12px;margin-top:4px;
+    background-image:linear-gradient(180deg,#b7cec7,#aec7c0);
+  }
+  .chathead{
+    display:flex;align-items:center;gap:7px;font-size:11.5px;color:#33484a;
+    font-weight:700;margin:0 2px 9px;
+  }
+  .chathead .ok{background:#e8f7ec;color:#1f7a44;border-radius:6px;padding:1px 6px;font-size:10.5px}
+  .chatwrap .bubble{background:#fef7c9}
+  .metaline{
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;
+    margin-top:8px;font-size:11px;color:#3d5457;
+  }
+  .pill{background:rgba(255,255,255,.75);border-radius:999px;padding:2px 9px;font-weight:700}
+  .tip{
+    display:flex;gap:10px;margin-top:14px;background:var(--cream);
+    border:1px solid #f3e4c6;border-radius:14px;padding:12px 13px;font-size:13px;color:#6b5527;
+  }
+  .tip .ic{flex:0 0 auto;font-size:15px;line-height:1.4}
+  .tip b{color:#7a5c17}
+
+  ul.mini{margin:10px 0 0;padding-left:18px;font-size:13px;color:var(--muted)}
+  ul.mini li{margin:4px 0}
+
+  footer{
+    margin-top:22px;text-align:center;font-size:12px;color:#8a9ba1;line-height:1.7;
+  }
+  footer b{color:#5c7379}
+
+  /* ---------- toast ---------- */
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:#12333a;color:#fff;font-size:14px;font-weight:700;
+    padding:12px 18px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.28);
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
+    z-index:99;max-width:calc(100vw - 32px);text-align:center;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+  #toast .e{margin-right:6px}
+
+  /* ---------- 1단계 · 우리 병원 이름 ---------- */
+  .hosp{
+    border:1.5px solid #cfe7e3;border-radius:14px;padding:13px 14px;margin-bottom:12px;
+    background:linear-gradient(180deg,#f5fcfa,#ecf8f5);
+  }
+  .hosp-label{
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+    font-size:13.2px;font-weight:800;color:var(--mint-d);margin:0 0 7px;line-height:1.4;
+  }
+  .hosp-label .opt{font-weight:600;color:var(--muted);font-size:11px}
+  .hosp input[type=text]{
+    width:100%;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);
+    background:#fff;border:1.5px solid #d8e7e7;border-radius:11px;padding:10px 12px;outline:none;
+    -webkit-appearance:none;transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .hosp input[type=text]:focus{border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .hosp input[type=text]::placeholder{color:#a6b8bc;font-weight:500}
+  .hosp-hint{margin:6px 1px 0;font-size:11.4px;color:var(--muted);line-height:1.55}
+  .hosp-hint b{display:inline;font-size:inherit;color:var(--mint-d)}
+  .hosp-note{
+    margin:7px 1px 0;padding:7px 9px;border-radius:9px;
+    background:#f1faf8;border:1px solid #d9ece8;
+    font-size:11.3px;font-weight:700;color:var(--mint-d);line-height:1.55;
+  }
+
+  /* ---------- 경고 배너 (JSON 파일 등) ---------- */
+  .warnbox{
+    display:flex;gap:9px;align-items:flex-start;margin:0 0 8px;
+    background:#fff6e8;border:1.5px solid #f0d6a8;border-radius:12px;
+    padding:10px 11px;font-size:12.4px;line-height:1.58;color:#7a5a16;
+  }
+  .warnbox .wic{flex:0 0 auto;font-size:15px;line-height:1.35}
+  .warnbox .wtxt{flex:1;min-width:0;font-weight:600}
+  .warnbox .wx{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:1px solid #e8d2a8;
+    background:#fff;color:#a8813a;font-size:12px;line-height:1;cursor:pointer;font-family:inherit;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .warnbox .wx:active{transform:translateY(1px)}
+
+  /* ---------- 1단계 ① · 내 병원 엑셀 ---------- */
+  .xlsxrow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:9px}
+  .xlsxbtn{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#fff;border:1.5px solid #cfe7e3;color:var(--mint-d);
+    font-family:inherit;font-size:12.4px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .xlsxbtn:active{transform:translateY(1px)}
+  .xlsxbtn[disabled]{opacity:.55;cursor:default}
+  .xlsxbtn .opt{font-weight:600;color:var(--muted);font-size:11px;margin-left:2px}
+  .xlsxstatus{margin-top:7px;font-size:11.4px;color:var(--muted);line-height:1.55}
+  .xlsxstatus b{display:inline;font-size:inherit;color:var(--mint-d)}
+
+  /* ===================== 프라이버시 배지 ===================== */
+  .privacy{
+    display:flex;align-items:flex-start;gap:11px;flex-wrap:wrap;
+    margin-top:12px;padding:13px 14px 12px 15px;border-radius:14px;
+    background:#fff;border:1px solid #d7ebe7;border-left:4px solid var(--mint);
+    box-shadow:0 1px 2px rgba(16,45,52,.04);
+    font-size:12.4px;line-height:1.55;color:#2f4b52;
+  }
+  .privacy .pico{flex:0 0 auto;font-size:16px;line-height:1.25}
+  .privacy .ptxt{flex:1;min-width:180px}
+  .privacy .ptitle{display:block;font-size:13px;font-weight:800;color:var(--mint-d);letter-spacing:-.2px;line-height:1.45}
+  .privacy b{display:inline;font-size:inherit;color:var(--mint-d);font-weight:800}
+  .privacy .psub{display:block;margin-top:3px;font-size:11.6px;color:#4b6068;font-weight:600;line-height:1.55}
+  .privacy .prule{display:block;margin-top:6px;padding-top:6px;border-top:1px dashed #e2ebee;font-size:11.1px;color:var(--muted);font-weight:500;line-height:1.6}
+  .wipe{
+    flex:0 0 auto;margin-left:auto;background:#fff5f4;border:1px solid #f0cdc9;color:#a4402f;
+    font-family:inherit;font-size:11.4px;font-weight:800;padding:7px 11px;border-radius:10px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wipe:active{transform:translateY(1px)}
+
+  @media (max-width:430px){
+    .privacy{padding:12px 12px 11px 13px}
+    .privacy .ptitle{font-size:12.4px}
+    .wipe{margin-left:0;width:100%;text-align:center;padding:9px 11px}
+    .wrap{padding:14px 12px 44px}
+    h1 .brk{display:block}
+    h1 .sep{display:none}
+    .metaline{justify-content:flex-start}
+    header.hero{padding:22px 17px 20px;border-radius:18px}
+    .step{padding:17px 14px;border-radius:16px}
+    .step-head h2{font-size:16.5px}
+    pre.prompt{font-size:11.9px;padding:13px 12px 14px}
+    .bubble{font-size:13px}
+    .flow div{font-size:11px;padding:8px 5px}
+    .mk-go{font-size:15.4px;padding:15px 14px}
+    .pv-copy{font-size:14.8px;padding:13px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+  @media print{
+    body{background:#fff}
+    .mk-go,.pv-copy,.ai-copy,.linkbtn,#toast,.wipe,.xlsxrow{display:none}
+    .step{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="badge">🐾 다른 병원에서도 그대로 쓰는 실전 가이드</div>
+    <h1>동물병원 보호자 카톡 안내 <span class="sep">·</span><br class="brk">1분 작성 가이드</h1>
+    <p class="sub">굿모닝펫동물병원 <strong>실전 노하우</strong> — 코멘트만 있으면 안내문이 바로 완성됩니다.</p>
+    <div class="flow">
+      <div><span>①</span>자료 2가지 준비</div>
+      <div><span>②</span>코멘트 입력</div>
+      <div><span>③</span>문구 복사 → 카톡</div>
+    </div>
+  </header>
+
+  <div class="privacy">
+    <div class="ptxt" id="confidBox">
+      <strong class="ptitle" id="confidTitle">🔒 우리 병원 내부 전용 · 자료 외부 유출 금지</strong>
+      <span class="psub">🔒 서버 전송 없음 · 우리 병원 기기 안에서만 처리돼요. 코멘트·차트·올린 파일 내용은 저장되지 않고 창을 닫으면 바로 사라집니다. 이 기기에 저장되는 건 병원 이름과 우리 병원 엑셀 카드 목록뿐이에요.</span>
+      <span class="prule">이 페이지의 진료 코멘트·차트·보호자 안내는 해당 병원 내부 업무 전용입니다. 화면 캡처, 개인 메신저/SNS 전송, 파일 무단 반출 등 외부 유출을 금지합니다. (입력 내용은 서버로 전송되지 않으며 창을 닫으면 사라집니다.)</span>
+    </div>
+    <button type="button" class="wipe" id="wipeBtn">🗑️ 이 기기 저장 정보 모두 지우기</button>
+  </div>
+
+  <!-- STEP 1 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">1</div>
+      <div>
+        <h2>준비 자료 2가지</h2>
+        <span class="hint">병원 이름만 적고, 이 두 가지만 있으면 됩니다. 30초면 모입니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="hosp">
+        <label class="hosp-label" for="hospitalName">🏥 우리 병원 이름 <span class="opt">여기만 바꾸면 병원별 완성</span></label>
+        <input type="text" id="hospitalName" maxlength="40" autocomplete="off" spellcheck="false"
+               placeholder="예: 굿모닝펫동물병원" aria-describedby="hospitalHint">
+        <p class="hosp-hint" id="hospitalHint">적은 이름이 <b>2단계 완성 문구</b>와 <b>3단계 예시</b> 첫 줄에 그대로 들어갑니다. 한 번 입력하면 이 브라우저에 이 병원 이름으로 저장되고, <b>병원 이름을 바꾸면 입력한 코멘트·파일·결과는 즉시 비워집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
+        <p class="hosp-note" id="hospNote" hidden></p>
+      </div>
+      <div class="mat">
+        <div class="tag">①</div>
+        <div class="txt">
+          <b>Petmate Aftercare 전체 콘텐츠 엑셀</b>
+          <p>펫메이트에 로그인한 뒤 <code class="k">m.pet-mate.net/my-cardnews</code> 에서 <b style="display:inline;font-size:inherit">[엑셀 다운로드]</b> 버튼을 누르면 내려받아집니다. 구독 중인 펫카드 목록과 링크가 모두 들어 있어요.</p>
+          <a class="linkbtn" href="https://m.pet-mate.net/my-cardnews" target="_blank" rel="noopener">펫메이트 열기 · 엑셀 다운로드 →</a>
+
+          <div class="xlsxrow">
+            <button type="button" class="xlsxbtn" id="xlsxBtn">📊 내 병원 엑셀(.xlsx) 올리기 <span class="opt">(선택)</span></button>
+            <button type="button" class="reset" id="xlsxReset" hidden>기본 목록으로</button>
+          </div>
+          <div class="xlsxstatus" id="xlsxStatus"></div>
+          <input type="file" id="xlsxInput" accept=".xlsx,.xls,.csv" hidden>
+        </div>
+      </div>
+      <div class="mat">
+        <div class="tag">②</div>
+        <div class="txt">
+          <b>원장님 진료 코멘트</b>
+          <p><b style="display:inline;font-size:inherit">텍스트로 적거나</b>, 카톡방 코멘트를 <b style="display:inline;font-size:inherit">텍스트 파일(.txt 등)로 올리면</b> 아이 이름·보호자 이름까지 자동으로 읽어 옵니다. 다듬지 않아도 2단계에서 보호자용 문구가 됩니다.</p>
+
+          <div class="memo">
+            <div class="memo-label">
+              <span>👇 코멘트를 그대로 적거나, 텍스트 파일을 올려 주세요</span>
+              <span class="cnt" id="commentCount">0자</span>
+            </div>
+
+            <div class="warnbox" id="jsonWarn" role="alert" hidden>
+              <span class="wic">⚠️</span>
+              <span class="wtxt">이 파일은 진료 코멘트가 아니라 시스템 데이터(JSON) 파일이에요. 카톡 대화 내보내기(.txt)나 진료 코멘트를 올려 주세요.</span>
+              <button type="button" class="wx" id="jsonWarnClose" aria-label="안내 닫기">✕</button>
+            </div>
+
+            <textarea id="commentInput" rows="3" aria-label="원장님 진료 코멘트 메모" autocomplete="off" spellcheck="false"
+              placeholder="예: 누아 구토로 내원, 엑스레이 결과 이상 없음, 소화제 처방"></textarea>
+
+            <div class="memo-foot">
+              <button type="button" class="reset" id="commentReset" hidden>초기화</button>
+            </div>
+
+            <div class="drop" id="fileDrop" role="button" tabindex="0" aria-label="텍스트 파일 올리기">
+              <span class="ic">📄</span>
+              <span>
+                <b>텍스트 파일 올리기 (.txt · .csv · .md)</b>
+                눌러서 고르기 · 끌어다 놓기 · 카톡 대화 내보내기 파일도 그대로 OK
+              </span>
+            </div>
+            <input type="file" id="fileInput" accept=".txt,.csv,.md,.text,.log,text/plain,text/csv,text/markdown" hidden>
+
+            <div class="filecard" id="fileCard" hidden>
+              <span class="fic">📄</span>
+              <div class="filemeta">
+                <span class="fname" id="fileName"></span>
+                <span class="fsize" id="fileMeta"></span>
+              </div>
+              <button type="button" class="filedel" id="fileDel" aria-label="올린 파일 지우기">✕</button>
+            </div>
+
+            <div class="entrybox" id="entryBox" hidden>
+              <div class="entryhead" id="entryHead"></div>
+              <div class="entrylist" id="entryList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">2</div>
+      <div>
+        <h2>보호자 발송용 문구 만들기</h2>
+        <span class="hint">1단계 ②의 코멘트로 바로 완성됩니다. 아이·보호자 이름도 자동으로 들어가요.</span>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <button type="button" class="mk-go" id="makeBtn">✨ 보호자 발송용 문구 만들기</button>
+
+      <div class="pv-empty" id="pvEmpty">1단계 ②에 코멘트를 적거나 텍스트 파일을 올린 뒤<br>위 버튼을 누르면 완성된 문구가 여기에 나타납니다.</div>
+
+      <!-- 결과 -->
+      <div class="result" id="result" hidden>
+        <div class="whoami" id="whoami" hidden></div>
+        <div class="pv-head">
+          <span>보호자에게 보낼 문구</span>
+          <span class="cnt-badge" id="charBadge">0자 / 300자 미만</span>
+        </div>
+        <div class="bubble" id="previewText"></div>
+
+        <div class="match">
+          <span class="match-tag" id="matchTag">🔗 자동으로 고른 펫메이트 카드</span>
+          <button type="button" class="match-btn" id="matchSwap">다른 카드로 바꾸기 ▾</button>
+        </div>
+        <div class="picker" id="picker" hidden>
+          <input type="search" id="cardSearch" placeholder="증상·질환으로 찾기 (예: 구토, 슬개골, 신장)" autocomplete="off">
+          <div class="picker-list" id="pickerList"></div>
+        </div>
+
+        <p class="pv-note" id="pvNote" hidden></p>
+        <button type="button" class="pv-copy" id="copyMsg">📋 문구 복사하기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">3</div>
+      <div>
+        <h2>복사한 문구를 보호자 카톡으로 발송</h2>
+        <span class="hint">카톡방에 붙여넣기만 하면 끝입니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="chatwrap">
+        <div class="chathead"><span>보호자에게 보낼 문구</span><span class="ok">예시</span></div>
+<div class="bubble">안녕하세요, 홍길동 보호자님 🐶
+<span id="exHosp">굿모닝펫동물병원입니다.</span>
+
+오늘 콩이 흉부 X-ray 검사 결과, 심장 크기를 보는 방사선 지표(VHS 10.3 · VLAS 2.0)가 모두 정상 범위로 확인되었습니다.
+
+11살이면 심장이 조금씩 커지기 쉬운데, 콩이는 아주 건강하게 유지되고 있어 다행입니다.
+
+앞으로 6개월에 한 번 정기 검진과 청진으로 심장 소리를 확인해 주세요. 밤에 기침이 잦아지면 바로 알려 주세요.
+
+💛 콩이에게 도움이 되는 심장 건강 정보도 함께 보내드려요.
+<span class="lnk">https://m.pet-mate.net/2k9d7f1</span></div>
+        <div class="metaline">
+          <span class="pill">공백 포함 <b>293자</b> / 300자 미만</span>
+          <span class="pill">문단마다 빈 줄</span>
+          <span class="pill">펫메이트 링크 1개</span>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="ic">💡</div>
+        <div><b>팁.</b> 같은 보호자에게 최근 1주일 내 보낸 펫메이트 링크는 겹치지 않게 다른 링크로 바꿔 주세요. 재진 보호자에게 비슷한 안내가 반복되면 성의가 떨어져 보이니까요.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>굿모닝펫동물병원</b> 실전 노하우로 만든 가이드입니다.<br>
+    병원 내부 교육용으로 자유롭게 공유하실 수 있어요. 🐾
+  </footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- 펫메이트 애프터케어 공개 카드 목록 (제목 | 해시태그 | 대상(0=공통,1=강아지,2=고양이) | 링크코드) -->
+<script type="text/plain" id="cardData">고양이 화재 사고, 전기레인지 전원 스위치가 원인일 수 있습니다.|고양이화재, 전기레인지, 화재예방, 반려동물안전, 생활안전|2|syk4ruv6
+환절기 건강관리, 체온·피부·체중까지 꼭 챙겨주세요!|환절기건강, 체온관리, 피부보습, 체중관리, 예방접종|0|6munfnes
+자다 소변을 지렸다면? 강아지 요실금, 원인부터 확인하세요!|요실금, 요도괄약근기능부전, 이소성요관, 방광질환, 비뇨기진료|1|er8j5bsw
+고양이 눈곱이 자꾸 생긴다면? 결막염·허피스 감염을 확인하세요!|고양이눈곱, 결막염, 허피스바이러스, 각막궤양, 안과질환|2|wfvmdloj
+콧물·재채기 반복된다면? 치주질환이 만든 구비강누공을 의심하세요!|구비강누공, 치주질환, 재채기, 콧물, 치과검진|1|ip1or9vu
+강아지 소변색이 달라졌다면? 신장·방광 질환의 신호일 수 있습니다.|소변색변화, 혈뇨, 신장질환, 방광질환, 건강이상신호|1|hu8ra93f
+멍냥이 구토, 횟수와 증상 따라 병원 가야 할 때가 다릅니다.|고양이구토, 반복구토, 혈액성구토, 이물섭취, 소화기질환|0|22zgff03
+관절염, 절뚝거리지 않아도 이미 아플 수 있습니다.|관절염, 관절통증, 절뚝거림, 체중관리, 노령동물|0|nlh4un73
+항생제, 증상 좋아졌다고 임의로 끊으면 더 위험할 수 있습니다.|항생제, 항생제내성, 약물부작용, 알레르기반응, 세균감염|0|lz936780
+강아지 심잡음, 증상 없어도 심장병이 진행 중일 수 있습니다.|심잡음, 심장병, 이첨판폐쇄부전증, 선천성심장질환, 심장검진|1|5azu44l1
+고양이 코 색깔이 달라졌다면, 몸이 보내는 이상 신호일 수 있습니다.|코색깔변화, 빈혈, 황달, 청색증, 고양이건강신호|2|dgcaugj7
+매일 주는 사료, 잘못된 급여 습관이 비만·질병을 부를 수 있습니다.|사료급여, 급여량, 비만관리, 사료교체, 음식중독|1|i0xmsoz0
+고양이가 밥을 안 먹는다면, 단순 입맛 문제가 아닐 수 있습니다.|고양이식욕부진, 고양이식욕저하, 고양이질병신호, 고양이건강, 고양이진료|2|pl14kjvr
+스테로이드, 임의로 끊으면 더 위험할 수 있습니다.|스테로이드, 스테로이드부작용, 약물부작용, 쿠싱증후군, 반려동물약물관리|0|3387w63o
+강아지 구토, 반복되거나 색이 이상하면 그냥 넘기면 안 됩니다.|강아지구토, 구토원인, 반복구토, 구토색깔, 응급증상|1|tguoee7g
+집에서 놓는 피하수액, 방법이 틀리면 오히려 위험할 수 있습니다.|피하수액, 반려동물수액, 만성신장질환, 탈수관리, 반려동물간호|0|tsq1hkuf
+반려동물 비만, 방치하면 관절·심장·당뇨까지 위험해집니다.|반려동물비만, 비만관리, 관절질환, 당뇨병, 심장질환|0|q4dtq1iq
+청년기 건강검진, 가장 건강할 때의 기준을 꼭 남겨두세요.|청년기건강검진, 건강기준수치, 조기검진, 정기건강검진, 질병조기발견|0|x441brc7
+집에만 있어도 안심 금물! 내부 기생충은 설사·면역저하를 부릅니다.|내부기생충, 구충제, 정기구충, 설사, 체중감소, 털상태악화, 면역력저하, 감염경로, 모체전염, 사람용구충제금지|0|k5pvy81z
+눈 비비고 충혈까지…결막염, 방치하면 더 심해질 수 있습니다.|강아지 결막염, 충혈, 눈 비비기, 눈물·눈곱 증가, 이물질(먼지·모래), 알레르기, 세균·바이러스 감염, 안구건조증|1|2ykbggb9
+소파에서 뛰어내린 뒤 다리를 절뚝인다면, 단순 삠이 아닐 수 있습니다.|강아지 염좌, 강아지 골절, 절뚝거림, 부종/부기, 통증, 휴식·활동 제한, 수의사 진료, 계단/경사로, 미끄럼 방지, 적정 체중|1|s62ffjg3
+증상 없는 심장병, 심부전으로 진행될 수 있습니다.|강아지, 심장병, 심부전, 심잡음, 기침, 호흡곤란, 운동불내성, 정기적 심장청진, 조기진단, 수명연장|0|wu0gzq40
+노령 반려동물, 이 작은 변화가 질병 신호일 수 있습니다.|노령반려동물, 음수량 증가(다뇨), 만성신장질환, 당뇨병, 쿠싱증후군, 안정시 호흡수 증가, 심장병, 활동성 감소, 근육감소·통증, 고양이 그루밍 감소·관절염|0|k67scgsi
+고양이 더위 관리, 방심하면 열사병으로 이어질 수 있습니다.|고양이, 더위 관리, 열사병 예방, 탈수 예방, 실내온도 26~28°C, 수분 섭취, 그루밍(빗질), 쿨매트·냉감제품, 정수기·분수기, 차광(블라인드·커튼)|2|1rbmgzpm
+아기 때 산책, 너무 늦으면 사회화가 어려워집니다.|산책시기, 사회화, 예방접종, 첫산책, 산책교육|1|ocvdqbuz
+간식 씹다 치아 파절? 보호자가 꼭 봐야 합니다.|치아파절, 딱딱한간식, 판상골절, 치수노출, 치근단농양|1|zrsu0lyc
+고양이 침 흘림, 그냥 두면 위험할 수 있습니다.|고양이침흘림, 구강질환, 이물질섭취, 메스꺼움, 독성물질|2|9oqhyrww
+올여름 바다여행 전, 동반 입수 가능 여부 확인하세요.|해수욕장, 동반입수, 여름여행, 물놀이주의, 자외선차단|1|7796u9ro
+여름만 되면 피부병이 생긴다면, 이걸 확인하세요.|피부관리, 여름철피부병, 귀청소, 목욕관리, 실내습도|0|8rgtted0
+나이마다 잘 걸리는 병이 다릅니다. 지금 확인하세요.|생애주기, 다빈도질환, 건강검진, 노령기질환, 질병예방|0|7fz0d2e9
+분홍색이 아니면 위험신호, 잇몸색으로 보는 건강상태|강아지잇몸색, 고양이잇몸색, 반려동물건강신호, 잇몸색건강체크, 동물병원상담|0|em38xupl
+장 건강 무너지면 면역도 흔들립니다. 마이크로바이옴 꼭 확인하세요.|장내마이크로바이옴, 반려동물장건강, 강아지면역력, 고양이면역관리, 반려동물유산균|0|dfxlw451
+강아지 벌 쏘임, 괜찮아 보여도 방심하면 위험합니다.|강아지벌쏘임, 반려견벌쏘임, 강아지응급처치, 강아지아나필락시스, 동물병원응급진료|1|pe7r4jb9
+어둠 속 반짝이는 고양이 눈, 알고 보면 생존능력입니다.|고양이눈빛, 고양이야간시력, 고양이눈반사, 고양이시력, 고양이눈건강|2|y6vgq5ux
+어린 강아지 목 통증, 디스크가 아니라 환축추아탈구일 수 있습니다.|강아지목통증, 환축추아탈구, 소형견질환, 강아지보행이상, 강아지목디스크|1|cjde7hki
+강아지가 기억력이 좋을까? 보호자가 꼭 알아야 할 진짜 이유|강아지기억력, 강아지행동이유, 강아지훈련, 반려견기억, 강아지감정기억|1|lsxe88ki
+고양이 몸이 유연한 이유, 알고 보면 놀랍습니다.|액체설|2|pljqrrc6
+강아지 다리 절뚝거림, 방치하면 평생 후회합니다.|대퇴골두허혈성괴사, 고관절|1|hrxy0a65
+고양이는 이 소리를 싫어합니다. 집에서 꼭 확인하세요.||2|nh04bg1i
+강아지 옴진드기(개선충), 방치하면 퍼집니다. 지금 치료하세요.||1|hcm9he3h
+봄만 되면 긁는 이유, 꽃가루 알레르기 반드시 확인하세요.|아토피|0|d679jhsb
+서울 너구리 3마리 중 1마리 감염, 심장사상충 지금 검사하세요.||0|lbv2xeel
+강아지 고양이 위험신호, 이런 증상 땐 주저 말고 응급실 꼭 가세요||0|sw1aywfa
+초콜릿 먹은 강아지, 괜찮을까? 중독 증상과 대처법 정리||1|so8tg4oa
+고양이가 몸을 떤다면 위험신호일까, 꼭 확인해야 할 원인 총정리||2|frm6i8fc
+모낭·피지선에 사는 벌레, 강아지 모낭충증 꼭 알아두셔야 합니다|모낭충, 피부병|1|gdnhomqj
+이제 반려동물과 외식 OK, 동반출입 음식점 이용법 제대로 알기||0|6d28lpbt
+봄만 되면 심해지는 가려움, 반려동물 꽃가루 알레르기 꼭 확인하세요||0|lp687hyd
+심장사상충 예방했어도 안심 금물, 1년에 1번은 꼭 검사하세요.||0|2fj4yy5k
+우리 집 고양이는 왜 변기 물을 마실까? 숨은 이유 3가지||2|uby2fgmn
+하루가 멀다 하고 싸우는 고양이들, 이유와 해결법|행동|2|nptq8j85
+켁켁 기침, 감기 아닐 수 있습니다 - 강아지 천식 신호||1|s6yqt39l
+조용히 시작해 빠르게 퍼지는 병, 반려동물 림프종||0|m2gnw9jc
+멍냥이 대변 색이 달라졌다? 지금 몸이 보내는 건강 신호||0|sx2vxpza
+물 많이 마시는 건 괜찮을까? 다음다뇨가 보내는 위험 신호||0|38ngeb2x
+수면 자세로 읽는 고양이의 마음||2|sczdz9qn
+강아지는 왜? 어떤 강아지는 좋아하고 어떤 강아지는 싫어할까?||1|seopbmrd
+고양이가 밤마다 우는 이유||2|0acu3qif
+애매한 증상 뒤에 숨은 치명적 호르몬 질환, 강아지 애디슨병|애디슨, 에디슨|1|g4anrgjj
+멍냥이 몸의 보일러 '갑상선'은 안녕한가요?||0|b9lylyh9
+멍냥이 치아가 뚝! 치아파절의 ABC||0|0twbymyi
+흥분해서 날뛰는 강아지…진정시킬 방법은?||1|s8yuyvtq
+고양이와 함께 키워도 안전한 식물 리스트||2|m4sdutdx
+강아지 장으로 단백질 줄줄…단백소실성장병증||1|mg7n7q6o
+고양이 언더그루밍은 건강 이상신호||2|wzic75qe
+보호자 지갑을 지키는 반려동물 예방의학||0|x9hi46bq
+무작정 보강접종은 NO! 항체가검사 먼저 받자!||0|xus1wj8d
+노령 반려동물을 위한 맞춤 운동 가이드||0|9sevleoq
+감기로 오인하기 십상! 강아지 폐렴||1|ju2o97c0
+골든타임을 지키는 고양이 심폐소생술||2|zaifb97a
+전진밖에 모르는 풀씨…강아지 몸에 박히면 위험||1|h95d468f
+유기동물에게 따뜻한 손길을!||0|zzxt1t1j
+관절염은 멍감님의 전유물? 어린 강아지도 예외 없다!||1|gu1cesae
+단두종 호흡의 걸림돌-연구개노장|단두종, 연구개노장, 호흡곤란, 코골이, 좁은 콧구멍, 열사병 위험, 주름 부위 염증, 불도그, 퍼그|1|t2za37uk
+반려동물 탈모 유형별 원인 질환|반려동물 탈모, 털갈이 vs 탈모, 알레르기, 피부사상균증(링웜), 갑상선기능저하증, 쿠싱증후군, 벼룩·진드기 예방, 오메가3·영양관리|0|bbk7lytm
+강아지 질식사고 대처법|강아지, 질식, 이물질, 응급처치, 호흡곤란, 손가락제거, 등두드리기, 하임리히법, 대형견, 소형견|1|vzu2h0wy
+고양이는 변화를 싫어해|고양이, 변화민감성, 스트레스, 규칙적생활, 면역력저하, 행동변화, 휴식공간, 점진적적응, 가구재배치, 보호자루틴|2|r76gh9d2
+반려동물 간병 부담 관리요령|반려동물, 간병 부담, 번아웃 신호, 자가관리, 휴식시간 확보, 도움 요청, 펫시터, 만성질환 케어, 감정 공유|0|g9mxg0jr
+중노년 소형견의 만성기침 주범 '만성기관지염'|만성기관지염, 만성기침, 중노년, 소형견, 감별진단, 호흡기질환, 진행성, 동물병원|1|3nu9xeku
+멍냥이는 거울에 비친 자신을 알아볼까?|거울 인식, 자기인식, 거울 테스트, 강아지 행동, 고양이 행동, 후각 중심 인지, 습관화, 인지·행동 연구|0|jaozrhs9
+강아지 며느리발톱 A to Z|며느리발톱, 늑대발톱, 발톱관리, 발톱정기손질, 과도한발톱성장, 발톱제거수술, 앞발뒷발차이, 활동적강아지주의|1|hpwlk1es
+고양이 거품토는 건강 적신호일까?|고양이 거품토, 흰 거품 구토, 공복 구토, 헤어볼(털뭉치), 구토 빈도, 식욕부진, 체중감소, 무기력, 수의사 진료, 소화기 질환|2|2ozz04eb
+강아지 악취 범인을 찾아라!|강아지 악취, 구취(구강), 치주질환, 외이염(귀), 피부감염, 항문낭 문제, 신부전(암모니아 냄새), 간부전(썩는 냄새), 당뇨병성 케톤산증(아세톤 냄새), 알레르기(만성 외이염·피부악화)|1|4z65k482
+반려동물을 위한 건강한 추석나기 가이드|추석, 반려동물 건강, 차멀미 예방, 명절음식 금지, 급성췌장염, 마늘·파·양파 중독, 포도 중독, 진드기 예방, 수의사 상담|0|gdj80iec
+'드르렁 드르렁대' 강아지가 코 고는 이유|코골이|1|8833yizi
+자고 자고 또 자고...멍냥이 하루 수면 시간은?|강아지, 고양이, 수면시간, 연령별수면, 다상수면주기, 수면리듬, 과도한수면, 수면과건강, 수의사상담|0|nxv81i6q
+노는 걸까, 싸우는 걸까? 고양이 놀이 vs 싸움 구분법|고양이, 놀이, 싸움, 행동신호, 신체접촉, 하악질·으르렁, 레슬링, 중간영역, 관계관찰, 스트레스|2|3yy67dxt
+조용히 대형견 생명 위협하는 확장성 심근증|확장성 심근증, 대형견, 심부전, 초기 무증상, 호흡곤란, 기침, 청색증, 복수, 실신, 고위험 품종(도베르만·그레이트 데인·아이리시 울프하운드·복서·코커스패니얼)|1|ziw24j3x
+고양이를 변비의 늪에 빠뜨리는 거대결장|거대결장, 고양이, 변비, 난치성변비, 만성변비, 특발성(원인불명), 수분섭취, 섬유질, 수의사진료, 방사선검사|2|kozsgh9e
+동물병원이 두려웠던 지난날이여 안녕|내원 스트레스, 동물병원, 핸들링, 이동장, 행복한 방문, 간식, 검진 준비, 혈액검사 왜곡, 긴장완화|0|sjqbveys
+눈 밑 피부병의 탈을 쓴 치과질환 '치근단농양'|치근단농양, 치과질환, 치아뿌리감염, 치주질환, 눈밑부종, 농양, 반려견, 반려묘, 치아파절, 조기치료|0|cf53adkk
+운동부족 반려동물 운동량 증진 팁|반려동물, 운동량 증진, 강아지 운동, 고양이 놀이, 일관성, 무리한 운동 금물, 짧고 자주, 정해진 시간 루틴, 장난감 취향, 사냥 성공 경험|0|5iayg3ve
+머리를 갸우뚱, 강아지  중이염·내이염|강아지, 귀질환, 외이염, 중이염, 내이염, 머리 기울임, 서클링, 청력 손실, 안면마비, 분비물/귀 가려움|1|gzyg21x2
+보호자는 알 수 없는 고양이 언어, 채터링 알이보기|고양이, 채터링, 사냥본능, 흥분·좌절, 먹잇감 유인, 준비 운동, 구강질환, 침 흘림, 입냄새, 행동학|2|jtc5ynzk
+여드름 닮은꼴 '강아지 농피증'|강아지, 농피증, 표재성농피증, 포도상구균, 구진·농포·딱지, 표피잔고리, 알레르기, 피부장벽손상, 기저질환·재발방지|1|qykfnh2w
+맹위를 떨치는 무더위! 반려동물 온열질환 주의보|온열질환, 열사병, 일사병, 강아지, 고양이, 증상, 예방, 과열, 산책주의|0|mmxka9ji
+민생회복 소비쿠폰, 우리 병원에서도 사용할 수 있어요|민생회복 소비쿠폰, 반려동물병원, 건강검진, 일반진료, 스케일링, 쿠폰사용가능, 비용부담경감, 유효기간|0|vk6e7nk1
+몸 튼튼 마음 튼튼' 멍냥이 일일 운동 권장량|반려동물 일일 운동, 강아지 산책 권장량, 고양이 놀이 시간, 나이별 운동, 품종별 운동량, 관절 보호, 스트레스 해소, 유대감 형성, 장난감·퍼즐 추천|0|a3t6pdn1
+고양이 생애주기별 사료 급여 가이드|생애주기별, 키튼 전용 사료, 성묘(어덜트) 사료, 시니어 전용 사료, 수분 섭취, 동물성 단백질, 저탄수화물, 칼슘·인, DHA(오메가3)|2|93yp4v7n
+강아지 발작 주범 중 하나로 꼽히는 뇌수막염|뇌수막염, 강아지, 발작, 신경증상, 자가면역, 감염성, 특발성, 안구진탕, 보행이상, 목경직|1|i5ta5mua
+고양이 급성후지마비는 심장이 보내는 SOS|고양이, 대동맥혈전색전증, 비대성심근병증, 후지마비, 뒷다리마비, 혈전, 심장질환, 응급상황, 정기검진, 심장바이오마커|2|eis4xpou
+멍냥이 키우면 건강이 따라온다!|반려동물, 심혈관질환 예방, 신체활동 증가, 강아지 산책, 스트레스 감소, 옥시토신, 사회적 연결, 노인 건강, 혈압·LDL·중성지방|0|pc74s2e9
+멍냥이 대변색은 건강신호등|대변색, 강아지, 고양이, 소화기질환, 출혈, 간담낭문제, 췌장문제, 기생충감염, 수의사상담|0|fdgkv6i1
+강아지 생애주기별 사료 급여 가이드|강아지 생애주기, 퍼피 사료, 어덜트 사료, 시니어 사료, 영양관리, 체중관리, 대형견 전환시기, 고단백·칼슘·DHA, 저칼로리·오메가3|1|svgr07vd
+고양이 '꼬드름'은 왜 나는 것일까?|고양이, 꼬리샘 과증식, 꼬리샘(피지선), 기름진 털/떡진 털, 블랙헤드, 중성화 수술, 그루밍 부족, 이차감염/염증, 약용 샴푸, 수의사 치료|2|6p91bolx
+강아지는 사람 말귀를 알아들을까?|강아지, 언어이해, 단어와억양, 뇌연구, 단어-물체연결, 버튼훈련, 2세수준, 반려견소통|1|ghep5dpy
+피부밑에 잡히는 말랑말랑한 혹, 정체는 강아지 지방종!|2506-3, 혹, 지방낭종, 말랑말랑, 피부빝|2|x2i0apnk
+반려동물 홈 신체검사 체크리스트|홈 신체검사, 반려동물 건강, 코, 눈, 귀, 입과 치아, 피부와 털, 모세혈관재충전(탈수), 감염 징후|0|7jsgldel
+예방이 상책! 강아지 건강 해치는 외부기생충 3대장|외부기생충, 참진드기, 모낭충, 개선충, 바베시아증, SFTS, 탈모, 각질, 가려움증, 예방약|1|rhyurzrb
+고양이가 '강아지보다 더' 입맛이 까다로운 이유|고양이, 입맛 까다로움, 육식동물, 잡식동물 차이, 미각 차이, 단맛 인지 없음, 감칠맛 선호, 단백질·지방 요구량, 사료 영양 불균형|2|57hlulfx
+강아지가 혹부리 염감이 된 까닭은? '침샘낭종'|2505-5, 혹부리, 영감, 강아지, 침샘낭종|1|k5iveuwz
+화면 향해 냥냥펀치! 고양이도 TV를 볼까?|고양이, TV 시청, 색각(빨강·녹색 구분 불가), 동체시력·움직임 반응, 사냥본능, 스포츠·야생동물 영상, 놀이 대체 불가, 행동관찰, 반려묘 관리, 시니어·구형 TV 깜빡임|2|lupwmeuh
+호기심이 고양이 잡네-응급상황 부르는 고양이 선형이물|2505-3, 응급상황, 고양이, 선형이물, 호기심|2|al67j6at
+풀밭에 도사리는 복병 '참진드기' 진드기 매개질환 조심하시개|참진드기, 진드기매개질환, 바베시아증, SFTS, 빈혈, 고열(39°C 이상), 외부기생충예방약, 산책·풀밭주의, 작은소피참진드기, 반려견|0|jaf74leb
+강아지가 풍기는 악취는 건강이상 신호!|강아지, 악취, 구강냄새, 치주질환, 귀염증, 눈물자국, 피부질환, 항문낭, 동물병원|1|g3is3by4
+발작이 다가 아니다! 반려동물 신경증상|반려동물 신경증상, 발작 외 증상, 행동 변화, 보행 이상, 근육 떨림, 서클링, 안구진탕, 사경, 뇌질환, 디스크 탈출증|0|pgutifgc
+묘생의 질 좌우하는 화장실, 고려할 점은?|고양이 화장실, 크기(몸길이의 1.5배), 낮은 입구·넓은 모양, 화장실 수(마릿수+1), 설치 위치 분산, 음식·물과 거리두기, 무향·부드러운 모래, 모래 깊이 5~7cm, 청소: 하루2회·월2회|2|bo0bqnfk
+강아지 산책 시 '줄 당김' 교정 가이드|줄 당김 교정, 산책 훈련, 당기면 멈추기, 방향 틀기, 칭찬·간식 보상, 줄 끌지 않기, 운동 후 산책, 냄새 맡기 허용, 보호자 인내심|1|zrrtbzrt
+심장사상충 주의보, 고양이도 예외 없다!|심장사상충, 고양이, 모기매개, 기침, 호흡기질환, 예방약, 월1회투약, 연중예방, 연간검사, 치료제없음|2|3hbt457o
+강아지 피부밑 말랑말랑 혹, 정체는 지방종이 유력!|강아지, 지방종, 피부밑혹, 피부종양, 비만세포종, 세침흡인검사, 양성종양, 수술적치료, 수의사진료|1|3eo3of56
+처방 없는 처방사료는 금물! 처방사료 바로 알기|처방사료, PARNUTs, 완전사료, 기능사료, 의약용사료, 수의사 상담, 질환관리, 영양불균형, 온라인구매주의|0|jv3jnc2m
+소심한 고양이와 친해지는 법|소심한 고양이, 개인 공간·은신처, 자극 최소화, 규칙적인 일과, 점진적 접근, 장난감·간식 보상, 스킨십 방법, 신뢰 형성|2|muofuf1c
+강아지 산책줄, 반드시 가슴줄을 써야 할까?|가슴줄, 목줄, 산책줄, 줄 당김(견인), 관절 부담, 기관협착(기관허탈), 그레이하운드 등 체형별 권장, 사이즈 선택, 반려견 훈련, 안전|1|j3nke9yn
+피부병의 탈을 쓴 치과질환, 치근단농양|치근단농양, 치과질환, 치아파절, 치주질환, 세균감염, 위턱 네 번째 앞어금니, 눈밑 농양, 예방(양치·스케일링), 단단한 것 씹지 않기, 개·고양이|0|fhojnqw2
+반려동물 오래 건강하게, 장수 위해 꼭 챙겨야 할 6가지|반려동물 장수, 영양관리, 고품질사료, 적정체중, 체중관리, 규칙적 운동, 정신적 자극, 보충제, 항산화제, 오메가-3|0|07f6fpuo
+멍냥이 신장이 보내는 SOS! 만성신장질환 증상|만성신장질환, 신장 기능, 다뇨(묽은 소변), 다음증(물 많이 마심), 구토·식욕감소, 구강궤양·구취, 빈혈, 수의사 상담|0|xo4pu8nk
+고양이 건식사료 VS 습식사료|2502-6, 건식사료, 습식사료, 고양이사료|2|3exfrux3
+강아지 자율급식 VS 제한급식|자율급식, 제한급식, 강아지 식습관, 체중관리, 비만예방, 건강관리, 급식장단점, 훈련과보상, 섭취량관리|1|no10wo5a
+고양이는 왜 '궁디팡팡'을 좋아할까?|고양이, 궁디팡팡, 허리·엉덩이, 신경자극, 페로몬·영역표시, 유대감·신뢰, 스킨십, 주의사항, 강도·빈도조절|2|ecvjirib
+거위 울음을 닮은 기침소리는 기관허탈 징후일 수 있습니다.|기관허탈, 기침, 거위울음, 호흡곤란, 비만관리, 가슴줄사용, 기도자극물회피, 수의사진료, 응급증상|0|f4mc74qn
+강아지·고양이 암 신호를 알자|반려동물 암, 조기발견, 림프절비대, 혹(종양), 체중감소, 비치유성 상처, 혈뇨·빈뇨, 구강종양·입냄새, 기침·폐전이, 구토·설사|0|8cs3eogv
+숨어 있는 심장병, 정기적인 청진으로 잡아내기|강아지, 심장병, 무증상 심장병, 심잡음, 심부전, 정기 심장청진, 조기진단, 건강검진, 수명연장, 7세 이상|0|iuf35ewr
+더 쉽고 안전한 반려동물 안약 넣는 법|강아지, 고양이, 안약 넣는 법, 안약 점안법, 연고·액체 구분, 청결, 자세 잡기, 눈꺼풀 올리기, 보관·사용기간|0|5d58nyrk
+강아지 선천성 심장병 '동맥관개존증'|동맥관 개존증, 선천성 심장병, 강아지, 무증상 초기, 기침, 호흡곤란, 성장지연, 소형견, 심잡음, 조기검진|1|vx2h6uor
+주범은 진드기! 고양이 외이염|고양이, 외이염, 귀진드기, 가려움, 귀지, 악취, 알레르기, 구충제, 예방관리|2|xl2zuhx4
+강아지 코가 건조한 이유|강아지, 코건조, 노화, 계절요인, 탈수, 알레르기, 자가면역질환, 보습제, 수분섭취, 검진|1|fbvk5m1q
+강아지·고양이 정기 건강검진의 3가지 목적|정기건강검진, 숨은질환, 정상기준수치, 추이관찰, 조기진단, 혈액검사, 소변검사, 연령별발생률, 강아지, 고양이|0|jqc1xr1a
+멍냥이 이물섭취에 대처하는 보호자의 자세|이물섭취, 반려동물응급, 동물병원, 구토유도금지, 내시경, 수의사상담, 강아지, 고양이|0|6umkb9ys
+강아지·고양이 종합 구강검진 및 치료 'COHAT'|COHAT, 반려동물 구강검진, 스케일링, 전신마취, 치과방사선촬영, 치주질환, 치석 제거, 발치/치과치료, 강아지, 고양이|1|if7s8a0e
+반복적인 이물섭취, 강아지 이식증|이식증, 강아지, 이물섭취, 증상, 원인, 위장관폐색, 중독, 행동문제, 분리불안|1|6o02nu49
+겨울에는 고양이도 옷을 입어야 할까?|고양이 옷, 겨울철, 스트레스, 그루밍 방해, 운동 제한, 이물 섭취 위험, 무모종(스핑크스), 수술 후 관리, 체온 관리, 실내 온도 유지|2|gq894u69
+겨울 산책을 위한 강아지 옷 입히기 요령|겨울산책, 강아지옷, 옷입기훈련, 추위관리, 체형별권장, 적응훈련, 보상훈련, 훈련주의사항|1|upgrtqwh
+항체가 충분한지 먼저 확인하고, 추가접종은 결정하세요-항체가검사|항체가검사, 항체검사, 보강접종, 예방접종, 강아지, 고양이, 면역력, 자가면역질환, 백신알레르기, 면역억제제|0|4zn1ha61
+고양이만 겪는 삼중고 질환, 세동이염|세동이염, 고양이, IBD, 췌장염, 담관간염, 십이지장, 간담도계, 염증, 진단 권고|2|vht4jgzy
+강아지 산책할 때는 휴대 전화 보지 않기|강아지 산책, 스몸비, 스마트폰 사용 금지, 충돌사고, 유해 음식 섭취, 신체 이상 신호, 유대감, 정서적 건강, 규칙적 산책|1|2bnhf8ro
+고양이가 싫어하는 냄새는 무엇일까?|고양이, 싫어하는 냄새, 시트러스(감귤류), 에센셜 오일, 라벤더·티트리, 멘톨·파스향, 세제·표백제·소독제, 독성(구토·설사), 스트레스|2|c3avf8jy
+무심코 건넨 사람음식, 강아지에겐 칼로리 폭탄!|강아지, 칼로리, 사람음식, 간식, RER, DER, 체중관리, 비만예방, 열량표, 급여주의|1|vu6p1cm5
+너무 마른 저체중 고양이, 체중 증가법|고양이, 저체중, 체중 증가, 사료 선택, 사료 전환, 소량 여러회 급여, 습식 사료 데우기, 식욕 증진, 스트레스 관리, 수의사 상담|2|m5jvvmle
+우리 강아지·고양이는 마른 걸까 뚱뚱한 걸까?|신체충실지수, BCS, 반려동물 체중관리, 저체중, 정상체중, 과체중, 비만, 체지방률, 적정체중 계산법, 체형평가|0|iubwvubj
+보호자 하기 나름인 만성신장질환 환자 관리 원칙 3가지|만성신장질환, 신장처방식, 수분섭취, 피하수액, 정기검진, 수의사상담, 반려동물, 강아지, 고양이, 삶의질|0|6zck9m5d
+이래서 왈 저래서 멍, 강아지가 짖는 이유|강아지, 짖음, 짖는 이유, 감각(청각·후각·시각), 심리적 요인, 신체적 문제, 습관적 짖음, 훈련법, 관찰·대응, 무시·보상|1|ylf159rz
+고양이가 자꾸 입맛 쩝쩝... 구강/안면 통증 탓?|구강안면통증증후군, 고양이, 구강통증, 삼차신경, 입맛다심, 식사거부, 유전적취약성, 유치빠짐, 스트레스, 약물·환경관리|2|xhajxbv7
+강아지 귀가 만두귀 됐다? 정체는 이개혈종|2410-4, 이개혈종, 만두귀, 강아지귀|1|zygrqx8h
+강아지의 지속적 머리 흔들기는 '귀 문제' 신호|강아지, 머리 흔듦, 외이염, 알레르기, 귓속 이물질, 귀진드기, 귀 악취, 귀 증상, 수의사 방문|1|meqdpd9j
+멍냥이는 지금 어디에… 반려동물 실종 대처법|강아지, 고양이, 반려동물 실종, 실종 대처법, 전단지, CCTV, 수색, 동물병원, SNS, 경찰|0|w3j541ko
+강아지가 발사탕에 빠진 까닭은?|발 핥기, 알레르기, 세균 감염, 효모균, 이물질(풀씨), 발 부상, 행동 문제, 불안, 지루함, 동물병원|1|9rmz3jb7
+농림축산식품부가 주관한 '길고양이 먹이 급여 가이드' 2편|길고양이, 먹이 급여, 적정 급여량, 급여 빈도, 물 제공, 위생 관리, 밥그릇 세척, 남은 먹이 수거, 이웃 갈등, 농림축산식품부|2|vv9ua2kb
+강아지도 음악을 좋아할까?|강아지, 음악, 스트레스완화, 음악추천, 레게, 소프트록, 클래식, 볼륨조절, 분리불안, 하울링|1|4tjjnyis
+해피 추석을 위한 반려동물 관리요령|추석, 반려동물관리, 위험한음식, 마늘·양파·파, 포도·건포도, 생선뼈·꼬치, 과일씨앗, 스트레스관리, 고양이돌봄, 강아지동반여행|0|ae5no2ne
+발생위치가 악성여부를 좌우한다! 고양이 비만세포종|고양이 비만세포종, 발생위치, 피부형, 내장형, 비장, 장, 증상(구토·설사·흑변), 악성 가능성, 고령묘, 수의사 상담|2|vgbfpmow
+강아지 피부암 비만세포종은 척척박사?|강아지, 비만세포종, 피부종양, 히스타민, 가려움·발적·부기, 지방종과 오인, 피부혹, 종양 크기 변화, 쓰다듬기로 발견|1|d3v60pzb
+강아지 심장이 보내는 SOS|강아지 심장병, 기침, 운동능력 저하, 실신, 청색증, 호흡곤란, 호흡수 측정, 수의사 상담|1|50zojnl5
+농림축산식품부가 주관한 '길고양이 먹이 급여 가이드' 1편|길고양이, 먹이 급여, 중성화, 급여 장소 선정, 규칙적 급여시간, 책임감 있는 돌봄, 사전 동의, 개체수·건강 관찰|2|wzwan257
+꼬리 무는 강아지, 정도가 지나치다면 건강문제 신호|꼬리 물기, 알레르기, 기생충(벼룩·진드기), 외상, 항문낭 문제, 스트레스·지루함, 운동·놀이, 수의사 진료, 청결 관리|1|lvcmu4jc
+고양이가 높은 곳을 좋아하는 이유는 무엇일까?|고양이, 높은 곳 선호, 캣타워, 사냥본능·관찰, 안전감, 놀이·정신적 자극, 따뜻함, 보호자 팁, 어린 고양이 주의, 노령묘 도움말|2|35ytvvtv
+강아지 치매 관리법, 뇌는 깨우고 불안은 잠재우기|강아지 치매, 치매 관리, 규칙적인 일상, 행동 풍부화, 산책, 노즈워크, 푸드퍼즐, 훈련, 야간 불안 관리, 보조제·약물|1|0uvxd5f8
+'강아지 머릿속 지우개' 인지기능장애증후군|인지기능장애증후군, 강아지 치매, 노령견, 기억력저하, 행동변화, 수면주기변화, 배변실수, 불안, 조기진단, 관리|1|7iylahsn
+계속 진행하는 강아지 치매, 조기 관리가 상책!|강아지 치매, 노령견(9세 이상), 조기 발견, 증상 인지, 동물병원 방문, 관리·치료, 삶의 질 향상, 신약|1|43j7ar4q
+유기동물에게 새 삶을! 임시보호 활동|유기동물, 임시보호, 입양, 동물보호소, 안락사, 사회화훈련, 질병관리, 봉사활동, 임시보호절차, 구조동물통계|0|udngo5p3
+머리 쿵! 강아지 뇌진탕에 대처하는 자세|2407-5, 뇌진탕, 강아지뇌진탕, 화상, 쿵|1|qg3n3nmf
+'나만 좋아해줘!' 고양이 질투 대처요령|고양이 질투, 다묘 가정, 행동 문제, 환경 풍부화, 긍정적 강화, 개인 공간 제공, 문제행동 대처, 단둘만의 시간, 배변 문제, 공격성|2|fcmixua0
+지긋지긋 알레르기에 괴로운 강아지|강아지, 알레르기, 가려움증, 음식알레르기, 환경알레르기, 알레르겐, 식이제한, 알레르기검사, 물컵이론, 동물병원|1|mcxaeilu
+'귀가 떨어지도록 벅벅' 강아지 단골병 외이염|외이염, 강아지, 가려움증, 통증, 알레르기, 말라세지아, 세균감염, 귀약, 재발, 갑상선기능저하증|1|cvvw4wbx
+강아지 방광결석 예방∙관리 3원칙|강아지, 방광결석, 예방, 수분섭취, 처방식(요로전용식), 소변 pH, 정기검진, 재발방지, 조기발견|1|erz3kx9f
+걱정이 태산! 아기와 강아지 같이 키울 수 있을까?|아기와강아지, 동거준비, 출산전훈련, 첫만남절차, 안전수칙, 냄새적응, 보상훈련, 강아지털사실체크, 아동발달|1|ahthubgz
+고양이는 왜 보호자를 핥을까?|고양이 핥음, 그루밍, 알로 그루밍(사회적 유대), 애정 표현, 영역 표시, 관심 요구, 냄새·맛 탐색, 스트레스·과도한 그루밍, 유해 약품 주의, 수의사 상담|2|ld4hal47
+강아지와 함께 러닝하는 꿀팁|강아지 러닝, 품종/체형 고려, 성장기 주의, 하네스, 물통, 배변봉투, 열사병 예방, 워밍업/쿨다운, 점진적 훈련|1|lkmnx8os
+보호자를 위한 당뇨병 관리법, 인슐린 주사 가이드|반려동물, 당뇨병, 인슐린 주사, 냉장 보관(2~8℃), 혼합 방법(부드럽게 롤링/8자), 주사기 사용법, 피하주사(삼각 텐트, 45도), 주사부위 회전, 저혈당 주의, 주사 후 문지르기 금지|0|kpdcspu1
+'삼다일소'는 멍냥이 당뇨병 신호!|당뇨병, 삼다일소, 다뇨, 다음, 다식, 체중감소, 인슐린, 1형 당뇨, 2형 당뇨, 백내장|0|nwh1vdnl
+초파리가 활개치는 계절, 안충 주의보!|안충, 초파리, 눈 기생충, 강아지, 결막염, 각막염, 각막궤양, 외부기생충 예방약, 예방, 수의사 상담|0|rf9tgysv
+'꼭 안고 타주세요' 강아지 승강이 안전수칙|강아지, 승강기안전, 목줄사고, 안전리드줄, 입마개, 배변봉투, 공용공간규정, 탑승예절, 보호자주의|1|sorf7kxl
+'그날엔 나도 예민보스' 강아지 생리 A to Z|강아지 생리, 발정기, 발정주기, 발정전기, 발정후기, 중성화수술, 자궁축농증 예방, 기저귀 관리, 소형견 대형견, 배뇨 표시|1|k2o41kbn
+툭 건드려 쨍그랑! 고양이는 왜 물건을 떨어트릴까?|고양이, 물건 떨어뜨림, 사냥본능, 관심 끌기, 지루함·호기심, 환경 풍부화, 행동 교정, 안전 관리, 시트러스 향, 장난감 유도|2|nxre12l1
+강아지 봄나들이 주의사항|강아지, 봄나들이, 독성꽃, 유박비료, 리실, 꽃가루알레르기, 미세먼지, 외출자제, 빗질·목욕|1|r6dn9dxu
+강아지 배 속 시한폭탄, 담낭점액증-늦으면 정말 위험합니다.||1|0wbwtp0p
+멍냥이가 기운도 없고 핏기도 없다? 빈혈 신호!|빈혈, 잇몸창백, 점막색, 증상판단, 면역매개성용혈성빈혈, 바베시아증, 만성신장질환, 동물병원, 강아지, 고양이|0|mv7atq2w
+반려동물 안고 운전하면 사고 위험성 쑥|반려동물, 운전, 교통안전, 사고위험 4.7배, 불법(도로교통법), 뒷좌석, 전용 케이지, 반려동물용 안전벨트, 한국교통안전공단, 집중력 분산|0|ehqs1x4m
+풀밭만 보면 뒹굴뒹굴… 강아지는 도대체 왜?|풀밭에서 뒹굴기, 영역표시, 냄새로 위장, 본능행동, 스트레칭·기분전환, 진드기예방, 산책후점검, 피부질환의심|1|tw2p7lnd
+고양이 눈물·눈곱 반복된다면, 결막염 지금 바로 확인하세요.|고양이 결막염, 결막염 증상, 허피스바이러스, 면역력 저하·스트레스, 눈물·눈곱, 각막궤양·합병증, 백신 예방, 항체 검사(연1회), 수의사 진료|2|lrp2ju7x
+강아지도 시간개념이 있을까?|강아지, 시간개념, 일주기리듬, 후각, 일화기억, 생체시계, 루틴, 산책, 귀가, 행동인지|1|0d06kqgr
+심장사상충약만 믿었다면 위험, 지금 꼭 검사받아야 합니다|심장사상충, 심장사상충 검사, 항원 검사, 예방약 주의사항, 모기 매개 감염, 미세사상충, 성충 치료, 아나필락시스 위험, 재검사 6개월|0|2uhlzhjl
+고양이가 밥맛 뚝 떨어졌다? 지방간 경보!|고양이, 지방간, 식욕부진, 간부전, 비만, 간질환, 금식(3일 이상), 즉시병원방문|2|vf0vw409
+강아지는 왜 배 긁기를 좋아할까?|배 긁기, 옥시토신, 코르티솔, 소파반사, 복종 신호, 스킨십 선호 부위, 반려견 행동, 스트레스 감소, 유대감, 발차기|1|8tsnynqo
+고양이 스크래칭으로부터 가구 지키기|고양이, 스크래칭, 가구 지키기, 스크래처, 캣닢, 장난감 유도, 보상훈련, 시트러스 향, 페로몬 냄새 제거, 처벌 금지|2|qxmivf03
+우리집 강아지는 왜 실외배변만 고집할까?|실외배변, 실내배변훈련, 강아지 배변습관, 배변패드, 배변판, 생활공간 개념, 방광염 예방, 항문낭 관리, 대소변 분리, 배변훈련 팁|1|s3kk77p3
+반려동물 스케일링 후 홈케어 가이드|스케일링, 치석제거, 전신마취, 마취회복, 부드러운 음식, 수분섭취, 양치 시작(2~3일), 발치 후 관리, 출혈시 병원|0|biprm6ko
+치석 방치하면 잇몸 무너지고 이빨을 잃을 수 있습니다|치태, 치석, 스케일링, 치주질환, 치아파절|0|mp4gp17e
+'심장사상충 예방 필수코스' 심장사상충 검사|심장사상충, 심장사상충검사, 예방, 강아지, 고양이, 혈액검사, 예방약, 성충, 유충, 약제저항성|0|9f3tlkuw
+강아지 자동차 이동 유의사항|강아지, 자동차이동, 멀미예방, 이동장, 강아지전용안전벨트, 뒷좌석, 물그릇, 2시간휴식, 퍼즐피더, 펫프렌들리휴게소|1|xpkn7lyy
+강아지 혈뇨는 방광이 보내는 SOS!|강아지 혈뇨, 방광염, 방광결석, 소변 출혈, 수분 섭취·배뇨 예방, 암컷 취약, 수의사 진료, 흰색 배변패드|1|294u91nm
+고양이는 자신의 이름을 알고 있을까?|고양이, 이름 인식, 호명 반응, 행동 신호, 보상 연관 학습, 무반응 원인, 2019 소피아대 연구, 아츠코 사이토|2|mhy3fxz1
+건조한 날씨 바싹 마른 피부, 겨울철 강아지 피부 관리|겨울철, 강아지 피부관리, 건조, 오메가3·오메가6, 가습기, 음수량 증가, 목욕 자제, 보습제, 빗질, 동물병원|1|wuo4s5ch
+조용한 암살자, 만성신장질환|만성신장질환, SDMA검사, 요독증, 구토, 식욕감소, 다음다뇨, 빈혈, 혈액검사, 요비중, 단백뇨|0|mwiq09me
+계속 악화하는 슬개골탈구, 우리 아이 몇 기?|2402-1, 소형견, 슬개골탈구, 유병률, #80%|1|6uq6g557
+고양이 자동차 적응 훈련|고양이, 자동차적응, 이동장, 동물병원, 단계적훈련, 안전벨트, 페로몬, 스트레스완화, 출발전체크리스트, 간식보상|2|jf1rppne
+새근새근 무장해제 강아지도 꿈을 꿀까?|강아지 꿈, 수면·REM, 수면 행동, 악몽 징후, 대처법(깨우지 않기), 근육 경련·움직임, 보호자 등장, 반려동물 상식|1|7st6hqlj
+고양이에게 입냄새가 나는 이유|고양이, 입냄새, 치주질환, 구내염, 구강종양, 신장병, 당뇨병, 간질환, 수의사 진료|2|i2k39l1q
+적혈구 부족 알리는 신호! 강아지 빈혈|강아지 빈혈, 적혈구 부족, 창백한 잇몸, 무기력, 호흡수 증가, 기절, 출혈, 용혈(면역성·바베시아), 적혈구 생산 감소, 만성신장질환|1|4ovaexhz
+반려동물을 위한 7가지 새해결심|새해결심, 반려동물, 운동, 정신적자극, 비만관리, 다이어트사료, 맞춤형사료, 수의사상담, 강아지, 고양이|0|364o70cn
+1년에 1번 치과검진으로 멍냥이 치아건강 사수|반려동물 치과검진, 연 1회 검진, 스케일링, 치태/치석, 치주질환 예방, 치과 방사선 검사, 조기발견, 예방치료, 강아지 고양이|0|1zwykj6n
+사랑하는 만큼 안아줄게! 강아지는 포옹을 좋아할까?|강아지, 포옹, 스트레스 신호, 바디랭귀지, 포옹 훈련, 불편함, 안전, 반려동물 상식|1|zrpx76d7
+유난히 추위 타는 강아지, 갑상선기능저하증|갑상선기능저하증, 강아지, 무기력, 체중증가, 추위민감, 피부증상, 탈모, 자가면역, 갑상선호르몬보충, 갑상선호르몬검사|1|phmg5thv
+우리집 고양이 크리스마스 안전수칙|고양이 안전, 크리스마스트리, 선형장식 금지, 파손 위험 장식, 전기장식·감전화상, 독성식물(포인세티아·겨우살이·아이비), 양초 화재주의, 트리 고정·차단, 휴식공간·스트레스관리|2|iwo7nr98
+강아지와 함께하는 보호자의 센스 있는 겨울나기|겨울철관리, 강아지, 산책, 추위신호, 외출복, 발바닥관리, 실내운동, 목욕관리, 차안안전|1|xae05pzs
+멍강님·묘르신도 관절염으로 뼈마디가 쿡쿡|2312-2, 멍냥이, 관절염, 강아지관절염, 고양이관절염, 뼈마디, 쿡쿡|0|8q45ytq4
+전국에 빈대 경보 발령!|빈대, 전국 경보, 반려동물, 강아지, 고양이, 물림, 가려움, 이차감염, 수의사|0|227wchur
+입맛 실종? 단신 투쟁? 강아지가 사료를 먹지 않는 이유|사료 거부, 식욕감퇴, 구강질환, 편식, 간식 관리, 식사습관 교정, 스트레스, 사료 냄새·온도 조절, 노즈워크·놀이훈련, 건강검진|0|0huc0kh6
+11월은 불조심 강조의 달! 반려동물 화재사고 예방법|반려동물, 화재예방, 전기레인지, 전선보호, 플러그분리, 누전차단기, 소화기, 단독경보형감지기, 이동장훈련|0|hfpr7q2h
+고양이 탈모는 건강 적신호!|고양이 탈모, 과도한 그루밍, 통증, 가려움증, 스트레스(행동성), 벼룩·외부기생충, 세균·곰팡이 감염, 원형탈모(링웜), 원인 파악·검사|2|4ccpq3q0
+가을철 산책길에 도사리는 복병 조심하시개|가을산책, 진드기, 바베시아증, SFTS, 켄넬코프, 야간산책안전, 도토리중독, 낙엽으로 인한 소화기증상, 외부기생충구제, 예방접종|0|b9d9o0a5
+멍냥이 치아, 어디까지 알고 있니?|강아지 치아, 고양이 치아, 유치, 영구치, 잔존유치, 치아 나는 시기, 치아관리, 씹는 장난감|0|x0tbb8xv
+환절기에 기승부리는 감기, 믿을 건 면역력뿐!|환절기, 강아지 감기, 고양이 감기, 기침·콧물·재채기, 눈충혈·눈곱·구강궤양, 백신접종, 항체가검사, 추가접종, 예방|0|y3jnwstm
+강아지 캠핑장 이용도 안전이 먼저|강아지캠핑, 동물등록, GPS목걸이, 구급상자, 진드기예방, 음식주의, 야생동물·뱀주의, 독성식물, 배변처리, 차량안전|1|5xk76mpp
+우울증에 빠진 강아지... 탈출을 돕는 방법은?|강아지 우울증, 원인, 증상, 진단, 동물병원, 관리법, 일과 유지, 산책·운동, 사회화, 장난감|1|4eipo2gf
+골든타임을 잡으라냥! 고양이 응급상황 4가지|고양이 응급상황, 호흡곤란, 동맥혈전증(뒷다리마비), 요도폐색, 지방간(지방간증), 식욕부진, 폐수종, 빠른 수의사 진료|2|69r1e8xd
+강아지 눈곱을 보면 건강상태가 보인다|강아지, 눈곱, 눈분비물, 결막염, 각막염/각막궤양, 건성각결막염(안구건조증), 알레르기, 눈관리, 증상관찰, 수의사검진 권고|1|wlinl1ka
+보호자는 아이의 대변인! 동물병원 내원 준비사항|동물병원 내원 준비, 구토, 설사, 증상 기록, 사진·동영상 촬영, 토사물 보관, 체크리스트, 예방접종, 동거동물 여부|0|aa2h7yi3
+'소형견 파행 주범' 슬개골탈구의 다양한 신호|2310-1, 슬개골탈구, 소형견|2|qqcqp78r
+막바지 무더위 기승, 강아지도 땀 흘릴까?|강아지 땀샘, 에크린샘(발바닥·코), 아포크린샘, 팬팅(헐떡거림), 혈관확장, 체온조절, 열사병 예방, 털 관리, 산책 시간|1|b0cvr59h
+'서서히 낡다가 뚝! 강아지 전방십자인대파열|2309-5, 강아지, 십자인대파열|0|5a1pjckx
+냥심을 표현하는 고양이 꼬리언어|고양이, 꼬리 언어, 몸짓 언어, 감정 표현, 놀이 신호, 공격 신호, 불안/두려움, 신뢰/애정|2|3ii3wsqy
+강아지도 진드기매개질환 'SFTS' 주의보|SFTS, 진드기, 진드기매개질환, 강아지, 증상, 인수공통전염병, 진드기제거, 격리치료, 소독, 잠복기|1|9xeoiw6r
+나이 든 우리 아이, 건강검진을 미루면 안 되는 이유|7세 이상, 노령, SDMA검사, 심장검사, 정기검진|0|2p2fhacf
+진드기 제거는 되도록 전문가 손길로!|진드기, 진드기 제거, 동물병원, 전문가 손길, 맨손 금지, 주둥이(입부분) 잔존, 감염 위험, 염증, 반려동물 관리|0|lscpx46f
+쿠싱증후군 관리의 생명은 코르티솔 밸런스 잡기|쿠싱증후군, 코르티솔 균형, 뇌하수체 종양, 부신피질기능항진증, 다뇨·다음·다식, 복부 팽만(팟벨리), 약물치료, 애디슨병(부신기능저하증), 모니터링, 반려견/반려동물|0|6i17hj8l
+고양이는 왜 상자를 좋아할까?|고양이, 상자, 보온, 안전감, 놀이, 호기심, 골판지, 적응, 스테이플러, 박스테이프|2|yi31x2vn
+우리 강아지, 장수견이 될 수 있을까요?|반려견 장수, 식이관리, 과체중 예방, 휴지기 에너지 요구량(RER), 치아관리, 정기 건강검진, 체중별 노령기, 스트레스 관리, 정서적 돌봄, 운동량 증가|1|3i5ap4aq
+여름철 반려동물 건강관리 가이드|여름철, 반려동물 건강관리, 열사병 예방, 일광화상, 발바닥 화상, 낮시간 산책 금지, 자동차 방치 금지, 응급처치, 수분공급, 휴식|0|842pxf1x
+멍냥이들 사이에서 무서운 병으로 손꼽히는-췌장염|췌장염, 강아지, 고양이, 급성췌장염, 만성췌장염, 고지방식이, 복통, 식욕부진, 기도하는자세, 동물병원|0|8oc530n8
+발병율도 치사율도 높다! 췌장염|췌장염, 강아지, 고양이, 급성췌장염, 만성췌장염, 복통, 식욕저하, 저지방사료, 췌장효소보조제|0|ib2yvwf6
+강아지 호흡이 이상하다? 건강신호등에 빨간불!|강아지, 호흡 이상, 빈호흡, 노력성 호흡, 열사병, 응급처치, 호흡수(분당30회), 잇몸색 변화, 호흡곤란 원인|1|su38qrw4
+강아지 수영장 이용 안전수칙&건강수칙|강아지, 수영장, 안전수칙, 구명조끼, 수영교육, 보호자감독, 열사병예방, 수영후세척와건조, 귀세정·눈관리|1|gxt4yjdu
+고양이도 여름철엔 식중독 주의보 발령|고양이, 식중독, 살모넬라, 보툴리누스, 마비(증상), 예방(위생), 익힌 음식 급여, 식기 청결, 수의사 방문, 격리|2|idmj7fmy
+장마철 강아지 산책 가이드|장마철, 강아지 산책, 강아지 비옷, 반사소재, 웅덩이 회피, 렙토스피라, 두꺼비독, 발·발바닥 세척과 건조, 물티슈|1|4e46y2t6
+닮은 듯 다른 발작과 실신|발작, 실신, 증상, 응급처치, 강아지, 고양이, 신경학적원인, 심장질환, 저혈당, 간질|0|xg1f2opw
+화장실을 들락날락, 소변을 찔끔찔끔-고양이 특발성방광염|고양이, 특발성방광염, 배뇨장애, 요도폐색, 스트레스, 방광팽창, 급성신부전, 응급상황, 증상관리|2|x48nsfwe
+차만 타면 울렁울렁 강아지 멀미 해결법|강아지, 차멀미, 증상(구토·침흘림·불안), 예방·적응훈련, 케이지·안전운전, 환기·편안한환경, 자주 태우기, 장거리 휴식권장, 항구토제·항불안제, 수의사상담|1|35cgpaiy
+무슨 걱정이라도 있나? 강아지는 왜 한숨을 쉴까?|강아지, 한숨, 의사소통, 스트레스·진정호흡, 편안함, 불만·화남, 냄새탐지, 호흡기·건강이상, 행동관찰|1|ug1lnfy1
+행복하고 건강한 견생의 밑거름 '강아지 중성화'|강아지 중성화, 중성화 수술, 행동 문제 예방, 유선종양, 자궁축농증, 고환암, 전립선암, 골육종, 발병률|1|5muqleaj
+묘생의 새벽부터 황혼까지 고양이 생애주기 6단계|고양이 생애주기, 유아기, 성장기, 청년기, 중년기, 장년기, 노년기, 예방접종, 중성화수술, 정기건강검진|2|sptei843
+멍냥이의 몸이 보내는 SOS 반려동물 통증신호|반려동물 통증, 통증신호, 강아지 증상, 고양이 증상, 절뚝거림, 관절염 의심, 식욕 감소, 활동성 감소, 과도한 그루밍, 표정으로 통증측정|0|17aa1a8y
+동물병원 대기실 펫티켓|동물병원, 대기실, 펫티켓, 이동장/안기, 마킹, 매너벨트, 다른 동물 접촉 금지, 휴대폰 무음/조용한 통화, 반려동물 스트레스 예방|0|pc8a20y3
+화사한 봄꽃의 위험한 유혹 조심하시개! 강아지에게 유독한 봄꽃|강아지, 봄꽃, 독성식물, 진달래과, 튤립, 수선화, 은방울꽃, 구토, 응급동물병원|1|fkbplk7c
+입안부터 찌릿찌릿 강아지·고양이 감전됐어요!|감전, 전선 물어뜯음, 입안 화상, 응급처치, 심폐소생술(CPR), 호흡곤란, 폐수종, 부정맥, 36시간 관찰|0|stlvyk7o
+증상이 애매모호해 놓치기 십상이라냥! 고양이 췌장염|고양이, 췌장염, 만성췌장염, 식욕부진, 기력저하, 복통, 조기발견, 당뇨병연관, 원인불명|2|ijxd1kb9
+반려동물 산책 훼방꾼 봄하늘 점령한 미세먼지|미세먼지, 강아지, 호흡기질환, 안구질환, 산책관리, 외출자제, 실내놀이, 세정·목욕, 마스크주의|0|8zxjgkfg
+멍냥이가 물 먹는 하마 됐다? 다음다뇨 부르는 질환|다음다뇨, 다뇨, 다식, 당뇨병, 만성신장질환, 부신피질기능항진증, 쿠싱증후군, 갑상선기능항진증, SDMA검사, 반려동물증상|0|6a08e7kg
+강아지 발작에 대처하는 보호자의 자세|강아지, 발작, 응급처치, 안전조치, 눈감기·압박, 영상촬영, 수의사방문, 동물병원, 지속시간기준, 낙상방지|1|op4r4lxr
+땅 파듯이 퍽퍽 강아지는 왜 침대를 긁을까?|강아지, 침대긁기, 자리준비, 영역표시, 지루함, 스트레스, 체온조절, 불안, 관심요구, 관절염|1|rwh4pe66
+선무당이 강아지 잡을라 가정 내 구토유발, 위험해요!|구토유도 금지, 과산화수소, 독성물질, 이물질 섭취, 소금 먹이기 금지, 올리브오일 먹이기 금지, 목구멍 손가락 금지, 흡인성 폐렴, 동물병원 방문|1|mtot75r9
+암고양이 젖꼭지 주변에 혹이 볼록? 정체는 십중팔구 '유선종양'|유선종양, 고양이, 중성화수술(중성화), 조기발견, 젖꼭지(유선), 촉진법(자가검진), 전이(폐·림프절), 악성종양, 수술적 제거, 예방|2|8f6r22zz
+막연한 마취사고 걱정은 이제 그만 '반려동물 마취 FAQ'|반려동물, 마취, 전신마취, 마취위험도, ASA분류, 주사마취, 호흡마취, 마취전검사, 심장·폐·간·신장|0|ameobhxo
+봄꽃구경보다 먼저 '심장사상충 검사'를 해봄|심장사상충, 심장사상충 검사, 심장사상충 예방, 모기 매개감염, 월별 예방약, 유충 단계(L3 L4 L5), 감염 시기(3~4일·45~65일·6개월), 반려견, 겨울철 예방|0|x295v9vl
+1957년에 만든 '광견병' 예방 포스터를 보여 드립니다.|광견병, 예방, 예방주사, 개, 물림사고, 광견병 예방 포스터, 1957, 공공보건 캠페인|1|h8r0ijdz
+집이라고 방심은 금물! 반려동물 실내 안전가이드|반려동물 실내 안전, 감전, 전선·콘센트, 추락, 가구·창문, 끼임(문), 중독, 의약품·화학제품 보관, 방묘창, 반려동물 전용 계단|0|bxg4yrip
+고양이가 우리에게 보내는 두근두근 하트시그널|고양이 애정 표현, 눈키스, 대답 울음, 그르렁/골골송, 몸 비비기, 헤드번팅, 배 보이기, 배 만지기 주의, 페로몬 표시|2|gpvhcfge
+“걷는 게 조금 이상해요.” 그 한마디가 고관절질환의 시작일 수 있습니다.|2304-4, 고관절질환, 절룩절룩, 씰룩씰룩, 강아지고관절|1|brzfmv91
+영역동물에게 이사는 고문이다냥! 고양이와 이사하는 법|고양이, 이사, 스트레스관리, 이동장적응, 소음적응교육, 안정제(수의사처방), 안전한방(격리), 화장실모래, 차량이동연습, 방광염예방|2|80m8239t
+반려동물 사망원인 1위 암|반려동물 암, 조기진단, 림프종, 유선암, 피부암, 골육종, 악성 흑색종, 증상, 중성화, 예방접종|0|jcozfj3r
+우리 아이는 사람으로 치면 몇 살?|반려동물 나이환산, 강아지, 고양이, 사람나이 환산, 소형견(9kg 이하) 기준, 중대형견 노화 빠름, 연령 단계, 청년기 중년기 노년기|0|q07x2hvh
+강아지가 우리에게 보내는 두근두근 하트시그널|강아지, 애정표현, 꼬리흔듦, 몸을붙임, 눈맞춤, 옥시토신, 하품모방, 얼굴핥기, 보호자유대|1|0s2jtvbi
+멍멍도 다 똑같은 멍멍이 아니다! 강아지가 짖는 이유|강아지 짖음, 경계성 짖음, 요구성 짖음, 불안성(분리불안), 짖음 교육, 사회화, 무시와 보상, 크레이트 훈련, 의사소통(소리), 수의사 상담|1|18gvfo28
+냥발톱에 긁힌 상처에 병의 씨앗이? 고양이 할큄병(a.k.a. 묘소병)|고양이 할큄병, 묘소병, 바르토넬라 헨셀라에, 고양이벼룩, 상처 감염, 림프절 비대, 발열, 상처 세척, 구충·발톱 관리, 길고양이 주의|2|dj457m8x
+반려동물 심장병 관리지침|반려동물, 심장병, 심부전, 폐수종, 호흡수 측정, 운동관리, 수분섭취, 체중관리, 스트레스관리, 치주질환|0|oepwr1zv
+강아지 사망원인 2위, 고양이 사망원인 3위 '심장병'|심장병, 이첨판폐쇄부전증, 비대성심근증, 심잡음, 심장청진, 조기진단, 심부전, 후지마비, 소형견, 노령견|1|gv0yazu8
+통증과 마비로 개고생-강아지 디스크 신호|강아지, 강아지디스크, 디스크, 2302-1|1|m5x7uh3i
+철저한 대비가 소중한 생명을 지킵니다. 반려가정 재난 대응법|반려가정 재난대응, 재난대비, 반려동물대피, 재난가방, 이동장(캐리어), 반려동물등록·백신, 대피시설확인, 이동장훈련, 해외대피정책|0|mtr9ymka
+개르신은 특히 조심하세요! 강아지 3대 호르몬질환|강아지, 노령견, 호르몬질환, 갑상선기능저하증, 당뇨(인슐린), 쿠싱증후군, 삼다증, 지속적 약물관리|1|19n97gri
+만성구토 늪에 빠졌다면 의심하라냥! 염증성장질환|염증성장질환, 만성구토, 설사, 체중감소, 고양이, 복부초음파검사, 조직검사(생검), 식이요법, 가수분해단백질, 스테로이드|0|ucxl26yo
+하늘에서 장난감이 내리개~ 강아지가 눈을 좋아하는 이유|강아지, 눈놀이, 발바닥 관리, 염화칼슘 주의, 눈 섭취 주의, 보온(발바닥), 안전수칙, 놀이·흥미|1|ip1afvok
+흡연 보호자라면 필독! 반려동물 암 부르는 간접흡연|간접흡연, 3차흡연, 반려동물암, 니코틴중독, 담배꽁초, 전자담배, 고양이구강암, 개비강암, 금연권고, 실외흡연|0|vie7kjga
+멍냥이 주요사망원인 심장병, 조기진단으로 대처!|심장병, 강아지, 고양이, 이첨판폐쇄부전증, 비대성심근증, 심장청진, 심잡음, NT-proBNP, Troponin I, 조기진단|1|osylmsri
+강아지 눈에 안개가 꼈다? 의심 1순위 안질환 '백내장'|백내장, 강아지, 증상, 노령견, 유전성, 당뇨병성, 수술, 안과질환, 초기증상, 백내장 단계|1|xva9bl5o
+깨끗하개 맑개 자신있개~ 강아지 목욕 가이드|강아지, 목욕, 목욕준비, 강아지샴푸, 헹굼, 말리기, 물온도, 목욕주기, 빗질, 눈관리|1|vtx0m52e
+묘르신도 뼈마디가 쿡쿡 쑤신다냥! 고양이 관절염|관절염, 고양이관절염, 2212-4|2|kze1p0ro
+겨울이라 코가 분홍분홍하개 '강아지 스노우노즈'|스노우노즈, 강아지 코색 변화, 멜라닌·티로시나아제, 품종 소인(허스키·골든·래브라도 등), 일시적·무해한 현상, 노화, 플라스틱 그릇 알레르기, 코 외상, 백반증, 수의사 권고|1|1la8uyx5
+잇몸이 무너지면 온몸이 와르르, 전신건강 위협하는 치주질환|치주질환, 치태·치석, 치은염·치주염 단계, 구취(입냄새), 치아 흔들림·치아상실, 치조농양·구비강누공, 전신 합병증(심내막염·간·신장), 예방·조기치료(스케일링)|0|6lo1puxf
+노령 반려동물 건강검진, 기본검진 받고 추가검진 더!|노령반려동물, 건강검진, ACTH검사, NT-proBNP검사, 갑상선호르몬검사, SDMA검사, 쿠싱증후군, 애디슨병, 비대성심근증, 만성신장질환|1|2xcsa8iv
+건강전선 이상 없나? 반려동물 데일리 건강체크|반려동물, 데일리 건강체크, 식욕 관찰, 대소변 관찰, 귀·눈·코 증상, 구강·잇몸 관리, 운동량, 스케일링, 병원검진|0|ye5q2wod
+반려동물 눈에 체리가 열렸다? 제3안검 탈출증(a.k.a. 체리아이)|제3안검, 제3안검탈출증, 체리아이, 강아지, 고양이, 결막염, 안구건조증, 매몰법·절제법, 수술 후 관리|0|cwp64knf
+행복한 묘생은 욕구충족에 달렸다냥! 고양이 환경풍부화|고양이 환경풍부화, 사냥놀이, 은신처, 수직공간, 스크래치, 핵심자원 분리, 화장실 n+1, 푸드퍼즐, 캣타워, 스트레스 예방|2|8k0sgmmm
+민망함은 보호자 몫, 강아지가 마운팅하는 이유|강아지, 마운팅, 중성화수술, 놀이와흥분, 관심끌기, 사회화부족, 행동교정, 훈련, 보호자대처, 응급대처|1|lcf8nhi0
+환절기 기침·콧물, 켄넬코프·독감 신호일 수 있습니다.|환절기, 반려동물 감기, 켄넬코프, 개 인플루엔자(H3N2), 고양이 상부호흡기질환, 허피스바이러스, 칼리시바이러스, 폐렴 위험, 관리·예방(가습기·병원), 인플루엔자, 상부호흡기질환, 기침콧물, 예방접종|0|6m5eubzs
+멍감님∙묘르신이 보내는 관절염 신호|관절염, 2211-1|0|ozacvszr
+반려동물이 똥꼬스키를 탄다? 항문낭이 불편하다는 SOS|항문낭, SOS, 2210-6|0|jvltk1ue
+우리집 강아지는 코흘리개? 강아지가 콧물 흘리는 이유|콧물, 강아지, 감염성질환, 알레르기, 이물질, 종양, 구조적문제, 비공협착, 구개열, 치과질환|1|c4kz8ydz
+화장실을 들락날락, 소변을 찔끔찔끔-고양이 특발성방광염|고양이, 특발성방광염, 방광염, 스트레스, 배뇨곤란, 요도폐색, 수컷(수고양이), 예방, 수분섭취, 환경관리|2|5schuy9a
+소형견 대표 관절질환, 슬개골탈구 관리법|2210-3, 소형견, 슬개골탈구|1|8sme1lqe
+살이 찐 반려동물, 관절·심장 건강까지 함께 무너질 수 있습니다.|반려동물 비만, 강아지 비만, 고양이 비만, 체형 판별, 촉진(갈비뼈) 검사, 다이어트사료, 사료 교체 요령, RER 계산법, 소량·자주 급여, 지방간(간지방증) 주의, 비만, 체중관리, 관절염, 당뇨병, 다이어트|0|w4a2toi3
+응급수혈에 대비해 알아야 할 멍냥이 혈액형|반려동물, 혈액형, 응급수혈, 수혈호환성, 강아지(DEA), 고양이(A/B/AB), 혈액형검사, 희귀혈액형, 헌혈커뮤니티|0|p7t7doyn
+반려동물 혈액검사 기본용어 가이드|반려동물, 혈액검사, CBC, 혈청검사, 적혈구(RBC), 백혈구(WBC), 혈소판(PLT), 신장지표(BUN·CREA), 간수치(ALT·AST), 췌장지표(AMYL·LIPA)|0|j327el5g
+이렇게 이용하세요! 반려견 놀이터 이용수칙6|반려견 놀이터, 이용수칙, 동물등록, 배변봉투·목줄, 음식물 반입금지, 예방접종, 체격별 구역, 보호자 감독, 안전관리, 공공시설 사용|1|qygccwna
+깔끔이 냥님의 이유 있는 배변실수|고양이, 배변실수, 고양이화장실, 배변통증, 관절염, 인지기능장애(치매), 화장실청결, 모래교체, 영역표시(마킹), 스트레스|2|yo705fgv
+참진드기가 옮기는 치명적 질환, 빈혈 부르는 바베시아증|참진드기, 바베시아증, 빈혈, 무기력·식욕부진·잇몸창백, 황달·소변적색화, 진드기 제거 방법, 진드기 구제제(먹는/바르는), 예방(풀숲 회피·깔개), 활동시기 4~11월, 전염 소요 24~48시간|0|47cyc08n
+추석 음식 한입이 응급상황으로, 반려동물에게 절대 주지 마세요.|반려동물, 추석음식, 전(고지방), 잡채(양파), 갈비뼈, 산적(이쑤시개), 송편(기도위험), 포도·건포도, 급성신부전, 명절증후군, 반려동물중독, 강아지금지음식, 고양이금지음식, 명절안전관리|0|md4w9a3l
+반려동물 장수의 5대 조건|영양관리, 꾸준한운동, 예방접종, 구충, 치아관리, 건강검진, 반려동물장수, 반려동물건강|0|9ruon1gs
+건강하게 편안하게 행복하게 '노령견 관리 가이드'|노령견, 사료, 관절염, 체중관리, 산책, 치매예방, 정기건강검진, 면역력, 보호자관심|1|nujp0wry
+털털했던 내 모습 되찾고 싶개~ 강아지 미용 후 탈모증후군|미용후탈모증후군, 이중모, 포메라니안, 털성장주기정지, 갑상선기능저하증, 부신피질기능항진증, 모낭충증, 피부진균증, 빗질관리, 호르몬치료|1|8lcvsykq
+다이어트도 안 했는데 살이 쏙? 고양이 체중감소|고양이, 체중감소, BCS(체형점검), 섭취부족·영양부족, 스트레스, 갑상선기능항진증, 당뇨병, 치과질환, 만성신장질환, 정기진단 권장|2|tyy24t8i
+덥고 습하면 번지는 말라세지아 피부염, 방치하면 만성화될 수 있어요|말라세지아피부염, 피부염, 가려움증, 곰팡이성피부염, 여름철피부질환|1|t5p4d40a
+피할 수 없다면 대비하세요! 반려동물 여름철 안전수칙|여름철, 반려동물, 열사병, 수분공급, 차안위험, 발바닥화상, 실내온도관리, 응급처치, 쿨링용품, 탈수예방|0|0nxzek00
+양날의 검' 스테로이드, 제대로 쓰면 그야말로 명약|스테로이드, 반려동물, 염증완화, 면역억제, 항암작용, 부작용, 식욕증가, 다뇨, 수의사처방|0|on0qjah9
+강아지 배변훈련 주의사항|강아지, 배변훈련, 화장실관리, 배변타이밍, 배변신호, 실수대처, 혼내지않기, 냄새제거(청결), 질환의심|1|fdjj9z1n
+강아지가 헐떡거리는 이유|강아지, 헐떡거림, 체온조절, 열사병, 통증, 불안/스트레스, 후두마비, 약물부작용, 응급처치|1|mdvvo7ua
+묘한 소화기구조 탓에 세 장기에 염증이 한꺼번에? 세동이염|세동이염, 고양이, 췌장염, 담관염(간), 염증성 장질환, 소화기구조, 구토, 식욕부진, 설사, 황달|2|dt7dilp3
+강아지가 또래보다 유난히 작다? 간문맥전신단락|강아지, 간문맥전신단락, 기형혈관, 선천성, 성장지연, 발작, 신경증상, 마취회복지연, 간우회|1|2om9nz26
+폭염에 둔 사료, 우리 아이 식중독 부를 수 있습니다.|사료보관, 식중독, 여름관리, 건식사료, 습식사료|0|uq9rgqkp
+아이야, 이 해보렴~ 치주질환 신호 확인하세요!|치주질환, 치석, 잇몸염, 잇몸출혈, 잇몸처짐, 스케일링, 구강관리, 강아지, 치아발치|1|3lkjl2q2
+침이 수도꼭지 튼 듯 줄줄? 강아지가 침 흘리는 이유|강아지, 침흘림, 음식반응, 체온조절, 흥분·멀미, 독성물질, 이물질, 치과질환, 신경계질환|1|i2yp8a78
+초파리가 옮기는 눈 기생충, 강아지 안충 꼭 확인하세요.|강아지안충, 초파리기생충, 강아지눈기생충, 반려견눈질환|0|u3g6p2c7
+고양이 귀지가 커피찌꺼기 같다? 귀진드기|고양이, 귀진드기, 귀지, 악취, 가려움, 이개혈종, 외이염, 전염성, 진단, 치료|2|wjny1g97
+귀청소, 면봉으로 하면 오히려 외이염이 심해질 수 있습니다.|강아지귀청소, 강아지외이염, 반려견귀관리, 강아지귀냄새, 강아지귀세정제|1|ripvcheb
+신속 대처하려면 알아 두세요! 반려동물 혈액형|반려동물, 혈액형, 수혈, 강아지, 고양이, DEA1, 혈액형검사, 희귀혈액형, 신생모적혈구용혈증|0|6eb9pwmx
+단순 뾰루지로 여겨 방치하면 큰일! 비만세포종|비만세포종, 피부종양, 강아지, 고양이, 세침흡인검사, 면역세포, 악성(개)/양성(고양이), 수의사진료|0|yt9trdrt
+닮은 듯 다른 강아지 놀이/싸움 구분하기|강아지 놀이, 강아지 싸움, 플레이 바우, 프레이 바우, 역할 전환, 셀프 핸디캡, 으르렁 소리, 싸움 중재법, 이불로 덮기, 주의사항|1|np7ssxpn
+프로산책러의 적, 강아지 후지파행 부르는 질환|후지파행, 슬개골탈구, 전십자인대파열, 고관절질환, 대퇴골두허혈성괴사, 고관절이형성, 고관절탈구, 동물병원검사|1|9iwbi38g
+피부감각이 초민감모드다냥! 고양이 지각과민증후군|고양이, 지각과민증후군, 피부과민, 등꿀렁거림, 꼬리행동, 벼룩알레르기, 골관절염, 신경계질환, 스트레스관리, 놀이치료|2|fkeo18v9
+봄바람 타고 찾아오는 불청객, 강아지 꽃가루 알레르기|강아지, 꽃가루 알레르기, 가려움증, 피내반응검사, 혈청검사, 참나무·소나무·자작나무, 노출 회피, 산책 시간 제한|1|vx6g5dy6
+어렵지 않아요~ 반려동물 약 먹이는 법|반려동물 약 먹이기, 가루약, 알약, 주사기 사용, 투약기(펄건), 음식에 섞어 먹이기, 손으로 직접 먹이기, 캡슐화, 주의사항|0|ipnkvl5g
+나이 든 비중성화 여아 노린다! 치명적 응급질환 자궁축농증|자궁축농증, 중성화(스페이), 비중성화 암컷, 개방형, 폐쇄형, 기력저하, 식욕부진, 다뇨, 응급질환, 강아지·고양이|0|nekzu6hv
+보호자와 가까워지면 사고와 멀어지개 '반려견 안전관리 의무강화'|반려견 안전관리, 목줄 2m 제한, 가슴줄 규정, 공용공간(엘리베이터·복도·계단), 보호자 의무, 과태료 부과, 2022년 2월 11일 시행, 줄 수직 유지, 사고 예방|1|gxz19cma
+오직 예방만이 살길! 치사율 99% 무시무시한 질병 '광견병'|광견병, 치사율, 인수공통감염병, 감염경로(물림·타액), 잠복기, 증상(광폭형·마비형), 예방접종, 예방접종 지원사업, 백신 무료지원, 의무접종|1|k195gt4p
+막히면 돌아가라냥! 고양이 요관폐색|고양이, 요관폐색, 요로결석, 수신증, 신부전, 탈수·저음수, 증상(식욕부진·구토·무기력), 피하요관우회술(인공요관), 정기 초음파·방사선 검사|2|gttym9zj
+잇몸색으로 확인하는 강아지 건강상태|잇몸색, CRT, 분홍잇몸, 검은잇몸, 붉은잇몸, 창백한잇몸, 푸른잇몸, 치은염, 빈혈, 구강종양|1|fiokwm0r
+철 없는 불청객 모기, 365일 심장사상충 주의보|심장사상충, 모기, 생활사·전파, 예방약(월1회), 강아지, 고양이, 기침·호흡기증상, 대정맥증후군, 수술·치료 위험|0|g4b5hs7k
+1년에 1번 필수 연례행사, 봄꽃구경보다 심장사상충 검사|심장사상충, 연간검사, 예방약, 재검, 양성치료, 간단검사, 반려동물건강, 강아지, 고양이|0|7ytaa8rh
+네가 떠올라 눈물이 왈칵 '펫로스증후군'|펫로스증후군, 반려동물 상실, 애도·장례, 추억 기록(동영상), 위로·커뮤니티, 심리상담·전문가치료, 새 반려동물 입양 주의, 반려동물 장례 법규|0|zw2jf324
+행복한 다묘가정을 위한 안내서|다묘가정, 고양이, 식사 공간 분리, 화장실 n+1, 수직 공간(캣타워), 사냥놀이 단독, 다묘관리, 놀이 시간 권장|2|8cm80253
+강아지 음수량 늘리기 대작전|강아지, 음수량, 수분섭취, 물그릇, 물종류, 육수/브로스, 사료불리기, 물그릇높이, 습식사료|1|l1hlki6t
+고약한 냄새는 덤이다옹~ 고양이 소변테러|고양이, 소변테러, 배뇨실수, 스프레이(영역표시), 하부요로계질환, 관절염(노령묘), 화장실관리, 중성화(중성화수술), 만성신장질환·당뇨·갑상선기능항진증|2|extqk9lc
+만성구토 부르는 헬리코박터균 감염|헬리코박터균, 만성구토, 구토증상, 강아지, 고양이, 조직검사, 현미경검사, 항생제, 위산분비억제제, 감염률/재발률|0|rs327kbo
+반려견 안전관리 의무강화(목줄·가슴줄 2m 이내)|반려견 안전관리 의무강화, 목줄 2m, 가슴줄 2m, 외출 시, 공동주택 내부공용공간, 엘리베이터, 목덜미 잡기, 가슴줄 손잡이, 과태료 50만 원|1|105eix4l
+반려동물 대중교통 이용법|반려동물, 대중교통, 이동장, 무게 제한, 크기 제한, 버스, 기차·철도, 비행기, 동반탑승 승인, 예방접종|0|06obwdmo
+강아지의 뿌옇게 흐려진 눈, 백내장인가 핵경화증인가|강아지, 눈, 백내장, 핵경화증, 수정체, 시력저하, 노화, 안과검진, 백내장수술|1|qtxngugn
+묘르신 머릿속의 지우개, 인지기능장애증후군 a.k.a. 치매|고양이 인지기능장애, 치매, 방향감각 상실, 기억력 저하, 야간 과도한 울음, 수면-각성주기 변화, 배변 실수, 불안·행동 변화, 진단·치료, 예방·인지자극|2|nyaquln5
+강아지에게 입 냄새가 나는 이유|강아지, 입냄새, 구취, 치주질환, 구강종양, 소화불량, 신장질환, 당뇨성케톤산증, 간질환, 수의사진료|1|t8h8hztl
+반려동물 수술 후 안내사항|반려동물, 수술 후, 회복관리, 수술부위 소독, 넥칼라, 운동제한, 마취후 증상, 출혈 관찰, 배변관리, 병원 상담|0|hppulzrk
+여아 젖꼭지 주변에 혹이? 십중팔구 유선종양|유선종양, 젖꼭지혹, 암컷(여아), 조기발견, 중성화, 강아지, 고양이, 악성률|2|n0du0xnp
+강아지가 핫팩을 뜯어먹었다? 철중독증 경보!|핫팩, 철중독증, 강아지, 철가루, 구토, 설사, 식욕부진, 복통, 황달, 응급처치|1|apxu3f0g
+Step by Step 강아지 크레이트훈련|강아지, 크레이트훈련, 크레이트, 안식처, 훈련단계, 간식유도, 배변훈련, 이동(자동차·비행기), 비상대응|1|dovhynvc
+성호르몬관련질환의 싹을 자른다냥! 고양이 중성화|고양이, 중성화, 중성화수술, 발정기, 스프레이, 유선종양, 자궁축농증, 성호르몬관련질환, 예방|2|rrycwqcv
+캑캑~ 강아지가 기침하는 이유|강아지, 기침, 켄넬코프, 기관허탈, 심장병, 폐렴, 심장사상충, 예방접종, 만성기관지염|1|qurv6zmy
+강아지도 고양이도 피해갈 수 없는 관절염|관절염, 증상, 통증완화, 체중관리, 운동조절, 환경개선, 보조제(오메가3·글루코사민), NSAIDs·약물주의, 고양이주의, 수의사상담|0|an5y1mog
+원인을 콕 집어내야 해결! 알레르기 검사|알레르기 검사, 알레르기, 가려움, 눈물, 재채기/기침, 구토·설사, 원인규명, 원인회피, 반려동물|0|udzl8ikp
+작다고 무시하면 큰일나요! 비만세포종|비만세포종, 피부종양, 강아지, 고양이, 세침흡인검사(FNA), 수술(종양제거), 항암치료, 혹/뾰루지, 진단, 전이|0|7wgu7qpz
+고양이 크리스마스 안전수칙|고양이, 크리스마스, 안전수칙, 크리스마스트리, 틴셀·리본, 전선감전, 독성식물, LED양초, 안식공간|2|7dbnovx4
+순혈주의는 비극을 낳는다냥! 고양이 유전병|고양이 유전병, 순혈주의, 골연골이형성증, 스코티시폴드, 다낭성신장질환, 페르시안, 비대성심근증, 메인쿤|2|5up2uajd
+드르렁~ 강아지가 코 고는 이유|강아지 코골이, 단두종, 연구개노장, 비공협착, 단두종후군, 비만, 수면자세, 알레르기, 비강종양, 코속 이물질|1|e7zfs993
+내려가는 기온에 산책을 멈출쏘냐! 강아지 겨울산책|강아지 겨울산책, 기온별 산책 점수, 보온(옷), 워밍업/준비운동, 소형견·단모종·어린강아지 주의, 체온조절, 저온 경고/산책 제한, 실내·실외 온도 적응|1|hur88sbh
+올해가 저물기 전에 '건강검진'|건강검진, 반려동물, 강아지, 고양이, 정기검진, 조기진단, 예방의학, 수의사상담, 치료비절감|0|rgedlkn2
+반려견을 위한 첫 선물 '강아지 이름'|강아지 이름, 이름 짓기 팁, 이름 인식 훈련, 보상(간식/칭찬), 긍정적 강화, 짧은 이름 권장, 인기 이름 TOP10, 이름 부를 때 주의사항|1|z67iube8
+야, 너두 치카치카할 수 있다옹! 고양이 양치질 가이드|고양이, 양치질, 구강관리, 단계적교육, 칫솔, 치약, 어금니, 잇몸경계, 간식보상|2|s38y8g1m
+강아지 3대 바이러스성질환(홍역, 파보장염, 코로나장염)|강아지, 바이러스성질환, 홍역, 파보장염, 코로나장염, 설사, 구토, 발작, 예방접종, 항체검사|1|od7c2x6i
+토했는데 괜찮을까? 문제일까? 고양이 구토 A to Z|고양이, 구토, 헤어볼, 구토색깔, 위장관운동, 응급증상, 수의사 방문, 이물질 섭취, 염증성장질환|2|7euvh6je
+강아지털 행방불명 사태! 강아지 탈모|강아지 탈모, 털갈이, 호르몬 문제, 피부질환, 알레르기, 쿠싱증후군, 갑상선기능저하증, 옴진드기증, 피부사상균증, 모낭충증|1|2y553345
+1년에 1번, 청진으로 '너의 심장소리를 들려줘!'|심장질환, 강아지, 심잡음, 청진, 심부전, 정기검진, B1단계, B2단계, 조기진단|0|yfmdsk6u
+소심한 우리 강아지 자신감 키우기 프로젝트|자신감키우기, 겁많은강아지, 낯가림, 산책공포, 평행산책, 스킨십훈련, 간식보상, 칭찬훈련, 강아지기호파악|1|9o9lasdw
+심장사상충약 선택가이드|심장사상충, 예방약 비교, 간식형 경구제, 국소 도포제, 주사제(프로하트 SR-12), 월간 투약, 심장사상충 검사, 소고기 알레르기 주의, 집먼지진드기|0|mfz67saj
+고양이는 아파도 숨깁니다, 늦기 전 건강검진 받으세요|고양이건강검진, 고양이정기검진, 고양이질환, SDMA검사, NT-proBNP검사|2|5q20jcon
+면역력 저하가 부르는 울긋불긋 피부 적신호 '농피증'|농피증, 세균성 피부감염, 포도상구균, 증상-농포·가려움·탈모, 진단-병변채취·세균검사, 치료-국소연고·약용샴푸, 항생제 장기투약, 면역력저하, 기저질환 확인|0|pfvgmacz
+매너가 안전을 만든다! 동물병원 원내펫티켓|동물병원, 펫티켓, 목줄·이동장, 고양이이동장, 배변정리, 전염병예방, 탈주방지, 휴대폰무음, 다른동물접촉금지|0|yhbl1e8v
+우리 아이 머릿속 지우개 '인지기능장애증후군(치매)'|인지기능장애증후군, 치매, DISHAA, 방향감각 상실, 보호자 인식 저하, 수면장애(밤에 잘 못 자요), 배뇨·배변 실수, 활동 저하(축 처져 있어요), 불안감 증가, 수의사 상담/약물치료 가능|0|6ti59t3g
+사라진 땅콩을 찾아서 '잠복고환'|잠복고환, 고환, 피하잠복고환, 복강잠복고환, 중성화수술, 고환염전, 불임, 고환종양, 강아지, 고양이|0|dwkeiivd
+가려움증 비켜! 반려동물 약욕 가이드|약욕, 약용샴푸, 반려동물목욕, 피부병, 가려움증, 마사지 10~15분, 충분한 헹굼, 잘 말리기, 수의사 상담, 반려동물샴푸|0|w53viozj
+고양이 당뇨병, 삼다증(다뇨∙다음∙다식) 나타나면 의심하라냥!|고양이 당뇨병, 삼다증, 다뇨, 다음, 다식, 비만, 인슐린저항성, 신경병증, 케톤산증, 조기발견|2|3lze59g0
+눈에 보이는 상처는 빙산의 일각-강아지 교상|강아지 교상, 물림사고, 세균감염, 응급처치, 상처 소독, 출혈 압박, 입마개, 리드줄 관리, 동물병원 이송|1|gsk9qhmt
+반려동물이 나이 들었다는 신호|반려동물 노화, 고령 증상, 털색 변화, 식욕 감소, 수면 증가, 감각 저하, 청력 저하, 시력 저하, 인지기능장애(치매), 노령 사료 교체|0|mo3c53pt
+우리 아이 전염병 방어력 측정, 1년에 1번 항체가검사|항체가검사, 1년에1번, 예방접종, 추가접종, 면역력, 항체수치, 동물병원문의, 개, 고양이, 백신|0|aztemc7n
+고양이 얌전모드 ON? 클립노시스-목덜미의 비밀|클립노시스, 목덜미 잡기, PIBI, 주의사항, 금지행동, 담요 감싸기, 고양이 진정, 새끼고양이 사회화|2|0jodvodp
+강아지가 고개를 갸우뚱하는 이유|강아지, 고개 갸우뚱, 호기심, 청취·시야 확보, 사회적 상호작용, 보상학습, 산책·간식 반응, 전정기관 이상, 중이염, 동물병원 검사|1|9txlwg02
+펄펄 끓는 가마솥더위가 냥이 잡네 '고양이 열사병 주의보'|고양이, 열사병, 증상, 응급처치, 체온관리, 탈수, 의식저하, 병원이송|2|sl91hpnp
+강아지가 먹으면 득/독이 되는 여름제철과일|강아지, 여름과일, 수박, 블루베리, 포도(금지), 참외·멜론, 자두·복숭아, 씨앗제거, 수의사상담, 급여주의(칼로리)|1|qtojvo2t
+암컷 반려동물 가슴에 나타난 수상한 멍울, 정체는 유선종양|유선종양, 암컷 반려동물, 강아지, 고양이, 중성화(중성화여부), 자가진단(가슴 촉진), 악성률, 조직검사, 수술·치료|0|hj84s2vu
+강아지 사망원인 3위, 고양이 사망원인 2위 '만성신장질환'|만성신장질환, SDMA검사, 조기진단, 침묵의 장기, 비가역성, 진행성, 신장기능, 강아지, 고양이, 수의사 문의|1|t20c8cuv
+중성화 후에도 난소가 그대로? 잔존난소증후군|잔존난소증후군, 중성화수술, 난소 잔존, 발정증상, 질분비물, 성호르몬검사, 복부초음파, 잔존난소절제술, 강아지, 고양이|0|wr7rmrv7
+휴가철 집사의 고민 1순위 '냥홀로 집에'|고양이, 혼자 집에, 여행 준비, 사료·물 관리, 자동급식기, 화장실 관리, 환기·쿨매트, 지인 돌봄, 펫시터·위탁돌봄, 고양이전용호텔|2|6lpse5va
+강아지가 풀을 먹는 이유|강아지, 풀 먹기, 심심함, 호기심, 스트레스, 소화 조절, 영양 보충, 독성 식물, 동물병원|1|plupmf6r
+살과의 전쟁을 선포하라냥! 뚱냥이 비만탈출 대작전|고양이 비만, 체지방률 측정, 9번째 갈비뼈 가슴둘레, 목표체중 설정, 수의사 상담, 안전한 체중감량(주당 2% 이하), 주간 체중측정, 소량·다회 급여, 습식사료, 다이어트 관리|1|oj0eqnke
+천둥소리에 혼비백산 '강아지 천둥공포증'|강아지 천둥공포증, 증상: 떨림 침흘림 배변실수 식욕감소, 피신처 제공(케널), 압박요법(썬더셔츠/탄력붕대), 소리 둔감화 훈련(녹음 재생), 간식 보상/긍정적 강화, 환경 조절(음악 커튼), 수의사 상담 및 항불안제|1|fv48q2jc
+푹푹 찌는 무더위에 식중독 비상! 여름철 반려동물 사료관리법|여름철, 사료관리, 건식사료, 습식사료, 식중독예방, 밀봉보관, 소량구매, 냉장보관, 유통기한, 반려동물|0|sq55otl0
+공혈견에겐 휴식을, 아픈 친구에겐 생명을-대형견 헌혈|반려견 헌혈, 공혈견, 대형견, 헌혈 자격, 심장사상충 예방, 한국헌혈견협회, 무료 건강검진, 헌혈 혜택, 수혈 응급치료|1|hofiei1k
+집사의 고난도미션-고양이 발톱깎기 A to Z|고양이 발톱깎기, 발 관리, 발 만지기 교육, 적절한 타이밍, 올바른 자세, 발톱 깎는 방법, 퀵(분홍빛) 주의, 반려동물용 지혈제, 간식 보상|2|1v1pak23
+안전하고 신나는 펫캉스를 위해 알아두라개~ 강아지 물놀이 주의사항|강아지, 물놀이, 안전수칙, 구명조끼, 저체온증, 탈진, 출입확인, 장소안전, 털말리기|1|fc1f7qxk
+반려동물 몸이 보내는 이상 신호 '반려동물 알레르기'|반려동물 알레르기, 가려움/긁기, 피부염, 귀 염증, 탈모/눈물, 식이 알레르기, 환경 알레르기, 저알레르기 사료, 알레르기 검사, 알레르겐|0|7n3rv8dl
+고양이 만성신장질환, 조기발견의 열쇠는 SDMA검사!|고양이, 만성신장질환, SDMA검사, 조기진단, 다뇨·다갈증, 구토, 식욕감소, 정기검진, 노령묘|2|6wjvo37m
+다뇨·다음·다식 삼다증은 당뇨 시그널!|반려동물, 당뇨, 삼다증, 다뇨, 다음, 다식, 백내장, 신경병증, 케톤산증, 조기치료|0|xkgosk73
+몸을 움찔 배가 들썩, 반려동물 딸꾹질|반려동물, 딸꾹질, 잘못된 식습관, 심리적 문제, 건강 이상 의심, 헤어볼(고양이), 식습관 교정, 스트레스 해소, 수의사 진료 권장|1|kwhmqb7x
+반려견 대표 무릎질환, 슬개골탈구X전십자인대파열|슬개골탈구, 전십자인대파열, 무릎질환, 절뚝거림, 무릎통증, 수술치료, 초기진단, 관절염, 수의사상담|1|9zvlypzq
+돌연사 면하려면 예방이 상책, 고양이 심장사상충증|고양이, 심장사상충증, 모기매개감염, 호흡기증상, 폐혈관손상, 폐혈전·급사, 대증치료, 월1회예방약, 예방약안전성|2|iim46hyv
+강아지 봄철산책 시 주의사항|강아지 봄철산책, 미세먼지, 산책 후 관리, 참진드기, 참진드기 예방, 유박비료(리신), 봄꽃 중독, 응급수의사|1|a5d897wk
+반려생활 최대 걸림돌, 반려동물털 알레르기 대처법|반려동물털, 털알레르기, 알레르겐, 침실금지, HEPA필터, 공기청정기, 목욕·빗질, 카펫금지, 손씻기, 피부병치료|0|j7mplqth
+'독소 뿜뿜' 치석 비켜! 스케일링|스케일링, 치석, 치은염, 치주염, 구강세균, 전신질환, 반려동물, 예방관리, 1년에1번|0|5g4psc9k
+고양이 대표 치과질환-치아흡수성병변|치아흡수성병변, 고양이 치과질환, 증상(침흘림·식욕저하), 치과방사선촬영, 발치, 수복치료, 치아통증, 정기 치과검진, 원인(영양·치석)|2|tncwgpz3
+강아지가 보내는 스트레스 신호|강아지 스트레스, 스트레스 신호, 공격성 사다리, 행동 문제, 스트레스 원인, 산책·운동, 주인과 소통, 조기중재|1|51k6obrs
+그루밍이 낳은 골칫덩이, 고양이 헤어볼 예방·관리법|고양이, 헤어볼, 헤어볼 예방, 매일 빗질, 헤어볼 관리사료, 캣그라스, 헤어볼 제거제, 미용(털깎기), 장폐색, 위·식도 염증|2|g7p6i89u
+우리 강아지 배꼽은 참외배꼽? 배꼽 탈장|배꼽 탈장, 제대탈장, 강아지, 증상(배꼽 부위 볼록), 수술 치료, 서혜부 탈장, 회음부 탈장, 수의사 상담, 응급 위험|1|3eaz5goj
+코로나19 관련 반려동물 관리지침|코로나19, 반려동물 관리지침, 예방수칙, 보호자 감염 시 조치, 검사대상, 검사절차, 자가격리, 격리관리, 손씻기, 지자체 위탁보호|0|mdw35ptr
+심장사상충과의 전쟁, 검사X예방 콜라보로 승리!|심장사상충, 예방약, 예방검사, 매달투약, 고양이, 강아지, 모기매개, 폐혈전, 수의사상담|0|qb936g85
+예비 보호자라면 필독! 반려동물 입양 전 체크리스트|입양체크리스트, 알레르기검사, 돌봄시간, 주거환경, 양육비용, 반려동물보험, 장기책임, 강아지산책, 고양이놀이|0|nrmkkmw5
+범백혈구감소증(a.k.a. 고양이 흑사병) 치사율 높기로 악명높다옹|범백혈구감소증, 고양이흑사병, 파보바이러스, 구토, 설사, 식욕부진, 지지치료, 예방접종, 환경소독|2|0h55qupu
+아픈 강아지가 보내는 SOS, 강아지 질환이 나타내는 이상행동|강아지 이상행동, 기침(기관허탈·심장병), 항문낭염(똥꼬 스퀴딩), 식욕 변화(소화기·내분비 질환), 빙빙 도는 행동(뇌·전정계 이상), 발등 끌기(디스크), 과다 음수·다뇨(당뇨·쿠싱·신부전), 절뚝거림(정형외과 문제)|1|761qdu72
+집사의 마음을 흔드는 매력! 고양이 발바닥의 모든 것|고양이 발바닥, 발바닥 기능, 발바닥 색상, 취선(체취분비선), 미끄럼방지, 충격흡수(쿠션), 무게중심, 발바닥 이상징후, 수의사 상담|2|6360x0v0
+노령 반려동물을 노리는 소리 없는 살인자 '강아지 비장종양'|강아지, 비장종양, 노령반려동물, 복부팽만, 구토·설사·변비, 식욕감소·무기력, 빈혈, 초음파·CT·조직검사, 수술(비장절제), 악성 혈관육종·항암치료|1|83docc70
+코로나19 관련 반려동물 관리지침|코로나19, 반려동물, 검사대상, 의심증상, 격리수칙, 격리해제, 예방수칙, 손씻기, 사회적거리, 접촉금지|0|n8mmzfmm
+소리 없는 시한폭탄 '고혈압'|반려동물 고혈압, 무증상 고혈압, 혈압 측정법, 고혈압 단계(mmHg), 눈 심장 신장 뇌 손상, 시력소실·발작 증상, 원인 질환(만성신장병·내분비·심장병·당뇨), 혈압약 처방, 저염식 주의|0|qa5254wx
+고양이 대변으로 알아보는 건강상태|고양이, 대변, 배변점수, 변비, 설사, 대변색, 장염, 기생충, 수분섭취, 유산균|2|7lw35il7
+우리 강아지가 사료를 안먹는 이유|사료거부, 식욕부진, 건강검진, 사람음식금지, 간식조절, 사료교체, 운동부족, 스트레스|1|q0hprx5v
+침 질질 입냄새 폴폴 '고양이 구내염'|고양이, 구내염, 구강질환, 침흘림, 구취, 발치, 스테로이드, 칼리시바이러스, 고양이면역결핍바이러스, 통증|2|uekc15vq
+걸으면 절뚝 만지면 깨갱 '강아지 디스크'|강아지 디스크, 추간판 탈출증(IVDD), 증상(절뚝·통증·마비), 취약 견종, 원인(노화·유전·외상), MRI 검사, 내과적 치료, 외과적 치료, 골든아워 48시간|1|x33oyrmw
+전기장판의 계절, 반려동물 저온화상 주의보|전기장판, 저온화상, 반려동물, 발적, 탈모, 물집, 부종, 예방, 수의사|0|qcv6pztw
+엔진룸에 잠든 길냥이를 깨워라 '모닝노크'(a.k.a.라이프노킹)|모닝노크, 라이프노킹, 길냥이, 엔진룸, 시동 전 확인, 보닛 두드리기, 팬벨트 사고, 지하주차장 안전|2|thd16r4w
+사시나무마냥 부들부들~ 강아지가 떠는 이유|강아지 떨림, 진전(떨림), 불안·두려움, 추위(보온), 근력저하(노령), 통증(관절·복부), 중독(초콜릿·자일리톨), 감염·질환(디스템퍼 등), 수의사 진료 권장|1|lelqzyvx
+묻지도 따지지도 않고 입에 쏙 '고양이 이물섭취'|고양이, 이물섭취, 선형이물, 실·끈, 마스크끈, 장천공, 응급치료, 이식증, 사냥놀이, 먹이퍼즐|2|1sdkezzq
+추운 겨울, 우리 아이 피부는 가뭄진행중? 강아지 피부건조증|강아지 피부건조증, 겨울철, 저습도·실내난방, 각질, 가려움, 피부균열·진물, 피부 pH·감염위험, 실내온도 20~24°C, 적정습도 50~60%, 목욕관리·보습|1|v00p5og4
+반려동물 상상임신의 모든 것|상상임신, 강아지, 고양이, 증상, 유선비대, 프로락틴, 프로게스테론, 중성화수술|0|qwtxqwhk
+반려동물에게 줄 새해선물로 딱! 건강검진|반려동물, 건강검진, 혈액검사, X-ray검사, 초음파검사, 연1회검진, 노화속도, 7살이상호르몬검사, 강아지, 고양이|0|dzco48o3
+전기충격 목줄 사용은 짖음해결책 아닌 학대!|전기충격 목줄, 짖음 문제, 신체·정신적 피해, 긍정적 강화 훈련, 행동치료, 전기충격기, 학대 예방, 영국 판매 금지, 전문가 도움|0|7y6rws12
+냥냥펀치를 부르는 집사의 행동|고양이, 싫어하는 행동, 배 만지기, 안는 법, 느린 눈 깜빡임, 야옹 소리, 갑작스런 큰 소리, 시트러스 향, 초보집사|2|bdmtxe8x
+멍냥이의 기본적인 건강지표 '바이탈사인'|반려동물, 바이탈사인, 호흡수, 심박수(맥박수), 체온, 모세혈관충만시간, 탈수, 측정방법, 정상범위, 응급대응|1|ozcxwd47
+걸리면 100% 고양이별행? '전염성복막염'|전염성복막염, 고양이, 고양이코로나바이러스, 습식, 건식, 포도막염, 신약, 임상시험, 자가투약금지|2|r9lcc4wj
+난방의 계절, 반려동물 화상 주의보|반려동물, 화상, 난방용품, 저온화상, 고온화상, 응급처치, 예방수칙, 전기장판, 히터|0|78j9zgko
+자꾸 토하고 식욕 뚝? 췌장염 의심하세요!|췌장염, 강아지, 고양이, 구토, 식욕감소, 복통, 고지방음식(삼겹살·족발), 담관간염·염증성장질환|0|to3o53ik
+기온이 밤낮으로 널뛰기하는 환절기 '고양이 감기 주의보'|고양이감기, 상부호흡기감염, 허피스바이러스, 칼리시바이러스, 결막염, 재채기, 콧물, 구강궤양, 예방접종, 수의사진료|2|s3go2joe
+산책길에서 만나는 작은 무법자 '풀씨'를 조심하세요!|풀씨, 발가락 사이, 발패드, 염증/감염, 출혈·고름, 외이염, 각결막염, 예방·산책관리|0|5el6hipu
+사냥본능 충족으로 스트레스 훌훌~ 고양이와 놀아주는 법|고양이 사냥놀이, 놀이시간 15분씩 2~4회, 낚싯대형 장난감, 사냥과정 연출, 장난감 로테이션, 간식 보상, 레이저포인터 주의, 스트레스·비만 예방|2|qxnfhu9c
+1년에 1번, 강아지 심장병의 신호 심잡음을 확인하세요!|강아지 심장병, 심잡음, 심부전, 무증상 심장병, 연간 심장검진, 심장청진, B2 엑스레이, 고위험 품종, 기침, 호흡곤란|1|33ug1w5b
+반려동물 당뇨병의 신호|반려동물 당뇨병, 다뇨·다음·다식, 제1형 당뇨, 제2형 당뇨, 고양이, 강아지, 당뇨병성 케톤산증, 인슐린, 혈당, 응급치료|0|1p30lwiu
+백신접종은 진료마감 최소 2시간 전에! (백신접종 부작용)|백신접종, 진료마감 2시간 전, 접종 후 30분 대기, 부작용, 안면부종, 호흡곤란, 쇼크, 응급처치, 발열, 발작|0|fb44j78r
+반려동물은 '상품'이 아닌 소중한 '생명'입니다. 사지 말고 입양하세요|사지말고입양, 유기동물, 유실동물, 입양절차, 입양비지원, 동물보호센터, 동물등록, 중성화수술, 펫샵구매|0|b03yracx
+행복한 반려생활의 주춧돌-고양이 사회화교육|고양이 사회화, 사회화 시기(생후3~12주), 핸들링(매일5분), 발톱깎기, 양치·귀청소, 새로운 사람·동물 소개, 사냥놀이, 생활소음 적응, 이동장(캐리어) 훈련|2|5c5g36sz
+멋진 견생을 위한 강아지 기본 관리 강아지 그루밍|강아지 그루밍, 빗질, 목욕, 털말리기, 귀관리, 발톱관리, 항문낭 관리, 피부관리|1|f4wrw93d
+고양이가 '켁켁'거린다? 원인은 십중팔구 천식!|고양이, 천식, 기침, 알레르기유발물질, 호흡곤란, 진단검사, 흡입치료, 스테로이드·기관지확장제|2|dj8oas04
+반려동물을 설사, 구토의 늪에 빠트리는 염증성장질환|염증성장질환, 만성설사, 만성구토, 식이요법, 스테로이드, 프로바이오틱스, 엽산·코발라민검사, 복부초음파, 조직검사, 항생제|0|tu8e1dgi
+새의 발목 칭칭, 마스크 귀걸이 잘라서 버리세요!|마스크 폐기, 귀걸이 절단, 야생동물 안전, 올가미 사고 방지, 종량제 봉투 묶기, 손씻기, 환경보호, 쓰레기 처리|0|cwli1gqc
+반려견을 위한 고속도로 휴게소 '대동견(犬)지도'|펫프렌들리 휴게소, 고속도로, 애견놀이터, 애견파크, 운영시간, 음수대, 세족대, 입장제한|1|19jltdzt
+손이나 발을 콱! 고양이가 집사를 무는 이유|고양이물기, 사냥본능, 놀이물기, 과도한쓰다듬(과자극), 장난감대체놀이, 냉각기(회피훈련), 통증의심(질환감별), 물림상처감염|2|ljfsavow
+우리에겐 '소리' 강아지에겐 '소음'-강아지 소음극복 프로젝트|강아지 소음 공포, 소리 민감성, 둔감화 훈련, 소리 안정화 교육, 사회화, 행동 문제, 탈감작, 소음관리, 간식 보상, 진정 행동|1|r9wsszyp
+턱에 검은깨가 콕콕! 피부 불청객 '고양이 턱드름'|고양이 턱드름, 턱 여드름, 블랙헤드, 오염된 식기, 플라스틱 식기, 그루밍 부족, 온찜질·수건 관리, 동물병원·소독약, 증상: 탈모·발적·고름|2|xpsdk350
+강아지 눈에 내려진 건조경보 '건성각결막염'|건성각결막염, 강아지, 안구건조증, 눈물기능, 눈물량검사, 눈물막파괴시간, 증상, 원인, 안약투약법, 진단|1|fl55m48c
+성호르몬 관련 질환의 싹을 싹둑-중성화수술|중성화수술, 자궁축농증, 유선종양, 난소종양, 전립선질환, 고환종양, 항문주위선종, 회음탈장, 수명연장, 강아지·고양이|0|el5ynhuq
+화장실에서 아무리 끙끙대도 무소식 고양이 변비|고양이, 변비, 배변곤란, 딱딱한변, 수분섭취부족, 습식사·수분공급, 거대결장, 원인(골반손상·종괴·만성질환·스트레스), 수의사진료|2|g10w0xis
+강아지 사료 가이드북-사료 급여량에서 사료 종류까지|강아지 사료, 급여량 계산(RER·DER), 연령별 급여 횟수, 갈비뼈 체형 체크, 대변 상태 체크, 건식·반습식·습식 특징, 사료 1g당 kcal 계산, 영양 조절, 수의사 상담|1|q3q84dcx
+집사와 떨어지면 문제행동 폭발 고양이 분리불안|고양이 분리불안, 문제행동, 집착, 울음, 대소변 테러, 과도한 그루밍, 환경 풍부화, 사냥놀이, 일상 루틴, 먹이퍼즐|2|7kd3k3da
+푹푹 찌는 가마솥더위 단두종은 숨이 막힌다! 단두종증후군|단두종증후군, 단두종, 비공협착, 연구개노장, 호흡곤란, 수술, 체중관리, 무더위주의, 퍼그, 불도그|1|xn96upro
+행복한 여름휴가를 위한 필수 지침, 반려동물 차량 탑승 안전수칙|반려동물 차량 탑승, 안전수칙, 켄넬/카시트, 전용 안전벨트, 창문관리, 운전중 금지행위, 에어백 위험, 적응훈련, 여름휴가|2|q2f4vzqq
+헤어나오기 힘든 귀 가려움증 '강아지 외이염'|외이염, 강아지, 귀 가려움, 귀 분비물, 검은 귀지, 귀진드기감염증, 아토피, 식이알레르기, 갑상선기능저하증, 세균·곰팡이|1|0qcw3ge6
+반려동물 이갈이|이갈이, 강아지, 고양이, 증상, 치아발육, 치아관리, 장난감, 부드러운음식, 양치습관, 수의사검진|1|likfl4i1
+뚱냥이가 연일 쫄쫄 굶는다? 고양이 지방간 경보 발령!|고양이 지방간, 식욕부진, 비만(뚱냥이), 체중감소, 황달, 구토, 영양공급, 단백질공급, 피딩튜브, 동물병원|2|ahkdzegz
+강아지가 발사탕에 빠진 까닭|강아지, 발 핥기, 과도한 그루밍, 알레르기, 통증, 감염(습진), 심리적 문제, 이물질·상처, 원인 진단|1|vn2ty7s5
+묘생 황혼기를 편안하게 건강하게! 묘르신 잘 모시는 법|노령묘, 관절염, 환경개선, 화장실 접근성, 밥·물그릇 높이, 발톱관리, 빗질, 맞춤형 놀이, 항산화제, 나이 환산 공식|2|5vqizwqm
+강아지와 올바르게 여름 산책하는 방법|강아지 여름 산책, 열사병 예방, 발바닥 화상, 수분공급, 그늘 산책, 털관리, 참진드기 예방, 산책 후 점검|1|nqwuv6z3
+풀숲에 도사리는 복병 참진드기(a.k.a. 살인진드기)|참진드기, 살인진드기, 진드기 매개질환, 빈혈, 절뚝거림, 예방약, 예방목걸이, 야외활동 후 관리, 동물병원|0|dxym4rgc
+척하면 척 냥심 읽으려면 필독 고양이 신체언어학 개론|고양이, 신체언어, 꼬리 언어, 눈 언어, 귀 언어, 수염 언어, 자세 언어, 감정 해석, 공격성 신호, 신뢰·안정|2|rp2t4mil
+체벌NO 소통YES 올바른 반려동물 교육 지침서 클리커 교육|클리커교육, 긍정강화, 반려동물교육, 원클릭원보상, 행동훈련, 보상(간식), 타이밍, 체벌금지, 훈련주의사항|0|ckhaq9b7
+리오의 소변길에 비상등 깜빡깜빡! 고양이 하부요로계질환|고양이, 하부요로계질환, 특발성방광염, 요폐, 배뇨곤란, 혈뇨, 스트레스, 환경관리, 응급치료|2|zzyeqd6u
+강아지의 깽깽이 걸음 부르는 슬개골탈구|슬개골탈구, 깽깽이걸음, 원인, 증상, 진행단계, 수술, 재활, 활차구, 무릎, 정형외과|1|8kviexgh
+예민보스 고양이를 위한 STRESS-FREE 동물병원 방문 요령|고양이, 동물병원, 이동장, 스트레스 완화, 내원 요령, 안정제, 간식 보상, 예약·대기시간 최소화, 이동 중 안전, 핸들링 교육|2|g85icyd8
+항문낭염 예방을 위한 항문낭 관리법|항문낭염, 항문낭관리, 항문낭짜기, 강아지, 물티슈, 냄새주의, 관리주기, 예방방법|0|zxlepw7m
+질풍노도의 강아지 사춘기' 개춘기|개춘기, 강아지 사춘기, 행동 문제, 물어뜯기, 실내 배변, 명령 불복종, 발정, 마킹, 시기(4~6개월·9~12개월), 보호자 주의|1|tl0jej3m
+밥은 마구 먹는데 살은 쏘옥 빠진다? 묘르신 갑상선기능항진증|고양이, 갑상선기능항진증, 식욕증가, 체중감소, 과활동, 야간울음, 갑상선호르몬검사, 저요오드식이, 항갑상선약물, 방사성요오드치료|2|2kxr54xe
+강아지가 걸리기 쉬운 '각막궤양' 주의!|각막궤양, 강아지, 원인, 증상, 치료, 표재성 각막궤양, 심층성 각막궤양, 데스메막류, 재발성 각막궤양(SCCED), 안과질환|1|1j6lsiwm
+고양이에게 독성을 일으키는 봄꽃|고양이, 꽃독성, 백합, 튤립, 히아신스, 수선화, 은방울꽃, 진달래과, 중독증상, 안전한꽃·공기정화식물|2|t6ab5pyy
+골든아워를 잡아라! 반려동물 응급처치 가이드|반려동물 응급처치, 심폐소생술(CPR), 기도 이물·하임리히법, 화상 냉각 처치, 골절 보호 및 이송, 발작(경련) 응급대처, 골든아워, 강아지 고양이 응급관리|0|7s44o8ft
+4주 완성 반려동물 양치질 가이드|반려동물 양치질, 4주 가이드, 치약, 칫솔, 치아 관리, 잇몸 터치, 단계별 교육, 강제 금지|0|3inqgh4p
+시각장애인의 눈' 안내견 에티켓|안내견, 시각장애인, 안내견 에티켓, 만지지 않기, 사진 촬영 금지, 음식 금지, 반려견 거리 유지, 횡단보도 신호 준수|1|lfajtayy
+아픈 고양이가 보내는 SOS 고양이 질환을 나타내는 행동적 징후|고양이, 행동변화, 통증, 식욕부진, 배뇨장애, 그루밍변화, 은둔, 수면증가, 구내염, 방광염|2|zjlt3vk1
+달라도 너무 다른 우리, 함께 살 수 있을까? 강아지 고양이 합사|강아지, 고양이, 합사, 사회화 시기, 단계적 도입, 격리 공간, 펜스/안전장치, 신체 언어, 보호자 감독|0|30uq3y8u
+원형탈모 부르는 냥이 피부병-피부사상균증|피부사상균증, 링웜, 고양이, 원형탈모, 항진균제, 약용샴푸, 배양검사, 환경소독, 인수공통감염|2|vtn0o1mn
+심장을 노리는 보이지 않는 위협자 심장사상충을 아시나요?|심장사상충, 모기매개감염, 증상(기침·체중감소·호흡곤란), 진행단계 Grade1~4, 치료(자충·성충 제거·수술), 예방(매월 예방약·연1검사), 강아지, 고양이|0|yd7cybgt
+심장사상충 예방에 앞서 심장사상충 검사를 꼭 해봄|심장사상충, 검사, 예방약, 항원키트, 혈액채취, 유충, 혈관폐색, 쇼크, 강아지, 고양이|0|1m43mr3w
+고양이 수분 섭취량 늘리는 방법|고양이, 수분섭취, 물그릇배치, 분수대, 습식사료, 캣닢, 신선한물교체, 권장음수량|2|57oiwuiv
+품행제로' 문제견 만든다! 스몰독 신드롬|스몰독 신드롬, 문제행동, 과보호, 일관된 규칙, 훈련(반복학습), 적절한 보상, 정기운동(20~30분), 주인인식개선, 전문가상담|1|49jcsaka
+멀쩡하던 고양이가 갑자기 고양이별로 떠났다, 비대성 심근증|비대성 심근증, 고양이, 혈전색전증(뒷다리 마비), 호흡곤란(폐수종·흉수), proBNP 검사, 심초음파, 유전성, 위험 품종|2|iwxhvnyw
+봄 산책길에 마추지는 치명적 유혹, 맹독 품은 피마자 유박비료 조심!|피마자 유박비료, 리신 중독, 반려동물 중독, 구토, 출혈성 설사, 활성탄, 수액치료, 응급처치, 산책길 주의|0|3cpf2grt
+보호자 최대의 고민 "중성화수술을 해야 할까?"|중성화수술, 발정기 스트레스, 행동 문제 예방, 고환암, 전립선 질병, 항문 주위 질환, 자궁축농증, 유선종양, 수명 증가, 체중 증가|0|gj6yhx2s
+강아지 눈에 안개가 꼈어요! 그냥 두면 시력 앗아가는 백내장|강아지, 백내장, 눈증상, 시력저하, 안과검진, 항산화제, 수정체제거, 인공렌즈삽입, 행동변화|1|44gkpeiz
+강아지 에스컬레이터 발끼임사고 주의!|강아지, 에스컬레이터, 발끼임사고, 발 부상, 응급대처, 예방수칙, 무빙워크, 안내견교육, 엘리베이터|1|pbtepvt7
+집사야 너 내 엄마가 돼라 아깽이 육아 가이드|아깽이, 신생아 고양이, 체온 유지, 분유 수유, KMR, 수유 간격, 이유식 전환, 배변 유도|2|g90dwjdz
+우리 강아지 꽃미모 망치는 유루증|유루증, 눈물자국, 눈물배출장애, 비루관, 속눈썹질환(첩모), 안검내번증, 식이알레르기, 눈물관리|1|vadl9cab
+깔끔한 우리 냥이에게 갑자기 찾아온 배뇨 문제|고양이, 배뇨 문제, 소변 실수, 행동학적 원인, 화장실 청결, 모래(배변제) 선호, 화장실 위치, 스트레스·환경 변화, 노령·인지·이동성 문제, 비뇨기 질환|2|d4g2gd4w
+반려동물의 뽀뽀 세례가 두렵다? 스케일링|스케일링, 치석, 구취, 치주질환, 마취, 반려동물치과, 치아관리, 폴리싱, 불소코팅|0|opqos2n5
+반려동물도 비만은 만병의 근원입니다.|반려동물비만, 체중관리, 비만유발질환, 체형측정, 다이어트, 수의사상담, 심혈관질환, 관절질환, 당뇨병|0|axyx1268
+소변을 보지 못해 안절부절 요로결석|요로결석, 배뇨곤란, 혈뇨, 스트루바이트, 칼슘옥살레이트, 치료, 수술, SUB, 강아지, 고양이|0|aige1c85
+우리 강아지는 왜 잠꾸러기일까?|강아지, 수면시간, 렘수면, 어린견, 노령견, 대형견, 활동량, 건강문제, 수면환경, 수면관리|1|8zmxh9u2
+탐스러운 털 위에 소복소복 쌓이는?! 고양이 비듬 원인별 관리법|고양이, 비듬, 건조한환경, 스트레스, 영양부족, 당뇨병, 피부질환, 비만, 오메가3, 가습기|2|hpa35ts1
+원인이 천차만별인 증상, 반려동물 구토|반려동물 구토, 급성 위염, 췌장염, 간부전·신부전, 세균성·바이러스성 장염, 알레르기, 전해질 불균형, 기생충·위장관폐색, 구토와 역류 구분|0|iqbmbes7
+겨울철 강아지 산책 안전하게 하는 방법|겨울철 산책, 강아지 보온, 준비운동, 동상 주의, 강아지 신발, 염화칼슘 주의, 발 관리, 실내운동, 터그놀이, 노즈워크|1|pgki5jcr
+2020년 경자년 새해 인사|2020년, 경자년, 새해 인사, 반려동물, 동물병원, 강아지, 고양이, 건강 기원, 감사 인사|0|d6o67ext
+강아지 부신피질호르몬질환 쿠싱증후군&애디슨병|부신, 부신피질호르몬, 쿠싱증후군, 애디슨병, 스테로이드장기투여, ACTH, 노령견, 다음다뇨, 저혈당, 전해질불균형|1|w9mbh89k
+고양이 울음소리에 담긴 의미|고양이 울음소리, 야옹, 그르릉(골골송), 우르르르(트릴링), 카르르칵칵(채터링), 나~오(케터월링), 하악(히스), 으르렁(그로울링), 질환 징후, 수의사 상담|2|p1uf1c8s
+중성화수술 후 관리법|중성화수술, 수술 후 관리, 상처 감염 예방, 활동 제한, 체온 유지, 처방약 복용, 균형 영양, 가벼운 활동 재개, 넥카라/보호복, 강아지·고양이|0|i0bo2ks4
+흔하고 치명적인 자궁축농증 주의!|자궁축농증, 강아지, 증상, 개방형, 폐쇄형, 응급합병증, 중성화수술, 수술치료, 예방, 초음파검사|1|afmm6kq2
+펫팸족에게 딱 맞는 짠테크 수단 '반려동물 특화 신용카드'|반려동물 특화 신용카드, 펫카드, 포인트 적립, 할인 혜택, 반려동물 배상책임보험, 단체보험, 연회비, NH농협 펫블리, KB 펫코노미, 우리카드 댕댕냥이|0|pftjvfz2
+생애전환기 건강검진은 필수!|생애전환기, 건강검진, 정기검진, 심장질환, 신장질환, 당뇨병, 쿠싱병, 비뇨기질환, 관절질환, 조기발견|0|oss1z4ec
+속을 통~알 수 없는 네가 궁금해, 강아지와 고양이의 마음|강아지 마음, 고양이 마음, 애정 표현, 손 깨물기, 놀이 교육, 몰티즈, 포메라니안, 공감 행동|2|8o6izuq2
+감염 주의! 고양이 백혈병|고양이 백혈병, FeLV, 전염경로(침·혈액·모유), 무증상 보균자, 증상(빈혈·발열·설사·림프종), 진단(키트·IFA·재검사), 예방접종, 정기건강검진·면역관리|2|xqlpxeza
+효과 만점 진통제, 아이에게 먹이면 독으로 돌변|사람용진통제, 아세트아미노펜, 이부프로펜, 나프록센, 반려동물중독, 고양이위험, 응급처치, 활성탄, 약물보관, 간신장손상|0|61t8b9uh
+견생의 질을 한껏 높이는 강아지 홈 마사지|강아지 마사지, 홈 마사지, 등 마사지, 머리 마사지, 귀 마사지, 눈 마사지, 코눈물관, 배 마사지, 고관절 마사지, 스트레스 완화|1|onzrhtbj
+보호자가 꼭 알아야 할 반려동물 심장질환|반려동물, 심장질환, 강아지, 고양이, 동맥관개존증, 폐동맥협착증, 이첨판 폐쇄부전증, 비대성심근증, 혈전색전증, 증상|0|08oql5js
+치석 OUT!구강건강 SAFE~ 스케일링|스케일링, 치석, 반려동물 구강관리, 잇몸염증, 치주질환, 치아 폴리싱, 불소 도포, 정기주기(1~2년·6~8개월)|0|stquuz69
+무지개다리 건넌 아이, 어떻게 보내야 할까?|반려동물 장례, 무지개다리, 동물 사체 처리, 동물 장묘, 불법 장묘업체, 유골 처리 투명성, 장례 비용, 환경오염, 법적 규정|0|kr73p7ur
+강아지 취향 제대로 저격 '10월 반려견 축제'|반려견 축제, 10월, 캠핑 위드 도그, 자라섬 댕댕이페스티벌, 부천 반려동물 어울림한마당, 도기워크 챌린지, 댕퍼레이드, 어질리티·운동회, 동물행동교육·강연, 건강상담·무료검진|1|f6gyrihi
+아이의 시력을 앗아가는 백내장과 녹내장|백내장, 녹내장, 반려동물, 강아지, 고양이, 시력손실, 수술, 인공렌즈, 약물치료, 안압|0|fkh1p2hf
+추락하는 고양이는 날개가 없다! 고소추락 증후군|고소추락증후군, 고양이, 추락사고, 정위반사, 기흉, 폐좌상, 골절, 응급처치, 창문 안전, 비만관리|2|og5v01dy
+예방접종 부작용 '아나필락시스' 대비∙대처법|아나필락시스, 예방접종 부작용, 반려동물, 증상(호흡곤란·부종·구토·쇼크), 응급처치, 항알레르기제, 수액치료, 접종 후 관찰, 자가접종 금지|0|mlbv82dq
+수의사와 상담해야 할 증상 14가지|수의사 상담, 강아지, 고양이, 식욕부진, 구토·설사, 호흡 이상, 피부·털 문제, 귀·코 이상, 통증·부종, 발작·떨림|0|5xpoy291
+쓰레기통에서 치킨을 훔쳐먹다 걸린 강아지, 괜찮을까요?|강아지, 조리된 닭뼈, 식도천공, 장폐색, 구토·구역질, 침흘림, 응급수의학, 과산화수소 금지|1|xh56hoiw
+우리 냥이는 지금 깔끔병 말기? '오버 그루밍'|오버 그루밍, 고양이, 털빠짐, 가려움증, 스트레스, 기생충, 알레르기, 요로·방광질환, 환경관리, 수의사 치료|2|oslbo7i3
+반려동물의 건강 빈틈, 영양제로 채워주세요~|반려동물영양제, 오메가3, 유산균(프로바이오틱스), 글루코사민, 콘드로이친, 항산화제(Q10·비타민), 관절보호, 영양제안전/보관|0|zjwn34ba
+안 무는 강아지로 키우기, 사회화에 달렸다!|강아지 사회화, 물림 예방, 생후 3~16주, 새로운 자극 노출, 관계 형성, 카밍시그널, 보상과 칭찬, 점진적 노출|1|g90mnjtu
+Step by Step' 고양이 이동장 적응 훈련|고양이 적응, 적응 훈련|2|eb98vue5
+동물병원 방문 스트레스 줄이는 법 5가지|동물병원, 병원 스트레스, 이동장, 핸들링 교육, 예약·대기시간, 집 냄새 준비, 신경 안정제, 반려동물|0|1uxc48xy
+야외활동 신나게 즐기다 날벼락 '뱀 교상'|뱀 교상, 독사, 증상, 응급처치, 예방, 강아지, 비알코올성 소독, 독사 구분, 야외활동, 5~10월|0|aycs1vwa
+당신의 반려동물은 비만입니다.|반려동물, 비만, BCS, 체중관리, 식이조절, 운동, 합병증, 강아지, 고양이|0|t99y04t5
+고양이가 가출했다? 당황하지 말고 이렇게!|고양이 가출, 실종 고양이 수색, 전단지 알림, 숨는 장소 찾기, 체취 이용, 야간 수색, 발견 시 조심스러운 접근, 동물병원 방문, 중성화수술, 방묘창 설치|2|r23d59bc
+에어컨 풀가동에 시름시름 '냉방병 예방법'|반려동물, 냉방병, 예방법, 적정실내온도(5~6°C), 에어컨필터청소, 환기(하루3회), 얇은이불, 증상(재채기/콧물/무기력), 쿨매트|0|1sp2g6dp
+해외직구로 사료 득템? 낭패 보기 십상!|해외직구, 반려동물사료, 검역, 검역불합격, 폐기·반송, 동물유래성분, 구제역, 조류인플루엔자, BSE, 수입절차|0|3d6prltc
+31일까지 동물등록 자진신고기간! 서두르세요~|동물등록, 자진신고기간, 반려견, 등록대상, 동물보호관리시스템, 정보변경신고, 과태료, 지자체지정동물병원, 분실·사망|0|8hpr9rgg
+풀숲에 도사리는 복병 '참진드기'|참진드기, 바베시아증, 라임병, 아나플라즈마증, 에를리키아증, 예방약, 예방목걸이, 진드기제거, 외출후점검, 반려동물|0|n4utpnx8
+돌이킬 수 없는 반려동물 질환 '만성 신부전'|만성 신부전, 반려동물, 조기진단, SDMA 검사, 수액 치료, 혈액투석, 합병증 치료, 식이관리, 증상, 신장기능|1|3ofx9jhg
+입 벌리고 헥헥 '고양이 개구호흡'|고양이, 개구호흡, 과열·운동, 스트레스·두려움, 상부호흡기질환, 천식(호흡곤란), 심장질환, 폐수종, 응급진료|2|gznjaxa4
+"놀리는 게 아니라개" 강아지 혀 내밂 증상|혀 내밈 증상, 소형견, 치아 부재, 혀 질환, 신경질환, 구취, 혀 갈라짐, 수분관리, 햇볕 화상, 동물병원|1|f88n4wqt
+장마철 강아지 건강관리 수칙|장마철, 강아지, 피부관리, 털말리기, 빗질, 사료보관, 습식사료관리, 식중독증상, 식기청결, 곰팡이·세균예방|1|tqt65lui
+강아지 종양 의심신호 10가지|반려견, 종양, 암의심신호, 멍울, 치유되지 않는 상처, 식욕부진, 절뚝거림, 체중감소, 호흡·배변·배뇨 곤란, 비정상 분비물|1|3xvlmxaf
+실험에 이용되고 버려지는 비글 아이들|비글, 동물실험, 실험동물, 동물보호법, 대체실험, 실험동물 재활, 독성시험, 윤리위원회, 규제 사각지대|1|lsxfg5mp
+건강 이상을 알리는 노란 경고등 '황달'|황달, 빌리루빈, 적혈구 파괴(용혈), 간 기능 저하, 담도 폐쇄, 강아지, 고양이, 황달 증상(눈·잇몸·피부), 진단·치료|0|o9c1eyha
+냥집사 데일리 루틴, 고양이 빗질|고양이, 빗질, 브러시추천, 장모종, 단모종, 헤어볼예방, 털관리, 피부검진, 빗질요령|2|596ycorm
+치명적인 탈수 부르는 강아지 설사|강아지, 설사, 탈수, 분변 유형, 설사 원인, 응급 증상, 가정 관리, 권장 식단, 사료 교체, 예방접종|1|m1c9ce2q
+집사 혼자만의 로망 '고양이 산책'|고양이 산책, 외출 위험, 하네스 탈출, 교통사고, 영역동물, 스트레스, 실내 환경 개선, 캣타워, 장난감 놀이|2|wd2koltv
+고양이 토사물 색깔로 건강 상태 체크해요!|고양이, 구토, 구토물 색깔, 소화기 문제, 출혈 의심, 응급 신호, 동물병원 방문 준비, 구토물 사진·채취|2|h0troqxz
+층견소음에 대처하는 우리들의 자세|층견소음, 층간소음, 반려견, 짖음, 사회화교육, 행동교정, 방음시설, 이웃갈등, 분리불안|1|323u3xai
+반려견 미용의 짙은 그늘 '미용 후 스트레스'|미용 후 스트레스, 반려견, 행동 변화, 식욕 저하, 떨림, 구토·설사, 피부 가려움, 배변 실수, 예방 및 관리, 보호자 지침|1|pbics8dz
+잘못된 습관이 불러온 나비효과 '슬개골탈구'|슬개골탈구, 증상(절뚝임·다리 들기·관절음), 소형견(몰티즈·포메라니안·푸들·치와와), 위험요인(미끄러운 바닥·긴 발바닥털·과도한 점프·비만), 진행단계(1~4기), 합병증(전십자인대파열·관절염), 진단(X-ray), 수술(활차구성형술·경골조면이식술·관절낭중첩술)|1|e1s48cyi
+슬기로운 아깽이 대란 대응 매뉴얼|아깽이, 길고양이, 어미고양이, 버려짐 판단, 8-12시간 관찰, 만지지 않기, 보호자 찾기, 아깽이 질환|2|yo5k2ki5
+긁을수록 피부는 더 망가집니다. 아토피 관리, 여름 전에 시작하세요!|아토피피부염, 피부가려움증, 알레르기성피부염, 반려동물피부질환, 피부염관리|1|jesm8gca
+맹견을 기른다면 지켜주개 행복하개|맹견, 동물보호법, 정기교육, 출입금지, 목줄·입마개, 법적처벌, 도사견, 로트와일러, 아메리칸 핏불테리어, 맹견 소유자 의무|1|knb4r6xy
+절대 넘어가지 마시개~ 강아지 자일리톨 중독|자일리톨, 강아지 중독, 저혈당증, 급성간부전, 구토, 운동실조, 발작, 응급처치(구토유도), 제품 보관 주의|1|v7vfm5oo
+사랑하는 우리 고양이, 너의 이름은∙∙∙|고양이, 이름짓기, 호명훈련, 반려묘, 훈련팁, 간식보상, 짧은이름, 훈련방법, 주의사항|2|ln968wqo
+긴 꼬리 축 늘어진 귀, 그 모습 그대로 예쁘다|단이, 단미, 꼬리절단, 귀절제, 웰시코기, 도베르만, 통증, 신경종양, 자가수술 위험|0|027bsxov
+고양이의 급하게 밥 먹는 버릇 바로잡기|고양이, 급하게 먹기, 식사습관 교정, 소량 자주 급여, 사료 퍼뜨리기, 장애물 사용, 퍼즐 피더, 수의사 상담|2|uewt36jh
+심장사상충, 이것만 알면 방어 준비 완료|심장사상충, 모기매개감염, 반려견, 증상단계, 예방검사, 예방약, 약물치료, 수술치료, 연중예방|0|an6yb7wl
+아이에게 그 음식 먹이면 아니아니 아니되오|반려동물, 초콜릿, 카페인, 알코올, 포도, 귤·레몬·오렌지, 독버섯, 중독증상|0|6uisgcsc
+보호자 깜놀하게 하는 반려동물 발작|반려동물 발작, 발작 증상, 발작 원인, 응급처치, 전·중·후 3단계, 졸도 허탈 감별, 침 관리, 발작 기록·영상|0|31hxbqtp
+갑자기 숨을 가쁘게 들이마시는 우리 강아지, 천식?!발작?!?!|역재채기, 강아지, 단두종, 호흡곤란, 알레르기·자극물, 응급처치, 예방, 목 마사지, 식사관리, 환기·청소|1|h1z4ow4y
+매력만점' 고양이 눈의 모든 것|고양이 눈, 타페텀(반사판), 간상체, 추상체, 동체 시력, 넓은 시야, 홍채 색 변화, 순막(제3의 눈꺼풀)|2|xdooc786
+대표적인 고양이 구강질환 3가지|고양이, 구강질환, 치주질환, 만성구내염, 치아흡수성병변, 구취, 잇몸출혈, 스케일링, 발치, 양치질|2|3df408fp
+갈 곳 없는 아이들을 위해 어떤 노력을 해야 할까요?|동물보호, 안락사 논란, 노킬 운동, 보호소 한계, 투명한 운영, 입양 촉진, 중성화·예방접종, 자원봉사·후원|0|uzg6o1bn
+봄맞이 필수 건강검진 항목 '심장사상충 검사'|심장사상충, 검사, 예방, 모기, 봄(필수검진), 감염률, 강아지, 연 1회 검사|0|rcygg8jz
+한파타고 찾아오는 불청객 '저체온증과 동상'|저체온증, 동상, 반려동물, 증상, 응급처치, 예방, 겨울산책, 보온용옷, 발관리|0|14dbb9s0
+강아지 기분을 팍 상하게 만드는 보호자의 경솔한 행동|강아지, 보호자행동, 스트레스, 소음, 강한눈빛, 일관성부족, 강제사회화, 산책방해, 과한스킨십, 무관심|1|wptl2ofu
+조금 예민해도 괜찮아. 삐죽삐죽 고양이 수염|고양이, 수염, 감각기관, 수염피로증, 식기관리, 균형감각, 공간인지, 행동신호|2|xh8o84yh
+치료비 부담 OUT~ 아이 건강 SAFE! '반려동물 보험'|반려동물 보험, 진료비 부담, 가입률 1.4%, 보장범위, 가입조건, 자기부담률, 수술·입원 보장, 면책기간, 피부·구강 질환, 장례비|0|qt5hcz62
+잿빛공포' 미세먼지, 사람보다 아이에게 더욱 위험!|미세먼지, 반려동물, 호흡기질환, 피부염/아토피, 산책관리, 실내공기정화, 물섭취, 목욕·세정, 실내식물·독성주의|0|4w40pz9v
+반려동물에게 해로운 설음식 주의하세요!|반려동물, 설음식, 중독, 전·튀김, 찰떡, 뼈있는 고기, 사과·배 씨, 양파·파·마늘, 염분 과다, 건강관리|1|bxar6b89
+한 방울씩 찔끔찔끔 반려견급수대, 아이들이 싫어해요!|반려견 급수대, 노즐형 급수기, 물그릇, 목마름·탈수, 위생관리, 스테인리스 그릇, 유리 그릇, 물그릇 청소, 급수기 관리|2|u42rf685
+온기가 그리운 길냥이의 겨울나기를 도와주세요.|길냥이, 겨울관리, 급식, 깨끗한물, 보온보금자리, TNR, 동물학대금지, 급식환경정리, 임시쉼터|0|5q4uwd1h
+댕댕아, 나가고 싶다고? 집에서 놀아줄개|실내운동, 강아지, 행동지시훈련, 강아지퍼즐, 노즈워크, 터그놀이, 장애물통과, 미세먼지, 추위, 양육팁|1|m7znvuww
+예방접종의 완성은 '보호자의 케어'|반려동물, 예방접종, 접종후관리, 주의사항, 부작용관찰, 목욕금지, 격렬한운동금지, 주사부위청결, 추가접종(보강), 노령동물주의|0|35mfv1b2
+예방접종은 YES or YES! 선택이 아닌 필수입니다.|반려동물 예방접종, 강아지 예방접종, 고양이 예방접종, 종합백신, 광견병, 예방접종 일정, 자가접종 금지, 동물병원, 백혈병(고양이), 켄넬코프|0|6nd6k33p
+2019년 기해년(己亥年) 새해 첫인사 올립니다!|2019, 황금돼지해, 새해인사, 반려동물병원, Petmate, 행복, 사랑, 건강, 생명, 진료약속|0|h07o5lh5
+전기장판에도 우리 아이들을 화상 입을 수 있어요|반려동물, 화상, 전기장판, 저온화상, 응급처치, 화상구분, 동물병원, 온열기구, 헤어드라이어|0|i2gu4i5u
+위험천만 하늘샷, 절대 찍지 마세요|위험천만, 하늘샷, 절때 찍지 마세요|0|pj8ojxmq
+반려동물 정전기, 확 줄이는 법|정전기, 반려동물, 습도관리, 미지근한목욕, 보습샴푸, 나무빗, 식초세탁, 정전기방지스프레이, 오메가지방산, 핸드크림|0|4sufz22z
+반려동물과 크리스마스 보낼 때 주의사항|크리스마스, 반려동물안전, 크리스마스트리, 장식품_틴셀, 초콜릿_테오브로민, 알코올중독, 소음_스트레스, 장폐색_위장손상|0|2j8eyimo
+아이가 7살이 넘었다구요? 건강검진을 할 시기입니다!|반려동물, 건강검진, 7세 이상, 노령관리, 예방의료, 심장질환, 신장질환, 당뇨병, 영유아기 혈액검사|0|7623ys7w
+반려동물 장수시대의 그림자 '인지장애증후군'|인지장애증후군, 반려동물 치매, 노령동물, 상호작용 변화, 방향감각 상실, 수면주기 변화, 배뇨·배변 이상, 활동량 변화, 동물병원 진단|0|0i2smgc3
+고양이들이 평화롭게 살아가는 세계 여행명소|고양이 여행, 고양이 명소, 허우통, 아이노시마, 라나이 고양이 보호소, 라르고 디 토레 아르헨티나, 쿠칭, 캣와칭|2|ua8f7oyi
+우리 집 냥이, 댕댕이가 방화범 될 수 있다?|반려동물, 화재예방, 전기레인지, 촛불주의, 전선보호, 콘센트커버, 이동장(캐리어), 펫레스큐(구조)스티커, 안전장치|1|jduj8ehm
+아이 구강 건강을 위해 '잇몸 마사지' 해주세요!|잇몸 마사지, 구강관리, 강아지, 고양이, 손가락 마사지, 칫솔 마사지, 잇몸 색, 치은염, 혈액순환, 구강 건강|0|bcoyjva7
+고양이와 임산부의 동거는 위험하다?|톡소플라즈마, 임산부, 고양이, 분변, 감염경로, 배변관리, 혈액검사, 위험도 낮음|2|h34gqcqn
+똥을 먹는 아이들, 어떻게 하면 고칠 수 있나요?|식분증, 호분증, 췌장염, 흡수불량, 과식, 행동학적원인, 관심받기, 즉시치움, 사료·간식조절, 치료제|0|ckjqvoga
+조용한 살인자 고혈압|고혈압, 반려동물, 혈압기준, 혈압관리, 정기검진, 심장질환, 만성신장병, 약물치료, 강아지, 고양이|0|r6lnnc0h
+반려견과 안전하게 야간 산책 즐기는 방법|야간 산책, 반려견 안전, 야광·발광 용품, 목줄·가슴줄, 단단히 잡기, 차량 주의, 손전등 휴대, 이어폰 금지, 조명 밝은 길, 빛나는 장난감|1|bhg6vmk2
+고양이가 골골송을 부르는 이유|고양이, 골골송, 퍼링, 유대감, 행복 표현, 식사 요구, 치유 효과, 주파수(Hz), ASMR, 보호자 진정|2|eq98is2q
+평온을 부르는 강아지의 몸짓 언어, 카밍시그널|카밍시그널, 강아지 행동, 진정 행동, 하품하기, 고개 돌리기, 코 핥기, 바닥 냄새 맡기, 옆드리기, 갈등 회피, 반려인 관찰|1|nas4fwf4
+토하고 나서 사료도 안 먹는 강아지|췌장염, 구토, 식욕부진, 고지방 음식, 고지혈증, 혈액검사, 초음파, 금식·수액·입원, 예방(비만관리), 미니어처슈나우저|1|yzf4ra7x
+강아지에게 해로운 가을 식물 주의하세요!|강아지, 은행열매, 대상화, 히비스커스, 베고니아, 국화, 무화과, 사프란, 남천, 상사화|1|uznopnbu
+노령묘의 가장 흔한 호르몬 질환 '갑상선기능항진증'|갑상선기능항진증, 고양이, 노령묘, 과다활동, 체중감소, 다식, 다뇨, 털변화·탈모, 호흡곤란, 심장영향|2|p9uwgiym
+강아지냐? 고양이냐? 그것이 문제로다.|강아지, 고양이, 차이점, 공통점, 행동습성, 물마시는방식, 활동시간, 길들이기, 초보반려인|0|694m36gq
+유선종양의 모든 것|유선종양, 중성화수술, 진단, 수술, 추적관리, 고양이, 강아지, 악성종양, 발생연령|0|3obr3wqj
+반려묘의 스트레스를 훌훌 날리는 환경 만들기|반려묘, 스트레스관리, 환경조성, 캣타워, 화장실청결, 놀이, 물공급, 고품질사료, 스크래처, 은신처|2|l94pob4o
+추석 황금연휴에도 우리 아이는 이상 무!|추석, 반려동물, 차량이동, 멀미예방, 휴게소, 펫호텔, 예방접종, 주의음식, 안전장비|0|x396r0xc
+반려동물 감기 조심하세요|환절기, 반려동물 감기, 개 인플루엔자, 고양이 상부호흡기질환, 증상: 재채기·콧물·발열·호흡곤란, 치료: 항생제·항바이러스제·수분·영양·휴식, 예방: 백신·습도관리·목욕후건조, 면역력·영양·운동|0|f8u5n9hd
+노령견의 대표적 호르몬 질환 쿠싱증후군|쿠싱증후군, 부신피질기능항진증, 노령견(8세 이상), 다뇨·다갈증, 복부팽만, 식욕증가, 피부얇음·탈모, 근육위축, 합병증(당뇨·고혈압·간질환)|1|1d8jgogs
+저는 '음식'이 아닙니다.(개식용)|개식용, 뜬장, 음식물 쓰레기 섭취, 염분으로 인한 신장·감염 문제, 무면허 자가진료(주사·항생제), 과밀 수송, 동물학대, 매달림·폭력|1|sp26tmro
+신나게 놀아보자 개캉스|개캉스, 반려견 동반, 멍비치, 자연휴양림, 애견캠핑장, 입장기준, 예약안내, 동물등록, 예방접종|1|tdllhmbb
+냄새만 맡아도 황홀하다옹. 고양이 마약 캣닙|캣닢, 개박하, 네페탈락톤, 스트레스 완화, 식욕증진, 놀이 유도, 스크래처 유도, 사용 주기(주2회), 부작용(소화불량)|2|g2dloa5l
+우리 아이 머릿속에 지우개가?(치매)|반려동물 치매, 인지장애증후군, 주요증상, 배변실수, 방향감각 상실, 수면장애, 활동성 감소, 진단·치료, 인지자극, 조기발견|0|xetmmnhp
+반려동물 피부암 주의보 발령|반려동물, 피부암, 자외선, 편평상피암종, 자외선차단제, 창문필터, 선글라스, 백내장, 강아지, 고양이|0|wsqp9je8
+반려동물이 냠냠하면 '탈'나는 과일|반려동물, 과일주의, 아보카도(페르신), 사과·체리(시안화물), 수박껍질 장폐색, 복숭아 위장폐색, 오렌지 과육 부작용, 구토·설사, 호흡곤란·중독|0|e1w6i9h9
+맹견 외출 시 입마개 착용은 필수 펫티켓!|맹견, 입마개, 그물망 입마개, 입마개 교육, 물림사고 예방, 동물보호법(맹견 의무), 과태료, 사회화|1|gz07kdg0
+반려동물과 해외여행 갈 때 체크 포인트!|해외여행, 반려동물, 입국검역, 예방접종, 마이크로칩, 항공사운송규정, 케이지준비, 검역증명서, 동물병원, 신원표시|0|94gcfyp8
+잠자는 자세로 훔쳐보는 강아지의 성격 6가지|강아지, 수면자세, 성격특성, 충성심, 독립심, 활발함, 호기심, 자신감, 적응력|1|m7cl7xzh
+집사님 힐링엔 고양이의 꾹꾹이 마사지가 최고!|꾹꾹이, 고양이 행동, 젖먹이 습성, 애정 표현, 영역 표시, 발바닥 분비물, 스트레칭, 쉼터 정리, 발정기 행동, 골골송/건강효과|2|1ju5wfk2
+반려동물 열사병 조심하세요!|열사병, 반려동물, 증상, 응급처치, 예방, 수분공급, 고열, 강아지, 고양이, 쿨매트|0|75g83r0a
+무더위에 기승을 부리는 진드기|진드기, 예방, 제거요령, 라임병, 중증열성혈소판감소증후군, 외부기생충약, 예방목걸이, 털관리, 산책주의, 2차감염|0|wirn1k1w
+고양이에게 화장실이란? 넘나 중요한 것!|고양이화장실, 화장실위치, 오픈형vs클로즈형, 응고형모래, 흡수형모래, 청소방법, 청소주기, 프라이버시, 냄새관리|2|ialx6dl6
+식탐쩌는 우리 집 강아지 왜 이렇게 먹는 걸 밝힐까요?|강아지, 식탐, 과식, 식욕관리, 기다려 훈련, 사료 칼로리, 사료량 조절, 당뇨병, 갑상선기능항진증, 부신피질기능항진증|1|wgelhlwl
+심장사상충 예방, 고양이도 매달 챙겨주세요!|심장사상충, 고양이, 모기전파, 월간예방, 호흡곤란, 기침, 구토·식욕부진, 돌연사, 치료곤란|2|nvxwawmj
+우리 아이는 눈곱공장장?|눈곱, 알레르기, 건성각결막염, 안충감염(안충), 유루증(눈물흘림), 충혈·눈비빔, 눈 세정·관리, 동물병원 진단, 강아지, 고양이|0|4zkla6k8
+보이지 않는 사랑의 연결고리 '동물등록제'|동물등록제, 마이크로칩, RFID, 동물등록의무, 과태료, 동물병원, 유실방지, 등록인식표, 3개월령 이상 개, 동물보호법|0|hjkuy7fm
+너무나 잦은 고양이의 발정기 스트레스|고양이, 발정기, 스트레스, 중성화수술, 유선종양, 자궁축농증, 고환암, 전립선질환, 예방|2|s7mjumbm
+강아지와 매너 있게 엘리베이터 타는 방법!|강아지, 엘리베이터, 매너, 목줄, 동승 허락, 엘리베이터 안전, 작은 강아지 안기, 배변봉투·휴지|1|u7ky2twm
+잘못 자란 속눈썹이 안구 테러해요.|첩모, 속눈썹, 이소성첩모, 첩모중생, 첩모난생, 눈충혈, 유루증, 결막염, 각막염, 동물병원|0|o2o8efar
+집사님 잘 못 들게 만드는 '고양이 우다다' 이유가 뭘까요?|우다다, 고양이 행동, 야행성, 사냥본능, 저녁놀이, 취침전간식, 갑상선기능항진증, 왕성한 식욕, 체중감소, 다뇨|2|c7wmz675
+강아지가 거위울음을 내며 숨쉬기 힘들어 한다고요?|기관허탈, 거위울음, 소형견, 비만, 하네스, 흡연노출, 환경관리, 휴대용산소, 기관스텐트, 기침|1|wmlso3pi
+사랑하는 반려동물 안고 운전해볼까?|반려동물, 차량 안전, 도로교통법, 불법, 안전벨트, 반려동물 카시트, 케이지, 칸막이, 창문 안전, 벌금|0|urigieke
+산책을 좋아하는 아이들 vs 산책을 힘들어하는 아이들|슬개골탈구, 무릎(슬개골), 절뚝거림, 한쪽다리들기, 뒷다리증상, 소형견, 몰티즈, 포메라니안, 요크셔테리어, 동물병원진료|0|6xi2n7zb
+집사님 심쿵하게 만드는 고양의 부비부비|고양이, 부비부비, 체취선, 영역표시, 애정표현, 소유표시, 낯선냄새, 길고양이|2|8sgqzkg1
+반려동물 사진 그뤠잇~하게 찍는 방법|반려동물 사진, 촬영 팁, 자연 배경, 망원렌즈, 연사 모드, 로우 앵글, 소품 활용, 간식·장난감, 플래시 금지, 컨디션 체크|0|l11jcbea
+강아지가 자꾸 '거기'를 핥아요.|생식기 핥음, 포피염, 자궁축농증, 포비돈 세척(1:20), 악취·음부분비물, 항생제 치료, 중성화수술 권장, 청결 관리|1|7nj499e8
+응급상황에 대비하여 반려묘의 혈액형을 미리 알아두세요~|고양이, 혈액형, 수혈, 신생묘 적혈구 용혈증, A형, B형, AB형, 혈액형 검사, 교배 전 검사, 품종별 확률|2|k337hysy
+심장사상충 전파자가 되어 버린 어느 모기의 이야기|심장사상충, 모기, 전파과정, 강아지, 고양이, 감염유충, 연중예방, 반려동물관리|0|5mrn7e47
+심장사상충 예방에 관한 오해와 진실을 알아보아요.|심장사상충, 예방약, 안전성, 경구약, 바르는약, 정기검사, 부작용, 콜리, 수의사상담, 예방관리|0|ltnaxtna
+아이에게 독이 될 수 있는 당신의 습관|보호자습관, 반려동물건강, 스트레스, 실내온도, 음주, 흡연, 산책적응, 사람음식, 공동수면|0|rrtbl8rj
+최초로 우주 비행한 고양이 펠리세트의 기구한 이야기|펠리세트, 고양이, 우주비행, 프랑스 우주연구, 동물실험, 1963년, 동물 희생, 기념 제안|2|odcf11ws
+완전 중요한 반려동물의 질환 10가지|반려동물, 관절염, 치주질환, 디스템퍼(강아지홍역), 파보장염, 신장질환, 당뇨병, 심장사상충, 광견병, 예방접종|0|6h7yxe12
+집사라면 각오해야 하는 고양이 털과의 전쟁|고양이, 털관리, 빗질, 영양관리, 스트레스관리, 기생충, 피부질환, 탈모, 수의사진료, 양육팁|2|40myug8b
+강아지 발바닥에서 '꼬순내'가 폴폴~나는 이유|강아지, 발바닥 냄새, 꼬순내, 세균(프로테우스·슈도모나스), 발바닥 염증/습진, 발바닥 관리, 발바닥 털 정리, 화학물질·열 손상|1|hiyjqo23
+심장사상충 예방, 고양이도 예외일 수 없습니다!|고양이, 심장사상충, 예방, 한달에한번, 바르는예방약, 과민반응, 급사, 치료제부작용, 건강관리|2|bhtyz8p2
+건강한 삶을 원한다면 반려견과 시간을 보내세요!|반려견, 정신건강, 스트레스 감소, 면역력 향상, 심장질환 예방, 체중관리, 산책, 신체활동, 아이들 건강|1|lh6g5cbt
+반려견의 공격성은 과연 덩치순일까?|반려견 공격성, 체고 40cm, 입마개, 사회화, 행동교정, 스트레스, 생후 18개월, 옐로우독 프로젝트, 반려동물 안전관리|1|oua4fv3u
+하루 종일 물을 찾는 우리 강아지. 뭐가 문제일까요?|다음(Polydipsia), 다뇨(Polyuria), 과도한 음수, 당뇨병, 쿠싱병, 자궁축농증, 신부전증, 물 섭취 체크, 수의사 상담|1|c90notda
+생명을 살리는 기적:반려동물 심폐소생술 방법|반려동물 심폐소생술, CPR, 응급처치, 반응체크, 기도확보, 인공호흡, 흉부압박, 강아지, 고양이, 동물병원 이송|0|nqkiuhgo
+강아지가 핥는 나름의 이유|강아지, 핥기행동, 애정표현, 맛탐색, 후각탐색, 발핥기, 코역할, 부위별원인, 핥음육아종, 스트레스|1|rbbdrqj9
+반려동물이 아동의 정서 발달에 긍정적인 영향을 미친다는 사실 아셨나요?|반려동물, 아동, 정서발달, 자아존중감, 생명존중의식, 인성, 돌봄, 연구결과|0|3q5kjc2s
+반려견을 향한 따뜻한 배려, 옐로우 독 프로젝트|옐로우독프로젝트, 노란리본, 만지지마, 반려견개인공간, 수술회복, 훈련중, 사람두려움, 접근예절|1|ag1sk2k3
+강아지가 꼬리를 쫓아 빙글빙글 도는 이유 4가지|꼬리쫓기, 강아지 행동, 호기심, 관심 끌기, 스트레스, 항문낭염, 행동교정, 수의사 진단|1|wb3fj7rw
+숙종이 사랑한 고양이 '금손'|숙종, 금손, 고양이, 조선왕조, 왕과반려동물, 충성, 장례, 영조, 역사에피소드|2|b2ifqbig
+건강검진으로 오래오래 우리 아이와 함께하기|건강검진, 반려동물, 정기검진, 영유아기(10~14개월), 생애전환기(7~8년), 노령기(11~12년), 혈액검사, 영상검사, 조기진단, 질병예방|0|k1n90sff
+고양이를 위한 건강한 겨울나기 요령!|고양이, 겨울관리, 실내온도, 습도유지, 보온용품, 전기난로주의, 비만관리, 다이어트사료, 동상예방, 호흡기건강|2|spo1w8lf
+2018년, 무술년은 황금 개띠의 해|새해 인사, 2018, 반려동물병원, 펫메이트, 감사 메시지, 진료 약속, 한복, 선물, 가정 행복|1|2tcehb8g
+오랑우탄도 하나의 인격체다!|오랑우탄, 인격체, 동물권, 법적 판결, 샌드라 사례, 거울실험, 자아인식, 도구 사용, 지능, 동물 보호|0|766g6yxv
+당신은 어쩌다 강아지 배변훈련에 실패하게 되었는가!|강아지, 배변훈련, 공간분리, 배변패드, 실수 혼내지 않기, 분리불안, 흥분배뇨, 방광염, 수의사 상담, 양육팁|1|5foh41by
+반려동물 지진 대피 요령|반려동물, 지진, 대피요령, 이동장, 응급준비, 진료기록, 목줄주의, 식수사료, 등록·인식표, 고양이은신처|0|wa0vyp3h
+고양이에게 쉽게 약을 먹이는 방법!|고양이, 약먹이기, 필건(Pill Gun), 필포켓(Pill Pockets), 알약 숨기기, 버터 사용, 캔 국물+주사기, 복용 확인|2|479dihfw
+종양이 의심스러운 증상 10가지|종양, 반려동물, 멍울/혹, 상처 미치유, 식욕부진, 체중감소, 출혈/고름, 절뚝임/통증, 호흡·배뇨 문제|0|nr77utsg
+아이 생애에 최소 3번 만이라도 '건강검진' 꼭 챙겨주세요!|반려동물, 건강검진, 정기검진, 영유아기(10~14개월), 생애전환기(약 7~8년), 노령기(11~12년), 조기발견, 예방치료|0|v45m76lj
+루왁커피의 불편한 진실|루왁커피, 사향고양이, 강제사육, 동물학대, 영양실조, 카페인중독, 스트레스, 인도네시아, 윤리적문제|2|dvifbg6w
+고양이 알레르기의 7가지 증상|고양이 알레르기, 증상, 눈 가려움·눈물, 결막 부종, 목 가려움·기침, 비염·콧물, 피부 가려움·두드러기, 입술·안면 부종, 접촉성 알레르기|2|zyb7jdag
+텃세부리는 고양이에게 필요한 3가지|고양이, 다묘가정, 텃세, 입양, 거리두기, 냄새소개, 분리공간, 사회화, 인내|2|84zvba43
+'중성화수술' 하느냐 마느냐, 그것이 문제로다!|중성화수술, 질병예방, 원치않는 임신, 발정 스트레스, 권장 수술 시기, 잠복고환, 유선종양, 자궁축농증, 강아지·고양이|0|uov5azog
+부담스러운 반려동물 양육비 이렇게 아껴 보세요.|반려동물, 양육비 절약, 예방접종, 정기건강검진, DIY 장난감, 사료·간식 선택, 수의사 상담, 예방관리, 비용절감|0|glbw0d0z
+고양이 비만, 내버려 두면 건강에 적신호가 켜집니다!|고양이 비만, 건강관리, 운동, 식사관리, 다이어트 사료, 관절염, 당뇨병, 쿠싱, 캣타워, 장난감|2|lgw02la7
+사람에게는 인권, 동물에게는 동물권이 있습니다.|동물권, 동물복지, 민법98조, 동물을물건으로취급, 동물학대금지, RSPCA, 법개정, 감찰기능, 법적처벌, 역사적사례|0|nxsh7y94
+가을철 털갈이인가 탈모인가|가을털갈이, 탈모, 증상구분, 수의사검진, 호르몬질환, 곰팡이감염, 기생충관리, 영양·위생관리, 노령견관리|0|ayswz0t0
+우리 강아지가 귀를 심하게 긁고 악취가 나요!|외이염, 강아지 귀질환, 귀 가려움, 악취, 세균/곰팡이, 알레르기, 귀 청소, 항생제/항염제, 면봉금지, 예방관리|1|8muhzr6e
+물이라면 질색하는 우리 냥이 목욕시키기|고양이 목욕, 목욕 방법, 고양이 전용 샴푸, 발톱 관리, 수온 조절, 수압 조절, 빠른 목욕, 수건으로 말리기, 그루밍|2|86xkpspm
+반려견과 자동차 여행 시 유의할 점 6가지|반려견, 자동차여행, 안전수칙, 멀미예방, 케이지/안전벨트, 휴식정차, 수분공급, 차량내 방치금지, 비상대응/동물병원|0|845vzpjn
+반려의 의미를 되새기는 10월이 되길 바랍니다.|반려동물, 애완동물, 용어유래, 인간-동물관계, 동물복지, 유기동물, 학대문제, 반려문화|0|wcxri8yf
+당신은 반려견 사이에서 패션고자?|반려견, 옷차림, 행동반응, 줄무늬, 불안·불쾌감, 복종행동, 경고색(보호색), 대인접촉 시 복장 추천|0|plnwwduh
+마음속으로도 반려동물을 미워하면 안 된다.|반려동물, 텔레파시, 마음 읽기, 루퍼트 쉘드레이크, 사례 소개, 보호자 태도, 심리적 교감, 동물 의사소통|0|7094aj97
+이제는 반려동물 자가진료 절대 안 돼요.|자가진료 제한, 수의사 진료 의무, 반려동물 자가처치, 예방약 투약, 주사·약 투여 제한, 외부 기생충 제거, 시행령 개정, 동물학대 예방|0|qac0k98c
+우리 강아지는 '펫밀크' 마셔요!|펫밀크, 반려동물 우유, 락토프리, 유당불내증, 가격 문제, 성분·영양, 수의사 상담, 서울우유 아이펫밀크|1|8u89av9v
+어느 심장사상충의 이야기|심장사상충, 모기매개감염, 강아지, 심장·혈관기생, 피로·운동력저하, 식욕감소·체중감소, 복수, 심장비대|0|9okj9rs6
+에티켓은 지키는데, 펫티켓은 안 지키신다구요?|펫티켓, 목줄·가슴줄, 배변봉투, 산책매너, 정기접종, 구충, 책임있는반려, 반려동물안전|0|ljfp1g6y
+딱히 외롭거나 그런거 아니다옹…|고양이, 외로움, 행동징후, 혼자있는시간, 환경구성, 캣타워, 창문놀이, 심심함해소|0|6623ojmh
+당신의 강아지는 생각보다 '겁쟁이' 일 수 있다.|강아지 공포, 전두엽, 감각적 공포, 시각적 공포, 청각적 공포, 촉각적 공포, 드라이기, 선풍기, 심리적 트라우마, 템플 그랜딘|2|hnerymjc
+차 안에 반려동물을 내버려두면 벌금 6,500만원!|차량내 반려동물 방치, 열사병 위험, 6분의 위험, 벌금·법적 처벌, Just Six Minutes 캠페인, 수분공급·물자주갈아주기, 여름철 안전수칙, 산책 시간 조절|0|3i3drg75
+7가지를 지키면 반려동물의 여름은 안전하다!|여름철, 반려동물, 수분공급, 그늘, 발보호, 화상예방, 냉각(얼음), 수영안전, 건강점검|0|veuf7wl4
+문재인 대통령이 꼭 지켜야 할 5가지 반려동물 공약|반려동물 공약, 동물의료 활성화, 동물의료보험, 반려견 놀이터, 행동교육, 전문인력 육성, 지원센터, 반려동물 복지|0|pt8i0131
+반려동물을 차에 두는 행동, 최악의 동물학대입니다.|반려동물, 차량, 열사병, 고온, 응급예방, 6분, 장기손상, 아이들, 에어컨고장|0|uv1nh5yi
+당신도 저지를 수 있는 친절한 학대|친절한 학대, 반려동물 비만, 간식 과다, 과체중, 강아지, 동물학대, 소유권 박탈, 반려동물 복지, 인식개선|0|u4smqnfc
+숯 가루로 동물을 치료한다?!|숯가루, 민간요법, 반려동물, 수의사경고, 변비, 동물학대, 응급치료지연, 위험한치료, 펫케어|0|5jbmkfws
+판도라의 상자를 열다. 반려동물 구강검사|반려동물, 구강검사, 치주염, 칫솔질, 씹는 장난감, 껌, 구강관리, 치석, 통증|0|3eo9t94r
+분노한 냥이 진정시키는 방법|고양이, 분노, 공격행동, 스트레스, 진정시키는 방법, 스킨십, 꼬리, 소음, 질투, 사회화|2|vaw0j0ii
+반려견의 수명을 단축시키는 보호자의 7가지 행동|반려견, 수명단축, 치아관리, 정기검진, 운동, 간접흡연, 건강관리, 예방|1|rkgbkrht
+고양이님, 저랑 살만 하신가요?|고양이, 반려묘, 네코노믹스, 동물행동풍부화, 외로움예방, 놀이활동, 반려생활팁, 고양이책|2|rsce4mwd
+유기견, 유기묘… 유기토끼는 걱정 안 할끼니?|유기토끼, 토끼 번식력, 생태계 교란, 호주 토끼 문제, 유기동물, 중복임신, 굴(구멍) 피해, 반려동물 책임|0|6er2tjsf
+반려동물 맞이하기, '작명센스'가 필요해!|반려동물, 이름짓기, 작명센스, 하치, 부르기 쉬운 이름, 개성있는 이름, 의미있는 이름, 작명 팁|0|4du58z3b
+반려동물 '헌혈' 얼마나 알고 계신가요?|반려동물헌혈, 혈액형, 개(DEA), 고양이 A/B/AB, 수혈안전, 수혈부작용, 혈액공급부족, 헌혈문화, 수의사진단|0|i8xz1ygr
+내부자냥: 고양이와 생선의 유착관계|고양이, 생선, 날생선 위험, 기생충, 식중독, 신부전, 황색지방증, 자연식 레시피, 연어캔, 현미|2|pxqp0cw7
+펫 택시:반려동물과 함께라면 언제든 불러주세요!|펫택시, 반려동물, 이동서비스, 택시거부, 이동장, 배변패드, 구토대응, 반려견, 반려묘, 반려동물용품|0|x20lkfhy
+사람도 숨쉬기 힘든데, 우리 애들은 어떨까요?|반려동물, 미세먼지, 호흡기, 발바닥세척, 털관리, 안구세정, 수분공급, 가습기, 외출자제|0|d2hxr4sm
+개 침에는 상처 치유 능력이 있다?!|개 침, 상처 치유, 항균 단백질, 캡노사이토퍼거, 감염 위험, 면역력 약자, 상처 소독, 고대 이집트|1|22qrsiyo
+우리 고양이가 천재인 것 같아요|고양이, 인지능력, 청각, 원인과결과, 물리적 기대, 상자 실험, 행동관찰, 연구결과|2|99yaiwxu
+움직이지마! 범인은 이 안에 있어:명탐정 앵무새|앵무새, 동물증언, 음성증거, 형사사건, 법적증거, 미시간사건, 인도사건, 재판사례, 증거능력|0|uaxeeusd
+심장사상충 매년 검사할 필요가 있다! 없다?|심장사상충, 예방약, 연간검사, 강아지, 고양이, 항원검사, 항체검사, 예방관리, 투약실패원인|0|jo3rg10a
+강아지와 꼭 해야 할 10가지 약속|강아지와 약속, 개주인의 십계명, 반려견 책임, 신뢰와 교감, 폭력 금지, 노견 돌봄, 마지막 돌봄, 스탠 롤린슨, 개와 나의 10가지 약속, 양육팁|1|jte2yfxu
+중성화수술, 여러분의 선택은 무엇인가요?|중성화수술, 반려동물, 자궁축농증, 유선종양, 수컷 표시행동, 행동교정, 예방의학, 건강관리, 강아지, 고양이|0|rs6wcgkh
+젖은 강아지를 말리는 가장 좋은 방법|젖은강아지말리기, 드라이기, 자연풍/선풍기, 강아지세탁기, 피부건강, 스트레스, 목욕관리, 건조방법|1|wk09h40u
+상상을 초월하는 강아지 후각|강아지, 후각, 감정인식, 야콥스기관, 호르몬, 냄새, 후각세포, 행동파악|1|tcs798qk
+고양이와 개를 주민으로 인정한 마을|스페인, 트리게로스 델 바예, 비인간 거주민, 반려동물 권리, 개, 고양이, 동물권, 투우 폐지, 동물학대 예방|0|7l2wenom
+고양이에게 인간은 덩치 큰 고양이|고양이, 반려묘, 집사, 인간-고양이 관계, 사냥 본능, 사냥감 선물, 가축화, 행동 해석, 존 브래드쇼, 반려동물상식|2|xuv7qskn
+강아지 멀미에 대처하는 6가지 방법|강아지 멀미, 차멀미, 멀미 증상, 예방법, 환기(창문), 차내 음식 금지, 장난감 준비, 전용 안전벨트, 적응 훈련|1|9o9tvcl6
+심장사상충, 이것만은 꼭 기억하세요!|심장사상충, 검사(정기검진), 예방약(투약), 연중예방, 강아지, 고양이, 모기매개질병, 투약주의|0|ygw9hl74
+반려견과 함께 할 수 있는 도그 스포츠|1703-6, 반려동물 스포츠, 반려견 스포츠, 도그 스포츠, 강아지 스포츠|1|la4m0i9y
+고양이 액체설 그것이 궁금하다!|고양이 액체설, 좁은 공간, 박스, 스트레스 감소, 야생성, 본능 행동, 안전·따뜻함, 캣타워, 고양이 행동|2|fau0tt3z
+공무원 고양이 래리: 시험이 뭐냐옹?|래리, 총리 관저 수렵 보좌관, Chief Mouser, 쥐 잡이, 베터시(동물보호소), 프레야, 파머스톤, 다운잉가 10번가, 공무원 고양이|2|radevlqx
+반려동물에게 독이 되는 우리집 생활용품 4가지|반려동물중독, 사고야자, 백합, 살충제, 쥐약, 차량용부동액, 에틸렌글리콜, 초콜릿, 포도/건포도, 가정용위험물질|0|oukntf5b
+강아지 양치질 가이드|강아지, 양치질, 구강관리, 입냄새, 치석, 칫솔, 강아지치약, 행동훈련, 장소선택, 인내심|1|qn9z9taj
+아파도 말을 못한다는 것이 얼마나 힘든지 아시나요?|반려동물, 건강검진, 조기발견, 예방, 영유아기, 생애전환기, 노령기, 수술예방|0|o8g5ssx5
+반려견, 사지 말고 입양하세요.|반려견, 입양, 유기견, 강아지 공장, 불법 번식, 동물복지, 농림축산식품부, 번식장 단속, 책임 있는 입양|1|g84gb9nn
+고양이 발톱 제거 수술'을 아십니까?|고양이, 발톱 제거 수술, 발가락 부분 절단, 통증·합병증, 행동 문제, 발톱 관리, 스크래치 예방, 법적 금지, 대체 방법|2|it2ko8hn
+허공 향해 짖는 강아지… 뭘 보고 짖는 거니?!|강아지 행동, 허공에 짖음, 청각(고주파), 민속·전설, 수호신·저승 안내, 반려동물 상식, 심리적 안정|1|x1z4iac8
+당신의 나쁜생각이 반려동물을 삐뚤어지게 만든다|반려견, 감정표현, 부정적감정, 신뢰, 사회적의사소통, 실험결과, 명령수행, 긍정적마음가짐|0|k8kge405
+당신의 반려견을 건강하게 만드는 6가지 방법|반려견, 건강관리, 사료, 운동, 털관리, 수의진료, 훈련, 놀이, 관심과배려|1|6ktio75j
+고로 나는 존재하는 고양이(지혜로운 집사가 되기 위한 지침서)|고양이, 독립성, 집사 지침서, 도서 소개, 진중권, 인터뷰, 반려동물 관심증가, 책추천, 생활교양|2|prle7ag0
+고양이가 좋아하는 마사지|고양이 마사지, 스트레스 완화, 쓰다듬기, 목 아래 마사지, 미간 마사지, 수염 방향, 부드럽게 진행, 릴렉스 상태|2|vf1cika8
+거북이는 거친 것을 싫어해!|거북이, 스킨십방법, 부드러운접근, 등껍질만지기, 부드러운부위회피, 스트레스관리, 난폭행동경계, 물림주의, 반려거북이관리|0|m8kc3wkx
+반려동물을 버리는 '말 같지도 않은 이유' 16가지|반려동물 유기, 말 같지도 않은 이유, 유기 사례, 강아지, 고양이, 행동 문제, 가정 내 문제, 인식 개선|0|kx5op94r
+토 색깔로 알아보는 고양이 건강상태|고양이, 구토, 토 색깔, 헤어볼, 투명·백색 구토, 노란색 구토, 녹색 구토, 짙은 갈색 구토, 담즙 역류, 소장 관련 질환|2|3eqpa1es
+당신의 반려동물을 위한 7가지 추운 날씨 안전 수칙|겨울철 관리, 반려동물 안전, 피부 건조 예방, 발바닥 관리, 보습 샴푸, 바세린 마사지, 부동액 주의, 수분공급, 식사량 증가, 강아지·고양이|0|hv1g9060
+펫메이트 독자 여러분~ 새해 복 많이 받으세요!|강아지, 반려견, 스트레스 감소, 면역력 향상, 심장질환 예방, 체중관리, 산책, 새해 인사|0|9z9f9mrs
+반려견 혼내야 할 때가 따로 있다?!|반려견 훈육, 혼내는 타이밍, 즉각적 교정, 본능적 행동, 일관된 규칙, 부적절한 처벌 회피, 행동 교육|1|8h6ml2qf
+고양이 자신감을 저격하는 레이저 포인터|고양이, 레이저포인터, 자신감, 사냥본능, 잡을수있는장난감, 인형·공, 놀이방법, 행동관리|2|1gry64sg
+비틀즈, 개를 위한 노래 만들다|비틀즈, A day in the life, 존 레논, 개 청력, 고주파 휘슬, 가청주파수, 청력 차이, 음향 실험, 장난|1|rdknccfi
+아니 요즘도 면봉으로 '귀 청소'하는 보호자가 있어요?!|강아지, 귀청소, 면봉금지, 세정액, L자형귀, 외이염예방, 귀관리, 찬바람건조, 동물병원상담|1|lzqccnb5
+노령견 보호자가 알아두면 좋은 '치매' 전조 증상|노령견, 치매, 인지기능장애, 전조증상, 호흡변화, 식사변화, 행동변화, 공격성, 수의사검진|1|va3u2y86
+메리크리스마스&해피뉴이어 인사말|크리스마스, 새해인사, 연말메시지, 반려동물, 펫메이트, 감사인사, 축하, 고양이|0|dhoms67d
+당신의 000은 '강아지의 꾀병'을 유발한다!|강아지 꾀병, 주인 무관심, 외로움, 관심 요구, 스킨십, 생체리듬, 통증 숨김, 행동 문제, 애착 형성, 반려견 관리|1|ud9oco5t
+검정색, 저희 정말 불길한가요?|1611-5, 검정색, 반려동물색깔, 털색깔, 불길|0|k2yq0oa1
+개보다 사람이 먼저다.|동물보호법, 법개정, 찬반논란, 동물복지, 수의사단체, 동물보호단체, 유기동물, 국회입법예고|1|3vzho14n
+산책을 즐기는 고양이를 만드는 4가지 방법|고양이 산책, 가슴줄(하네스), 리드줄, 적응 훈련, 실내 연습, 야외 시도, 안전 관리, 고양이 주도|2|uce7o1af
+반려견을 위해 보호자가 알아야 할 '눈'질환|반려견, 눈 질환, 건성각결막염, 결막염, 녹내장, 백내장, 인공눈물, 시력저하, 눈 분비물, 정기검진|1|zjtge00h
+지진이 나면 반려동물은 어떻게 하죠?|지진대피, 반려동물, 비상물품, 이동장, 인식표, 마이크로칩, 비상약품, 임시보호, 목줄금지, 식수·사료준비|0|ap6x19x2
+보호자가 흔히 하는 '잘못된' 반려동물 목욕 방법|반려동물, 목욕, 목욕방법, 잘못된습관, 보호자주의, 청결, 양육팁, 강아지|0|yzsggilq
+사람의 하품이 개에게도 전염된다?|하품 전염, 개, 공감, 보호자(주인), 행동실험, 스트레스 여부, 연구결과, 정서적 유대|1|3eabkb1h
+셀프진료'는 생명 앞에 붙을 수 없습니다.|셀프진료, 자가진료, 반려동물, 수의사법, 피해사례, 자가수술, 약물오남용, 동물복지|0|67osipvr
+고양이 관절염의 7가지 징후|고양이, 관절염, 절뚝거림, 점프불능, 목·등 통증, 과민반응, 근육위축(다리얇아짐), 몸 물어뜯기, 과다수면, 수의사 상담|2|2job3j2b
+지랄견이라는 가면 뒤에 숨겨진 분리불안|분리불안, 파괴행동, 과도한 짖음(하울링), 실내 배변, 자해성 그루밍, 사회화 부족, 보호자 의존성, 행동교정, 약물치료|1|78xt96tr
+개보다 사람이 먼저다?|동물보호법, 법 개정, 동물복지, 찬반논란, 수의사단체, 동물보호단체, 유기동물, 국회, 협력|1|ctadj1rc
+강아지, 고양이에게 미움받는 사람의 6가지 특징|강아지, 고양이, 반려동물, 큰 소리, 지나친 눈맞춤, 강한 향수, 갑작스러운 접촉, 머리 쓰다듬 금지, 선글라스·모자|0|cfvndxom
+너 진짜 자는 중인 거지?:고양이 수면|고양이, 수면, 수면시간, 아기고양이, 야행성, 낮잠, 사냥본능, 스트레스|2|2m3apdiq
+독일의 유기동물보호소, '티어하임'을 아시나요?|티어하임, 유기동물, 입양률 90%, 무안락사 원칙, 동물보호법, 민간후원, 자원봉사, 반려동물 문화, 생활환경|0|ppqzzhp1
+고양이 기분, 한눈에 알 수 있다?!|고양이 행동, 기분·감정, 그루밍(몸 핥기), 부비부비(비비기), 배 보이기, 신뢰, 마킹(소유 표시), 스트레스 완화, 반려동물 상식|2|33s0tiph
+반려견과의 이상적인 산책을 위해:산책의 기술|반려견 산책, 리더십, 목줄 관리, 산책훈련, 강아지 행동 이해, 고집 대처, 양육 팁|1|ihu9cepr
+선진국의 기준을 묻다.|동물복지, 야생동물구조, 레스스토커, St. Tiggywinkles, 동물병원지원, 동물권, 재활치료, 반려동물문제|0|evdjb50j
+반려견 놀이터 사용가이드 -서울편-|반려견 놀이터, 서울, 어린이대공원, 월드컵공원, 보라매공원, 운영시간, 무료이용, 안전수칙|1|syjexzvm
+강아지 사료에 첨가하면 좋은 4가지 음식|강아지, 사료첨가, 아마씨(아마씨드), 강황(터메릭), 코코넛오일, 치아씨(치아씨드), 오메가3, 피부·털관리, 면역증진|1|afgfwg6u
+강아지로 알아보는 보호자의 성향|강아지, 보호자 성향, 견종별 성격, 치와와, 토이푸들, 미니어처 닥스훈트, 골든 리트리버, 반려동물 상식|1|c74cnlll
+고양이와 '더' 친해지는 방법|고양이, 고양이 친해지기, 첫 대면, 이름 짓기, 냄새 교환, 손 숨기기, 식사 관리, 빗질, 화장실 관리, 초보 집사|2|cyrd08ms
+강아지를 소심하게 만드는 보호자의 잘못된 행동 6가지|강아지소심함, 보호자의잘못된행동, 외부에묶기, 낯선사람접촉, 확인불가소음노출, 고압적훈육, 억지로빼내기, 혼잡한장소, 사회화과정, 기본지시훈련|1|rc53w16v
+더위 속에서 우리 강아지 건강하게 여름 나기|강아지, 여름철건강, 사료첨가, 반려견식품, 영양관리, 펫케어, 쉐이크쉑, 백오븐, 체력회복|1|1pfpfm59
+강아지의 탐지 능력은 어디까지?|강아지, 후각, 의학탐지견, 암감지, 당뇨병(저혈당), 말라리아, 휘발성유기화합물(VOC), 탐지훈련, 질병진단|1|igdw8i9y
+반려견 산책, 얼마나 자주 하시나요?|반려견 산책, 산책 빈도, 분리불안, 스트레스 해소, 사회화, 운동, 일광욕, 비만 예방, 관절 질환 예방, 수의사 권고|1|v0ael9ea
+276마리의 강아지를 가둔 '애니멀 호더'|애니멀 호더, 동물학대, 동물 방임, 강아지 구조, 대량 사육, 트라우마, 법적 책임, 뉴저지 사건|1|0ca0eg9o
+강아지와 더 친해지는 8가지 방법|강아지, 반려견, 유대감, 지시훈련, 사회화, 놀이, 산책, 규칙적사료, 만져주기, 재주훈련|1|t6iqf5vx
+노령견을 위한 건강 생활 수칙|노령견, 노화, 구강관리, 자세교정, 관절보호, 운동증가, 척추보호대, 미끄럼방지, 건강관리|1|5h7j0m0u
+산책은 원헬스의 시작입니다.|산책, 원헬스, 반려동물, 스트레스 감소, 일광욕, 운동, 건강관리, 반려견|0|1fl1xjul
+강아지 시원한 여름 나는 Tip|강아지, 여름 더위, 체온 기준 25도, 털 미용, 피부병 예방, 시원한 물 공급, 목욕(등목), 건강관리|1|ljalbtw5
+강아지는 왜 부들부들 떨까?|강아지, 떨림, 근무력증, 통증, 추위, 스트레스, 불안감, 보온, 진통·진정 건강식품|1|u2z09cjv
+코끼리 안에 암 정복, 답이 있다!!|코끼리, TP53, 암, 종양억제유전자, 세포사멸, 유전학, 암 연구, 장수|0|7ywsd8lw
+똥 색깔이 말해주는 강아지의 건강 상태|대변 색깔, 검은색 변, 붉은색 변, 보라색 변, 암회색 변, 주황색 변, 위장 출혈, 췌장 기능 이상, 간담도 문제, 동물병원|1|vvdrvup0
+당신의 습관이 반려동물을 위협하고 있다?!|반려동물 건강, 흡연, 간접흡연, 음주, 사람 음식 급여, 수면(동침), 불규칙 생활, 실내온도·건조, 산책 습관, 스트레스|0|j1jc0wp7
+산에서 만나는 '너구리', 광견병 위험이 있어요!|너구리, 광견병, 야생동물, 물림 시 병원진료, 미끼 예방약, 봄철(3~5월), 중추신경계 증상, 가려움·알레르기|0|l2rk7kso
+집안 살림 거덜내는 우리 냥이 스크래치|고양이, 스크래치, 영역표시, 발톱관리, 기분표시, 본능행동, 가구손상, 스크래처|2|upp3q02s
+아티스트'라 불리는 반려견|반려견 아티스트, 도그페인팅, 대거 2세, 레오나르도 도그빈치, 도우미견 훈련, 작품 판매, 기부, SNS·언론 소개, 동물보호|1|el0nugxv
+당신의 강아지는 얼마나 '스마트' 하나요?|강아지 지능검사, 수건 테스트, 컵 테스트, 좋아하는 장소 테스트, 물건 회수 테스트, 문제해결 능력, 행동 관찰, 반려견 평가|1|fjqgl61i
+강아지를 키우면 건강해지는 4가지 이유|강아지, 반려동물, 스트레스 감소, 면역력 증가, 심장 건강, 체중 관리, 산책, 어린이 건강, 알레르기 예방, 심신 안정|1|51g2rkub
+도심에서 정글을 느끼고 싶다면!! 파충류 이색 카페 '쿠펫'|파충류, 이색카페, 쿠펫, 삼성동, 체험, 분양, 파충류용품, 알다브라육지거북이, 뱀, 도마뱀|0|b6r41s24
+강아지도 수염이 꼭 필요할까?|강아지, 수염, 감각신경, 안전, 미용, 수염관리, 노령견, 시력저하, 백내장|1|h1yhv1ds
+고양이 변비에 대처하는 우리의 자세|고양이 변비, 변비증상, 수분부족, 식이섬유, 화장실불만, 스트레스, 헤어볼, 요로질환, 관장약금지, 수분공급|2|i5exa8r1
+우리 강아지 악취의 숨은 주범, 항문낭 관리법|항문낭, 강아지 악취, 항문낭 짜기, 분비물 관리, 월 1~2회, 항문 주변 털 정리, 농양·감염 예방, 자가관리 방법|1|0q1occh5
+꼭' 알아야 하는 반려동물의 심각한 질환 10가지|반려동물, 심각한 질환, 신장질환, 당뇨병, 관절염, 예방, 정기검진, 식단조절, 운동, 관리|0|aowd8zqu
+너구리와 함께 놀 수 있는 이색카페 '블라인드 앨리'|너구리카페, 블라인드앨리, 동물카페, 안전수칙, 위생, 용산, 체험카페, 너구리관리, 방문팁|0|6ti6ufcc
+고양이 혀는 왜 까칠까칠하죠?|고양이 혀, 혀의 돌기(타치라), 그루밍, 헤어볼, 육식동물 적응, 이물 섭취(실·비닐), 침의 살균 작용, 수술 후 관리|2|njh7bai2
+A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운증후군, 장애아동, 사회적 연결, 책임감, 리얼리티 광고, Kleenex, 치료적효과|0|l6jd9s15
+어떤 과일이나 야채가 강아지에게 안전할까?|강아지, 과일 안전, 아보카도 금지, 수박 껍질 주의, 사과 씨앗 주의, 레몬 주의, 복숭아 과다섭취 주의, 블루베리, 파인애플, 바나나|1|5b86guam
+아픈 강아지가 보내는 7가지 신호|강아지, 통증 신호, 증상, 행동 변화, 통증 은폐, 보호자 관찰, 반려동물, 건강 관리|1|fpavnvud</script>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ===================== 1단계 ② 메모 · 텍스트 파일 ===================== */
+  var ta        = document.getElementById('commentInput');
+  var countEl   = document.getElementById('commentCount');
+  var resetBtn  = document.getElementById('commentReset');
+  var fileDrop  = document.getElementById('fileDrop');
+  var fileInput = document.getElementById('fileInput');
+  var fileCard  = document.getElementById('fileCard');
+  var fileName  = document.getElementById('fileName');
+  var fileMeta  = document.getElementById('fileMeta');
+  var fileDel   = document.getElementById('fileDel');
+  var entryBox  = document.getElementById('entryBox');
+  var entryHead = document.getElementById('entryHead');
+  var entryList = document.getElementById('entryList');
+  var toast     = document.getElementById('toast');
+
+  /* ---------- 저장소 도우미 (사생활 보호 모드 · file:// 에서도 안전) ---------- */
+  var HOSP_KEY      = 'petmate_hospital';        /* 이 기기에 마지막으로 쓴 병원 이름 */
+  var CARDS_KEY_PFX = 'petmate_cards::';         /* 병원 이름별로 분리 저장 (petmate_cards::<병원명>) */
+  var activeHospital = '';                       /* 지금 화면에 열려 있는 병원 */
+
+  function lsGet(k){
+    try { return window.localStorage.getItem(k); } catch(e){ return null; }
+  }
+  function lsSet(k, v){
+    try { window.localStorage.setItem(k, v); return true; } catch(e){ return false; }
+  }
+  function lsDel(k){
+    try { window.localStorage.removeItem(k); } catch(e){}
+  }
+  /* 병원별 저장 키 — 병원 이름이 다르면 다른 칸에 저장된다 */
+  function cardsKeyFor(name){
+    var n = cleanHospital(name);
+    return n ? CARDS_KEY_PFX + n : '';
+  }
+
+  /* ===================== ① 우리 병원 이름 (병원별 설정) ===================== */
+  var hospInput = document.getElementById('hospitalName');
+  var exHospEl  = document.getElementById('exHosp');
+  var confidEl  = document.getElementById('confidTitle');
+
+  function cleanHospital(s){
+    return (s || '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .replace(/^[\s"'“”‘’\[\]]+|[\s"'“”‘’\[\]]+$/g, '')
+      .replace(/\s*(입니다|이에요|예요)\.?$/, '')
+      .trim();
+  }
+  /* 입력된 병원 이름 (없으면 빈 문자열) */
+  function hospitalName(){
+    if (hospInput && typeof hospInput.value === 'string' && cleanHospital(hospInput.value)) {
+      return cleanHospital(hospInput.value);
+    }
+    return cleanHospital(lsGet(HOSP_KEY) || '');
+  }
+  /* 문구 첫 줄에 들어갈 병원 소개 한 줄 */
+  function hospitalLine(){
+    var n = hospitalName();
+    return (n ? n : '동물병원') + '입니다.';
+  }
+  function syncHospital(){
+    var n = hospitalName();
+    if (exHospEl) exHospEl.textContent = (n ? n : '동물병원') + '입니다.';
+    if (confidEl) confidEl.textContent = '🔒 ' + (n ? n : '우리 병원') + ' 내부 전용 · 자료 외부 유출 금지';
+    if (made) renderResult();
+  }
+
+  /* 병원이 바뀌면 이 병원 것만 남긴다 — 코멘트·파일·결과는 메모리에만 있고 즉시 버린다 */
+  function resetWorkspace(){
+    ta.value = '';
+    srcNames = { pet: '', guardian: '' };
+    entries = [];
+    made = false;
+    manualCard = null;
+    lastMsg = '';
+    hideJsonWarn();
+    clearFile();
+    entryBox.hidden = true;
+    if (picker) picker.hidden = true;
+    if (swapBtn) swapBtn.textContent = '다른 카드로 바꾸기 ▾';
+    if (result) result.hidden = true;
+    if (pvEmpty) pvEmpty.hidden = false;
+    if (pvText) pvText.innerHTML = '';
+    if (whoami){ whoami.textContent = ''; whoami.hidden = true; }
+    if (pvNote){ pvNote.textContent = ''; pvNote.hidden = true; }
+    if (badge) badge.textContent = '0자 / 300자 미만';
+    if (matchTag) matchTag.textContent = '🔗 자동으로 고른 펫메이트 카드';
+    if (copyMsg){
+      copyMsg.textContent = '📋 문구 복사하기';
+      copyMsg.classList.remove('done');
+    }
+    syncState();
+  }
+
+  function onHospitalChanged(){
+    var now = hospitalName();
+    if (cleanHospital(activeHospital) !== now){
+      activeHospital = now;
+      var hn = document.getElementById('hospNote');
+      if (hn) hn.hidden = true;             /* 이름을 바꾸면 안내는 사라진다 */
+      resetWorkspace();                     /* 타 병원 코멘트·파일·결과 즉시 삭제 */
+      loadCardsFor(now);                    /* 이 병원 칸에 저장된 카드만 읽어 온다 */
+    }
+    syncHospital();
+  }
+
+  /* ===================== ② 시스템 데이터(JSON) 차단 ===================== */
+  var jsonWarn      = document.getElementById('jsonWarn');
+  var jsonWarnClose = document.getElementById('jsonWarnClose');
+
+  var JSON_KEY_RE = /"(updatedAt|schemaVersion|coverage|cases|cats|cards|version)"\s*:/;
+
+  /* 카톡 코멘트가 아니라 펫메이트 같은 시스템이 내보낸 JSON 데이터인지 */
+  function looksLikeSystemJson(text){
+    var t = (text || '').replace(/^\uFEFF/, '').replace(/^\s+/, '');
+    if (!t) return false;
+    if (t.charAt(0) !== '{' && t.charAt(0) !== '[') return false;
+    if (JSON_KEY_RE.test(t)) return true;
+    try {
+      var v = JSON.parse(t);
+      return !!v && typeof v === 'object';
+    } catch(e){ return false; }
+  }
+  function showJsonWarn(){
+    if (jsonWarn){
+      jsonWarn.hidden = false;
+      if (jsonWarn.scrollIntoView) jsonWarn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    showToast('진료 코멘트가 아니라 시스템 데이터(JSON) 파일이에요. 카톡 대화 내보내기(.txt)나 진료 코멘트를 올려 주세요.', '⚠️');
+  }
+  function hideJsonWarn(){ if (jsonWarn) jsonWarn.hidden = true; }
+  if (jsonWarnClose) jsonWarnClose.addEventListener('click', hideJsonWarn);
+
+  /* 메모장에 JSON이 들어오면 안내하고 비운다 */
+  function guardMemo(){
+    if (!looksLikeSystemJson(ta.value)) return false;
+    ta.value = '';
+    made = false;
+    srcNames = { pet: '', guardian: '' };
+    showJsonWarn();
+    syncState();
+    return true;
+  }
+
+  var tTimer   = null;
+  var srcNames = { pet: '', guardian: '' };   /* 파일에서 읽은 이름 */
+  var entries  = [];                          /* 파일에서 뽑은 진료 코멘트 */
+
+  function memoText(){ return ta.value.replace(/^\s+/, '').replace(/\s+$/, ''); }
+  function showToast(msg, icon){
+    toast.innerHTML = '<span class="e">' + (icon || '✅') + '</span>' + msg;
+    toast.classList.add('show');
+    clearTimeout(tTimer);
+    tTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2800);
+  }
+  function humanSize(b){
+    if (!b) return '';
+    if (b < 1024) return b + 'B';
+    if (b < 1024 * 1024) return Math.round(b / 1024) + 'KB';
+    return (b / 1024 / 1024).toFixed(1) + 'MB';
+  }
+
+  /* ---------- 코멘트에서 아이 이름 · 보호자 이름 읽기 ---------- */
+  var BAD_NAME = /^(감소|증가|정상|이상|없음|유지|처방|검사|확인|필요|개선|악화|진행|반복|보호자|반려동물|반려견|반려묘|아이|환자|이름|결과|치료|수술|약물|주의|권장|관리|내원|재진|사진|동영상)$/;
+
+  function isGuardian(s){ return /^[가-힣]{2,4}$/.test(s) && !BAD_NAME.test(s); }
+  function isPet(s){
+    if (!s || BAD_NAME.test(s)) return false;
+    return /^[가-힣]{1,8}$/.test(s) || /^[A-Z][A-Za-z]{1,10}$/.test(s);
+  }
+  function tidyName(s){
+    return (s || '')
+      .replace(/^[\s\[\(<"'“”·・,]+|[\s\]\)>"'“”,.]+$/g, '')
+      .replace(/\s*(님|보호자|환자)$/, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+  function parseNames(text){
+    var t = (text || '').replace(/\u00a0/g, ' ');
+    var pet = '', guardian = '', m, p, g;
+
+    /* ① 릴리 ( 이원정 님 ) · 몽이 ( 김주원님 ) · 릴리(이원정) */
+    m = t.match(/([가-힣A-Za-z0-9]{1,12})\s*\(\s*([가-힣]{2,4})\s*(?:님)?\s*\)/);
+    if (m){
+      p = tidyName(m[1]); g = tidyName(m[2]);
+      if (isPet(p) && isGuardian(g)){ pet = p; guardian = g; }
+    }
+    /* ② 릴리/이원정 · 릴리 · 이원정 */
+    if (!pet){
+      m = t.match(/([가-힣A-Za-z0-9]{1,12})\s*[/·・]\s*([가-힣]{2,4})(?![가-힣])/);
+      if (m){
+        p = tidyName(m[1]); g = tidyName(m[2]);
+        if (isPet(p) && isGuardian(g)){ pet = p; guardian = g; }
+      }
+    }
+    /* ③ 보호자: 이원정 */
+    if (!guardian){
+      m = t.match(/보호자\s*[:：\-]\s*([가-힣]{2,4})/);
+      if (m && isGuardian(tidyName(m[1]))) guardian = tidyName(m[1]);
+    }
+    /* ④ 환자: 릴리 · 아이 이름: 릴리 */
+    if (!pet){
+      m = t.match(/(?:환자|아이|반려동물|반려견|반려묘)\s*(?:이름)?\s*[:：]\s*([가-힣A-Za-z0-9]{1,12})/);
+      if (m && isPet(tidyName(m[1]))) pet = tidyName(m[1]);
+    }
+    /* ⑤ 이원정 보호자 */
+    if (!guardian){
+      m = t.match(/([가-힣]{2,4})\s*보호자(?:님)?/);
+      if (m && isGuardian(tidyName(m[1]))) guardian = tidyName(m[1]);
+    }
+    return { pet: pet, guardian: guardian };
+  }
+
+  /* ---------- 카톡 대화 내보내기(.txt) 읽기 ---------- */
+  var DATE_RE = /^(?:-{3,}\s*)?(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*[월화수목금토일]?요일?(?:\s*-{3,})?\s*$/;
+  var MSG_RE  = /^\[(.+?)\]\s*\[(오전|오후)\s*(\d{1,2}):(\d{2})\]\s?([\s\S]*)$/;
+  var SYS_RE  = /^<?\s*(메시지가 삭제되었습니다|삭제된 메시지입니다|삭제된 메시지)\s*\.?\s*>?$/;
+
+  function parseKakao(text){
+    var lines = (text || '').split(/\r\n|\r|\n/);
+    var dates = [], msgs = [], buf = null, curDate = -1, i, L, dm, mm;
+
+    for (i = 0; i < lines.length; i++){
+      L = lines[i];
+      dm = L.match(DATE_RE);
+      if (dm){
+        if (buf){ msgs.push(buf); buf = null; }
+        dates.push({ label: dm[1] + '년 ' + dm[2] + '월 ' + dm[3] + '일' });
+        curDate = dates.length - 1;
+        continue;
+      }
+      mm = L.match(MSG_RE);
+      if (mm){
+        if (buf) msgs.push(buf);
+        buf = { d: curDate, sender: mm[1].trim(), time: mm[3] + ':' + mm[4], text: mm[5] };
+        continue;
+      }
+      if (SYS_RE.test(L.replace(/\s+$/, '').trim())) continue;   /* 카톡 시스템 문구 */
+      if (buf) buf.text += '\n' + L;
+    }
+    if (buf) msgs.push(buf);
+    return { dates: dates, msgs: msgs };
+  }
+
+  function isMediaNote(t){
+    t = (t || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+    if (!t) return true;
+    if (/^(사진|동영상|이모티콘|파일\s*:|삭제된 메시지|메시지가 삭제)/.test(t)) return true;
+    if (/(사진|동영상)\s*\d*\s*장?$/.test(t) && t.length <= 24) return true;
+    if (/^https?:\/\//.test(t)) return true;
+    return false;
+  }
+
+  /* 마지막 날짜의 원장님 코멘트만 뽑아 아이별로 묶는다 */
+  function buildEntries(parsed, anySender){
+    var out = [], byKey = {};
+    if (!parsed.dates.length) return out;
+    var last = parsed.dates.length - 1;
+    var list = parsed.msgs.filter(function(m){ return m.d === last; });
+    var cur = null, chain = false;
+
+    list.forEach(function(m){
+      var txt = (m.text || '').replace(/\u00a0/g, ' ').replace(/\s+$/, '');
+      if (!txt) return;
+      var first = txt.split('\n')[0].replace(/\s+$/, '');
+      var vet = anySender || m.sender.indexOf('원장') >= 0;
+
+      if (!vet){ chain = false; return; }
+      if (isMediaNote(txt)){ chain = false; return; }
+
+      var nm = parseNames(first);
+      var header = nm.pet && first.length <= 40 &&
+                   (txt.indexOf('(') >= 0 || first.indexOf('님') >= 0 || first.indexOf('보호자') >= 0);
+
+      if (header){
+        var key = nm.pet + '|' + nm.guardian;
+        var nl = txt.indexOf('\n');
+        var firstLine = nl < 0 ? txt : txt.slice(0, nl);
+        var close = firstLine.lastIndexOf(')');
+        var restFirst = close >= 0 ? firstLine.slice(close + 1).replace(/^[\s,\-–—:·]+/, '') : '';
+        var body = (restFirst ? restFirst + '\n' : '') + txt.split('\n').slice(1).join('\n').replace(/^\s+|^-?\s+|\s+$/g, '');
+        var e = byKey[key];
+        if (!e){
+          e = { pet: nm.pet, guardian: nm.guardian, bodies: [] };
+          byKey[key] = e; out.push(e);
+        }
+        if (body) e.bodies.push(body);
+        cur = e; chain = true;
+        return;
+      }
+      /* 바로 뒤에 이어 붙는 원장님 코멘트("연고는 1일 1회", "폴 최근 …") */
+      if (cur && chain && txt.length <= 150){
+        var b = txt;
+        if (cur.pet && b.indexOf(cur.pet) === 0){
+          b = b.slice(cur.pet.length).replace(/^[은는이가의,\s]+/, '');
+        }
+        if (b) cur.bodies.push(b);
+        return;
+      }
+      chain = false;
+    });
+
+    return out.map(function(e){
+      var body = e.bodies.join('\n\n')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .replace(/^[ \t]+|[ \t]+$/g, '');
+      return { pet: e.pet, guardian: e.guardian, body: body };
+    }).filter(function(e){ return e.body.length > 1; });
+  }
+
+  /* ---------- 파일 읽기 ---------- */
+  function decodeText(buf){
+    var u8 = new Uint8Array(buf), s = '';
+    try { s = new TextDecoder('utf-8').decode(u8); } catch(e){ s = ''; }
+    if (!s || s.indexOf('\uFFFD') >= 0){
+      try {
+        var alt = new TextDecoder('euc-kr').decode(u8);
+        if (alt && alt.indexOf('\uFFFD') < 0) s = alt;
+      } catch(e){}
+    }
+    return (s || '').replace(/^\uFEFF/, '');
+  }
+
+  function setFile(file){
+    if (!file) return;
+    var nm = (file.name || '').toLowerCase();
+    if (/\.(json|jsonl|js|xml|html?)$/.test(nm) || /json/.test(file.type || '')){
+      clearFile();
+      showJsonWarn();
+      return;
+    }
+    if (!/\.(txt|csv|md|text|log|tsv)$/.test(nm) && !/^text\//.test(file.type || '')){
+      showToast('텍스트 파일(.txt · .csv · .md)만 올릴 수 있어요.', '⚠️');
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024){
+      showToast('20MB 이하 파일을 올려 주세요.', '⚠️');
+      return;
+    }
+    var fr = new FileReader();
+    fr.onload = function(){ onLoaded(file, decodeText(fr.result)); };
+    fr.onerror = function(){ showToast('파일을 읽지 못했어요. 다시 시도해 주세요.', '⚠️'); };
+    fr.readAsArrayBuffer(file);
+  }
+
+  function onLoaded(file, text){
+    /* 펫메이트 시스템 데이터(JSON)를 코멘트로 착각해 넣지 않도록 먼저 걸러낸다 */
+    if (looksLikeSystemJson(text)){
+      clearFile();
+      ta.value = '';
+      srcNames = { pet: '', guardian: '' };
+      made = false;
+      syncState();
+      showJsonWarn();
+      return;
+    }
+    hideJsonWarn();
+
+    fileName.textContent = file.name || '텍스트 파일';
+    fileMeta.textContent = humanSize(file.size) + ' · 브라우저 메모리에서만 읽어요 (저장·전송 없음)';
+    fileCard.hidden = false;
+    fileDrop.hidden = true;
+
+    var parsed = parseKakao(text);
+    var found = buildEntries(parsed, false);
+    if (!found.length) found = buildEntries(parsed, true);   /* 원장님 표기가 없으면 전체에서 */
+
+    entries = found;
+
+    if (found.length > 1){
+      renderEntries(parsed);
+      loadEntry(0, false);
+      showToast('코멘트 ' + found.length + '건을 찾았어요. 만들 아이를 눌러 주세요.', '📄');
+      entryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    entryBox.hidden = true;
+    if (found.length === 1){
+      loadEntry(0, true);
+      showToast('코멘트를 찾아 2단계에 문구까지 만들었어요.', '✨');
+      return;
+    }
+
+    /* 코멘트 형식이 없는 일반 메모 파일 */
+    ta.value = text.replace(/\r\n?/g, '\n')
+                   .replace(/\n{3,}/g, '\n\n')
+                   .replace(/^\s+/, '')
+                   .slice(0, 4000)
+                   .replace(/\s+$/, '');
+    srcNames = parseNames(ta.value.slice(0, 300));
+    made = false;
+    syncState();
+    showToast('파일 내용을 1단계 ②에 넣었어요. 2단계 버튼을 눌러 주세요.', '📄');
+  }
+
+  function renderEntries(parsed){
+    var d = parsed.dates[parsed.dates.length - 1];
+    entryHead.textContent = '📅 ' + d.label + ' 코멘트 ' + entries.length + '건 — 아이를 누르면 2단계에 문구가 바로 만들어져요';
+    var html = '';
+    entries.forEach(function(e, i){
+      html += '<button type="button" class="echip" data-i="' + i + '">' +
+              '<span>' + esc(e.pet || '이름 없음') + '</span>' +
+              (e.guardian ? '<span class="eg">· ' + esc(e.guardian) + '</span>' : '') +
+              '</button>';
+    });
+    entryList.innerHTML = html;
+    entryBox.hidden = false;
+  }
+
+  function markEntry(i){
+    var chips = entryList.querySelectorAll('.echip');
+    Array.prototype.forEach.call(chips, function(b){
+      if (parseInt(b.getAttribute('data-i'), 10) === i) b.classList.add('on');
+      else b.classList.remove('on');
+    });
+  }
+
+  function loadEntry(i, generate){
+    var e = entries[i];
+    if (!e) return;
+    ta.value = e.body;
+    srcNames = { pet: e.pet || '', guardian: e.guardian || '' };
+    markEntry(i);
+    made = !!generate;
+    syncState();
+    if (generate) result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function clearFile(){
+    fileInput.value = '';
+    fileName.textContent = '';
+    fileMeta.textContent = '';
+    fileCard.hidden = true;
+    fileDrop.hidden = false;
+    entryBox.hidden = true;
+    entryList.innerHTML = '';
+    entries = [];
+  }
+
+  /* ---- 파일 올리기 · 끌어다 놓기 ---- */
+  fileDrop.addEventListener('click', function(){ fileInput.click(); });
+  fileDrop.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener('change', function(){
+    setFile(fileInput.files && fileInput.files[0]);
+  });
+  fileDel.addEventListener('click', function(e){
+    e.stopPropagation();
+    clearFile();
+    showToast('올린 파일을 지웠어요.', '🗑️');
+  });
+  entryList.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.echip') : null;
+    if (!btn) return;
+    loadEntry(parseInt(btn.getAttribute('data-i'), 10), true);
+    showToast('이 아이의 문구를 만들었어요. 2단계에서 확인하세요.', '✨');
+  });
+
+  function stopDrag(e){ e.preventDefault(); e.stopPropagation(); }
+
+  fileDrop.addEventListener('dragenter', function(e){ stopDrag(e); fileDrop.classList.add('over'); });
+  fileDrop.addEventListener('dragover',  function(e){ stopDrag(e); fileDrop.classList.add('over'); });
+  fileDrop.addEventListener('dragleave', function(e){ stopDrag(e); fileDrop.classList.remove('over'); });
+  fileDrop.addEventListener('drop', function(e){
+    stopDrag(e);
+    fileDrop.classList.remove('over');
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) setFile(f);
+  });
+  document.addEventListener('dragover', function(e){
+    var dt = e.dataTransfer;
+    if (!dt) return;
+    var hasFiles = dt.types ? Array.prototype.indexOf.call(dt.types, 'Files') > -1
+                            : !!(dt.files && dt.files.length);
+    if (hasFiles) e.preventDefault();
+  });
+  document.addEventListener('drop', function(e){
+    if (e.defaultPrevented) return;
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!f) return;
+    e.preventDefault();
+    setFile(f);
+  });
+
+  /* ===================== 카드 목록 · 증상 매칭 ===================== */
+  var CARDS = [], byUrl = {};
+  (document.getElementById('cardData').textContent || '').split('\n').forEach(function(line){
+    line = line.replace(/\s+$/, '');
+    if (!line || line.indexOf('|') < 0) return;
+    var p = line.split('|');
+    if (p.length < 4) return;
+    var c = { t: p[0], g: p[1] || '', s: parseInt(p[2], 10) || 0, u: 'https://m.pet-mate.net/' + p[3] };
+    CARDS.push(c); byUrl[c.u] = c;
+  });
+  var FALLBACK_URL = 'https://m.pet-mate.net/aa2h7yi3';
+  var DEFAULT_CARDS = CARDS.slice();          /* 기본 내장 목록 (복원용) */
+
+  /* ===================== ③ 내 병원 엑셀(.xlsx) 카드 목록 ===================== */
+  var xlsxBtn    = document.getElementById('xlsxBtn');
+  var xlsxInput  = document.getElementById('xlsxInput');
+  var xlsxReset  = document.getElementById('xlsxReset');
+  var xlsxStatus = document.getElementById('xlsxStatus');
+  var SHEETJS_SRC = 'https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.full.min.js';
+  var customCards = null;                     /* 내 병원 엑셀에서 읽은 카드 */
+  var customName  = '';
+
+  function cardUrl(code){ return 'https://m.pet-mate.net/' + code; }
+  function cardCode(u){
+    return String(u || '').replace(/^https?:\/\/[^\/]+\//, '').replace(/[?#].*$/, '').replace(/\/+$/, '');
+  }
+  function cardToRow(c){ return [c.t, c.g, c.s, cardCode(c.u)]; }
+  function rowToCard(r){
+    if (!r || r.length < 1) return null;
+    var t = String(r[0] == null ? '' : r[0]).replace(/\s+/g, ' ').trim();
+    var code = cardCode(r[3]);
+    if (!t || !code || !/^[A-Za-z0-9_-]{4,}$/.test(code)) return null;
+    return { t: t, g: String(r[1] == null ? '' : r[1]).replace(/\s+/g, ' ').trim(), s: toSpecies(r[2]), u: cardUrl(code) };
+  }
+  function toSpecies(v){
+    var n = parseInt(v, 10);
+    if (n === 1 || n === 2) return n;
+    var s = String(v == null ? '' : v);
+    var dog = /강아지|반려견|멍|dog/i.test(s);
+    var cat = /고양이|반려묘|냥|묘|cat/i.test(s);
+    if (dog && cat) return 0;          /* 「강아지 + 고양이」는 공통 */
+    if (cat) return 2;
+    if (dog) return 1;
+    return 0;
+  }
+  function setCards(list){
+    if (!list || !list.length) return;
+    CARDS.length = 0;
+    byUrl = {};
+    list.forEach(function(c){ CARDS.push(c); byUrl[c.u] = c; });
+  }
+
+  /* 여러 시트에서 카드 목록 찾기 (제목·해시태그·대상·링크 열 인식) */
+  function cardsFromRows(rows){
+    var out = [], map = null, start = 0, i, j;
+    for (i = 0; i < Math.min(rows.length, 25); i++){
+      var hr = (rows[i] || []).map(function(x){ return String(x == null ? '' : x).replace(/\s+/g, '').toLowerCase(); });
+      var m = {}, hits = 0;
+      for (j = 0; j < hr.length; j++){
+        var h = hr[j];
+        if (!h) continue;
+        if (m.t == null && /제목|타이틀|title|카드명|콘텐츠명|컨텐츠명/.test(h)) { m.t = j; hits++; }
+        else if (m.g == null && /태그|해시|hash|키워드|keyword|증상|질환/.test(h)) { m.g = j; hits++; }
+        else if (m.s == null && /대상|구분|종류|species|target|반려동물|동물구분/.test(h)) { m.s = j; hits++; }
+        else if (m.u == null && /링크|url|주소|코드|code|link/.test(h)) { m.u = j; hits++; }
+      }
+      if (m.t != null && m.u != null && hits >= 3){ map = m; start = i + 1; break; }
+    }
+    if (!map){ map = { t: 0, g: 1, s: 2, u: 3 }; start = 0; }   /* 머리글 없으면 기본 4열 */
+
+    /* 「대상」 열 이름이 달라도(예: 카테고리 1) 값이 강아지·고양이인 열을 찾아 쓴다 */
+    if (map.s == null){
+      var spCount = {}, spBest = -1, spCnt = 0;
+      rows.slice(start, start + 40).forEach(function(r){
+        if (!r) return;
+        for (var k = 0; k < r.length; k++){
+          var v = String(r[k] == null ? '' : r[k]).replace(/\s+/g, '');
+          if (/^(강아지|고양이|강아지\+고양이|공통|반려견|반려묘)$/.test(v)){
+            spCount[k] = (spCount[k] || 0) + 1;
+            if (spCount[k] > spCnt){ spCnt = spCount[k]; spBest = k; }
+          }
+        }
+      });
+      if (spBest >= 0 && spCnt >= 3) map.s = spBest;
+    }
+
+    rows.slice(start).forEach(function(r){
+      if (!r) return;
+      var c = rowToCard([r[map.t], map.g == null ? '' : r[map.g], map.s == null ? '' : r[map.s], r[map.u]]);
+      if (c) out.push(c);
+    });
+    if (!out.length) out = guessCards(rows);   /* 머리글·열 순서가 다른 파일은 한 번 더 추정 */
+    return out;
+  }
+
+  /* 머리글이 없거나 열 순서가 다른 엑셀: 링크처럼 보이는 열을 먼저 찾아 카드로 복원 */
+  function guessCards(rows){
+    var out = [], counts = {}, urlCol = -1, bestCnt = 0, i, j;
+    for (i = 0; i < Math.min(rows.length, 80); i++){
+      var r = rows[i] || [];
+      for (j = 0; j < r.length; j++){
+        var s = String(r[j] == null ? '' : r[j]).trim();
+        if (!s) continue;
+        if (/pet-mate\.net\/[A-Za-z0-9_-]{4,}/.test(s) || /^[A-Za-z0-9_-]{6,12}$/.test(s)){
+          counts[j] = (counts[j] || 0) + 1;
+          if (counts[j] > bestCnt){ bestCnt = counts[j]; urlCol = j; }
+        }
+      }
+    }
+    if (urlCol < 0 || bestCnt < 3) return out;
+
+    rows.forEach(function(r){
+      if (!r) return;
+      var code = cardCode(r[urlCol]);
+      if (!/^[A-Za-z0-9_-]{4,}$/.test(code)) return;
+      var t = '', g = '', sp = 0, k, v, tags = '';
+      for (k = 0; k < r.length; k++){
+        if (k === urlCol) continue;
+        v = String(r[k] == null ? '' : r[k]).trim();
+        if (!v) continue;
+        if (!sp && v.length <= 6 && /강아지|고양이|공통|반려견|반려묘/.test(v)){ sp = toSpecies(v); continue; }
+        if (/^[\d\s.,%:-]+$/.test(v)) continue;                 /* 숫자·수치 열 */
+        if ((v.match(/[,·]/g) || []).length >= 2){                 /* 해시태그 열 */
+          if (v.length >= tags.length) tags = v;
+          continue;
+        }
+        if (v.length > t.length) t = v;
+      }
+      g = tags;
+      if (!t && tags){ t = tags; g = ''; }
+      if (!t) return;
+      out.push({ t: t, g: g, s: sp, u: cardUrl(code) });
+    });
+    return out;
+  }
+  function cardsFromWorkbook(wb){
+    var out = [], seen = {};
+    var names = (wb && wb.SheetNames) || [];
+    names.forEach(function(n){
+      var ws = wb.Sheets && wb.Sheets[n];
+      if (!ws) return;
+      var rows;
+      try { rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '', blankrows: false }); }
+      catch(e){ return; }
+      if (!rows || !rows.length) return;
+      cardsFromRows(rows).forEach(function(c){
+        if (seen[c.u]) return;
+        seen[c.u] = 1; out.push(c);
+      });
+    });
+    return out;
+  }
+
+  function loadSheetJS(cb){
+    if (typeof XLSX !== 'undefined' && XLSX) { cb(true); return; }
+    if (!document.createElement || !document.head) { cb(false); return; }
+    var done = false, s;
+    try {
+      s = document.createElement('script');
+      s.src = SHEETJS_SRC;
+      s.async = true;
+      s.onload = function(){ if (done) return; done = true; cb(typeof XLSX !== 'undefined' && !!XLSX); };
+      s.onerror = function(){ if (done) return; done = true; cb(false); };
+      document.head.appendChild(s);
+    } catch(e){ cb(false); return; }
+    setTimeout(function(){
+      if (done) return; done = true;
+      cb(typeof XLSX !== 'undefined' && !!XLSX);
+    }, 9000);
+  }
+
+  function renderXlsxStatus(mode){
+    if (!xlsxStatus) return;
+    if (customCards && customCards.length){
+      var n = customCards.length;
+      var nm = esc(customName || '내 병원 엑셀');
+      if (mode === 'memory'){
+        var why = cardsKeyFor(hospitalName())
+          ? '저장 공간이 부족해 이번 화면에서만 적용됐어요(창을 닫으면 사라집니다).'
+          : '저장은 안 됐어요. 「🏥 우리 병원 이름」을 먼저 적으면 다음에도 이 병원 카드로 불러옵니다.';
+        xlsxStatus.innerHTML = '📊 <b>' + nm + '</b> · 카드 <b>' + n + '</b>개 적용 중 — ' + why;
+      } else {
+        xlsxStatus.innerHTML = '📊 <b>' + nm + '</b> · 카드 <b>' + n + '</b>개 — 「' + esc(hospitalName()) + '」 칸에만 저장됐어요(서버 전송 없음).';
+      }
+      if (xlsxReset) xlsxReset.hidden = false;
+    } else {
+      xlsxStatus.innerHTML = '기본 내장 카드 <b>' + CARDS.length + '</b>개로 동작해요. 내 병원 엑셀을 올리면 이 병원 구독 카드로 바뀝니다(서버 전송 없음).';
+      if (xlsxReset) xlsxReset.hidden = true;
+    }
+  }
+
+  /* 병원 이름별 저장분을 읽어 온다 — 다른 병원 카드는 절대 불러오지 않는다 */
+  function readCards(name){
+    var key = cardsKeyFor(name);
+    if (!key) return null;
+    var raw = lsGet(key);
+    if (!raw) return null;
+    try {
+      var o = JSON.parse(raw);
+      var rows = (o && o.rows) || [];
+      var list = [];
+      rows.forEach(function(r){ var c = rowToCard(r); if (c) list.push(c); });
+      if (!list.length) return null;
+      return { list: list, name: (o && o.name) || '' };
+    } catch(e){ return null; }
+  }
+
+  function loadCardsFor(name){
+    var got = readCards(name);
+    if (got){
+      customCards = got.list;
+      customName  = got.name;
+      setCards(got.list);
+      renderXlsxStatus('saved');
+    } else {
+      customCards = null;
+      customName  = '';
+      setCards(DEFAULT_CARDS);
+      renderXlsxStatus('default');
+    }
+    if (picker && !picker.hidden) renderPicker();
+  }
+
+  function applyCustomCards(list, fname){
+    if (!list || !list.length) return;
+    customCards = list;
+    customName = fname || '';
+    setCards(list);
+    manualCard = null;
+    var key = cardsKeyFor(hospitalName());
+    var saved = false;
+    if (key) saved = lsSet(key, JSON.stringify({ name: customName, at: Date.now(), rows: list.map(cardToRow) }));
+    renderXlsxStatus(saved ? 'saved' : 'memory');
+    if (made) renderResult();
+    if (picker && !picker.hidden) renderPicker();
+    if (saved) showToast('내 병원 카드 ' + list.length + '개를 적용했어요. 이 병원 이름 칸에만 저장됩니다.', '📊');
+    else if (key) showToast('내 병원 카드 ' + list.length + '개를 화면에만 적용했어요. 이 브라우저의 저장 공간이 부족합니다.', '📊');
+    else showToast('내 병원 카드 ' + list.length + '개를 적용했어요. 병원 이름을 적으면 다음에도 그대로 쓸 수 있어요.', '📊');
+  }
+
+  function handleXlsx(file){
+    if (!file) return;
+    var nm = (file.name || '').toLowerCase();
+    if (!/\.(xlsx|xls|csv)$/.test(nm)){
+      showToast('엑셀 파일(.xlsx · .xls · .csv)만 올릴 수 있어요.', '⚠️');
+      return;
+    }
+    if (file.size > 30 * 1024 * 1024){ showToast('30MB 이하 파일을 올려 주세요.', '⚠️'); return; }
+    if (xlsxBtn) xlsxBtn.disabled = true;
+    showToast('엑셀을 읽는 중이에요…', '📊');
+    loadSheetJS(function(ok){
+      if (!ok){
+        if (xlsxBtn) xlsxBtn.disabled = false;
+        showToast('엑셀 기능을 불러오지 못했어요(인터넷 연결 확인). 지금도 기본 카드 ' + CARDS.length + '개로 그대로 쓰실 수 있어요.', '⚠️');
+        return;
+      }
+      var fr = new FileReader();
+      fr.onload = function(){
+        var list = [];
+        try {
+          var wb = XLSX.read(new Uint8Array(fr.result), { type: 'array' });
+          list = cardsFromWorkbook(wb);
+        } catch(err){ list = []; }
+        if (xlsxBtn) xlsxBtn.disabled = false;
+        if (!list.length){
+          showToast('엑셀에서 펫카드 목록을 찾지 못했어요. 펫메이트 [엑셀 다운로드] 파일인지 확인해 주세요.', '⚠️');
+          return;
+        }
+        applyCustomCards(list, file.name || '');
+      };
+      fr.onerror = function(){
+        if (xlsxBtn) xlsxBtn.disabled = false;
+        showToast('파일을 읽지 못했어요. 다시 시도해 주세요.', '⚠️');
+      };
+      fr.readAsArrayBuffer(file);
+    });
+  }
+
+  if (xlsxBtn) xlsxBtn.addEventListener('click', function(){ if (xlsxInput) xlsxInput.click(); });
+  if (xlsxInput) xlsxInput.addEventListener('change', function(){
+    var f = xlsxInput.files && xlsxInput.files[0];
+    handleXlsx(f);
+    xlsxInput.value = '';
+  });
+  if (xlsxReset) xlsxReset.addEventListener('click', function(){
+    var key = cardsKeyFor(hospitalName());
+    if (key) lsDel(key);
+    customCards = null; customName = '';
+    setCards(DEFAULT_CARDS);
+    manualCard = null;
+    renderXlsxStatus('default');
+    if (made) renderResult();
+    if (picker && !picker.hidden) renderPicker();
+    showToast('이 병원 칸에 저장된 엑셀 카드를 지우고 기본 목록으로 되돌렸어요.', '↩️');
+  });
+
+  var TOPICS = [
+    ['pancreas',   ['췌장'], ['췌장'], []],
+    ['seizure',    ['발작','경련'], ['발작','경련'], []],
+    ['toxic',      ['중독','독성'], ['중독','독성'], []],
+    ['foreign',    ['이물','삼킨','먹어','섭취'], ['이물'], []],
+    ['cognitive',  ['치매','인지'], ['인지','치매'], []],
+    ['anemia',     ['빈혈'], ['빈혈'], []],
+    ['dehydration',['탈수'], ['탈수'], []],
+    ['heart',      ['심장','판막','심잡음','vhs','기침'], ['심장','판막','심잡음'], ['사상충']],
+    ['kidney',     ['신장','콩팥','신부전','요독','sdma','단백뇨'], ['신장','신부전'], ['사상충']],
+    ['urinary',    ['방광','요로','결석','배뇨','소변','혈뇨','빈뇨','전립선','요실금'], ['방광','요로','결석','배뇨','소변'], []],
+    ['eye',        ['눈물','눈곱','안구','각막','결막','백내장','녹내장','안약','눈이'], ['눈','안과','각막','결막','백내장'], []],
+    ['ear',        ['귀를','귀가','귓','외이','중이','이염','귀지','고막'], ['귀','외이','이염'], []],
+    ['dental',     ['치아','치과','잇몸','치주','치석','스케일링','발치','구취','입냄새','구강'], ['치과','치주','구강','스케일링','치석'], []],
+    ['skin',       ['피부','가려움','아토피','농피','탈모','곰팡이','알레르기'], ['피부','아토피','알레르기','가려움','농피'], ['비만세포','지방종','종양','치근단']],
+    ['joint',      ['관절','슬개골','십자인대','파행','절뚝','디스크','척추'], ['관절','슬개골','십자인대','파행','디스크'], []],
+    ['respiratory',['기관지','폐렴','폐수종','폐종양','호흡','숨소리','콧물','재채기'], ['기관지','폐','호흡','콧물'], []],
+    ['tumor',      ['종양','혹','결절'], ['종양'], []],
+    ['anesthesia', ['마취'], ['마취'], []],
+    ['vomit',      ['구토','토했','토함','게워','구역','토사'], ['구토'], ['헬리코박터','이물','중독','종양','신부전','마취']],
+    ['diarrhea',   ['설사','무른변','묽은변','혈변','장염','대변'], ['설사','대변'], ['바이러스','파보','홍역','코로나','종양','비만세포','중독','이물']],
+    ['weight',     ['비만','체중','다이어트'], ['비만','체중'], []],
+    ['parasite',   ['구충','심장사상충','기생충','벼룩','진드기'], ['심장사상충','구충','기생충'], []],
+    ['vaccine',    ['예방접종','백신','항체'], ['예방접종','백신','항체'], []],
+    ['neutering',  ['중성화'], ['중성화'], []],
+    ['checkup',    ['건강검진','정기검진','노령'], ['건강검진','노령'], []]
+  ];
+
+  var DOG_RE = /강아지|멍|댕|포메|말티|시츄|푸들|골든|진돗|진도|비글|코기|리트리버|치와와|닥스|불독|스피츠/;
+  var CAT_RE = /고양이|냥|묘|코숏|러시안|페르시안|샴|브리티시|스코티시|먼치킨/;
+  var SPECIES_PREFIX = /^(고양이|강아지|반려견|반려묘|멍냥이|멍냥|반려동물)/;
+
+  function detectSpecies(t){
+    t = (t || '').toLowerCase();
+    if (DOG_RE.test(t)) return 1;
+    if (CAT_RE.test(t)) return 2;
+    return 0;
+  }
+  function norm(s){ return (s || '').replace(/\s+/g, '').toLowerCase().replace(SPECIES_PREFIX, ''); }
+  function tagItems(card){
+    return (card.g || '').split(/[,·\/\(\)\[\]]/).filter(function(x){ return x.trim(); }).map(norm);
+  }
+  function hasTerm(s, term){
+    var i = s.indexOf(term);
+    while (i >= 0){
+      if (i === 0 || '비미무불'.indexOf(s.charAt(i - 1)) < 0) return true;
+      i = s.indexOf(term, i + 1);
+    }
+    return false;
+  }
+  function uniq(a){
+    var out = [], seen = {};
+    a.forEach(function(x){ if (!seen[x]) { seen[x] = 1; out.push(x); } });
+    return out;
+  }
+  function cardScore(card, terms, sp, weight){
+    var its = tagItems(card), title = norm(card.t);
+    var s = 0, why = [], matched = 0;
+    terms.forEach(function(term){
+      var got = 0;
+      if (hasTerm(title, term)){
+        got = 8 * weight;
+        if (title.indexOf(term) === 0) got += 3 * weight;
+      }
+      var cnt = 0, best = 0;
+      its.forEach(function(it){
+        var at = it.indexOf(term);
+        if (at < 0) return;
+        cnt++;
+        var v;
+        if (it.length <= term.length + 1 && (at === 0 || at === it.length - term.length)) v = 6;
+        else v = 4 * term.length / Math.max(it.length, term.length);
+        if (v > best) best = v;
+      });
+      got += (best + Math.min(cnt, 4) * 0.9) * weight;
+      if (got > 0){ s += got; why.push(term); matched++; }
+    });
+    if (s <= 0) return null;
+    s *= Math.sqrt(matched / terms.length);
+    if (card.s === 0) s *= 1.18;
+    else if (sp && card.s !== sp) s *= 0.08;
+    else if (sp && card.s === sp) s *= 1.06;
+    else s *= 0.85;
+    return { s: s, why: why };
+  }
+  function byScore(a, b){
+    if (b.s !== a.s) return b.s - a.s;
+    return a.card.t.length - b.card.t.length;
+  }
+  function analyse(comment){
+    var c = (comment || '').replace(/\s+/g, '').toLowerCase();
+    var sp = detectSpecies(comment);
+    var trig = TOPICS.filter(function(t){
+      return t[1].some(function(k){ return c.indexOf(k) >= 0; });
+    });
+    var all = [], excl = [];
+    trig.forEach(function(t){ all = all.concat(t[2]); excl = excl.concat(t[3]); });
+    var active = uniq(all.filter(function(t){ return c.indexOf(t) >= 0; }));
+    var blocked = function(card){ return excl.some(function(e){ return c.indexOf(e) < 0 && card.t.indexOf(e) >= 0; }); };
+    var list = [];
+    CARDS.forEach(function(card){
+      if (blocked(card)) return;
+      var r = active.length ? cardScore(card, active, sp, 1) : null;
+      if (r) list.push({ card: card, s: r.s, why: r.why });
+    });
+    list.sort(byScore);
+    if (list.length < 6){
+      var used = {};
+      list.forEach(function(x){ used[x.card.u] = 1; });
+      var loose = uniq(all.filter(function(t){ return c.indexOf(t) < 0; }));
+      if (loose.length){
+        CARDS.forEach(function(card){
+          if (used[card.u] || blocked(card)) return;
+          var r = cardScore(card, loose, sp, 0.3);
+          if (r) list.push({ card: card, s: r.s, why: r.why });
+        });
+        list.sort(byScore);
+      }
+    }
+    return { sp: sp, terms: trig.map(function(t){ return t[0]; }), active: active, list: list };
+  }
+  function autoPick(comment){
+    var a = analyse(comment);
+    if (a.list.length){
+      return { card: a.list[0].card, why: a.list[0].why, active: a.active, sp: a.sp, list: a.list, auto: true };
+    }
+    return { card: byUrl[FALLBACK_URL] || CARDS[0], why: [], active: [], sp: a.sp, list: a.list, auto: true, fallback: true };
+  }
+
+  /* ===================== 문구 조립 ===================== */
+  function tidyBody(s){
+    s = (s || '').replace(/\u00a0/g, ' ').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
+    if (!s) return '';
+    s = s.replace(/이상무/g, '이상 없음');
+    if (!/[.!?~\u2026👍🙂]$/.test(s)) s += '.';
+    return s;
+  }
+  function clipBody(b, room){
+    b = b.replace(/\s+$/, '');
+    if (room < 16) return b.slice(0, Math.max(4, room - 1)) + '\u2026';
+    var cut = b.slice(0, room - 1);
+    var best = -1;
+    ['. ', '.\n', '! ', '? '].forEach(function(m){
+      var at = cut.lastIndexOf(m);
+      if (at > best) best = at;
+    });
+    if (best > 20) return cut.slice(0, best + 1);
+    return cut.replace(/[,\s]+$/, '') + '\u2026';
+  }
+  function charLen(s){ return Array.from(s).length; }
+
+  function compose(o){
+    var head = '안녕하세요, ' + (o.name ? o.name + ' 보호자님 ' : '보호자님 ') + o.emoji + '\n' +
+               (o.hospital || hospitalLine());
+    var linkLine = '💛 ' + (o.pet ? o.pet + '에게 ' : '') + '도움이 되는 건강 정보도 함께 보내드려요 👇';
+    var tail = linkLine + '\n' + o.url;
+    var closing = '궁금하신 점은 언제든 편하게 연락 주세요.';
+    var body = o.body, msg, trimmed = false;
+
+    msg = head + '\n\n' + body + '\n\n' + closing + '\n\n' + tail;
+    if (charLen(msg) >= 300){
+      msg = head + '\n\n' + body + '\n\n' + tail;
+      trimmed = true;
+    }
+    if (charLen(msg) >= 300){
+      var room = 299 - charLen(head + '\n\n' + '\n\n' + tail) - 1;
+      body = clipBody(body, room);
+      msg = head + '\n\n' + body + '\n\n' + tail;
+      trimmed = true;
+    }
+    if (charLen(msg) >= 300){
+      var room2 = 299 - charLen('\n\n' + tail) - 1;
+      body = clipBody(body, room2);
+      msg = body + '\n\n' + tail;
+      trimmed = true;
+    }
+    return { msg: msg, trimmed: trimmed };
+  }
+
+  /* ===================== 요소 ===================== */
+  var makeBtn   = document.getElementById('makeBtn');
+  var pvEmpty   = document.getElementById('pvEmpty');
+  var whoami    = document.getElementById('whoami');
+  var result    = document.getElementById('result');
+  var badge     = document.getElementById('charBadge');
+  var pvText    = document.getElementById('previewText');
+  var pvNote    = document.getElementById('pvNote');
+  var matchTag  = document.getElementById('matchTag');
+  var swapBtn   = document.getElementById('matchSwap');
+  var picker    = document.getElementById('picker');
+  var searchIn  = document.getElementById('cardSearch');
+  var pickerList= document.getElementById('pickerList');
+  var copyMsg   = document.getElementById('copyMsg');
+
+  var manualCard = null;
+  var current = null;
+  var made = false;
+  var lastMsg = '';
+  var cTimer = null;
+
+  function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function syncState(){
+    var memo = memoText();
+    countEl.textContent = (memo ? memo.length : 0) + '자';
+    resetBtn.hidden = !memo;
+
+    if (!made || !memo){
+      result.hidden = true;
+      pvEmpty.hidden = false;
+      return;
+    }
+    pvEmpty.hidden = true;
+    result.hidden = false;
+    renderResult();
+  }
+
+  /* 코멘트에 적힌 이름 → 파일에서 읽은 이름 순서로 사용 */
+  function resolvedNames(){
+    var n = parseNames(memoText().slice(0, 400));
+    return {
+      pet: n.pet || srcNames.pet || '',
+      guardian: n.guardian || srcNames.guardian || ''
+    };
+  }
+
+  /* 코멘트 안의 '보호자: 김민지', '릴리 ( 이원정 님 )' 같은 이름 줄은 본문에서 뺀다 */
+  function stripNameLines(t){
+    return (t || '').split('\n').filter(function(L){
+      var s = L.replace(/\s+$/, '');
+      if (/^\s*(보호자|보호자명|환자|환자명|아이|아이이름|반려동물|반려견|반려묘|이름)\s*(?:이름)?\s*[:：]\s*\S/.test(s)) return false;
+      if (/^\s*[가-힣A-Za-z0-9]{1,12}\s*\(\s*[가-힣]{2,4}\s*님?\s*\)\s*$/.test(s)) return false;
+      if (/^\s*[가-힣]{2,4}\s*보호자(?:님)?\s*$/.test(s)) return false;
+      return true;
+    }).join('\n').replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
+  }
+
+  function emojiFor(sp, card){
+    var s = sp || (card && card.s) || 0;
+    return s === 1 ? '🐶' : s === 2 ? '🐱' : '🐾';
+  }
+
+  function renderResult(){
+    var memo = memoText();
+    var pick;
+    if (manualCard){
+      pick = { card: manualCard, why: [], sp: detectSpecies(memo), list: current ? current.list : [], auto: false };
+    } else {
+      pick = autoPick(memo);
+    }
+    current = pick;
+
+    var body = tidyBody(stripNameLines(memo));
+    if (body) body = '오늘 진료 결과 안내드립니다.\n' + body;
+
+    var nm = resolvedNames();
+    var out = compose({
+      body: body,
+      name: nm.guardian,
+      pet: nm.pet,
+      url: pick.card.u,
+      emoji: emojiFor(pick.sp, pick.card),
+      hospital: hospitalLine()
+    });
+    lastMsg = out.msg;
+
+    whoami.hidden = false;
+    if (nm.pet || nm.guardian){
+      whoami.className = 'whoami';
+      whoami.textContent = '👤 ' + (nm.guardian ? nm.guardian + ' 보호자님' : '보호자님') +
+        (nm.pet ? ' · 🐾 ' + nm.pet : '') + ' — 이 이름으로 문구를 만들었어요';
+    } else {
+      whoami.className = 'whoami miss';
+      whoami.textContent = '👤 이름을 못 찾아 「보호자님」으로 시작했어요. 코멘트에 「릴리 ( 이원정 님 )」처럼 적으면 자동으로 들어갑니다.';
+    }
+
+    pvText.innerHTML = esc(out.msg).split(esc(pick.card.u)).join('<span class="lnk">' + esc(pick.card.u) + '</span>');
+    var n = charLen(out.msg);
+    badge.textContent = n + '자 / 300자 미만';
+    badge.className = 'cnt-badge' + (n >= 300 ? ' over' : n > 282 ? ' tight' : '');
+
+    var notes = [];
+    if (out.trimmed) notes.push('300자 미만에 맞추려고 뒤쪽 문장을 자동으로 줄였어요.');
+    if (!hospitalName()) notes.push('1단계 맨 위 「🏥 우리 병원 이름」에 병원 이름을 적으면 문구 첫 줄이 「해피동물병원입니다.」처럼 나갑니다.');
+    pvNote.hidden = !notes.length;
+    pvNote.textContent = notes.join(' ');
+
+    if (!pick.auto){
+      matchTag.textContent = '🔗 직접 고른 카드';
+    } else if (pick.fallback){
+      matchTag.textContent = '🔗 증상을 못 찾아 기본 카드로 골랐어요';
+    } else if (pick.why && pick.why.length){
+      matchTag.textContent = '🔗 ' + pick.why.slice(0, 3).join(' · ') + ' 관련 카드 자동 선택';
+    } else {
+      matchTag.textContent = '🔗 자동으로 고른 펫메이트 카드';
+    }
+    if (!picker.hidden) renderPicker();
+  }
+
+  function renderPicker(){
+    var q = norm(searchIn.value);
+    var items = [], seen = {};
+    if (q){
+      var tn = [], gn = [];
+      CARDS.forEach(function(c){
+        if (seen[c.u]) return;
+        if (norm(c.t).indexOf(q) >= 0){ tn.push(c); seen[c.u] = 1; }
+        else if (norm(c.g).indexOf(q) >= 0){ gn.push(c); seen[c.u] = 1; }
+      });
+      items = tn.concat(gn).slice(0, 40);
+    } else if (current && current.list && current.list.length){
+      current.list.slice(0, 20).forEach(function(x){ if (!seen[x.card.u]) { items.push(x.card); seen[x.card.u] = 1; } });
+    } else {
+      items = CARDS.slice(0, 20);
+    }
+
+    var html = '';
+    if (manualCard){
+      html += '<button type="button" class="pitem" data-auto="1"><span class="sp">✨</span><span class="auto">자동으로 다시 고르기</span></button>';
+    }
+    if (!items.length){
+      html += '<div class="pnone">찾는 카드가 없어요. 다른 말로 검색해 보세요.</div>';
+    }
+    items.forEach(function(c, i){
+      var sp = c.s === 1 ? '🐶' : c.s === 2 ? '🐱' : '🐾';
+      var on = (manualCard && manualCard.u === c.u) ? ' on' : '';
+      html += '<button type="button" class="pitem' + on + '" data-i="' + i + '">' +
+              '<span class="sp">' + sp + '</span><span>' + esc(c.t) + '</span></button>';
+    });
+    pickerList.innerHTML = html;
+    pickerList.__items = items;
+  }
+
+  /* ---- 복사 공통 ---- */
+  function legacyCopy(str){
+    var t = document.createElement('textarea');
+    t.value = str;
+    t.setAttribute('readonly', '');
+    t.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(t);
+    t.focus(); t.select(); t.setSelectionRange(0, str.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(t);
+    return ok;
+  }
+  function copyText(str, ok, fail){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(str).then(ok).catch(function(){
+        if (legacyCopy(str)) ok(); else fail();
+      });
+    } else {
+      if (legacyCopy(str)) ok(); else fail();
+    }
+  }
+
+  /* ---- 만들기 ---- */
+  makeBtn.addEventListener('click', function(){
+    var memo = memoText();
+    if (looksLikeSystemJson(memo)){
+      ta.value = '';
+      made = false;
+      srcNames = { pet: '', guardian: '' };
+      syncState();
+      showJsonWarn();
+      return;
+    }
+    if (!memo){
+      showToast('1단계 ②에 진료 코멘트를 적거나 텍스트 파일을 올려 주세요.', '✍️');
+      ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function(){ ta.focus(); }, 380);
+      return;
+    }
+    made = true;
+    pvEmpty.hidden = true;
+    result.hidden = false;
+    renderResult();
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast('보호자 발송용 문구를 만들었어요. 복사해서 카톡에 붙여넣으세요.', '✨');
+  });
+
+  /* ---- 입력 변화 ---- */
+  ta.addEventListener('input', function(){
+    if (guardMemo()) return;
+    hideJsonWarn();
+    syncState();
+  });
+  ta.addEventListener('change', syncState);
+  ta.addEventListener('paste', function(e){
+    var dt = e.clipboardData || window.clipboardData;
+    var txt = '';
+    try { txt = dt && dt.getData ? dt.getData('text') : (dt && dt.text) || ''; } catch(err){ txt = ''; }
+    if (txt && looksLikeSystemJson(txt)){
+      if (e.preventDefault) e.preventDefault();
+      showJsonWarn();
+    }
+  });
+  resetBtn.addEventListener('click', function(){
+    ta.value = '';
+    srcNames = { pet: '', guardian: '' };
+    manualCard = null;
+    made = false;
+    syncState();
+    if (entryList) Array.prototype.forEach.call(entryList.querySelectorAll('.echip'), function(b){ b.classList.remove('on'); });
+    ta.focus();
+  });
+
+  /* ---- 카드 바꾸기 ---- */
+  swapBtn.addEventListener('click', function(){
+    picker.hidden = !picker.hidden;
+    swapBtn.textContent = picker.hidden ? '다른 카드로 바꾸기 ▾' : '카드 목록 닫기 ▴';
+    if (!picker.hidden){
+      searchIn.value = '';
+      renderPicker();
+      searchIn.focus();
+    }
+  });
+  searchIn.addEventListener('input', renderPicker);
+  pickerList.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.pitem') : null;
+    if (!btn) return;
+    if (btn.getAttribute('data-auto') === '1'){
+      manualCard = null;
+    } else {
+      var i = parseInt(btn.getAttribute('data-i'), 10);
+      var list = pickerList.__items || [];
+      if (list[i]) manualCard = list[i];
+    }
+    picker.hidden = true;
+    swapBtn.textContent = '다른 카드로 바꾸기 ▾';
+    renderResult();
+  });
+
+  /* ---- 문구 복사 ---- */
+  copyMsg.addEventListener('click', function(){
+    if (!lastMsg) return;
+    copyText(lastMsg, function(){
+      copyMsg.textContent = '✅ 복사 완료!';
+      copyMsg.classList.add('done');
+      showToast('복사 완료! 보호자 카톡방에 붙여넣으세요.');
+      clearTimeout(cTimer);
+      cTimer = setTimeout(function(){
+        copyMsg.textContent = '📋 문구 복사하기';
+        copyMsg.classList.remove('done');
+      }, 3200);
+    }, function(){
+      showToast('자동 복사가 막혔어요. 위 문구를 길게 눌러 복사해 주세요.', '⚠️');
+    });
+  });
+
+  /* ===================== 부팅 · 이 기기 저장 정보 삭제 ===================== */
+  function wipeSavedData(){
+    var keys = [];
+    try {
+      var n = window.localStorage.length;
+      for (var i = 0; i < n; i++){
+        var k = window.localStorage.key(i);
+        if (!k) continue;
+        if (k === HOSP_KEY || k.indexOf(CARDS_KEY_PFX) === 0) keys.push(k);
+      }
+    } catch(e){}
+    keys.forEach(lsDel);
+    lsDel(HOSP_KEY);
+  }
+
+  function bootHospital(){
+    var savedHosp = cleanHospital(lsGet(HOSP_KEY) || '');
+    var restored = false;
+    if (savedHosp && hospInput && !cleanHospital(hospInput.value)){ hospInput.value = savedHosp; restored = true; }
+    activeHospital = hospitalName();
+    loadCardsFor(activeHospital);
+    syncHospital();
+
+    var hospNote = document.getElementById('hospNote');
+    if (hospNote && restored){
+      hospNote.hidden = false;
+      hospNote.textContent = '🔒 이 기기에 저장돼 있던 「' + savedHosp + '」 이름과 카드 목록을 불러왔어요. ' +
+                             '다른 병원에서 같이 쓰는 기기라면 이름을 바꾸거나 위의 🗑️ 버튼으로 지워 주세요.';
+    }
+
+    if (hospInput){
+      var onChange = function(){
+        var v = cleanHospital(hospInput.value);
+        if (v) lsSet(HOSP_KEY, v); else lsDel(HOSP_KEY);
+        onHospitalChanged();
+      };
+      hospInput.addEventListener('input', onChange);
+      hospInput.addEventListener('change', onChange);
+    }
+
+    var wipeBtn = document.getElementById('wipeBtn');
+    if (wipeBtn) wipeBtn.addEventListener('click', function(){
+      var go = true;
+      try {
+        if (typeof window.confirm === 'function'){
+          go = window.confirm('이 기기에 저장된 병원 이름과 엑셀 카드 목록을 모두 지웁니다.\n입력한 코멘트·차트·파일은 원래 저장되지 않으며 함께 비워집니다. 계속할까요?');
+        }
+      } catch(e){ go = true; }
+      if (!go) return;
+      wipeSavedData();
+      if (hospInput) hospInput.value = '';
+      var hn2 = document.getElementById('hospNote');
+      if (hn2) hn2.hidden = true;
+      activeHospital = '';
+      customCards = null; customName = '';
+      setCards(DEFAULT_CARDS);
+      resetWorkspace();
+      renderXlsxStatus('default');
+      syncHospital();
+      showToast('이 기기에 저장된 병원 이름·카드 목록을 모두 지웠어요. 입력한 코멘트와 파일도 비웠습니다.', '🗑️');
+    });
+  }
+
+  bootHospital();
+
+  syncState();
+})();
+</script>
+</body>
+</html>
