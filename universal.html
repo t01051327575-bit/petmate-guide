@@ -48,6 +48,7 @@
       radial-gradient(1100px 520px at 8% -10%, #d9f4ee 0%, rgba(217,244,238,0) 62%),
       radial-gradient(900px 460px at 100% 0%, #fff1d8 0%, rgba(255,241,216,0) 55%),
       #f6faf9;
+    background-attachment:fixed;
     line-height:1.62;
     -webkit-font-smoothing:antialiased;
     word-break:keep-all;
@@ -349,7 +350,7 @@
   /* ---------- 1단계 · 우리 병원 이름 ---------- */
   .hosp{
     border:1.5px solid #cfe7e3;border-radius:14px;padding:13px 14px;margin-bottom:12px;
-    background:linear-gradient(180deg,#f5fcfa,#ecf8f5);
+    background:linear-gradient(180deg,#fbfdfc,var(--hosp-bg,#ecf8f5));
   }
   .hosp-label{
     display:flex;align-items:center;gap:6px;flex-wrap:wrap;
@@ -370,6 +371,27 @@
     background:#f1faf8;border:1px solid #d9ece8;
     font-size:11.3px;font-weight:700;color:var(--mint-d);line-height:1.55;
   }
+  .hosp-sub{margin-top:11px}
+  .hosp-sub .hosp-label{margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;
+    background:#fff;border:1.5px solid #d8e7e7;color:var(--ink-soft);
+    font-family:inherit;font-size:11.8px;font-weight:700;line-height:1;
+    padding:7px 10px;border-radius:999px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chip:active{transform:translateY(1px)}
+  .chip .sw{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.12);flex:0 0 auto}
+  .chip.on{border-color:var(--mint);color:var(--mint-d);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .chip.custom{padding:4px 8px 4px 10px;gap:6px}
+  .chip.custom input{
+    width:24px;height:24px;padding:0;border:none;background:none;cursor:pointer;
+    -webkit-appearance:none;appearance:none;
+  }
+  .chip.custom input::-webkit-color-swatch-wrapper{padding:0}
+  .chip.custom input::-webkit-color-swatch{border:1px solid rgba(0,0,0,.12);border-radius:6px}
+  .chip.custom input::-moz-color-swatch{border:1px solid rgba(0,0,0,.12);border-radius:6px}
 
   /* ---------- 경고 배너 (JSON 파일 등) ---------- */
   .warnbox{
@@ -485,7 +507,32 @@
         <label class="hosp-label" for="hospitalName">🏥 우리 병원 이름 <span class="opt">여기만 바꾸면 병원별 완성</span></label>
         <input type="text" id="hospitalName" maxlength="40" autocomplete="off" spellcheck="false"
                placeholder="예: 굿모닝펫동물병원" aria-describedby="hospitalHint">
-        <p class="hosp-hint" id="hospitalHint">적은 이름이 <b>2단계 완성 문구</b>와 <b>3단계 예시</b> 첫 줄에 그대로 들어갑니다. 한 번 입력하면 이 브라우저에 이 병원 이름으로 저장되고, <b>병원 이름을 바꾸면 입력한 코멘트·파일·결과는 즉시 비워집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
+
+        <div class="hosp-sub">
+          <label class="hosp-label" for="hospitalSlogan">✒️ 병원 슬로건 <span class="opt">(선택)</span></label>
+          <input type="text" id="hospitalSlogan" maxlength="40" autocomplete="off" spellcheck="false"
+                 placeholder="예: since 2003 · 평생 함께하는 주치의" aria-describedby="sloganHint">
+          <p class="hosp-hint" id="sloganHint">적으면 인사말이 <b>「우리들 동물병원입니다. (since 2003)」</b>처럼 나갑니다. 병원별로 저장돼요.</p>
+        </div>
+
+        <div class="hosp-sub">
+          <label class="hosp-label" id="themeLabel">🎨 배경 색상 <span class="opt">병원 분위기대로</span></label>
+          <div class="chips" id="themeChips" role="group" aria-labelledby="themeLabel">
+            <button type="button" class="chip on" data-theme="mint" aria-pressed="true"><span class="sw" style="background:#d9f4ee"></span>민트</button>
+            <button type="button" class="chip" data-theme="ivory" aria-pressed="false"><span class="sw" style="background:#ffeccb"></span>아이보리</button>
+            <button type="button" class="chip" data-theme="sky" aria-pressed="false"><span class="sw" style="background:#d8ecff"></span>스카이</button>
+            <button type="button" class="chip" data-theme="lavender" aria-pressed="false"><span class="sw" style="background:#e4daff"></span>라벤더</button>
+            <button type="button" class="chip" data-theme="peach" aria-pressed="false"><span class="sw" style="background:#ffdcd2"></span>피치</button>
+            <button type="button" class="chip" data-theme="sage" aria-pressed="false"><span class="sw" style="background:#dcead0"></span>세이지</button>
+            <label class="chip custom" for="themeColor" title="직접 고르기">
+              <span class="sw" style="background:linear-gradient(135deg,#ffb4a2,#a5b4fc,#a7f3d0)"></span>직접
+              <input type="color" id="themeColor" value="#f6faf9" aria-label="배경 색상 직접 고르기">
+            </label>
+          </div>
+          <p class="hosp-hint">누르면 바로 바뀌고, 고른 색은 <b>이 병원 이름으로 저장</b>돼 다음에 열어도 그대로예요.</p>
+        </div>
+
+        <p class="hosp-hint" id="hospitalHint">적은 이름이 <b>2단계 완성 문구</b>와 <b>3단계 예시</b> 첫 줄에 그대로 들어갑니다. 한 번 입력하면 이 브라우저에 이 병원 이름·슬로건·배경 색으로 저장되고, <b>병원 이름을 바꾸면 입력한 코멘트·파일·결과는 즉시 비워집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
         <p class="hosp-note" id="hospNote" hidden></p>
       </div>
       <div class="mat">
@@ -562,7 +609,7 @@
       <div class="num">2</div>
       <div>
         <h2>보호자 발송용 문구 만들기</h2>
-        <span class="hint">1단계 ②의 코멘트로 바로 완성됩니다. 아이·보호자 이름도 자동으로 들어가요.</span>
+        <span class="hint">1단계 ②의 코멘트를 그대로 넣어도 오타·메모체 말투를 다듬고 응원 한 줄까지 넣어 완성됩니다.</span>
       </div>
     </div>
     <div class="step-body">
@@ -608,20 +655,22 @@
 
       <div class="chatwrap">
         <div class="chathead"><span>보호자에게 보낼 문구</span><span class="ok">예시</span></div>
-<div class="bubble">안녕하세요, 홍길동 보호자님 🐶
-<span id="exHosp">굿모닝펫동물병원입니다.</span>
+<div class="bubble">안녕하세요, 김민지 보호자님 🐱
+<span id="exHosp">우리들 동물병원입니다. (since 2003)</span>
 
-오늘 콩이 흉부 X-ray 검사 결과, 심장 크기를 보는 방사선 지표(VHS 10.3 · VLAS 2.0)가 모두 정상 범위로 확인되었습니다.
+오늘 진료 결과 안내드립니다.
+누아 심장사상충 예방약 넥스가드 급여했어요. 체중 4.2kg으로 안정적이고 컨디션도 양호해요. 다음 예방접종은 12월 24일 예정이에요.
+앞으로도 한 달에 한 번 꾸준히 챙겨 주세요.
 
-11살이면 심장이 조금씩 커지기 쉬운데, 콩이는 아주 건강하게 유지되고 있어 다행입니다.
+누아와 오늘도 건강한 하루 보내세요 🍀
 
-앞으로 6개월에 한 번 정기 검진과 청진으로 심장 소리를 확인해 주세요. 밤에 기침이 잦아지면 바로 알려 주세요.
+궁금하신 점은 언제든 편하게 연락 주세요.
 
-💛 콩이에게 도움이 되는 심장 건강 정보도 함께 보내드려요.
+💛 누아에게 도움이 되는 건강 정보도 함께 보내드려요 👇
 <span class="lnk">https://m.pet-mate.net/2k9d7f1</span></div>
         <div class="metaline">
-          <span class="pill">공백 포함 <b>293자</b> / 300자 미만</span>
-          <span class="pill">문단마다 빈 줄</span>
+          <span class="pill">공백 포함 <b>276자</b> / 300자 미만</span>
+          <span class="pill">슬로건·응원 한 줄 포함</span>
           <span class="pill">펫메이트 링크 1개</span>
         </div>
       </div>
@@ -1452,10 +1501,127 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
     return n ? CARDS_KEY_PFX + n : '';
   }
 
-  /* ===================== ① 우리 병원 이름 (병원별 설정) ===================== */
+  /* ===================== ① 우리 병원 이름·슬로건·배경 색 (병원별 설정) ===================== */
   var hospInput = document.getElementById('hospitalName');
   var exHospEl  = document.getElementById('exHosp');
   var confidEl  = document.getElementById('confidTitle');
+  var slogInput = document.getElementById('hospitalSlogan');
+  var themeChips = document.getElementById('themeChips');
+  var themeColor = document.getElementById('themeColor');
+
+  /* ---------- 배경 색 테마 ---------- */
+  var THEMES = {
+    mint:     { base:'#f6faf9', g1:'#d9f4ee', g2:'#fff1d8' },
+    ivory:    { base:'#fffaf0', g1:'#ffeccb', g2:'#fdeedd' },
+    sky:      { base:'#f2f8ff', g1:'#d8ecff', g2:'#e9f3ff' },
+    lavender: { base:'#f7f4ff', g1:'#e4daff', g2:'#f2ecff' },
+    peach:    { base:'#fff5f3', g1:'#ffdcd2', g2:'#ffeee4' },
+    sage:     { base:'#f5f9f1', g1:'#dcead0', g2:'#eef5e4' }
+  };
+  var curTheme = { theme:'mint', color:'' };
+
+  function hex2rgb(h){
+    h = String(h || '').replace('#', '');
+    if (h.length === 3) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    var n = parseInt(h, 16);
+    if (isNaN(n)) return { r:246, g:250, b:249 };
+    return { r:(n >> 16) & 255, g:(n >> 8) & 255, b:n & 255 };
+  }
+  function to2(v){ var s = v.toString(16); return s.length < 2 ? '0' + s : s; }
+  /* a에서 b 방향으로 t(0~1)만큼 섮은 색 */
+  function mixHex(a, b, t){
+    var A = hex2rgb(a), B = hex2rgb(b);
+    function m(x, y){ return Math.round(x + (y - x) * t); }
+    return '#' + to2(m(A.r, B.r)) + to2(m(A.g, B.g)) + to2(m(A.b, B.b));
+  }
+  function fadeOf(hex){ var c = hex2rgb(hex); return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',0)'; }
+
+  /* 선택한 배경 색을 페이지 전체에 입힘 (글자색은 그대로 → 가독성 유지) */
+  function applyTheme(t){
+    t = (t && typeof t === 'object') ? t : {};
+    var base, g1, g2, activeKey;
+    if (t.color && /^#[0-9a-fA-F]{6}$/.test(t.color)){
+      base = mixHex(t.color, '#ffffff', 0.93);
+      g1   = mixHex(t.color, '#ffffff', 0.80);
+      g2   = mixHex(t.color, '#fff1d8', 0.86);
+      activeKey = 'custom';
+      curTheme = { theme:'custom', color:t.color.toLowerCase() };
+    } else {
+      var k = (t.theme && THEMES[t.theme]) ? t.theme : 'mint';
+      base = THEMES[k].base; g1 = THEMES[k].g1; g2 = THEMES[k].g2;
+      activeKey = k;
+      curTheme = { theme:k, color:'' };
+    }
+    if (document.documentElement && document.documentElement.style && document.documentElement.style.setProperty){
+      document.documentElement.style.setProperty('--page-bg', base);
+      document.documentElement.style.setProperty('--glow1', g1);
+      document.documentElement.style.setProperty('--glow2', g2);
+      document.documentElement.style.setProperty('--hosp-bg', mixHex(g1, '#ffffff', 0.55));
+    }
+    if (document.body && document.body.style){
+      document.body.style.background =
+        'radial-gradient(1100px 520px at 8% -10%, ' + g1 + ' 0%, ' + fadeOf(g1) + ' 62%), ' +
+        'radial-gradient(900px 460px at 100% 0%, ' + g2 + ' 0%, ' + fadeOf(g2) + ' 55%), ' + base;
+    }
+    if (themeChips && themeChips.querySelectorAll){
+      Array.prototype.forEach.call(themeChips.querySelectorAll('.chip[data-theme]'), function(b){
+        var on = b.getAttribute('data-theme') === activeKey;
+        if (b.classList) b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var cst = themeChips.querySelector('.chip.custom');
+      if (cst && cst.classList) cst.classList.toggle('on', activeKey === 'custom');
+    }
+    if (themeColor) themeColor.value = curTheme.color || (THEMES[activeKey] ? THEMES[activeKey].base : '#f6faf9');
+  }
+
+  /* ---------- 병원별 프로필(슬로건·배경 색) 저장 ---------- */
+  var PROFILE_KEY_PFX = 'petmate_profile::';
+  var profileOwner = null;      /* 지금 화면 값이 어느 병원 것으로 저장돼 있는지 */
+  var profileFromStore = false; /* 저장된 값을 그대로 보여 주는 중인지 */
+
+  function profileKeyFor(name){ return PROFILE_KEY_PFX + cleanHospital(name); }
+  function readProfile(name){
+    var raw = lsGet(profileKeyFor(name));
+    if (!raw) return null;
+    try { var p = JSON.parse(raw); if (p && typeof p === 'object') return p; } catch(e){}
+    return null;
+  }
+  function writeProfile(name){
+    lsSet(profileKeyFor(name), JSON.stringify({ slogan: sloganValue(), theme: curTheme.theme, color: curTheme.color }));
+  }
+  function applyProfile(p){
+    if (slogInput) slogInput.value = (p && p.slogan) ? p.slogan : '';
+    applyTheme(p && (p.theme || p.color) ? { theme:p.theme, color:p.color } : null);
+  }
+  function loadProfileFor(name){
+    var p = readProfile(name);
+    if (p){ applyProfile(p); profileFromStore = true; }
+    else if (profileFromStore){ applyProfile(null); profileFromStore = false; }
+    profileOwner = name;
+  }
+  /* 슬로건·배경 색을 손봤을 때 — 지금 병원 이름으로 저장한다 */
+  function onProfileEdited(){
+    profileFromStore = true;
+    profileOwner = hospitalName();
+    writeProfile(profileOwner);
+    syncHospital();
+  }
+
+  function cleanSlogan(s){
+    return (s || '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .replace(/^[\s"'“”‘’\[\]()（）]+|[\s"'“”‘’\[\]()（）]+$/g, '')
+      .replace(/\s*(입니다|이에요|예요)\.?$/, '')
+      .replace(/[\s.]+$/, '')
+      .trim()
+      .slice(0, 40);
+  }
+  function sloganValue(){
+    if (slogInput && typeof slogInput.value === 'string') return cleanSlogan(slogInput.value);
+    return '';
+  }
 
   function cleanHospital(s){
     return (s || '')
@@ -1472,14 +1638,15 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
     }
     return cleanHospital(lsGet(HOSP_KEY) || '');
   }
-  /* 문구 첫 줄에 들어갈 병원 소개 한 줄 */
+  /* 문구 첫 줄에 들어갈 병원 소개 한 줄 (슬로건이 있으면 함께) */
   function hospitalLine(){
     var n = hospitalName();
-    return (n ? n : '동물병원') + '입니다.';
+    var s = sloganValue();
+    return (n ? n : '동물병원') + '입니다.' + (s ? ' (' + s + ')' : '');
   }
   function syncHospital(){
     var n = hospitalName();
-    if (exHospEl) exHospEl.textContent = (n ? n : '동물병원') + '입니다.';
+    if (exHospEl) exHospEl.textContent = hospitalLine();
     if (confidEl) confidEl.textContent = '🔒 ' + (n ? n : '우리 병원') + ' 내부 전용 · 자료 외부 유출 금지';
     if (made) renderResult();
   }
@@ -1519,6 +1686,7 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       if (hn) hn.hidden = true;             /* 이름을 바꾸면 안내는 사라진다 */
       resetWorkspace();                     /* 타 병원 코멘트·파일·결과 즉시 삭제 */
       loadCardsFor(now);                    /* 이 병원 칸에 저장된 카드만 읽어 온다 */
+      loadProfileFor(now);                  /* 이 병원에 저장된 슬로건·배경 색 */
     }
     syncHospital();
   }
@@ -2333,11 +2501,196 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
   }
 
   /* ===================== 문구 조립 ===================== */
-  function tidyBody(s){
-    s = (s || '').replace(/\u00a0/g, ' ').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
+
+  /* ---------- 오타 · 띄어쓰기 정리 (고유명사는 건드리지 않는 보수적 규칙만) ---------- */
+  var TYPO_RULES = [
+    [/안\s*되요/g, '안 돼요'],
+    [/안\s*됬/g, '안 됐'],
+    [/몇\s*일/g, '며칠'],
+    [/어떻해요/g, '어떡해요'],
+    [/어떻해/g, '어떻게'],
+    [/오랫만/g, '오랜만'],
+    [/금새/g, '금세'],
+    [/역활/g, '역할'],
+    [/웬지/g, '왠지'],
+    [/설겆이/g, '설거지'],
+    [/찌게/g, '찌개'],
+    [/됬/g, '됐'],
+    [/됄/g, '될'],
+    [/됍/g, '됨'],
+    [/되여/g, '돼'],
+    [/([가-힣])읍니다/g, '$1습니다'],
+    [/([가-힣])(할|갈|볼|줄|살|올|들|줄)께(?=[\s.,!?]|$)/g, '$1$2게']
+  ];
+
+  function fixTypos(s){
     if (!s) return '';
-    s = s.replace(/이상무/g, '이상 없음');
-    if (!/[.!?~\u2026👍🙂]$/.test(s)) s += '.';
+    s = s.replace(/\u00a0/g, ' ');
+    TYPO_RULES.forEach(function(r){ s = s.replace(r[0], r[1]); });
+    return s
+      .replace(/[ \t]{2,}/g, ' ')
+      .replace(/[ \t]+([,，.。!?~…:;)\]}])/g, '$1')
+      .replace(/([([{])\s+/g, '$1')
+      .replace(/([가-힣])([.!?])(?=[가-힣])/g, '$1$2 ')
+      .replace(/([가-힣])(,)(?=[가-힣])/g, '$1$2 ')
+      .replace(/\.{3,}/g, '…')
+      .replace(/\.{2}/g, '.')
+      .replace(/([!?.,])\1{1,}/g, '$1')
+      .replace(/[ \t]+$/gm, '');
+  }
+
+  /* ---------- 수의사 메모체 → 보호자용 말투 ---------- */
+  var MEMO_WORDS = {
+    '급여':'급여했어요', '처방':'처방했어요', '완료':'완료했어요', '미완료':'미완료예요',
+    '진행':'진행했어요', '확인':'확인했어요', '체크':'체크했어요', '접종':'접종했어요',
+    '투약':'투약했어요', '투여':'투여했어요', '복용':'복용했어요', '검사':'검사했어요',
+    '시행':'시행했어요', '실시':'실시했어요', '처치':'처치했어요', '수술':'수술했어요',
+    '마취':'마취했어요', '발치':'발치했어요', '스케일링':'스케일링했어요',
+    '중성화':'중성화했어요', '예방접종':'예방접종했어요', '내원':'내원했어요',
+    '퇴원':'퇴원했어요', '입원':'입원했어요', '재검':'재검 예정이에요',
+    '양호':'양호해요', '정상':'정상이에요', '필요':'필요해요', '권장':'권장드려요',
+    '예정':'예정이에요', '호전':'호전됐어요', '악화':'악화됐어요',
+    '유지':'유지하고 있어요', '관찰':'관찰 중이에요', '안정':'안정적이에요',
+    '가능':'가능해요', '불가':'불가해요', '불가능':'불가능해요',
+    '발급':'발급했어요', '안내':'안내드렸어요', '조치':'조치했어요'
+  };
+  var MEMO_KEYS = Object.keys(MEMO_WORDS).sort(function(a, b){ return b.length - a.length; });
+  /* 이미 존댓문으로 끝나는 문장은 그대로 둔다 */
+  var POLITE_RE = /(니다|니까|세요|네요|어요|아요|해요|예요|이에요|죠|지요|까요|군요|답니다|요)$/;
+
+  function hasBatchim(word){
+    if (!word) return false;
+    var c = word.charCodeAt(word.length - 1);
+    if (c < 0xAC00 || c > 0xD7A3) return false;
+    return (c - 0xAC00) % 28 !== 0;
+  }
+
+  /* 한 마디(마침표·쉼표로 나뉜 단위)를 보호자용 말투로 */
+  function convertChunk(t){
+    t = String(t || '').replace(/^[\s,;:·]+|[\s,;:·]+$/g, '');
+    if (!t) return '';
+    /* ① 메모 단어를 먼저 본다 (필요·정상처럼 '요'로 끝나는 말이 존댓문으로 오인되지 않도록) */
+    for (var i = 0; i < MEMO_KEYS.length; i++){
+      var w = MEMO_KEYS[i];
+      if (t.length >= w.length && t.slice(t.length - w.length) === w){
+        var head = t.slice(0, t.length - w.length);
+        if (head && /[가-힣0-9]$/.test(head) && /^[가-힣]/.test(w)) head += ' ';
+        return head + MEMO_WORDS[w];
+      }
+    }
+    /* ② 이미 존댓문이면 그대로 */
+    if (POLITE_RE.test(t)) return t;
+    if (/없음$/.test(t)) return t.slice(0, -2) + '없어요';
+    if (/있음$/.test(t)) return t.slice(0, -2) + '있어요';
+    if (/했음$/.test(t)) return t.slice(0, -2) + '했어요';
+    if (/됨$/.test(t))   return t.slice(0, -1) + '됐어요';
+    if (/함$/.test(t))   return t.slice(0, -1) + '했어요';
+    if (/임$/.test(t)){
+      var st = t.slice(0, -1);
+      return st + (hasBatchim(st) ? '이에요' : '예요');
+    }
+    if (/중$/.test(t)) return t.slice(0, -1) + '중이에요';
+    return t;
+  }
+
+  /* 쉼표로 나누되 숫자 사이(1,500)·괄호 안 쉼표는 유지 */
+  function splitCommas(t){
+    var out = [], buf = '', depth = 0;
+    for (var i = 0; i < t.length; i++){
+      var ch = t.charAt(i);
+      if (ch === '(' || ch === '[') depth++;
+      else if (ch === ')' || ch === ']') depth = Math.max(0, depth - 1);
+      if (ch === ',' && depth === 0){
+        if (/\d/.test(t.charAt(i - 1)) && /\d/.test(t.charAt(i + 1))){ buf += ch; continue; }
+        out.push(buf); buf = ''; continue;
+      }
+      buf += ch;
+    }
+    out.push(buf);
+    return out;
+  }
+
+  /* 한 줄을 문장 단위로 나누기 (1.5 · 10.3 같은 소수점은 나누지 않음) */
+  function splitSentences(t){
+    var out = [], buf = '';
+    for (var i = 0; i < t.length; i++){
+      var ch = t.charAt(i);
+      buf += ch;
+      if (ch === '.' || ch === '!' || ch === '?'){
+        var next = t.charAt(i + 1);
+        if (next === '' || /\s/.test(next)){
+          out.push(buf); buf = '';
+          if (/\s/.test(next)) i++;
+        }
+      }
+    }
+    if (buf.replace(/\s/g, '')) out.push(buf);
+    return out;
+  }
+
+  /* 한 문장을 다듬어 보호자용 문장으로 */
+  function convertSentence(s){
+    var tailM = s.match(/([.!?~…]+)$/);
+    var tail = tailM ? tailM[1] : '';
+    if (tail) s = s.slice(0, s.length - tail.length);
+    s = s.replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    var parts = splitCommas(s).map(convertChunk).filter(function(x){ return !!x; });
+    if (!parts.length) return '';
+    var end = '.';
+    if (/!/.test(tail)) end = '!';
+    else if (/\?/.test(tail)) end = '?';
+    else if (/~/.test(tail)) end = '~';
+    return parts.join(', ') + end;
+  }
+
+  /* 한 줄을 다듬어 보호자용 문장으로 */
+  function speechifyLine(line){
+    var lead = (line.match(/^[ \t]*/) || [''])[0];
+    var t = line.trim();
+    if (!t) return line;
+
+    var mark = '';
+    var bullet = t.match(/^([•·\-*]|\d+[.)]|[①-⑳]|[★▶◆◇■□○●])\s*/);
+    if (bullet){ mark = bullet[0]; t = t.slice(mark.length); }
+    if (!t) return line;
+
+    var out = splitSentences(t).map(convertSentence).filter(function(x){ return !!x; });
+    if (!out.length) return line;
+    return lead + mark + out.join(' ');
+  }
+
+  /* 여러 줄 정리 — 빈 줄은 한 줄로, 공백만 있는 줄은 지운다 */
+  function tidyLines(s){
+    var lines = String(s || '').replace(/\r\n?/g, '\n').split('\n').map(function(L){
+      return L.replace(/\u00a0/g, ' ').replace(/[ \t]+$/, '').replace(/^[ \t]+/, '');
+    });
+    var out = [];
+    lines.forEach(function(L){
+      if (!L){
+        if (out.length && out[out.length - 1] !== '') out.push('');
+        return;
+      }
+      if (/^[-–—·•.=*_]{1,}$/.test(L)) return;   /* 구분선만 있는 줄 */
+      out.push(L);
+    });
+    while (out.length && out[0] === '') out.shift();
+    while (out.length && out[out.length - 1] === '') out.pop();
+    return out.join('\n');
+  }
+
+  function tidyBody(s){
+    s = tidyLines(s || '');
+    if (!s) return '';
+    s = s.replace(/이상\s*무/g, '이상 없음');
+    /* 카톡에서 그대로 붙여넣은 머리표 “[보낸사람] [오후 3:21]”는 본문에서 뺀다 */
+    s = s.replace(/^\[[^\]\n]{1,20}\]\s*\[(?:오전|오후)\s*\d{1,2}:\d{2}\]\s*/gm, '');
+    /* “( 김민지 님 )”처럼 보호자 이름만 덧댄 괄호는 뺀다 */
+    s = s.replace(/\(\s*[가-힣]{2,4}\s*님\s*\)/g, '').replace(/[ \t]{2,}/g, ' ').trim();
+    if (!s) return '';
+    s = s.split('\n').map(speechifyLine).join('\n');
+    s = fixTypos(s);
+    s = s.replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
     return s;
   }
   function clipBody(b, room){
@@ -2354,32 +2707,45 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
   }
   function charLen(s){ return Array.from(s).length; }
 
+  /* 본문과 마무리 인사 사이에 들어가는 응원 한 줄 */
+  function cheerLine(pet){
+    if (pet) return pet + (hasBatchim(pet) ? '과' : '와') + ' 오늘도 건강한 하루 보내세요 🍀';
+    return '오늘도 아이와 건강한 하루 보내세요 🍀';
+  }
+
   function compose(o){
     var head = '안녕하세요, ' + (o.name ? o.name + ' 보호자님 ' : '보호자님 ') + o.emoji + '\n' +
                (o.hospital || hospitalLine());
     var linkLine = '💛 ' + (o.pet ? o.pet + '에게 ' : '') + '도움이 되는 건강 정보도 함께 보내드려요 👇';
     var tail = linkLine + '\n' + o.url;
     var closing = '궁금하신 점은 언제든 편하게 연락 주세요.';
-    var body = o.body, msg, trimmed = false;
+    var cheer = o.cheer || '';            /* 응원 한 줄 */
+    var body = o.body, msg, trimmed = false, dropped = '';
 
-    msg = head + '\n\n' + body + '\n\n' + closing + '\n\n' + tail;
+    function pack(parts){ return parts.filter(function(p){ return !!p; }).join('\n\n'); }
+
+    msg = head + '\n\n' + pack([body, cheer, closing]) + '\n\n' + tail;
     if (charLen(msg) >= 300){
-      msg = head + '\n\n' + body + '\n\n' + tail;
-      trimmed = true;
+      msg = head + '\n\n' + pack([body, cheer]) + '\n\n' + tail;
+      trimmed = true; dropped = 'closing';
+    }
+    if (charLen(msg) >= 300){
+      msg = head + '\n\n' + pack([body]) + '\n\n' + tail;
+      trimmed = true; dropped = 'cheer';
     }
     if (charLen(msg) >= 300){
       var room = 299 - charLen(head + '\n\n' + '\n\n' + tail) - 1;
       body = clipBody(body, room);
       msg = head + '\n\n' + body + '\n\n' + tail;
-      trimmed = true;
+      trimmed = true; dropped = 'body';
     }
     if (charLen(msg) >= 300){
       var room2 = 299 - charLen('\n\n' + tail) - 1;
       body = clipBody(body, room2);
       msg = body + '\n\n' + tail;
-      trimmed = true;
+      trimmed = true; dropped = 'body';
     }
-    return { msg: msg, trimmed: trimmed };
+    return { msg: msg, trimmed: trimmed, dropped: dropped };
   }
 
   /* ===================== 요소 ===================== */
@@ -2465,7 +2831,8 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       pet: nm.pet,
       url: pick.card.u,
       emoji: emojiFor(pick.sp, pick.card),
-      hospital: hospitalLine()
+      hospital: hospitalLine(),
+      cheer: cheerLine(nm.pet)
     });
     lastMsg = out.msg;
 
@@ -2661,7 +3028,7 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       for (var i = 0; i < n; i++){
         var k = window.localStorage.key(i);
         if (!k) continue;
-        if (k === HOSP_KEY || k.indexOf(CARDS_KEY_PFX) === 0) keys.push(k);
+        if (k === HOSP_KEY || k.indexOf(CARDS_KEY_PFX) === 0 || k.indexOf(PROFILE_KEY_PFX) === 0) keys.push(k);
       }
     } catch(e){}
     keys.forEach(lsDel);
@@ -2674,6 +3041,8 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
     if (savedHosp && hospInput && !cleanHospital(hospInput.value)){ hospInput.value = savedHosp; restored = true; }
     activeHospital = hospitalName();
     loadCardsFor(activeHospital);
+    applyTheme(null);                    /* 기본(민트)에서 시작 */
+    loadProfileFor(activeHospital);      /* 저장된 슬로건·배경 색이 있으면 입힌다 */
     syncHospital();
 
     var hospNote = document.getElementById('hospNote');
@@ -2693,12 +3062,39 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       hospInput.addEventListener('change', onChange);
     }
 
+    /* 슬로건 */
+    if (slogInput){
+      var onSlogan = function(){ onProfileEdited(); };
+      slogInput.addEventListener('input', onSlogan);
+      slogInput.addEventListener('change', onSlogan);
+    }
+
+    /* 배경 색 프리셋 */
+    if (themeChips){
+      themeChips.addEventListener('click', function(e){
+        var b = e.target && e.target.closest ? e.target.closest('.chip[data-theme]') : null;
+        if (!b) return;
+        applyTheme({ theme: b.getAttribute('data-theme') });
+        onProfileEdited();
+      });
+    }
+    /* 배경 색 직접 고르기 */
+    if (themeColor){
+      var onColor = function(){
+        if (!/^#[0-9a-fA-F]{6}$/.test(themeColor.value || '')) return;
+        applyTheme({ color: themeColor.value });
+        onProfileEdited();
+      };
+      themeColor.addEventListener('input', onColor);
+      themeColor.addEventListener('change', onColor);
+    }
+
     var wipeBtn = document.getElementById('wipeBtn');
     if (wipeBtn) wipeBtn.addEventListener('click', function(){
       var go = true;
       try {
         if (typeof window.confirm === 'function'){
-          go = window.confirm('이 기기에 저장된 병원 이름과 엑셀 카드 목록을 모두 지웁니다.\n입력한 코멘트·차트·파일은 원래 저장되지 않으며 함께 비워집니다. 계속할까요?');
+          go = window.confirm('이 기기에 저장된 병원 이름·슬로건·배경 색과 엑셀 카드 목록을 모두 지웁니다.\n입력한 코멘트·차트·파일은 원래 저장되지 않으며 함께 비워집니다. 계속할까요?');
         }
       } catch(e){ go = true; }
       if (!go) return;
@@ -2710,9 +3106,11 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       customCards = null; customName = '';
       setCards(DEFAULT_CARDS);
       resetWorkspace();
+      if (slogInput) slogInput.value = '';
+      applyTheme(null);
       renderXlsxStatus('default');
       syncHospital();
-      showToast('이 기기에 저장된 병원 이름·카드 목록을 모두 지웠어요. 입력한 코멘트와 파일도 비웠습니다.', '🗑️');
+      showToast('이 기기에 저장된 병원 이름·슬로건·배경 색과 카드 목록을 모두 지웠어요. 입력한 코멘트와 파일도 비웠습니다.', '🗑️');
     });
   }
 
