@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드</title>
+<meta name="description" content="펫메이트 전체콘텐츠 엑셀과 원장님 코멘트만 있으면, 400자 이내 보호자 카톡 안내문이 1분 만에 완성됩니다. AI 지시문 원클릭 복사 가이드.">
+
+<!-- Open Graph (카카오톡 공유 카드) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드">
+<meta property="og:description" content="펫메이트 엑셀 + 원장님 코멘트만 있으면 400자 이내 보호자 안내문 완성. 지시문은 버튼 한 번으로 복사하세요.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+<meta property="og:image:secure_url" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="동물병원 보호자 카톡 안내 1분 작성 가이드">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🐾 동물병원 보호자 카톡 안내 · 1분 작성 가이드">
+<meta name="twitter:description" content="펫메이트 엑셀 + 원장님 코멘트만 있으면 400자 이내 보호자 안내문 완성.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/og-card.png">
+
+<style>
+  :root{
+    --ink:#1b2a2f;
+    --ink-soft:#4b6068;
+    --muted:#6b8087;
+    --line:#e2ebee;
+    --mint:#0f9d8f;
+    --mint-d:#0a7a6f;
+    --mint-l:#e6f7f4;
+    --cream:#fffaf2;
+    --card:#ffffff;
+    --shadow:0 1px 2px rgba(16,45,52,.05), 0 8px 24px rgba(16,45,52,.07);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 520px at 8% -10%, #d9f4ee 0%, rgba(217,244,238,0) 62%),
+      radial-gradient(900px 460px at 100% 0%, #fff1d8 0%, rgba(255,241,216,0) 55%),
+      #f6faf9;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:22px 16px 56px}
+
+  /* ---------- header ---------- */
+  header.hero{
+    background:linear-gradient(150deg,#0f9d8f 0%,#12b3a2 52%,#3fc9b0 100%);
+    color:#fff;border-radius:22px;padding:26px 22px 24px;
+    box-shadow:0 10px 30px rgba(15,157,143,.24);
+    position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-46px;top:-58px;width:190px;height:190px;
+    background:rgba(255,255,255,.13);border-radius:50%;
+  }
+  header.hero::before{
+    content:"";position:absolute;right:34px;bottom:-72px;width:120px;height:120px;
+    background:rgba(255,255,255,.10);border-radius:50%;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.34);
+    color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.2px;
+    padding:5px 11px;border-radius:999px;margin-bottom:12px;position:relative;z-index:1;
+  }
+  h1{
+    font-size:clamp(21px,5.4vw,29px);line-height:1.34;margin:0 0 8px;
+    letter-spacing:-.4px;font-weight:800;position:relative;z-index:1;
+  }
+  .hero .sub{
+    margin:0;font-size:14px;color:rgba(255,255,255,.94);position:relative;z-index:1;
+  }
+  .hero .sub strong{font-weight:700;border-bottom:2px solid rgba(255,255,255,.5);padding-bottom:1px}
+
+  /* ---------- flow strip ---------- */
+  .flow{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 0;
+  }
+  .flow div{
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;padding:9px 8px;text-align:center;
+    font-size:12px;font-weight:700;color:#fff;line-height:1.35;position:relative;z-index:1;
+  }
+  .flow div span{display:block;font-size:15px;opacity:.85;margin-bottom:2px}
+
+  /* ---------- step card ---------- */
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 18px;margin-top:16px;
+  }
+  .step-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+  .num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:11px;
+    background:var(--mint-l);color:var(--mint-d);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;
+  }
+  .step-head h2{
+    font-size:17.5px;margin:5px 0 0;letter-spacing:-.3px;font-weight:800;line-height:1.4;
+  }
+  .step-head .hint{display:block;font-size:12.5px;color:var(--muted);font-weight:500;margin-top:3px}
+  .step-body{padding-left:0;margin-top:14px;font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---------- step 1 items ---------- */
+  .mat{
+    display:flex;gap:12px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#fbfdfd;
+    margin-bottom:10px;
+  }
+  .mat:last-child{margin-bottom:0}
+  .mat .tag{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#fff;border:1.5px solid var(--mint);
+    color:var(--mint-d);font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .mat .txt{flex:1;min-width:0}
+  .mat b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+  .mat p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+  .mat code, code.k{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:#eef5f6;border:1px solid #dde9ec;border-radius:6px;
+    padding:1px 6px;font-size:12.5px;color:#26454d;word-break:break-all;
+  }
+  .linkbtn{
+    display:inline-flex;align-items:center;gap:7px;margin-top:9px;
+    background:var(--mint);color:#fff;text-decoration:none;
+    font-size:13px;font-weight:700;padding:9px 14px;border-radius:10px;
+    box-shadow:0 2px 8px rgba(15,157,143,.25);
+  }
+  .linkbtn:active{transform:translateY(1px)}
+
+  /* ---------- prompt box ---------- */
+  .prompt-top{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:#0f2c31;color:#cfe7e3;border-radius:14px 14px 0 0;
+    padding:10px 14px;font-size:12.5px;font-weight:700;
+  }
+  .prompt-top .dots{display:flex;gap:5px}
+  .prompt-top .dots i{width:8px;height:8px;border-radius:50%;background:#3d6b70;display:block}
+  pre.prompt{
+    margin:0;background:#10363c;color:#e8f5f2;
+    border-radius:0 0 14px 14px;padding:14px 15px 16px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DungGeunMo",monospace;
+    font-size:12.6px;line-height:1.75;white-space:pre-wrap;word-break:break-word;
+    overflow-x:auto;
+  }
+  .copybar{margin:14px 0 12px}
+  .copy{
+    width:100%;border:0;cursor:pointer;
+    background:linear-gradient(180deg,#12b3a2,#0d9488);color:#fff;
+    font-family:inherit;font-size:16px;font-weight:800;letter-spacing:-.2px;
+    padding:15px 18px;border-radius:14px;
+    box-shadow:0 6px 16px rgba(13,148,136,.32);
+    transition:transform .08s ease, box-shadow .15s ease, background .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .copy:hover{box-shadow:0 8px 20px rgba(13,148,136,.4)}
+  .copy:active{transform:translateY(1px) scale(.997)}
+  .copy.done{background:linear-gradient(180deg,#3fbf8f,#1f9d6b);box-shadow:0 6px 16px rgba(31,157,107,.3)}
+  .copy-note{margin:8px 2px 0;font-size:12px;color:var(--muted);text-align:center}
+
+  /* ---------- step 3 example ---------- */
+  .chatwrap{
+    background:#b9cec6;border-radius:16px;padding:14px 12px;margin-top:4px;
+    background-image:linear-gradient(180deg,#b7cec7,#aec7c0);
+  }
+  .chathead{
+    display:flex;align-items:center;gap:7px;font-size:11.5px;color:#33484a;
+    font-weight:700;margin:0 2px 9px;
+  }
+  .chathead .ok{background:#e8f7ec;color:#1f7a44;border-radius:6px;padding:1px 6px;font-size:10.5px}
+  .bubble{
+    background:#fef7c9;border-radius:14px 14px 14px 4px;padding:13px 14px;
+    font-size:13.4px;line-height:1.72;color:#20282a;
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+    white-space:pre-wrap;word-break:break-word;
+  }
+  .bubble .lnk{color:#0b6ea8;text-decoration:underline;word-break:break-all}
+  .metaline{
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;
+    margin-top:8px;font-size:11px;color:#3d5457;
+  }
+  .pill{background:rgba(255,255,255,.75);border-radius:999px;padding:2px 9px;font-weight:700}
+  .tip{
+    display:flex;gap:10px;margin-top:14px;background:var(--cream);
+    border:1px solid #f3e4c6;border-radius:14px;padding:12px 13px;font-size:13px;color:#6b5527;
+  }
+  .tip .ic{flex:0 0 auto;font-size:15px;line-height:1.4}
+  .tip b{color:#7a5c17}
+
+  ul.mini{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--muted)}
+  ul.mini li{margin:4px 0}
+
+  footer{
+    margin-top:22px;text-align:center;font-size:12px;color:#8a9ba1;line-height:1.7;
+  }
+  footer b{color:#5c7379}
+
+  /* ---------- toast ---------- */
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:#12333a;color:#fff;font-size:14px;font-weight:700;
+    padding:12px 18px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.28);
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
+    z-index:99;max-width:calc(100vw - 32px);text-align:center;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+  #toast .e{margin-right:6px}
+
+  @media (max-width:430px){
+    .wrap{padding:14px 12px 44px}
+    header.hero{padding:22px 17px 20px;border-radius:18px}
+    .step{padding:17px 14px;border-radius:16px}
+    .step-head h2{font-size:16.5px}
+    pre.prompt{font-size:11.9px;padding:13px 12px 14px}
+    .bubble{font-size:13px}
+    .copy{font-size:15.4px;padding:14px}
+    .flow div{font-size:11px;padding:8px 5px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+  @media print{
+    body{background:#fff}
+    .copybar,.linkbtn,#toast{display:none}
+    .step{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="badge">🐾 다른 병원에서도 그대로 쓰는 실전 가이드</div>
+    <h1>동물병원 보호자 카톡 안내 · 1분 작성 가이드</h1>
+    <p class="sub">굿모닝펫동물병원 <strong>실전 노하우</strong> — 준비 2가지, 붙여넣기 1번이면 끝납니다.</p>
+    <div class="flow">
+      <div><span>①</span>자료 2가지 준비</div>
+      <div><span>②</span>AI에 붙여넣기</div>
+      <div><span>③</span>카톡에 복붙</div>
+    </div>
+  </header>
+
+  <!-- STEP 1 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">1</div>
+      <div>
+        <h2>준비 자료 2가지</h2>
+        <span class="hint">이 두 가지만 있으면 됩니다. 30초면 모입니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mat">
+        <div class="tag">①</div>
+        <div class="txt">
+          <b>펫메이트 전체콘텐츠 엑셀</b>
+          <p>펫메이트에 로그인한 뒤 <code class="k">m.pet-mate.net/my-cardnews</code> 에서 <b style="display:inline;font-size:inherit">[엑셀 다운로드]</b> 버튼을 누르면 내려받아집니다. 구독 중인 펫카드 목록과 링크가 모두 들어 있어요.</p>
+          <a class="linkbtn" href="https://m.pet-mate.net/my-cardnews" target="_blank" rel="noopener">펫메이트 열기 · 엑셀 다운로드 →</a>
+        </div>
+      </div>
+      <div class="mat">
+        <div class="tag">②</div>
+        <div class="txt">
+          <b>원장님 진료 코멘트</b>
+          <p>원내 카톡방에 올라온 <b style="display:inline;font-size:inherit">캡처 이미지</b> 그대로, 또는 <b style="display:inline;font-size:inherit">텍스트 메모</b> 그대로 쓰면 됩니다. 다듬지 않아도 AI가 보호자용 문장으로 바꿔 줍니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">2</div>
+      <div>
+        <h2>AI(피클 · 클로드 · GPT)에 자료 올리고 지시문 복사하기</h2>
+        <span class="hint">쓰시는 AI 아무거나 괜찮습니다. 파일 2개 올리고 → 아래 버튼 → 붙여넣기.</span>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="copybar">
+        <button class="copy" id="copyBtn" type="button">📋 AI 지시문 복사하기</button>
+        <p class="copy-note">버튼을 누르면 지시문 전체가 복사됩니다. 복사가 안 되면 아래 네모 박스를 길게 눌러 직접 복사하세요.</p>
+      </div>
+
+      <div class="prompt-top">
+        <span>지시문 — 그대로 붙여넣기</span>
+        <span class="dots"><i></i><i></i><i></i></span>
+      </div>
+      <pre class="prompt" id="promptText">첨부한 펫메이트 전체콘텐츠 엑셀에서 오늘 진료·증상과 가장 잘 맞는 펫카드 링크 1개를 골라, 아래 원장님 코멘트를 보호자용 카톡 안내문으로 작성해 주세요.
+[작성 규칙]
+1. 전체 공백 포함 400자 이내
+2. 읽기 편하게 문단마다 빈 줄(내려쓰기) 넣기
+3. 앞뒤 큰따옴표(") 없이 본문만 출력
+4. 마지막에 고른 펫메이트 링크 1개 포함
+---
+[여기에 원장님 코멘트 또는 캡처 이미지를 올리세요]</pre>
+
+      <ul class="mini">
+        <li>원장님 코멘트는 <b>지시문 맨 아래 <code class="k">---</code> 아래</b>에 붙여넣거나, 캡처 이미지를 함께 첨부하세요.</li>
+        <li>답이 400자를 넘으면 <b>“400자 넘었어, 줄여서 다시”</b> 한마디만 하면 됩니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step">
+    <div class="step-head">
+      <div class="num">3</div>
+      <div>
+        <h2>완성된 문구 복붙해서 보호자 카톡으로 발송</h2>
+        <span class="hint">AI가 준 문구를 그대로 복사해 보호자님 카톡방에 붙여넣습니다.</span>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="chatwrap">
+        <div class="chathead"><span>보호자에게 보낼 문구</span><span class="ok">예시</span></div>
+<div class="bubble">안녕하세요, 홍길동 보호자님 🐶
+굿모닝펫동물병원입니다.
+
+오늘 콩이 흉부 X-ray 검사 결과, 심장 크기를 보는 방사선 지표(VHS 10.3 · VLAS 2.0)가 모두 정상 범위로 확인되었습니다.
+
+11살이 되면 심장이 조금씩 커지는 경우가 많은데, 콩이는 지표가 아주 건강하게 잘 유지되고 있어 다행입니다.
+
+앞으로도 6개월에 한 번 정기 검진과 청진으로 심장 소리를 꾸준히 확인해 주시고, 밤에 기침이 잦아지거나 산책 중 숨이 빨리 차면 바로 알려 주세요.
+
+💛 콩이에게 도움이 되는 심장 건강 정보도 함께 보내드려요. 한 번 읽어 보시고 궁금한 점은 편하게 연락 주세요.
+<span class="lnk">https://m.pet-mate.net/2k9d7f1</span></div>
+        <div class="metaline">
+          <span class="pill">공백 포함 <b>355자</b> / 400자</span>
+          <span class="pill">문단마다 빈 줄</span>
+          <span class="pill">펫메이트 링크 1개</span>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="ic">💡</div>
+        <div><b>팁.</b> 같은 보호자에게 최근 1주일 내 보낸 펫메이트 링크는 겹치지 않게 다른 링크로 요청하면 더 좋습니다. 재진 보호자에게 비슷한 안내가 반복되면 성의가 떨어져 보이니까요.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>굿모닝펫동물병원</b> 실전 노하우로 만든 가이드입니다.<br>
+    병원 내부 교육용으로 자유롭게 공유하실 수 있어요. 🐾
+  </footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var btn = document.getElementById('copyBtn');
+  var pre = document.getElementById('promptText');
+  var toast = document.getElementById('toast');
+  var timer = null, tTimer = null;
+
+  function text(){
+    return pre.textContent.replace(/\u00a0/g,'\u0020');
+  }
+
+  function showToast(msg){
+    toast.innerHTML = '<span class="e">✅</span>' + msg;
+    toast.classList.add('show');
+    clearTimeout(tTimer);
+    tTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2400);
+  }
+
+  function legacyCopy(str){
+    var ta = document.createElement('textarea');
+    ta.value = str;
+    ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0, str.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function done(){
+    btn.textContent = '✅ 복사 완료!';
+    btn.classList.add('done');
+    showToast('복사 완료! AI 채팅창에 붙여넣으세요.');
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      btn.textContent = '📋 AI 지시문 복사하기';
+      btn.classList.remove('done');
+    }, 2600);
+  }
+
+  function fail(){
+    btn.textContent = '지시문을 직접 선택해 복사해 주세요';
+    showToast('자동 복사가 막혔어요. 아래 네모 박스를 길게 눌러 복사해 주세요.');
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      btn.textContent = '📋 AI 지시문 복사하기';
+    }, 3200);
+  }
+
+  btn.addEventListener('click', function(){
+    var str = text();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(str).then(done).catch(function(){
+        if (legacyCopy(str)) { done(); } else { fail(); }
+      });
+    } else {
+      if (legacyCopy(str)) { done(); } else { fail(); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
