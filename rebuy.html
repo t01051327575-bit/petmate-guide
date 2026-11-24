@@ -526,6 +526,7 @@
         </div>
 
         <p class="hosp-hint">이 이름으로 이름·슬로건·배경 색·링크가 저장되고, <b>병원 이름을 바꾸면 그 병원 칸의 판매내역이 따로 불러와집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
+        <p class="hosp-hint">주소 끝에 <code class="k">?hospital=병원이름&amp;link=구매요청주소</code>를 붙여 열면 <b>이 칸이 자동으로 채워집니다</b>(병원에 보내는 원클릭 세팅 링크).</p>
       </div>
     </div>
   </section>
@@ -609,7 +610,7 @@
       <div class="num">4</div>
       <div>
         <h2>재구매 안내 문구 만들기</h2>
-        <span class="hint">선택한 품목과 병원 정보로 카톡에 붙여넣을 문구를 만듭니다.</span>
+        <span class="hint">선택한 품목과 병원 정보로 카톡에 붙여넣을 문구를 만듭니다. 카톡 400자 제한에 맞춰 자동으로 줄여 드려요.</span>
       </div>
     </div>
     <div class="step-body">
@@ -620,7 +621,7 @@
         <div class="whoami" id="whoami"></div>
         <div class="pv-head">
           <span>보호자에게 보낼 문구</span>
-          <span class="cnt-badge" id="charBadge">0자</span>
+          <span class="cnt-badge" id="charBadge">0자 / 최대 400자</span>
         </div>
         <div class="bubble" id="previewText"></div>
         <p class="pv-note" id="pvNote"></p>
@@ -848,7 +849,8 @@
       .replace(/\s*(입니다|이에요|예요)\.?$/, '')
       .replace(/[\s.]+$/, '')
       .trim()
-      .slice(0, 40);
+      .slice(0, 40)
+      .replace(/[\s.]+$/, '');
   }
   function applyProfile(p){
     p = p || {};
@@ -1662,7 +1664,9 @@
   $('selNone').addEventListener('click', function(){ setAll('none'); });
 
   /* ===================== ⑤ 문구 만들기 ===================== */
+  var MAX_CHARS = 400;                    /* 카톡 입력창 기준 상한 */
   var lastMessage = '';
+  var lastFit = null;
 
   function urlInfo(){
     var v = String(orderInput.value || '').trim();
@@ -1673,14 +1677,16 @@
     return { kind:'text', value:v };
   }
 
-  function renderLinkState(){
-    var has = !!urlInfo().kind;
+  function renderLinkState(fit){
     var note = $('pvNote');
-    if(note && !$('result').hidden){
-      note.innerHTML = has
-        ? '🛒 <b>구매요청 링크가 문구에 들어갔어요.</b> 1단계에서 언제든 바꿀 수 있습니다.'
-        : '링크가 비어 있어 <b>「이 카톡방으로 편하게 말씀해 주세요」</b> 안내로 나갑니다. 1단계에서 링크를 넣으면 바로 버튼이 붙어요.';
-    }
+    if(!note) return;
+    if($('result').hidden) return;
+    var has = !!urlInfo().kind;
+    var html = has
+      ? '🛒 <b>구매요청 링크가 문구에 들어갔어요.</b> 1단계에서 언제든 바꿀 수 있습니다.'
+      : '링크가 비어 있어 <b>「이 카톡방으로 편하게 말씀해 주세요」</b> 안내로 나갑니다. 1단계에서 링크를 넣으면 바로 버튼이 붙어요.';
+    if(fit && fit.note) html += '<br>' + fit.note;
+    note.innerHTML = html;
   }
 
   var WARM = [
@@ -1696,26 +1702,67 @@
     return Math.abs(h);
   }
 
-  function buildMessage(){
+  /* ---------- 400자 맞춤: 상품명 축약 도우미 ---------- */
+  /* mode 'tail'  : 끝에 붙은 괄호 부가설명 + 아주 긴 괄호설명만 걷어낸다 */
+  /* mode 'all'   : 괄호 부가설명을 모두 걷어낸다 */
+  function stripParens(name, mode){
+    var s = String(name == null ? '' : name);
+    if(mode === 'all'){
+      s = s.replace(/\([^)]*\)/g, ' ');
+    } else if(mode === 'tail'){
+      for(var i = 0; i < 3; i++){
+        var b = s;
+        s = s.replace(/\s*\([^)]*\)\s*$/, '');
+        if(s === b) break;
+      }
+      s = s.replace(/\(([^)]{11,})\)/g, ' ');
+    }
+    return s.replace(/\s+/g, ' ').replace(/[\s·,\/\-]+$/, '').trim();
+  }
+
+  function clipName(name, max){
+    var s = String(name == null ? '' : name).replace(/[\s·,\/\-]+$/, '');
+    if(!max || s.length <= max) return s;
+    var cut = s.slice(0, max - 1);
+    var sp = cut.lastIndexOf(' ');
+    if(sp >= Math.max(5, max - 9)) cut = cut.slice(0, sp);
+    cut = cut.replace(/[\s(\[\/·,\-]+$/, '');
+    cut = cut.replace(/\([^)]*$/, '');          /* 잘리다 만 괄호는 통째로 버린다 */
+    cut = cut.replace(/[\s(\[\/·,\-]+$/, '');
+    if(!cut) cut = s.slice(0, max - 1);
+    return cut + '…';
+  }
+
+  /* ---------- 문구 조립 (cfg 로 축약 단계를 바꿔 가며 400자에 맞춘다) ---------- */
+  function buildMessage(cfg){
+    cfg = cfg || {};
     var hosp = curHospital || '○○동물병원';
-    var slogan = cleanSlogan(slogInput.value);
+    var slogan = cfg.noSlogan ? '' : cleanSlogan(slogInput.value);
     var g = curPair.g || '';
     var p = curPair.p || '';
-    var items = selList().reverse(); /* 최신순으로 정리된 것을 오래된 것부터 */
+    var all = selList().reverse();          /* 가장 오래전(급한) 품목부터 */
+    var total = all.length;
+    var lim = cfg.maxItems || 0;
+    var items = (lim && total > lim) ? all.slice(0, lim) : all;
+    var hidden = total - items.length;
+
+    function nm(raw){
+      var s = cleanProduct(raw);
+      if(cfg.paren) s = stripParens(s, cfg.paren);
+      if(cfg.nameMax) s = clipName(s, cfg.nameMax);
+      return s;
+    }
 
     var L = [];
-    if(g){
-      L.push('안녕하세요, ' + g + ' 보호자님 🐾');
-    } else {
-      L.push('안녕하세요, ' + (p ? p + ' 아이' : '보호자') + '님 🐾');
-    }
+    var whoLabel = g ? (g + ' 보호자') : (p ? (p + ' 아이') : '보호자');
+    L.push(cfg.headShort ? ('안녕하세요 ' + whoLabel + '님 🐾') : ('안녕하세요, ' + whoLabel + '님 🐾'));
     L.push(hosp + '입니다.' + (slogan ? ' (' + slogan + ')' : ''));
-    L.push('');
+    if(!cfg.compact) L.push('');
 
     var sameDay = items.length > 0;
     var d0 = items.length ? items[0].d : '';
     items.forEach(function(r){ if(r.d !== d0) sameDay = false; });
-    var many = items.length > 1 ? '제품들이에요.' : '제품이에요.';
+    var many = total > 1 ? '제품들이에요.' : '제품이에요.';
     var who = p ? (p + ' 아이가 ') : '';
     if(sameDay){
       L.push('지난번(' + mdOf(d0) + ')에 ' + who + '챙겨 간 ' + many);
@@ -1723,36 +1770,99 @@
       L.push('지난번에 ' + who + '챙겨 간 ' + many);
     }
     items.forEach(function(rec){
-      var name = cleanProduct(rec.n);
+      var name = nm(rec.n);
       var qty = rec.q && rec.q > 1 ? ' ' + rec.q + '개' : '';
-      if(sameDay){
+      if(sameDay || cfg.noDate){
         L.push('• ' + name + qty);
       } else {
         L.push('• ' + name + qty + ' (' + mdOf(rec.d) + ' · ' + daysText(daysSince(rec.d)) + ')');
       }
     });
-    L.push('');
-    L.push('요즘 슬슬 떨어져 갈 때가 되었어요.');
-    L.push('');
-    L.push('같은 제품으로 미리 준비해 두시면 마음이 놓이실 거예요.');
+    if(hidden > 0) L.push('• 외 ' + hidden + '건');
+    if(!cfg.compact) L.push('');
+
+    if(!cfg.noLead) L.push('요즘 슬슬 떨어져 갈 때가 되었어요.');
+    if(!cfg.noPrep) L.push('같은 제품으로 미리 준비해 두시면 마음이 놓이실 거예요.');
+
+    if(cfg.cheer !== 'none'){
+      var warmWho = p || g || '아이';
+      if(cfg.cheer === 'short'){
+        L.push(warmWho + '와 늘 건강하길 바라요 🍀');
+      } else {
+        var warm = WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
+        L.push(warm(warmWho));
+      }
+    }
 
     var u = urlInfo();
     if(u.kind === 'url'){
       L.push('필요하시면 아래로 편하게 요청해 주세요 😊');
-      L.push('');
-      L.push('🛒 바로 재구매 요청하기');
-      L.push(u.value);
     } else if(u.kind === 'text'){
-      L.push('필요하시면 ' + u.value + '에 편하게 말씀해 주세요 😊');
+      if(/(주세요|주십시오|바랍니다|부탁드립니다)$/.test(u.value)) L.push('필요하시면 ' + u.value + ' 😊');
+      else L.push('필요하시면 ' + u.value + '에 편하게 말씀해 주세요 😊');
     } else {
       L.push('필요하시면 이 카톡방으로 편하게 말씀해 주세요 😊');
     }
 
-    L.push('');
-    var warmWho = p || g || '아이';
-    var warm = WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
-    L.push(warm(warmWho));
-    return L.join('\n');
+    var body = L.join('\n');
+    if(u.kind === 'url'){
+      /* 구매요청 링크 블록은 통째로, 문구 맨 끝에 그대로 붙인다 (절대 줄이지 않음) */
+      body += (cfg.compact ? '\n' : '\n\n') + '🛒 바로 재구매 요청하기\n' + u.value;
+    }
+    return body;
+  }
+
+  /* ① 이름 축약 → ② 품목 수 줄이기(외 N건) → ③ 맺음말 간결화 순서로 조금씩 강하게 */
+  var FIT_STEPS = [
+    {},
+    { paren:'tail' },
+    { paren:'tail', nameMax:28 },
+    { paren:'tail', nameMax:22 },
+    { paren:'tail', nameMax:18 },
+    { paren:'tail', nameMax:18, maxItems:3 },
+    { paren:'tail', nameMax:14, maxItems:3 },
+    { paren:'tail', nameMax:14, maxItems:2 },
+    { paren:'tail', nameMax:14, maxItems:2, cheer:'short' },
+    { paren:'all', nameMax:12, maxItems:3, cheer:'short', noDate:true },
+    { paren:'all', nameMax:12, maxItems:2, cheer:'short', noDate:true, compact:true },
+    { paren:'all', nameMax:10, maxItems:2, cheer:'none', noDate:true, compact:true },
+    { paren:'all', nameMax:10, maxItems:2, cheer:'none', noDate:true, compact:true, noLead:true },
+    { paren:'all', nameMax:8, maxItems:2, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true },
+    { paren:'all', nameMax:8, maxItems:1, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true, noPrep:true },
+    { paren:'all', nameMax:6, maxItems:1, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true, noPrep:true, headShort:true }
+  ];
+
+  function describeFit(st){
+    var b = [];
+    if(st.paren) b.push('상품명 부가설명 축약');
+    if(st.nameMax) b.push('상품명 ' + st.nameMax + '자 말줄임');
+    if(st.maxItems) b.push('상위 ' + st.maxItems + '개만 표시(외 N건)');
+    if(st.cheer === 'short') b.push('맺음 인사 간결화');
+    if(st.cheer === 'none') b.push('맺음 인사 생략');
+    if(st.noDate) b.push('구매일 표기 생략');
+    if(st.compact) b.push('줄바꿈 압축');
+    if(st.noLead || st.noPrep) b.push('안내문 간결화');
+    if(st.noSlogan) b.push('슬로건 생략');
+    return b.join(' · ');
+  }
+
+  function fitMessage(){
+    var tried = null, step = null, text = '';
+    for(var i = 0; i < FIT_STEPS.length; i++){
+      var t = buildMessage(FIT_STEPS[i]);
+      tried = { step:FIT_STEPS[i], text:t };
+      if(t.length <= MAX_CHARS){ step = FIT_STEPS[i]; text = t; break; }
+    }
+    if(!text){ step = tried.step; text = tried.text; }
+    var over = text.length > MAX_CHARS;
+    var desc = describeFit(step);
+    var note = '';
+    if(over){
+      note = '⚠️ 링크 주소가 길어 <b>' + text.length + '자</b>가 되었어요. 링크는 잘리지 않게 그대로 두었으니 1단계에서 더 짧은 주소를 넣어 주세요.';
+    } else if(desc){
+      note = '✂️ 400자에 맞춰 <b>' + desc + '</b>했어요. 구매요청 링크는 그대로 살렸습니다.';
+    }
+    return { text:text, step:step, note:note, over:over, count:text.length };
   }
 
   function onMake(){
@@ -1776,17 +1886,22 @@
 
   function renderMessage(){
     var items = selList();
-    lastMessage = buildMessage();
+    var fit = fitMessage();
+    var lim = fit.step && fit.step.maxItems ? fit.step.maxItems : 0;
+    var shown = (lim && items.length > lim) ? lim : items.length;
+    lastMessage = fit.text;
+    lastFit = { step:fit.step, note:fit.note, over:fit.over, shown:shown, total:items.length };
     $('previewText').textContent = lastMessage;
     $('whoami').textContent = '👤 ' + (curPair.g || '보호자 미기재') + ' 보호자님 · ' + (curPair.p || '아이 이름 미기재') +
-      ' · 선택한 품목 ' + items.length + '개';
+      ' · 선택한 품목 ' + items.length + '개' +
+      (shown < items.length ? ' (문구에는 ' + shown + '개 + 외 ' + (items.length - shown) + '건)' : '');
     var n = lastMessage.length;
     var badge = $('charBadge');
-    badge.textContent = '공백 포함 ' + n + '자';
-    badge.className = 'cnt-badge' + (n >= 900 ? ' over' : (n >= 450 ? ' tight' : ''));
+    badge.textContent = n + '자 / 최대 ' + MAX_CHARS + '자';
+    badge.className = 'cnt-badge' + (n > MAX_CHARS ? ' over' : '');
     $('result').hidden = false;
     $('pvEmpty').hidden = true;
-    renderLinkState();
+    renderLinkState(lastFit);
     var cp = $('copyMsg');
     cp.className = 'pv-copy';
     cp.textContent = '📋 문구 복사하기';
@@ -1862,6 +1977,62 @@
     say('이 기기 저장 정보를 모두 지웠어요');
   });
 
+  /* ===================== ⑦ 주소(링크)로 병원 세팅 자동 채우기 ===================== */
+  /* ?hospital=병원이름&slogan=슬로건&link=구매요청링크  로 열면 1단계가 자동으로 채워진다.
+     파라미터가 없으면 기존과 똑같이 동작한다. */
+  function readParam(names){
+    var q = String((window.location && window.location.search) || '');
+    if(q.length < 2) return null;
+    var pairs = q.replace(/^\?/, '').split('&');
+    for(var i = 0; i < pairs.length; i++){
+      var raw = pairs[i];
+      if(!raw) continue;
+      var eq = raw.indexOf('=');
+      var k = eq < 0 ? raw : raw.slice(0, eq);
+      var v = eq < 0 ? '' : raw.slice(eq + 1);
+      try { k = decodeURIComponent(k.replace(/\+/g, ' ')); } catch(e){}
+      k = String(k).toLowerCase().trim();
+      for(var j = 0; j < names.length; j++){
+        if(k === names[j]){
+          var out = v.replace(/\+/g, ' ');
+          try { out = decodeURIComponent(out); } catch(e){}
+          return out;
+        }
+      }
+    }
+    return null;
+  }
+
+  function applyUrlParams(){
+    var pName   = cleanName(readParam(['hospital','hosp','h','name']) || '');
+    var pSlogan = readParam(['slogan','slogun','s']);
+    var pLink   = readParam(['link','url','l']);
+    if(!pName && pSlogan == null && pLink == null) return false;
+
+    if(pName && pName !== curHospital){
+      hospInput.value = pName;
+      curHospital = pName;
+      lsSet(K_HOSP, pName);
+      applyProfile(readProfile(pName));
+      loadDataFor(pName);
+    }
+    if(pSlogan != null && String(pSlogan).trim()) slogInput.value = cleanSlogan(pSlogan);
+    if(pLink != null && String(pLink).trim()) orderInput.value = String(pLink).trim().slice(0, 300);
+
+    syncConfid(curHospital);
+    writeProfile();
+    if(!$('result').hidden) refreshMessageIfOpen();
+    renderLinkState();
+    say('링크로 병원 세팅을 불러왔어요');
+    /* 한 번 채웠으면 주소창의 파라미터는 지워, 다음에 고친 내용이 그대로 남게 */
+    try{
+      if(window.history && window.history.replaceState){
+        window.history.replaceState(null, '', window.location.pathname + (window.location.hash || ''));
+      }
+    }catch(e){}
+    return true;
+  }
+
   /* ===================== 시작 ===================== */
   (function init(){
     var lastName = cleanName(lsGet(K_HOSP) || '');
@@ -1875,6 +2046,7 @@
     }
     syncConfid(curHospital);
     loadDataFor(curHospital);
+    applyUrlParams();
     renderLinkState();
   })();
 
