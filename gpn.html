@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GPN 포지션 · 일일 마감 보고 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GPN · 포지션 · 일일 마감 보고 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gpn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPN · 포지션 · 일일 마감 보고">
+<meta name="twitter:description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GPN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GPN</span>
+      <span class="eng-chip">P · Position</span>
+    </div>
+    <h1>포지션 · 일일 마감 보고</h1>
+    <p>오늘의 숫자와 특이사항을 넣으면, 원장님께 드릴 마감 보고가 1분 만에 완성됩니다.</p>
+    <div class="marks"><span>일일 마감</span><span>포지션 정리</span><span>보고 문구</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>P · Position — 누가 무엇을 맡는지, 오늘 어떻게 끝났는지</small></h2></div>
+    <p>하루를 <b>숫자와 한 줄</b>로 남기면, 다음 날 아침이 가벼워집니다. 2인 체제에서는 특히 <b>역할이 겹치지 않는 것</b>이 중요합니다.</p>
+    <ul class="clean">
+      <li>오늘의 매출·환자·미내원을 <b>한 장으로</b> 정리합니다.</li>
+      <li>원장님께 드릴 <b>마감 보고</b>를 400자로 만듭니다.</li>
+      <li>원무과·진료검사과의 <b>포지션</b>을 확인합니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>오늘 마감<small>숫자는 마감 후 한 번에</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>날짜</label><input id="date" type="date"></div>
+      <div class="field"><label>총 매출 (원)</label><input id="sales" type="number" inputmode="numeric" min="0" step="1000" placeholder="0"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>신환</label><input id="newp" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>재진</label><input id="re" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>미내원</label><input id="miss" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>수술·처치</label><input id="surg" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>예약 잡은 건수</label><input id="book" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </div>
+    <div class="field"><label>특이사항 <span class="hint">한 줄씩</span></label><textarea id="memo" style="min-height:84px" placeholder="예: 콩이 안압 재측정 필요&#10;보호자님 환불 요청 1건 — 내일 처리"></textarea></div>
+    <div class="field"><label>내일 준비</label><input id="tomorrow" type="text" placeholder="예: 수술 2건 금식 안내 완료, 냉장 시약 보충"></div>
+    <div class="result">
+      <div class="kv"><span class="k">총 내원</span><span class="v"><span id="total">0</span>명</span></div>
+      <div class="kv"><span class="k">1인당 매출</span><span class="v"><span id="per">0</span>원</span></div>
+      <div class="kv"><span class="k">미내원율</span><span class="v"><span id="missRate">0</span>%</span></div>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>2인 체제 포지션<small>겹치면 둘 다 지치고, 비면 아무도 못 봅니다</small></h2></div>
+    <div class="grid2">
+      <div class="mini"><div class="k">원무과</div><div class="v">응대 · 수납 · 카톡 · 주문 · 재고 · 예약</div></div>
+      <div class="mini"><div class="k">진료검사과</div><div class="v">보조 · 보정 · 검사 · 조제 · 수술 준비</div></div>
+      <div class="mini"><div class="k">원장님</div><div class="v">진료 · 수술 · 검사 판독 · 처방</div></div>
+      <div class="mini"><div class="k">경영부원장</div><div class="v">운영 · 시스템 · 거래처 · 정산</div></div>
+    </div>
+    <div class="callout"><b>그물망 연결:</b> 마감 보고는 <b>GAN</b>(정산)과 <b>GXN</b>(미내원)의 숫자와 맞춰야 합니다. 세 칸이 같은 숫자를 보게 하세요.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gon.html"><span class="k">◀ 이전 칸 · GON</span><span class="v">개원 스토리</span></a>
+    <a class="next" href="gqn.html"><span class="k">다음 칸 · GQN ▶</span><span class="v">보고 퀴즈</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  $('#date').value = G.today();
+  ['date', 'sales', 'newp', 're', 'miss', 'surg', 'book', 'memo', 'tomorrow'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+  function n(id) { return parseInt(($('#' + id).value || '0'), 10) || 0; }
+
+  var kit = G.outKit({
+    num: 3,
+    title: '원장님께 드릴 마감 보고',
+    sub: '400자 이내 · 퇴근 전 한 번',
+    build: function () {
+      var d = G.settings();
+      var date = ($('#date').value || G.today()).replace(/-/g, '. ');
+      var memo = ($('#memo').value || '').trim();
+      var head = '[일일 마감] ' + date + '\n';
+      var body = '매출 ' + G.money(n('sales')) + '원\n' +
+        '신환 ' + n('newp') + ' · 재진 ' + n('re') + ' · 미내원 ' + n('miss') + ' · 수술 ' + n('surg') + ' · 예약 ' + n('book') + '\n';
+      var tail = (memo ? '\n특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '') +
+        (($('#tomorrow').value || '').trim() ? '내일: ' + $('#tomorrow').value.trim() + '\n' : '') +
+        '\n수고하셨습니다.\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true
+  });
+
+  function refresh() {
+    var total = n('newp') + n('re');
+    var s = n('sales');
+    $('#total').textContent = total;
+    $('#per').textContent = total > 0 ? G.money(s / total) : '0';
+    var denom = total + n('miss');
+    $('#missRate').textContent = denom > 0 ? Math.round(n('miss') / denom * 100) : '0';
+    if (kit) kit.refresh();
+  }
+  refresh();
+})();
+
+</script>
+</body>
+</html>

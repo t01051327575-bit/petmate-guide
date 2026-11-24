@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GIN 자료 정리 · 보호자 질문 수첩 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GIN — 검사·상담 자료 파일명을 규칙대로 만들고, 보호자 질문에 근거와 함께 답하는 400자 문구를 정리합니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GIN · 자료 정리 · 보호자 질문 수첩 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GIN — 검사·상담 자료 파일명을 규칙대로 만들고, 보호자 질문에 근거와 함께 답하는 400자 문구를 정리합니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gin.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GIN · 자료 정리 · 보호자 질문 수첩">
+<meta name="twitter:description" content="굿모닝펫 GIN — 검사·상담 자료 파일명을 규칙대로 만들고, 보호자 질문에 근거와 함께 답하는 400자 문구를 정리합니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GIN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GIN</span>
+      <span class="eng-chip">I · Import</span>
+    </div>
+    <h1>자료 정리 · 보호자 질문 수첩</h1>
+    <p>검사지 파일 이름을 규칙대로 만들고, 보호자 질문에는 근거를 붙여 답합니다.</p>
+    <div class="marks"><span>파일명 자동</span><span>질문 수첩</span><span>근거 있는 답변</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>I · Import — 흩어진 자료와 질문을 한곳에 모으는 칸</small></h2></div>
+    <p>검사지가 “카톡_사진_2026.jpg”로 쌓이면 <b>다시 찾을 수 없습니다</b>. 이름 규칙 하나와, 질문에 근거를 붙이는 습관 하나가 병원의 기억을 만듭니다.</p>
+    <ul class="clean">
+      <li>날짜_보호자_아이_자료명으로 <b>파일명을 자동 생성</b>합니다.</li>
+      <li>보호자 질문에 <b>근거(검사·코멘트)</b>를 붙여 답합니다.</li>
+      <li>답변은 400자로 정리해 카톡으로 보냅니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>파일명 만들기<small>검색이 되는 이름으로</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>날짜</label><input id="fdate" type="date"></div>
+      <div class="field"><label>자료 종류</label>
+        <select id="ftype"><option>혈액검사</option><option>장내미생물</option><option>FMT</option><option>혹 세포검사</option><option>방사선</option><option>초음파</option><option>안과</option><option>건강관리표</option><option>처방전</option></select>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="fguard" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="fpet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="result">
+      <div class="kv"><span class="k">파일명</span><span class="v" id="fileName" style="word-break:break-all">-</span></div>
+    </div>
+    <div class="btns"><button class="btn primary wide" id="copyName" type="button">📋 파일명 복사</button></div>
+    <p class="note">예: <b>20261125_김민지_콩이_혈액검사</b> — 날짜를 앞에 두면 폴더에서 자동 정렬됩니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>보호자 질문 수첩<small>답변에는 반드시 근거를 함께</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="field"><label>보호자 질문</label><textarea id="q" style="min-height:76px" placeholder="예: 사료를 바꿔도 될까요? 지금은 처방식 먹고 있어요."></textarea></div>
+    <div class="field"><label>근거 <span class="hint">검사 결과·원장님 코멘트·이전 처방</span></label><textarea id="basis" style="min-height:76px" placeholder="예: 11/18 혈액검사에서 신장 수치 경계, 원장님 코멘트: 3개월 뒤 재검까지 처방식 유지"></textarea></div>
+    <div class="field"><label>답변 요지</label><textarea id="answer" style="min-height:76px" placeholder="예: 지금은 처방식을 유지하고, 재검 후에 바꾸는 것이 좋습니다."></textarea></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>질문에 답하는 순서<small>“모르겠어요” 대신 근거를 찾는 3단계</small></h2></div>
+    <ul class="clean">
+      <li><b>차트</b>에서 같은 증상의 이전 기록을 찾습니다.</li>
+      <li><b>원장님 코멘트</b>와 검사 결과에서 근거 문장을 그대로 가져옵니다.</li>
+      <li>근거 → 판단 → 다음 할 일 순서로 답합니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 같은 질문이 반복되면 <b>GTN</b>(카톡 안내) 문구로 만들어 두세요. 다음에는 1분이면 답할 수 있습니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="ghn.html"><span class="k">◀ 이전 칸 · GHN</span><span class="v">건강관리표</span></a>
+    <a class="next" href="gjn.html"><span class="k">다음 칸 · GJN ▶</span><span class="v">생일 엽서·선물</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  $('#fdate').value = G.today();
+  ['fdate', 'ftype', 'fguard', 'fpet'].forEach(function (id) {
+    $('#' + id).addEventListener('input', updateName);
+    $('#' + id).addEventListener('change', updateName);
+  });
+  ['guardian', 'pet', 'q', 'basis', 'answer'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+  });
+
+  function clean(s) {
+    return String(s || '').replace(/[\\/:*?"<>|\s]/g, '').slice(0, 20);
+  }
+  function fileName() {
+    var d = ($('#fdate').value || G.today()).replace(/-/g, '');
+    var g = clean($('#fguard').value) || '보호자';
+    var p = clean($('#fpet').value) || '아이';
+    return d + '_' + g + '_' + p + '_' + $('#ftype').value;
+  }
+  function updateName() {
+    $('#fileName').textContent = fileName();
+    var b = $('#copyName');
+    b.setAttribute('data-copy', fileName());
+  }
+  $('#copyName').addEventListener('click', function () {
+    G.copy(fileName()).then(function (ok) {
+      G.toast(ok ? '파일명을 복사했어요' : '복사가 막혔어요. 길게 눌러 직접 복사해 주세요');
+    });
+  });
+
+  var kit = G.outKit({
+    num: 4,
+    title: '보호자에게 보낼 답변',
+    sub: '400자 이내 · 질문 → 근거 → 다음 할 일',
+    build: function () {
+      var d = G.settings();
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var q = ($('#q').value || '').trim();
+      var basis = ($('#basis').value || '').trim();
+      var ans = ($('#answer').value || '').trim();
+      var head = '🐾 ' + g + '님, ' + p + '에 대해 물어보신 내용 답변드립니다.\n\n';
+      var body = (q ? '· 질문: ' + q + '\n\n' : '') +
+        (basis ? '· 근거: ' + basis + '\n\n' : '') +
+        (ans ? '· 답변: ' + ans + '\n\n' : '· 답변: 확인 후 다시 안내드리겠습니다.\n\n');
+      var tail = '이해가 어려우시면 언제든 다시 물어보세요.\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '근거 없이 “괜찮을 거예요”라고 답하면, 다음에 같은 질문이 다시 옵니다.'
+  });
+
+  function refresh() { if (kit) kit.refresh(); }
+  updateName(); refresh();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GYN 연간 백신 · 건강검진 플래너 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GYN — 생년월일과 마지막 접종일로 다음 백신·심장사상충·건강검진 시기를 계산해 연간 플랜과 보호자 안내를 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GYN · 연간 백신 · 건강검진 플래너 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GYN — 생년월일과 마지막 접종일로 다음 백신·심장사상충·건강검진 시기를 계산해 연간 플랜과 보호자 안내를 만듭니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gyn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GYN · 연간 백신 · 건강검진 플래너">
+<meta name="twitter:description" content="굿모닝펫 GYN — 생년월일과 마지막 접종일로 다음 백신·심장사상충·건강검진 시기를 계산해 연간 플랜과 보호자 안내를 만듭니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GYN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GYN</span>
+      <span class="eng-chip">Y · Yearly</span>
+    </div>
+    <h1>연간 백신 · 건강검진 플래너</h1>
+    <p>생년월일과 마지막 접종일만 넣으면, 올해 언제 무엇을 해야 하는지 달력으로 정리됩니다.</p>
+    <div class="marks"><span>접종 주기 계산</span><span>검진 D-day</span><span>연간 안내</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>Y · Yearly — 1년을 미리 그려 두는 칸</small></h2></div>
+    <p>백신과 검진은 <b>기억이 아니라 달력</b>으로 챙겨야 빠지지 않습니다. 한 번 정리해 두면 1년이 편해집니다.</p>
+    <ul class="clean">
+      <li>마지막 접종일로 <b>다음 접종일</b>을 계산합니다.</li>
+      <li>6세 이상은 <b>검진 주기가 6개월</b>로 바뀝니다.</li>
+      <li>1년 치 일정을 <b>보호자 안내</b>로 만들어 보냅니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>아이 정보<small>접종 수첩을 보면서 넣어 주세요</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>생년월일</label><input id="birth" type="date"></div>
+      <div class="field"><label>종</label><select id="species"><option>강아지</option><option>고양이</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>마지막 종합백신</label><input id="v1" type="date"></div>
+      <div class="field"><label>마지막 광견병</label><input id="v2" type="date"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>마지막 심장사상충</label><input id="v3" type="date"></div>
+      <div class="field"><label>마지막 건강검진</label><input id="v4" type="date"></div>
+    </div>
+    <div class="field"><label>기타 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 켄넬코프 11월, 치과 스케일링 상담"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>올해 일정<small>오늘 기준 · 진료는 월·화·수</small></h2></div>
+    <div id="plan"></div>
+    <p class="note">접종 주기는 아이의 나이·백신 종류·병원 기준에 따라 달라집니다. <b>원장님 확인 후</b> 안내하세요.</p>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>연간 관리가 이어지게<small>한 번에 몰아 보내지 않기</small></h2></div>
+    <ul class="clean">
+      <li>접종 안내는 <b>2주 전</b>에 한 번, <b>3일 전</b>에 한 번 보냅니다.</li>
+      <li>검진은 <b>생일 달</b>로 묶으면 기억하기 쉽습니다.</li>
+      <li>심장사상충은 <b>매월 같은 날</b>로 정해 문자를 보냅니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 연간 플랜은 <b>GJN</b>(생일)과 <b>GHN</b>(내원 전) 사이에 놓입니다. 기념일과 검진을 함께 챙기면 기억에 남습니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gxn.html"><span class="k">◀ 이전 칸 · GXN</span><span class="v">미내원·03마감</span></a>
+    <a class="next" href="gzn.html"><span class="k">다음 칸 · GZN ▶</span><span class="v">제로 청소</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var ids = ['guardian', 'pet', 'birth', 'species', 'v1', 'v2', 'v3', 'v4', 'extra'];
+  ids.forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+  function addMonths(iso, m) {
+    if (!iso) return null;
+    var d = new Date(iso + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    var day = d.getDate();
+    d.setMonth(d.getMonth() + m);
+    if (d.getDate() < day) d.setDate(0);
+    return d;
+  }
+  function addDaysIso(iso, days) {
+    if (!iso) return null;
+    var d = new Date(iso + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+  function ageYears() {
+    var b = $('#birth').value;
+    if (!b) return null;
+    var d = new Date(b + 'T00:00:00');
+    if (isNaN(d.getTime())) return null;
+    var now = new Date();
+    var y = now.getFullYear() - d.getFullYear();
+    var m = now.getMonth() - d.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < d.getDate())) y--;
+    return y;
+  }
+  function rows() {
+    var out = [];
+    var years = ageYears();
+    var senior = years != null && years >= 6;
+    var v1 = addDaysIso($('#v1').value, 365);
+    var v2 = addDaysIso($('#v2').value, 365);
+    var v3 = addDaysIso($('#v3').value, 30);
+    var v4 = addDaysIso($('#v4').value, senior ? 182 : 365);
+    if (v1) out.push({ k: '종합백신', d: v1 });
+    if (v2) out.push({ k: '광견병', d: v2 });
+    if (v3) out.push({ k: '심장사상충', d: v3 });
+    if (v4) out.push({ k: '건강검진' + (senior ? ' (6세 이상 6개월)' : ''), d: v4 });
+    out.sort(function (a, b) { return a.d - b.d; });
+    return out;
+  }
+
+  var kit = G.outKit({
+    num: 4,
+    title: '보호자에게 보낼 연간 안내',
+    sub: '400자 이내 · 가장 가까운 일정부터',
+    build: function () {
+      var d = G.settings();
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var list = rows();
+      var head = '🐾 ' + g + '님, ' + p + ' 올해 일정 안내입니다.\n\n';
+      if (!list.length) return head + '마지막 접종일을 넣으면 다음 일정을 계산해 드립니다.\n- ' + d.hospital;
+      var lines = list.slice(0, 4).map(function (x) {
+        return '· ' + G.fmtDate(x.d) + ' ' + x.k + ' (' + G.dday(G.isoDate(x.d)) + ')';
+      });
+      var body = lines.join('\n') + '\n';
+      var years = ageYears();
+      if (years != null) body += '\n· 나이: ' + years + '살' + (years >= 6 ? ' (6세 이상 · 검진 6개월 주기)' : '');
+      var extra = ($('#extra').value || '').trim();
+      if (extra) body += '\n· ' + extra;
+      var tail = '\n\n진료는 월·화·수 09:00–12:00입니다.\n2주 전에 다시 안내드릴게요.\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '접종 주기는 <b>원장님 기준</b>이 우선입니다. 이 계산은 안내 초안입니다.'
+  });
+
+  function refresh() {
+    var list = rows();
+    var years = ageYears();
+    var host = $('#plan');
+    if (!list.length) {
+      host.innerHTML = '<p class="note">마지막 접종일을 넣으면 여기에 일정이 표시됩니다.</p>';
+    } else {
+      host.innerHTML =
+        (years != null ? '<div class="kv"><span class="k">나이</span><span class="v">' + years + '살' + (years >= 6 ? ' · 6세 이상' : '') + '</span></div>' : '') +
+        list.map(function (x) {
+          var dd = G.dday(G.isoDate(x.d));
+          var cls = dd === '오늘' ? 'warn' : (dd.indexOf('D+') === 0 ? 'bad' : '');
+          return '<div class="kv"><span class="k">' + G.esc(x.k) + '</span><span class="v ' + cls + '">' + G.fmtDate(x.d) + ' · ' + dd + '</span></div>';
+        }).join('');
+    }
+    if (kit) kit.refresh();
+  }
+  refresh();
+})();
+
+</script>
+</body>
+</html>

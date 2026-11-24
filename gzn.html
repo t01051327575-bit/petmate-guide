@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GZN 수술실 · 마감 제로 체크 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GZN — 수술실·마감·장비 청소를 제로 체크리스트로 확인하고, 마감 보고 문구를 만듭니다. 체크는 오늘 날짜로 저장됩니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GZN · 수술실 · 마감 제로 체크 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GZN — 수술실·마감·장비 청소를 제로 체크리스트로 확인하고, 마감 보고 문구를 만듭니다. 체크는 오늘 날짜로 저장됩니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gzn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GZN · 수술실 · 마감 제로 체크">
+<meta name="twitter:description" content="굿모닝펫 GZN — 수술실·마감·장비 청소를 제로 체크리스트로 확인하고, 마감 보고 문구를 만듭니다. 체크는 오늘 날짜로 저장됩니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GZN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GZN</span>
+      <span class="eng-chip">Z · Zero</span>
+    </div>
+    <h1>수술실 · 마감 제로 체크</h1>
+    <p>청소도 완전 깨끗하게 — 수술실·마감·장비를 세 묶음으로 나눠 빠짐없이 확인합니다.</p>
+    <div class="marks"><span>제로 청소</span><span>3묶음 체크</span><span>마감 보고</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>Z · Zero — ‘거의 깨끗해요’를 없애는 칸</small></h2></div>
+    <p>감염은 <b>한 칸이 비어서</b> 생깁니다. 수술실·마감·장비를 묶음으로 나눠, 마지막에 <b>제로</b>인지 확인합니다.</p>
+    <div class="callout"><b>원장님 말씀:</b> “청소도 완전 깨끗하게 하거든. Zero가 좋다.”</div>
+    <ul class="clean">
+      <li>수술실 · 마감 · 장비 <b>3묶음</b>으로 확인합니다.</li>
+      <li>체크는 <b>오늘 날짜로 저장</b>되어 인수인계에 쓰입니다.</li>
+      <li>미완료 항목은 <b>마감 보고</b>에 자동으로 들어갑니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>오늘의 제로 체크<small>끝나면 “제로” 한 번 눌러 주세요</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>날짜</label><input id="date" type="date"></div>
+      <div class="field"><label>담당</label><input id="who" type="text" placeholder="예: 진료검사과"></div>
+    </div>
+    <h3>수술실</h3><div id="g1"></div>
+    <h3>마감</h3><div id="g2"></div>
+    <h3>장비 · 기구</h3><div id="g3"></div>
+    <div class="progress">
+      <div class="t"><span>전체 완료</span><span id="progT">0 / 0</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <div class="btns">
+      <button class="btn primary" id="zero" type="button">✅ 오늘 제로</button>
+      <button class="btn ghost" id="reset" type="button">초기화</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>마감 메모<small>내일 아침에 먼저 볼 것</small></h2></div>
+    <div class="field"><label>특이사항</label><textarea id="memo" style="min-height:80px" placeholder="예: 3번 수술대 커버 교체 필요&#10;자동세척기 필터 청소 완료"></textarea></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>제로 체크가 습관이 되려면<small>바쁜 날일수록</small></h2></div>
+    <ul class="clean">
+      <li>체크는 <b>일이 끝난 뒤 몰아서</b> 하지 않고, 구역을 끝낼 때마다 합니다.</li>
+      <li>“대충”이 나오는 항목은 <b>체크리스트를 더 잘게</b> 쪼갭니다.</li>
+      <li>주 1회는 <b>다른 사람이</b> 확인합니다. 자기 체크는 자기에게 관대합니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 청소는 <b>GLN</b>(검사실)과 <b>GZN</b>(수술실)이 같은 날 이어집니다. 두 칸이 끝나야 병원이 닫힙니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gyn.html"><span class="k">◀ 이전 칸 · GYN</span><span class="v">연간 백신·검진</span></a>
+    <a class="next" href="gan.html"><span class="k">다음 칸 · GAN ▶</span><span class="v">사입·정산</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var GROUPS = {
+    g1: ['수술대·베드 소독', '바닥·배수구 소독', '마취기·회로 점검', '수술 기구 멸균 확인', '폐기물·날카로운 도구 처리', '소독액 유효기간 확인'],
+    g2: ['진료실·상담실 정리', '대기실·접수대 정리', '화장실·수건 보충', '쓰레기 분리수거', '냉장고·시약 온도 확인', '문단속·전원·소등'],
+    g3: ['초음파·방사선 장비 커버', '현미경·세극등 렌즈', '자동세척기 필터', '원심분리기 회전', '저울·체온계 배터리', '기구 보관함 정리']
+  };
+  var KEY = 'gzn_zero_v1';
+
+  Object.keys(GROUPS).forEach(function (g) {
+    $('#' + g).innerHTML = GROUPS[g].map(function (t, i) {
+      return '<label class="check"><input type="checkbox" data-g="' + g + '" data-i="' + i + '"><span>' + t + '</span></label>';
+    }).join('');
+  });
+
+  function key() { return KEY + '_' + ($('#date').value || G.today()); }
+  function all() { return G.qa('input[type=checkbox][data-g]'); }
+  function load() {
+    try {
+      var o = JSON.parse(localStorage.getItem(key()) || '{}');
+      all().forEach(function (c) {
+        c.checked = !!o[c.getAttribute('data-g') + c.getAttribute('data-i')];
+      });
+    } catch (e) {}
+    progress();
+  }
+  function save() {
+    var o = {};
+    all().forEach(function (c) {
+      if (c.checked) o[c.getAttribute('data-g') + c.getAttribute('data-i')] = 1;
+    });
+    try { localStorage.setItem(key(), JSON.stringify(o)); } catch (e) {}
+    progress();
+    if (kit) kit.refresh();
+  }
+  function progress() {
+    var list = all();
+    var n = list.filter(function (c) { return c.checked; }).length;
+    $('#progT').textContent = n + ' / ' + list.length;
+    $('#progBar').style.width = (n / list.length * 100) + '%';
+  }
+  function missing() {
+    return all().filter(function (c) { return !c.checked; }).map(function (c) {
+      return GROUPS[c.getAttribute('data-g')][parseInt(c.getAttribute('data-i'), 10)];
+    });
+  }
+
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.getAttribute && e.target.getAttribute('data-g')) save();
+  });
+  $('#date').value = G.today();
+  $('#date').addEventListener('change', load);
+  ['who', 'memo'].forEach(function (id) { $('#' + id).addEventListener('input', function () { kit && kit.refresh(); }); });
+  $('#reset').addEventListener('click', function () {
+    all().forEach(function (c) { c.checked = false; });
+    save();
+  });
+  $('#zero').addEventListener('click', function () {
+    var miss = missing();
+    if (miss.length) {
+      G.toast('아직 ' + miss.length + '항목이 남았어요. 미완료는 보고에 자동으로 들어갑니다.');
+      $('#out').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    G.toast('오늘 제로 — 수고하셨습니다');
+    if (kit) kit.refresh();
+  });
+
+  var kit = G.outKit({
+    num: 4,
+    title: '마감 보고',
+    sub: '400자 이내 · 원장님·다음 근무자에게',
+    build: function () {
+      var d = G.settings();
+      var date = ($('#date').value || G.today()).replace(/-/g, '. ');
+      var miss = missing();
+      var total = all().length;
+      var memo = ($('#memo').value || '').trim();
+      var head = '[제로 체크] ' + date + ' · ' + (($('#who').value || '').trim() || '진료검사과') + '\n';
+      var body = '· 완료 ' + (total - miss.length) + '/' + total + (miss.length ? '' : ' — 오늘 제로 ✅') + '\n' +
+        (miss.length ? '· 미완료: ' + miss.slice(0, 3).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n' : '') +
+        (memo ? '· 특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '');
+      var tail = '\n문단속·소등 완료.\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true
+  });
+
+  load();
+})();
+
+</script>
+</body>
+</html>

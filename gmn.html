@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GMN 매뉴얼 · 신규 온보딩 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GMN — 신규 직원 온보딩 12단계를 체크하고, 첫 주 일정과 안내 문구를 만들어 직원이 스스로 배우게 합니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GMN · 매뉴얼 · 신규 온보딩 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GMN — 신규 직원 온보딩 12단계를 체크하고, 첫 주 일정과 안내 문구를 만들어 직원이 스스로 배우게 합니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gmn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GMN · 매뉴얼 · 신규 온보딩">
+<meta name="twitter:description" content="굿모닝펫 GMN — 신규 직원 온보딩 12단계를 체크하고, 첫 주 일정과 안내 문구를 만들어 직원이 스스로 배우게 합니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GMN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GMN</span>
+      <span class="eng-chip">M · Manual</span>
+    </div>
+    <h1>매뉴얼 · 신규 온보딩</h1>
+    <p>새 직원이 첫 주에 무엇을 배우고 누구에게 물어야 하는지, 12단계로 정리합니다.</p>
+    <div class="marks"><span>온보딩 12단계</span><span>진행률 저장</span><span>첫 주 안내</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>M · Manual — 사장님 머릿속을 직원 손에 쥐여주는 칸</small></h2></div>
+    <p>2인 체제에서 교육은 <b>일하면서</b> 이뤄집니다. 순서를 정해 두면, 바쁜 날에도 빠지지 않고 이어집니다.</p>
+    <ul class="clean">
+      <li>신규 직원 <b>온보딩 12단계</b>를 순서대로 체크합니다.</li>
+      <li>체크는 <b>직원 이름별로 저장</b>돼, 다음 날 이어서 볼 수 있습니다.</li>
+      <li>첫 주 일정 <b>안내 문구</b>를 만들어 카톡으로 보냅니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>온보딩 12단계<small>“가르친다”보다 “같이 해본다”</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>신규 직원 이름</label><input id="name" type="text" placeholder="예: 김영준"></div>
+      <div class="field"><label>입사일</label><input id="hired" type="date"></div>
+    </div>
+    <div id="checks"></div>
+    <div class="progress">
+      <div class="t"><span>완료</span><span id="progT">0 / 12</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <div class="btns"><button class="btn ghost wide" id="reset" type="button">체크 초기화</button></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>첫 주 안내 만들기<small>출근 첫날 보내면 하루가 달라집니다</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>첫 출근</label><input id="first" type="date"></div>
+      <div class="field"><label>근무 요일</label><input id="days" type="text" value="월~목" placeholder="예: 월~목"></div>
+    </div>
+    <div class="field"><label>준비물</label><input id="bring" type="text" placeholder="예: 신분증, 필기 도구, 실내화"></div>
+    <div class="field"><label>첫날 함께할 사람</label><input id="buddy" type="text" placeholder="예: 원무과 선생님"></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>매뉴얼이 살아 있게<small>쓰는 사람이 고쳐야 안 낡습니다</small></h2></div>
+    <ul class="clean">
+      <li>새로 배운 일은 <b>그 자리에서 한 줄</b> 추가합니다.</li>
+      <li>“왜 이렇게 하는지”를 함께 적습니다. 이유를 알면 응용합니다.</li>
+      <li>3개월마다 <b>안 쓰는 항목은 지웁니다</b>. 두꺼운 매뉴얼은 아무도 안 봅니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 온보딩 마지막에는 <b>GLN</b>(검사실)과 <b>GZN</b>(청소)을 직접 해보게 합니다. 한 번 해본 일은 기억에 남습니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gln.html"><span class="k">◀ 이전 칸 · GLN</span><span class="v">검사실 루틴</span></a>
+    <a class="next" href="gnn.html"><span class="k">다음 칸 · GNN ▶</span><span class="v">AI 자동화</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var ITEMS = [
+    '병원 소개·진료 요일(월·화·수) 이해', '카톡 응대·문의 답변 방식 익히기', '예약·비대기 접수 흐름 따라하기',
+    '결제·수납·영수증 처리', '재고·주문·입고 확인', '검사실 기본 루틴 관찰(GLN)',
+    '청소·마감·수술실 제로 체크(GZN)', '응급 상황 시 연락·대처(GUN)', '개인정보·차트 다루는 법',
+    '보호자에게 설명하는 말투 익히기', '장비 위치·사용법 익히기', '첫 주 스스로 해본 일 정리'
+  ];
+  var host = $('#checks');
+  host.innerHTML = ITEMS.map(function (t, i) {
+    return '<label class="check"><input type="checkbox" data-i="' + i + '"><span><b>' + (i + 1) + '.</b> ' + t + '</span></label>';
+  }).join('');
+
+  function key() { return 'gmn_' + (($('#name').value || '').trim() || 'new'); }
+  function load() {
+    try {
+      var o = JSON.parse(localStorage.getItem(key()) || '{}');
+      G.qa('input[type=checkbox]', host).forEach(function (c) {
+        c.checked = !!o[c.getAttribute('data-i')];
+      });
+    } catch (e) {}
+    progress();
+  }
+  function save() {
+    var o = {};
+    G.qa('input[type=checkbox]', host).forEach(function (c) {
+      if (c.checked) o[c.getAttribute('data-i')] = 1;
+    });
+    try { localStorage.setItem(key(), JSON.stringify(o)); } catch (e) {}
+    progress();
+    if (kit) kit.refresh();
+  }
+  function progress() {
+    var n = G.qa('input[type=checkbox]', host).filter(function (c) { return c.checked; }).length;
+    $('#progT').textContent = n + ' / ' + ITEMS.length;
+    $('#progBar').style.width = (n / ITEMS.length * 100) + '%';
+  }
+  function doneCount() {
+    return G.qa('input[type=checkbox]', host).filter(function (c) { return c.checked; }).length;
+  }
+
+  host.addEventListener('change', save);
+  var nameEl = $('#name');
+  nameEl.addEventListener('change', load);
+  nameEl.addEventListener('blur', load);
+  $('#hired').value = G.today();
+  $('#first').value = G.today();
+  ['name', 'hired', 'first', 'days', 'bring', 'buddy'].forEach(function (id) {
+    $('#' + id).addEventListener('input', function () { if (kit) kit.refresh(); });
+    $('#' + id).addEventListener('change', function () { if (kit) kit.refresh(); });
+  });
+  $('#reset').addEventListener('click', function () {
+    G.qa('input[type=checkbox]', host).forEach(function (c) { c.checked = false; });
+    save();
+  });
+
+  var kit = G.outKit({
+    num: 4,
+    title: '신규 직원에게 보낼 첫 주 안내',
+    sub: '400자 이내 · 첫 출근 전날 보내세요',
+    build: function () {
+      var d = G.settings();
+      var n = ($('#name').value || '').trim() || '새 식구';
+      var first = ($('#first').value || G.today()).replace(/-/g, '. ');
+      var bring = ($('#bring').value || '').trim() || '신분증, 필기 도구, 편한 복장';
+      var buddy = ($('#buddy').value || '').trim() || '원무과 선생님';
+      var head = '🐾 ' + n + '님, ' + d.hospital + '에 오신 것을 환영합니다!\n\n';
+      var body = '· 첫 출근: ' + first + ' 09:00\n' +
+        '· 근무: ' + ($('#days').value || '월~목') + '\n' +
+        '· 준비물: ' + bring + '\n' +
+        '· 첫날 안내: ' + buddy + '\n\n' +
+        '첫 주에는 병원 소개 → 접수·수납 → 검사실 → 마감 순서로 함께 합니다. 모르는 것은 그때그때 물어보셔도 괜찮습니다.';
+      var tail = '\n주소: 성남시 분당구 정자일로 55 분당두산위브 108동 110호\n문의: ' + (d.phone || '') + '\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '교육은 <b>한 번에 다 가르치지 않습니다</b>. 하루 2~3개씩, 직접 해보게 합니다.'
+  });
+
+  load();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GUN 응급 대처 · 내원 판단 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GUN — 호흡곤란·이물·경련·중독 등 12가지 응급 증상별로 내원 판단과 응급처치, 보호자 안내 문구를 정리했습니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GUN · 응급 대처 · 내원 판단 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GUN — 호흡곤란·이물·경련·중독 등 12가지 응급 증상별로 내원 판단과 응급처치, 보호자 안내 문구를 정리했습니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gun.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GUN · 응급 대처 · 내원 판단">
+<meta name="twitter:description" content="굿모닝펫 GUN — 호흡곤란·이물·경련·중독 등 12가지 응급 증상별로 내원 판단과 응급처치, 보호자 안내 문구를 정리했습니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GUN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GUN</span>
+      <span class="eng-chip">U · Urgent</span>
+    </div>
+    <h1>응급 대처 · 내원 판단</h1>
+    <p>증상을 고르면 지금 바로 와야 하는지, 오는 길에 무엇을 하면 되는지 한 화면에 정리됩니다.</p>
+    <div class="marks"><span>12가지 응급 증상</span><span>지금/당일/관찰</span><span>보호자 안내 문구</span></div>
+  </header>
+
+  <section class="card" style="background:#fff8f7;border:1px solid #f6d9d5;box-shadow:none">
+    <div class="sec-head"><span class="num" style="background:#ffe9e6;border-color:#f6d9d5;color:#c0392b">!</span><h2>먼저 전화 주세요<small>판단이 어려우면 증상 설명만으로도 안내해 드립니다</small></h2></div>
+    <p style="color:#7d3b33">숨을 못 쉬거나, 경련이 멈추지 않거나, 소변이 나오지 않으면 <b>이 페이지를 읽는 시간이 아깝습니다.</b> 바로 전화하고 오세요.</p>
+    <div class="btns">
+      <a class="btn solid" href="tel:0317157119" style="background:#c0392b;border-color:#c0392b">📞 병원에 전화</a>
+      <a class="btn ghost" href="welcome.html" style="background:#fff;border-color:#f6d9d5;color:#7d3b33">진료 시간 보기</a>
+    </div>
+    <p class="note" style="color:#95655f">진료는 월·화·수 09:00–12:00 · 비대기 접수 08:30–11:00. 진료 시간이 아니면 가까운 응급 동물병원으로 안내해 드립니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>증상 고르기<small>가장 가까운 것을 하나 골라 주세요</small></h2></div>
+    <div class="seg" id="syms"></div>
+    <div id="panel"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>보호자에게 보낼 안내<small>전화로 안내한 내용을 문자로 남기면 책임이 분명해집니다</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자 이름</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이 이름</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="field"><label>추가로 들은 내용 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 30분 전부터 토하고 축 처져 있어요"></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>응급에서 가장 많이 틀리는 것<small>보호자가 집에서 하지 말아야 할 일</small></h2></div>
+    <ul class="clean">
+      <li><b>구토를 억지로 시키지 않습니다.</b> 날카로운 것을 토하게 하면 식도가 더 다칩니다.</li>
+      <li><b>경련 중 입에 손가락·숟가락을 넣지 않습니다.</b> 물리지 않고, 시간만 재어 주세요.</li>
+      <li><b>사람 약을 먹이지 않습니다.</b> 아세트아미노펜·이부프로펜은 개·고양이에게 치명적입니다.</li>
+      <li><b>얼음물에 담그지 않습니다.</b> 열사병에서는 미지근한 물로 적시며 이동합니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 응급으로 왔다 간 아이는 <b>GHN</b>(건강관리표)으로 상태를 남기고, 다음 날 <b>GXN</b>(미내원 관리)에서 한 번 더 확인합니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="grn.html"><span class="k">◀ 이전 칸 · GRN</span><span class="v">채용·면접</span></a>
+    <a class="next" href="gvn.html"><span class="k">다음 칸 · GVN ▶</span><span class="v">진료 신청</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var SYM = [
+    { t: '숨을 못 쉬어요', level: 'red', when: '지금 바로',
+      signs: '입을 벌리고 헐떡이거나, 배로 숨쉬고, 잇몸이 파랗거나 보라색으로 변합니다. 목을 길게 빼고 앉아 있습니다.',
+      doit: '목줄과 옷을 풀고, 서늘하고 조용한 곳에서 앉은 자세로 이동합니다. 이동장에 눕히지 마세요.',
+      dont: '물을 억지로 먹이거나 입을 벌려 확인하지 않습니다.' },
+    { t: '이물을 먹었어요', level: 'red', when: '지금 바로',
+      signs: '뼈·장난감·끈·약·초콜릿·양파·포도·자일리톨. 먹은 양과 시간이 중요합니다.',
+      doit: '먹은 것의 포장지나 남은 조각을 챙겨 오세요. 언제·얼마나 먹었는지 적어 오시면 가장 빠릅니다.',
+      dont: '억지로 토하게 하거나 물을 많이 먹이지 않습니다.' },
+    { t: '경련해요', level: 'red', when: '지금 바로',
+      signs: '몸을 떨며 다리를 젓고 침을 흘립니다. 5분 이상 이어지거나 24시간 안에 반복하면 위험합니다.',
+      doit: '주변의 날카로운 물건을 치우고, 시작·종료 시각을 재고, 가능하면 영상으로 찍어 주세요.',
+      dont: '입에 손가락이나 숟가락을 넣지 않습니다.' },
+    { t: '중독된 것 같아요', level: 'red', when: '지금 바로',
+      signs: '사람 약·농약·제초제·세제·초콜릿·포도·양파·백합. 침 흘림, 구토, 떨림, 발작이 나타납니다.',
+      doit: '제품 포장이나 성분 표시를 그대로 챙겨 오세요. 피부에 묻었으면 미지근한 물로 씻어 냅니다.',
+      dont: '우유나 기름을 먹이지 않습니다. 흡수를 늘릴 수 있습니다.' },
+    { t: '소변이 안 나와요', level: 'red', when: '지금 바로',
+      signs: '특히 수고양이. 화장실에 오래 앉아 있지만 소변이 거의 없거나, 힘을 주며 울고, 배가 단단합니다.',
+      doit: '몇 시간째 소변이 없는지 확인해 전화로 알려 주세요. 요도가 막히면 몇 시간 안에 위험해집니다.',
+      dont: '물을 억지로 먹이거나 배를 누르지 않습니다.' },
+    { t: '피가 나요', level: 'red', when: '지금 바로',
+      signs: '깊은 상처, 코피가 멈추지 않음, 혈변·혈뇨, 교통사고 후 절뚝임.',
+      doit: '깨끗한 천으로 상처를 10분 이상 꾹 눌러 지혈하고, 그대로 병원으로 옵니다.',
+      dont: '상처에 소독약·파스·연고를 바르지 않습니다.' },
+    { t: '배가 불러요', level: 'red', when: '지금 바로',
+      signs: '대형견에서 배가 북처럼 부풀고, 헛구역질만 하며 토가 나오지 않습니다. 위확장·염전은 시간 싸움입니다.',
+      doit: '물도 주지 말고 바로 이동합니다. 이동 중에도 목줄을 풀지 않습니다.',
+      dont: '배를 눌러보거나 걸어 다니게 하지 않습니다.' },
+    { t: '열사병 같아요', level: 'red', when: '지금 바로',
+      signs: '더운 날·차 안에서 헐떡임이 심하고 침이 끈적하며 걸음이 비틀거립니다. 체온 40도 이상.',
+      doit: '미지근한 물로 겨드랑이·배·발바닥을 적시고, 바람을 쐬며 이동합니다.',
+      dont: '얼음물에 담그거나 얼음을 먹이지 않습니다.' },
+    { t: '눈을 다쳤어요', level: 'amber', when: '오늘 안에',
+      signs: '눈을 못 뜨고 긁으며 눈물이 흐르고, 각막이 하얗게 보이거나 안구가 튀어나옵니다.',
+      doit: '넥카라를 채우고 긁지 못하게 한 뒤 오세요. 눈은 하루만 늦어도 손상이 남습니다.',
+      dont: '눈에 식염수 외의 안약을 넣지 않습니다.' },
+    { t: '토하고 설사해요', level: 'amber', when: '오늘 안에',
+      signs: '하루 3회 이상, 피가 섞임, 물을 마시지 못함, 축 처짐. 어린 강아지·노령견은 더 빨리 위험해집니다.',
+      doit: '물은 소량씩 자주 주고, 마지막 식사 시간과 횟수를 적어 오세요.',
+      dont: '사료를 바꾸거나 사람 음식을 주지 않습니다.' },
+    { t: '절뚝거려요', level: 'green', when: '1~2일 안에',
+      signs: '발을 딛지 못하거나 24시간 이상 지속되면 진료가 필요합니다. 갑자기 한쪽 다리를 들면 탈구일 수 있습니다.',
+      doit: '산책을 줄이고, 계단과 미끄러운 바닥을 피합니다.',
+      dont: '마사지나 온찜질로 악화될 수 있으니 문지르지 않습니다.' },
+    { t: '기침·콧물이 나요', level: 'green', when: '경과 관찰 후 진료',
+      signs: '식욕과 활동이 정상이면 1~2일 지켜봅니다. 밤에 심해지거나 숨이 차면 바로 내원합니다.',
+      doit: '집안 환기를 하고, 목줄 대신 하네스를 사용합니다.',
+      dont: '사람 감기약을 먹이지 않습니다.' }
+  ];
+  var LV = {
+    red: { label: '지금 바로 내원', cls: 'bad', color: '#c0392b' },
+    amber: { label: '오늘 안에 내원', cls: 'warn', color: '#b46a12' },
+    green: { label: '경과 관찰 · 진료 예약', cls: 'ok', color: '#1f8a63' }
+  };
+  var cur = 0;
+
+  $('#syms').innerHTML = SYM.map(function (s, i) {
+    return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' + s.t + '</button>';
+  }).join('');
+
+  function render() {
+    var s = SYM[cur], lv = LV[s.level];
+    $('#panel').innerHTML =
+      '<div class="callout ' + (s.level === 'red' ? 'bad' : s.level === 'amber' ? 'warn' : 'ok') + '" style="margin-top:12px">' +
+        '<b>' + lv.label + '</b> · ' + G.esc(s.t) + '</div>' +
+      '<h3>이런 상태인가요</h3><p>' + G.esc(s.signs) + '</p>' +
+      '<h3>오는 길에 이렇게 해 주세요</h3><p>' + G.esc(s.doit) + '</p>' +
+      '<h3>하지 마세요</h3><p>' + G.esc(s.dont) + '</p>' +
+      '<div class="btns"><a class="btn solid" href="tel:0317157119">📞 지금 전화</a><a class="btn ghost" href="welcome.html#s1">진료 시간</a></div>';
+    if (kit) kit.refresh();
+  }
+  $('#syms').addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('button') : null;
+    if (!b) return;
+    cur = parseInt(b.getAttribute('data-i'), 10) || 0;
+    G.qa('button', $('#syms')).forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    render();
+  });
+  ['guardian', 'pet', 'extra'].forEach(function (id) { $('#' + id).addEventListener('input', function () { kit && kit.refresh(); }); });
+
+  var kit = G.outKit({
+    num: 3,
+    title: '보호자에게 보낼 응급 안내',
+    sub: '400자 이내 · 통화 후 문자로 남기면 기록이 됩니다',
+    build: function () {
+      var d = G.settings();
+      var s = SYM[cur];
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var extra = ($('#extra').value || '').trim();
+      var head = '🐾 ' + g + '님, ' + p + ' 상태는 ' + s.t + '로 지금 내원이 필요합니다.\n\n';
+      var body = '오시는 길에 ' + s.doit + '\n' +
+        (extra ? '· ' + extra + '\n' : '') +
+        '\n도착하면 바로 진료합니다. 오는 시간을 전화로 알려 주세요.\n' +
+        '진료: 월·화·수 09:00–12:00\n전화: ' + (d.phone || '031-715-7119') + '\n- ' + d.hospital;
+      var text = head + body;
+      return G.count(text) > 400 ? G.cut(head + body, 400) : text;
+    },
+    noShort: true,
+    note: '응급 안내는 <b>짧고 분명하게</b>. 보호자가 운전 중이어도 한 번에 읽히도록 씁니다.'
+  });
+
+  render();
+})();
+
+</script>
+</body>
+</html>

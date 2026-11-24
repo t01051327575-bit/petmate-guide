@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GKN 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GKN · 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gkn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GKN · 처방 · 복약 안내">
+<meta name="twitter:description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GKN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GKN</span>
+      <span class="eng-chip">K · Kit</span>
+    </div>
+    <h1>처방 · 복약 안내</h1>
+    <p>약 이름과 용량을 넣으면 보호자가 놓치지 않는 복약 안내문이 만들어집니다.</p>
+    <div class="marks"><span>복약 안내문</span><span>용량 계산</span><span>상비약 주의</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>K · Kit — 약을 ‘먹었다/안 먹었다’로 갈라놓는 칸</small></h2></div>
+    <p>복약이 실패하는 이유는 대부분 <b>설명이 길어서</b>입니다. 언제, 몇 알, 며칠을 먹는지만 분명하게 남깁니다.</p>
+    <ul class="clean">
+      <li>약별 용량·횟수·일수로 <b>총 투약량</b>을 계산합니다.</li>
+      <li>보호자에게 보낼 <b>복약 안내</b>를 400자로 만듭니다.</li>
+      <li>상비약에서 <b>흔히 틀리는 주의</b>를 바로 확인합니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>처방 입력<small>한 줄에 한 약씩</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>처방일</label><input id="date" type="date"></div>
+      <div class="field"><label>복약 시작</label><select id="start"><option>오늘 저녁부터</option><option>오늘 아침부터</option><option>내일 아침부터</option></select></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="min-width:96px">약 이름</th><th style="min-width:56px">1회</th><th style="min-width:52px">횟수/일</th><th style="min-width:52px">일수</th><th></th></tr></thead>
+        <tbody id="meds"></tbody>
+      </table>
+    </div>
+    <div class="btns"><button class="btn ghost wide" id="addMed" type="button">+ 약 한 줄 더</button></div>
+    <div class="result">
+      <div class="kv"><span class="k">처방 약 종류</span><span class="v"><span id="mKinds">0</span>종</span></div>
+      <div class="kv"><span class="k">총 투약 일수</span><span class="v"><span id="mDays">0</span>일</span></div>
+      <div class="kv"><span class="k">가장 긴 약</span><span class="v" id="mLong">-</span></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label>식전·식후</label>
+      <select id="meal"><option>식후 30분</option><option>식전 30분</option><option>식사와 관계없이</option><option>아침 식후</option></select>
+    </div>
+    <div class="field"><label>보호자에게 꼭 말할 것 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 물과 함께, 산책 전에는 먹이지 마세요"></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>상비약 · 복약 주의<small>보호자가 가장 많이 하는 실수</small></h2></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>상황</th><th>하지 말 것</th></tr></thead>
+        <tbody>
+          <tr><th>통증</th><td class="l">사람용 아세트아미노펜·이부프로펜 — 개·고양이에게 간·신장 손상</td></tr>
+          <tr><th>항생제</th><td class="l">증상이 나아도 임의로 중단 — 내성·재발</td></tr>
+          <tr><th>스테로이드</th><td class="l">갑자기 끊기 — 부신 위기. 반드시 감량 지시대로</td></tr>
+          <tr><th>심장약</th><td class="l">시간을 건너뛰고 두 배로 먹이기</td></tr>
+          <tr><th>구충·예방</th><td class="l">체중 확인 없이 다른 아이 약을 나눠 먹이기</td></tr>
+          <tr><th>눈·귀 약</th><td class="l">사람용 안약·귀약 임의 사용</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn"><b>복약을 놓쳤을 때:</b> 시간이 많이 지났으면 <b>두 배로 먹이지 말고</b> 병원에 전화하게 안내합니다. 임의 조정은 보호자 판단에 맡기지 않습니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gjn.html"><span class="k">◀ 이전 칸 · GJN</span><span class="v">생일 엽서·선물</span></a>
+    <a class="next" href="gln.html"><span class="k">다음 칸 · GLN ▶</span><span class="v">검사실 루틴</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var body = $('#meds');
+  $('#date').value = G.today();
+
+  function row() {
+    return '<tr>' +
+      '<td><input class="tin name" type="text" placeholder="약 이름"></td>' +
+      '<td><input class="tin dose" type="text" placeholder="1정"></td>' +
+      '<td><input class="tin freq" type="number" inputmode="numeric" min="1" max="4" placeholder="2"></td>' +
+      '<td><input class="tin days" type="number" inputmode="numeric" min="1" max="90" placeholder="7"></td>' +
+      '<td><button class="del" type="button" aria-label="줄 삭제">×</button></td>' +
+    '</tr>';
+  }
+  for (var i = 0; i < 2; i++) body.insertAdjacentHTML('beforeend', row());
+  $('#addMed').addEventListener('click', function () { body.insertAdjacentHTML('beforeend', row()); refresh(); });
+  body.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.del') : null;
+    if (!b) return;
+    var tr = b.parentNode.parentNode;
+    if (body.children.length <= 1) G.qa('input', tr).forEach(function (x) { x.value = ''; });
+    else tr.parentNode.removeChild(tr);
+    refresh();
+  });
+  body.addEventListener('input', refresh);
+  ['guardian', 'pet', 'date', 'start', 'meal', 'extra'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+
+  function meds() {
+    return G.qa('tr', body).map(function (tr) {
+      return {
+        name: $('.name', tr).value.trim(),
+        dose: $('.dose', tr).value.trim() || '1정',
+        freq: parseInt($('.freq', tr).value, 10) || 0,
+        days: parseInt($('.days', tr).value, 10) || 0
+      };
+    }).filter(function (m) { return m.name; });
+  }
+
+  var kit = G.outKit({
+    num: 3,
+    title: '보호자에게 보낼 복약 안내',
+    sub: '400자 이내 · 약 이름·횟수·일수만 분명하게',
+    build: function () {
+      var d = G.settings();
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var list = meds();
+      var head = '🐾 ' + g + '님, ' + p + ' 복약 안내입니다.\n\n';
+      if (!list.length) return head + '처방 약을 위 표에 적으면 복약 안내가 만들어집니다.\n- ' + d.hospital;
+      var lines = list.map(function (m) {
+        return '· ' + m.name + ' — ' + m.dose + ', 하루 ' + m.freq + '회, ' + m.days + '일';
+      });
+      var body = lines.join('\n') + '\n\n' + $('#meal').value + '에 먹입니다. ' + $('#start').value + ' 시작합니다.\n';
+      var extra = ($('#extra').value || '').trim();
+      var tail = (extra ? '· ' + extra + '\n' : '') +
+        '\n빠뜨린 약이 있으면 두 배로 먹이지 말고 병원에 먼저 전화해 주세요.\n문의: ' + (d.phone || '') + '\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '보호자는 대개 <b>“하루 두 번”</b>까지만 기억합니다. 아침·저녁처럼 시간을 붙여 주세요.'
+  });
+
+  function refresh() {
+    var list = meds();
+    var kinds = list.length;
+    var days = list.reduce(function (a, m) { return Math.max(a, m.days); }, 0);
+    var longest = list.slice().sort(function (a, b) { return b.days - a.days; })[0];
+    $('#mKinds').textContent = kinds;
+    $('#mDays').textContent = days;
+    $('#mLong').textContent = longest ? longest.name + ' (' + longest.days + '일)' : '-';
+    if (kit) kit.refresh();
+  }
+  refresh();
+})();
+
+</script>
+</body>
+</html>

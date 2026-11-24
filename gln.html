@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GLN 검사실 루틴 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GLN · 검사실 루틴 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gln.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GLN · 검사실 루틴">
+<meta name="twitter:description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GLN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GLN</span>
+      <span class="eng-chip">L · Lab</span>
+    </div>
+    <h1>검사실 루틴</h1>
+    <p>매일 같은 순서로 확인하면, 검사 결과가 흔들리지 않습니다. 체크는 오늘 날짜로 저장됩니다.</p>
+    <div class="marks"><span>검사실 12체크</span><span>진행률 저장</span><span>인계 문구</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>L · Lab — 결과의 신뢰를 매일 지키는 칸</small></h2></div>
+    <p>검사 결과가 흔들리면 <b>진단도 처방도 흔들립니다</b>. 장비·시약·검체 라벨을 같은 순서로 확인하는 것만으로 대부분의 오류가 막힙니다.</p>
+    <ul class="clean">
+      <li>검사 전·중·후 <b>12단계를 체크</b>합니다(오늘 날짜로 저장).</li>
+      <li>미완료 항목이 있으면 <b>인계 문구</b>에 자동으로 들어갑니다.</li>
+      <li>2인 체제에서 <b>다음 근무자가 바로 이어받게</b> 만듭니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>오늘의 검사실 루틴<small>체크하면 자동 저장 · 날짜가 바뀌면 새로 시작</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>날짜</label><input id="date" type="date"></div>
+      <div class="field"><label>담당</label><input id="who" type="text" placeholder="예: 진료검사과"></div>
+    </div>
+    <div id="checks"></div>
+    <div class="progress">
+      <div class="t"><span>완료</span><span id="progT">0 / 12</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <div class="btns"><button class="btn ghost wide" id="reset" type="button">오늘 체크 초기화</button></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>인계 메모<small>다음 근무자가 먼저 봐야 할 것</small></h2></div>
+    <div class="field"><label>특이사항 <span class="hint">한 줄씩</span></label><textarea id="memo" style="min-height:88px" placeholder="예: 혈액검사 장비 QC 재확인 필요&#10;콩이 SDMA 재검 예정"></textarea></div>
+    <div class="field"><label>다음 근무자에게</label><select id="next"><option>진료검사과</option><option>원무과</option><option>원장님</option></select></div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>검사실 오류의 3대 원인<small>장비보다 사람에서 많이 납니다</small></h2></div>
+    <ul class="clean">
+      <li><b>검체 라벨</b> — 보호자·아이 이름을 소리 내어 확인합니다.</li>
+      <li><b>시약 유효기간</b> — 개봉일을 적어 두고, 만료 전에 교체합니다.</li>
+      <li><b>QC 생략</b> — 바쁜 날일수록 생략됩니다. QC 없는 결과는 다시 뽑아야 합니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 결과는 <b>GDN</b>으로 해설하고, 보호자 안내는 <b>GTN</b>으로 보냅니다. 검사실에서 끝나지 않게 이어 주세요.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gkn.html"><span class="k">◀ 이전 칸 · GKN</span><span class="v">처방·복약</span></a>
+    <a class="next" href="gmn.html"><span class="k">다음 칸 · GMN ▶</span><span class="v">매뉴얼·온보딩</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var ITEMS = [
+    '장비 전원·프린터 상태 확인', '냉장 보관 시약 온도 확인', '시약 유효기간·개봉일 확인',
+    '장비 QC(정도관리) 실시', '검체 라벨(보호자·아이 이름) 확인', '검사 항목·의뢰 내용 대조',
+    '검체 처리·원심분리 순서 준수', '결과 값 이상치 표시 확인', '결과 입력·차트 반영',
+    '이상 결과 원장님께 즉시 보고', '폐기물·날카로운 도구 정리', '장비 청소·다음 근무 인계'
+  ];
+  var KEY = 'gln_check_v1';
+  var host = $('#checks');
+  host.innerHTML = ITEMS.map(function (t, i) {
+    return '<label class="check"><input type="checkbox" data-i="' + i + '"><span><b>' + (i + 1) + '.</b> ' + t + '</span></label>';
+  }).join('');
+
+  function key() { return KEY + '_' + ($('#date').value || G.today()); }
+  function load() {
+    try {
+      var o = JSON.parse(localStorage.getItem(key()) || '{}');
+      G.qa('input[type=checkbox]', host).forEach(function (c) {
+        c.checked = !!o[c.getAttribute('data-i')];
+      });
+    } catch (e) {}
+    progress();
+  }
+  function save() {
+    var o = {};
+    G.qa('input[type=checkbox]', host).forEach(function (c) {
+      if (c.checked) o[c.getAttribute('data-i')] = 1;
+    });
+    try { localStorage.setItem(key(), JSON.stringify(o)); } catch (e) {}
+    progress();
+    if (kit) kit.refresh();
+  }
+  function progress() {
+    var n = G.qa('input[type=checkbox]', host).filter(function (c) { return c.checked; }).length;
+    $('#progT').textContent = n + ' / ' + ITEMS.length;
+    $('#progBar').style.width = (n / ITEMS.length * 100) + '%';
+  }
+  function missing() {
+    return ITEMS.filter(function (t, i) {
+      var c = q('input[data-i="' + i + '"]', host);
+      return c && !c.checked;
+    });
+  }
+  function q(sel, root) { return (root || document).querySelector(sel); }
+
+  host.addEventListener('change', save);
+  $('#date').value = G.today();
+  $('#date').addEventListener('change', load);
+  ['who', 'memo', 'next'].forEach(function (id) { $('#' + id).addEventListener('input', function () { kit && kit.refresh(); }); });
+  $('#reset').addEventListener('click', function () {
+    G.qa('input[type=checkbox]', host).forEach(function (c) { c.checked = false; });
+    save();
+  });
+
+  var kit = G.outKit({
+    num: 4,
+    title: '다음 근무자에게 보낼 인계',
+    sub: '400자 이내 · 미완료 항목은 자동으로 들어갑니다',
+    build: function () {
+      var d = G.settings();
+      var date = ($('#date').value || G.today()).replace(/-/g, '. ');
+      var miss = missing();
+      var memo = ($('#memo').value || '').trim();
+      var head = '[검사실 인계] ' + date + ' · ' + (($('#who').value || '').trim() || '진료검사과') + '\n';
+      var body = '· 완료 ' + (ITEMS.length - miss.length) + '/' + ITEMS.length + '항목\n' +
+        (miss.length ? '· 미완료: ' + miss.slice(0, 3).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n' : '· 미완료 없음\n') +
+        (memo ? '· 특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '');
+      var tail = '\n다음 근무: ' + $('#next').value + '\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true
+  });
+
+  load();
+})();
+
+</script>
+</body>
+</html>

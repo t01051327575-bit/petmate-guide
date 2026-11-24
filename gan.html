@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GAN 사입·정산 계산기 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GAN · 사입·정산 계산기 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gan.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GAN · 사입·정산 계산기">
+<meta name="twitter:description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GAN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GAN</span>
+      <span class="eng-chip">A · Accounting</span>
+    </div>
+    <h1>사입·정산 계산기</h1>
+    <p>품명·수량·단가만 넣으면 사입액·판매액·마진과 거래처 발주 문구까지 한 번에 정리됩니다.</p>
+    <div class="marks"><span>마진율 자동</span><span>발주 문구</span><span>세금계산서</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>A · Accounting — 사입과 정산이 틀어지지 않게</small></h2></div>
+    <p>사입은 <b>단가 하나만 틀려도 마진이 사라집니다</b>. 품목을 넣는 순간 마진율이 보이고, 거래처에 보낼 발주 문구가 같이 만들어집니다.</p>
+    <ul class="clean">
+      <li>사입단가·판매단가로 <b>마진액·마진율</b>을 바로 계산합니다.</li>
+      <li>수량이 바뀌면 합계가 그 자리에서 다시 계산됩니다.</li>
+      <li><b>발주 요청 문구</b>를 400자 이내로 만들어 복사합니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>품목 넣기<small>사입 단가와 판매 단가를 함께 적으면 마진이 보입니다</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>거래처</label><input id="vendor" type="text" placeholder="예: 대웅펫"></div>
+      <div class="field"><label>발주일</label><input id="date" type="date"></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl" id="rows">
+        <thead><tr><th style="min-width:96px">품명</th><th style="min-width:52px">수량</th><th style="min-width:78px">사입단가</th><th style="min-width:78px">판매단가</th><th></th></tr></thead>
+        <tbody id="rowsBody"></tbody>
+      </table>
+    </div>
+    <div class="btns"><button class="btn ghost wide" id="addRow" type="button">+ 품목 한 줄 더</button></div>
+
+    <div class="result">
+      <div class="kv"><span class="k">총 수량</span><span class="v"><span id="tQty">0</span>개</span></div>
+      <div class="kv"><span class="k">총 사입액</span><span class="v"><span id="tBuy">0</span>원</span></div>
+      <div class="kv"><span class="k">총 판매액</span><span class="v"><span id="tSell">0</span>원</span></div>
+      <div class="kv"><span class="k">예상 마진</span><span class="v ok"><span id="tMargin">0</span>원</span></div>
+      <div class="kv"><span class="k">평균 마진율</span><span class="v"><span id="tRate">0</span>%</span></div>
+    </div>
+    <p class="note">마진율은 <b>(판매가 − 사입가) ÷ 판매가</b> 기준입니다. 부가세 포함·별도는 거래처마다 다르니 아래에서 골라 주세요.</p>
+    <div class="field" style="margin-top:10px"><label>부가세</label>
+      <select id="vat">
+        <option value="별도">별도 (합계에 VAT 추가 안내)</option>
+        <option value="포함">포함 (합계가 결제 금액)</option>
+        <option value="면세">면세</option>
+      </select>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>입고 희망일 <span class="hint">선택</span></label><input id="hope" type="date"></div>
+      <div class="field"><label>세금계산서</label>
+        <select id="tax"><option>발행 요청</option><option>발행 불필요</option><option>이번 달 합산 발행</option></select>
+      </div>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>정산이 틀어지지 않게<small>원무과 체크 3가지</small></h2></div>
+    <ul class="clean">
+      <li>거래명세서와 <b>품목·수량·단가</b>를 한 줄씩 대조합니다.</li>
+      <li>사입가가 바뀐 품목은 <b>판매가도 같이</b> 손봅니다.</li>
+      <li>세금계산서 발행일과 입금일을 <b>같은 달</b>로 맞춥니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 정산이 끝나면 <b>GSN</b>(재구매·주문)으로 재고를, <b>GPN</b>(포지션·마감)으로 일보를 이어서 정리하세요.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gzn.html"><span class="k">◀ 이전 칸 · GZN</span><span class="v">제로 청소</span></a>
+    <a class="next" href="gbn.html"><span class="k">다음 칸 · GBN ▶</span><span class="v">미용·피부</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var body = $('#rowsBody');
+  $('#date').value = G.today();
+
+  function rowHTML() {
+    return '<tr>' +
+      '<td><input class="tin name" type="text" inputmode="text" placeholder="품명"></td>' +
+      '<td><input class="tin qty" type="number" inputmode="numeric" min="0" step="1" placeholder="0"></td>' +
+      '<td><input class="tin buy" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></td>' +
+      '<td><input class="tin sell" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></td>' +
+      '<td><button class="del" type="button" aria-label="줄 삭제">×</button></td>' +
+    '</tr>';
+  }
+  function addRow() { body.insertAdjacentHTML('beforeend', rowHTML()); }
+  for (var i = 0; i < 3; i++) addRow();
+
+  $('#addRow').addEventListener('click', function () { addRow(); refresh(); });
+  body.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.del') : null;
+    if (!b) return;
+    var tr = b.parentNode.parentNode;
+    if (body.children.length <= 1) {
+      G.qa('input', tr).forEach(function (x) { x.value = ''; });
+    } else {
+      tr.parentNode.removeChild(tr);
+    }
+    refresh();
+  });
+  body.addEventListener('input', refresh);
+  ['vendor', 'date', 'vat', 'hope', 'tax'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+
+  function items() {
+    return G.qa('tr', body).map(function (tr) {
+      return {
+        name: $('.name', tr).value.trim(),
+        qty: parseFloat($('.qty', tr).value) || 0,
+        buy: parseFloat($('.buy', tr).value) || 0,
+        sell: parseFloat($('.sell', tr).value) || 0
+      };
+    }).filter(function (x) { return x.name || x.qty || x.buy || x.sell; });
+  }
+  function totals() {
+    var t = { qty: 0, buy: 0, sell: 0 };
+    items().forEach(function (x) {
+      t.qty += x.qty; t.buy += x.qty * x.buy; t.sell += x.qty * x.sell;
+    });
+    t.margin = t.sell - t.buy;
+    t.rate = t.sell > 0 ? (t.margin / t.sell) * 100 : 0;
+    return t;
+  }
+
+  var kit = G.outKit({
+    num: 3,
+    title: '거래처에 보낼 발주 문구',
+    sub: '400자 이내 · 복사해서 카톡·문자로',
+    build: function () {
+      var t = totals();
+      var lines = items().filter(function (x) { return x.name; }).map(function (x) {
+        return '· ' + x.name + ' ' + x.qty + '개 × ' + G.money(x.buy) + ' = ' + G.money(x.qty * x.buy) + '원';
+      });
+      var head = '[발주 요청] ' + (($('#vendor').value || '').trim() || '거래처') + ' → ' + G.settings().hospital + '\n' +
+        '일자: ' + ($('#date').value || G.today()).replace(/-/g, '. ') + '\n';
+      var sum = '합계: ' + t.qty + '개 / ' + G.money(t.buy) + '원 (VAT ' + $('#vat').value + ')';
+      var tail = ($('#hope').value ? '입고 희망: ' + $('#hope').value.replace(/-/g, '. ') + '\n' : '') +
+        '세금계산서: ' + $('#tax').value + '\n문의: ' + (G.settings().phone || '') + '\n- ' + G.settings().hospital;
+      var text = head + lines.join('\n') + '\n' + sum + '\n' + tail;
+      if (!lines.length) text = head + '아직 품목을 넣지 않았습니다. 위 표에 품명을 적어 주세요.\n' + sum + '\n' + tail;
+      return G.count(text) > 400 ? G.cut(head + lines.join('\n') + '\n' + sum, 398 - G.count(tail) - 2) + '\n' + tail : text;
+    },
+    noShort: true,
+    note: '거래처에 보내는 문구에는 <b>마진</b>이 들어가지 않습니다. 마진은 위 계산 결과로만 확인하세요.'
+  });
+
+  function refresh() {
+    var t = totals();
+    $('#tQty').textContent = t.qty;
+    $('#tBuy').textContent = G.money(t.buy);
+    $('#tSell').textContent = G.money(t.sell);
+    $('#tMargin').textContent = G.money(t.margin);
+    $('#tRate').textContent = t.rate.toFixed(1);
+    $('#tRate').parentNode.className = 'v ' + (t.rate < 20 ? 'bad' : (t.rate < 35 ? 'warn' : 'ok'));
+    if (kit) kit.refresh();
+  }
+
+  /* 최초 마운트는 outKit 안에서 refresh를 부르므로, 그 뒤 값 채우기 */
+  refresh();
+})();
+
+</script>
+</body>
+</html>

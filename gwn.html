@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GWN 체중 관리 · 만성질환 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GWN · 체중 관리 · 만성질환 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gwn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GWN · 체중 관리 · 만성질환">
+<meta name="twitter:description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GWN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GWN</span>
+      <span class="eng-chip">W · Weight</span>
+    </div>
+    <h1>체중 관리 · 만성질환</h1>
+    <p>체중을 기록하면 변화가 보이고, 목표까지 얼마나 남았는지·어떤 속도로 줄일지 계산됩니다.</p>
+    <div class="marks"><span>체중 기록</span><span>변화 그래프</span><span>감량 안내</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>W · Weight — 만성질환 관리의 첫 숫자</small></h2></div>
+    <p>관절·심장·당뇨·신장은 모두 <b>체중에서 시작</b>합니다. 집에서 잰 체중을 기록해 두면, 진료실에서 6개월의 흐름이 한눈에 보입니다.</p>
+    <ul class="clean">
+      <li>날짜별 체중을 기록하고 <b>변화 그래프</b>를 봅니다.</li>
+      <li>목표 체중까지 <b>남은 양과 안전한 속도</b>를 계산합니다.</li>
+      <li>보호자에게 보낼 <b>체중 관리 안내</b>를 만듭니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>체중 기록<small>이 기기 브라우저에 저장됩니다</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>날짜</label><input id="wdate" type="date"></div>
+      <div class="field"><label>체중 (kg)</label><input id="wval" type="number" inputmode="decimal" step="0.1" min="0.2" placeholder="5.2"></div>
+      <div class="field"><label>&nbsp;</label><button class="btn primary" id="addW" type="button" style="width:100%">기록</button></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>목표 체중 (kg)</label><input id="target" type="number" inputmode="decimal" step="0.1" min="0.2" placeholder="4.6"></div>
+      <div class="field"><label>BCS (1~9)</label>
+        <select id="bcs"><option value="">모름</option><option value="3">3 · 마름</option><option value="4">4 · 약간 마름</option><option value="5">5 · 적정</option><option value="6">6 · 약간 과체중</option><option value="7">7 · 과체중</option><option value="8">8 · 비만</option><option value="9">9 · 심한 비만</option></select>
+      </div>
+    </div>
+    <div id="chartWrap" class="chart" style="display:none"><svg class="spark" id="spark" viewBox="0 0 320 120" preserveAspectRatio="none"></svg></div>
+    <div id="list" style="margin-top:10px"></div>
+    <div class="btns"><button class="btn ghost wide" id="clearW" type="button">기록 모두 지우기</button></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>지금 상태<small>기록이 쌓일수록 정확해집니다</small></h2></div>
+    <div class="result">
+      <div class="kv"><span class="k">현재 체중</span><span class="v"><span id="nowW">-</span> kg</span></div>
+      <div class="kv"><span class="k">첫 기록 대비</span><span class="v" id="diff">-</span></div>
+      <div class="kv"><span class="k">목표까지</span><span class="v" id="toGoal">-</span></div>
+      <div class="kv"><span class="k">안전한 감량 속도</span><span class="v" id="safe">-</span></div>
+    </div>
+    <p class="note">개·고양이 모두 <b>주 1~2%</b> 감량이 안전합니다. 그보다 빨리 줄이면 근육과 면역이 먼저 빠집니다.</p>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>체중 관리가 이어지게<small>보호자가 지치는 지점</small></h2></div>
+    <ul class="clean">
+      <li>집에서 재는 체중은 <b>같은 시간·같은 저울</b>로 재야 비교됩니다.</li>
+      <li>간식을 줄일 때는 <b>사료를 줄이지 않습니다</b>. 영양 불균형이 옵니다.</li>
+      <li>2주마다 <b>GFN</b>에서 급여량을 다시 계산합니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 체중이 줄면 <b>GWN</b>에 남기고, 검사는 <b>GDN</b>, 처방은 <b>GKN</b>으로 이어집니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gvn.html"><span class="k">◀ 이전 칸 · GVN</span><span class="v">진료 신청</span></a>
+    <a class="next" href="gxn.html"><span class="k">다음 칸 · GXN ▶</span><span class="v">미내원·03마감</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var KEY = 'gwn_weights_v1';
+  var data = [];
+  $('#wdate').value = G.today();
+
+  function load() {
+    try { data = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { data = []; }
+    if (!Array.isArray(data)) data = [];
+    data.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+  function num(id) { return parseFloat($('#' + id).value) || 0; }
+
+  function render() {
+    var list = $('#list');
+    if (!data.length) {
+      list.innerHTML = '<p class="note">아직 기록이 없습니다. 오늘 체중부터 넣어 보세요.</p>';
+      $('#chartWrap').style.display = 'none';
+      $('#nowW').textContent = '-'; $('#diff').textContent = '-';
+      $('#toGoal').textContent = '-'; $('#safe').textContent = '-';
+      return;
+    }
+    list.innerHTML = data.slice(-8).reverse().map(function (x) {
+      return '<div class="kv"><span class="k">' + G.esc(x.d.replace(/-/g, '. ')) + '</span><span class="v">' + x.w + ' kg</span></div>';
+    }).join('');
+    draw();
+    var first = data[0], last = data[data.length - 1];
+    var delta = last.w - first.w;
+    $('#nowW').textContent = last.w;
+    $('#diff').textContent = (delta > 0 ? '+' : '') + delta.toFixed(1) + ' kg (' + first.w + ' → ' + last.w + ')';
+    $('#diff').className = 'v ' + (delta > 0 ? 'warn' : delta < 0 ? 'ok' : '');
+    var t = num('target');
+    if (t > 0) {
+      var gap = last.w - t;
+      $('#toGoal').textContent = gap > 0 ? gap.toFixed(1) + ' kg 남음 (목표 ' + t + 'kg)' : gap === 0 ? '목표 달성' : '목표보다 ' + Math.abs(gap).toFixed(1) + 'kg 적음';
+      $('#toGoal').className = 'v ' + (gap <= 0 ? 'ok' : 'warn');
+      $('#safe').textContent = '주 ' + (last.w * 0.01).toFixed(2) + '~' + (last.w * 0.02).toFixed(2) + ' kg';
+    } else {
+      $('#toGoal').textContent = '목표 체중을 넣어 주세요';
+      $('#safe').textContent = '주 ' + (last.w * 0.01).toFixed(2) + '~' + (last.w * 0.02).toFixed(2) + ' kg';
+    }
+  }
+
+  function draw() {
+    var w = data.map(function (x) { return x.w; });
+    if (w.length < 2) { $('#chartWrap').style.display = 'none'; return; }
+    $('#chartWrap').style.display = '';
+    var min = Math.min.apply(null, w), max = Math.max.apply(null, w);
+    if (max === min) { max = min + 0.5; }
+    var pad = (max - min) * 0.2;
+    min -= pad; max += pad;
+    var pts = data.map(function (x, i) {
+      var px = 12 + (i / (data.length - 1)) * 296;
+      var py = 110 - ((x.w - min) / (max - min)) * 92;
+      return px.toFixed(1) + ',' + py.toFixed(1);
+    });
+    var area = '12,112 ' + pts.join(' ') + ' 308,112';
+    var svg = '<defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7cc6e8" stop-opacity=".45"/><stop offset="100%" stop-color="#7cc6e8" stop-opacity="0"/></linearGradient></defs>' +
+      '<polygon points="' + area + '" fill="url(#gw)"/>' +
+      '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#2f86b5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      pts.map(function (p) { var xy = p.split(','); return '<circle cx="' + xy[0] + '" cy="' + xy[1] + '" r="3" fill="#fff" stroke="#2f86b5" stroke-width="2"/>'; }).join('') +
+      '<text x="12" y="14" font-size="10" fill="#71858f">' + max.toFixed(1) + 'kg</text>' +
+      '<text x="12" y="112" font-size="10" fill="#71858f">' + min.toFixed(1) + 'kg</text>';
+    $('#spark').innerHTML = svg;
+  }
+
+  $('#addW').addEventListener('click', function () {
+    var w = num('wval');
+    if (!(w > 0)) { G.toast('체중을 입력해 주세요'); return; }
+    var d = $('#wdate').value || G.today();
+    data = data.filter(function (x) { return x.d !== d; });
+    data.push({ d: d, w: w });
+    data.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+    save(); render();
+    $('#wval').value = '';
+    if (kit) kit.refresh();
+    G.toast('기록했습니다');
+  });
+  $('#clearW').addEventListener('click', function () {
+    if (!data.length) return;
+    if (window.confirm('체중 기록을 모두 지울까요? 되돌릴 수 없습니다.')) {
+      data = []; save(); render(); if (kit) kit.refresh();
+    }
+  });
+  ['target', 'bcs', 'guardian', 'pet'].forEach(function (id) {
+    $('#' + id).addEventListener('input', function () { render(); if (kit) kit.refresh(); });
+    $('#' + id).addEventListener('change', function () { render(); if (kit) kit.refresh(); });
+  });
+
+  var kit = G.outKit({
+    num: 4,
+    title: '보호자에게 보낼 체중 관리 안내',
+    sub: '400자 이내 · 기록이 있을 때 정확합니다',
+    build: function () {
+      var d = G.settings();
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var head = '🐾 ' + g + '님, ' + p + ' 체중 기록 안내입니다.\n\n';
+      if (!data.length) return head + '체중을 기록하면 변화와 목표까지의 거리를 알려 드립니다.\n- ' + d.hospital;
+      var first = data[0], last = data[data.length - 1];
+      var delta = last.w - first.w;
+      var t = num('target');
+      var body = '· 현재 ' + last.w + 'kg (' + last.d.replace(/-/g, '. ') + ')\n' +
+        '· 첫 기록 대비 ' + (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg\n';
+      if (t > 0 && last.w > t) {
+        var weeks = Math.ceil((last.w - t) / (last.w * 0.015));
+        body += '· 목표 ' + t + 'kg까지 ' + (last.w - t).toFixed(1) + 'kg, 약 ' + weeks + '주\n';
+        body += '\n주 1~2% 속도로 줄이는 것이 안전합니다. 급여량은 GFN에서 다시 계산해 드릴게요.';
+      } else if (t > 0) {
+        body += '· 목표 ' + t + 'kg 달성\n\n이 속도를 유지하면 됩니다. 2주마다 같은 시간에 재 주세요.';
+      } else {
+        body += '\n2주마다 같은 시간·같은 저울로 재서 알려 주세요.';
+      }
+      var tail = '\n\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true
+  });
+
+  load(); render(); refresh();
+  function refresh() { if (kit) kit.refresh(); }
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GXN 미내원 관리 · 03 마감 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GXN — 미내원 보호자에게 보낼 1·2·3차 안내 문구와 03 마감 기준을 정리했습니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GXN · 미내원 관리 · 03 마감 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GXN — 미내원 보호자에게 보낼 1·2·3차 안내 문구와 03 마감 기준을 정리했습니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gxn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GXN · 미내원 관리 · 03 마감">
+<meta name="twitter:description" content="굿모닝펫 GXN — 미내원 보호자에게 보낼 1·2·3차 안내 문구와 03 마감 기준을 정리했습니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GXN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GXN</span>
+      <span class="eng-chip">X · eXit</span>
+    </div>
+    <h1>미내원 관리 · 03 마감</h1>
+    <p>안 온 보호자를 세 번까지 정중히 부르고, 그 뒤에는 깔끔하게 마감합니다.</p>
+    <div class="marks"><span>1·2·3차 안내</span><span>03 마감 기준</span><span>안내 문구</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>X · eXit — 떠난 보호자를 미련 없이, 그러나 따뜻하게</small></h2></div>
+    <p>미내원은 대개 <b>잊어서</b>가 아니라 <b>말하기 어려워서</b> 생깁니다. 세 번까지는 정중하게, 그 뒤에는 깔끔하게 정리합니다.</p>
+    <ul class="clean">
+      <li>연락 횟수에 따라 <b>1차·2차·3차 안내</b> 문구가 바뀝니다.</li>
+      <li>3회 연락 뒤에는 <b>03 마감</b> 기준으로 정리합니다.</li>
+      <li>마감해도 <b>다시 올 길</b>은 남겨 둡니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>미내원 건 정리<small>차트·시트를 보면서</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>마지막 내원</label><input id="last" type="date"></div>
+      <div class="field"><label>예정일(안 온 날)</label><input id="due" type="date"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>연락 횟수</label>
+        <select id="tries"><option value="0">0회 (아직 연락 전)</option><option value="1">1회</option><option value="2">2회</option><option value="3">3회 (마감 검토)</option></select>
+      </div>
+      <div class="field"><label>사유</label>
+        <select id="reason"><option>단순 미내원</option><option>연락 두절</option><option>다른 병원 이용</option><option>비용 부담</option><option>이사·상황 변화</option><option>치료 결과 불만</option></select>
+      </div>
+    </div>
+    <div class="field"><label>마지막으로 들은 말 <span class="hint">선택</span></label><input id="note" type="text" placeholder="예: 다음 달에 오겠다고 하심"></div>
+    <div class="result">
+      <div class="kv"><span class="k">경과일</span><span class="v" id="elapsed">-</span></div>
+      <div class="kv"><span class="k">다음 할 일</span><span class="v" id="nextAct">-</span></div>
+      <div class="kv"><span class="k">상태</span><span class="v" id="state">-</span></div>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">4</span><h2>03 마감 기준<small>감정이 아니라 규칙으로</small></h2></div>
+    <label class="check"><input type="checkbox"><span><b>1차</b> — 미내원 다음 날 카톡 안내</span></label>
+    <label class="check"><input type="checkbox"><span><b>2차</b> — 1주 뒤 전화 또는 카톡</span></label>
+    <label class="check"><input type="checkbox"><span><b>3차</b> — 2주 뒤 마지막 안내(문자)</span></label>
+    <label class="check"><input type="checkbox"><span><b>기록</b> — 연락 일시·방법·반응을 시트에 남김</span></label>
+    <label class="check"><input type="checkbox"><span><b>마감</b> — 3회 연락 후 03 마감으로 이동</span></label>
+    <label class="check"><input type="checkbox"><span><b>재방문 문</b> — “언제든 다시 오셔도 됩니다” 한 줄 남김</span></label>
+    <div class="callout warn"><b>마감은 차단이 아닙니다.</b> 명단에서 내려놓는 것이고, 보호자가 다시 오면 <b>처음처럼</b> 맞습니다. 이 태도가 입소문을 만듭니다.</div>
+  </section>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>미내원을 줄이는 예방<small>연락보다 먼저 할 일</small></h2></div>
+    <ul class="clean">
+      <li>진료 당일 <b>다음 예약</b>을 잡습니다(“언제 다시 볼까요”).</li>
+      <li>내원 전날 <b>GHN 사전 안내</b>를 보냅니다.</li>
+      <li>검사 결과는 <b>48시간 안에</b> 설명합니다. 늦으면 신뢰가 식습니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> GXN은 <b>GTN</b>의 코멘트와 <b>GCN</b>의 진료보드에서 이어집니다. 한 칸만 보면 놓칩니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gwn.html"><span class="k">◀ 이전 칸 · GWN</span><span class="v">체중·만성질환</span></a>
+    <a class="next" href="gyn.html"><span class="k">다음 칸 · GYN ▶</span><span class="v">연간 백신·검진</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  ['guardian', 'pet', 'last', 'due', 'tries', 'reason', 'note'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+
+  function tries() { return parseInt($('#tries').value, 10) || 0; }
+  function stage() {
+    var t = tries();
+    if (t === 0) return { key: 'first', label: '1차 안내 필요', cls: 'warn' };
+    if (t === 1) return { key: 'second', label: '2차 안내 필요', cls: 'warn' };
+    if (t === 2) return { key: 'third', label: '3차(마지막) 안내', cls: 'bad' };
+    return { key: 'close', label: '03 마감 검토', cls: 'bad' };
+  }
+  function elapsedDays() {
+    var d = $('#due').value || $('#last').value;
+    if (!d) return null;
+    var t = new Date(d + 'T00:00:00');
+    if (isNaN(t.getTime())) return null;
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    return Math.round((now - t) / 86400000);
+  }
+
+  var kit = G.outKit({
+    num: 3,
+    title: '보호자에게 보낼 안내',
+    sub: '400자 이내 · 단계에 맞는 말투로',
+    build: function () {
+      var d = G.settings();
+      var g = ($('#guardian').value || '').trim() || '보호자';
+      var p = ($('#pet').value || '').trim() || '우리 아이';
+      var st = stage();
+      var note = ($('#note').value || '').trim();
+      var head = '🐾 ' + g + '님, ' + d.hospital + '입니다.\n\n';
+      var body;
+      if (st.key === 'first') {
+        body = p + ' 진료 예정일이 지나서 연락드렸어요. 바쁘셔서 못 오셨다면, 편한 날짜로 다시 잡아 드릴게요.\n\n' +
+          '아이가 지금 어떻게 지내는지 궁금합니다. 간단히 답 주셔도 좋습니다.';
+      } else if (st.key === 'second') {
+        body = p + ' 이후 잘 지내고 있나요? 지난번 예약일에 못 오셔서 한 번 더 연락드렸습니다.\n\n' +
+          '상태가 괜찮다면 그대로 두셔도 되고, 걱정되는 점이 있으면 진료 시간에 오시면 바로 봐 드립니다.';
+      } else if (st.key === 'third') {
+        body = p + '와의 마지막 안내 연락드립니다. 지난 예약일 이후 소식이 없어 걱정이 됩니다.\n\n' +
+          '지금 특별한 문제가 없다면 이 안내를 마지막으로 정리하려 합니다. 언제든 다시 오셔도 처음처럼 맞이하겠습니다.';
+      } else {
+        body = p + ' 관련 안내를 마지막으로 정리하려 합니다. 그동안 함께할 수 있어 감사했습니다.\n\n' +
+          '아이가 아프거나 궁금한 점이 생기면 언제든 다시 연락 주세요. 처음처럼 봐 드리겠습니다.';
+      }
+      if (note) body += '\n\n· ' + note;
+      var tail = '\n\n진료는 월·화·수 09:00–12:00입니다.\n카톡 GoodPet · ' + (d.phone || '') + '\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '마지막 안내에는 <b>“언제든 다시”</b>를 꼭 넣습니다. 문을 닫지 않는 것이 마감입니다.'
+  });
+
+  function refresh() {
+    var st = stage();
+    var el = elapsedDays();
+    $('#elapsed').textContent = el == null ? '-' : el + '일';
+    $('#nextAct').textContent = st.key === 'close' ? '03 마감 처리 · 기록 남기기' : st.key === 'third' ? '3차 안내 보내고 2주 뒤 마감' : '안내 보내고 1주 뒤 재확인';
+    $('#state').textContent = st.label;
+    $('#state').className = 'v ' + st.cls;
+    if (kit) kit.refresh();
+  }
+  refresh();
+})();
+
+</script>
+</body>
+</html>

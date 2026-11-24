@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GJN 생일 엽서 · 음료 선물 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GJN — 보호자·아이 이름과 축하 메시지, 선물을 넣으면 모바일 생일 엽서 카드와 400자 카톡 문구, 짧은 링크까지 한 번에 만들어집니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GJN · 생일 엽서 · 음료 선물 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GJN — 보호자·아이 이름과 축하 메시지, 선물을 넣으면 모바일 생일 엽서 카드와 400자 카톡 문구, 짧은 링크까지 한 번에 만들어집니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gjn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GJN · 생일 엽서 · 음료 선물">
+<meta name="twitter:description" content="굿모닝펫 GJN — 보호자·아이 이름과 축하 메시지, 선물을 넣으면 모바일 생일 엽서 카드와 400자 카톡 문구, 짧은 링크까지 한 번에 만들어집니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GJN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GJN</span>
+      <span class="eng-chip">J · Journey</span>
+    </div>
+    <h1>생일 엽서 · 음료 선물</h1>
+    <p>보호자와 아이 이름만 넣으면, 오늘 보낼 수 있는 생일 엽서 링크와 400자 카톡 문구가 완성됩니다.</p>
+    <div class="marks"><span>모바일 엽서 카드</span><span>400자 카톡 문구</span><span>짧은 링크</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>J · Journey — 아이의 생애주기를 함께 걷는 칸</small></h2></div>
+    <p>생일은 보호자가 우리 병원을 가장 따뜻하게 기억하는 순간입니다. 엽서 한 장과 음료 한 잔이 <b>다음 내원</b>을 만듭니다.</p>
+    <ul class="clean">
+      <li>보호자·아이 이름을 넣으면 <b>모바일 생일 엽서</b>가 바로 만들어집니다.</li>
+      <li>엽서 링크를 <b>짧은 주소</b>로 바꿔 카톡 문구에 넣어 드립니다.</li>
+      <li>문구는 <b>400자 이내</b>로 맞춰 카톡에서 잘리지 않습니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>엽서 만들기<small>이름과 한마디만 넣어 주세요</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자 이름</label><input id="guardian" type="text" placeholder="예: 김민지" autocomplete="off"></div>
+      <div class="field"><label>아이 이름</label><input id="pet" type="text" placeholder="예: 콩이" autocomplete="off"></div>
+    </div>
+    <div class="field"><label>생일 <span class="hint">(선택 · D-day 표시용)</span></label><input id="bday" type="date"></div>
+    <div class="field">
+      <label>축하 메시지 <span class="hint">비워두면 다정한 기본 문구로 채워집니다</span></label>
+      <textarea id="note" style="min-height:96px" placeholder="예: 우리 콩이, 벌써 7살이네요. 늘 건강하게 오래오래 함께해요!"></textarea>
+    </div>
+    <div class="seg" id="notePresets">
+      <button type="button" data-note="오늘도 제일 사랑받는 하루 보내렴!">사랑받는 하루</button>
+      <button type="button" data-note="우리 아이의 생일을 진심으로 축하해요. 함께해 주셔서 감사합니다.">정중한 감사</button>
+      <button type="button" data-note="올해도 건강하게, 많이 웃으며 함께해요 :)">건강·웃음</button>
+    </div>
+    <div class="field"><label>선물 안내</label>
+      <select id="gift">
+        <option value="따뜻한 아메리카노 1잔 쿠폰">음료 · 아메리카노 1잔</option>
+        <option value="달콤한 카페라떼 1잔 쿠폰">커피 · 카페라떼 1잔</option>
+        <option value="수제 간식 1봉 쿠폰">수제 간식 1봉</option>
+        <option value="미용 10% 할인 쿠폰">미용 10% 할인</option>
+        <option value="다음 내원 시 건강 간식 1봉">건강 간식 1봉</option>
+        <option value="__custom">직접 입력</option>
+      </select>
+    </div>
+    <div class="field" id="giftCustomWrap" style="display:none"><label>선물 직접 입력</label><input id="giftCustom" type="text" placeholder="예: 병원 앞 카페 아메리카노 1잔"></div>
+    <div class="callout">선물은 <b>말로만 안내</b>하거나, 병원에서 실제로 준비되는 쿠폰·음료와 맞춰 주세요. 엽서에는 “준비되어 있습니다”라고만 적고, 지급 방식은 카톡에서 안내하는 편이 안전합니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>엽서 미리보기<small>보호자가 링크를 열면 보이는 화면</small></h2></div>
+    <div id="cardPrev"></div>
+  </section>
+
+  <section class="card" id="out">
+    <div class="sec-head"><span class="num">4</span><h2>보호자에게 보낼 카톡 문구<small>400자 이내 · 복사해서 그대로 붙여넣기</small></h2></div>
+    <textarea class="msg" id="msg" spellcheck="false"></textarea>
+    <div class="msg-foot">
+      <div class="count"><b id="cnt">0</b> / 400자</div>
+      <a class="chip-link" id="cardLink" href="#" target="_blank" rel="noopener" style="display:none">엽서 열어보기</a>
+    </div>
+    <div class="btns">
+      <button class="btn primary" id="copy" type="button">📋 문구 복사</button>
+      <button class="btn ghost" id="short" type="button">🔗 짧은 링크</button>
+      <button class="btn ghost wide" id="share" type="button">카톡으로 공유</button>
+    </div>
+    <p class="note" id="shortNote"></p>
+  </section>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">5</span><h2>이렇게 쓰세요<small>원무과 1분 루틴</small></h2></div>
+    <ul class="clean">
+      <li>오늘 생일 명단에서 보호자·아이 이름을 넣습니다.</li>
+      <li>선물을 고르고 <b>짧은 링크</b>를 누릅니다(2초).</li>
+      <li><b>문구 복사</b> → 카톡에 붙여넣고 보냅니다.</li>
+      <li>보호자가 엽서를 열면, 사진 없이도 마음이 전해집니다.</li>
+    </ul>
+    <div class="callout ok"><b>그물망 연결:</b> 엽서를 받은 보호자는 <b>GHN</b>(건강관리표)과 <b>GSN</b>(재구매)으로 이어집니다. 생일은 “다시 오는 이유”를 만드는 첫 칸입니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gin.html"><span class="k">◀ 이전 칸 · GIN</span><span class="v">자료·질문수첩</span></a>
+    <a class="next" href="gkn.html"><span class="k">다음 칸 · GKN ▶</span><span class="v">처방·복약</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  var guardian = $('#guardian'), pet = $('#pet'), bday = $('#bday'), note = $('#note'), gift = $('#gift'),
+      giftCustom = $('#giftCustom'), giftWrap = $('#giftCustomWrap');
+  var cardPrev = $('#cardPrev');
+  var lastShort = '';
+  var DEFAULT_NOTE = '우리 아이의 생일을 진심으로 축하합니다. 늘 건강하게, 함께 오래오래 걸어가요!';
+
+  gift.addEventListener('change', function () {
+    giftWrap.style.display = gift.value === '__custom' ? '' : 'none';
+    update();
+  });
+  note.addEventListener('input', function () { update(); });
+  ['guardian', 'pet', 'bday', 'giftCustom'].forEach(function (id) {
+    $('#' + id).addEventListener('input', update);
+    $('#' + id).addEventListener('change', update);
+  });
+  G.qa('#notePresets button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      note.value = b.getAttribute('data-note');
+      G.qa('#notePresets button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      update();
+    });
+  });
+
+  function giftText() {
+    if (gift.value === '__custom') return (giftCustom.value || '').trim() || '작은 선물';
+    return gift.value;
+  }
+  function data() {
+    var s = G.settings();
+    return {
+      h: s.hospital,
+      s: s.slogan,
+      g: (guardian.value || '').trim() || '보호자',
+      p: (pet.value || '').trim() || '우리 아이',
+      m: (note.value || '').trim() || DEFAULT_NOTE,
+      gift: giftText(),
+      d: bday.value || G.today()
+    };
+  }
+  function b64e(str) {
+    var bytes = unescape(encodeURIComponent(str));
+    return btoa(bytes).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function b64d(s) {
+    s = String(s).replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    return decodeURIComponent(escape(atob(s)));
+  }
+  function cardUrl() {
+    return G.baseUrl() + '?card=' + b64e(JSON.stringify(data()));
+  }
+
+  /* ---------- 엽서 카드 마크업 (미리보기와 실제 카드가 같은 함수) ---------- */
+  function cardHTML(d, live) {
+    var dday = d.d ? G.dday(d.d) : '';
+    var when = d.d ? d.d.replace(/-/g, '. ') + '.' : '';
+    var tag = 'HAPPY BIRTHDAY';
+    if (dday === '오늘') tag = 'HAPPY BIRTHDAY · TODAY';
+    else if (dday && dday.indexOf('D-') === 0) tag = 'HAPPY BIRTHDAY · ' + dday;
+    return '' +
+      '<div class="ecard">' +
+        '<div class="ribbon"></div>' +
+        '<div class="inner">' +
+          '<div class="tag">' + G.esc(tag) + '</div>' +
+          '<div class="cake" aria-hidden="true">🎂</div>' +
+          '<h1>' + G.esc(d.g) + '님께 드리는 생일 엽서</h1>' +
+          '<div class="pet"><span>' + G.esc(d.p) + '</span><em>♡</em></div>' +
+          '<div class="msg">' + G.esc(d.m) + '</div>' +
+          '<div class="gift"><div class="t">작은 선물</div><div class="v">🎁 ' + G.esc(d.gift) + '</div></div>' +
+          (when ? '<div class="from" style="margin-top:12px">' + G.esc(when) + ' · ' + G.esc(d.p) + '의 생일</div>' : '') +
+          '<div class="from"><b>' + G.esc(d.h) + '</b><br>' + G.esc(d.s || '') + '</div>' +
+          (live ? '' : '<div class="btns">' +
+            '<button class="btn solid" type="button" id="cardShare">카톡으로 보내기</button>' +
+            '<a class="btn" href="gjn.html">새 엽서 만들기</a>' +
+          '</div>') +
+        '</div>' +
+      '</div>';
+  }
+
+  var lastKey = '';
+  function update() {
+    var d = data();
+    cardPrev.innerHTML = cardHTML(d, true);
+    if (!kit) return;
+    var key = JSON.stringify(d);
+    if (key !== lastKey) {
+      lastKey = key;
+      kit.state.short = '';
+      var sn = $('#shortNote'); if (sn) sn.textContent = '';
+    }
+    kit.refresh();
+  }
+
+  /* ---------- 카드 뷰 (?card=...) ---------- */
+  var params = new URLSearchParams(location.search);
+  var cardRaw = params.get('card');
+  var cardMode = false;
+  if (cardRaw) {
+    try {
+      var d = JSON.parse(b64d(cardRaw));
+      if (d && d.p) {
+        cardMode = true;
+        document.body.classList.add('cardmode');
+        document.title = d.p + '의 생일 엽서 | ' + (d.h || '굿모닝펫동물병원');
+        var wrap = $('.wrap');
+        wrap.innerHTML = cardHTML(d, false) +
+          '<div class="center" style="margin-top:14px"><a class="chip-link" href="gjn.html">나도 생일 엽서 만들기</a></div>';
+        var sh = $('#cardShare');
+        if (sh) sh.addEventListener('click', function () {
+          if (navigator.share) {
+            navigator.share({ title: d.p + '의 생일 엽서', text: d.g + '님, ' + d.p + '의 생일을 축하합니다! 🎂', url: location.href })
+              .catch(function () {});
+          } else {
+            G.copy(location.href).then(function () { G.toast('엽서 링크를 복사했어요'); });
+          }
+        });
+        return;
+      }
+    } catch (e) {}
+  }
+
+  /* ---------- 400자 문구 ---------- */
+  var kit = G.msgKit({
+    build: function (state) {
+      var d = data();
+      var link = state.short || cardUrl();
+      var head = '🐾 ' + d.g + '님, ' + d.p + '의 생일을 진심으로 축하합니다! 🎂\n\n';
+      var tail = '🎁 작은 선물로 ' + d.gift + '을 준비했어요.\n아래 엽서를 눌러 보세요 👇\n' + link + '\n\n- ' + d.h + ' 드림';
+      var room = 400 - G.count(head) - G.count(tail) - 4;
+      var body = room > 12 ? G.cut(d.m, room) + '\n\n' : '';
+      return head + body + tail;
+    },
+    link: function (state) { return state.short ? null : cardUrl(); },
+    autoShort: true
+  });
+
+  function refreshLinkChip() {
+    var url = kit.state.short || cardUrl();
+    var a = $('#cardLink');
+    a.href = url;
+    a.style.display = '';
+    a.textContent = kit.state.short ? '엽서 열어보기 (짧은 링크)' : '엽서 열어보기';
+  }
+  var origRefresh = kit.refresh;
+  kit.refresh = function (force) {
+    origRefresh(force);
+    refreshLinkChip();
+  };
+  var shortBtn = $('#short');
+  shortBtn.addEventListener('click', function () {
+    setTimeout(function () {
+      refreshLinkChip();
+      $('#shortNote').textContent = kit.state.short
+        ? '짧은 링크: ' + kit.state.short + ' — 문구에 자동으로 들어갔어요.'
+        : '링크를 짧게 줄이지 못했어요. 긴 주소 그대로도 열립니다.';
+    }, 300);
+  });
+
+  update();
+})();
+
+</script>
+</body>
+</html>

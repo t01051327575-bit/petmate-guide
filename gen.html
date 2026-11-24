@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GEN 참관 · 교육 신청 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GEN — 참관·교육 신청 링크와 참관 안내 문구, 준비물 체크리스트를 한 페이지에 정리했습니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GEN · 참관 · 교육 신청 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GEN — 참관·교육 신청 링크와 참관 안내 문구, 준비물 체크리스트를 한 페이지에 정리했습니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gen.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GEN · 참관 · 교육 신청">
+<meta name="twitter:description" content="굿모닝펫 GEN — 참관·교육 신청 링크와 참관 안내 문구, 준비물 체크리스트를 한 페이지에 정리했습니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GEN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GEN</span>
+      <span class="eng-chip">E · Education</span>
+    </div>
+    <h1>참관 · 교육 신청</h1>
+    <p>참관 오시는 날짜와 인원만 정하면, 준비물과 안내 문구까지 한 번에 정리됩니다.</p>
+    <div class="marks"><span>참관 신청</span><span>준비물 체크</span><span>안내 문구</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>E · Education — 배우러 오는 사람을 위한 칸</small></h2></div>
+    <p>참관은 <b>우리 병원의 진료를 그대로 보여주는 일</b>입니다. 신청부터 준비물, 도착 안내까지 미리 정리해 두면 현장이 흔들리지 않습니다.</p>
+    <div class="btns">
+      <a class="btn solid wide" href="https://claude.ai/public/artifacts/DEA3SY98Jc1QQfSoMKaFWf" target="_blank" rel="noopener">🎓 참관 신청 페이지 열기</a>
+      <a class="btn ghost" href="welcome.html">오시는 길 · 진료 시간</a>
+      <a class="btn ghost" href="gmn.html">직원 온보딩 (GMN)</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>참관 안내 만들기<small>신청자에게 보낼 확정 안내</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>참관자 이름</label><input id="name" type="text" placeholder="예: 김영준"></div>
+      <div class="field"><label>연락처 <span class="hint">선택</span></label><input id="tel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>참관 날짜</label><input id="date" type="date"></div>
+      <div class="field"><label>도착 시간</label><input id="time" type="time" value="09:00"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>인원</label><input id="people" type="number" inputmode="numeric" min="1" max="6" value="1"></div>
+      <div class="field"><label>참관 목적</label>
+        <select id="purpose">
+          <option>수의대 실습 · 진로 탐색</option>
+          <option>진료·수술 과정 관찰</option>
+          <option>병원 운영·시스템 벤치마킹</option>
+          <option>기타</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>준비물 안내에 덧붙일 말 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 흰 가운은 병원에서 준비합니다"></div>
+    <div class="progress">
+      <div class="t"><span>준비물 체크</span><span id="progT">0 / 6</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>신분증</b> — 출입 등록</span></label>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>필기 도구</b> — 메모·관찰 기록</span></label>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>편한 신발·복장</b> — 하루 서서 봅니다</span></label>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>예방접종 확인</b> — 병원 규정 안내</span></label>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>사진·촬영 금지</b> 안내 확인</span></label>
+    <label class="check"><input type="checkbox" data-p="1"><span><b>10분 전 도착</b> 안내 확인</span></label>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>참관이 끝난 뒤<small>한 번 온 사람이 다시 오게 하는 3줄</small></h2></div>
+    <ul class="clean">
+      <li>그날 본 진료 중 <b>인상 깊었던 장면</b>을 하나 짚어 감사 인사를 보냅니다.</li>
+      <li>궁금한 점을 <b>카톡으로</b> 언제든 물어보라고 안내합니다.</li>
+      <li>채용에 관심이 있으면 <b>GRN</b>(채용·면접)으로 자연스럽게 잇습니다.</li>
+    </ul>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gdn.html"><span class="k">◀ 이전 칸 · GDN</span><span class="v">검사 결과</span></a>
+    <a class="next" href="gfn.html"><span class="k">다음 칸 · GFN ▶</span><span class="v">맞춤 사료</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  $('#date').value = G.today();
+  ['name', 'tel', 'date', 'time', 'people', 'purpose', 'extra'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+  var boxes = G.qa('input[data-p]');
+  boxes.forEach(function (b) { b.addEventListener('change', progress); });
+  function progress() {
+    var n = boxes.filter(function (b) { return b.checked; }).length;
+    $('#progT').textContent = n + ' / ' + boxes.length;
+    $('#progBar').style.width = (n / boxes.length * 100) + '%';
+  }
+  progress();
+
+  var kit = G.outKit({
+    num: 3,
+    title: '참관 확정 안내 문구',
+    sub: '400자 이내 · 신청자에게 그대로 보내세요',
+    build: function () {
+      var d = G.settings();
+      var name = ($('#name').value || '').trim() || '참관자';
+      var date = ($('#date').value || '').replace(/-/g, '. ');
+      var extra = ($('#extra').value || '').trim();
+      var head = '🐾 ' + name + '님, 굿모닝펫 참관 신청 감사합니다. 아래 일정으로 확정되었습니다.\n\n';
+      var body = '· 일시: ' + date + ' ' + ($('#time').value || '09:00') + '\n' +
+        '· 인원: ' + ($('#people').value || 1) + '명\n' +
+        '· 목적: ' + $('#purpose').value + '\n' +
+        '· 장소: 성남시 분당구 정자일로 55 분당두산위브 108동 110호\n\n' +
+        '준비물: 신분증, 필기 도구, 편한 복장. 촬영은 어렵고, 10분 전에 도착해 주세요.' +
+        (extra ? '\n' + extra : '') + '\n';
+      var tail = '\n주차는 건물 1층, 3시간 무료입니다.\n문의: ' + (d.phone || '') + '\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true,
+    note: '참관 확정은 <b>날짜·시간·인원·준비물</b> 네 가지만 분명하면 됩니다.'
+  });
+  function refresh() { if (kit) kit.refresh(); }
+  refresh();
+})();
+
+</script>
+</body>
+</html>

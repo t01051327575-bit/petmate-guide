@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GCN 진료보드 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GCN — 진료보드로 오늘 예약·내원·미내원·검사 대기를 한눈에 보고, 원장님께 드릴 진료 요약 문구를 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GCN · 진료보드 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GCN — 진료보드로 오늘 예약·내원·미내원·검사 대기를 한눈에 보고, 원장님께 드릴 진료 요약 문구를 만듭니다.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gcn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GCN · 진료보드">
+<meta name="twitter:description" content="굿모닝펫 GCN — 진료보드로 오늘 예약·내원·미내원·검사 대기를 한눈에 보고, 원장님께 드릴 진료 요약 문구를 만듭니다.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<link rel="stylesheet" href="assets/g-common.css">
+</head>
+<body data-code="GCN">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GCN</span>
+      <span class="eng-chip">C · Care</span>
+    </div>
+    <h1>진료보드</h1>
+    <p>오늘 우리 병원의 진료 흐름을 한 화면에서 보고, 원장님께 드릴 요약까지 1분에 정리합니다.</p>
+    <div class="marks"><span>실시간 진료보드</span><span>오늘 요약</span><span>미내원·검사 대기</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>C · Care — 병원의 하루를 한 장에 모으는 칸</small></h2></div>
+    <p>진료보드는 <b>오늘 누가 오고, 누가 안 왔고, 누가 검사를 기다리는지</b>를 한 화면에서 보는 병원의 중심입니다.</p>
+    <div class="btns">
+      <a class="btn solid wide" href="https://t01051327575-bit.github.io/Gcn/" target="_blank" rel="noopener">📋 진료보드 열기 (최신 GCN)</a>
+      <a class="btn ghost" href="ghn.html">건강관리표 (GHN)</a>
+      <a class="btn ghost" href="gxn.html">미내원 관리 (GXN)</a>
+    </div>
+    <p class="note">GCN은 별도 앱으로 운영됩니다. 이 페이지는 GCN을 여는 입구와, 오늘 숫자를 <b>보고용 문구</b>로 바꿔 주는 보조 도구입니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>오늘 숫자 정리<small>GCN을 보면서 옮겨 적으면 됩니다</small></h2></div>
+    <div class="field"><label>날짜</label><input id="date" type="date"></div>
+    <div class="grid2">
+      <div class="field"><label>오늘 예약</label><input id="book" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>내원 완료</label><input id="done" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>미내원</label><input id="miss" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>검사 결과 대기</label><input id="wait" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>신환</label><input id="newp" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+      <div class="field"><label>수술·처치</label><input id="surg" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </div>
+    <div class="field"><label>특이사항 <span class="hint">한 줄씩</span></label><textarea id="memo" style="min-height:88px" placeholder="예: 콩이 포도막염 안압 재측정 필요&#10;보호자님 15시 이후 연락 요청"></textarea></div>
+    <div class="result">
+      <div class="kv"><span class="k">내원율</span><span class="v" id="rate">-</span></div>
+      <div class="kv"><span class="k">남은 예약</span><span class="v" id="left">-</span></div>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">4</span><h2>GCN을 오래 쓰는 법<small>2인 체제에서 지킬 것</small></h2></div>
+    <ul class="clean">
+      <li>아침 9시 전에 <b>오늘 예약·검사 대기</b>를 한 번 맞춥니다.</li>
+      <li>진료 중 메모는 <b>그 자리에서</b> 넣습니다. 퇴근 후 몰아 넣으면 빠집니다.</li>
+      <li>미내원은 <b>당일</b> GXN으로 넘깁니다. 다음 날이면 연락이 늦습니다.</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 진료가 끝난 아이는 <b>GTN</b>(카톡 안내)으로 코멘트를 보내고, 다음 예약은 <b>GSN</b>으로 이어집니다. 이 세 칸이 이어져야 재방문이 됩니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gbn.html"><span class="k">◀ 이전 칸 · GBN</span><span class="v">미용·피부</span></a>
+    <a class="next" href="gdn.html"><span class="k">다음 칸 · GDN ▶</span><span class="v">검사 결과</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js"></script>
+<script>
+
+(function () {
+  var $ = G.q;
+  $('#date').value = G.today();
+  ['date', 'book', 'done', 'miss', 'wait', 'newp', 'surg', 'memo'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+  function n(id) { return parseInt(($('#' + id).value || '0'), 10) || 0; }
+
+  var kit = G.outKit({
+    num: 3,
+    title: '원장님께 드릴 오늘 요약',
+    sub: '400자 이내 · 진료 마감 후 한 번에',
+    build: function () {
+      var d = G.settings();
+      var date = ($('#date').value || G.today()).replace(/-/g, '/').slice(5);
+      var memo = ($('#memo').value || '').trim();
+      var head = '[진료보드 요약] ' + date + '\n';
+      var body = '예약 ' + n('book') + ' · 내원 ' + n('done') + ' · 미내원 ' + n('miss') +
+        ' · 검사대기 ' + n('wait') + ' · 신환 ' + n('newp') + ' · 수술 ' + n('surg') + '\n';
+      var tail = (memo ? '\n특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '') +
+        '\n보드: https://t01051327575-bit.github.io/Gcn/\n- ' + d.hospital;
+      var text = head + body + tail;
+      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    },
+    noShort: true
+  });
+
+  function refresh() {
+    var b = n('book'), dn = n('done');
+    $('#rate').textContent = b > 0 ? Math.round(dn / b * 100) + '%' : '-';
+    $('#left').textContent = Math.max(0, b - dn) + '건';
+    if (kit) kit.refresh();
+  }
+  refresh();
+})();
+
+</script>
+</body>
+</html>
