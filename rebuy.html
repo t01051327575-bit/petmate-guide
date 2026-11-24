@@ -1027,6 +1027,11 @@
     s = s.replace(/^\[[^\]]{1,26}\]\s*/, '');
     s = s.replace(/\(단품\)/g, ' ');
     s = s.replace(/｜.*$/, '');
+    /* 인투펫 판매내역은 긴 구분선(--------) 뒤에 실제 제품명이 오는 경우가 많다 */
+    if(/-{3,}/.test(s)){
+      var afterDash = s.replace(/^[\s\S]*?-{3,}\s*/, '').trim();
+      if(afterDash && /[가-힣A-Za-z]{2,}/.test(afterDash)) s = afterDash;
+    }
     /* 앞에 붙은 짧은 재고·복용 표시( (하루2회), (오렌지) )는 한두 번만 걷어낸다 */
     for(var j = 0; j < 2; j++){
       var b2 = s;
@@ -1957,10 +1962,12 @@
     items.forEach(function(r){ if(r.d !== d0) sameDay = false; });
     var many = total > 1 ? '제품들이에요.' : '제품이에요.';
     var who = p ? (p + ' 아이가 ') : '';
-    if(sameDay){
-      L.push('지난번(' + mdOf(d0) + ')에 ' + who + '챙겨 간 ' + many);
-    } else {
-      L.push('지난번에 ' + who + '챙겨 간 ' + many);
+    if(!cfg.noIntro){
+      if(sameDay){
+        L.push('지난번(' + mdOf(d0) + ')에 ' + who + '챙겨 간 ' + many);
+      } else {
+        L.push('지난번에 ' + who + '챙겨 간 ' + many);
+      }
     }
     items.forEach(function(rec){
       var name = nm(rec.n);
@@ -2029,14 +2036,16 @@
     { paren:'tail', nameMax:26 },
     { paren:'tail', nameMax:22 },
     { paren:'tail', nameMax:20, cheer:'short' },
-    { paren:'tail', nameMax:18, cheer:'short' },
-    { paren:'tail', nameMax:18, maxItems:4, cheer:'short' },
-    { paren:'tail', nameMax:16, maxItems:4, cheer:'short', compact:true },
-    { paren:'all',  nameMax:16, maxItems:4, cheer:'short', compact:true },
-    { paren:'all',  nameMax:14, maxItems:3, cheer:'short', compact:true },
-    { paren:'all',  nameMax:14, maxItems:3, cheer:'none', compact:true, leadShort:true },
-    { paren:'all',  nameMax:12, maxItems:3, cheer:'none', compact:true, noLead:true },
-    { paren:'all',  nameMax:12, maxItems:2, cheer:'none', compact:true, noLead:true },
+    { paren:'tail', nameMax:18, cheer:'short', leadShort:true },
+    { paren:'tail', nameMax:18, cheer:'none', leadShort:true },
+    { paren:'tail', nameMax:18, cheer:'none', compact:true },
+    { paren:'all',  nameMax:18, cheer:'none', compact:true, leadShort:true },
+    { paren:'all',  nameMax:16, cheer:'none', compact:true, leadShort:true },
+    { paren:'all',  nameMax:16, cheer:'none', compact:true, noLead:true },
+    { paren:'all',  nameMax:14, cheer:'none', compact:true, noLead:true },
+    { paren:'all',  nameMax:14, cheer:'none', compact:true, noLead:true, noIntro:true },
+    { paren:'all',  nameMax:13, maxItems:3, cheer:'none', compact:true, noLead:true },
+    { paren:'all',  nameMax:12, maxItems:3, cheer:'none', compact:true, noLead:true, noSlogan:true },
     { paren:'all',  nameMax:12, maxItems:2, cheer:'none', compact:true, noLead:true, noSlogan:true },
     { paren:'all',  nameMax:10, maxItems:2, cheer:'none', compact:true, noLead:true, noSlogan:true, noDate:true, headShort:true },
     { paren:'all',  nameMax:10, maxItems:1, cheer:'none', compact:true, noLead:true, noSlogan:true, noDate:true, headShort:true, payNameMax:12 }
@@ -2053,6 +2062,7 @@
     if(st.compact) b.push('줄바꿈 압축');
     if(st.leadShort) b.push('안내문 간결화');
     if(st.noLead || st.noPrep) b.push('안내문 생략');
+    if(st.noIntro) b.push('구매 안내 문장 생략');
     if(st.noSlogan) b.push('슬로건 생략');
     return b.join(' · ');
   }
