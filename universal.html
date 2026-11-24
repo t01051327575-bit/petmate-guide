@@ -2520,7 +2520,12 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
     [/됍/g, '됨'],
     [/되여/g, '돼'],
     [/([가-힣])읍니다/g, '$1습니다'],
-    [/([가-힣])(할|갈|볼|줄|살|올|들|줄)께(?=[\s.,!?]|$)/g, '$1$2게']
+    /* 할께요 → 할게요 : 어간이 ㄹ받침(할·갈·볼·줄·살·올·들·만들)이거나 ‘를’로 끝날 때만 (아버지께서 같은 존칭은 그대로) */
+    [/[가-힣]께(?=요?[\s.,!?]|요?$)/g, function(m){
+      var c = m.charCodeAt(0);
+      var jong = (c >= 0xAC00 && c <= 0xD7A3) ? (c - 0xAC00) % 28 : -1;
+      return (jong === 8 || m.charAt(0) === '를') ? m.charAt(0) + '게' : m;
+    }]
   ];
 
   function fixTypos(s){
@@ -2558,6 +2563,18 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
   /* 이미 존댓문으로 끝나는 문장은 그대로 둔다 */
   var POLITE_RE = /(니다|니까|세요|네요|어요|아요|해요|예요|이에요|죠|지요|까요|군요|답니다|요)$/;
 
+  /* 문장 끝 메모 단어 앞에 띄어쓰기를 넣는다: ‘혈액검사완료’ → ‘혈액검사 완료’ */
+  function spacedMemoEnd(str){
+    for (var i = 0; i < MEMO_KEYS.length; i++){
+      var w = MEMO_KEYS[i];
+      if (str.length > w.length && str.slice(str.length - w.length) === w){
+        var h = str.slice(0, str.length - w.length);
+        if (h && /[가-힣0-9)\]]$/.test(h) && /^[가-힣]/.test(w)) return h + ' ' + w;
+      }
+    }
+    return str;
+  }
+
   function hasBatchim(word){
     if (!word) return false;
     var c = word.charCodeAt(word.length - 1);
@@ -2574,8 +2591,20 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
       var w = MEMO_KEYS[i];
       if (t.length >= w.length && t.slice(t.length - w.length) === w){
         var head = t.slice(0, t.length - w.length);
-        if (head && /[가-힣0-9]$/.test(head) && /^[가-힣]/.test(w)) head += ' ';
+        if (head && /[가-힣0-9)\]]$/.test(head) && /^[가-힣]/.test(w)) head += ' ';
         return head + MEMO_WORDS[w];
+      }
+    }
+    /* ①-2 ‘항체검사진행함’처럼 메모 단어 뒤에 ‘함’이 더 붙은 경우 */
+    if (/함$/.test(t)){
+      var stm = t.slice(0, -1);
+      for (var k = 0; k < MEMO_KEYS.length; k++){
+        var wk = MEMO_KEYS[k];
+        if (stm.length >= wk.length && stm.slice(stm.length - wk.length) === wk){
+          var hd = stm.slice(0, stm.length - wk.length);
+          if (hd && /[가-힣0-9)\]]$/.test(hd) && /^[가-힣]/.test(wk)) hd += ' ';
+          return hd + MEMO_WORDS[wk];
+        }
       }
     }
     /* ② 이미 존댓문이면 그대로 */
@@ -2583,7 +2612,7 @@ A girl's best friend 동물매개치료|동물매개치료, 도우미견, 다운
     if (/없음$/.test(t)) return t.slice(0, -2) + '없어요';
     if (/있음$/.test(t)) return t.slice(0, -2) + '있어요';
     if (/했음$/.test(t)) return t.slice(0, -2) + '했어요';
-    if (/됨$/.test(t))   return t.slice(0, -1) + '됐어요';
+    if (/됨$/.test(t))   return spacedMemoEnd(t.slice(0, -1)) + '됐어요';
     if (/함$/.test(t))   return t.slice(0, -1) + '했어요';
     if (/임$/.test(t)){
       var st = t.slice(0, -1);
