@@ -952,6 +952,8 @@
 
     if(!has){
       $('dstat').innerHTML = '';
+      $('dataStatus').className = 'xlsxstatus';
+      $('dataStatus').textContent = '';
       return;
     }
     var minD = '', maxD = '';
