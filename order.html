@@ -853,6 +853,7 @@
     if(!DATA || (!DATA.items.length && !DATA.guardian && !DATA.hosp)){
       $('errBox').hidden = false;
       $('hero').hidden = true;
+      $('sticky').hidden = true;
       $('body').hidden = true;
       if(!raw){
         $('errMsg').innerHTML = '병원에서 받은 링크로 다시 열어 주세요.<br>링크에 구매이력이 담겨 있어요.';
