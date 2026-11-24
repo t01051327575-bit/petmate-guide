@@ -253,6 +253,25 @@
   }
   .selbar button:active{transform:translateY(1px)}
 
+  /* ---------- 다음 예약일 (선택) ---------- */
+  .nextrow{
+    margin-top:10px;padding:11px 12px;border-radius:12px;background:#fff;
+    border:1px solid #e4eef0;
+  }
+  .nextrow label{display:block;font-size:12.3px;font-weight:800;color:var(--ink);margin-bottom:7px}
+  .nextrow label .opt{font-weight:600;color:var(--muted);font-size:11.3px}
+  .nextin{display:flex;gap:7px;align-items:center}
+  .nextin input[type=date]{
+    flex:1 1 auto;min-width:0;padding:9px 10px;border:1px solid #dbe7ea;border-radius:10px;
+    font-family:inherit;font-size:13.5px;color:var(--ink);background:#fbfefd;
+  }
+  .nextin input[type=date]:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 3px rgba(15,157,143,.12)}
+  .nextin .nextclear{
+    flex:0 0 auto;background:#fff;border:1px solid #cfe7e3;color:var(--mint-d);
+    font-family:inherit;font-size:11.6px;font-weight:800;padding:7px 10px;border-radius:999px;cursor:pointer;
+  }
+  .nextrow .hint3{margin:6px 0 0;font-size:11.3px;color:var(--muted);line-height:1.5}
+
   /* ---------- 구매이력 ---------- */
   .hlist{margin-top:9px;display:flex;flex-direction:column;gap:6px}
   .hrow{
@@ -519,10 +538,10 @@
         </div>
 
         <div class="hosp-sub">
-          <label class="hosp-label" for="orderUrl">🛒 병원 구매요청 받을 링크 <span class="opt">(선택)</span></label>
+          <label class="hosp-label" for="orderUrl">🛒 병원 카톡(오픈채팅·채널) 주소 <span class="opt">(선택)</span></label>
           <input type="url" id="orderUrl" inputmode="url" autocomplete="off" spellcheck="false"
-                 placeholder="예: https://pf.kakao.com/_xxxxx · 네이버 폼 · 구글 폼 주소">
-          <p class="hosp-hint">링크를 넣으면 안내문 아래에 <b>「🛒 바로 재구매 요청하기」 + 주소</b>가 자동으로 붙습니다. 비워 두면 <b>「이 카톡방으로 편하게 말씀해 주세요」</b>로 나가요.</p>
+                 placeholder="예: https://open.kakao.com/o/sNJowzYi · https://pf.kakao.com/_xxxxx">
+          <p class="hosp-hint">보호자가 체크한 주문을 <b>이 카톡방으로 보내게</b> 됩니다. 문구에는 <b>보호자 전용 구매이력·주문 링크</b>가 자동으로 붙어요.</p>
         </div>
 
         <p class="hosp-hint">이 이름으로 이름·슬로건·배경 색·링크가 저장되고, <b>병원 이름을 바꾸면 그 병원 칸의 판매내역이 따로 불러와집니다</b>(다른 병원 자료가 섞이지 않도록).</p>
@@ -590,6 +609,14 @@
       </div>
       <div id="pairWrap" hidden>
         <div class="pairhead" id="pairHead"></div>
+        <div class="nextrow" id="nextRow">
+          <label for="nextDate">📅 다음 예약일 <span class="opt">(선택)</span></label>
+          <div class="nextin">
+            <input type="date" id="nextDate">
+            <button type="button" class="nextclear" id="nextClear">지우기</button>
+          </div>
+          <p class="hint3">적으면 보호자 링크(구매이력 수첩)의 <b>맨 위 요약 카드</b>에 그대로 표시됩니다.</p>
+        </div>
         <div class="selbar" id="selBar">
           <span class="cnt" id="selCnt">0개 선택</span>
           <span class="sp"></span>
@@ -610,7 +637,7 @@
       <div class="num">4</div>
       <div>
         <h2>재구매 안내 문구 만들기</h2>
-        <span class="hint">선택한 품목과 병원 정보로 카톡에 붙여넣을 문구를 만듭니다. 카톡 400자 제한에 맞춰 자동으로 줄여 드려요.</span>
+        <span class="hint">선택한 품목으로 카톡에 붙여넣을 문구를 만듭니다. 끝에 <b>보호자 전용 구매이력·주문 링크</b>가 자동으로 붙고, 400자에 맞춰 줄여 드려요.</span>
       </div>
     </div>
     <div class="step-body">
@@ -630,7 +657,7 @@
 
       <div class="tip">
         <div class="ic">💡</div>
-        <div><b>팁.</b> 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다. 구매한 지 30일이 지났거나 사료·유산균·영양제·예방약이면 이력에 <b>재구매 시기</b> 배지가 붙어요.</div>
+        <div><b>팁.</b> 문구를 받은 보호자는 링크를 눌러 <b>자기 아이의 구매이력·심장사상충 예방일·다음 예약일</b>을 확인하고, 필요한 품목을 <b>체크해서 바로 주문</b>할 수 있어요. 재구매 안내는 <b>예방약·사료처럼 주기가 있는 품목</b>에 반응이 좋습니다.</div>
       </div>
     </div>
   </section>
@@ -1022,8 +1049,11 @@
 
   /* ---------- 재구매 분류 ---------- */
   var RP_CATS = ['사료','유산균','영양제','예방약'];
+  /* 검사·키트·진단 항목은 재구매 주기 품목이 아니므로 '예방약'으로 분류하지 않는다 */
+  function isTestItem(s){ return /검사|키트|패널|진단|초음파|엑스레이|x-ray|방사선|현미경/i.test(String(s||'')); }
   function rpCategory(rec){
     var s = String(rec.n || '') + ' ' + String(rec.c || '');
+    if(isTestItem(s)) return '';
     if(/사료|키블|화식|습식|건식|로얄캐닌|힐스|오리젠|아카나|퓨리나|이즈칸|웰니스|뉴트리나/i.test(s)) return '사료';
     if(/유산균|프로바이오|엠바이옴|락토|장유산균/.test(s)) return '유산균';
     if(/영양제|비타민|오메가|관절|콘드로이친|글루코사민|칼슘|오메가3/.test(s)) return '영양제';
@@ -1031,10 +1061,12 @@
     return '';
   }
   function isDue(rec){
+    if(isTestItem(rec.n)) return false;
     var d = daysSince(rec.d);
     return d >= 30 || !!rpCategory(rec);
   }
   function dueLabel(rec){
+    if(isTestItem(rec.n)) return '';
     var cat = rpCategory(rec);
     if(cat) return '재구매 시기 · ' + cat;
     if(daysSince(rec.d) >= 30) return '재구매 시기';
@@ -1493,6 +1525,7 @@
     searchList.innerHTML = '';
     pairWrap.hidden = true;
     histList.innerHTML = '';
+    if(nextInput) nextInput.value = '';
     buildPairs();
     renderSearch();
   }
@@ -1548,6 +1581,7 @@
     pairWrap.hidden = false;
     renderPairHead();
     renderHistory();
+    loadNextDate();
     renderSearch();
     pairWrap.scrollIntoView({ behavior:'smooth', block:'start' });
   }
@@ -1589,6 +1623,7 @@
           selected = {};
           renderPairHead();
           renderHistory();
+          loadNextDate();
         }
       });
     });
@@ -1663,6 +1698,46 @@
   $('selAll').addEventListener('click', function(){ setAll('all'); });
   $('selNone').addEventListener('click', function(){ setAll('none'); });
 
+  /* ---------- 다음 예약일 (선택 · 보호자 링크에 표시) ---------- */
+  var P_NEXT   = 'rebuy_next::';
+  var nextInput = $('nextDate');
+
+  function nextKey(){
+    if(!curPair) return '';
+    return P_NEXT + cleanName(curHospital) + '::' + (curPair.g || '') + '::' + (curPair.p || '');
+  }
+  function nextDateISO(){
+    var v = nextInput && nextInput.value ? String(nextInput.value) : '';
+    return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : '';
+  }
+  function loadNextDate(){
+    if(!nextInput) return;
+    nextInput.value = '';
+    var k = nextKey();
+    if(!k) return;
+    var v = lsGet(k);
+    if(v && /^\d{4}-\d{2}-\d{2}$/.test(v)) nextInput.value = v;
+  }
+  function saveNextDate(){
+    var k = nextKey();
+    if(!k) return;
+    var v = nextDateISO();
+    if(v) lsSet(k, v); else lsDel(k);
+    refreshMessageIfOpen();
+  }
+  if(nextInput){
+    nextInput.addEventListener('change', saveNextDate);
+    nextInput.addEventListener('input', saveNextDate);
+  }
+  var nextClear = $('nextClear');
+  if(nextClear){
+    nextClear.addEventListener('click', function(){
+      if(nextInput) nextInput.value = '';
+      saveNextDate();
+      say('다음 예약일을 지웠어요');
+    });
+  }
+
   /* ===================== ⑤ 문구 만들기 ===================== */
   var MAX_CHARS = 400;                    /* 카톡 입력창 기준 상한 */
   var lastMessage = '';
@@ -1681,10 +1756,11 @@
     var note = $('pvNote');
     if(!note) return;
     if($('result').hidden) return;
-    var has = !!urlInfo().kind;
-    var html = has
-      ? '🛒 <b>구매요청 링크가 문구에 들어갔어요.</b> 1단계에서 언제든 바꿀 수 있습니다.'
-      : '링크가 비어 있어 <b>「이 카톡방으로 편하게 말씀해 주세요」</b> 안내로 나갑니다. 1단계에서 링크를 넣으면 바로 버튼이 붙어요.';
+    var hasPair = !!curPair && selList().length > 0;
+    var html = hasPair
+      ? '🛒 <b>보호자 전용 구매이력·주문 링크가 문구 끝에 들어갔어요.</b> 링크를 받은 보호자는 자기 아이 이력만 보고, 체크해서 바로 주문할 수 있습니다.'
+      : '보호자를 고르면 <b>보호자 전용 구매이력·주문 링크</b>가 문구 끝에 자동으로 붙습니다.';
+    if(!urlInfo().kind) html += '<br>1단계에 병원 카톡 주소를 넣으면 보호자 화면에 <b>「카톡방 열기」 버튼</b>까지 생깁니다.';
     if(fit && fit.note) html += '<br>' + fit.note;
     note.innerHTML = html;
   }
@@ -1700,6 +1776,119 @@
     var h = 0;
     for(var i = 0; i < s.length; i++){ h = (h * 31 + s.charCodeAt(i)) | 0; }
     return Math.abs(h);
+  }
+
+  /* ============================================================
+     보호자 전용 링크(order.html) 만들기
+     서버 없이 링크 안에 "그 보호자·아이 1명"의 이력만 담습니다.
+     base64url(bitpack("1|병원|보호자|아이|슬로건|카톡|다음예약|심장사상충|품목;품목"))
+     ============================================================ */
+  var ORDER_BASE = 'https://t01051327575-bit.github.io/petmate-guide/order.html?d=';
+  var ENC_EPOCH = Date.UTC(2000, 0, 1);
+
+  function packStr(s){
+    var bits = [], i, b;
+    for(i = 0; i < s.length; i++){
+      var c = s.charCodeAt(i);
+      if(c < 128){
+        bits.push(0);
+        for(b = 6; b >= 0; b--) bits.push((c >> b) & 1);
+      } else if(c >= 0xAC00 && c <= 0xD7A3){
+        var v = c - 0xAC00;
+        bits.push(1);
+        for(b = 13; b >= 0; b--) bits.push((v >> b) & 1);
+      } else {
+        bits.push(0);
+        for(b = 6; b >= 0; b--) bits.push((63 >> b) & 1);   /* 그 밖의 문자는 '?' */
+      }
+    }
+    while(bits.length % 8) bits.push(0);
+    var bin = '';
+    for(i = 0; i < bits.length; i += 8){
+      var byte = 0;
+      for(b = 0; b < 8; b++) byte = (byte << 1) | bits[i + b];
+      bin += String.fromCharCode(byte);
+    }
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function dCode(iso){
+    var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!m) return '';
+    var t = Date.UTC(+m[1], +m[2] - 1, +m[3]);
+    var n = Math.round((t - ENC_EPOCH) / 86400000);
+    if(!(n >= 0)) return '';
+    var s = n.toString(36);
+    return s.length < 3 ? ('000' + s).slice(-3) : s;
+  }
+
+  /* 품목 용도 코드 (order.html 의 CATS 와 같음) */
+  function purposeCat(raw){
+    var s = String(raw || '');
+    if(isTestItem(s)) return '8';
+    if(/하트가드|넥스가드|심패리카|레볼루션|애드보킷|브라벡토|프론트라인|사상충|구충|예방약|백신/.test(s)) return '1';
+    if(/안약|점안|안연고|결막|눈/.test(s)) return '2';
+    if(/치약|칫솔|덴탈|구강|덴톨|이갈이|껌|벳큐어/.test(s)) return '3';
+    if(/유산균|프로바이오|엠바이옴|락토|장건강|장내/.test(s)) return '4';
+    if(/관절|콘드로|글루코|영양제|비타민|오메가|칼슘/.test(s)) return '5';
+    if(/샴푸|귀|이어|피부|목욕/.test(s)) return '6';
+    if(/사료|화식|습식|건식|키블|처방식|로얄캐닌|힐스|오리젠|아카나/.test(s)) return '7';
+    return '8';
+  }
+
+  /* 링크에 담을 짧은 이름 (괄호 설명만 걷어내고, 크기·용량 표기는 살린다) */
+  function payName(raw, max){
+    var s = cleanProduct(raw);
+    s = stripParens(s, 'all');
+    s = s.replace(/[,;|]/g, ' ').replace(/\s+/g, ' ').trim();
+    if(!s) s = cleanProduct(raw).replace(/[,;|]/g, ' ').replace(/\s+/g, ' ').trim();
+    max = max || 15;
+    if(s.length > max){
+      var cut = s.slice(0, max);
+      var sp = cut.lastIndexOf(' ');
+      if(sp >= 5) cut = cut.slice(0, sp);
+      s = cut.replace(/[\s\-~\/·,]+$/, '');
+    }
+    return s || String(raw || '').slice(0, max);
+  }
+
+  function kakaoCode(){
+    var v = String(orderInput.value || '').trim();
+    if(!v) return '';
+    var m = v.match(/open\.kakao\.com\/o\/([A-Za-z0-9_-]{4,})/i);
+    if(m) return 'o:' + m[1];
+    m = v.match(/pf\.kakao\.com\/([A-Za-z0-9_-]{3,})/i);
+    if(m) return 'p:' + m[1];
+    if(/^https?:\/\//i.test(v) && v.length <= 70) return 'u:' + v;
+    return '';
+  }
+
+  /* 이 보호자·아이의 이력 중 가장 최근 심장사상충·구충 예방 기록 */
+  function latestHeartRec(){
+    if(!curPair) return null;
+    var best = null;
+    curPair.recs.forEach(function(r){
+      if(purposeCat(r.n) !== '1') return;
+      if(!best || r.d > best.d) best = r;
+    });
+    return best;
+  }
+
+  function buildOrderUrl(items, cfg){
+    if(!curPair || !items || !items.length) return '';
+    cfg = cfg || {};
+    var slogan = cfg.noSlogan ? '' : cleanSlogan(slogInput.value);
+    var nd = nextDateISO();
+    var heart = latestHeartRec();
+    var head = [
+      '1', cleanName(curHospital), curPair.g || '', curPair.p || '', slogan, kakaoCode(),
+      nd ? dCode(nd) : '', heart ? dCode(heart.d) : ''
+    ];
+    var max = cfg.payNameMax || 15;
+    var rows = items.map(function(rec){
+      return payName(rec.n, max) + ',' + dCode(rec.d) + ',' + (rec.q || 1) + ',' + purposeCat(rec.n);
+    });
+    return ORDER_BASE + packStr(head.join('|') + '|' + rows.join(';'));
   }
 
   /* ---------- 400자 맞춤: 상품명 축약 도우미 ---------- */
@@ -1738,8 +1927,8 @@
     cfg = cfg || {};
     var hosp = curHospital || '○○동물병원';
     var slogan = cfg.noSlogan ? '' : cleanSlogan(slogInput.value);
-    var g = curPair.g || '';
-    var p = curPair.p || '';
+    var g = curPair ? (curPair.g || '') : '';
+    var p = curPair ? (curPair.p || '') : '';
     var all = selList().reverse();          /* 가장 오래전(급한) 품목부터 */
     var total = all.length;
     var lim = cfg.maxItems || 0;
@@ -1758,6 +1947,10 @@
     L.push(cfg.headShort ? ('안녕하세요 ' + whoLabel + '님 🐾') : ('안녕하세요, ' + whoLabel + '님 🐾'));
     L.push(hosp + '입니다.' + (slogan ? ' (' + slogan + ')' : ''));
     if(!cfg.compact) L.push('');
+
+    /* 보호자 전용 구매이력·주문 링크 (선택한 품목 그대로 담는다) */
+    var orderUrl = cfg.noOrder ? '' : buildOrderUrl(items, cfg);
+    var u = orderUrl ? { kind:'order', value:orderUrl } : urlInfo();
 
     var sameDay = items.length > 0;
     var d0 = items.length ? items[0].d : '';
@@ -1781,20 +1974,37 @@
     if(hidden > 0) L.push('• 외 ' + hidden + '건');
     if(!cfg.compact) L.push('');
 
+    if(u.kind === 'order'){
+      if(!cfg.noLead){
+        L.push(cfg.leadShort
+          ? '아래 링크에서 이력·용도를 확인하고 필요한 것만 체크해 주문하실 수 있어요.'
+          : '아래 링크에서 이전 구매이력과 용도를 확인하고, 필요한 품목을 체크해 바로 주문하실 수 있어요.');
+      }
+      if(cfg.cheer !== 'none'){
+        var warmWho = p || g || '아이';
+        if(cfg.cheer === 'short'){
+          L.push(warmWho + '와 늘 건강하길 바라요 🍀');
+        } else {
+          L.push(WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length](warmWho));
+        }
+      }
+      return L.join('\n') + (cfg.compact ? '\n' : '\n\n') +
+        '📋 ' + (p || '아이') + ' 구매이력 · 재구매 주문\n' + u.value;
+    }
+
+    /* --- 링크를 만들 수 없을 때(이력 없음 등): 기존 방식 --- */
     if(!cfg.noLead) L.push('요즘 슬슬 떨어져 갈 때가 되었어요.');
     if(!cfg.noPrep) L.push('같은 제품으로 미리 준비해 두시면 마음이 놓이실 거예요.');
 
     if(cfg.cheer !== 'none'){
-      var warmWho = p || g || '아이';
+      var warmWho2 = p || g || '아이';
       if(cfg.cheer === 'short'){
-        L.push(warmWho + '와 늘 건강하길 바라요 🍀');
+        L.push(warmWho2 + '와 늘 건강하길 바라요 🍀');
       } else {
-        var warm = WARM[hashStr(warmWho + items.map(function(r){ return r.n; }).join(',')) % WARM.length];
-        L.push(warm(warmWho));
+        L.push(WARM[hashStr(warmWho2 + items.map(function(r){ return r.n; }).join(',')) % WARM.length](warmWho2));
       }
     }
 
-    var u = urlInfo();
     if(u.kind === 'url'){
       L.push('필요하시면 아래로 편하게 요청해 주세요 😊');
     } else if(u.kind === 'text'){
@@ -1812,24 +2022,24 @@
     return body;
   }
 
-  /* ① 이름 축약 → ② 품목 수 줄이기(외 N건) → ③ 맺음말 간결화 순서로 조금씩 강하게 */
+  /* ① 이름 축약 → ② 품목 수 줄이기(링크도 같이 짧아짐) → ③ 인사·안내문 간결화 순서로 조금씩 강하게 */
   var FIT_STEPS = [
     {},
     { paren:'tail' },
-    { paren:'tail', nameMax:28 },
+    { paren:'tail', nameMax:26 },
     { paren:'tail', nameMax:22 },
-    { paren:'tail', nameMax:18 },
-    { paren:'tail', nameMax:18, maxItems:3 },
-    { paren:'tail', nameMax:14, maxItems:3 },
-    { paren:'tail', nameMax:14, maxItems:2 },
-    { paren:'tail', nameMax:14, maxItems:2, cheer:'short' },
-    { paren:'all', nameMax:12, maxItems:3, cheer:'short', noDate:true },
-    { paren:'all', nameMax:12, maxItems:2, cheer:'short', noDate:true, compact:true },
-    { paren:'all', nameMax:10, maxItems:2, cheer:'none', noDate:true, compact:true },
-    { paren:'all', nameMax:10, maxItems:2, cheer:'none', noDate:true, compact:true, noLead:true },
-    { paren:'all', nameMax:8, maxItems:2, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true },
-    { paren:'all', nameMax:8, maxItems:1, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true, noPrep:true },
-    { paren:'all', nameMax:6, maxItems:1, cheer:'none', noDate:true, compact:true, noLead:true, noSlogan:true, noPrep:true, headShort:true }
+    { paren:'tail', nameMax:20, cheer:'short' },
+    { paren:'tail', nameMax:18, cheer:'short' },
+    { paren:'tail', nameMax:18, maxItems:4, cheer:'short' },
+    { paren:'tail', nameMax:16, maxItems:4, cheer:'short', compact:true },
+    { paren:'all',  nameMax:16, maxItems:4, cheer:'short', compact:true },
+    { paren:'all',  nameMax:14, maxItems:3, cheer:'short', compact:true },
+    { paren:'all',  nameMax:14, maxItems:3, cheer:'none', compact:true, leadShort:true },
+    { paren:'all',  nameMax:12, maxItems:3, cheer:'none', compact:true, noLead:true },
+    { paren:'all',  nameMax:12, maxItems:2, cheer:'none', compact:true, noLead:true },
+    { paren:'all',  nameMax:12, maxItems:2, cheer:'none', compact:true, noLead:true, noSlogan:true },
+    { paren:'all',  nameMax:10, maxItems:2, cheer:'none', compact:true, noLead:true, noSlogan:true, noDate:true, headShort:true },
+    { paren:'all',  nameMax:10, maxItems:1, cheer:'none', compact:true, noLead:true, noSlogan:true, noDate:true, headShort:true, payNameMax:12 }
   ];
 
   function describeFit(st){
@@ -1841,7 +2051,8 @@
     if(st.cheer === 'none') b.push('맺음 인사 생략');
     if(st.noDate) b.push('구매일 표기 생략');
     if(st.compact) b.push('줄바꿈 압축');
-    if(st.noLead || st.noPrep) b.push('안내문 간결화');
+    if(st.leadShort) b.push('안내문 간결화');
+    if(st.noLead || st.noPrep) b.push('안내문 생략');
     if(st.noSlogan) b.push('슬로건 생략');
     return b.join(' · ');
   }

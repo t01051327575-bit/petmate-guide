@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🐾 구매이력 · 재구매 수첩</title>
+<meta name="description" content="병원에서 받은 링크로 우리 아이의 이전 구매이력과 심장사상충 예방일·다음 예약일을 확인하고, 필요한 품목을 체크해 바로 주문할 수 있는 보호자 전용 페이지입니다.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f9d8f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="🐾 우리 아이 케어 &amp; 재구매 수첩">
+<meta property="og:description" content="이전 구매이력 · 심장사상충 예방일 · 다음 예약일을 한눈에. 필요한 품목은 체크해서 바로 주문하세요.">
+<style>
+  :root{
+    --ink:#1b2a2f;
+    --ink-soft:#4b6068;
+    --muted:#6b8087;
+    --line:#e2ebee;
+    --mint:#0f9d8f;
+    --mint-d:#0a7a6f;
+    --mint-l:#e6f7f4;
+    --mint-ll:#f2fbf9;
+    --pink:#e2566f;
+    --pink-l:#fdeef1;
+    --amber:#b4711a;
+    --amber-l:#fff5e6;
+    --card:#ffffff;
+    --shadow:0 1px 2px rgba(16,45,52,.05), 0 8px 24px rgba(16,45,52,.07);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  [hidden]{display:none!important}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 520px at 8% -10%, #d9f4ee 0%, rgba(217,244,238,0) 62%),
+      radial-gradient(900px 460px at 100% 0%, #fff1d8 0%, rgba(255,241,216,0) 55%),
+      #f6faf9;
+    background-attachment:fixed;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:18px 15px calc(120px + env(safe-area-inset-bottom, 0px))}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;border-radius:22px;
+    padding:22px 20px 20px;
+    background:linear-gradient(150deg,#0f9d8f 0%,#12b3a2 52%,#3fc9b0 100%);
+    box-shadow:0 10px 30px rgba(15,157,143,.24);
+  }
+  .hero::after{content:"";position:absolute;right:-46px;top:-58px;width:190px;height:190px;background:rgba(255,255,255,.13);border-radius:50%}
+  .hero::before{content:"";position:absolute;right:34px;bottom:-72px;width:120px;height:120px;background:rgba(255,255,255,.10);border-radius:50%}
+  .hosp-row{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:12px}
+  .hosp{
+    display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);
+    border:1px solid rgba(255,255,255,.34);color:#fff;font-size:12.5px;font-weight:800;
+    letter-spacing:.1px;padding:5px 11px;border-radius:999px;
+  }
+  .slogan{font-size:12px;color:rgba(255,255,255,.86);font-weight:600;letter-spacing:.1px}
+  .hero h1{
+    position:relative;z-index:1;margin:0 0 7px;font-size:clamp(20px,5.3vw,26px);
+    line-height:1.36;letter-spacing:-.4px;font-weight:800;
+  }
+  .hero h1 .who{font-weight:700;opacity:.95}
+  .hero .sub{position:relative;z-index:1;margin:0;font-size:13px;color:rgba(255,255,255,.92)}
+  .hero .sub b{font-weight:700;border-bottom:2px solid rgba(255,255,255,.45);padding-bottom:1px}
+
+  /* ---------- 요약 카드 ---------- */
+  .sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .sum.one{grid-template-columns:1fr}
+  .sc{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:14px 15px;box-shadow:var(--shadow);
+  }
+  .sc .lab{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:-.1px}
+  .sc .val{display:flex;align-items:baseline;gap:6px;margin-top:6px}
+  .sc .val b{font-size:clamp(22px,6.2vw,27px);font-weight:800;letter-spacing:-.6px;line-height:1.1}
+  .sc .val .ago{font-size:12.5px;font-weight:800;color:var(--mint-d);background:var(--mint-l);border-radius:999px;padding:2px 8px}
+  .sc .meta{margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+  .sc.heart .lab{color:var(--pink)}
+  .sc.heart .val .ago{color:var(--pink);background:var(--pink-l)}
+  .sc.next .lab{color:var(--amber)}
+  .sc.next .val .ago{color:var(--amber);background:var(--amber-l)}
+  .sc.none .val b{font-size:16px;color:var(--ink-soft);letter-spacing:-.2px}
+  .sc.none .val .ago{display:none}
+
+  /* ---------- 목록 ---------- */
+  .listhead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:22px 2px 10px}
+  .listhead h2{margin:0;font-size:16.5px;letter-spacing:-.3px;font-weight:800}
+  .listhead .hint{font-size:12px;color:var(--muted);font-weight:600}
+  .listhead .cnt{font-size:12px;font-weight:800;color:var(--mint-d);background:var(--mint-l);border-radius:999px;padding:3px 9px}
+
+  .item{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:12px 12px 10px;box-shadow:var(--shadow);
+    margin-bottom:9px;transition:border-color .15s, background .15s, transform .1s;
+  }
+  .item:active{transform:scale(.997)}
+  .item.on{border-color:#8fdccf;background:linear-gradient(180deg,#ffffff,#f7fdfb)}
+  .ilabel{display:flex;align-items:flex-start;gap:11px;position:relative;cursor:pointer}
+  .ilabel input{position:absolute;opacity:0;width:0;height:0}
+  .pthumb{
+    position:relative;flex:0 0 auto;width:58px;height:58px;border-radius:13px;
+    background:#f4f8f8;border:1px solid var(--line);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .pthumb .pfb{position:absolute;font-size:22px;line-height:1;opacity:.55}
+  .tick{
+    position:absolute;top:0;right:0;width:24px;height:24px;border-radius:8px;
+    border:2px solid #c9dade;background:#fff;color:transparent;font-size:13px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;line-height:1;transition:all .15s;
+  }
+  .ilabel input:checked ~ .tick{background:var(--mint);border-color:var(--mint);color:#fff}
+  .ilabel input:focus-visible ~ .tick{box-shadow:0 0 0 3px rgba(15,157,143,.22)}
+  .imain{flex:1 1 auto;min-width:0;display:block;padding-right:28px}
+  .idate{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .idate b{font-size:15px;font-weight:800;letter-spacing:-.2px;font-variant-numeric:tabular-nums}
+  .idate .ago{font-size:11.5px;font-weight:800;color:var(--mint-d);background:var(--mint-l);border-radius:999px;padding:2px 7px}
+  .iname{display:block;margin:4px 0 0;font-size:14.5px;font-weight:700;line-height:1.42;letter-spacing:-.2px}
+  .iuse{display:flex;align-items:flex-start;gap:5px;margin:4px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  .iuse .em{flex:0 0 auto;font-size:12.5px;line-height:1.45}
+  .ifoot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-left:69px}
+  .photo{font-size:11.5px;font-weight:800;color:var(--mint-d);text-decoration:none;white-space:nowrap;padding:3px 0}
+  .photo:active{opacity:.6}
+  .stepper{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;width:max-content}
+  .stepper button{
+    width:32px;height:30px;border:0;background:#fff;color:var(--mint-d);
+    font-size:17px;font-weight:800;line-height:1;cursor:pointer;
+  }
+  .stepper button:disabled{color:#c6d3d7;cursor:default}
+  .stepper .q{min-width:34px;text-align:center;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums}
+  .stepper .q em{font-style:normal;font-size:11px;color:var(--muted);font-weight:700;margin-left:1px}
+
+  /* ---------- 주문서 ---------- */
+  .order{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:17px 16px;margin-top:16px;
+  }
+  .order h2{margin:0;font-size:16.5px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:7px}
+  .order .sub{margin:5px 0 0;font-size:12.5px;color:var(--muted)}
+  .olist{list-style:none;margin:12px 0 0;padding:0}
+  .olist li{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;
+  }
+  .olist li:last-child{border-bottom:0}
+  .olist .nm{font-weight:700;letter-spacing:-.2px;min-width:0}
+  .olist .qt{flex:0 0 auto;font-size:12.5px;font-weight:800;color:var(--mint-d);background:var(--mint-l);border-radius:8px;padding:2px 8px}
+  .oempty{margin:12px 0 0;padding:14px;border-radius:12px;background:var(--mint-ll);border:1px dashed #bfe6de;font-size:13px;color:var(--ink-soft);text-align:center}
+  .send{
+    display:flex;align-items:center;justify-content:center;gap:7px;width:100%;
+    margin-top:14px;padding:15px 16px;border:0;border-radius:14px;
+    background:linear-gradient(135deg,#0f9d8f,#12b3a2);color:#fff;font-size:16px;font-weight:800;
+    letter-spacing:-.3px;cursor:pointer;box-shadow:0 8px 18px rgba(15,157,143,.28);
+  }
+  .send:disabled{background:#cfdcdf;color:#fff;box-shadow:none;cursor:default}
+  .send.done{background:linear-gradient(135deg,#0a7a6f,#0f9d8f)}
+  .ohint{margin:9px 2px 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+  .kakaobtn{
+    display:none;align-items:center;justify-content:center;gap:7px;width:100%;
+    margin-top:9px;padding:13px 16px;border-radius:14px;border:1px solid #f2d24b;
+    background:#fee500;color:#3b1f1f;font-size:15px;font-weight:800;text-decoration:none;
+  }
+  .kakaobtn.on{display:flex}
+
+  /* ---------- 안내 ---------- */
+  .note{
+    display:flex;gap:9px;background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:13px 14px;margin-top:14px;font-size:12.5px;color:var(--ink-soft);line-height:1.55;
+  }
+  .note .ic{flex:0 0 auto;font-size:15px;line-height:1.3}
+  .note b{color:var(--ink)}
+
+  .errbox{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 20px;margin-top:14px;text-align:center;
+  }
+  .errbox .big{font-size:38px;line-height:1}
+  .errbox h2{margin:12px 0 6px;font-size:18px;font-weight:800;letter-spacing:-.3px}
+  .errbox p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.6}
+
+  footer{margin-top:22px;text-align:center;font-size:11.5px;color:#8a9ea4;line-height:1.7}
+  footer b{color:var(--ink-soft)}
+
+  /* ---------- sticky 주문 바 ---------- */
+  .sticky{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    transform:translateY(120%);transition:transform .22s ease;
+  }
+  .sticky.on{transform:translateY(0)}
+  .sticky .in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:10px}
+  .sticky .cnt{flex:1 1 auto;font-size:13px;font-weight:800;color:var(--ink)}
+  .sticky .cnt span{color:var(--mint-d)}
+  .sticky button{
+    flex:0 0 auto;padding:12px 18px;border:0;border-radius:12px;
+    background:linear-gradient(135deg,#0f9d8f,#12b3a2);color:#fff;font-size:14.5px;font-weight:800;
+    cursor:pointer;box-shadow:0 6px 14px rgba(15,157,143,.28);
+  }
+
+  /* ---------- 토스트 / 시트 ---------- */
+  #toast{
+    position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom, 0px));
+    transform:translate(-50%,14px);z-index:60;
+    max-width:min(92vw,520px);padding:12px 16px;border-radius:13px;
+    background:rgba(20,42,48,.94);color:#fff;font-size:13.5px;font-weight:700;line-height:1.45;
+    text-align:center;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;
+    box-shadow:0 10px 26px rgba(10,30,36,.3);
+  }
+  #toast.on{opacity:1;transform:translate(-50%,0)}
+
+  .sheet{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:center}
+  .sheet[hidden]{display:none}
+  .sheet .bd{position:absolute;inset:0;background:rgba(12,32,38,.42)}
+  .sheet .pn{
+    position:relative;width:100%;max-width:560px;background:#fff;
+    border-radius:20px 20px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+    box-shadow:0 -8px 30px rgba(10,30,36,.18);animation:up .22s ease;
+  }
+  @keyframes up{from{transform:translateY(18px);opacity:.6}to{transform:translateY(0);opacity:1}}
+  .sheet h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.3px}
+  .sheet p{margin:6px 0 0;font-size:13px;color:var(--ink-soft);line-height:1.55}
+  .sheet .ct{display:flex;gap:8px;margin-top:14px}
+  .sheet .ct button, .sheet .ct a{
+    flex:1 1 0;text-align:center;padding:13px 12px;border-radius:13px;font-size:14.5px;font-weight:800;
+    text-decoration:none;border:0;cursor:pointer;
+  }
+  .sheet .go{background:#fee500;color:#3b1f1f}
+  .sheet .close{background:#eef4f5;color:var(--ink-soft)}
+
+  @media (max-width:380px){
+    .sum{grid-template-columns:1fr}
+    .sc .val b{font-size:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero" id="hero">
+    <div class="hosp-row">
+      <span class="hosp" id="hospName">동물병원</span>
+      <span class="slogan" id="slogan"></span>
+    </div>
+    <h1 id="heroTitle"><span class="who" id="whoLine">보호자님</span><br><span id="petLine">아이의 케어 &amp; 재구매 수첩</span></h1>
+    <p class="sub" id="heroSub">이전 구매이력과 예방 기록을 한눈에 확인하세요</p>
+  </header>
+
+  <div id="errBox" class="errbox" hidden>
+    <div class="big">🐾</div>
+    <h2>링크를 확인해 주세요</h2>
+    <p id="errMsg">병원에서 받은 링크로 다시 열어 주시면<br>구매이력을 바로 확인하실 수 있어요.</p>
+  </div>
+
+  <div id="body" hidden>
+    <section class="sum" id="sum">
+      <div class="sc heart" id="heartCard">
+        <div class="lab"><span>💓</span> 최근 심장사상충 예방</div>
+        <div class="val"><b id="heartDate">-</b><span class="ago" id="heartAgo"></span></div>
+        <p class="meta" id="heartMeta"></p>
+      </div>
+      <div class="sc next" id="nextCard" hidden>
+        <div class="lab"><span>📅</span> 다음 예약일</div>
+        <div class="val"><b id="nextDate">-</b><span class="ago" id="nextAgo"></span></div>
+        <p class="meta" id="nextMeta"></p>
+      </div>
+    </section>
+
+    <div class="listhead">
+      <h2>이전 구매이력 <span class="cnt" id="histCnt">0건</span></h2>
+      <span class="hint">체크하면 주문서에 담겨요</span>
+    </div>
+    <div id="items"></div>
+    <div id="emptyBox" class="oempty" hidden>이전 구매이력이 없어요. 궁금한 점은 병원으로 문의해 주세요.</div>
+
+    <section class="order" id="orderCard">
+      <h2><span>🧺</span> 주문서</h2>
+      <p class="sub" id="orderSub">재구매할 품목을 체크하면 여기에 담깁니다.</p>
+      <ul class="olist" id="olist" hidden></ul>
+      <p class="oempty" id="oempty">아직 선택한 품목이 없어요.<br>위 구매이력에서 필요한 품목을 체크해 주세요.</p>
+      <button type="button" class="send" id="sendBtn" disabled>💬 카톡으로 바로 주문 보내기</button>
+      <a class="kakaobtn" id="kakaoBtn" href="#" target="_blank" rel="noopener">카카오톡 방 열기</a>
+      <p class="ohint" id="orderHint">버튼을 누르면 주문 내용이 복사돼요.</p>
+    </section>
+
+    <div class="note">
+      <span class="ic">🔒</span>
+      <span>이 링크에는 <b id="privacyWho">우리 아이</b>의 구매이력만 담겨 있어요. 다른 보호자의 정보는 포함되지 않습니다.<br>카톡에 저장해 두면 언제든 다시 열어 확인하실 수 있어요.</span>
+    </div>
+
+    <div class="note">
+      <span class="ic">📷</span>
+      <span>품목 사진은 <b>이해를 돕기 위한 예시 이미지</b>이고, 실제 포장·함량은 다를 수 있어요. 정확한 제품 사진은 각 품목의 <b>「🔍 사진 보기」</b>를 눌러 확인해 주세요.</span>
+    </div>
+
+    <div class="note">
+      <span class="ic">💡</span>
+      <span>심장사상충·구충 예방약은 보통 한 달 간격으로 챙깁니다. <b>정확한 다음 복용일은 병원에 문의</b>해 주세요.</span>
+    </div>
+  </div>
+
+  <footer>
+    <b id="footHosp">동물병원</b><br>
+    보호자 전용 페이지입니다 · 링크를 받은 분만 열람할 수 있어요.
+  </footer>
+</div>
+
+<div class="sticky" id="sticky">
+  <div class="in">
+    <div class="cnt"><span id="stickyCnt">0</span>개 선택 · 주문서 보기</div>
+    <button type="button" id="stickyGo">주문서 보기</button>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="bd" id="sheetBd"></div>
+  <div class="pn" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h3 id="sheetTitle">주문 내용을 복사했어요</h3>
+    <p id="sheetMsg">카카오톡 방에 붙여넣기 해 주세요.</p>
+    <div class="ct">
+      <a class="go" id="sheetGo" href="#" target="_blank" rel="noopener">카톡방 열기</a>
+      <button type="button" class="close" id="sheetClose">닫기</button>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <div class="wrap"><div class="errbox"><h2>자바스크립트가 꺼져 있어요</h2><p>브라우저 설정에서 자바스크립트를 켜고 다시 열어 주세요.</p></div></div>
+</noscript>
+
+<script>
+(function(){
+  'use strict';
+
+  function $(id){ return document.getElementById(id); }
+  function pad2(n){ return n < 10 ? '0' + n : '' + n; }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* ============================================================
+     데이터 형식  (서버 없이 링크 안에만 담깁니다)
+     base64url( bitpack( "1|병원|보호자|아이|슬로건|카톡|다음예약|심장사상충|품목;품목..." ) )
+     품목 = 이름,구매일,수량,용도코드
+     구매일 = 2000-01-01 부터 일수(36진수)
+     ============================================================ */
+  var EPOCH = Date.UTC(2000, 0, 1);
+
+  var CATS = {
+    '1': { em:'💊', txt:'심장사상충·내외부 기생충 예방약' },
+    '2': { em:'👁️', txt:'눈 염증·소염 안약' },
+    '3': { em:'🦷', txt:'구강·치아 관리' },
+    '4': { em:'🌿', txt:'장 건강·면역 유산균' },
+    '5': { em:'🦴', txt:'관절·연골 영양제' },
+    '6': { em:'🧴', txt:'피부·귀 관리' },
+    '7': { em:'🍽️', txt:'맞춤 처방·주식 사료' },
+    '8': { em:'🏥', txt:'검사·처방 등 병원 관리 물품' }
+  };
+
+  /* 이름만 보고 용도를 추정 (생성기가 코드를 못 넣었을 때의 대비책) */
+  function inferCat(name){
+    var s = String(name || '');
+    if(/검사|키트|패널|진단/.test(s)) return '8';
+    if(/하트가드|넥스가드|심패리카|레볼루션|애드보킷|브라벡토|프론트라인|사상충|구충|예방약|백신/.test(s)) return '1';
+    if(/안약|점안|안연고|결막|눈/.test(s)) return '2';
+    if(/치약|칫솔|덴탈|구강|덴톨|이갈이/.test(s)) return '3';
+    if(/유산균|프로바이오|엠바이옴|락토|장건강|장내/.test(s)) return '4';
+    if(/관절|콘드로|글루코|영양제|비타민|오메가|칼슘/.test(s)) return '5';
+    if(/샴푸|귀|이어|피부|목욕/.test(s)) return '6';
+    if(/사료|화식|습식|건식|키블|처방식|로얄캐닌|힐스|오리젠|아카나/.test(s)) return '7';
+    return '8';
+  }
+
+  /* ---------- 제품 썸네일 (assets/ 로컬 이미지) ---------- */
+  var IMG = {
+    heartworm:  'assets/prod-heartworm.jpg',
+    food:       'assets/prod-food.jpg',
+    supplement: 'assets/prod-supplement.jpg',
+    joint:      'assets/prod-joint.jpg',
+    eye:        'assets/prod-eye.jpg',
+    ear:        'assets/prod-ear.jpg',
+    dental:     'assets/prod-dental.jpg',
+    care:       'assets/prod-care.jpg'
+  };
+  function imgKey(name, cat){
+    var s = String(name || '');
+    if(/하트가드|넥스가드|심패리카|레볼루션|애드보킷|브라벡토|프론트라인|사상충|구충|예방약|백신/.test(s)) return 'heartworm';
+    if(/안약|점안|안연고|결막/.test(s)) return 'eye';
+    if(/치약|칫솔|덴탈|구강|덴톨|이갈이|껌/.test(s)) return 'dental';
+    if(/유산균|프로바이오|엠바이옴|락토|장건강|장내/.test(s)) return 'supplement';
+    if(/관절|콘드로|글루코|영양제|비타민|오메가|칼슘/.test(s)) return 'joint';
+    if(/사료|화식|습식|건식|키블|처방식|로얄캐닌|힐스|오리젠|아카나/.test(s)) return 'food';
+    if(/귀|이어|샴푸|피부|목욕/.test(s)) return 'ear';
+    var byCat = { '1':'heartworm', '2':'eye', '3':'dental', '4':'supplement', '5':'joint', '6':'ear', '7':'food', '8':'care' };
+    return byCat[String(cat || '')] || 'care';
+  }
+  function imgFor(it){ return IMG[imgKey(it.name, it.cat)]; }
+  function photoUrl(name){
+    return 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' +
+      encodeURIComponent(String(name || '') + ' 동물병원');
+  }
+
+  /* ---------- base64url · 비트 패킹 ---------- */
+  function b64ToBytes(str){
+    var s = String(str || '').replace(/-/g, '+').replace(/_/g, '/').replace(/\s+/g, '');
+    while(s.length % 4) s += '=';
+    var bin = atob(s);
+    var out = new Uint8Array(bin.length);
+    for(var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function unpackStr(bytes){
+    var bits = [];
+    for(var i = 0; i < bytes.length; i++){
+      for(var b = 7; b >= 0; b--) bits.push((bytes[i] >> b) & 1);
+    }
+    var p = 0, out = '';
+    function bit(){ return p < bits.length ? bits[p++] : null; }
+    while(p < bits.length){
+      var t = bit();
+      if(t === null) break;
+      if(t === 0){
+        var v = 0, ok = true;
+        for(var k = 0; k < 7; k++){
+          var x = bit();
+          if(x === null){ ok = false; break; }
+          v = (v << 1) | x;
+        }
+        if(!ok) break;
+        out += String.fromCharCode(v);
+      } else {
+        var v2 = 0, ok2 = true;
+        for(var k2 = 0; k2 < 14; k2++){
+          var y = bit();
+          if(y === null){ ok2 = false; break; }
+          v2 = (v2 << 1) | y;
+        }
+        if(!ok2) break;
+        out += String.fromCharCode(0xAC00 + v2);
+      }
+    }
+    return out.replace(/\u0000+$/, '');
+  }
+
+  /* ---------- 날짜 ---------- */
+  function dIso(code){
+    if(!code) return '';
+    var n = parseInt(code, 36);
+    if(isNaN(n)) return '';
+    var d = new Date(EPOCH + n * 86400000);
+    return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+  }
+  function isoToDate(iso){
+    var p = String(iso || '').split('-');
+    if(p.length < 3) return null;
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function today0(){
+    var n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+  }
+  function daysSince(iso){
+    var d = isoToDate(iso);
+    if(!d) return null;
+    return Math.round((today0() - d) / 86400000);
+  }
+  function daysText(n){
+    if(n == null) return '';
+    if(n === 0) return '오늘';
+    if(n > 0) return n + '일 전';
+    return Math.abs(n) + '일 후';
+  }
+  function mdOf(iso){
+    var d = isoToDate(iso);
+    return d ? (d.getMonth() + 1) + '/' + d.getDate() : '';
+  }
+  var WD = ['일','월','화','수','목','금','토'];
+  function mdWd(iso){
+    var d = isoToDate(iso);
+    return d ? ((d.getMonth() + 1) + '/' + d.getDate() + ' (' + WD[d.getDay()] + ')') : '';
+  }
+
+  /* ---------- 링크 해석 ---------- */
+  function getParam(name){
+    var q = String(window.location.search || '').replace(/^\?/, '');
+    if(!q) return '';
+    var pairs = q.split('&');
+    for(var i = 0; i < pairs.length; i++){
+      var eq = pairs[i].indexOf('=');
+      var k = eq < 0 ? pairs[i] : pairs[i].slice(0, eq);
+      if(k !== name) continue;
+      var v = eq < 0 ? '' : pairs[i].slice(eq + 1);
+      v = v.replace(/\+/g, ' ');
+      try { return decodeURIComponent(v); } catch(e){ return v; }
+    }
+    return '';
+  }
+
+  function parsePayload(raw){
+    if(!raw) return null;
+    var text = '';
+    try { text = unpackStr(b64ToBytes(raw)); } catch(e){ return null; }
+    if(!text) return null;
+    var f = text.split('|');
+    if(f.length < 4) return null;
+    var data = {
+      ver: f[0] || '1',
+      hosp: f[1] || '',
+      guardian: f[2] || '',
+      pet: f[3] || '',
+      slogan: f[4] || '',
+      kakao: f[5] || '',
+      next: dIso(f[6] || ''),
+      heart: dIso(f[7] || ''),
+      items: []
+    };
+    var its = (f[8] || '').split(';');
+    for(var i = 0; i < its.length; i++){
+      var row = its[i];
+      if(!row) continue;
+      var c = row.split(',');
+      var name = String(c[0] || '').trim();
+      if(!name) continue;
+      var date = dIso(c[1] || '');
+      var qty = parseInt(c[2], 10);
+      var cat = String(c[3] || '').trim();
+      if(!(qty > 0)) qty = 1;
+      if(!CATS[cat]) cat = inferCat(name);
+      data.items.push({ name:name, date:date, qty:qty, cat:cat });
+    }
+    data.items.sort(function(a, b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    return data;
+  }
+
+  function kakaoUrl(code){
+    var v = String(code || '');
+    if(!v) return '';
+    if(v.indexOf('o:') === 0) return 'https://open.kakao.com/o/' + v.slice(2);
+    if(v.indexOf('p:') === 0) return 'https://pf.kakao.com/' + v.slice(2);
+    if(v.indexOf('u:') === 0) return v.slice(2);
+    if(/^https?:\/\//i.test(v)) return v;
+    if(/^[A-Za-z0-9_-]{5,}$/.test(v)) return 'https://open.kakao.com/o/' + v;
+    return '';
+  }
+
+  /* ============================================================
+     상태
+     ============================================================ */
+  var DATA = null;
+  var SEL = {};              /* index -> true */
+  var QTY = {};              /* index -> qty  */
+  var KAKAO = '';
+
+  function todayLine(){
+    var d = new Date();
+    return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+
+  function render(){
+    var d = DATA;
+    var hosp = d.hosp || '동물병원';
+    $('hospName').textContent = '🏥 ' + hosp;
+    $('slogan').textContent = d.slogan ? d.slogan : '';
+    $('footHosp').textContent = hosp;
+    document.title = '🐾 ' + (d.pet ? d.pet + ' 아이' : '우리 아이') + ' 구매이력 · 재구매 수첩';
+
+    var who = d.guardian ? (d.guardian + ' 보호자님') : '보호자님';
+    $('whoLine').textContent = who;
+    $('petLine').textContent = (d.pet ? (d.pet + ' 아이의 ') : '아이의 ') + '케어 & 재구매 수첩';
+    var subBits = [];
+    if(d.guardian) subBits.push(d.guardian + ' 보호자님');
+    if(d.pet) subBits.push(d.pet + ' 아이');
+    $('heroSub').textContent = subBits.length ? subBits.join(' · ') : '이전 구매이력과 예방 기록을 한눈에 확인하세요';
+    $('privacyWho').textContent = (d.guardian || '보호자') + ' · ' + (d.pet || '아이');
+
+    /* --- 요약: 심장사상충 --- */
+    var hd = d.heart;
+    if(!hd){
+      var best = null;
+      d.items.forEach(function(it){
+        if(it.cat !== '1') return;
+        if(!best || it.date > best.date) best = it;
+      });
+      if(best) hd = best.date;
+    }
+    if(hd){
+      var hdDays = daysSince(hd);
+      $('heartCard').className = 'sc heart';
+      $('heartDate').textContent = mdOf(hd);
+      $('heartAgo').textContent = daysText(hdDays);
+      $('heartMeta').textContent = hd + ' 구매' + (hdDays != null ? ' · ' + hdDays + '일 지났어요' : '');
+    } else {
+      $('heartCard').className = 'sc heart none';
+      $('heartDate').textContent = '기록이 없어요';
+      $('heartAgo').textContent = '';
+      $('heartMeta').textContent = '이번에 받은 이력에는 심장사상충 예방 기록이 없어요. 병원에 문의해 주세요.';
+    }
+
+    /* --- 요약: 다음 예약일 --- */
+    if(d.next){
+      var nd = daysSince(d.next);
+      $('nextCard').hidden = false;
+      $('nextDate').textContent = mdWd(d.next);
+      $('nextAgo').textContent = nd == null ? '' : (nd === 0 ? '오늘' : (nd > 0 ? Math.abs(nd) + '일 지남' : Math.abs(nd) + '일 후'));
+      $('nextMeta').textContent = d.next + ' 예약';
+      $('sum').className = 'sum';
+    } else {
+      $('nextCard').hidden = true;
+      $('sum').className = 'sum one';
+    }
+
+    /* --- 구매이력 --- */
+    $('histCnt').textContent = d.items.length + '건';
+    var box = $('items');
+    box.innerHTML = '';
+    if(!d.items.length){
+      $('emptyBox').hidden = false;
+    } else {
+      $('emptyBox').hidden = true;
+      d.items.forEach(function(it, i){
+        var days = daysSince(it.date);
+        var cat = CATS[it.cat] || CATS['8'];
+        var qty = QTY[i] || it.qty || 1;
+        var el = document.createElement('div');
+        el.className = 'item';
+        el.setAttribute('data-i', String(i));
+        el.innerHTML =
+          '<label class="ilabel">' +
+            '<input type="checkbox" data-i="' + i + '">' +
+            '<span class="pthumb"><img src="' + imgFor(it) + '" alt="" loading="lazy" onerror="this.remove()"><span class="pfb">' + cat.em + '</span></span>' +
+            '<span class="imain">' +
+              '<span class="idate"><b>' + esc(it.date || '날짜 미상') + '</b>' +
+                (days != null ? '<span class="ago">' + esc(daysText(days)) + '</span>' : '') +
+              '</span>' +
+              '<span class="iname">' + esc(it.name) + '</span>' +
+              '<span class="iuse"><span class="em">' + cat.em + '</span><span>' + esc(cat.txt) + '</span></span>' +
+            '</span>' +
+            '<span class="tick">✓</span>' +
+          '</label>' +
+          '<div class="ifoot">' +
+            '<div class="stepper">' +
+              '<button type="button" class="minus" aria-label="수량 줄이기"' + (qty <= 1 ? ' disabled' : '') + '>−</button>' +
+              '<span class="q">' + qty + '<em>개</em></span>' +
+              '<button type="button" class="plus" aria-label="수량 늘리기">+</button>' +
+            '</div>' +
+            '<a class="photo" href="' + photoUrl(it.name) + '" target="_blank" rel="noopener">🔍 사진 보기</a>' +
+          '</div>';
+        box.appendChild(el);
+      });
+      bindItems();
+    }
+    renderOrder();
+  }
+
+  function bindItems(){
+    var rows = $('items').querySelectorAll('.item');
+    Array.prototype.forEach.call(rows, function(row){
+      var i = parseInt(row.getAttribute('data-i'), 10);
+      var cb = row.querySelector('input[type=checkbox]');
+      cb.addEventListener('change', function(){
+        if(cb.checked){ SEL[i] = true; if(!QTY[i]) QTY[i] = DATA.items[i].qty || 1; }
+        else { delete SEL[i]; }
+        row.classList.toggle('on', cb.checked);
+        renderOrder();
+      });
+      var minus = row.querySelector('.minus');
+      var plus = row.querySelector('.plus');
+      minus.addEventListener('click', function(){
+        var q = QTY[i] || 1;
+        if(q <= 1) return;
+        QTY[i] = q - 1;
+        if(!SEL[i]){ SEL[i] = true; cb.checked = true; row.classList.add('on'); }
+        row.querySelector('.q').innerHTML = QTY[i] + '<em>개</em>';
+        minus.disabled = QTY[i] <= 1;
+        renderOrder();
+      });
+      plus.addEventListener('click', function(){
+        var q = QTY[i] || 1;
+        if(q >= 20) return;
+        QTY[i] = q + 1;
+        if(!SEL[i]){ SEL[i] = true; cb.checked = true; row.classList.add('on'); }
+        row.querySelector('.q').innerHTML = QTY[i] + '<em>개</em>';
+        minus.disabled = false;
+        renderOrder();
+      });
+    });
+  }
+
+  function selList(){
+    var out = [];
+    for(var k in SEL){
+      if(!SEL.hasOwnProperty(k)) continue;
+      var i = parseInt(k, 10);
+      var it = DATA.items[i];
+      if(!it) continue;
+      out.push({ i:i, name:it.name, qty:(QTY[i] || it.qty || 1), date:it.date });
+    }
+    out.sort(function(a, b){ return a.i - b.i; });
+    return out;
+  }
+
+  function orderText(){
+    var list = selList();
+    var head = '[' + (DATA.hosp || '동물병원') + ' 재구매 요청] ' +
+      (DATA.guardian ? DATA.guardian + ' 보호자님' : '보호자님') +
+      (DATA.pet ? ' (' + DATA.pet + ')' : '');
+    var lines = [head];
+    list.forEach(function(it){ lines.push('• ' + it.name + ' ' + it.qty + '개'); });
+    return lines.join('\n');
+  }
+
+  function renderOrder(){
+    var list = selList();
+    var ol = $('olist');
+    var empty = $('oempty');
+    var sub = $('orderSub');
+    if(list.length){
+      ol.hidden = false;
+      empty.hidden = true;
+      var html = '';
+      list.forEach(function(it){
+        html += '<li><span class="nm">' + esc(it.name) + '</span><span class="qt">' + it.qty + '개</span></li>';
+      });
+      ol.innerHTML = html;
+      var totalQty = list.reduce(function(a, b){ return a + b.qty; }, 0);
+      sub.textContent = list.length + '가지 · 모두 ' + totalQty + '개를 주문서에 담았어요.';
+    } else {
+      ol.hidden = true;
+      empty.hidden = false;
+      sub.textContent = '재구매할 품목을 체크하면 여기에 담깁니다.';
+    }
+    var btn = $('sendBtn');
+    btn.disabled = !list.length;
+    btn.className = 'send';
+    btn.textContent = '💬 카톡으로 바로 주문 보내기';
+
+    var sc = $('sticky');
+    if(list.length){
+      sc.classList.add('on');
+      $('stickyCnt').textContent = String(list.length);
+    } else {
+      sc.classList.remove('on');
+    }
+    var kb = $('kakaoBtn');
+    if(KAKAO && list.length){ kb.classList.add('on'); kb.href = KAKAO; }
+    else kb.classList.remove('on');
+
+    $('orderHint').textContent = list.length
+      ? (KAKAO ? '버튼을 누르면 주문 내용이 복사되고, 병원 카톡방으로 이동해요.' : '버튼을 누르면 주문 내용이 복사돼요. 병원 카톡방에 붙여넣기 해 주세요.')
+      : '버튼을 누르면 주문 내용이 복사돼요.';
+  }
+
+  /* ---------- 토스트 ---------- */
+  var toastTimer = null;
+  function say(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 2600);
+  }
+
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(t);
+    }
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement('textarea');
+      ta.value = t;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('copy failed'));
+    });
+  }
+
+  $('sendBtn').addEventListener('click', function(){
+    var list = selList();
+    if(!list.length) return;
+    var text = orderText();
+    var btn = this;
+    copyText(text).then(function(){
+      btn.className = 'send done';
+      btn.textContent = KAKAO ? '✅ 복사 완료 · 카톡방으로 이동하세요' : '✅ 복사 완료 · 카톡방에 붙여넣기';
+      say('주문 내용을 복사했어요');
+      if(KAKAO){
+        $('sheetMsg').textContent = '주문 내용이 복사됐어요. 카톡방을 열고 붙여넣기만 하면 주문이 전달됩니다.';
+        $('sheetGo').href = KAKAO;
+        $('sheet').hidden = false;
+      } else {
+        say('복사된 주문 내용을 병원 카톡방에 붙여넣기 해 주세요!');
+      }
+    }).catch(function(){
+      showManual(text);
+    });
+  });
+
+  function showManual(text){
+    $('sheetTitle').textContent = '자동 복사가 안 돼요';
+    $('sheetMsg').textContent = '아래 주문 내용을 길게 눌러 직접 복사해 주세요.\n\n' + text;
+    $('sheetGo').textContent = '확인';
+    $('sheetGo').removeAttribute('href');
+    $('sheetGo').setAttribute('href', '#');
+    $('sheet').hidden = false;
+  }
+
+  $('sheetClose').addEventListener('click', function(){ $('sheet').hidden = true; });
+  $('sheetBd').addEventListener('click', function(){ $('sheet').hidden = true; });
+  $('stickyGo').addEventListener('click', function(){
+    $('orderCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+  $('sheetGo').addEventListener('click', function(e){
+    if(this.getAttribute('href') === '#'){ e.preventDefault(); $('sheet').hidden = true; }
+  });
+
+  /* ---------- 시작 ---------- */
+  (function init(){
+    var raw = getParam('d');
+    DATA = parsePayload(raw);
+    if(!DATA || (!DATA.items.length && !DATA.guardian && !DATA.hosp)){
+      $('errBox').hidden = false;
+      $('body').hidden = true;
+      if(!raw){
+        $('errMsg').innerHTML = '병원에서 받은 링크로 다시 열어 주세요.<br>링크에 구매이력이 담겨 있어요.';
+      } else {
+        $('errMsg').innerHTML = '링크가 중간에 잘렸거나 오래된 형식이에요.<br>병원에 링크를 다시 보내 달라고 말씀해 주세요.';
+      }
+      return;
+    }
+    $('errBox').hidden = true;
+    $('body').hidden = false;
+    KAKAO = kakaoUrl(DATA.kakao);
+    render();
+    window.__pmOrder = { data:DATA, orderText:orderText, selList:selList };
+  })();
+
+})();
+</script>
+</body>
+</html>
