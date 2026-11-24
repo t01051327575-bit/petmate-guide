@@ -726,6 +726,15 @@
     return lines.join('\n');
   }
 
+  var suppressSticky = false;
+  function syncSticky(){
+    if(!DATA) return;
+    var sc = $('sticky');
+    var n = selList().length;
+    if(n && !suppressSticky) sc.classList.add('on');
+    else sc.classList.remove('on');
+  }
+
   function renderOrder(){
     var list = selList();
     var ol = $('olist');
@@ -752,7 +761,7 @@
     btn.textContent = '💬 카톡으로 바로 주문 보내기';
 
     var sc = $('sticky');
-    if(list.length){
+    if(list.length && !suppressSticky){
       sc.classList.add('on');
       $('stickyCnt').textContent = String(list.length);
     } else {
@@ -855,6 +864,17 @@
     $('body').hidden = false;
     KAKAO = kakaoUrl(DATA.kakao);
     render();
+    /* 주문서가 화면에 보이면 하단 바는 숨겨서 버튼을 가리지 않게 */
+    var oc = $('orderCard');
+    if(oc && window.IntersectionObserver){
+      try {
+        new IntersectionObserver(function(es){
+          var e = es[0];
+          suppressSticky = !!(e && e.isIntersecting && e.intersectionRatio > 0.18);
+          syncSticky();
+        }, { threshold:[0, 0.18] }).observe(oc);
+      } catch(err){}
+    }
     window.__pmOrder = { data:DATA, orderText:orderText, selList:selList };
   })();
 
