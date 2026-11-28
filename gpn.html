@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GPN 포지션 · 일일 마감 보고 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<title>GPN 자리 지도 · 일일 마감 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GPN — 원무과·진료과·검사실 세 자리의 하루 루틴(검사실 12단계 포함)을 체크하고, 일일 마감 보고를 1분 만에 만듭니다.">
 <meta name="theme-color" content="#eaf6fb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,17 +14,46 @@
 <meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
-<meta property="og:title" content="GPN · 포지션 · 일일 마감 보고 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<meta property="og:title" content="GPN · 자리 지도 · 일일 마감 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GPN — 원무과·진료과·검사실 세 자리의 하루 루틴을 체크하고, 일일 마감 보고를 1분 만에 만듭니다.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gpn.html">
 <meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GPN · 포지션 · 일일 마감 보고">
-<meta name="twitter:description" content="굿모닝펫 GPN — 매출·신환·미내원·특이사항을 정리해 일일 마감 보고 문구를 만들고, 2인 체제의 포지션을 한눈에 봅니다.">
+<meta name="twitter:title" content="GPN · 자리 지도 · 일일 마감">
+<meta name="twitter:description" content="굿모닝펫 GPN — 원무과·진료과·검사실 세 자리의 하루 루틴을 체크하고, 일일 마감 보고를 1분 만에 만듭니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* GPN 전용 — 자리 지도 */
+.jgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px}
+.jump a{font-size:12px;font-weight:800;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:6px 11px;text-decoration:none}
+.jump a:active{transform:scale(.97)}
+.route{border:1px solid var(--line);border-radius:18px;padding:14px 14px 10px;background:#fff;margin-top:12px;scroll-margin-top:14px}
+.route-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:4px}
+.route-no{flex:0 0 auto;width:26px;height:26px;border-radius:9px;background:var(--soft);border:1px solid var(--badge-line);color:var(--brand-d);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.route-head .rt{min-width:0}
+.route-head b{display:block;font-size:16px;letter-spacing:-.02em;line-height:1.3}
+.route-head i{display:block;font-style:normal;font-size:11.5px;color:var(--muted);font-weight:700;margin-top:2px;line-height:1.45;word-break:keep-all}
+.route-head .pp{margin-left:auto;flex:0 0 auto;font-size:11.5px;font-weight:900;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:4px 9px;white-space:nowrap}
+.step{margin-top:11px}
+.step-t{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:900;color:var(--brand-d);background:var(--soft2);border:1px solid var(--line);border-radius:10px;padding:6px 9px;margin-bottom:1px}
+.step-t span{margin-left:auto;font-weight:800;color:var(--muted);font-size:11px;white-space:nowrap}
+.route .check{padding:7px 2px}
+.route .check span{font-size:13.5px}
+.mini2{border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:#fff;display:block;text-decoration:none;color:inherit}
+.mini2 b{display:block;font-size:13.5px;letter-spacing:-.01em}
+.mini2 span{display:block;font-size:11.5px;color:var(--muted);font-weight:700;line-height:1.5;margin-top:3px;word-break:keep-all}
+.tear{margin-top:12px;border-top:1px dashed var(--line);padding-top:11px}
+@media (max-width:520px){
+  .jgrid{grid-template-columns:1fr}
+  .route{padding:13px 12px 8px}
+  .route .check span{font-size:13.5px}
+  .step-t{font-size:11.5px}
+}
+</style>
 </head>
 <body data-code="GPN">
 <div id="g-top"></div>
@@ -35,27 +64,42 @@
       <span class="code-chip">GPN</span>
       <span class="eng-chip">P · Position</span>
     </div>
-    <h1>포지션 · 일일 마감 보고</h1>
-    <p>오늘의 숫자와 특이사항을 넣으면, 원장님께 드릴 마감 보고가 1분 만에 완성됩니다.</p>
-    <div class="marks"><span>일일 마감</span><span>포지션 정리</span><span>보고 문구</span></div>
+    <h1>자리 지도 · 일일 마감</h1>
+    <p>원무과·진료과·검사실 — 오늘 내 자리만 위에서 아래로 체크하고, 17시에 마감 보고 한 장으로 끝냅니다.</p>
+    <div class="marks"><span>원무과 데스크</span><span>진료과</span><span>검사실 12단계</span><span>일일 마감</span></div>
   </header>
 
   <section class="card">
-    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>P · Position — 누가 무엇을 맡는지, 오늘 어떻게 끝났는지</small></h2></div>
-    <p>하루를 <b>숫자와 한 줄</b>로 남기면, 다음 날 아침이 가벼워집니다. 2인 체제에서는 특히 <b>역할이 겹치지 않는 것</b>이 중요합니다.</p>
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>P · Position — 세 자리의 하루 순서와 마감이 한 장에</small></h2></div>
+    <p>하루는 <b>세 자리</b>에서 돌아갑니다. 자리마다 할 일을 <b>같은 순서</b>로 체크하면 빠뜨리는 일이 줄고, 마감은 숫자 몇 개로 끝납니다.</p>
+    <div class="jgrid">
+      <a class="mini2" href="#desk"><b>원무과 자리</b><span>오픈 → 접수·전화·건강관리표 → 보험청구·서류 → 마감</span></a>
+      <a class="mini2" href="#clinic"><b>진료과 자리</b><span>진료 전 준비 → GCN 보드 → 코멘트·안내 → 퇴근 전 정리</span></a>
+      <a class="mini2" href="#lab"><b>검사실 자리</b><span>12단계 루틴 + 인계 문구 한 번에 복사</span></a>
+    </div>
     <ul class="clean">
-      <li>오늘의 매출·환자·미내원을 <b>한 장으로</b> 정리합니다.</li>
-      <li>원장님께 드릴 <b>마감 보고</b>를 400자로 만듭니다.</li>
-      <li>원무과·진료검사과의 <b>포지션</b>을 확인합니다.</li>
+      <li><b>① 날짜 확인 → ② 내 자리만 체크(자동 저장) → ③ 17시에 마감 보고 복사.</b> 이 세 줄이 전부입니다.</li>
+      <li>검사실 <b>12단계 루틴</b>은 원래 GLN에 있던 것을 이 칸으로 옮겨 왔습니다(GLN은 라벨·재고).</li>
+      <li>날짜가 바뀌면 체크는 새로 시작되고, 지난 날짜 체크는 그대로 남습니다.</li>
     </ul>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>오늘 마감<small>숫자는 마감 후 한 번에</small></h2></div>
+    <div class="sec-head"><span class="num">2</span><h2>자리 지도<small>오늘 내 자리 하나만 봐도 됩니다 · 셋 다 하면 마감이 가장 빠릅니다</small></h2></div>
     <div class="grid2">
       <div class="field"><label>날짜</label><input id="date" type="date"></div>
-      <div class="field"><label>총 매출 (원)</label><input id="sales" type="number" inputmode="numeric" min="0" step="1000" placeholder="0"></div>
+      <div class="field"><label>담당 <span class="hint">선택</span></label><input id="who" type="text" placeholder="예: 원무과 / 진료검사과"></div>
     </div>
+    <div class="jump">
+      <a href="#desk">원무과</a><a href="#clinic">진료과</a><a href="#lab">검사실</a><a href="#close">일일 마감</a>
+    </div>
+    <div id="routes"></div>
+    <div class="btns"><button class="btn ghost wide" id="resetAll" type="button">오늘 자리 체크 전체 초기화</button></div>
+  </section>
+
+  <section class="card" id="close">
+    <div class="sec-head"><span class="num">3</span><h2>일일 마감<small>숫자는 마감 후 한 번에 · 위 날짜로 저장됩니다</small></h2></div>
+    <div class="field"><label>총 매출 (원)</label><input id="sales" type="number" inputmode="numeric" min="0" step="1000" placeholder="0"></div>
     <div class="grid3">
       <div class="field"><label>신환</label><input id="newp" type="number" inputmode="numeric" min="0" placeholder="0"></div>
       <div class="field"><label>재진</label><input id="re" type="number" inputmode="numeric" min="0" placeholder="0"></div>
@@ -77,14 +121,36 @@
   <div id="out"></div>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">4</span><h2>2인 체제 포지션<small>겹치면 둘 다 지치고, 비면 아무도 못 봅니다</small></h2></div>
+    <div class="sec-head"><span class="num">5</span><h2>2인 체제 포지션<small>겹치면 둘 다 지치고, 비면 아무도 못 봅니다</small></h2></div>
     <div class="grid2">
-      <div class="mini"><div class="k">원무과</div><div class="v">응대 · 수납 · 카톡 · 주문 · 재고 · 예약</div></div>
-      <div class="mini"><div class="k">진료검사과</div><div class="v">보조 · 보정 · 검사 · 조제 · 수술 준비</div></div>
-      <div class="mini"><div class="k">원장님</div><div class="v">진료 · 수술 · 검사 판독 · 처방</div></div>
-      <div class="mini"><div class="k">경영부원장</div><div class="v">운영 · 시스템 · 거래처 · 정산</div></div>
+      <div class="mini2"><b>원무과</b><span>오픈·응대·수납·전화·카톡·주문·재고·예약·보험청구</span></div>
+      <div class="mini2"><b>진료과 · 검사실</b><span>한 팀 — 보조·보정·검사·조제·수술 준비</span></div>
+      <div class="mini2"><b>원장님</b><span>진료·수술·검사 판독·처방</span></div>
+      <div class="mini2"><b>경영부원장</b><span>운영·시스템·거래처·정산</span></div>
     </div>
-    <div class="callout"><b>그물망 연결:</b> 마감 보고는 <b>GAN</b>(정산)과 <b>GXN</b>(미내원)의 숫자와 맞춰야 합니다. 세 칸이 같은 숫자를 보게 하세요.</div>
+    <div class="callout"><b>그물망 연결:</b> 마감 보고 숫자는 <b>GAN</b>(정산)과 <b>GXN</b>(미내원)이 보는 숫자와 같아야 합니다. 검사 결과 해설은 <b>GDN</b>, 라벨·재고는 <b>GLN</b>으로 이어집니다. 세 자리가 같은 화면을 보면 “그거 누가 했어?”가 사라집니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">6</span><h2>직접 연습해 보기<small>새로 온 직원용 · 오늘 기록과 따로 저장됩니다</small></h2></div>
+    <p>오늘 내 자리를 골라 <b>한 번 체크해 보고</b>, 연습 마감 보고를 만들어 봅니다. 실제 기록은 위 자리 지도에만 남습니다.</p>
+    <div class="seg" id="pracSeg">
+      <button type="button" data-p="desk" aria-pressed="true">원무과</button>
+      <button type="button" data-p="clinic" aria-pressed="false">진료과</button>
+      <button type="button" data-p="lab" aria-pressed="false">검사실</button>
+    </div>
+    <div id="pracChecks"></div>
+    <div class="progress">
+      <div class="t"><span>연습 완료</span><span id="pracT">0 / 0</span></div>
+      <div class="bar"><i id="pracBar"></i></div>
+    </div>
+    <div class="field"><label>한 줄 배운 점 <span class="hint">선택</span></label><input id="pracNote" type="text" placeholder="예: 마감은 돈·환자·내일 셋으로만 본다"></div>
+    <div class="field"><label>연습 마감 보고 <span class="hint">복사해서 원장님께 보내 보세요</span></label><textarea id="pracMsg" class="msg" spellcheck="false" style="min-height:150px"></textarea></div>
+    <div class="msg-foot"><div class="count"><b id="pracCnt">0</b> / 400자</div></div>
+    <div class="btns">
+      <button class="btn primary" id="pracCopy" type="button">📋 연습 보고 복사</button>
+      <button class="btn ghost" id="pracReset" type="button">연습 지우기</button>
+    </div>
   </section>
 
   <nav class="webnav" aria-label="그물망 이웃 칸">
@@ -107,25 +173,237 @@
 
 (function () {
   var $ = G.q;
-  $('#date').value = G.today();
-  ['date', 'sales', 'newp', 're', 'miss', 'surg', 'book', 'memo', 'tomorrow'].forEach(function (id) {
-    $('#' + id).addEventListener('input', refresh);
-    $('#' + id).addEventListener('change', refresh);
+  var qa = G.qa;
+
+  /* ---------- 세 자리 하루 순서 (실제 업무표 기준) ---------- */
+  var ROUTES = [
+    {
+      id: 'desk', short: '원무', name: '원무과 자리', sub: '데스크 — 문을 열고, 받고, 청구하고, 닫습니다',
+      steps: [
+        { t: '1. 오픈', time: '08:30', items: [
+          '어제 미처리·나가실 시간 확인',
+          '예약표 출력 · 오늘 진료 순서 확인',
+          '데스크·대기실·수납기 상태 확인'
+        ] },
+        { t: '2. 접수 · 전화 · 건강관리표', time: '오전 ~ 오후', items: [
+          '보호자 응대할 때 차트에 3개 적기(다음 일정·수납·말씀)',
+          '송장번호 · 택배 주소(시/도) 대조 후 발송',
+          '못 받은 전화 · 카톡 문의 다시 확인',
+          '건강관리표(GHN) 새 접수 확인 → 준비건 표시'
+        ] },
+        { t: '3. 보험청구 · 서류', time: '오후', items: [
+          '청구할 건 목록 확인(진료·검사·수술)',
+          '청구서 · 동의서 · 진단서 빠진 칸 확인',
+          '발급 · 청구 접수 후 대장에 적기',
+          '반려 · 보완 요청 확인'
+        ] },
+        { t: '4. 마감 — 돈 · 환자 · 내일', time: '17:00', items: [
+          '돈: 수납 처리 · 현금 시재 · 카드 마감 확인',
+          '환자: 다음 예약일 · 보호자 말씀 3개 확인',
+          '내일: 익일 · 차주 예약 확인, 판매 마감',
+          '파일: 예약 · 수납 · 카톡(.txt) 피클 전송',
+          '마감 청소'
+        ] }
+      ]
+    },
+    {
+      id: 'clinic', short: '진료', name: '진료과 자리', sub: '진료·검사과는 한 팀 — 준비하고, 보드 보고, 안내하고, 정리합니다',
+      steps: [
+        { t: '1. 진료 전 준비', time: '08:00', items: [
+          '카톡 발송 · 키오스크 켜기',
+          '보정 · 조제 · 검사 준비물 확인',
+          '12:00 조제 · 검사 · 외래 준비'
+        ] },
+        { t: '2. 진료보드(GCN) 확인', time: '오전', items: [
+          '오늘 예약 유형(진료·검사·수술·미용) 확인',
+          '금식 · 금수 · 안정제 대상 확인',
+          '건강관리표 새 접수 · 다시 필요해요 확인',
+          '검사 건수 마감(1시 · 2시 · 3시) 확인'
+        ] },
+        { t: '3. 코멘트 · 안내', time: '14:30', items: [
+          '진료 코멘트 순서대로 발송(사진 → AI 요약 → 원장님 → 첨부)',
+          '보낸 코멘트 V 표시',
+          '오시지 않음 · 백신 경과 · 내일 예약 안내'
+        ] },
+        { t: '4. 퇴근 전 정리', time: '17:00', items: [
+          '오후 보정 · 검사 · 결과 입력',
+          '당일 진행자 확인(코멘트·조제약·퇴원·공지방)',
+          '조제방 · 검사실 정리(목: 약제실 바꾸기)',
+          'RX · TX · 검사사진 · 카톡(.txt) 피클 전송',
+          '업무시간 정리 엑셀 업로드'
+        ] }
+      ]
+    },
+    {
+      id: 'lab', short: '검사', name: '검사실 자리', sub: '검사실 12단계 — 같은 순서로 확인하면 결과가 흔들리지 않습니다',
+      steps: [
+        { t: '검사 전', time: '1~4단계', items: [
+          '장비 전원 · 프린터 상태 확인',
+          '냉장 보관 시약 온도 확인',
+          '시약 유효기간 · 개봉일 확인',
+          '장비 QC(정도관리) 실시'
+        ] },
+        { t: '검체 · 검사', time: '5~7단계', items: [
+          '검체 라벨(보호자·아이 이름) 확인',
+          '검사 항목 · 의뢰 내용 대조',
+          '검체 처리 · 원심분리 순서 준수'
+        ] },
+        { t: '결과 · 마감', time: '8~12단계', items: [
+          '결과 값 이상치 표시 확인',
+          '결과 입력 · 차트 반영',
+          '이상 결과 원장님께 즉시 보고',
+          '폐기물 · 날카로운 도구 정리',
+          '장비 청소 · 다음 근무 인계'
+        ] }
+      ]
+    }
+  ];
+
+  /* 총 단계 수 */
+  ROUTES.forEach(function (r) {
+    r.total = r.steps.reduce(function (a, s) { return a + s.items.length; }, 0);
   });
+  function route(id) { for (var i = 0; i < ROUTES.length; i++) { if (ROUTES[i].id === id) return ROUTES[i]; } return null; }
+
+  /* ---------- 날짜 · 저장 키 ---------- */
+  var RKEY = 'gpn_route_v1', WKEY = 'gpn_who_v1', LKEY = 'gpn_lab_v1', PKEY = 'gpn_prac_v1';
+  function dateStr() { return ($('#date').value || G.today()); }
+  function keyFor(r) { return RKEY + '_' + dateStr() + '_' + r.id; }
+  function read(k) { try { return JSON.parse(localStorage.getItem(k) || '{}') || {}; } catch (e) { return {}; } }
+  function write(k, o) { try { localStorage.setItem(k, JSON.stringify(o)); } catch (e) {} }
+
+  /* ---------- 자리 지도 그리기 ---------- */
+  var LAB_EXTRA =
+    '<div class="tear">' +
+      '<div class="grid2">' +
+        '<div class="field"><label>다음 근무자에게</label>' +
+          '<select id="labNext"><option>진료검사과</option><option>원무과</option><option>원장님</option></select></div>' +
+        '<div class="field"><label>특이 <span class="hint">한 줄씩</span></label>' +
+          '<input id="labShort" type="text" placeholder="예: QC 재확인 필요"></div>' +
+      '</div>' +
+      '<div class="field"><label>인계 메모 <span class="hint">다음 근무자가 먼저 볼 것</span></label>' +
+        '<textarea id="labMemo" style="min-height:78px" placeholder="예: 혈액검사 장비 QC 재확인 필요&#10;콩이 SDMA 재검 예정"></textarea></div>' +
+      '<div class="field"><label>다음 근무자에게 보낼 인계 문구</label>' +
+        '<textarea id="labMsg" class="msg" spellcheck="false" style="min-height:150px"></textarea></div>' +
+      '<div class="msg-foot"><div class="count"><b id="labCnt">0</b> / 400자</div></div>' +
+      '<div class="btns"><button class="btn primary wide" id="labCopy" type="button">📋 인계 문구 복사</button></div>' +
+    '</div>';
+
+  var host = $('#routes');
+  host.innerHTML = ROUTES.map(function (r, ri) {
+    var idx = 0;
+    var steps = r.steps.map(function (s) {
+      var items = s.items.map(function (t) {
+        idx++;
+        return '<label class="check"><input type="checkbox" data-r="' + r.id + '" data-i="' + idx + '">' +
+          '<span><b>' + idx + '.</b> ' + G.esc(t) + '</span></label>';
+      }).join('');
+      return '<div class="step"><div class="step-t">' + G.esc(s.t) + (s.time ? '<span>' + G.esc(s.time) + '</span>' : '') + '</div>' + items + '</div>';
+    }).join('');
+    return '<section class="route" id="' + r.id + '">' +
+      '<div class="route-head"><span class="route-no">' + (ri + 1) + '</span>' +
+        '<div class="rt"><b>' + G.esc(r.name) + '</b><i>' + G.esc(r.sub) + '</i></div>' +
+        '<span class="pp" id="pp_' + r.id + '">0/' + r.total + '</span></div>' +
+      steps +
+      '<div class="progress"><div class="bar"><i id="bar_' + r.id + '"></i></div></div>' +
+      (r.id === 'lab' ? LAB_EXTRA : '') +
+      '</section>';
+  }).join('');
+
+  function boxes(id) { return qa('input[type=checkbox][data-r="' + id + '"]', host); }
+  function stateOf(id) {
+    var o = {}, n = 0;
+    boxes(id).forEach(function (c) { if (c.checked) { o[c.getAttribute('data-i')] = 1; n++; } });
+    return { o: o, done: n };
+  }
+  function paint(id) {
+    var st = stateOf(id), r = route(id);
+    $('#pp_' + id).textContent = st.done + '/' + r.total;
+    $('#bar_' + id).style.width = (r.total ? (st.done / r.total * 100) : 0) + '%';
+    $('#bar_' + id).style.background = st.done === r.total
+      ? 'linear-gradient(90deg,#3fae7d,#7fd6a8)'
+      : 'linear-gradient(90deg,var(--brand),var(--accent))';
+    return st;
+  }
+  function loadRoute(id) {
+    var o = read(keyFor(route(id)));
+    boxes(id).forEach(function (c) { c.checked = !!o[c.getAttribute('data-i')]; });
+    paint(id);
+  }
+  function saveRoute(id) { write(keyFor(route(id)), stateOf(id).o); paint(id); }
+  function loadAll() {
+    ROUTES.forEach(function (r) { loadRoute(r.id); });
+    loadLab();
+    refresh();
+    refreshPrac();
+  }
+
+  /* ---------- 검사실 인계 ---------- */
+  function labMissing() {
+    var out = [], idx = 0;
+    route('lab').steps.forEach(function (s) { s.items.forEach(function (t) { idx++; out.push({ n: idx, t: t }); }); });
+    var st = stateOf('lab');
+    return out.filter(function (x) { return !st.o[x.n]; });
+  }
+  function labText() {
+    var d = G.settings();
+    var miss = labMissing(), r = route('lab');
+    var memo = (($('#labMemo') && $('#labMemo').value) || '').trim();
+    var short = (($('#labShort') && $('#labShort').value) || '').trim();
+    var head = '[검사실 인계] ' + dateStr().replace(/-/g, '. ') + ' · ' + ((($('#who') && $('#who').value) || '').trim() || '진료검사과') + '\n';
+    var body = '· 완료 ' + (r.total - miss.length) + '/' + r.total + '항목\n' +
+      (miss.length
+        ? '· 미완료: ' + miss.slice(0, 3).map(function (x) { return x.n + '.' + x.t; }).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n'
+        : '· 미완료 없음\n') +
+      (short ? '· 특이: ' + short + '\n' : '') +
+      (memo ? '· 메모: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '');
+    var tail = '\n다음 근무: ' + (($('#labNext') && $('#labNext').value) || '진료검사과') + '\n- ' + d.hospital;
+    var text = head + body + tail;
+    return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+  }
+  function paintLab() {
+    var t = labText();
+    if ($('#labMsg')) { $('#labMsg').value = t; if ($('#labCnt')) $('#labCnt').textContent = G.count(t); }
+  }
+  function loadLab() {
+    var o = read(LKEY + '_' + dateStr());
+    if ($('#labMemo')) $('#labMemo').value = o.memo || '';
+    if ($('#labShort')) $('#labShort').value = o.short || '';
+    if ($('#labNext') && o.next) $('#labNext').value = o.next;
+    paintLab();
+  }
+  function saveLab() {
+    if (!$('#labMemo')) return;
+    write(LKEY + '_' + dateStr(), {
+      memo: $('#labMemo').value, short: $('#labShort').value, next: $('#labNext').value
+    });
+  }
+
+  /* ---------- 숫자 · 마감 보고 ---------- */
   function n(id) { return parseInt(($('#' + id).value || '0'), 10) || 0; }
 
+  function routeLine() {
+    var parts = [];
+    ROUTES.forEach(function (r) {
+      var st = stateOf(r.id);
+      if (st.done > 0) parts.push(r.short + ' ' + st.done + '/' + r.total);
+    });
+    return parts.length ? '자리: ' + parts.join(' · ') + '\n' : '';
+  }
+
   var kit = G.outKit({
-    num: 3,
+    num: 4,
     title: '원장님께 드릴 마감 보고',
     sub: '400자 이내 · 퇴근 전 한 번',
     build: function () {
       var d = G.settings();
-      var date = ($('#date').value || G.today()).replace(/-/g, '. ');
+      var date = dateStr().replace(/-/g, '. ');
       var memo = ($('#memo').value || '').trim();
       var head = '[일일 마감] ' + date + '\n';
       var body = '매출 ' + G.money(n('sales')) + '원\n' +
-        '신환 ' + n('newp') + ' · 재진 ' + n('re') + ' · 미내원 ' + n('miss') + ' · 수술 ' + n('surg') + ' · 예약 ' + n('book') + '\n';
-      var tail = (memo ? '\n특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '') +
+        '신환 ' + n('newp') + ' · 재진 ' + n('re') + ' · 미내원 ' + n('miss') + ' · 수술 ' + n('surg') + ' · 예약 ' + n('book') + '\n' +
+        routeLine();
+      var tail = (memo ? '특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '') +
         (($('#tomorrow').value || '').trim() ? '내일: ' + $('#tomorrow').value.trim() + '\n' : '') +
         '\n수고하셨습니다.\n- ' + d.hospital;
       var text = head + body + tail;
@@ -143,6 +421,122 @@
     $('#missRate').textContent = denom > 0 ? Math.round(n('miss') / denom * 100) : '0';
     if (kit) kit.refresh();
   }
+
+  /* ---------- 연습 ---------- */
+  var pracPos = 'desk';
+  function pracBoxes() { return qa('input[type=checkbox]', $('#pracChecks')); }
+  function pracState() {
+    var o = {}, d = 0;
+    pracBoxes().forEach(function (c, i) { if (c.checked) { o[c.getAttribute('data-i')] = 1; d++; } });
+    return { o: o, done: d, total: pracBoxes().length };
+  }
+  function pracItems() {
+    var out = [], idx = 0;
+    route(pracPos).steps.forEach(function (s) { s.items.forEach(function (t) { idx++; out.push({ n: idx, t: t }); }); });
+    return out;
+  }
+  function paintPrac() {
+    var st = pracState();
+    $('#pracT').textContent = st.done + ' / ' + st.total;
+    $('#pracBar').style.width = (st.total ? (st.done / st.total * 100) : 0) + '%';
+    var miss = pracItems().filter(function (x) { return !st.o[x.n]; });
+    var note = ($('#pracNote').value || '').trim();
+    var head = '[연습] ' + route(pracPos).name + ' · ' + dateStr().replace(/-/g, '. ') + '\n';
+    var body = '완료 ' + st.done + '/' + st.total + '\n' +
+      (miss.length ? '미완료: ' + miss.slice(0, 4).map(function (x) { return x.t; }).join(', ') + (miss.length > 4 ? ' 외 ' + (miss.length - 4) + '건' : '') + '\n'
+        : '미완료 없음 — 마감까지 끝냈습니다\n');
+    var tail = (note ? '배운 점: ' + note + '\n' : '') + '\n- ' + G.settings().hospital;
+    var text = head + body + tail;
+    var out = G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+    $('#pracMsg').value = out;
+    $('#pracCnt').textContent = G.count(out);
+  }
+  function renderPrac() {
+    var r = route(pracPos), idx = 0;
+    $('#pracChecks').innerHTML = r.steps.map(function (s) {
+      var items = s.items.map(function (t) {
+        idx++;
+        return '<label class="check"><input type="checkbox" data-i="' + idx + '">' +
+          '<span><b>' + idx + '.</b> ' + G.esc(t) + '</span></label>';
+      }).join('');
+      return '<div class="step"><div class="step-t">' + G.esc(s.t) + (s.time ? '<span>' + G.esc(s.time) + '</span>' : '') + '</div>' + items + '</div>';
+    }).join('');
+    var o = read(PKEY + '_' + pracPos);
+    pracBoxes().forEach(function (c) { c.checked = !!o[c.getAttribute('data-i')]; });
+    paintPrac();
+  }
+  function refreshPrac() { if ($('#pracChecks')) renderPrac(); }
+
+  /* ---------- 이벤트 ---------- */
+  host.addEventListener('change', function (e) {
+    var c = e.target;
+    if (!c || c.type !== 'checkbox' || !c.getAttribute('data-r')) return;
+    saveRoute(c.getAttribute('data-r'));
+    if (c.getAttribute('data-r') === 'lab') paintLab();
+    refresh();
+  });
+
+  $('#date').value = G.today();
+  $('#who').value = (function () { try { return localStorage.getItem(WKEY) || ''; } catch (e) { return ''; } })();
+  $('#date').addEventListener('change', loadAll);
+  $('#who').addEventListener('input', function () {
+    try { localStorage.setItem(WKEY, $('#who').value); } catch (e) {}
+    paintLab(); refresh();
+  });
+
+  ['sales', 'newp', 're', 'miss', 'surg', 'book', 'memo', 'tomorrow'].forEach(function (id) {
+    $('#' + id).addEventListener('input', refresh);
+    $('#' + id).addEventListener('change', refresh);
+  });
+
+  $('#labMemo').addEventListener('input', function () { saveLab(); paintLab(); refresh(); });
+  $('#labShort').addEventListener('input', function () { saveLab(); paintLab(); });
+  $('#labNext').addEventListener('change', function () { saveLab(); paintLab(); });
+  $('#labCopy').addEventListener('click', function () {
+    G.copy($('#labMsg').value).then(function (ok) {
+      G.toast(ok ? '인계 문구를 복사했습니다' : '복사하지 못했습니다. 문구를 길게 눌러 직접 복사해 주세요');
+    });
+  });
+
+  $('#resetAll').addEventListener('click', function () {
+    ROUTES.forEach(function (r) {
+      boxes(r.id).forEach(function (c) { c.checked = false; });
+      saveRoute(r.id);
+    });
+    paintLab();
+    refresh();
+    G.toast('오늘 자리 체크를 모두 지웠습니다');
+  });
+
+  $('#pracSeg').addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('button[data-p]') : null;
+    if (!b) return;
+    pracPos = b.getAttribute('data-p');
+    qa('button[data-p]', $('#pracSeg')).forEach(function (x) {
+      x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+    });
+    renderPrac();
+  });
+  $('#pracChecks').addEventListener('change', function (e) {
+    if (!e.target || e.target.type !== 'checkbox') return;
+    write(PKEY + '_' + pracPos, pracState().o);
+    paintPrac();
+  });
+  $('#pracNote').addEventListener('input', paintPrac);
+  $('#pracCopy').addEventListener('click', function () {
+    G.copy($('#pracMsg').value).then(function (ok) {
+      G.toast(ok ? '연습 보고를 복사했습니다' : '복사하지 못했습니다. 문구를 길게 눌러 직접 복사해 주세요');
+    });
+  });
+  $('#pracReset').addEventListener('click', function () {
+    pracBoxes().forEach(function (c) { c.checked = false; });
+    write(PKEY + '_' + pracPos, {});
+    $('#pracNote').value = '';
+    paintPrac();
+    G.toast('연습을 지웠습니다');
+  });
+
+  loadAll();
   refresh();
 })();
 
