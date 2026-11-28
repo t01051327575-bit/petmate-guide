@@ -257,7 +257,7 @@
   var $ = G.q;
   var base = new URL('groom.html', location.href);
 
-  function buildUrl() {
+  function buildUrl(withClinic) {
     var s = G.settings();
     var u = new URL(base.href);
     var pet = ($('#gpPet').value || '').trim();
@@ -266,7 +266,7 @@
     if (pet) u.searchParams.set('pet', pet);
     if (g) u.searchParams.set('guardian', g);
     if (ih) u.searchParams.set('inhouse', ih);
-    if (s.hospital) u.searchParams.set('clinic', s.hospital);
+    if (withClinic !== false && s.hospital) u.searchParams.set('clinic', s.hospital);
     return u.href;
   }
 
@@ -287,12 +287,21 @@
     return body + tail;
   }
 
+  var currentUrl = '';
+
   function draw() {
-    var url = buildUrl();
+    var url = buildUrl(true);
+    var msg = message(url);
+    if (msg.indexOf('…') >= 0) {
+      var short = buildUrl(false);
+      var msg2 = message(short);
+      if (msg2.indexOf('…') < 0) { url = short; msg = msg2; }
+    }
+    currentUrl = url;
     var pet = ($('#gpPet').value || '').trim();
     $('#gpUrlBox').textContent = url;
     $('#gpOpen').href = url;
-    $('#gpMsgBox').textContent = message(url);
+    $('#gpMsgBox').textContent = msg;
     $('#gpMsgBox').style.opacity = pet ? '1' : '.7';
   }
 
@@ -304,12 +313,12 @@
   });
 
   $('#gpCopy').addEventListener('click', function () {
-    G.copy(buildUrl()).then(function (ok) {
+    G.copy(currentUrl || buildUrl(true)).then(function (ok) {
       G.toast(ok ? '미용사 링크를 복사했어요 — 미용실에 그대로 보내세요' : '복사가 막혔어요. 길게 눌러 직접 복사해 주세요');
     });
   });
   $('#gpMsgCopy').addEventListener('click', function () {
-    G.copy(message(buildUrl())).then(function (ok) {
+    G.copy($('#gpMsgBox').textContent || '').then(function (ok) {
       G.toast(ok ? '안내 문구를 복사했어요 — 카톡에 붙여넣기 하세요' : '복사가 막혔어요. 길게 눌러 직접 복사해 주세요');
     });
   });
