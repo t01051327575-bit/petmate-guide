@@ -470,7 +470,7 @@
     return d.getTime() >= t0.getTime() && d.getTime() < G.addDays(t0, days).getTime();
   }
   function notStartedYet(ds, t) {
-    return state.start === '오늘 저녁부터' && ds === state.date && String(t) < '17:00';
+    return state.start === '오늘 저녁부터' && ds === state.date && String(t) < '18:00';
   }
 
   function slotMap(ds) {
@@ -1077,8 +1077,14 @@
       var s = seg.trim();
       if (!s) return;
       var num = s.match(/(\d{1,3})\s*번/);
-      if (!num) return;
-      var name = num[1] + '번';
+      var name = '';
+      var suppOnly = false;
+      if (num) name = num[1] + '번';
+      else if (/보조제|영양제|유산균|오메가|관절/.test(s)) {
+        name = s.split(/하루|1일/)[0].replace(/보조제|영양제/g, '').trim();
+        if (!name) name = '보조제';
+        suppOnly = true;
+      } else return;
       var freq = 0;
       var m1 = s.match(/하루\s*(한|두|세|네|다섯|여섯|\d)\s*번/);
       if (m1) freq = /\d/.test(m1[1]) ? parseInt(m1[1], 10) : (KO_NUM[m1[1]] || 0);
@@ -1097,9 +1103,10 @@
       if (!days && /이주|2주/.test(s)) days = 14;
 
       var kind = 'oral';
-      if (/안약|점안/.test(s)) kind = 'eye';
+      if (suppOnly) kind = 'supp';
+      else if (/안약|점안/.test(s)) kind = 'eye';
       if (/귀약|점이/.test(s)) kind = 'ear';
-      if (/안연고|연고/.test(s)) kind = 'oint';
+      if (!suppOnly && /안연고|연고/.test(s)) kind = 'oint';
       if (/주사/.test(s)) kind = 'inj';
       if (/영양제|유산균|보조제|관절|오메가/.test(s)) kind = 'supp';
 
@@ -1112,7 +1119,12 @@
         else if (/좌이|왼쪽 귀/.test(s)) side = '좌이';
         else if (/양이|양쪽 귀/.test(s)) side = '양이';
       }
-      out.push({ name: name, kind: kind, side: side, freq: freq || 0, days: days || 0 });
+      var form = '';
+      if (/현탁/.test(s)) form = '현탁액';
+      else if (/겔/.test(s)) form = '겔';
+      else if (/연고/.test(s)) form = '연고';
+      else if ((kind === 'eye' || kind === 'ear') && /액|점안/.test(s)) form = '액';
+      out.push({ name: name, kind: kind, side: side, freq: freq || 0, days: days || 0, form: form });
     });
     return out;
   }
@@ -1127,6 +1139,7 @@
         if (p.freq) { exists.freq = p.freq; exists.times = (DEF_TIMES[p.freq] || DEF_TIMES[2]).slice(); }
         if (p.days) exists.days = p.days;
         if (p.side) exists.side = p.side;
+        if (p.form) exists.form = p.form;
         return;
       }
       var m = newMed(p.kind, state.meds);
@@ -1135,11 +1148,12 @@
       m.freq = p.freq || 2;
       m.times = (DEF_TIMES[m.freq] || DEF_TIMES[2]).slice();
       m.days = p.days || 7;
-      if (m.kind === 'eye') m.form = '액';
+      if (p.form) m.form = p.form;
       state.meds.push(m);
     });
     if (!state.meds.length) state.meds.push(newMed('oral'));
-    saveState(); renderMeds(); renderSchedule(); refreshSummary(); syncSoon();
+    saveState(); renderMeds(); renderSchedule(); refreshSummary(); renderLink(); syncSoon();
+    try { kit.refresh(true); } catch (e) {}
     G.toast(list.length + '개 약을 표에 채웠습니다 — 확인해 주세요');
   }
 
