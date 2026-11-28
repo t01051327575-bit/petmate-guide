@@ -534,6 +534,16 @@ html.sheet-open body{overflow:hidden}
 
   var ROWPLAN = { 3:[3,2,3,2,3,2,3,2,3,3], 4:[4,3,4,3,4,4,4], 6:[6,5,6,5,4] };
 
+  /* 역할별 칸 수는 데이터에서 다시 세어 표시(필터 숫자가 실제와 늘 맞게) */
+  (function () {
+    var cnt = { all: HEXES.length };
+    HEXES.forEach(function (x) { cnt[x.cat] = (cnt[x.cat] || 0) + 1; });
+    G.qa('.chip').forEach(function (b) {
+      var c = b.getAttribute('data-cat'), n = b.querySelector('.n');
+      if (n && cnt[c] != null) n.textContent = cnt[c];
+    });
+  })();
+
   /* 특징(f) · 키워드(k) · 실전 3팁(t)은 assets/g-tips.js 한 곳에서 관리 */
   if (window.GTIPS) {
     HEXES.forEach(function (x) {
