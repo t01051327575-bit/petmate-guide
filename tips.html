@@ -87,19 +87,37 @@
 
 /* ---------- 인쇄 ---------- */
 @media print{
-  @page{margin:12mm 10mm}
+  @page{margin:10mm 9mm}
   body{background:#fff}
-  #g-top,#g-footer,.tools,.no-print{display:none !important}
+  #g-top,#g-footer,#g-toast,.tools,.no-print{display:none !important}
   .tipsw{max-width:none;padding:0}
   .page-hero{display:none}
-  .printhead{display:block;margin:0 0 8mm;padding-bottom:3mm;border-bottom:1.5px solid #333}
-  .printhead b{display:block;font-size:15pt;letter-spacing:-.02em}
-  .printhead span{display:block;font-size:9pt;color:#555;margin-top:1mm}
+  .printhead{display:block;margin:0 0 5mm;padding-bottom:2.5mm;border-bottom:1.5px solid #333}
+  .printhead b{display:block;font-size:14pt;letter-spacing:-.02em}
+  .printhead span{display:block;font-size:8pt;color:#555;margin-top:1mm}
   .tlist{display:block;margin:0}
-  .tcard{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc;border-radius:6px;
-    padding:4mm;margin-bottom:4mm}
+  .tcard{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc;border-radius:4px;
+    padding:3mm 3.5mm;margin:0 0 3mm}
   .topen{display:none}
-  .ttips{background:#fffdf3}
+  .tch{gap:3mm}
+  .tcode{width:11mm;height:11mm;border-radius:2.5mm;font-size:8pt}
+  .tid h2{font-size:11pt}
+  .tid h2 small{font-size:7pt;margin-top:0.5mm}
+  .tid .prog{font-size:7.5pt;margin-top:1mm}
+  .tfeat{margin-top:2mm;padding:1.8mm 2.4mm;border-radius:3px}
+  .tfeat .lb{font-size:6.5pt;padding:0.5mm 2mm;margin-bottom:0.8mm}
+  .tfeat p{font-size:9pt;line-height:1.45}
+  .twords{gap:1mm;margin-top:1.6mm}
+  .twords span{font-size:7.5pt;padding:1px 5px}
+  .tben{margin-top:1.8mm}
+  .tben h3,.ttips h3{font-size:7.5pt;margin-bottom:0.8mm}
+  .tben ul{gap:0.5mm}
+  .tben li{font-size:8.5pt;line-height:1.4}
+  .tben li b{flex-basis:12mm;font-size:6.5pt}
+  .ttips{margin-top:2mm;padding:2mm 2.4mm;border-radius:3px;background:#fffdf3}
+  .ttips ol{gap:1mm}
+  .ttips li{font-size:8.5pt;line-height:1.42}
+  .ttips li .n{width:4.2mm;height:4.2mm;font-size:6.5pt}
 }
 </style>
 </head>
