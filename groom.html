@@ -129,6 +129,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       건강관리에 최선을 다하겠습니다.
     </div>
     <div class="steps"><span class="st on" id="step1">① 체크</span><span class="ar">→</span><span class="st" id="step2">② 완료 · 전송</span></div>
+    <div id="preInfo"></div>
   </header>
 
   <form id="form" autocomplete="on">
@@ -574,6 +575,132 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   var submitting = false;
   $('#submitBtn').addEventListener('click', function(){ submit(); });
 
+  /* ---------- 그 아이 혹 정보·지난 원장님 소견 (미용사가 이발기 대기 전에 확인) ---------- */
+  var GCN_BASE='https://t01051327575-bit.github.io/Gcn/';
+  var SHEET_ID='1qBrHBcGRy0LDrCrj11HS5bZr3a-T1J32nFGZOF09dG8';
+  function pn(s){ return String(s||'').replace(/\([^)]*\)/g,'').replace(/[\/\s.]/g,'').toLowerCase(); }
+  function pick(obj, pet, own){
+    if(!obj) return null;
+    var a=pn(pet), o=pn(own), hit=null, hitG=null;
+    Object.keys(obj).forEach(function(k){
+      var i=k.lastIndexOf('|'); var kp=pn(i<0?k:k.slice(0,i)), ko=pn(i<0?'':k.slice(i+1));
+      if(!kp) return;
+      if(kp!==a && kp.indexOf(a)!==0 && a.indexOf(kp)!==0) return;
+      hit=obj[k];
+      if(o && ko && (ko===o||ko.indexOf(o)===0||o.indexOf(ko)===0)) hitG=obj[k];
+    });
+    return hitG||hit;
+  }
+  function jget(u){ return fetch(u,{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('응답 '+r.status); return r.json(); }).catch(function(){ return {}; }); }
+  function sheetRows(tab){
+    var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&headers=1&sheet='+encodeURIComponent(tab);
+    return fetch(url,{cache:'no-store'}).then(function(r){ return r.text(); }).then(function(t){
+      var i=t.indexOf('{'), j=t.lastIndexOf('}'); if(i<0) return [];
+      var d=JSON.parse(t.slice(i,j+1));
+      var cols=((d.table&&d.table.cols)||[]).map(function(c){return (c.label||'').trim();});
+      return ((d.table&&d.table.rows)||[]).map(function(r){
+        var o={}; (r.c||[]).forEach(function(cell,k){ o[cols[k]||('c'+k)]=cell?(cell.f!=null?cell.f:(cell.v!=null?cell.v:'')):''; });
+        return o;
+      });
+    }).catch(function(){ return []; });
+  }
+  function loadPetInfo(){
+    var box=document.getElementById('preInfo');
+    if(!box) return;
+    var pet=(fromLink? qPet : (document.getElementById('pet')||{}).value || '').trim();
+    var own=(fromLink? qGuardian : (document.getElementById('guardian')||{}).value || '').trim();
+    if(!pet){ box.innerHTML=''; return; }
+    Promise.all([jget(GCN_BASE+'lump.json'), jget(GCN_BASE+'lumps/index.json'), sheetRows('미용소견')]).then(function(res){
+      var L=pick(res[0]||{}, pet, own), I=pick(res[1]||{}, pet, own), ops=res[2]||[];
+      box.innerHTML='';
+      /* ---- 혹 박스 ---- */
+      if(L || I){
+        var w=document.createElement('div');
+        w.style.cssText='margin:12px 0 0;padding:13px 14px;background:#fdeaee;border:1px solid #f3cfdb;border-radius:14px;color:#7a1626';
+        var t=document.createElement('div');
+        t.style.cssText='font-size:19px;font-weight:900;margin-bottom:2px';
+        t.textContent='🩺 혹 있음 — 이발기 주의';
+        w.appendChild(t);
+        var sub=document.createElement('div');
+        sub.style.cssText='font-size:14.5px;line-height:1.55';
+        sub.textContent='아래 부위에 혹이 있습니다. 이발기·가위를 대기 전에 눈으로 확인하고, 혹 위를 밀지 마세요.';
+        w.appendChild(sub);
+        var rows=[];
+        if(L && L.n) rows.push(['개수', L.n+'곳']);
+        if(L && L.last) rows.push(['최근 확인', String(L.last)]);
+        if(L && L.marks) rows.push(['부위', String(L.marks)]);
+        if(L && L.op) rows.push(['수술 이력', String(L.op).slice(0,200)]);
+        rows.forEach(function(r){
+          var d=document.createElement('div');
+          d.style.cssText='display:flex;gap:8px;margin-top:6px;font-size:14.5px';
+          var k=document.createElement('span');
+          k.style.cssText='flex:0 0 66px;font-weight:800;color:#a03a4e;font-size:13.5px';
+          k.textContent=r[0];
+          var v=document.createElement('span');
+          v.style.cssText='flex:1;min-width:0;white-space:pre-wrap;word-break:keep-all';
+          v.textContent=r[1];
+          d.appendChild(k); d.appendChild(v); w.appendChild(d);
+        });
+        var imgs=[];
+        if(I){
+          [['old','oldL','oldD'],['new','newL','newD'],['paper','paperL','paperD']].forEach(function(k){
+            if(I[k[0]]) imgs.push({file:I[k[0]], label:I[k[1]]||'위치 표시', date:I[k[2]]||''});
+          });
+          if(Array.isArray(I.extra)) I.extra.forEach(function(x){ (x.files||[]).forEach(function(f){ imgs.push({file:f, label:x.label||'위치 표시', date:x.d||''}); }); });
+        }
+        imgs.slice(0,4).forEach(function(im){
+          var fg=document.createElement('div');
+          fg.style.cssText='margin-top:8px';
+          var lab=document.createElement('div');
+          lab.style.cssText='font-size:12.5px;color:#8c4b5c;font-weight:700;margin-bottom:3px';
+          lab.textContent=im.label+(im.date?(' · '+im.date):'');
+          var a=document.createElement('a'); a.href=GCN_BASE+'lumps/'+im.file; a.target='_blank'; a.rel='noopener noreferrer';
+          var img=document.createElement('img');
+          img.src=GCN_BASE+'lumps/'+im.file; img.alt='혹 위치 그림'; img.loading='lazy';
+          img.style.cssText='width:100%;border-radius:10px;border:1px solid #f0cfd7;background:#fff;display:block';
+          img.addEventListener('error',function(){ fg.style.display='none'; });
+          a.appendChild(img); fg.appendChild(lab); fg.appendChild(a); w.appendChild(fg);
+        });
+        var lc=document.createElement('label');
+        lc.style.cssText='display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 10px;background:#fff;border:1px solid #f0cfd7;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer';
+        var cb=document.createElement('input'); cb.type='checkbox'; cb.id='lumpChk';
+        cb.style.cssText='width:20px;height:20px';
+        lc.appendChild(cb);
+        lc.appendChild(document.createTextNode('혹 부위 확인함 (이발기 전에 확인했습니다)'));
+        w.appendChild(lc);
+        box.appendChild(w);
+      }
+      /* ---- 지난 원장님 소견 ---- */
+      var mine=(ops||[]).filter(function(o){
+        var a=pn(o['아이']), b=pn(pet);
+        if(!a) return false;
+        if(!(a===b || a.indexOf(b)===0 || b.indexOf(a)===0)) return false;
+        var go=pn(o['보호자']);
+        return !(own && go && go!==pn(own));
+      }).filter(function(o){ return o['작성자']==='원장님' || o['종류']==='재진'; });
+      if(mine.length){
+        mine.sort(function(x,y){ return String(x['시각']||'').localeCompare(String(y['시각']||'')); });
+        var o2=document.createElement('div');
+        o2.style.cssText='margin:12px 0 0;padding:12px 14px;background:#f6fbff;border:1px solid #cfe3f2;border-radius:14px;color:#1f3a52';
+        var h=document.createElement('div');
+        h.style.cssText='font-size:16px;font-weight:900;margin-bottom:2px';
+        h.textContent='🩺 병원에서 남긴 소견 — 같은 부위를 다시 확인해 주세요';
+        o2.appendChild(h);
+        mine.slice(-4).reverse().forEach(function(o){
+          var d=document.createElement('div');
+          d.style.cssText='margin-top:5px;font-size:14.5px;line-height:1.5';
+          var dt=String(o['시각']||'').slice(5,10).replace('-','/');
+          d.textContent='· '+dt+' '+(o['항목코드']?o['항목코드']+' ':'')+(o['부위']?o['부위']+' — ':'')+o['소견']+(o['종류']==='재진'?' (재진)':'');
+          o2.appendChild(d);
+        });
+        box.appendChild(o2);
+      }
+    });
+  }
+  var petEl=document.getElementById('pet'), ownEl=document.getElementById('guardian');
+  if(petEl) petEl.addEventListener('change',loadPetInfo);
+  if(ownEl) ownEl.addEventListener('change',loadPetInfo);
+
   function submit(){
     if(submitting) return;
     var pet = fromLink ? qPet : ($('#pet').value || '').trim();
@@ -596,7 +723,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
     $('#step2').classList.add('on');
 
     var answers = ITEMS.map(function(it){
-      return { no:it.no, label:it.label, state:state[it.key].v, note:(state[it.key].note||'').trim() };
+      return { no:it.no, code:'A'+it.no, label:it.label, state:state[it.key].v, note:(state[it.key].note||'').trim() };
     });
     var payload = {
       action:'submit',
@@ -609,7 +736,8 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       groomDate:$('#groomDate').value || todayStr(),
       answers:answers,
       memo:($('#memo').value || '').trim(),
-      mustTell:$('#mustTell').checked
+      mustTell:$('#mustTell').checked,
+      lumpChecked:!!($('#lumpChk') && $('#lumpChk').checked)
     };
 
     var media = [];
@@ -723,6 +851,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   ITEMS.forEach(function(it){ refreshItem(it.key); });
   updateBar();
   saveLocal();
+  loadPetInfo();
 })();
 </script>
 </body>
