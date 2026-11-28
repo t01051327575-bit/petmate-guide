@@ -179,10 +179,10 @@ b,strong{color:var(--ink)}
 .tone[aria-pressed="true"]{border-color:var(--brand);background:var(--soft);color:var(--brand-d)}
 #g-footer .mentor{margin:2px 0 6px;font-size:12px;font-weight:800;color:var(--brand-d);opacity:.9}
 /* 벌집 칸 색도 진하기에 따라 (테마와 무관하게 역할색 기준) */
-html[data-tone="strong"] .hex.t-care .face{background:linear-gradient(160deg,#eaf6fd 0%,#cbe7f7 100%)}
-html[data-tone="strong"] .hex.t-clinic .face{background:linear-gradient(160deg,#e8faf3 0%,#c4ecdc 100%)}
-html[data-tone="strong"] .hex.t-stock .face{background:linear-gradient(160deg,#fdf5e1 0%,#f4e2b8 100%)}
-html[data-tone="strong"] .hex.t-admin .face{background:linear-gradient(160deg,#f3eefc 0%,#ded4f5 100%)}
+html[data-tone="strong"] .hex.t-care .face{background:linear-gradient(160deg,#e2f2fc 0%,#aed6ef 100%)}
+html[data-tone="strong"] .hex.t-clinic .face{background:linear-gradient(160deg,#ddf7ec 0%,#a3e0c8 100%)}
+html[data-tone="strong"] .hex.t-stock .face{background:linear-gradient(160deg,#fdf1d2 0%,#efd49b 100%)}
+html[data-tone="strong"] .hex.t-admin .face{background:linear-gradient(160deg,#efe8fb 0%,#cec0ef 100%)}
 html[data-tone="soft"] .hex.t-care .face{background:linear-gradient(160deg,#fdfeff 0%,#f5fbfe 100%)}
 html[data-tone="soft"] .hex.t-clinic .face{background:linear-gradient(160deg,#fcfffd 0%,#f3fcf8 100%)}
 html[data-tone="soft"] .hex.t-stock .face{background:linear-gradient(160deg,#fffefb 0%,#fdf8ec 100%)}
