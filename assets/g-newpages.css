@@ -1,0 +1,141 @@
+/* =========================================================
+   굿모닝펫 · 신규 두 칸 공용 스타일
+   NEWCARE(신제품 보호자 설명) · PROMO(주 1회 홍보)
+   모바일 390px 우선 · g-common.css 위에 얹습니다
+   ========================================================= */
+
+.np-lead{font-size:14.5px;color:var(--ink-soft);margin:2px 0 0}
+.np-muted{color:var(--muted);font-size:12.5px;line-height:1.55}
+.np-gap{height:12px}
+
+/* ---------- 고르기 칩 ---------- */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.pick button{
+  appearance:none;border:1px solid var(--badge-line);background:#fff;color:var(--ink-soft);
+  border-radius:999px;padding:9px 13px;font-size:14px;line-height:1.25;font-weight:700;
+  min-height:42px;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s;
+}
+.pick button:hover{background:var(--soft)}
+.pick button.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 4px 12px rgba(47,134,181,.18)}
+.pick button .em{font-size:15px;margin-right:4px}
+.pick.wide button{width:100%;border-radius:14px}
+
+/* 소재 고르기 카드형 */
+.pick-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.pick-cards button{
+  appearance:none;border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 12px;
+  text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);min-height:64px;
+  display:flex;flex-direction:column;gap:3px;transition:border-color .15s,background .15s;
+}
+.pick-cards button .t{font-size:13.5px;font-weight:800;line-height:1.35}
+.pick-cards button .e{font-size:11.5px;color:var(--muted);font-weight:600}
+.pick-cards button.on{border-color:var(--brand);background:var(--soft);box-shadow:inset 0 0 0 1px var(--brand)}
+.pick-cards button.on .e{color:var(--brand-d)}
+
+/* ---------- 배지 ---------- */
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 9px;font-size:11.5px;font-weight:800;line-height:1.4;border:1px solid transparent;vertical-align:middle}
+.badge.ok{background:#e9f7f0;color:#15704f;border-color:#c7e9d8}
+.badge.warn{background:#fdf3e4;color:#96600f;border-color:#f2ddb7}
+.badge.info{background:var(--soft);color:var(--brand-d);border-color:var(--badge-line)}
+.badge.gray{background:#f1f5f8;color:var(--muted);border-color:var(--line)}
+
+/* ---------- 3단 구조 ---------- */
+.stepb{border:1px solid var(--line);border-radius:16px;padding:12px 13px;margin-top:10px;background:#fff}
+.stepb>.h{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px}
+.stepb>.h .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.stepb>.h .t{font-size:14.5px;font-weight:900;line-height:1.4}
+.stepb>.h .s{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:1px}
+.stepb p{margin:0 0 8px;font-size:14.5px;line-height:1.7}
+.stepb p:last-child{margin-bottom:0}
+.stepb ul{margin:0 0 6px;padding-left:18px}
+.stepb li{font-size:14.5px;line-height:1.65;margin-bottom:5px}
+.stepb.my{border-color:var(--badge-line);background:linear-gradient(180deg,#fff,var(--soft2))}
+
+/* ---------- 복사 상자 ---------- */
+.txtbox{
+  white-space:pre-wrap;font-size:14px;line-height:1.68;background:var(--bg);border:1px solid var(--line);
+  border-radius:14px;padding:12px 13px;margin-top:8px;color:var(--ink);word-break:keep-all;
+}
+.txtbox.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;white-space:pre;overflow-x:auto}
+.copyrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.copyrow .btn{min-height:40px;padding:8px 13px;font-size:13px}
+.copyrow .btn.wide{flex:1 1 100%}
+
+/* ---------- 인스타 카드 ---------- */
+.insta-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+.icard{
+  position:relative;aspect-ratio:1/1;border-radius:20px;padding:22px 20px;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(155deg,#eff9fe 0%,#fdf4f8 58%,#ffffff 100%);
+  border:1px solid var(--badge-line);box-shadow:0 8px 22px rgba(23,58,72,.06);
+}
+.icard.dark{background:linear-gradient(155deg,#2f86b5,#1f6f96 55%,#1b5d80);border-color:#1f6f96;color:#fff}
+.icard .top{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:900;letter-spacing:.08em;color:var(--brand-d);opacity:.95}
+.icard.dark .top{color:#dff2fb}
+.icard .k{font-size:11px;font-weight:900;color:var(--brand-d);margin-bottom:6px;letter-spacing:.02em}
+.icard.dark .k{color:#dff2fb}
+.icard h3{margin:0;font-size:27px;line-height:1.28;font-weight:900;letter-spacing:-.02em;white-space:pre-line}
+.icard .sub{font-size:13.5px;color:var(--ink-soft);margin-top:9px;font-weight:700}
+.icard.dark .sub{color:#e4f4fc}
+.icard ul{margin:2px 0 0;padding:0;list-style:none}
+.icard li{font-size:15.5px;font-weight:800;line-height:1.5;margin-bottom:8px;padding-left:16px;position:relative}
+.icard li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+.icard.dark li::before{background:#9fd8f0}
+.icard .foot{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.02em}
+.icard.dark .foot{color:#cfebf8}
+
+/* ---------- 퀴즈 ---------- */
+.qlist{counter-reset:qi;margin-top:8px}
+.qi{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:9px;background:#fff}
+.qi .qh{display:flex;gap:8px;align-items:flex-start}
+.qi .qn{flex:0 0 22px;height:22px;border-radius:7px;background:var(--soft);color:var(--brand-d);font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.qi .qt{font-size:14.5px;font-weight:800;line-height:1.5}
+.qi .opts{margin:7px 0 0;padding:0;list-style:none}
+.qi .opts li{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:3px}
+.qi .ans{margin-top:7px;font-size:13px;line-height:1.55;color:var(--ok);font-weight:800}
+.qi .ans .why{display:block;color:var(--ink-soft);font-weight:600;margin-top:2px}
+.qi .ans .hint{display:block;color:var(--muted);font-weight:600;font-size:12.5px}
+.qi.hide .ans,.qi.hide .opts{display:none}
+
+/* ---------- 근거 표 ---------- */
+.facts{margin-top:6px}
+.facts .row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line)}
+.facts .row:first-child{border-top:0}
+.facts .k{font-size:12.5px;font-weight:900;color:var(--brand-d);line-height:1.5}
+.facts .v{font-size:13.5px;line-height:1.62;color:var(--ink)}
+.facts .src{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.sources{list-style:none;padding:0;margin:8px 0 0}
+.sources li{font-size:12.5px;line-height:1.55;color:var(--ink-soft);padding:7px 0;border-top:1px dashed var(--line)}
+.sources li:first-child{border-top:0}
+.sources a{word-break:break-all}
+
+/* ---------- 안내 박스 ---------- */
+.warnbox{border:1px solid #f2ddb7;background:#fffaf0;border-radius:14px;padding:10px 12px;font-size:13px;line-height:1.6;color:#7a5209;margin-top:9px}
+.warnbox b{color:#6b4707}
+.okbox{border:1px solid #c7e9d8;background:#f4fcf8;border-radius:14px;padding:10px 12px;font-size:13px;line-height:1.6;color:#146b4c;margin-top:9px}
+
+/* ---------- 추가 입력 ---------- */
+.addform{display:grid;gap:9px;margin-top:8px}
+.addform .field{margin:0}
+.addform textarea{min-height:64px}
+.savedlist{margin-top:10px}
+.savedlist .it{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:#fff}
+.savedlist .it .nm{flex:1;font-size:13.5px;font-weight:800;line-height:1.4}
+.savedlist .it .x{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:9px;padding:5px 9px;font-size:12px;font-weight:700}
+
+/* ---------- 요약 줄 ---------- */
+.kvline{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:7px;font-size:12.5px;color:var(--muted)}
+.kvline b{color:var(--ink-soft)}
+
+/* ---------- 두 칸 이동 ---------- */
+.webnav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0 8px}
+.webnav a{display:block;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff;text-decoration:none}
+.webnav a .k{display:block;font-size:11.5px;color:var(--muted);font-weight:800}
+.webnav a .v{display:block;font-size:14px;font-weight:900;color:var(--brand-d);margin-top:2px}
+
+@media (min-width:620px){
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+  .icard h3{font-size:22px}
+  .icard li{font-size:13.5px}
+  .pick-cards{grid-template-columns:repeat(3,1fr)}
+}

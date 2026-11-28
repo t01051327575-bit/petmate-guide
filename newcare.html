@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEWCARE 신제품 보호자 설명 · 굿모닝펫</title>
+<meta name="description" content="보호자가 쓰는 증상 언어를 고르면 ① 증상 확인 질문 ② 설명 ③ 다음 단계가 나오고, 직원이 그대로 읽는 문장과 400자 카톡 문구, 신제품 퀴즈 7문제까지 한 번에 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="NEWCARE · 신제품 보호자 설명 | 굿모닝펫">
+<meta property="og:description" content="증상 언어 → 확인 질문 → 설명 → 다음 단계. 직원용 문장과 카톡 문구, 신제품 퀴즈까지.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/newcare.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128g">
+<link rel="stylesheet" href="assets/g-newpages.css?v=20261128a">
+</head>
+<body data-code="NEWCARE">
+<div id="g-top"></div>
+
+<div class="wrap">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">NEWCARE</span>
+      <span class="eng-chip">신제품 설명</span>
+    </div>
+    <h1>보호자가 하는 말에서<br>설명이 시작됩니다</h1>
+    <p>"다리가 아파요"라고 하면 "안 가는 게 아니라 아파서 그러는 거예요"로 이어지게. 신제품이 들어오면 설명·카톡·직원 퀴즈까지 같은 근거로 만듭니다.</p>
+    <div class="marks"><span>증상 언어</span><span>3단 설명</span><span>직원 문장</span><span>GQN 퀴즈</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>보호자가 하는 말<small>실제로 쓰는 표현을 고르세요</small></h2></div>
+    <p class="np-lead">증상 언어를 고르면 아래 3단 설명과 직원용 문장·카톡 문구가 함께 바뀝니다. 제품은 근거가 확인된 것만 효과 문구를 쓰고, 확인 전 항목은 <b>확인 중</b>으로 비워 둡니다.</p>
+    <div class="pick" id="symPick" style="margin-top:10px"></div>
+    <div class="kvline" id="symInfo"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>3단 설명<small>① 확인 질문 → ② 설명 → ③ 다음 단계</small></h2></div>
+    <div id="steps"></div>
+    <div class="copyrow"><button class="btn ghost wide" id="copySteps" type="button">📋 3단 설명 전체 복사</button></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>직원용 문장 · 보호자 카톡<small>그대로 읽는 말 / 400자 이내</small></h2></div>
+    <div class="stepb my">
+      <div class="h"><span class="n">직</span><div class="t">직원이 그대로 읽는 문장<small>존댓말 · 진단을 단정하지 않습니다</small></div></div>
+      <p id="staffText"></p>
+      <div class="copyrow"><button class="btn ghost" id="copyStaff" type="button">📋 복사</button></div>
+    </div>
+    <div class="stepb">
+      <div class="h"><span class="n">톡</span><div class="t">보호자에게 보낼 카톡<small>앞뒤 따옴표 없이 · 문단마다 빈 줄</small></div></div>
+      <textarea class="msg" id="kakao" spellcheck="false"></textarea>
+      <div class="msg-foot"><div class="count" id="kakaoCount"><b>0</b> / 400자</div><span class="np-muted" id="kakaoNote"></span></div>
+      <div class="btns">
+        <button class="btn primary" id="copyKakao" type="button">📋 카톡 문구 복사</button>
+        <button class="btn ghost" id="shareKakao" type="button">카톡으로 공유</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">4</span><h2>근거와 출처<small>확인한 날짜까지 남깁니다</small></h2></div>
+    <div id="evidence"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">5</span><h2>GQN 신제품 퀴즈<small>현장 기준 5~7문제 · 정답·해설 분리</small></h2></div>
+    <p class="np-lead" id="quizLead"></p>
+    <div id="quiz"></div>
+    <div class="btns">
+      <button class="btn ghost" id="toggleAns" type="button">정답 펼치기</button>
+      <button class="btn solid" id="copyQuizQ" type="button">📋 직원에게 보낼 문제</button>
+      <button class="btn ghost" id="copyQuizA" type="button">📋 정답·해설(실장님)</button>
+      <a class="btn ghost wide" href="gqn.html">GQN 퀴즈 칸 열기</a>
+    </div>
+    <p class="note">문제를 보낼 때는 정답을 빼고 보냅니다. 보기 순서는 문제마다 달라서 정답 위치를 외울 수 없습니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">6</span><h2>신제품·시술 추가<small>코드 수정 없이 입력</small></h2></div>
+    <p class="np-lead">새 제품이 들어오면 여기에 적어 두세요. 이 기기에 저장되고, 같은 구조로 설명·카톡·퀴즈가 자동으로 만들어집니다.</p>
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:14px;font-weight:900;color:var(--brand-d)">➕ 새 항목 입력 열기</summary>
+      <div class="addform" style="margin-top:10px">
+        <div class="grid2">
+          <div class="field"><label>보호자가 하는 말</label><input id="f_label" type="text" placeholder="예) 귀를 자꾸 긁어요"></div>
+          <div class="field"><label>대상</label><select id="f_species"><option>개</option><option>묘</option><option>개·묘</option></select></div>
+        </div>
+        <div class="field"><label>제품·시술명</label><input id="f_name" type="text" placeholder="예) 넵트라 (Neptra)"></div>
+        <div class="field"><label>① 증상 확인 질문 <span class="hint">한 줄에 하나</span></label><textarea id="f_ask" style="min-height:64px" placeholder="언제부터 긁었나요?&#10;한쪽 귀만 긁나요?&#10;머리를 흔들거나 냄새가 나나요?"></textarea></div>
+        <div class="field"><label>② 설명</label><textarea id="f_why" style="min-height:64px" placeholder="왜 그런지, 어떤 처치가 있는지"></textarea></div>
+        <div class="field"><label>③ 다음 단계 <span class="hint">한 줄에 하나</span></label><textarea id="f_next" style="min-height:56px"></textarea></div>
+        <div class="field"><label>직원이 그대로 읽는 문장</label><textarea id="f_staff" style="min-height:56px"></textarea></div>
+        <div class="field"><label>보호자 카톡 <span class="hint">비우면 자동으로 만듭니다</span></label><textarea id="f_kakao" style="min-height:56px"></textarea></div>
+        <div class="grid2">
+          <div class="field"><label>성분</label><input id="f_ing" type="text"></div>
+          <div class="field"><label>효능·적응증</label><input id="f_ind" type="text"></div>
+          <div class="field"><label>용법·용량</label><input id="f_dose" type="text"></div>
+          <div class="field"><label>금기·주의</label><input id="f_avoid" type="text"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>출처 링크</label><input id="f_src" type="url" inputmode="url" placeholder="https://"></div>
+          <div class="field"><label>확인일</label><input id="f_date" type="date"></div>
+        </div>
+        <label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.5;margin-top:2px">
+          <input id="f_checked" type="checkbox" style="margin-top:3px">
+          <span>출처를 직접 확인했어요 (체크하면 '근거 확인'으로 표시하고 퀴즈에 효과·용량을 넣습니다)</span>
+        </label>
+        <div class="copyrow"><button class="btn solid" id="addItem" type="button">저장하고 바로 보기</button></div>
+      </div>
+    </details>
+    <div class="savedlist" id="savedList"></div>
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:800;color:var(--brand-d)">JSON으로 내보내기·불러오기</summary>
+      <div class="field" style="margin-top:8px"><textarea class="msg" id="jsonBox" style="min-height:120px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px"></textarea></div>
+      <div class="copyrow">
+        <button class="btn ghost" id="exportJson" type="button">📋 내 항목 JSON 복사</button>
+        <button class="btn ghost" id="importJson" type="button">불러오기</button>
+      </div>
+      <p class="np-muted">다른 기기에서 쓰려면 JSON을 복사해 그 기기에서 불러오세요. 저장 위치는 이 브라우저입니다.</p>
+    </details>
+  </section>
+
+  <nav class="webnav" aria-label="이어서 할 일">
+    <a href="promo.html"><span class="k">이어서 · PROMO</span><span class="v">주 1회 홍보 초안</span></a>
+    <a href="gtn.html"><span class="k">이어서 · GTN</span><span class="v">카톡 안내 생성기</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d" style="font-weight:800;color:#2f6f7e;margin-top:-2px">진심경영멘토 유희진</div>
+    <div class="d">같은 설명을 직원마다 다르게 하지 않도록, 확인된 근거 하나로 문장·카톡·퀴즈를 맞춰 둡니다. 신제품이 들어오면 한 번만 입력하면 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js?v=20261128g"></script>
+<script src="assets/g-care-data.js?v=20261128a"></script>
+<script src="assets/g-care-core.js?v=20261128a"></script>
+<script>
+(function () {
+  var $ = G.q, C = G_CARE_CORE;
+  var KEY = 'gcare_custom_v1';
+  var custom = loadCustom();
+  var state = { symId: G_CARE.SYMPTOMS[0].id, showAns: false };
+
+  function loadCustom() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      var arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+  function saveCustom() {
+    try { localStorage.setItem(KEY, JSON.stringify(custom)); } catch (e) { G.toast('저장 공간이 부족해 저장하지 못했어요'); }
+  }
+  function allSymptoms() { return G_CARE.SYMPTOMS.concat(custom); }
+  function itemOf(id) {
+    if (!id) return null;
+    for (var i = 0; i < G_CARE.ITEMS.length; i++) if (G_CARE.ITEMS[i].id === id) return G_CARE.ITEMS[i];
+    return null;
+  }
+  function current() {
+    var list = allSymptoms();
+    for (var i = 0; i < list.length; i++) if (list[i].id === state.symId) return list[i];
+    return list[0];
+  }
+  function customItem(sym) { return sym.item || null; }
+
+  /* ---------- 증상 칩 ---------- */
+  function renderPick() {
+    var host = $('#symPick');
+    host.innerHTML = '';
+    allSymptoms().forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = s.id === state.symId ? 'on' : '';
+      b.innerHTML = '<span class="em">' + (s.emoji || '🐾') + '</span>' + G.esc(s.label);
+      b.addEventListener('click', function () { state.symId = s.id; renderPick(); renderAll(); });
+      host.appendChild(b);
+    });
+  }
+
+  function renderAll() {
+    var sym = current();
+    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var isCustom = custom.some(function (s) { return s.id === sym.id; });
+
+    $('#symInfo').innerHTML =
+      '대상: <b>' + G.esc(sym.species || '개·묘') + '</b>' +
+      ' · 연결: <b>' + (item ? G.esc(item.name) : '제품 연결 없음(일반 진료 안내)') + '</b>' +
+      ' · 근거: <b>' + (item && item.status === 'verified' ? '공식 자료 확인' : '확인 전 — 효과 문구 없음') + '</b>';
+
+    /* 3단 */
+    var steps = '';
+    steps += '<div class="stepb"><div class="h"><span class="n">1</span><div class="t">증상 확인 질문<small>직원이 이 말 그대로 물어봅니다</small></div></div>' +
+      '<ul>' + (sym.ask || []).map(function (l) { return '<li>' + G.esc(l) + '</li>'; }).join('') + '</ul></div>';
+    steps += '<div class="stepb"><div class="h"><span class="n">2</span><div class="t">설명<small>왜 그런지 · 어떤 약·처치가 있는지</small></div></div>' +
+      '<p>' + (sym.why || []).map(function (p) { return G.esc(p); }).join('</p><p>') + '</p></div>';
+    steps += '<div class="stepb"><div class="h"><span class="n">3</span><div class="t">다음 단계<small>내원·검사·예약</small></div></div>' +
+      '<ul>' + (sym.next || []).map(function (l) { return '<li>' + G.esc(l) + '</li>'; }).join('') + '</ul>' +
+      '<div class="copyrow"><a class="btn ghost" href="gvn.html">진료 신청(GVN) 열기</a></div></div>';
+    $('#steps').innerHTML = steps;
+
+    /* 직원·카톡 */
+    $('#staffText').textContent = sym.staff || '직원용 문장이 아직 없습니다.';
+    var kakao = C.buildKakao(sym, { hospital: G_CARE.hospital, phone: G_CARE.phone });
+    $('#kakao').value = kakao;
+    var n = C.count(kakao);
+    $('#kakaoCount').innerHTML = '<b>' + n + '</b> / 400자';
+    $('#kakaoCount').classList.toggle('over', n > 400);
+    $('#kakaoNote').textContent = n > 400 ? '400자를 넘어 접힙니다' : (n < 250 ? '짧습니다 — 한 문단 더해도 좋아요' : '카톡에 그대로 붙여넣으세요');
+
+    /* 근거 */
+    var ev = '';
+    if (item) {
+      ev += '<div class="facts">' + (item.facts || []).map(function (f) {
+        var src = f.src && G_CARE.SOURCES[f.src] ? G_CARE.SOURCES[f.src] : null;
+        return '<div class="row"><div class="k">' + G.esc(f.k) + '</div><div class="v">' + G.esc(f.v) +
+          (src ? '<span class="src">출처: ' + G.esc(src.publisher) + ' · 확인 ' + G.esc(src.checked) + '</span>' : '') +
+          '</div></div>';
+      }).join('') + '</div>';
+      if (item.sources && item.sources.length) {
+        ev += '<div class="np-gap"></div><div class="np-muted" style="font-weight:800;color:var(--brand-d)">공식 자료</div><ul class="sources">' +
+          item.sources.map(function (k) {
+            var s = G_CARE.SOURCES[k];
+            if (!s) return '';
+            return '<li>' + G.esc(s.label) + '<br><a href="' + G.esc(s.url) + '" target="_blank" rel="noopener">' + G.esc(s.url) + '</a><br><span class="np-muted">확인 ' + G.esc(s.checked) + ' · ' + G.esc(s.publisher) + '</span></li>';
+          }).join('') + '</ul>';
+      } else if (item.srcUrl) {
+        ev += '<div class="np-gap"></div><div class="np-muted">출처: <a href="' + G.esc(item.srcUrl) + '" target="_blank" rel="noopener">' + G.esc(item.srcUrl) + '</a> · 확인 ' + G.esc(item.updated || '') + '</div>';
+      }
+      if (item.status === 'verified') {
+        ev += '<div class="okbox"><b>근거 확인:</b> 출처에서 확인한 내용만 적었습니다. 확인일 ' + G.esc(item.updated || '') + '. 효과·수치는 이 범위를 넘겨 말하지 않습니다.</div>';
+      } else {
+        ev += '<div class="warnbox"><b>확인 중:</b> 병원 자체 임상 결과·효과 수치·다른 제품과의 비교는 확인하지 않았으므로 문구에 넣지 않았습니다. 출처를 확인한 뒤 [근거 확인]으로 바꿔 주세요.</div>';
+      }
+    } else {
+      ev += '<div class="facts"><div class="row"><div class="k">안내 근거</div><div class="v">이 증상은 특정 제품의 효과 문구가 아니라 일반 진료 안내입니다. 진찰·검사로 원인을 확인하는 순서만 적었습니다.</div></div>' +
+        '<div class="row"><div class="k">확인 중</div><div class="v">제품별 효과·용법·금기 문구는 아직 확인하지 않았습니다. 제품을 연결하려면 아래 [신제품·시술 추가]에 출처와 함께 적어 주세요.</div></div></div>';
+    }
+    $('#evidence').innerHTML = ev;
+
+    /* 퀴즈 */
+    var quiz = [];
+    if (item && item.status === 'verified') quiz = C.generateQuiz(item, allItems());
+    var ql = $('#quizLead');
+    if (quiz.length) {
+      ql.innerHTML = '<b>' + G.esc(item.name) + '</b> 기준 ' + quiz.length + '문제입니다. 용량·간격·금기·보호자에게 하는 말이 모두 들어 있습니다.';
+      $('#quiz').innerHTML = quiz.map(function (q, i) {
+        var opts = [q.a].concat(q.wrong || []).slice(0, 3);
+        var h = 0, s = q.q;
+        for (var k = 0; k < s.length; k++) h = (h * 31 + s.charCodeAt(k)) | 0;
+        var off = Math.abs(h) % opts.length;
+        opts = opts.slice(off).concat(opts.slice(0, off));
+        return '<div class="qi' + (state.showAns ? '' : ' hide') + '">' +
+          '<div class="qh"><span class="qn">Q' + (i + 1) + '</span><div class="qt">' + G.esc(q.q) + '</div></div>' +
+          '<ul class="opts">' + opts.map(function (o, j) { return '<li>' + (j + 1) + ') ' + G.esc(o) + '</li>'; }).join('') + '</ul>' +
+          '<div class="ans">정답: ' + G.esc(q.a) +
+          (q.hint ? '<span class="hint">힌트: ' + G.esc(q.hint) + '</span>' : '') +
+          '<span class="why">' + G.esc(q.why || '') + '</span></div></div>';
+      }).join('');
+      $('#toggleAns').textContent = state.showAns ? '정답 접기' : '정답 펼치기';
+    } else {
+      ql.textContent = '이 증상에는 근거가 확인된 제품이 연결되어 있지 않아 퀴즈를 만들지 않았습니다. 신제품을 추가하고 출처를 확인하면 5~7문제가 자동으로 만들어집니다.';
+      $('#quiz').innerHTML = '';
+    }
+
+    renderSaved();
+  }
+
+  function allItems() {
+    var arr = G_CARE.ITEMS.slice();
+    custom.forEach(function (s) { if (s.item) arr.push(s.item); });
+    return arr;
+  }
+
+  function renderSaved() {
+    var host = $('#savedList');
+    if (!custom.length) { host.innerHTML = ''; return; }
+    host.innerHTML = '<div class="np-muted" style="font-weight:800;color:var(--brand-d);margin-top:12px">이 기기에 저장된 항목</div>' +
+      custom.map(function (s) {
+        return '<div class="it"><span class="nm">' + (s.emoji || '🐾') + ' ' + G.esc(s.label) + ' <span class="np-muted">· ' + (s.item && s.item.status === 'verified' ? '근거 확인' : '확인 전') + '</span></span>' +
+          '<button class="x" data-del="' + G.esc(s.id) + '" type="button">삭제</button></div>';
+      }).join('');
+    G.qa('#savedList .x').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-del');
+        custom = custom.filter(function (s) { return s.id !== id; });
+        saveCustom();
+        if (state.symId === id) state.symId = G_CARE.SYMPTOMS[0].id;
+        renderPick(); renderAll();
+        G.toast('삭제했어요');
+      });
+    });
+  }
+
+  /* ---------- 복사 ---------- */
+  function stepText(sym) {
+    return '① 증상 확인 질문\n' + (sym.ask || []).map(function (l) { return '· ' + l; }).join('\n') +
+      '\n\n② 설명\n' + (sym.why || []).join('\n\n') +
+      '\n\n③ 다음 단계\n' + (sym.next || []).map(function (l) { return '· ' + l; }).join('\n');
+  }
+  $('#copySteps').addEventListener('click', function () {
+    G.copy(stepText(current())).then(function (ok) { G.toast(ok ? '3단 설명을 복사했어요' : '복사가 막혔어요'); });
+  });
+  $('#copyStaff').addEventListener('click', function () {
+    G.copy(current().staff || '').then(function (ok) { G.toast(ok ? '직원용 문장을 복사했어요' : '복사가 막혔어요'); });
+  });
+  $('#copyKakao').addEventListener('click', function () {
+    G.copy($('#kakao').value).then(function (ok) { G.toast(ok ? '카톡 문구를 복사했어요' : '복사가 막혔어요'); });
+  });
+  $('#shareKakao').addEventListener('click', function () { G.share($('#kakao').value); });
+  $('#toggleAns').addEventListener('click', function () {
+    state.showAns = !state.showAns;
+    G.qa('#quiz .qi').forEach(function (el) { el.classList.toggle('hide', !state.showAns); });
+    $('#toggleAns').textContent = state.showAns ? '정답 접기' : '정답 펼치기';
+  });
+  $('#copyQuizQ').addEventListener('click', function () {
+    var sym = current();
+    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var quiz = item && item.status === 'verified' ? C.generateQuiz(item, allItems()) : [];
+    if (!quiz.length) { G.toast('이 증상은 연결된 제품 근거가 없어 퀴즈가 없습니다'); return; }
+    G.copy(C.quizQuestionsText(quiz, '🍀 신제품')).then(function (ok) { G.toast(ok ? '직원에게 보낼 문제를 복사했어요 (정답 제외)' : '복사가 막혔어요'); });
+  });
+  $('#copyQuizA').addEventListener('click', function () {
+    var sym = current();
+    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var quiz = item && item.status === 'verified' ? C.generateQuiz(item, allItems()) : [];
+    if (!quiz.length) { G.toast('이 증상은 연결된 제품 근거가 없어 퀴즈가 없습니다'); return; }
+    G.copy(C.quizAnswersText(quiz)).then(function (ok) { G.toast(ok ? '정답·해설을 복사했어요 (실장님 보관용)' : '복사가 막혔어요'); });
+  });
+
+  /* ---------- 추가 ---------- */
+  function val(id) { return ($('#' + id).value || '').trim(); }
+  function lines(id) {
+    return val(id).split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  $('#addItem').addEventListener('click', function () {
+    var label = val('f_label'), name = val('f_name');
+    if (!label) { G.toast('보호자가 하는 말을 적어 주세요'); return; }
+    if (!name) name = label;
+    var checked = $('#f_checked').checked;
+    var srcUrl = val('f_src');
+    var date = val('f_date') || G.today();
+    var facts = [];
+    if (val('f_ing')) facts.push({ k: '성분', v: val('f_ing') });
+    if (val('f_ind')) facts.push({ k: '효능', v: val('f_ind') });
+    if (val('f_dose')) facts.push({ k: '용법·용량', v: val('f_dose') });
+    if (val('f_avoid')) facts.push({ k: '쓸 수 없는 경우', v: val('f_avoid') });
+    var item = {
+      id: 'own-' + Date.now().toString(36),
+      emoji: '✍️',
+      name: name,
+      sub: label,
+      species: $('#f_species').value,
+      status: checked ? 'verified' : 'checking',
+      updated: date,
+      hook: '',
+      summary: (lines('f_why')[0] || ''),
+      facts: facts,
+      sources: [],
+      srcUrl: srcUrl,
+      notes: []
+    };
+    var why = lines('f_why');
+    var ask = lines('f_ask');
+    var next = lines('f_next');
+    var kakao = val('f_kakao');
+    if (!kakao) {
+      kakao = ['안녕하세요, ' + G_CARE.hospital + '입니다.'].concat(why).concat(
+        next.map(function (l) { return '· ' + l; })
+      ).concat(['진단과 처방은 진료 후에 정해집니다. 궁금하시면 편하게 연락 주세요.']).join('\n\n');
+    }
+    var sym = {
+      id: item.id,
+      label: label,
+      emoji: '✍️',
+      species: $('#f_species').value,
+      itemId: 'own',
+      status: checked ? 'verified' : 'checking',
+      ask: ask.length ? ask : ['증상이 언제부터였는지, 달라진 점이 있는지 여쭤봐도 될까요?'],
+      why: why.length ? why : ['같은 증상도 원인에 따라 치료가 달라집니다. 진찰로 원인을 확인하는 것이 먼저입니다.'],
+      next: next.length ? next : ['진찰과 필요한 검사로 원인을 확인한 뒤 방법을 정합니다.'],
+      staff: val('f_staff') || '보호자님, 증상이 언제부터였는지 여쭤봐도 될까요? 아이 상태를 확인하고 필요한 검사를 안내해 드리겠습니다.',
+      kakao: kakao.split(/\n{2,}/).map(function (s) { return s.trim(); }).filter(Boolean),
+      faq: [],
+      hashtags: ['#굿모닝펫동물병원'],
+      item: item
+    };
+    custom.push(sym);
+    saveCustom();
+    state.symId = sym.id;
+    renderPick(); renderAll();
+    G.toast(checked ? '저장했어요 — 근거 확인으로 표시했습니다' : '저장했어요 — 근거 확인 전으로 표시했습니다');
+  });
+
+  function exportJson() {
+    var out = custom.map(function (s) { return s; });
+    $('#jsonBox').value = JSON.stringify(out, null, 2);
+    G.copy($('#jsonBox').value).then(function (ok) { G.toast(ok ? 'JSON을 복사했어요' : '복사가 막혔어요 — 길게 눌러 복사해 주세요'); });
+  }
+  function importJson() {
+    var raw = $('#jsonBox').value.trim();
+    if (!raw) { G.toast('불러올 JSON을 붙여넣어 주세요'); return; }
+    try {
+      var arr = JSON.parse(raw);
+      if (!Array.isArray(arr)) throw new Error('not array');
+      var added = 0;
+      arr.forEach(function (s) {
+        if (!s || !s.id || !s.label) return;
+        if (custom.some(function (x) { return x.id === s.id; })) return;
+        custom.push(s); added++;
+      });
+      saveCustom(); renderPick(); renderAll();
+      G.toast(added ? added + '개를 불러왔어요' : '새로 불러올 항목이 없어요');
+    } catch (e) { G.toast('JSON 형식을 확인해 주세요'); }
+  }
+  $('#exportJson').addEventListener('click', exportJson);
+  $('#importJson').addEventListener('click', importJson);
+
+  renderPick();
+  renderAll();
+})();
+</script>
+<script src="assets/pwa.js?v=20261128a"></script>
+</body>
+</html>
