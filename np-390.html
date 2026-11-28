@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신규 칸 390 미리보기</title>
+<style>
+body{margin:0;background:#2b3238;font-family:sans-serif;display:flex;justify-content:center;padding:10px;gap:10px}
+.frame{width:390px;border:0;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+</style>
+</head><body>
+<script>
+  /* 사용법: np-390.html?p=promo&scroll=0   (p=promo | newcare) */
+  var q = new URLSearchParams(location.search);
+  var p = (q.get('p') || 'promo').replace(/[^a-z]/g, '') || 'promo';
+  if (p !== 'newcare') p = 'promo';
+  var h = parseInt(q.get('h') || '700', 10) || 700;
+  var sc = parseInt(q.get('scroll') || '0', 10) || 0;
+  document.write('<iframe id="f" class="frame" height="' + h + '" src="' + p + '.html?v=390"></iframe>');
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      try { document.getElementById('f').contentWindow.scrollTo(0, sc); } catch (e) {}
+    }, 700);
+  });
+</script>
+</body></html>

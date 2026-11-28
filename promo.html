@@ -217,28 +217,13 @@
 
   /* ---------- 카톡 ---------- */
   function buildKakao(mat) {
-    var paras = [];
-    paras.push('안녕하세요, ' + G_CARE.hospital + '입니다.');
-    paras.push(seasonLine() + mat.hook);
-    paras.push('이런 모습이 있다면 한 번쯤 살펴봐 주세요.\n· ' + mat.signs.join('\n· '));
-    paras.push(mat.why);
-    paras.push('병원에서는 ' + mat.hospital);
-    if (state.link) {
-      var link = state.short || state.link;
-      paras.push('자세히 보기: ' + link);
-    }
-    paras.push(G_CARE.disclaimer);
-    var tail = ($('#phone').value || '').trim();
-    if (tail) paras.push(G_CARE.hospital + ' · ' + tail);
-
-    var text = paras.join('\n\n');
-    var guard = 0;
-    while (C.count(text) > 400 && paras.length > 4 && guard < 6) {
-      paras.splice(paras.length - 2, 1);
-      text = paras.join('\n\n');
-      guard++;
-    }
-    return C.count(text) > 400 ? C.cut(text, 400) : text;
+    return C.buildPromoKakao(mat, {
+      seasonLine: seasonLine(),
+      hospital: G_CARE.hospital,
+      phone: ($('#phone').value || '').trim(),
+      link: state.link ? (state.short || state.link) : '',
+      disclaimer: G_CARE.disclaimer
+    });
   }
 
   /* ---------- FAQ (직접 입력 소재용 기본 문항) ---------- */

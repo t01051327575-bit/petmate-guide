@@ -28,31 +28,56 @@ var G_CARE_CORE = (function () {
     return arr.slice(0, limit - 1).join('') + '…';
   }
 
-  /* ---------- 카톡 문구 ---------- */
+  /* ---------- 카톡 문구 (NEWCARE: 손으로 쓴 문단) ---------- */
   function buildKakao(sym, opt) {
     opt = opt || {};
     var limit = opt.limit || 400;
     var paras = (sym.kakao || []).slice();
+    if (opt.seasonLine && paras.length > 1) paras[1] = opt.seasonLine + paras[1];
+    var hospital = opt.hospital || '굿모닝펫동물병원';
+    var tail = opt.phone ? (hospital + ' · ' + opt.phone) : '';
+    if (tail) paras.push(tail);
 
-    if (opt.seasonLine) {
-      /* 계절 문구는 첫 인사 다음에 붙입니다 */
-      if (paras.length > 1) paras[1] = opt.seasonLine + paras[1];
-      else paras.unshift(opt.seasonLine);
-    }
-    var sign = opt.hospital || '굿모닝펫동물병원';
-    var phone = opt.phone || '031-715-7119';
-    var tail = sign + ' · ' + phone;
-    if (phone) paras.push(tail);
-
-    var text = paras.join('\n\n');
-    /* 넘치면 가운데 설명 문단부터 덜어냅니다(인사·고지는 남김) */
+    function text() { return paras.join('\n\n'); }
+    /* 넘치면 가운데 설명 문단을 덜어내고 고지·연락처는 남깁니다 */
     var guard = 0;
-    while (count(text) > limit && paras.length > 3 && guard < 6) {
-      paras.splice(paras.length - 2, 1);
-      text = paras.join('\n\n');
+    while (count(text()) > limit && paras.length > 3 && guard < 6) {
+      paras.splice(paras.length - 3, 1);
       guard++;
     }
-    return count(text) > limit ? cut(text, limit) : text;
+    var out = text();
+    return count(out) > limit ? cut(out, limit) : out;
+  }
+
+  /* ---------- 카톡 문구 (PROMO: 소재 항목으로 조립) ---------- */
+  function buildPromoKakao(mat, opt) {
+    opt = opt || {};
+    var limit = opt.limit || 400;
+    var hospital = opt.hospital || '굿모닝펫동물병원';
+    var phone = opt.phone || '';
+
+    var parts = [];
+    parts.push({ k: 'greet', v: '안녕하세요, ' + hospital + '입니다.' });
+    parts.push({ k: 'hook', v: (opt.seasonLine || '') + mat.hook });
+    parts.push({ k: 'signs', v: '이런 신호가 있다면:\n· ' + (mat.signs || []).join('\n· ') });
+    parts.push({ k: 'why', v: mat.kakaoWhy || mat.why });
+    parts.push({ k: 'hospital', v: '병원에서는 ' + mat.hospital });
+    if (opt.link) parts.push({ k: 'link', v: '자세히 보기: ' + opt.link });
+    parts.push({ k: 'disclaimer', v: opt.disclaimer || '진단과 처방은 진료 후에 정해집니다. 이 안내는 병원 안내용이며 치료를 대신하지 않습니다.' });
+    if (phone) parts.push({ k: 'tail', v: hospital + ' · ' + phone });
+
+    function text() {
+      return parts.map(function (p) { return p.v; }).filter(Boolean).join('\n\n');
+    }
+    /* 넘치면 설명 → 링크 → 병원 안내 순서로 덜어내고, 인사·고지·연락처는 남깁니다 */
+    var dropOrder = ['why', 'link', 'hospital'];
+    for (var i = 0; i < dropOrder.length && count(text()) > limit; i++) {
+      for (var j = 0; j < parts.length; j++) {
+        if (parts[j].k === dropOrder[i]) { parts.splice(j, 1); break; }
+      }
+    }
+    var out = text();
+    return count(out) > limit ? cut(out, limit) : out;
   }
 
   /* ---------- 블로그 초안 ---------- */
@@ -75,12 +100,16 @@ var G_CARE_CORE = (function () {
     if (mat.caution) p.push('꼭 확인해 주세요. ' + mat.caution);
 
     var body = p.join('\n\n');
-    /* 600자에 못 미치면 마무리 문단을 더합니다 */
-    if (count(body) < 600) {
-      body += '\n\n' + '아이의 평소 모습을 가장 잘 아는 건 보호자님입니다. 조금이라도 달라졌다면 진료 때 함께 이야기해 주세요. 문의는 ' + phone + '로 주시면 됩니다.';
-    }
-    if (count(body) < 600) {
-      body += '\n\n' + '진단과 처방은 진료 후에 정해집니다. 이 글은 병원 안내용이며 치료를 대신하지 않습니다.';
+    /* 600자에 못 미치면 안내 문단을 차례로 더합니다 */
+    var fillers = [
+      '아이의 평소 모습을 가장 잘 아는 건 보호자님입니다. 조금이라도 달라졌다면 진료 때 함께 이야기해 주세요.',
+      '진료는 예약 후에 오시면 대기 시간이 짧습니다. 문의는 ' + phone + '로 주시면 됩니다.',
+      '진단과 처방은 진료 후에 정해집니다. 이 글은 병원 안내용이며 치료를 대신하지 않습니다.'
+    ];
+    var fi = 0;
+    while (count(body) < 600 && fi < fillers.length) {
+      if (body.indexOf(fillers[fi]) < 0) body += '\n\n' + fillers[fi];
+      fi++;
     }
     /* 900자를 넘으면 집에서 할 일 문단을 줄입니다 */
     if (count(body) > 900) {
@@ -260,6 +289,7 @@ var G_CARE_CORE = (function () {
     count: count,
     cut: cut,
     buildKakao: buildKakao,
+    buildPromoKakao: buildPromoKakao,
     buildBlog: buildBlog,
     buildInsta: buildInsta,
     instaText: instaText,
