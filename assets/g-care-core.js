@@ -206,16 +206,15 @@ var G_CARE_CORE = (function () {
         };
       })
     };
-    var obj = { faq: data };
-    if (opt.publisher || opt.url) {
-      obj.provider = {
+    /* 병원 정보는 FAQPage 안이 아니라 publisher(조직)로 넣습니다 */
+    if (opt.hospital) {
+      data.publisher = {
         '@type': 'VeterinaryCare',
-        name: opt.hospital || '굿모닝펫동물병원',
-        telephone: opt.phone || '031-715-7119'
+        name: opt.hospital,
+        telephone: opt.phone || ''
       };
-      if (opt.url) obj.provider.url = opt.url;
     }
-    return JSON.stringify(obj, null, 2);
+    return JSON.stringify(data, null, 2);
   }
 
   /* ---------- GQN 퀴즈 ---------- */
