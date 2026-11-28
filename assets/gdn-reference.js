@@ -13,6 +13,7 @@ window.GDN_REF = {
  },
  "sources": {
   "idexx-cat-2024": {
+   "short": "IDEXX Catalyst One/Dx 참고치표(2024)",
    "doc": "Reference Ranges for the Catalyst One Chemistry Analyzer and Catalyst Dx Chemistry Analyzer (06-18790-09)",
    "org": "IDEXX Laboratories",
    "year": "2024",
@@ -20,6 +21,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "idexx-cat-rev": {
+   "short": "같은 표 개정판 대조",
    "doc": "Reference Ranges for the Catalyst One and Catalyst Dx Chemistry Analyzers (catalyst-species-reference-ranges.pdf, 개정판)",
    "org": "IDEXX Laboratories",
    "year": "2024(판본 확인)",
@@ -27,6 +29,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표(개정판 대조)"
   },
   "idexx-cat-opg-ko": {
+   "short": "IDEXX Catalyst One 사용자 가이드(한국어)",
    "doc": "Catalyst One Chemistry Analyzer 사용자 가이드(한국어, 06-0038584-01) / Catalyst CRP 빠른 참조 가이드",
    "org": "IDEXX Laboratories",
    "year": "2022·2024",
@@ -34,6 +37,7 @@ window.GDN_REF = {
    "stype": "제조사 사용설명서"
   },
   "idexx-procyte-dx": {
+   "short": "IDEXX ProCyte Dx 참고구간표(2019)",
    "doc": "Reference Intervals for the IDEXX ProCyte Dx Hematology Analyzer (VetLab Station SW 5.01, 06-27445-12)",
    "org": "IDEXX Laboratories",
    "year": "2019",
@@ -41,6 +45,7 @@ window.GDN_REF = {
    "stype": "제조사 참고구간표"
   },
   "idexx-procyte-one-2026": {
+   "short": "IDEXX ProCyte One 참고구간표(2026)",
    "doc": "ProCyte One Hematology Analyzer Reference Intervals (VetLab Station SW 8.5.1 이상, 06-0015050-02)",
    "org": "IDEXX Laboratories",
    "year": "2026",
@@ -48,6 +53,7 @@ window.GDN_REF = {
    "stype": "제조사 참고구간표"
   },
   "idexx-procyte-one-ko-2021": {
+   "short": "IDEXX ProCyte One 한국어판(2021)",
    "doc": "IDEXX ProCyte One 혈액 분석기 참고 범위(한국어, SW 5.08 기준, 06-0015050-01)",
    "org": "IDEXX Laboratories",
    "year": "2021",
@@ -55,6 +61,7 @@ window.GDN_REF = {
    "stype": "제조사 참고구간표(한국어판)"
   },
   "lasercyte-uzh": {
+   "short": "LaserCyte 평가논문(2006)",
    "doc": "Wenger-Riggenbach B. et al. Evaluation of the LaserCyte: an in-house haematology analyzer for dogs and cats (Zurich Open Repository, 박사논문; 선형성 표에 LaserCyte 성견 참고구간 기재)",
    "org": "University of Zurich",
    "year": "2006",
@@ -62,6 +69,7 @@ window.GDN_REF = {
    "stype": "2차 문헌(제조사 참고구간 인용)"
   },
   "lasercyte-galgo": {
+   "short": "LaserCyte 제조사값 인용논문(2011)",
    "doc": "Couto G. Hematología del Galgo Español utilizando el analizador hematológico LaserCyte (IDEXX). Clin. Vet. Peq. Anim. 31(4):205-207; \"제조사(IDEXX) 제공 참고구간\" 명시",
    "org": "AVEPA / Clin. Vet. Peq. Anim.",
    "year": "2011",
@@ -69,6 +77,7 @@ window.GDN_REF = {
    "stype": "2차 문헌(제조사 참고구간 인용)"
   },
   "vs2-guide": {
+   "short": "Zoetis VS2 기술문서",
    "doc": "VETSCAN VS2 Hospital Resource Guide — Reference Intervals (common units / SI units)",
    "org": "Zoetis",
    "year": "(게시본, 발행연도 미표기)",
@@ -76,6 +85,7 @@ window.GDN_REF = {
    "stype": "제조사 기술문서"
   },
   "vs2-flyer": {
+   "short": "Zoetis VS2 참고치표 V1.6",
    "doc": "VETSCAN VS2 Reference Ranges V1.6 (VTS-00038)",
    "org": "Zoetis",
    "year": "V1.6",
@@ -83,6 +93,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "hm5-flyer": {
+   "short": "Zoetis HM5 참고치표",
    "doc": "VETSCAN HM5 Reference Intervals (Common Species), VTS-00426",
    "org": "Zoetis",
    "year": "(게시본)",
@@ -90,6 +101,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "hm5-uk-guide": {
+   "short": "Zoetis HM5 기술문서(UK)",
    "doc": "VETSCAN HM5 Hospital Resource Guide (UK) — Reference Intervals, SI units / common units",
    "org": "Zoetis",
    "year": "(게시본)",
@@ -97,6 +109,7 @@ window.GDN_REF = {
    "stype": "제조사 기술문서"
   },
   "hm5-jp": {
+   "short": "Zoetis Japan HM5 참고치표",
    "doc": "ゾエティス・ジャパン ベトスキャン HM5 Reference Intervals (販売会社受領資料)",
    "org": "Zoetis Japan / 펫커뮤니케이션즈",
    "year": "2025",
@@ -104,6 +117,7 @@ window.GDN_REF = {
    "stype": "유통사 기술문서"
   },
   "ht5-bulletin": {
+   "short": "Heska HT5 참고치표(2024)",
    "doc": "Element HT5 Reference Ranges — Product Bulletin (US19LT0408_001)",
    "org": "Heska / Antech Diagnostics",
    "year": "2024",
@@ -111,6 +125,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "ht5-de": {
+   "short": "Heska HT5 참고치표(독일어판)",
    "doc": "Element HT5 Referenzwerte (DE, V_202412)",
    "org": "Antech Diagnostics",
    "year": "2024-12",
@@ -118,6 +133,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표(독일어판)"
   },
   "epoc-bulletin": {
+   "short": "Heska Element POC 참고치표(2018)",
    "doc": "Element POC Blood Gas & Electrolyte Analyzer — Reference Ranges and Reportable Ranges, Product Bulletin (18LT0903)",
    "org": "Heska",
    "year": "2018",
@@ -125,6 +141,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "epoc-manual": {
+   "short": "Heska Element POC 설명서(2024)",
    "doc": "Element POC Product Manual (US23MD0402-001) — 종별 참고범위 제공(개·고양이·말) 명시",
    "org": "Heska / Antech",
    "year": "2024",
@@ -132,6 +149,7 @@ window.GDN_REF = {
    "stype": "제조사 사용설명서"
   },
   "pt10v-ri": {
+   "short": "Samsung PT10V 참고구간표",
    "doc": "Samsung PT10V Reference Intervals 1·2 (제조사 참고구간표, Scil 유통본)",
    "org": "Samsung Electronics (현 i-SENS 유통)",
    "year": "(발행연도 미표기)",
@@ -139,6 +157,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "pt10v-news": {
+   "short": "데일리벳·전자신문(유통 확인)",
    "doc": "데일리벳 \"삼성 동물임상화학분석기 PT10V\" / 전자신문 \"삼성전자 의료기기, 수의학 시장 겨냥\" — 국내 유통·판매 확인",
    "org": "데일리벳·전자신문",
    "year": "2015·2016",
@@ -146,6 +165,7 @@ window.GDN_REF = {
    "stype": "언론(국내 유통 확인)"
   },
   "vetchroma-brochure": {
+   "short": "Boditech VetChroma 제품자료(2018)",
    "doc": "VET CHROMA Animal Immunofluorescence Analyzer (Boditech Med, Ver 01_20180308_8P_EN) — 항목별 cut-off/판정구간",
    "org": "Boditech Med",
    "year": "2018",
@@ -153,6 +173,7 @@ window.GDN_REF = {
    "stype": "제조사 제품자료"
   },
   "vetchroma-hba1c": {
+   "short": "VetChroma HbA1c 논문(2026)",
    "doc": "Adam D. et al. Evaluation of a canine hemoglobin A1c point-of-care assay (VetChroma), 2026 — 건강한 젊은 개 HbA1c 참고구간 1.25–2.75%",
    "org": "PMC (peer-reviewed)",
    "year": "2026",
@@ -160,6 +181,7 @@ window.GDN_REF = {
    "stype": "공개 논문"
   },
   "vetchroma-dailyvet": {
+   "short": "데일리벳(유통 확인)",
    "doc": "데일리벳 \"베트 크로마 출시\" / \"벳크로마 신제품\" — 국내 유통사(웅비메디텍·웅비애니벳), 검사 항목",
    "org": "데일리벳",
    "year": "2017·2019",

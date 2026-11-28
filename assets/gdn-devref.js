@@ -109,7 +109,7 @@
     var s = REF.sources[id];
     if (!s) return id;
     if (full) return s.doc + ' · ' + s.org + ' · ' + s.year + ' · ' + s.url;
-    return s.org + ' ' + s.year;
+    return s.short || (s.org + ' ' + s.year);
   }
   function srcLine(r) {
     var ids = r.src || [];
@@ -143,9 +143,10 @@
     (p.unverified || []).forEach(function (u) { unres[u.code] = u.note; });
 
     /* 요약 */
-    var cnt = { ok: 0, edge: 0, bad: 0, hold: 0 };
+    var cnt = { ok: 0, edge: 0, bad: 0, hold: 0, na: 0 };
     rows.forEach(function (row) {
       var r = vals[row.code];
+      if (!r && !unres[row.code]) { row.ref = null; row.j = { level: 'na', label: '—' }; cnt.na++; return; }
       var j = judge(r, row.value);
       row.ref = r; row.j = j; cnt[j.level]++;
     });
@@ -154,6 +155,7 @@
       '<span class="chip c-edge">경계 ' + cnt.edge + '</span>' +
       '<span class="chip c-bad">치료 필요 ' + cnt.bad + '</span>' +
       '<span class="chip c-hold">판정 보류 ' + cnt.hold + '</span>' +
+      (cnt.na ? '<span class="chip c-hold">이 장비에 없음 ' + cnt.na + '</span>' : '') +
       '<span class="chip c-hold">' + esc(p.label) + ' · ' + rows.length + '항목 입력</span>';
 
     /* 그룹별 표 */
@@ -236,10 +238,12 @@
         a.push('- ' + nm + ' ' + fmt(row.value) + ' ' + (row.unit || row.ref.unit) + ' (참고 ' + fmt(row.ref.lo) + '–' + fmt(row.ref.hi) + ') — ' + row.j.label);
         b.push('- ' + nm + ': ' + srcLine(row.ref).short.replace(/^출처: /, '') + (row.ref.conflict ? ' (출처 간 차이 있음)' : ''));
         if (row.j.level !== 'ok') abn.push(nm);
-      } else {
+      } else if (unres[row.code]) {
         a.push('- ' + nm + ' ' + fmt(row.value) + ' — 판정 보류(참고치 확인 필요)');
         b.push('- ' + nm + ': 근거 없음 — 원장님 판단');
         abn.push(nm);
+      } else {
+        a.push('- ' + nm + ' ' + fmt(row.value) + ' — 이 장비 검사 항목 아님');
       }
     });
     var t = '① 현재 상태\n' + a.join('\n') + '\n\n' +
