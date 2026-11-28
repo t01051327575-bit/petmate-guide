@@ -750,6 +750,21 @@
   /* ================= 체크 저장 ================= */
   function mark(k, slot, medId) {
     if (getChk(k)) { G.toast('이미 체크했어요 — ' + hhmm(getChk(k).at)); return; }
+    var mm = findMed(medId);
+    if (mm && (mm.kind === 'eye' || mm.kind === 'ear')) {
+      var sm = slotMap(viewDate)[slot];
+      if (sm && sm.eyes.length > 1) {
+        var idx = -1;
+        for (var j = 0; j < sm.eyes.length; j++) { if (sm.eyes[j].id === medId) { idx = j; break; } }
+        if (idx > 0) {
+          var pc = getChk(chkKey(viewDate, slot, sm.eyes[idx - 1].id));
+          if (pc && (Date.now() - pc.at) < (state.interval * 60000)) {
+            var left = Math.ceil((state.interval * 60000 - (Date.now() - pc.at)) / 60000);
+            G.toast('아직 ' + left + '분 남았어요 — 한꺼번에 넣지 마세요. 넣었다면 그대로 기록됩니다');
+          }
+        }
+      }
+    }
     chkSet(k, { at: Date.now(), by: '보호자' });
     if (navigator.vibrate) { try { navigator.vibrate(25); } catch (e) {} }
     renderSchedule(); syncSoon();
