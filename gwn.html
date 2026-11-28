@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GWN 체중 관리 · 만성질환 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<title>GWN 체중 관리 · 식이 관리 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GWN — 체중을 날짜별로 기록하고, 운동·식사·간식을 남기고, 위에서 찍은 사진으로 BCS를 추정해 병원과 함께 봅니다.">
 <meta name="theme-color" content="#eaf6fb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,17 +14,92 @@
 <meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
-<meta property="og:title" content="GWN · 체중 관리 · 만성질환 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<meta property="og:title" content="GWN · 체중 관리 · 식이 관리 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GWN — 체중을 날짜별로 기록하고, 운동·식사·간식을 남기고, 위에서 찍은 사진으로 BCS를 추정해 병원과 함께 봅니다.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gwn.html">
 <meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GWN · 체중 관리 · 만성질환">
-<meta name="twitter:description" content="굿모닝펫 GWN — 체중을 날짜별로 기록해 변화 그래프와 목표까지 남은 양을 보여주고, 보호자용 체중 관리 안내를 만듭니다.">
+<meta name="twitter:title" content="GWN · 체중 관리 · 식이 관리">
+<meta name="twitter:description" content="체중·운동·식사·간식 기록과 위에서 찍는 BCS 사진을 한곳에.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* GWN 전용 — 체중 기록 · 식이 관리 · BCS 사진 */
+.gwn-goal{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px}
+.gwn-goal button{appearance:none;font-family:inherit;cursor:pointer;border:1.5px solid var(--line);
+  background:var(--bg);color:var(--ink-soft);font-size:13px;font-weight:800;border-radius:999px;padding:8px 12px}
+.gwn-goal button[aria-pressed="true"]{border-color:var(--brand);background:var(--soft);color:var(--brand-d)}
+.state{margin-top:10px;font-size:12.5px;font-weight:700;line-height:1.6;padding:10px 12px;border-radius:12px;
+  border:1px solid var(--badge-line);background:var(--soft2);color:var(--ink-soft)}
+.state.ok{background:#eef9f3;border-color:#cdeadd;color:var(--ok)}
+.state.warn{background:#fff8ec;border-color:#f2e0c2;color:var(--warn)}
+.state b{color:inherit}
+.week{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.week span{font-size:12.5px;font-weight:800;background:var(--soft);color:var(--brand-d);
+  border:1px solid var(--badge-line);border-radius:999px;padding:6px 10px}
+/* 운동 타이머 */
+.timer{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.timer .clock{font-variant-numeric:tabular-nums;font-size:22px;font-weight:900;color:var(--brand-d);letter-spacing:.02em}
+.timer .tl{font-size:12px;color:var(--muted);font-weight:700}
+.sess{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sess i{font-style:normal;font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:5px 9px;color:var(--ink-soft)}
+/* 사진 */
+.shotbox{border:1.5px dashed var(--badge-line);border-radius:16px;padding:14px;text-align:center;background:var(--bg)}
+.shotbox p{margin:0 0 10px;font-size:13px;color:var(--ink-soft);line-height:1.6}
+.shotbox .btn{min-width:170px}
+#camWrap{display:none;position:relative;margin-top:12px;border-radius:16px;overflow:hidden;background:#0b1418}
+#camWrap.on{display:block}
+#camWrap .camstage{position:relative;width:100%;padding-top:133.33%;overflow:hidden}
+#camWrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#camWrap .ov{position:absolute;inset:0;pointer-events:none}
+#camWrap .ov .frame{position:absolute;left:5%;right:5%;top:8%;bottom:8%;border:2px dashed rgba(255,255,255,.9);border-radius:14px}
+#camWrap .ov .mid{position:absolute;left:50%;top:8%;bottom:8%;border-left:1px dashed rgba(255,255,255,.45)}
+#camWrap .ov .head{position:absolute;left:6%;top:10%;font-size:11px;font-weight:900;color:#fff;background:rgba(0,0,0,.45);border-radius:8px;padding:3px 7px}
+#camWrap .ov .tail{position:absolute;right:6%;top:10%;font-size:11px;font-weight:900;color:#fff;background:rgba(0,0,0,.45);border-radius:8px;padding:3px 7px}
+#camWrap .ov .hint{position:absolute;left:0;right:0;bottom:5%;text-align:center;font-size:12px;font-weight:800;color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,.7);padding:0 10px;line-height:1.5}
+#camWrap .camctl{display:flex;gap:8px;padding:10px;background:#0b1418}
+#camWrap .camctl .btn{flex:1}
+.canvasWrap{position:relative;margin-top:12px;border-radius:14px;overflow:hidden;background:#0d171c;touch-action:none}
+#measCanvas{display:block;width:100%;height:auto}
+.measHint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px}
+.bcsOut{margin-top:10px;border:1px solid var(--badge-line);border-radius:14px;padding:12px;background:var(--soft2)}
+.bcsOut .big{font-size:19px;font-weight:900;color:var(--brand-d);letter-spacing:-.01em}
+.bcsOut .sub{font-size:13px;color:var(--ink-soft);font-weight:700;margin-top:3px}
+.bcsOut .disc{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+.bcsOut .hosp{margin-top:8px;font-size:12.5px;font-weight:800;color:var(--ok)}
+/* 사진 이력 */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.shots button{appearance:none;font-family:inherit;cursor:pointer;border:2px solid transparent;background:#fff;border-radius:12px;
+  padding:0;overflow:hidden;text-align:left;box-shadow:var(--shadow)}
+.shots button[aria-pressed="true"]{border-color:var(--brand)}
+.shots .ph{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#e8f1f5}
+.shots .cap{display:block;font-size:10.5px;font-weight:800;color:var(--ink-soft);padding:5px 6px;line-height:1.35}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cmp figure{margin:0;border:1px solid var(--badge-line);border-radius:12px;overflow:hidden;background:#fff}
+.cmp canvas{display:block;width:100%;height:auto}
+.cmp figcaption{font-size:11px;font-weight:800;color:var(--ink-soft);padding:6px;line-height:1.45}
+.cmpDelta{margin-top:8px;font-size:12.5px;font-weight:800;color:var(--brand-d);background:var(--soft);
+  border:1px solid var(--badge-line);border-radius:12px;padding:9px 11px;line-height:1.6}
+/* 칭찬 */
+.praise{border:1px solid #e7dcc0;background:linear-gradient(135deg,#fffdf6,#fff7e6);border-radius:16px;padding:13px;margin-top:10px}
+.praise .t{font-size:14px;font-weight:900;color:#8a631f}
+.praise .b{font-size:13px;color:#5b4a2b;line-height:1.6;margin-top:4px}
+.praise .m{font-size:11.5px;color:#9a875f;margin-top:6px;font-weight:700}
+.streak{display:flex;align-items:center;gap:8px;margin-top:10px}
+.streak b{font-size:15px;font-weight:900;color:var(--accent-d)}
+.plist{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.plist div{font-size:12px;color:var(--ink-soft);background:#fffdf5;border:1px dashed #ecdfc0;border-radius:10px;padding:7px 9px;line-height:1.5}
+.month{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+.month th,.month td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+.month th{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.02em}
+.month td b{font-size:14px}
+.months{margin-top:10px}
+@media (max-width:400px){.grid3{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body data-code="GWN">
 <div id="g-top"></div>
@@ -35,27 +110,68 @@
       <span class="code-chip">GWN</span>
       <span class="eng-chip">W · Weight</span>
     </div>
-    <h1>체중 관리 · 만성질환</h1>
-    <p>체중을 기록하면 변화가 보이고, 목표까지 얼마나 남았는지·어떤 속도로 줄일지 계산됩니다.</p>
-    <div class="marks"><span>체중 기록</span><span>변화 그래프</span><span>감량 안내</span></div>
+    <h1>체중 관리 · 식이 관리</h1>
+    <p>체중을 기록하면 변화가 보이고, 운동·식사·간식을 남기면 다음 진료에서 무엇이 효과였는지 보입니다.</p>
+    <div class="marks"><span>체중 기록</span><span>식이 관리</span><span>BCS 사진</span></div>
   </header>
+
+  <section class="card" id="fromVet" style="display:none;border-color:#cdeadd;background:linear-gradient(135deg,#f2fbf6,#ffffff)">
+    <div class="sec-head"><span class="num">✚</span><h2 id="fromVetTitle">원장님이 정한 목표<small>이 목표로 오늘부터 기록합니다</small></h2></div>
+    <p id="fromVetBody" style="font-size:14px;line-height:1.7"></p>
+    <p class="note">목표가 다르면 아래 <b>식이 관리 목표</b>에서 바꿀 수 있습니다. 바뀐 목표는 병원에도 함께 전달됩니다.</p>
+  </section>
 
   <section class="card">
     <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>W · Weight — 만성질환 관리의 첫 숫자</small></h2></div>
-    <p>관절·심장·당뇨·신장은 모두 <b>체중에서 시작</b>합니다. 집에서 잰 체중을 기록해 두면, 진료실에서 6개월의 흐름이 한눈에 보입니다.</p>
+    <p>관절·심장·당뇨·신장·피부 알러지는 모두 <b>체중과 먹는 것에서 시작</b>합니다. 집에서 남긴 기록이 진료실에서 6개월의 흐름을 한눈에 보이게 합니다.</p>
     <ul class="clean">
-      <li>날짜별 체중을 기록하고 <b>변화 그래프</b>를 봅니다.</li>
-      <li>목표 체중까지 <b>남은 양과 안전한 속도</b>를 계산합니다.</li>
-      <li>보호자에게 보낼 <b>체중 관리 안내</b>를 만듭니다.</li>
+      <li>날짜별 체중·BCS를 기록하고 <b>변화 그래프</b>를 봅니다.</li>
+      <li>운동·사료·간식·먹은 것 사진을 <b>매일</b> 남깁니다.</li>
+      <li>위에서 찍은 사진으로 <b>BCS를 추정</b>하고 날짜별로 비교합니다.</li>
+      <li>기록이 이어지면 <b>칭찬</b>이 쌓여 한 달 요약으로 남습니다.</li>
     </ul>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>체중 기록<small>이 기기 브라우저에 저장됩니다</small></h2></div>
+    <div class="sec-head"><span class="num">2</span><h2>아이와 목표<small>목표에 따라 받는 칸이 달라집니다</small></h2></div>
     <div class="grid2">
-      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
-      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지" autocomplete="name"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이" autocomplete="off"></div>
     </div>
+    <div class="field"><label>식이 관리 목표<span class="hint">원장님 코멘트에 나온 목표를 그대로 고르세요</span></label>
+      <div class="gwn-goal" id="goalChips">
+        <button type="button" data-goal="체중 조절">체중 조절</button>
+        <button type="button" data-goal="알러지 관리">알러지 관리</button>
+        <button type="button" data-goal="피부">피부</button>
+        <button type="button" data-goal="소화">소화</button>
+        <button type="button" data-goal="관절">관절</button>
+      </div>
+    </div>
+    <p class="note" id="goalNote">아이 이름과 목표를 넣으면 이 기기에 저장되어, 다음에 열 때 그대로 이어집니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">↗</span><h2>보호자에게 같이 보내기<small>링크·문구만 만들어 둡니다 (발송은 하지 않습니다)</small></h2></div>
+    <p class="note" style="margin-top:0">원장님 진료에서 식이 관리가 나온 아이에게, 그 아이 목표가 미리 세팅된 링크를 보낼 수 있습니다. 보호자가 열면 바로 오늘 기록을 시작합니다.</p>
+    <div class="grid2" style="margin-top:9px">
+      <div class="field"><label>아이</label><input id="lkPet" type="text" placeholder="예: 콩이"></div>
+      <div class="field"><label>보호자</label><input id="lkGuardian" type="text" placeholder="예: 김민지"></div>
+    </div>
+    <div class="field"><label>목표</label><select id="lkGoal">
+      <option value="weight">체중 조절</option><option value="allergy">알러지 관리</option><option value="skin">피부</option><option value="digest">소화</option><option value="joint">관절</option>
+    </select></div>
+    <div class="btnrow">
+      <button class="btn primary" id="mkLink" type="button">링크 만들기</button>
+      <button class="btn ghost" id="copyLink" type="button">링크 복사</button>
+      <button class="btn ghost" id="copyMsg" type="button">카톡 문구 복사</button>
+    </div>
+    <div id="linkOut" class="state" style="display:none"></div>
+    <div id="msgOut" class="state" style="display:none;white-space:pre-wrap"></div>
+    <p class="note">보호자에게는 <b>그 아이 한 명</b>의 기록만 보입니다. 문구는 400자 이내·문단마다 빈 줄이며, 실제 발송은 원장님·원무과가 확인한 뒤에 합니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>체중 기록<small>이 기기와 병원에 함께 저장됩니다</small></h2></div>
     <div class="grid3">
       <div class="field"><label>날짜</label><input id="wdate" type="date"></div>
       <div class="field"><label>체중 (kg)</label><input id="wval" type="number" inputmode="decimal" step="0.1" min="0.2" placeholder="5.2"></div>
@@ -63,17 +179,144 @@
     </div>
     <div class="grid2">
       <div class="field"><label>목표 체중 (kg)</label><input id="target" type="number" inputmode="decimal" step="0.1" min="0.2" placeholder="4.6"></div>
-      <div class="field"><label>BCS (1~9)</label>
-        <select id="bcs"><option value="">모름</option><option value="3">3 · 마름</option><option value="4">4 · 약간 마름</option><option value="5">5 · 적정</option><option value="6">6 · 약간 과체중</option><option value="7">7 · 과체중</option><option value="8">8 · 비만</option><option value="9">9 · 심한 비만</option></select>
+      <div class="field"><label>병원 확인 BCS (1~9)</label>
+        <select id="hospBcs"><option value="">아직 확인 전</option><option value="1">1 · 심한 마름</option><option value="2">2 · 마름</option><option value="3">3 · 마름</option><option value="4">4 · 약간 마름</option><option value="5">5 · 적정</option><option value="6">6 · 약간 과체중</option><option value="7">7 · 과체중</option><option value="8">8 · 비만</option><option value="9">9 · 심한 비만</option></select>
       </div>
     </div>
-    <div id="chartWrap" class="chart" style="display:none"><svg class="spark" id="spark" viewBox="0 0 320 120" preserveAspectRatio="none"></svg></div>
+    <p class="note" id="bcsSource">BCS는 병원이 확인한 값이 기준입니다. 사진으로 계산하는 값은 참고용 추정치입니다.</p>
+    <div id="saveState" class="state" style="display:none"></div>
+    <div id="chartWrap" class="chart" style="display:none"><svg class="spark" id="spark" viewBox="0 0 320 150" preserveAspectRatio="none"></svg></div>
     <div id="list" style="margin-top:10px"></div>
-    <div class="btns"><button class="btn ghost wide" id="clearW" type="button">기록 모두 지우기</button></div>
+    <div class="btns"><button class="btn ghost wide" id="clearW" type="button">이 기기의 기록 모두 지우기</button></div>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">3</span><h2>지금 상태<small>기록이 쌓일수록 정확해집니다</small></h2></div>
+    <div class="sec-head"><span class="num">4</span><h2>식이 관리 기록<small>체중만 재지 않고, 무엇을 했는지 남깁니다</small></h2></div>
+
+    <div class="field"><label>오늘 운동<span class="hint">시작을 누르고, 끝나면 완료</span></label></div>
+    <div class="timer">
+      <button class="btn solid" id="exStart" type="button">▶ 운동 시작</button>
+      <button class="btn primary" id="exStop" type="button" style="display:none">■ 완료</button>
+      <span class="clock" id="exClock">00:00</span>
+      <span class="tl" id="exNote">오늘 0분</span>
+    </div>
+    <div class="sess" id="exSess"></div>
+    <div class="grid3" style="margin-top:10px">
+      <div class="field"><label>직접 입력 (분)</label><input id="walkMin" type="number" inputmode="numeric" min="0" step="5" placeholder="30"></div>
+      <div class="field"><label>강도</label><select id="walkLevel"><option value="가볍게">가볍게</option><option value="보통" selected>보통</option><option value="힘들게">힘들게</option></select></div>
+      <div class="field"><label>&nbsp;</label><button class="btn ghost" id="addWalk" type="button" style="width:100%">시간 더하기</button></div>
+    </div>
+    <div class="gwn-goal" id="exChips" style="margin-bottom:10px">
+      <button type="button" data-ex="산책">산책</button>
+      <button type="button" data-ex="계단">계단</button>
+      <button type="button" data-ex="놀이">놀이</button>
+      <button type="button" data-ex="수영">수영</button>
+      <button type="button" data-ex="재활">재활</button>
+    </div>
+
+    <div class="grid2">
+      <div class="field"><label>먹는 것</label>
+        <select id="foodKind"><option value="">골라 주세요</option><option value="병원 처방식">병원 처방식</option><option value="일반 사료">일반 사료</option><option value="화식">화식</option><option value="습식">습식</option><option value="혼합">혼합</option></select>
+      </div>
+      <div class="field"><label>사료 이름<span class="hint">비우면 종류만 저장</span></label><input id="foodName" type="text" placeholder="예: 로얄캐닌 URI" maxlength="40"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>하루 급여량</label><input id="foodAmt" type="number" inputmode="decimal" min="0" step="1" placeholder="120"></div>
+      <div class="field"><label>단위</label><select id="foodUnit"><option value="g">g</option><option value="컵">컵</option></select></div>
+      <div class="field"><label>급여 횟수</label><select id="meals"><option value="1">1회</option><option value="2" selected>2회</option><option value="3">3회</option><option value="4">4회</option><option value="자유급식">자유급식</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>간식</label><select id="treat"><option value="없음">없음</option><option value="조금" selected>조금</option><option value="보통">보통</option><option value="많이">많이</option></select></div>
+      <div class="field"><label>간식 양<span class="hint">예: 닭가슴살 20g</span></label><input id="treatAmt" type="text" placeholder="예: 닭가슴살 20g" maxlength="60"></div>
+    </div>
+
+    <div class="shotbox" id="foodBox">
+      <p id="foodGuide">오늘 먹은 것을 한 장 찍어 주세요. 다음 진료 때 한 달치를 함께 봅니다.</p>
+      <button class="btn primary" id="foodShot" type="button">📷 오늘 먹은 것 찍기</button>
+      <button class="btn ghost" id="foodPick" type="button">🖼 앨범에서</button>
+      <input type="file" id="foodCam" accept="image/*" capture="environment" style="display:none">
+      <input type="file" id="foodFile" accept="image/*" style="display:none">
+      <div id="foodPrev" style="display:none;margin-top:10px">
+        <img id="foodImg" alt="오늘 먹은 것 사진" style="width:100%;max-height:260px;object-fit:cover;border-radius:12px">
+        <button class="btn ghost" id="foodClear" type="button" style="margin-top:8px">사진 지우기</button>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:11px"><label>알러지 노출<span class="hint">오늘 새로 먹은 것·접한 것</span></label><input id="allergy" type="text" placeholder="예: 새 간식(오리) 처음 줌" maxlength="80"></div>
+    <div class="field" style="margin-top:11px"><label>메모<span class="hint">구토·설사·가려움·새로 생긴 것</span></label><input id="dayMemo" type="text" placeholder="예: 저녁에 귀를 긁었어요" maxlength="120"></div>
+
+    <div class="btns">
+      <button class="btn solid wide" id="saveDay" type="button">오늘 식이 관리 저장</button>
+    </div>
+    <div id="dayState" class="state" style="display:none"></div>
+    <div class="streak" id="streakWrap" style="display:none">
+      <b id="streakNum">0일 연속</b><span class="tl" id="streakMsg">오늘 한 번 남기면 시작입니다.</span>
+    </div>
+    <div class="week" id="weekSum"></div>
+    <p class="note">급여량은 병원 처방이 우선입니다. 처방과 다르게 급여하고 있다면 진료 때 말씀해 주세요.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">5</span><h2>위에서 찍는 BCS 사진<small>날짜별로 쌓아 변화를 봅니다</small></h2></div>
+    <p class="note" style="margin-top:0">아이 바로 위에서, 머리부터 꼬리까지 다 보이게 찍어 주세요. 사진 위에 갈비(가장 넓은 곳)와 허리(가장 좁은 곳) 선을 끌어 폭을 재면 BCS를 <b>추정</b>합니다.</p>
+    <div class="shotbox" style="margin-top:10px">
+      <p>오늘 사진 한 장 남기면 변화가 보입니다.</p>
+      <button class="btn primary" id="bcsShot" type="button">📷 위에서 찍기</button>
+      <button class="btn ghost" id="bcsPick" type="button">🖼 앨범에서</button>
+      <input type="file" id="bcsCam" accept="image/*" capture="environment" style="display:none">
+      <input type="file" id="bcsFile" accept="image/*" style="display:none">
+    </div>
+
+    <div id="camWrap">
+      <div class="camstage" id="camStage">
+        <video id="camVideo" playsinline muted autoplay></video>
+        <div class="ov">
+          <div class="frame"></div>
+          <div class="mid"></div>
+          <div class="head">머리</div>
+          <div class="tail">꼬리</div>
+          <div class="hint">아이 바로 위에서 · 머리부터 꼬리까지 다 보이게</div>
+        </div>
+      </div>
+      <div class="camctl">
+        <button class="btn primary" id="camShoot" type="button">● 촬영</button>
+        <button class="btn ghost" id="camCancel" type="button">취소</button>
+      </div>
+    </div>
+
+    <div id="measWrap" style="display:none">
+      <div class="canvasWrap"><canvas id="measCanvas"></canvas></div>
+      <p class="measHint" id="measHint">주황 선 = 갈비(가장 넓은 곳), 파란 선 = 허리(가장 좁은 곳). 선을 위아래로 끌어 맞춰 주세요.</p>
+      <div class="btnrow" style="margin-top:8px">
+        <button class="btn ghost" id="autoMeasure" type="button">자동으로 잡기</button>
+        <button class="btn ghost" id="hipToggle" type="button">엉덩이 선 추가</button>
+      </div>
+      <div class="bcsOut">
+        <div class="big" id="bcsBig">추정 BCS -</div>
+        <div class="sub" id="bcsSub">허리/갈비 -</div>
+        <div class="disc">털 길이·체형에 따라 다르게 보일 수 있습니다. 정확한 판정은 진료실에서 원장님 확인이 필요합니다.</div>
+        <div class="hosp" id="bcsHosp" style="display:none"></div>
+      </div>
+      <div class="field" style="margin-top:10px"><label>이 사진의 날짜</label><input id="pdate" type="date"></div>
+      <div class="btns">
+        <button class="btn solid wide" id="savePhoto" type="button">이 사진 저장 (병원에도 보내기)</button>
+        <button class="btn ghost wide" id="retake" type="button">다시 찍기</button>
+      </div>
+      <div id="photoState" class="state" style="display:none"></div>
+    </div>
+
+    <div class="field" style="margin-top:14px"><label>사진 이력<span class="hint">두 날짜를 눌러 나란히 비교</span></label></div>
+    <div class="shots" id="photoHist"></div>
+    <div id="cmpWrap" style="display:none">
+      <div class="cmp" id="cmpBox"></div>
+      <div class="cmpDelta" id="cmpDelta"></div>
+      <p class="note">왼쪽이 이전, 오른쪽이 이후입니다. 같은 자세·같은 높이에서 찍어야 비교가 맞습니다.</p>
+    </div>
+    <p class="note" id="photoNote">사진은 이 기기와 병원(드라이브)에 함께 남습니다. 병원 전송이 안 되면 이 기기에만 남고, 그 사실을 위에 표시합니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">6</span><h2>지금 상태<small>기록이 쌓일수록 정확해집니다</small></h2></div>
     <div class="result">
       <div class="kv"><span class="k">현재 체중</span><span class="v"><span id="nowW">-</span> kg</span></div>
       <div class="kv"><span class="k">첫 기록 대비</span><span class="v" id="diff">-</span></div>
@@ -81,16 +324,24 @@
       <div class="kv"><span class="k">안전한 감량 속도</span><span class="v" id="safe">-</span></div>
     </div>
     <p class="note">개·고양이 모두 <b>주 1~2%</b> 감량이 안전합니다. 그보다 빨리 줄이면 근육과 면역이 먼저 빠집니다.</p>
+    <div class="week" id="weekSum2"></div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">7</span><h2>한 달 요약<small>다음 진료 때 원장님이 함께 보는 표</small></h2></div>
+    <div class="months" id="monthBox"></div>
+    <p class="note">이 표를 진료 때 보여 주시면, 무엇이 효과였는지 함께 볼 수 있습니다.</p>
   </section>
 
   <div id="out"></div>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">5</span><h2>체중 관리가 이어지게<small>보호자가 지치는 지점</small></h2></div>
+    <div class="sec-head"><span class="num">8</span><h2>식이 관리가 이어지게<small>보호자가 지치는 지점</small></h2></div>
     <ul class="clean">
       <li>집에서 재는 체중은 <b>같은 시간·같은 저울</b>로 재야 비교됩니다.</li>
       <li>간식을 줄일 때는 <b>사료를 줄이지 않습니다</b>. 영양 불균형이 옵니다.</li>
       <li>2주마다 <b>GFN</b>에서 급여량을 다시 계산합니다.</li>
+      <li>하루 빠졌다고 처음으로 돌아가지 않습니다. <b>다시 시작하면 됩니다.</b></li>
     </ul>
     <div class="callout"><b>그물망 연결:</b> 체중이 줄면 <b>GWN</b>에 남기고, 검사는 <b>GDN</b>, 처방은 <b>GKN</b>으로 이어집니다.</div>
   </section>
@@ -113,113 +364,1129 @@
 <script>
 
 (function () {
-  var $ = G.q;
-  var KEY = 'gwn_weights_v1';
-  var data = [];
-  $('#wdate').value = G.today();
+  'use strict';
+  var $ = G.q, $$ = G.qa;
 
-  function load() {
-    try { data = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { data = []; }
-    if (!Array.isArray(data)) data = [];
-    data.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
-  }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+  /* ================= 서버 ================= */
+  var API = 'https://script.google.com/macros/s/AKfycbwogzgIJoyeF6H19M4nb8q3woW3I_XHxLo6i9KSj6CA33IL5R8QfRN2UFWQNXQ3mICj/exec';
+  var API_KEY = 'gwn_2026';
+
+  var LS_REC = 'gwn_records_v2';     // 체중·BCS 기록
+  var LS_DAY = 'gwn_days_v1';        // 식이 관리(운동·식사·사진·칭찬)
+  var LS_PROF = 'gwn_profile_v1';
+  var LS_PRAISE = 'gwn_praises_v1';
+  var LS_OLD = 'gwn_weights_v1';
+
+  var recs = [];            // {date, pet, guardian, weight, target, bcs, hospBcs, photoThumb, photoUrl, ratio, est, ribY, waistY, hipY, ribFx, waistFx, photoDone}
+  var days = [];            // {date, pet, guardian, walkMin, sessions:[{start,end,min,kind}], exKinds:[], foodKind, foodName, foodAmt, foodUnit, meals, treat, treatAmt, memo, foodThumb, foodUrl, foodDone}
+  var praises = [];         // [{date, days, text, pet}]
+  var profile = { guardian: '', pet: '', goal: '', target: '' };
+
+  function todayS() { return G.today(); }
   function num(id) { return parseFloat($('#' + id).value) || 0; }
+  function txt(id) { return ($('#' + id).value || '').trim(); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
-  function render() {
-    var list = $('#list');
-    if (!data.length) {
-      list.innerHTML = '<p class="note">아직 기록이 없습니다. 오늘 체중부터 넣어 보세요.</p>';
-      $('#chartWrap').style.display = 'none';
-      $('#nowW').textContent = '-'; $('#diff').textContent = '-';
-      $('#toGoal').textContent = '-'; $('#safe').textContent = '-';
+  function loadLocal() {
+    try { recs = JSON.parse(localStorage.getItem(LS_REC) || '[]'); } catch (e) { recs = []; }
+    if (!Array.isArray(recs)) recs = [];
+    try { days = JSON.parse(localStorage.getItem(LS_DAY) || '[]'); } catch (e) { days = []; }
+    if (!Array.isArray(days)) days = [];
+    try { praises = JSON.parse(localStorage.getItem(LS_PRAISE) || '[]'); } catch (e) { praises = []; }
+    if (!Array.isArray(praises)) praises = [];
+    try {
+      var p = JSON.parse(localStorage.getItem(LS_PROF) || '{}');
+      if (p && typeof p === 'object') profile = { guardian: p.guardian || '', pet: p.pet || '', goal: p.goal || '', target: p.target || '' };
+    } catch (e) { }
+    migrateOld();
+    recs.sort(byDate); days.sort(byDate);
+  }
+  function byDate(a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }
+  function migrateOld() {
+    var old;
+    try { old = JSON.parse(localStorage.getItem(LS_OLD) || '[]'); } catch (e) { return; }
+    if (!Array.isArray(old) || !old.length) return;
+    old.forEach(function (x) {
+      if (!x || !x.d) return;
+      var hit = recs.filter(function (r) { return r.date === x.d; })[0];
+      if (hit) { if (!hit.weight) hit.weight = x.w; return; }
+      recs.push({ date: x.d, weight: x.w });
+    });
+    try { localStorage.setItem(LS_OLD, '[]'); } catch (e) { }
+  }
+  function saveRecs() { try { localStorage.setItem(LS_REC, JSON.stringify(recs)); } catch (e) { } }
+  function saveDays() { try { localStorage.setItem(LS_DAY, JSON.stringify(days)); } catch (e) { } }
+  function savePraises() { try { localStorage.setItem(LS_PRAISE, JSON.stringify(praises)); } catch (e) { } }
+  function saveProfile() {
+    profile.guardian = txt('guardian'); profile.pet = txt('pet'); profile.target = txt('target');
+    try { localStorage.setItem(LS_PROF, JSON.stringify(profile)); } catch (e) { }
+  }
+
+  function recOf(date) {
+    var hit = recs.filter(function (r) { return r.date === date; })[0];
+    if (!hit) { hit = { date: date }; recs.push(hit); }
+    return hit;
+  }
+  function dayOf(date) {
+    var hit = days.filter(function (d) { return d.date === date; })[0];
+    if (!hit) { hit = { date: date, sessions: [], exKinds: [] }; days.push(hit); }
+    return hit;
+  }
+  /* 한 아이만 보이게 — 다른 아이 이름이 저장돼 있어도 화면에는 섞이지 않는다 */
+  function mine(x) { var p = txt('pet'); return !p || !x.pet || x.pet === p; }
+  function myRecs() { return recs.filter(mine); }
+  function myDays() { return days.filter(mine); }
+  function lastRec() { return myRecs().filter(function (r) { return r.weight > 0; }).slice(-1)[0] || null; }
+  function firstRec() { return myRecs().filter(function (r) { return r.weight > 0; })[0] || null; }
+
+  /* ================= 서버 통신 ================= */
+  function post(obj) {
+    return fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(obj)
+    }).then(function (r) { return r.text(); }).then(function (t) {
+      var j = null;
+      try { j = JSON.parse(t); } catch (e) { throw new Error('서버 응답을 읽지 못했습니다'); }
+      if (!j || j.ok === false) throw new Error((j && j.error) || '전송하지 못했습니다');
+      return j;
+    });
+  }
+  function getJSON(qs) {
+    return fetch(API + '?' + qs + '&_=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.text(); }).then(function (t) {
+        var j = null;
+        try { j = JSON.parse(t); } catch (e) { throw new Error('응답을 읽지 못했습니다'); }
+        if (!j || j.ok === false) throw new Error((j && j.error) || '불러오지 못했습니다');
+        return j;
+      });
+  }
+  function setState(el, kind, html) {
+    var node = $('#' + el);
+    node.className = 'state' + (kind ? ' ' + kind : '');
+    node.innerHTML = html;
+    node.style.display = '';
+  }
+  function hideState(el) { $('#' + el).style.display = 'none'; }
+
+  function blobToB64(blob) {
+    return new Promise(function (res, rej) {
+      var fr = new FileReader();
+      fr.onload = function () { var s = String(fr.result || ''); var i = s.indexOf(','); res(i >= 0 ? s.slice(i + 1) : s); };
+      fr.onerror = function () { rej(new Error('사진을 읽지 못했습니다')); };
+      fr.readAsDataURL(blob);
+    });
+  }
+  function compress(file, maxEdge, quality) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var w = img.naturalWidth, h = img.naturalHeight;
+        var sc = Math.min(1, maxEdge / Math.max(w, h));
+        var cw = Math.round(w * sc), ch = Math.round(h * sc);
+        var c = document.createElement('canvas');
+        c.width = cw; c.height = ch;
+        c.getContext('2d').drawImage(img, 0, 0, cw, ch);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) {
+          if (!b) { rej(new Error('사진을 줄이지 못했습니다')); return; }
+          var thumb = document.createElement('canvas');
+          var ts = Math.min(1, 420 / Math.max(cw, ch));
+          thumb.width = Math.round(cw * ts); thumb.height = Math.round(ch * ts);
+          thumb.getContext('2d').drawImage(c, 0, 0, thumb.width, thumb.height);
+          res({ blob: b, thumb: thumb.toDataURL('image/jpeg', 0.6), w: cw, h: ch, canvas: c });
+        }, 'image/jpeg', quality);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('사진을 열지 못했습니다')); };
+      img.src = url;
+    });
+  }
+
+  /* ================= 체중 저장 ================= */
+  $('#addW').addEventListener('click', function () { saveWeight(); });
+  function saveWeight() {
+    var w = num('wval');
+    var pet = txt('pet'), g = txt('guardian');
+    if (!(w > 0)) { G.toast('체중을 입력해 주세요'); $('#' + 'wval').focus(); return; }
+    if (!pet) { G.toast('아이 이름을 먼저 넣어 주세요'); $('#' + 'pet').focus(); return; }
+    var d = $('#wdate').value || todayS();
+    var r = recOf(d);
+    r.weight = w; r.target = num('target') || ''; r.hospBcs = $('#hospBcs').value || '';
+    r.pet = pet; r.guardian = g;
+    recs.sort(byDate); saveRecs(); saveProfile(); renderAll();
+    $('#wval').value = '';
+    setState('saveState', '', '이 기기에 저장했습니다. 병원으로 보내는 중…');
+    post({
+      action: 'weight', key: API_KEY, src: 'GWN', pet: pet, guardian: g, date: d,
+      weight: w, target: num('target') || '', bcs: r.bcs || '', hospBcs: r.hospBcs || '',
+      est: r.est || '', ratio: r.ratio || '', ribPx: r.ribPx || '', waistPx: r.waistPx || '', hipPx: r.hipPx || ''
+    }).then(function (j) {
+      r.sent = true;
+      setState('saveState', 'ok', '병원에도 기록되었습니다. (' + G.esc(d.replace(/-/g, '. ')) + ' · ' + w + 'kg)');
+      if (kit) kit.refresh();
+    }).catch(function (e) {
+      r.sent = false;
+      setState('saveState', 'warn', '이 기기에만 저장되었습니다. 병원 전송 실패 — ' + G.esc(e.message || '') +
+        ' <button class="btn ghost" id="retryW" type="button" style="margin-top:8px">병원에 다시 보내기</button>');
+      var b = $('#retryW'); if (b) b.addEventListener('click', saveWeight);
+      if (kit) kit.refresh();
+    });
+  }
+
+  /* ================= 운동 ================= */
+  var exTimer = { on: false, start: 0, tick: null, base: 0 };
+  var exToday = [];
+  function exKey() { return 'gwn_ex_' + todayS() + '_' + (txt('pet') || 'any'); }
+  function exLoad() {
+    try { exToday = JSON.parse(localStorage.getItem(exKey()) || '[]'); } catch (e) { exToday = []; }
+    if (!Array.isArray(exToday)) exToday = [];
+  }
+  function exSave() { try { localStorage.setItem(exKey(), JSON.stringify(exToday)); } catch (e) { } }
+  function exTotal() { return exToday.reduce(function (s, x) { return s + (Number(x.min) || 0); }, 0); }
+
+  $('#exStart').addEventListener('click', function () {
+    exTimer.on = true; exTimer.start = Date.now(); exTimer.base = exTotal();
+    $('#exStart').style.display = 'none'; $('#exStop').style.display = '';
+    $('#exNote').textContent = '운동 중… 끝나면 완료를 눌러 주세요';
+    clearInterval(exTimer.tick);
+    exTimer.tick = setInterval(paintClock, 1000);
+    paintClock();
+  });
+  $('#exStop').addEventListener('click', function () {
+    if (!exTimer.on) return;
+    clearInterval(exTimer.tick);
+    var min = Math.max(1, Math.round((Date.now() - exTimer.start) / 60000));
+    var s = new Date(exTimer.start), e = new Date();
+    exToday.push({ start: hhmm(s), end: hhmm(e), min: min, kind: '운동' });
+    exSave(); paintEx(); paintWeek();
+    exTimer.on = false;
+    $('#exStart').style.display = ''; $('#exStop').style.display = 'none';
+    $('#exClock').textContent = '00:00';
+    $('#exNote').textContent = '오늘 ' + exTotal() + '분 · 방금 ' + min + '분 기록';
+    G.toast(min + '분 운동을 기록했습니다');
+  });
+  $('#addWalk').addEventListener('click', function () {
+    var m = num('walkMin');
+    if (!(m > 0)) { G.toast('분을 입력해 주세요'); return; }
+    exToday.push({ start: '', end: '', min: Math.round(m), kind: $('#walkLevel').value || '보통', manual: true });
+    exSave(); paintEx(); paintWeek();
+    $('#walkMin').value = '';
+    G.toast(m + '분을 더했습니다');
+  });
+  function hhmm(d) { return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function paintClock() {
+    if (!exTimer.on) { $('#exClock').textContent = '00:00'; return; }
+    var sec = Math.floor((Date.now() - exTimer.start) / 1000);
+    $('#exClock').textContent = ('0' + Math.floor(sec / 60)).slice(-2) + ':' + ('0' + (sec % 60)).slice(-2);
+  }
+  function paintEx() {
+    var box = $('#exSess');
+    if (!exToday.length) { box.innerHTML = '<i>아직 오늘 운동 기록이 없습니다</i>'; return; }
+    box.innerHTML = exToday.map(function (x) {
+      return '<i>' + (x.start ? G.esc(x.start) + '~' + G.esc(x.end) + ' · ' : '') + (x.min || 0) + '분 · ' + G.esc(x.kind || '') + '</i>';
+    }).join('');
+    $('#exNote').textContent = '오늘 ' + exTotal() + '분';
+  }
+  $$('#exChips button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+  });
+  function exKinds() {
+    return $$('#exChips button').filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })
+      .map(function (b) { return b.getAttribute('data-ex'); });
+  }
+
+  /* ================= 먹은 것 사진 ================= */
+  var foodShot = null; // {thumb, dataUrl}
+  $('#foodShot').addEventListener('click', function () { $('#foodCam').click(); });
+  $('#foodPick').addEventListener('click', function () { $('#foodFile').click(); });
+  $('#foodCam').addEventListener('change', onFoodFile);
+  $('#foodFile').addEventListener('change', onFoodFile);
+  function onFoodFile(e) {
+    var f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    compress(f, 1000, 0.72).then(function (r) {
+      return blobToB64(r.blob).then(function (b64) {
+        foodShot = { thumb: r.thumb, data: b64 };
+        $('#foodImg').src = r.thumb; $('#foodPrev').style.display = '';
+        G.toast('사진을 붙였습니다. 저장을 눌러 주세요');
+      });
+    }).catch(function (err) { G.toast(err.message || '사진을 읽지 못했습니다'); });
+  }
+  $('#foodClear').addEventListener('click', function () {
+    foodShot = null; $('#foodPrev').style.display = 'none'; $('#foodImg').src = '';
+  });
+
+  /* ================= 식이 관리 저장 ================= */
+  $('#saveDay').addEventListener('click', function () { saveDay(); });
+  function saveDay() {
+    var pet = txt('pet'), g = txt('guardian');
+    if (!pet) { G.toast('아이 이름을 먼저 넣어 주세요'); $('#pet').focus(); return; }
+    var d = $('#wdate').value || todayS();
+    var goal = profile.goal || '';
+    var allergy = goal === '알러지 관리';
+    if (allergy && !foodShot && !(dayOf(d).foodThumb)) {
+      setState('dayState', 'warn', '알러지 관리 목표는 <b>오늘 먹은 것 사진</b>이 꼭 필요합니다. 위에서 한 장 찍어 주세요.');
+      $('#foodBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    list.innerHTML = data.slice(-8).reverse().map(function (x) {
-      return '<div class="kv"><span class="k">' + G.esc(x.d.replace(/-/g, '. ')) + '</span><span class="v">' + x.w + ' kg</span></div>';
-    }).join('');
-    draw();
-    var first = data[0], last = data[data.length - 1];
-    var delta = last.w - first.w;
-    $('#nowW').textContent = last.w;
-    $('#diff').textContent = (delta > 0 ? '+' : '') + delta.toFixed(1) + ' kg (' + first.w + ' → ' + last.w + ')';
-    $('#diff').className = 'v ' + (delta > 0 ? 'warn' : delta < 0 ? 'ok' : '');
-    var t = num('target');
-    if (t > 0) {
-      var gap = last.w - t;
-      $('#toGoal').textContent = gap > 0 ? gap.toFixed(1) + ' kg 남음 (목표 ' + t + 'kg)' : gap === 0 ? '목표 달성' : '목표보다 ' + Math.abs(gap).toFixed(1) + 'kg 적음';
-      $('#toGoal').className = 'v ' + (gap <= 0 ? 'ok' : 'warn');
-      $('#safe').textContent = '주 ' + (last.w * 0.01).toFixed(2) + '~' + (last.w * 0.02).toFixed(2) + ' kg';
-    } else {
-      $('#toGoal').textContent = '목표 체중을 넣어 주세요';
-      $('#safe').textContent = '주 ' + (last.w * 0.01).toFixed(2) + '~' + (last.w * 0.02).toFixed(2) + ' kg';
+    if (exTimer.on) {
+      if (!window.confirm('운동이 아직 진행 중입니다. 완료로 기록하고 저장할까요?')) return;
+      $('#exStop').click();
     }
+    var day = dayOf(d);
+    day.pet = pet; day.guardian = g; day.goal = goal;
+    day.sessions = exToday.slice();
+    day.walkMin = exTotal();
+    day.exKinds = exKinds();
+    day.foodKind = txt('foodKind'); day.foodName = txt('foodName');
+    day.foodAmt = num('foodAmt') || ''; day.foodUnit = $('#foodUnit').value;
+    day.meals = $('#meals').value; day.treat = $('#treat').value; day.treatAmt = txt('treatAmt');
+    day.memo = txt('dayMemo');
+    day.allergy = txt('allergy');
+    if (foodShot) { day.foodThumb = foodShot.thumb; day.foodPending = foodShot.data; }
+    saveDays();
+    checkPraise();
+    renderAll();
+    setState('dayState', '', '이 기기에 저장했습니다. 병원으로 보내는 중…');
+    var payload = {
+      action: 'diet', key: API_KEY, src: 'GWN', pet: pet, guardian: g, date: d, goal: goal,
+      walkMin: day.walkMin, walkLevel: (day.sessions[0] && day.sessions[0].kind) || '',
+      sessions: day.sessions, exKinds: day.exKinds,
+      food: (day.foodKind ? day.foodKind + (day.foodName ? ' ' + day.foodName : '') : day.foodName),
+      foodAmt: day.foodAmt, foodUnit: day.foodUnit, meals: day.meals,
+      treat: day.treat, treatAmt: day.treatAmt, memo: day.memo, goal, allergy: day.allergy || '',
+      praiseN: (function () { var ps = praises.filter(function (p) { return p.date === d; }); return ps.length ? ps[ps.length - 1].days : ''; })(),
+      praiseText: (function () { var ps = praises.filter(function (p) { return p.date === d; }); return ps.length ? ps[ps.length - 1].text : ''; })()
+    };
+    if (foodShot && foodShot.data) payload.photo = { data: foodShot.data, mime: 'image/jpeg' };
+    post(payload).then(function (j) {
+      day.sent = true;
+      if (j.photoUrl) { day.foodUrl = j.photoUrl; day.foodDone = true; }
+      day.foodPending = null; saveDays();
+      var msg = '병원에도 기록되었습니다.';
+      if (foodShot && !j.photoUrl) msg = '운동·식사는 병원에 저장했습니다. 사진은 올리지 못해 이 기기에만 남아 있습니다.';
+      setState('dayState', 'ok', msg);
+      foodShot = null; $('#foodPrev').style.display = 'none';
+      checkPraise();
+      renderAll();
+      if (kit) kit.refresh();
+    }).catch(function (e) {
+      day.sent = false; saveDays();
+      setState('dayState', 'warn', '이 기기에만 저장되었습니다. 병원 전송 실패 — ' + G.esc(e.message || '') +
+        ' <button class="btn ghost" id="retryD" type="button" style="margin-top:8px">병원에 다시 보내기</button>');
+      var b = $('#retryD'); if (b) b.addEventListener('click', saveDay);
+      checkPraise();
+      renderAll();
+      if (kit) kit.refresh();
+    });
   }
 
-  function draw() {
-    var w = data.map(function (x) { return x.w; });
+  /* ================= 칭찬 · 연속 일수 ================= */
+  var PRAISE_AT = [1, 2, 3, 7, 14, 30];
+  function praiseText(days, pet) {
+    var n = pet ? pet + ', ' : '';
+    if (days === 1) return n + '오늘 첫 기록을 남겼어요. 시작한 것만으로 충분히 잘했어요.';
+    if (days === 2) return n + '이틀째예요. 어제 한 번 더 해내는 게 제일 어려운 일인데, 정말 잘했어요.';
+    if (days === 3) return n + '3일 연속이에요. 습관이 붙기 시작했습니다. 수고했어요.';
+    if (days === 7) return n + '일주일을 채웠어요. 아이도 보호자님도 정말 대단합니다.';
+    if (days === 14) return n + '2주째 이어지고 있어요. 이대로면 다음 진료 때 원장님이 크게 칭찬하실 거예요.';
+    if (days === 30) return n + '한 달을 채웠어요. 쉽게 되는 일이 아닙니다. 정말 잘하셨습니다.';
+    return n + days + '일째 이어지고 있어요.';
+  }
+  function recDays() {
+    var set = {};
+    myDays().forEach(function (d) {
+      if ((d.walkMin || 0) > 0 || d.foodKind || d.foodName || d.foodThumb || d.foodUrl || d.treat || d.memo) set[d.date] = 1;
+    });
+    myRecs().forEach(function (r) { if (r.weight > 0) set[r.date] = 1; });
+    return Object.keys(set).sort();
+  }
+  function streak() {
+    var list = recDays();
+    if (!list.length) return 0;
+    var set = {}; list.forEach(function (d) { set[d] = 1; });
+    var cur = new Date(todayS() + 'T00:00:00');
+    var n = 0;
+    // 오늘 기록이 없으면 어제부터 센다(오늘 아직 안 남겼다고 0으로 만들지 않는다)
+    if (!set[iso(cur)]) cur.setDate(cur.getDate() - 1);
+    while (set[iso(cur)]) { n++; cur.setDate(cur.getDate() - 1); }
+    return n;
+  }
+  function iso(d) { return G.isoDate(d); }
+  function checkPraise() {
+    var n = streak();
+    if (!n) return;
+    var pet = txt('pet') || profile.pet || '';
+    var d = todayS();
+    for (var i = 0; i < PRAISE_AT.length; i++) {
+      var th = PRAISE_AT[i];
+      if (n >= th) {
+        var exists = praises.some(function (p) { return p.days === th && p.date === d; });
+        if (!exists) praises.push({ date: d, days: th, text: praiseText(th, pet), pet: pet });
+      }
+    }
+    savePraises();
+  }
+  function paintPraise() {
+    var n = streak();
+    var wrap = $('#streakWrap');
+    if (!n) { wrap.style.display = 'none'; return; }
+    wrap.style.display = '';
+    $('#streakNum').textContent = n + '일 연속';
+    var next = PRAISE_AT.filter(function (x) { return x > n; })[0];
+    $('#streakMsg').textContent = next ? (next - n) + '일 더 하면 ' + next + '일 칭찬이 쌓입니다.' : '꾸준히 이어가고 있어요.';
+    var box = $('#dayState');
+    var recent = praises.filter(function (p) { return !p.pet || !txt('pet') || p.pet === txt('pet'); }).slice(-3).reverse();
+    var html = recent.map(function (p) {
+      return '<div class="praise"><div class="t">🎉 ' + p.days + '일째 칭찬</div><div class="b">' + G.esc(p.text) + '</div><div class="m">' + p.date.replace(/-/g, '. ') + ' 기록</div></div>';
+    }).join('');
+    var host = $('#praiseBox');
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'praiseBox';
+      box.parentNode.insertBefore(host, box.nextSibling);
+    }
+    host.innerHTML = html;
+  }
+
+  /* ================= 목표 칩 ================= */
+  function paintGoal() {
+    $$('#goalChips button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-goal') === profile.goal ? 'true' : 'false');
+    });
+    var allergy = profile.goal === '알러지 관리';
+    $('#foodGuide').innerHTML = allergy
+      ? '<b>알러지 관리</b>는 매일 먹는 것이 가장 중요합니다. 오늘 먹은 밥·간식을 <b>한 장 찍어</b> 주세요.'
+      : '오늘 먹은 것을 한 장 찍어 주세요. 다음 진료 때 한 달치를 함께 봅니다.';
+    $('#goalNote').textContent = profile.goal
+      ? '목표: ' + profile.goal + ' — 이 목표에 맞춰 기록합니다. 원장님 코멘트가 바뀌면 여기서 바꿔 주세요.'
+      : '아이 이름과 목표를 넣으면 이 기기에 저장되어, 다음에 열 때 그대로 이어집니다.';
+  }
+  $$('#goalChips button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      profile.goal = b.getAttribute('data-goal');
+      saveProfile(); paintGoal();
+    });
+  });
+
+  /* ================= 그리기 ================= */
+  function renderAll() { paintList(); paintChart(); paintStats(); paintWeek(); paintPhotos(); paintMonth(); paintPraise(); paintGoal(); paintEx(); }
+
+  function paintList() {
+    var list = $('#list'), RR = myRecs();
+    if (!RR.length) {
+      list.innerHTML = '<p class="note">아직 기록이 없습니다. 오늘 체중부터 넣어 보세요.</p>';
+      return;
+    }
+    list.innerHTML = RR.slice(-8).reverse().map(function (x) {
+      var extra = [];
+      if (x.est) extra.push('추정 BCS ' + x.est);
+      if (x.hospBcs) extra.push('병원 ' + x.hospBcs + '/9');
+      if (x.treat) extra.push('간식 ' + x.treat);
+      return '<div class="kv"><span class="k">' + G.esc(x.date.replace(/-/g, '. ')) + '</span><span class="v">' +
+        (x.weight ? x.weight + ' kg' : '체중 미기록') + (extra.length ? ' <small style="font-weight:700;color:var(--muted)">· ' + G.esc(extra.join(' · ')) + '</small>' : '') + '</span></div>';
+    }).join('');
+  }
+
+  function paintChart() {
+    var w = myRecs().filter(function (r) { return r.weight > 0; });
     if (w.length < 2) { $('#chartWrap').style.display = 'none'; return; }
     $('#chartWrap').style.display = '';
-    var min = Math.min.apply(null, w), max = Math.max.apply(null, w);
-    if (max === min) { max = min + 0.5; }
-    var pad = (max - min) * 0.2;
-    min -= pad; max += pad;
-    var pts = data.map(function (x, i) {
-      var px = 12 + (i / (data.length - 1)) * 296;
-      var py = 110 - ((x.w - min) / (max - min)) * 92;
+    var vals = w.map(function (x) { return x.weight; });
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    if (max === min) max = min + 0.5;
+    var pad = (max - min) * 0.18; min -= pad; max += pad;
+    var H = 108, top = 16;
+    var pts = w.map(function (x, i) {
+      var px = 12 + (i / (w.length - 1)) * 288;
+      var py = top + H - ((x.weight - min) / (max - min)) * H;
       return px.toFixed(1) + ',' + py.toFixed(1);
     });
-    var area = '12,112 ' + pts.join(' ') + ' 308,112';
+    var treatMax = 0;
+    w.forEach(function (x) {
+      var d = myDays().filter(function (y) { return y.date === x.date; })[0];
+      var n = d && d.treat && d.treat !== '없음' ? ({ 조금: 1, 보통: 2, 많이: 3 }[d.treat] || 1) : 0;
+      if (n > treatMax) treatMax = n;
+    });
+    if (treatMax < 1) treatMax = 1;
+    var bars = '';
+    if (w.some(function (x) { return myDays().some(function (y) { return y.date === x.date && y.treat && y.treat !== '없음'; }); })) {
+      w.forEach(function (x, i) {
+        var d = myDays().filter(function (y) { return y.date === x.date; })[0];
+        var n = d && d.treat && d.treat !== '없음' ? ({ 조금: 1, 보통: 2, 많이: 3 }[d.treat] || 1) : 0;
+        if (!n) return;
+        var bw = 12, bx = 12 + (i / (w.length - 1)) * 288 - bw / 2;
+        var bh = (n / treatMax) * 26;
+        bars += '<rect x="' + bx.toFixed(1) + '" y="' + (top + H - bh).toFixed(1) + '" width="' + bw + '" height="' + bh.toFixed(1) + '" rx="3" fill="#f0b7c8" opacity=".85"/>';
+      });
+    }
     var svg = '<defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7cc6e8" stop-opacity=".45"/><stop offset="100%" stop-color="#7cc6e8" stop-opacity="0"/></linearGradient></defs>' +
-      '<polygon points="' + area + '" fill="url(#gw)"/>' +
+      bars +
+      '<polygon points="12,' + (top + H + 2) + ' ' + pts.join(' ') + ' 300,' + (top + H + 2) + '" fill="url(#gw)"/>' +
       '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#2f86b5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       pts.map(function (p) { var xy = p.split(','); return '<circle cx="' + xy[0] + '" cy="' + xy[1] + '" r="3" fill="#fff" stroke="#2f86b5" stroke-width="2"/>'; }).join('') +
-      '<text x="12" y="14" font-size="10" fill="#71858f">' + max.toFixed(1) + 'kg</text>' +
-      '<text x="12" y="112" font-size="10" fill="#71858f">' + min.toFixed(1) + 'kg</text>';
+      '<text x="12" y="12" font-size="9" fill="#71858f">' + max.toFixed(1) + 'kg · 체중(선) · 간식(막대)</text>' +
+      '<text x="12" y="' + (top + H + 14) + '" font-size="9" fill="#71858f">' + min.toFixed(1) + 'kg</text>';
     $('#spark').innerHTML = svg;
   }
 
-  $('#addW').addEventListener('click', function () {
-    var w = num('wval');
-    if (!(w > 0)) { G.toast('체중을 입력해 주세요'); return; }
-    var d = $('#wdate').value || G.today();
-    data = data.filter(function (x) { return x.d !== d; });
-    data.push({ d: d, w: w });
-    data.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
-    save(); render();
-    $('#wval').value = '';
-    if (kit) kit.refresh();
-    G.toast('기록했습니다');
-  });
-  $('#clearW').addEventListener('click', function () {
-    if (!data.length) return;
-    if (window.confirm('체중 기록을 모두 지울까요? 되돌릴 수 없습니다.')) {
-      data = []; save(); render(); if (kit) kit.refresh();
+  function paintStats() {
+    var last = lastRec(), first = firstRec();
+    if (!last) {
+      $('#nowW').textContent = '-'; $('#diff').textContent = '-'; $('#toGoal').textContent = '-'; $('#safe').textContent = '-';
+      return;
     }
-  });
-  ['target', 'bcs', 'guardian', 'pet'].forEach(function (id) {
-    $('#' + id).addEventListener('input', function () { render(); if (kit) kit.refresh(); });
-    $('#' + id).addEventListener('change', function () { render(); if (kit) kit.refresh(); });
+    $('#nowW').textContent = last.weight;
+    if (first && myRecs().length > 1) {
+      var delta = last.weight - first.weight;
+      $('#diff').textContent = (delta > 0 ? '+' : '') + delta.toFixed(1) + ' kg (' + first.weight + ' → ' + last.weight + ')';
+      $('#diff').className = 'v ' + (delta > 0 ? 'warn' : delta < 0 ? 'ok' : '');
+    } else { $('#diff').textContent = '-'; }
+    var t = num('target') || Number(profile.target) || 0;
+    if (t > 0) {
+      var gap = last.weight - t;
+      $('#toGoal').textContent = gap > 0 ? gap.toFixed(1) + ' kg 남음 (목표 ' + t + 'kg)' : gap === 0 ? '목표 달성' : '목표보다 ' + Math.abs(gap).toFixed(1) + 'kg 적음';
+      $('#toGoal').className = 'v ' + (gap <= 0 ? 'ok' : 'warn');
+    } else { $('#toGoal').textContent = '목표 체중을 넣어 주세요'; }
+    $('#safe').textContent = '주 ' + (last.weight * 0.01).toFixed(2) + '~' + (last.weight * 0.02).toFixed(2) + ' kg';
+  }
+
+  function weekDays() {
+    var out = [], cur = new Date(todayS() + 'T00:00:00');
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(cur.getTime()); d.setDate(cur.getDate() - i);
+      out.push(iso(d));
+    }
+    return out;
+  }
+  function weekStats() {
+    var wk = weekDays(), walk = 0, treatN = 0, recN = 0;
+    wk.forEach(function (d) {
+      var dd = myDays().filter(function (x) { return x.date === d; })[0];
+      if (dd) {
+        walk += Number(dd.walkMin) || 0;
+        if (dd.treat && dd.treat !== '없음') treatN += ({ 조금: 1, 보통: 2, 많이: 3 }[dd.treat] || 1);
+        if (dd.foodThumb || dd.foodUrl || dd.foodKind) recN++;
+      }
+    });
+    var inWk = myRecs().filter(function (r) { return r.weight > 0 && wk.indexOf(r.date) >= 0; });
+    var dw = inWk.length > 1 ? (inWk[inWk.length - 1].weight - inWk[0].weight) : 0;
+    return { walk: walk, treat: treatN, days: recN, dw: dw, hasW: inWk.length > 1 };
+  }
+  function paintWeek() {
+    var s = weekStats();
+    var html = '<span>이번 주 산책 ' + s.walk + '분</span><span>간식 ' + s.treat + '회</span>' +
+      (s.hasW ? '<span>체중 ' + (s.dw > 0 ? '+' : '') + s.dw.toFixed(1) + 'kg</span>' : '<span>체중 기록 ' + (myRecs().length || 0) + '건</span>');
+    $('#weekSum').innerHTML = html;
+    $('#weekSum2').innerHTML = html + '<span>기록한 날 ' + s.days + '/7</span>';
+  }
+
+  /* ================= BCS 사진 ================= */
+  var shot = { canvas: null, w: 0, h: 0, mask: null, bbox: null, ribY: 0.34, waistY: 0.68, hipY: 0.9, hipOn: false, active: null, srcThumb: '' };
+
+  $('#bcsShot').addEventListener('click', openCam);
+  $('#bcsPick').addEventListener('click', function () { $('#bcsFile').click(); });
+  $('#bcsCam').addEventListener('change', onBcsFile);
+  $('#bcsFile').addEventListener('change', onBcsFile);
+
+  function onBcsFile(e) {
+    var f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    compress(f, 1280, 0.8).then(function (r) {
+      startMeasure(r.canvas, r.thumb);
+    }).catch(function (err) { G.toast(err.message || '사진을 열지 못했습니다'); });
+  }
+
+  /* --- 카메라(실시간 가이드) --- */
+  var camStream = null;
+  function openCam() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      G.toast('이 브라우저는 카메라 미리보기가 안 됩니다. 카메라로 찍기를 엽니다.');
+      $('#bcsCam').click(); return;
+    }
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 } }, audio: false })
+      .then(function (s) {
+        camStream = s;
+        var v = $('#camVideo');
+        v.srcObject = s;
+        $('#camWrap').classList.add('on');
+        $('#camWrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }).catch(function () {
+        G.toast('카메라를 열 수 없어 촬영/앨범 선택으로 넘어갑니다.');
+        $('#bcsCam').click();
+      });
+  }
+  function closeCam() {
+    if (camStream) { camStream.getTracks().forEach(function (t) { t.stop(); }); camStream = null; }
+    $('#camWrap').classList.remove('on');
+  }
+  $('#camCancel').addEventListener('click', closeCam);
+  $('#camShoot').addEventListener('click', function () {
+    var v = $('#camVideo');
+    if (!v.videoWidth) { G.toast('카메라가 아직 준비되지 않았습니다'); return; }
+    var stage = $('#camStage'), aspect = stage.clientHeight / stage.clientWidth || 4 / 3;
+    var vw = v.videoWidth, vh = v.videoHeight;
+    var sh = vh, sw = vh / aspect;
+    if (sw > vw) { sw = vw; sh = vw * aspect; }
+    var sx = (vw - sw) / 2, sy = (vh - sh) / 2;
+    var sc = Math.min(1, 1280 / Math.max(sw, sh));
+    var c = document.createElement('canvas');
+    c.width = Math.round(sw * sc); c.height = Math.round(sh * sc);
+    c.getContext('2d').drawImage(v, sx, sy, sw, sh, 0, 0, c.width, c.height);
+    closeCam();
+    startMeasure(c, c.toDataURL('image/jpeg', 0.6));
   });
 
+  /* --- 실루엣 분석 --- */
+  function analyze(srcCanvas) {
+    var W = 220;
+    var H = Math.max(1, Math.round(srcCanvas.height / srcCanvas.width * W));
+    var c = document.createElement('canvas'); c.width = W; c.height = H;
+    var ctx = c.getContext('2d');
+    ctx.drawImage(srcCanvas, 0, 0, W, H);
+    var data;
+    try { data = ctx.getImageData(0, 0, W, H).data; } catch (e) { return null; }
+    function px(x, y) { var i = (y * W + x) * 4; return [data[i], data[i + 1], data[i + 2]]; }
+    var corners = [px(1, 1), px(W - 2, 1), px(1, H - 2), px(W - 2, H - 2)];
+    var bg = [0, 0, 0];
+    corners.forEach(function (c2) { bg[0] += c2[0] / 4; bg[1] += c2[1] / 4; bg[2] += c2[2] / 4; });
+    var diff = 46;
+    var rows = [], top = -1, bot = -1, left = W, right = 0, area = 0;
+    for (var y = 0; y < H; y++) {
+      var x0 = -1, x1 = -1;
+      for (var x = 0; x < W; x++) {
+        var i = (y * W + x) * 4;
+        var d0 = Math.abs(data[i] - bg[0]) + Math.abs(data[i + 1] - bg[1]) + Math.abs(data[i + 2] - bg[2]);
+        if (d0 > diff) {
+          if (x0 < 0) x0 = x;
+          x1 = x; area++;
+        }
+      }
+      if (x0 >= 0 && (x1 - x0) > W * 0.06) {
+        rows[y] = { x0: x0, x1: x1, w: x1 - x0 };
+        if (top < 0) top = y;
+        bot = y;
+        if (x0 < left) left = x0;
+        if (x1 > right) right = x1;
+      }
+    }
+    if (top < 0 || area < W * H * 0.04) return { ok: false };
+    var touch = (left <= 2) || (right >= W - 3) || (top <= 2) || (bot >= H - 3);
+    return { ok: true, W: W, H: H, rows: rows, top: top, bot: bot, left: left, right: right, touch: touch, area: area / (W * H) };
+  }
+  function rowAt(y) {
+    if (!shot.mask || !shot.mask.rows) return null;
+    var rows = shot.mask.rows, H = shot.mask.H;
+    var y0 = Math.round(y * (H - 1));
+    for (var k = 0; k < 26; k++) {
+      var a = rows[y0 + k], b = rows[y0 - k];
+      if (a) return a; if (b) return b;
+    }
+    return null;
+  }
+  function autoPlace() {
+    var m = shot.mask;
+    if (!m || !m.ok) return false;
+    var top = m.top, bot = m.bot, best = null, bestW = 0;
+    var y1 = Math.round(top + (bot - top) * 0.25), y2 = Math.round(top + (bot - top) * 0.78);
+    for (var y = y1; y <= y2; y++) {
+      var r = m.rows[y]; if (!r) continue;
+      if (r.w > bestW) { bestW = r.w; best = y; }
+    }
+    if (best == null) return false;
+    var waist = null, wMin = 1e9;
+    var start = Math.round(best + (bot - best) * 0.12);
+    for (var yy = start; yy <= Math.round(bot - (bot - top) * 0.04); yy++) {
+      var rr = m.rows[yy]; if (!rr) continue;
+      if (rr.w < wMin) { wMin = rr.w; waist = yy; }
+    }
+    if (waist == null) return false;
+    shot.ribY = best / (m.H - 1);
+    shot.waistY = waist / (m.H - 1);
+    shot.hipY = (bot - 2) / (m.H - 1);
+    return true;
+  }
+
+  function startMeasure(srcCanvas, thumb) {
+    shot.canvas = srcCanvas; shot.w = srcCanvas.width; shot.h = srcCanvas.height;
+    shot.srcThumb = thumb || '';
+    shot.mask = analyze(srcCanvas);
+    shot.ribY = 0.34; shot.waistY = 0.68; shot.hipY = 0.92; shot.hipOn = false;
+    var auto = autoPlace();
+    $('#measWrap').style.display = '';
+    $('#pdate').value = todayS();
+    paintMeasure();
+    var hint = $('#measHint');
+    if (!shot.mask || !shot.mask.ok) {
+      hint.innerHTML = '사진에서 아이 몸을 자동으로 찾지 못했습니다. <b>선을 직접 끌어</b> 갈비·허리에 맞춰 주세요.';
+    } else if (shot.mask.touch) {
+      hint.innerHTML = '아이가 화면 밖으로 나갔어요. <b>조금 더 멀리서 다시 찍는 것이 좋습니다.</b> 그대로 쓰려면 선을 맞춰 주세요.';
+    } else if (auto) {
+      hint.innerHTML = '자동으로 잡은 위치입니다. 주황 선(갈비·가장 넓은 곳)과 파란 선(허리·가장 좁은 곳)을 <b>끌어서</b> 맞춰 주세요.';
+    } else {
+      hint.innerHTML = '주황 선 = 갈비, 파란 선 = 허리. 선을 위아래로 끌어 맞춰 주세요.';
+    }
+    $('#measWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function paintMeasure() {
+    var c = $('#measCanvas');
+    if (!shot.canvas) return;
+    var boxW = c.parentNode.clientWidth || 320;
+    var scale = Math.min(1, boxW / shot.w);
+    c.width = Math.round(shot.w * scale); c.height = Math.round(shot.h * scale);
+    var ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(shot.canvas, 0, 0, c.width, c.height);
+    drawLine('rib', shot.ribY, '#e2567f', '갈비');
+    drawLine('waist', shot.waistY, '#2f86b5', '허리');
+    if (shot.hipOn) drawLine('hip', shot.hipY, '#6b8f3a', '엉덩이');
+    calcBcs();
+  }
+  function drawLine(kind, fy, color, label) {
+    var c = $('#measCanvas'), ctx = c.getContext('2d');
+    var y = fy * c.height;
+    var r = rowAt(fy);
+    var x0 = r ? (r.x0 / (shot.mask.W - 1)) * c.width : c.width * 0.18;
+    var x1 = r ? (r.x1 / (shot.mask.W - 1)) * c.width : c.width * 0.82;
+    ctx.save();
+    ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+    ctx.fillStyle = color;
+    [x0, x1].forEach(function (x) {
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill();
+    });
+    var w = r ? Math.round((r.x1 - r.x0) / (shot.mask.W - 1) * shot.w) : 0;
+    ctx.font = 'bold 12px sans-serif';
+    var tx = Math.min(c.width - 74, Math.max(4, x0));
+    ctx.fillStyle = 'rgba(255,255,255,.9)';
+    ctx.fillRect(tx - 2, y - 20, 74, 17);
+    ctx.fillStyle = color;
+    ctx.fillText(label + ' ' + w + 'px', tx + 2, y - 7);
+    ctx.restore();
+  }
+
+  function widths() {
+    var r = rowAt(shot.ribY), w = rowAt(shot.waistY), h = shot.hipOn ? rowAt(shot.hipY) : null;
+    return {
+      rib: r ? (r.x1 - r.x0) : 0, waist: w ? (w.x1 - w.x0) : 0, hip: h ? (h.x1 - h.x0) : 0,
+      ribFr: r ? (r.x1 - r.x0) / (shot.mask ? shot.mask.W - 1 : 1) : 0,
+      waistFr: w ? (w.x1 - w.x0) / (shot.mask ? shot.mask.W - 1 : 1) : 0
+    };
+  }
+  /* 비율 → BCS 추정.
+     근거: Gant P. et al., BMC Vet Res 2016;12:19 — 표준 등쪽(위에서) 사진에서 잰
+     복부폭/흉곽폭(A:T) 비율의 구분점: 적정 <0.77, 과체중 0.77~0.87, 비만 >0.87
+     (이 구분점은 BCS·체지방률에 맞춰 연구진이 주관적으로 정한 값).
+     여기서는 그 세 구간을 9점 척도로 펼친 추정이며, 검증된 공식이 아니다. */
+  function estBcs(ratio) {
+    if (!ratio) return null;
+    if (ratio < 0.68) return 3;
+    if (ratio < 0.72) return 4;
+    if (ratio < 0.77) return 5;
+    if (ratio < 0.82) return 6;
+    if (ratio < 0.87) return 7;
+    return 8;
+  }
+  function calcBcs() {
+    var w = widths();
+    var ratio = w.rib > 0 && w.waist > 0 ? w.waist / w.rib : 0;
+    var est = estBcs(ratio);
+    var big = $('#bcsBig'), sub = $('#bcsSub');
+    if (!est) {
+      big.textContent = '추정 BCS -';
+      sub.textContent = '선을 갈비·허리에 맞춰 주세요';
+    } else {
+      big.textContent = '추정 BCS ' + est + '/9';
+      sub.innerHTML = '허리/갈비 ' + ratio.toFixed(2) + ' · 갈비 ' + Math.round(w.rib / (shot.mask ? shot.mask.W - 1 : 1) * shot.w) + 'px · 허리 ' + Math.round(w.waist / (shot.mask ? shot.mask.W - 1 : 1) * shot.w) + 'px' +
+        (ratio < 0.72 ? ' <span style="color:var(--warn)">— 마른 쪽(1~3)은 사진 비율로 구분이 어렵습니다</span>' : '') +
+        '<br><small style="color:var(--muted);font-weight:700">병원 확인 전 추정값입니다</small>';
+    }
+    shot.ratio = ratio; shot.est = est;
+    var hb = $('#hospBcs').value;
+    $('#bcsHosp').style.display = hb ? '' : 'none';
+    if (hb) $('#bcsHosp').textContent = '병원 확인 BCS ' + hb + '/9 — 이 값이 기준입니다(추정 ' + (est || '-') + '는 참고).';
+  }
+
+  /* --- 선 끌기 --- */
+  (function bindDrag() {
+    var c = $('#measCanvas');
+    function pos(e) {
+      var r = c.getBoundingClientRect();
+      var y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
+      return clamp(y / r.height, 0, 1);
+    }
+    function find(y) {
+      var cand = [['rib', shot.ribY], ['waist', shot.waistY]];
+      if (shot.hipOn) cand.push(['hip', shot.hipY]);
+      var best = null, bd = 0.06;
+      cand.forEach(function (x) { var d = Math.abs(x[1] - y); if (d < bd) { bd = d; best = x[0]; } });
+      return best;
+    }
+    function down(e) {
+      var y = pos(e);
+      shot.active = find(y) || (Math.abs(shot.ribY - y) < Math.abs(shot.waistY - y) ? 'rib' : 'waist');
+      move(e);
+      e.preventDefault();
+    }
+    function move(e) {
+      if (!shot.active) return;
+      var y = pos(e);
+      if (shot.active === 'rib') shot.ribY = y;
+      else if (shot.active === 'waist') shot.waistY = y;
+      else if (shot.active === 'hip') shot.hipY = y;
+      paintMeasure();
+      e.preventDefault();
+    }
+    function up() { shot.active = null; }
+    c.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+    c.addEventListener('touchstart', down, { passive: false }); c.addEventListener('touchmove', move, { passive: false }); c.addEventListener('touchend', up);
+  })();
+
+  $('#autoMeasure').addEventListener('click', function () {
+    if (autoPlace()) { paintMeasure(); G.toast('자동으로 잡았습니다. 선을 확인해 주세요'); }
+    else G.toast('자동으로 찾지 못했습니다. 선을 직접 맞춰 주세요');
+  });
+  $('#hipToggle').addEventListener('click', function () {
+    shot.hipOn = !shot.hipOn;
+    $('#hipToggle').textContent = shot.hipOn ? '엉덩이 선 빼기' : '엉덩이 선 추가';
+    paintMeasure();
+  });
+  $('#retake').addEventListener('click', function () { $('#measWrap').style.display = 'none'; openCam(); });
+  $('#hospBcs').addEventListener('change', function () { calcBcs(); });
+
+  $('#savePhoto').addEventListener('click', function () {
+    if (!shot.canvas) { G.toast('사진을 먼저 찍어 주세요'); return; }
+    var pet = txt('pet');
+    if (!pet) { G.toast('아이 이름을 먼저 넣어 주세요'); $('#pet').focus(); return; }
+    var d = $('#pdate').value || todayS();
+    var w = widths();
+    var r = recOf(d);
+    r.pet = pet; r.guardian = txt('guardian');
+    r.photoThumb = shot.srcThumb || r.photoThumb || '';
+    r.ribY = shot.ribY; r.waistY = shot.waistY; r.hipY = shot.hipY; r.hipOn = shot.hipOn;
+    r.ribFr = w.ribFr; r.waistFr = w.waistFr;
+    r.ratio = shot.ratio || 0; r.est = shot.est || '';
+    r.ribPx = Math.round(w.rib / (shot.mask ? shot.mask.W - 1 : 1) * shot.w);
+    r.waistPx = Math.round(w.waist / (shot.mask ? shot.mask.W - 1 : 1) * shot.w);
+    r.hipPx = Math.round(w.hip / (shot.mask ? shot.mask.W - 1 : 1) * shot.w);
+    if (!r.weight) { var lr = lastRec(); }
+    saveRecs(); saveProfile(); renderAll();
+    setState('photoState', '', '이 기기에 저장했습니다. 병원으로 보내는 중…');
+    setState('saveState', '', '사진을 이 기기에 저장했습니다. 병원으로 보내는 중…');
+    var data = shot.canvas.toDataURL('image/jpeg', 0.78).split(',')[1];
+    post({
+      action: 'weight', key: API_KEY, src: 'GWN', pet: pet, guardian: txt('guardian'), date: d,
+      weight: r.weight || '', target: num('target') || '', bcs: r.bcs || '', hospBcs: $('#hospBcs').value || '',
+      est: r.est || '', ratio: (r.ratio || 0).toFixed(3), ribPx: r.ribPx || '', waistPx: r.waistPx || '', hipPx: r.hipPx || '',
+      photo: { data: data, mime: 'image/jpeg' }
+    }).then(function (j) {
+      r.sent = true; if (j.photoUrl) { r.photoUrl = j.photoUrl; r.photoDone = true; }
+      saveRecs(); renderAll();
+      setState('photoState', 'ok', '병원에도 사진과 측정값을 보냈습니다.' + (j.photoUrl ? '' : ' (사진 링크는 서버에서 만들지 못했습니다)'));
+      setState('saveState', 'ok', '사진과 추정 BCS ' + (r.est || '-') + '/9를 병원에 보냈습니다.');
+      if (kit) kit.refresh();
+    }).catch(function (e) {
+      setState('photoState', 'warn', '이 기기에만 저장되었습니다. 병원 전송 실패 — ' + G.esc(e.message || ''));
+      setState('saveState', 'warn', '사진은 이 기기에만 저장되었습니다. 병원 전송 실패 — ' + G.esc(e.message || ''));
+    });
+  });
+
+  /* --- 사진 이력·비교 --- */
+  var picked = [];
+  function paintPhotos() {
+    var host = $('#photoHist');
+    var list = myRecs().filter(function (r) { return r.photoThumb || r.photoUrl; });
+    if (!list.length) {
+      host.innerHTML = '<p class="note" style="grid-column:1/-1">아직 사진이 없습니다. 오늘 한 장 남겨 보세요.</p>';
+      $('#cmpWrap').style.display = 'none';
+      return;
+    }
+    host.innerHTML = list.slice().reverse().map(function (r) {
+      var on = picked.indexOf(r.date) >= 0;
+      return '<button type="button" data-d="' + G.esc(r.date) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
+        '<img class="ph" src="' + (r.photoThumb || '') + '" alt="' + G.esc(r.date) + ' 사진">' +
+        '<span class="cap">' + G.esc(r.date.slice(5).replace('-', '.')) + (r.weight ? ' · ' + r.weight + 'kg' : '') +
+        (r.est ? ' · BCS ' + r.est : '') + '</span></button>';
+    }).join('');
+    $$('#photoHist button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var d = b.getAttribute('data-d');
+        var i = picked.indexOf(d);
+        if (i >= 0) picked.splice(i, 1);
+        else { picked.push(d); if (picked.length > 2) picked.shift(); }
+        paintPhotos();
+      });
+    });
+    if (picked.length === 2) paintCompare(); else $('#cmpWrap').style.display = 'none';
+  }
+  function paintCompare() {
+    var a = recs.filter(function (r) { return r.date === picked[0]; })[0];
+    var b = recs.filter(function (r) { return r.date === picked[1]; })[0];
+    if (!a || !b) return;
+    var ord = a.date < b.date ? [a, b] : [b, a];
+    $('#cmpWrap').style.display = '';
+    $('#cmpBox').innerHTML = ord.map(function (r) {
+      return '<figure><canvas data-d="' + G.esc(r.date) + '"></canvas><figcaption>' +
+        G.esc(r.date.replace(/-/g, '. ')) + (r.weight ? ' · ' + r.weight + 'kg' : '') +
+        (r.ratio ? ' · 허리/갈비 ' + Number(r.ratio).toFixed(2) : '') +
+        (r.est ? ' · 추정 BCS ' + r.est + '/9' : '') + '</figcaption></figure>';
+    }).join('');
+    $$('#cmpBox canvas').forEach(function (cv) {
+      var r = recs.filter(function (x) { return x.date === cv.getAttribute('data-d'); })[0];
+      drawThumb(cv, r);
+    });
+    var first = ord[0], second = ord[1];
+    var bits = [];
+    if (first.weight && second.weight) {
+      var dw = second.weight - first.weight;
+      bits.push('체중 ' + (dw > 0 ? '+' : '') + dw.toFixed(1) + 'kg');
+    }
+    if (first.ratio && second.ratio) {
+      bits.push('허리/갈비 ' + Number(first.ratio).toFixed(2) + ' → ' + Number(second.ratio).toFixed(2));
+    }
+    if (first.est && second.est) bits.push('추정 BCS ' + first.est + ' → ' + second.est);
+    var days = Math.round((new Date(second.date) - new Date(first.date)) / 86400000);
+    $('#cmpDelta').innerHTML = (days > 0 ? days + '일 사이 · ' : '') + (bits.length ? bits.join(' · ') : '두 사진을 비교합니다') +
+      ' <span style="font-weight:700;color:var(--muted)">— 추정값이며 병원 확인이 필요합니다</span>';
+  }
+  function drawThumb(cv, r) {
+    var src = r.photoThumb;
+    var W = 220, H = 293;
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext('2d');
+    ctx.fillStyle = '#e8f1f5'; ctx.fillRect(0, 0, W, H);
+    if (!src) return;
+    var img = new Image();
+    img.onload = function () {
+      var sc = Math.max(W / img.width, H / img.height);
+      var dw = img.width * sc, dh = img.height * sc;
+      ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      if (r.ribY) {
+        line(r.ribY, r.ribFr, '#e2567f');
+        line(r.waistY, r.waistFr, '#2f86b5');
+      }
+    };
+    img.src = src;
+    function line(fy, ffr, color) {
+      ctx.save();
+      ctx.strokeStyle = color; ctx.lineWidth = 2;
+      var y = fy * H;
+      var half = (ffr || 0.6) * W / 2;
+      ctx.beginPath(); ctx.moveTo(W / 2 - half, y); ctx.lineTo(W / 2 + half, y); ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ================= 한 달 요약 ================= */
+  function paintMonth() {
+    var host = $('#monthBox');
+    var all = recDays();
+    if (!all.length) { host.innerHTML = '<p class="note">기록이 쌓이면 여기에 한 달 요약이 나옵니다.</p>'; return; }
+    var RR = myRecs(), DD = myDays();
+    var months = {};
+    all.forEach(function (d) { var m = d.slice(0, 7); months[m] = 1; });
+    var keys = Object.keys(months).sort().reverse().slice(0, 3);
+    host.innerHTML = keys.map(function (m) {
+      var inM = all.filter(function (d) { return d.slice(0, 7) === m; });
+      var walk = 0, exDays = 0, treatN = 0, recN = 0, photos = 0, praiseN = 0;
+      inM.forEach(function (d) {
+        var dd = DD.filter(function (x) { return x.date === d; })[0];
+        if (dd) {
+          var w = Number(dd.walkMin) || 0;
+          walk += w; if (w > 0) exDays++;
+          if (dd.treat && dd.treat !== '없음') treatN += ({ 조금: 1, 보통: 2, 많이: 3 }[dd.treat] || 1);
+          if (dd.foodThumb || dd.foodUrl) photos++;
+          if (dd.foodThumb || dd.foodUrl || dd.foodKind || dd.memo) recN++;
+        }
+      });
+      praises.forEach(function (p) { if (p.date.slice(0, 7) === m) praiseN++; });
+      var ws = RR.filter(function (r) { return r.weight > 0 && r.date.slice(0, 7) === m; });
+      var dw = ws.length > 1 ? ws[ws.length - 1].weight - ws[0].weight : null;
+      var avg = exDays ? Math.round(walk / exDays) : 0;
+      return '<table class="month"><tr><th colspan="2">' + m.replace('-', '년 ') + '월</th></tr>' +
+        '<tr><td>운동한 날 / 기록한 날</td><td><b>' + exDays + '일</b> / ' + Math.max(recN, inM.length) + '일</td></tr>' +
+        '<tr><td>운동 합계 / 하루 평균</td><td><b>' + walk + '분</b> / ' + avg + '분</td></tr>' +
+        '<tr><td>간식</td><td><b>' + treatN + '회</b></td></tr>' +
+        '<tr><td>먹은 것 사진</td><td><b>' + photos + '장</b></td></tr>' +
+        '<tr><td>체중 변화</td><td>' + (dw === null ? '기록 2회 이상 필요' : '<b>' + (dw > 0 ? '+' : '') + dw.toFixed(1) + 'kg</b>') + '</td></tr>' +
+        '<tr><td>받은 칭찬</td><td><b>' + praiseN + '개</b></td></tr></table>';
+    }).join('');
+  }
+
+  /* ================= 초기화 ================= */
+  var GOALS = { weight: '체중 조절', allergy: '알러지 관리', skin: '피부', digest: '소화', joint: '관절' };
+  var GOALS_REV = { '체중 조절': 'weight', '알러지 관리': 'allergy', '피부': 'skin', '소화': 'digest', '관절': 'joint' };
+  function readParams() {
+    var out = {};
+    try {
+      var sp = new URLSearchParams(window.location.search);
+      ['pet', 'guardian', 'goal', 'target', 'date', 'from'].forEach(function (k) { var v = sp.get(k); if (v) out[k] = v; });
+    } catch (e) { }
+    return out;
+  }
+  var URLP = readParams();
+  $('#wdate').value = todayS();
+  $('#pdate').value = todayS();
+  loadLocal();
+  if (URLP.goal) profile.goal = GOALS[URLP.goal] || URLP.goal;
+  if (URLP.pet) { profile.pet = URLP.pet; $('#pet').value = URLP.pet; }
+  if (URLP.guardian) { profile.guardian = URLP.guardian; $('#guardian').value = URLP.guardian; }
+  if (URLP.target) profile.target = URLP.target;
+  if (URLP.date && /^\d{4}-\d{2}-\d{2}$/.test(URLP.date)) { $('#wdate').value = URLP.date; $('#pdate').value = URLP.date; }
+  if (profile.guardian && !$('#guardian').value) $('#guardian').value = profile.guardian;
+  if (profile.pet && !$('#pet').value) $('#pet').value = profile.pet;
+  if (profile.target) $('#target').value = profile.target;
+  if (URLP.goal || URLP.from) {
+    var goalName = profile.goal || '식이 관리';
+    $('#fromVet').style.display = '';
+    $('#fromVetBody').innerHTML = '<b>' + G.esc(profile.pet || '아이') + '</b>의 식이 관리 목표는 <b>' + G.esc(goalName) + '</b>입니다.<br>' +
+      '오늘부터 체중·운동·먹는 것을 기록해 주세요. 다음 진료 때 한 달 기록을 함께 보면서 이야기합니다.';
+  }
+  paintGoal();
+  exLoad(); paintEx(); paintClock();
+  renderAll();
+
+  /* --- 보호자에게 보낼 링크·문구 --- */
+  function gwnUrl(pet, guardian, goalCode) {
+    var base = window.location.origin + window.location.pathname;
+    var q = [];
+    if (pet) q.push('pet=' + encodeURIComponent(pet));
+    if (guardian) q.push('guardian=' + encodeURIComponent(guardian));
+    if (goalCode) q.push('goal=' + encodeURIComponent(goalCode));
+    q.push('from=vet');
+    return base + '?' + q.join('&');
+  }
+  function kakaoMsg(pet, guardian, goalName, link) {
+    var g = guardian || '보호자';
+    var p = pet || '우리 아이';
+    var body = g + '님, ' + p + ' 식이 관리 안내입니다.\n\n' +
+      '원장님이 ' + goalName + '을(를) 목표로 정하셨어요. 아래 링크를 열면 오늘부터 체중·운동·먹는 것을 기록할 수 있습니다.\n\n' +
+      '먹는 것은 사진으로 찍어 주세요. 하루 빠져도 괜찮습니다. 다시 시작하면 됩니다.\n\n' +
+      '다음 진료 때 한 달 기록을 함께 보면서 이야기해요.\n\n' + link;
+    if (G.count(body) > 400) body = body.replace(' 하루 빠져도 괜찮습니다. 다시 시작하면 됩니다.\n\n', ' ');
+    return body;
+  }
+  function syncLinkInputs() {
+    $('#lkPet').value = txt('pet');
+    $('#lkGuardian').value = txt('guardian');
+    if (profile.goal && GOALS_REV[profile.goal]) $('#lkGoal').value = GOALS_REV[profile.goal];
+  }
+  $('#mkLink').addEventListener('click', function () {
+    var pet = ($('#lkPet').value || '').trim() || txt('pet');
+    var g = ($('#lkGuardian').value || '').trim() || txt('guardian');
+    var code = $('#lkGoal').value;
+    if (!pet) { G.toast('아이 이름을 넣어 주세요'); return; }
+    var link = gwnUrl(pet, g, code);
+    var msg = kakaoMsg(pet, g, GOALS[code] || code, link);
+    setState('linkOut', 'ok', '<b>링크</b><br>' + G.esc(link));
+    setState('msgOut', '', '<b>카톡 문구 (' + G.count(msg) + '자 / 400자 이내)</b>\n\n' + G.esc(msg));
+    $('#msgOut').style.whiteSpace = 'pre-wrap';
+    $('#msgOut').dataset.msg = msg;
+    $('#linkOut').dataset.link = link;
+    if (G.count(msg) > 400) setState('msgOut', 'warn', '문구가 400자를 넘었습니다. 아이 이름을 줄여 주세요.');
+  });
+  $('#copyLink').addEventListener('click', function () {
+    var link = $('#linkOut').dataset.link;
+    if (!link) { $('#mkLink').click(); link = $('#linkOut').dataset.link; }
+    if (!link) return;
+    G.copy(link); G.toast('링크를 복사했습니다');
+  });
+  $('#copyMsg').addEventListener('click', function () {
+    var msg = $('#msgOut').dataset.msg;
+    if (!msg) { $('#mkLink').click(); msg = $('#msgOut').dataset.msg; }
+    if (!msg) return;
+    G.copy(msg); G.toast('카톡 문구를 복사했습니다');
+  });
+  syncLinkInputs();
+
+  ['guardian', 'pet', 'target'].forEach(function (id) {
+    $('#' + id).addEventListener('change', function () {
+      saveProfile(); exLoad(); paintEx(); renderAll(); syncLinkInputs(); pullFromServer();
+      if (kit) kit.refresh();
+    });
+  });
+  $('#wdate').addEventListener('change', function () {
+    var d = $('#wdate').value || todayS();
+    var r = recOf(d);
+    if (r.weight) $('#wval').value = r.weight;
+    exLoad(); paintEx();
+  });
+  $('#clearW').addEventListener('click', function () {
+    if (!recs.length) return;
+    if (window.confirm('이 기기의 체중·사진 기록을 모두 지울까요? 병원에 보낸 기록은 지워지지 않습니다.')) {
+      recs = []; saveRecs(); renderAll();
+      if (kit) kit.refresh();
+    }
+  });
+
+  /* 다른 기기에서 남긴 기록 불러오기 */
+  var pulled = {};
+  function pullFromServer() {
+    var pet = txt('pet'), g = txt('guardian');
+    if (!pet) return;
+    var key = pet + '|' + g;
+    if (pulled[key]) return;
+    pulled[key] = 1;
+    getJSON('action=weight_list&key=' + API_KEY + '&pet=' + encodeURIComponent(pet) + '&guardian=' + encodeURIComponent(g))
+      .then(function (j) {
+        var rows = j.rows || [], n = 0;
+        rows.forEach(function (row) {
+          var d = String(row['측정일'] || '').slice(0, 10).replace(/\//g, '-');
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+          var w = parseFloat(row['체중kg']) || 0;
+          if (!w && !row['사진링크']) return;
+          var r = recOf(d);
+          if (w && !r.weight) { r.weight = w; n++; }
+          if (row['사진링크'] && !r.photoUrl) r.photoUrl = row['사진링크'];
+          if (row['추정BCS'] && !r.est) r.est = String(row['추정BCS']).replace(/[^0-9]/g, '');
+          if (row['허리/갈비'] && !r.ratio) r.ratio = Number(row['허리/갈비']) || 0;
+          if (row['병원확인BCS'] && !r.hospBcs) r.hospBcs = String(row['병원확인BCS']).replace(/[^0-9]/g, '');
+          if (row['목표kg'] && !r.target) r.target = parseFloat(row['목표kg']) || '';
+        });
+        if (n) { recs.sort(byDate); saveRecs(); renderAll(); G.toast('병원 기록 ' + n + '건을 불러왔습니다'); }
+      }).catch(function () { });
+    getJSON('action=diet_list&key=' + API_KEY + '&pet=' + encodeURIComponent(pet) + '&guardian=' + encodeURIComponent(g))
+      .then(function (j) {
+        (j.rows || []).forEach(function (row) {
+          var d = String(row['날짜'] || '').slice(0, 10).replace(/\//g, '-');
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+          var dd = dayOf(d);
+          if (!dd.walkMin && row['운동분']) dd.walkMin = Number(row['운동분']) || 0;
+          if (!dd.foodKind && row['사료']) dd.foodKind = String(row['사료']);
+          if (!dd.treat && row['간식']) dd.treat = String(row['간식']);
+          if (row['먹은것사진'] && !dd.foodUrl) dd.foodUrl = row['먹은것사진'];
+          if (row['목표'] && !profile.goal) profile.goal = String(row['목표']);
+        });
+        saveDays(); renderAll();
+      }).catch(function () { });
+  }
+
   var kit = G.outKit({
-    num: 4,
-    title: '보호자에게 보낼 체중 관리 안내',
+    num: 9,
+    title: '보호자에게 보낼 체중·식이 관리 안내',
     sub: '400자 이내 · 기록이 있을 때 정확합니다',
     build: function () {
       var d = G.settings();
-      var g = ($('#guardian').value || '').trim() || '보호자';
-      var p = ($('#pet').value || '').trim() || '우리 아이';
-      var head = '🐾 ' + g + '님, ' + p + ' 체중 기록 안내입니다.\n\n';
-      if (!data.length) return head + '체중을 기록하면 변화와 목표까지의 거리를 알려 드립니다.\n- ' + d.hospital;
-      var first = data[0], last = data[data.length - 1];
-      var delta = last.w - first.w;
-      var t = num('target');
-      var body = '· 현재 ' + last.w + 'kg (' + last.d.replace(/-/g, '. ') + ')\n' +
-        '· 첫 기록 대비 ' + (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg\n';
-      if (t > 0 && last.w > t) {
-        var weeks = Math.ceil((last.w - t) / (last.w * 0.015));
-        body += '· 목표 ' + t + 'kg까지 ' + (last.w - t).toFixed(1) + 'kg, 약 ' + weeks + '주\n';
+      var g = txt('guardian') || '보호자';
+      var p = txt('pet') || '우리 아이';
+      var head = '🐾 ' + g + '님, ' + p + ' 체중·식이 관리 안내입니다.\n\n';
+      var last = lastRec(), first = firstRec();
+      if (!last) return head + '체중과 먹는 것을 기록하면 변화와 목표까지의 거리를 알려 드립니다.\n- ' + d.hospital;
+      var delta = first && myRecs().length > 1 ? last.weight - first.weight : 0;
+      var t = num('target') || Number(profile.target) || 0;
+      var ws = weekStats();
+      var body = '· 현재 ' + last.weight + 'kg (' + last.date.replace(/-/g, '. ') + ')\n' +
+        (first && myRecs().length > 1 ? '· 첫 기록 대비 ' + (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg\n' : '') +
+        '· 이번 주 산책 ' + ws.walk + '분 · 간식 ' + ws.treat + '회\n';
+      if (t > 0 && last.weight > t) {
+        var weeks = Math.ceil((last.weight - t) / (last.weight * 0.015));
+        body += '· 목표 ' + t + 'kg까지 ' + (last.weight - t).toFixed(1) + 'kg, 약 ' + weeks + '주\n';
         body += '\n주 1~2% 속도로 줄이는 것이 안전합니다. 급여량은 GFN에서 다시 계산해 드릴게요.';
       } else if (t > 0) {
         body += '· 목표 ' + t + 'kg 달성\n\n이 속도를 유지하면 됩니다. 2주마다 같은 시간에 재 주세요.';
@@ -233,10 +1500,8 @@
     noShort: true
   });
 
-  load(); render(); refresh();
-  function refresh() { if (kit) kit.refresh(); }
+  pullFromServer();
 })();
-
 </script>
 <script src="assets/pwa.js?v=20261128a"></script>
 </body>
