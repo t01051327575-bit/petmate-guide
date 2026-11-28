@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="GPN · 자리 지도 · 일일 마감">
 <meta name="twitter:description" content="굿모닝펫 GPN — 원무과·진료과·검사실 세 자리의 하루 루틴을 체크하고, 일일 마감 보고를 1분 만에 만듭니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
-<link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128e">
 <style>
 /* GPN 전용 — 자리 지도 */
 .jgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
@@ -168,7 +168,7 @@
   <div id="g-footer"></div>
 </div>
 
-<script src="assets/g-common.js?v=20261128d"></script>
+<script src="assets/g-common.js?v=20261128e"></script>
 <script>
 
 (function () {
@@ -353,7 +353,7 @@
     var head = '[검사실 인계] ' + dateStr().replace(/-/g, '. ') + ' · ' + ((($('#who') && $('#who').value) || '').trim() || '진료검사과') + '\n';
     var body = '· 완료 ' + (r.total - miss.length) + '/' + r.total + '항목\n' +
       (miss.length
-        ? '· 미완료: ' + miss.slice(0, 3).map(function (x) { return x.n + '.' + x.t; }).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n'
+        ? '· 미완료: ' + miss.slice(0, 3).map(function (x) { return x.n + '. ' + x.t; }).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n'
         : '· 미완료 없음\n') +
       (short ? '· 특이: ' + short + '\n' : '') +
       (memo ? '· 메모: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '');
