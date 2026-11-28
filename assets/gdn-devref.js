@@ -134,7 +134,7 @@
       } else {
         devnone.hidden = true;
       }
-      buildDraft([]);
+      buildDraft([], {});
       return;
     }
     devnone.hidden = true;
@@ -224,11 +224,12 @@
     rv += '<div class="src" style="margin-top:10px">장비 구분: ' + esc(d.method) + ' · 데이터 갱신 ' + esc(REF.updated) + '</div>';
     refview.innerHTML = rv;
 
-    buildDraft(rows);
+    buildDraft(rows, unres);
   }
 
   /* ---------- 코멘트 초안 ---------- */
-  function buildDraft(rows) {
+  function buildDraft(rows, unres) {
+    unres = unres || {};
     if (!rows.length) { draft.value = ''; draftlen.textContent = ''; return; }
     var d = dev(), p = prof(d);
     var a = [], b = [], abn = [];
