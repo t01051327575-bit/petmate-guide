@@ -62,7 +62,7 @@ var G_CARE_CORE = (function () {
     parts.push({ k: 'signs', v: '이런 신호가 있다면:\n· ' + (mat.signs || []).join('\n· ') });
     parts.push({ k: 'why', v: mat.kakaoWhy || mat.why });
     parts.push({ k: 'hospital', v: '병원에서는 ' + mat.hospital });
-    if (opt.link) parts.push({ k: 'link', v: '자세히 보기: ' + opt.link });
+    if (opt.link) parts.push({ k: 'link', v: '예약: ' + opt.link });
     parts.push({ k: 'disclaimer', v: opt.disclaimer || '진단과 처방은 진료 후에 정해집니다. 이 안내는 병원 안내용이며 치료를 대신하지 않습니다.' });
     if (phone) parts.push({ k: 'tail', v: hospital + ' · ' + phone });
 
@@ -81,7 +81,7 @@ var G_CARE_CORE = (function () {
         }
       }
     }
-    var dropOrder = ['link', 'why', 'hospital'];
+    var dropOrder = opt.link ? ['hospital', 'why', 'signs'] : ['why', 'hospital', 'signs'];
     for (var i = 0; i < dropOrder.length && count(text()) > limit; i++) {
       for (var j = 0; j < parts.length; j++) {
         if (parts[j].k === dropOrder[i]) { parts.splice(j, 1); break; }
