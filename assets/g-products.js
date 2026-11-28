@@ -513,16 +513,20 @@ var G_PRODUCTS = (function () {
     return null;
   }
 
-  /* 진료 메모에서 소견 태그 자동 감지 (많이 걸린 순, 최대 max개) */
+  /* 진료 메모에서 소견 태그 자동 감지
+     낱말이 몇 번 나왔는지 + 긴 낱말일수록 무겁게 세어 순서를 정한다. */
   function detect(text, max) {
     var s = String(text || '').toLowerCase();
     var hits = [];
     for (var i = 0; i < TAGS.length; i++) {
-      var t = TAGS[i], hit = 0;
+      var t = TAGS[i], score = 0;
       for (var k = 0; k < t.kw.length; k++) {
-        if (s.indexOf(String(t.kw[k]).toLowerCase()) >= 0) hit++;
+        var kw = String(t.kw[k]).toLowerCase();
+        var n = 0, at = 0;
+        while ((at = s.indexOf(kw, at)) >= 0) { n++; at += kw.length; }
+        if (n) score += n * (kw.length >= 3 ? 2 : 1);
       }
-      if (hit) hits.push({ id: t.id, n: hit, i: i });
+      if (score) hits.push({ id: t.id, n: score, i: i });
     }
     hits.sort(function (a, b) { return b.n - a.n || a.i - b.i; });
     return hits.slice(0, max || 3).map(function (h) { return h.id; });

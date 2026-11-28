@@ -521,7 +521,7 @@ body.hasbar{padding-bottom:78px}
         var why = it.s.why || '';
         if (mode >= 1) why = shortWhy(why);
         if (mode >= 2) why = '';
-        lines.push((i + 1) + '. ' + it.cat.em + ' ' + it.s.name + (why ? ' — ' + why : ''));
+        lines.push((i + 1) + '. ' + it.cat.em + ' ' + it.s.name + (why ? ' — ' + why.replace(/—/g, '·') : ''));
       });
     }
     var link = orderLink();
@@ -541,12 +541,23 @@ body.hasbar{padding-bottom:78px}
     return s.length > 16 ? s.slice(0, 15) + '…' : s;
   }
 
+  /* 코멘트에서 '○○ 검사'를 찾아 검사명으로 (없으면 소견 이름) */
+  function examGuess() {
+    var c = String($('#comment').value || '');
+    var m = c.match(/([가-힣A-Za-z0-9()\u00b7\s]{2,24}?검사)/);
+    if (m) return m[1].replace(/\s+/g, ' ').trim();
+    if (/초음파/.test(c)) return '초음파 검사';
+    if (/엑스레이|x-ray/i.test(c)) return '엑스레이 검사';
+    if (/혈액/.test(c)) return '혈액검사';
+    return '';
+  }
+
   /* STEP 3 — 검사·혹 해설 */
   function buildGdn() {
     var c = stripHead(cleanBlock($('#comment').value));
     var head = '🔎 ' + petName() + ' 검사 결과 안내 (' + guardianName() + ' 님)';
     var t = (state.tags.length && P) ? P.tag(state.tags[0]) : null;
-    var exam = val('exam') || (t ? t.ko : '검사 결과');
+    var exam = val('exam') || examGuess() || (t ? t.short : '검사 결과');
     var foot = tail();
     var body = ['●검사 : ' + exam];
     if (t) body.push('●쉽게 말하면 : ' + t.explain);
@@ -612,7 +623,8 @@ body.hasbar{padding-bottom:78px}
     if (!pk.length) return '';
     var day = daysCode(G.today());
     var items = pk.map(function (it) { return it.s.name.replace(/,/g, ' ') + ',' + day + ',1,' + catOf(it.s.name); }).join(';');
-    var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '|' + (G.settings().slogan || '') + '|' + kakao() + '||' + items;
+    /* 형식: 1|병원|보호자|아이|슬로건|카톡|다음예약|심장사상충|품목 (빈 칸 2개 주의) */
+    var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '|' + (G.settings().slogan || '') + '|' + kakao() + '|||' + items;
     return dirUrl() + 'order.html?r=1&d=' + b64url(packStr(d));
   }
   function rebuyLink() {
