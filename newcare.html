@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/g-common.css?v=20261128g">
-<link rel="stylesheet" href="assets/g-newpages.css?v=20261128c">
+<link rel="stylesheet" href="assets/g-newpages.css?v=20261128d">
 </head>
 <body data-code="NEWCARE">
 <div id="g-top"></div>
@@ -148,8 +148,8 @@
 </div>
 
 <script src="assets/g-common.js?v=20261128g"></script>
-<script src="assets/g-care-data.js?v=20261128c"></script>
-<script src="assets/g-care-core.js?v=20261128c"></script>
+<script src="assets/g-care-data.js?v=20261128d"></script>
+<script src="assets/g-care-core.js?v=20261128d"></script>
 <script>
 (function () {
   var $ = G.q, C = G_CARE_CORE;
@@ -374,7 +374,8 @@
       facts: facts,
       sources: [],
       srcUrl: srcUrl,
-      notes: []
+      staff: val('f_staff') || '보호자님, 증상이 언제부터였는지 여쭤봐도 될까요? 아이 상태를 확인하고 필요한 검사를 안내해 드리겠습니다.',
+      notes: ['출처에서 확인한 내용만 설명하고, 진단·처방을 대신하지 않습니다.']
     };
     var why = lines('f_why');
     var ask = lines('f_ask');
@@ -395,7 +396,7 @@
       ask: ask.length ? ask : ['증상이 언제부터였는지, 달라진 점이 있는지 여쭤봐도 될까요?'],
       why: why.length ? why : ['같은 증상도 원인에 따라 치료가 달라집니다. 진찰로 원인을 확인하는 것이 먼저입니다.'],
       next: next.length ? next : ['진찰과 필요한 검사로 원인을 확인한 뒤 방법을 정합니다.'],
-      staff: val('f_staff') || '보호자님, 증상이 언제부터였는지 여쭤봐도 될까요? 아이 상태를 확인하고 필요한 검사를 안내해 드리겠습니다.',
+      staff: item.staff,
       kakao: kakao.split(/\n{2,}/).map(function (s) { return s.trim(); }).filter(Boolean),
       faq: [],
       hashtags: ['#굿모닝펫동물병원'],
