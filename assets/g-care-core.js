@@ -69,8 +69,19 @@ var G_CARE_CORE = (function () {
     function text() {
       return parts.map(function (p) { return p.v; }).filter(Boolean).join('\n\n');
     }
-    /* 넘치면 설명 → 링크 → 병원 안내 순서로 덜어내고, 인사·고지·연락처는 남깁니다 */
-    var dropOrder = ['why', 'link', 'hospital'];
+    /* 넘치면 설명을 첫 문장으로 줄이고, 그래도 넘치면 링크 → 설명 → 병원 안내 순서로 덜어냅니다 */
+    if (count(text()) > limit) {
+      for (var w = 0; w < parts.length; w++) {
+        if (parts[w].k === 'why') {
+          var first = String(parts[w].v).split('. ')[0];
+          if (first && first.length < String(parts[w].v).length - 2) {
+            parts[w].v = first.replace(/\.$/, '') + '.';
+          }
+          break;
+        }
+      }
+    }
+    var dropOrder = ['link', 'why', 'hospital'];
     for (var i = 0; i < dropOrder.length && count(text()) > limit; i++) {
       for (var j = 0; j < parts.length; j++) {
         if (parts[j].k === dropOrder[i]) { parts.splice(j, 1); break; }
