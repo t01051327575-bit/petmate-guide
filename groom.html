@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미용 전 건강관리표</title>
+<meta name="description" content="미용하면서 아이 몸 12곳을 확인하고, 이상이 있으면 사진·영상으로 남겨 병원에 바로 전하는 미용 전 체크표입니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --bg:#eef7fb; --card:#fff; --ink:#1f2d38; --sub:#5b7286; --line:#d8e6ef;
+  --pink:#df5b83; --pink-soft:#fdeef3; --blue:#2f7fb8; --blue-soft:#e8f4fb;
+  --ok:#178a5b; --ok-soft:#e6f6ee; --bad:#d8344f; --bad-soft:#fdeaee; --na:#7b8794; --na-soft:#eff2f4;
+  --radius:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:17px; line-height:1.55; -webkit-text-size-adjust:100%;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 24px}
+header.top{padding:18px 4px 10px}
+.clinic{font-size:14px;color:var(--sub);font-weight:600;letter-spacing:.2px}
+h1{font-size:26px;line-height:1.25;margin:6px 0 4px;letter-spacing:-.4px}
+h1 .pet{color:var(--pink)}
+.intro{
+  margin:12px 0 0; padding:14px 16px; background:var(--pink-soft); border:1px solid #f3cfdb;
+  border-radius:14px; font-size:16px; line-height:1.6; color:#5a2a3c;
+}
+.intro b{color:#b0243f}
+.steps{display:flex;align-items:center;gap:8px;margin:12px 0 2px;font-size:15px;font-weight:700}
+.steps .st{padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--sub)}
+.steps .st.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.steps .ar{color:#9fb3c2}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;box-shadow:0 1px 2px rgba(20,50,70,.04)}
+.card h2{font-size:18px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.card h2 .n{display:inline-flex;width:26px;height:26px;border-radius:9px;background:var(--blue-soft);color:var(--blue);align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.field{margin:10px 0}
+.field label{display:block;font-size:14px;font-weight:700;color:var(--sub);margin-bottom:6px}
+.field input[type=text],.field input[type=date],.field textarea{
+  width:100%;font-size:17px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fbfdff;color:var(--ink);font-family:inherit;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);background:#fff}
+.field textarea{min-height:86px;resize:vertical}
+.fixed{display:flex;align-items:center;gap:8px;padding:13px 14px;border-radius:12px;background:var(--blue-soft);border:1.5px solid #cfe6f4;font-size:18px;font-weight:800}
+.fixed .lock{font-size:14px;font-weight:600;color:var(--sub)}
+.hint{font-size:13px;color:var(--sub);font-weight:500}
+.item{border:1px solid var(--line);border-radius:14px;padding:13px 13px 11px;margin:10px 0;background:#fff}
+.item.done{border-color:#c6e3d4;background:#fcfefd}
+.item.abn{border-color:#f2c6cf;background:#fffafb}
+.ihead{display:flex;gap:8px;align-items:flex-start}
+.ihead .no{font-weight:800;color:var(--blue);font-size:16px;min-width:18px}
+.ihead .t{font-weight:800;font-size:17px;line-height:1.35}
+.ihead .h{display:block;font-weight:500;font-size:13.5px;color:var(--sub);margin-top:2px;line-height:1.45}
+.seg3{display:grid;grid-template-columns:1fr 1fr 1Fr;gap:7px;margin-top:10px}
+.seg3 button{
+  -webkit-appearance:none;appearance:none;border:1.5px solid var(--line);background:#f7fafc;color:var(--sub);
+  font-family:inherit;font-size:15.5px;font-weight:700;padding:11px 4px;border-radius:11px;min-height:48px;cursor:pointer;
+}
+.seg3 button[aria-pressed=true][data-v=ok]{background:var(--ok-soft);border-color:#9cd3b6;color:var(--ok)}
+.seg3 button[aria-pressed=true][data-v=bad]{background:var(--bad-soft);border-color:#f0a9b5;color:var(--bad)}
+.seg3 button[aria-pressed=true][data-v=na]{background:var(--na-soft);border-color:#cfd6dc;color:#4a545d}
+.media{display:none;margin-top:10px}
+.media.on{display:block}
+.mrow{display:flex;flex-wrap:wrap;gap:7px}
+.mbtn{
+  -webkit-appearance:none;appearance:none;font-family:inherit;font-size:15px;font-weight:700;
+  border:1.5px dashed #c3d7e5;background:#f6fbfe;color:var(--blue);border-radius:11px;padding:10px 12px;min-height:44px;cursor:pointer;
+}
+.mbtn:active{background:#e7f3fa}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.thumb{position:relative;width:84px;height:84px;border-radius:11px;overflow:hidden;border:1px solid var(--line);background:#000}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .x{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.62);color:#fff;font-size:14px;line-height:24px;padding:0;cursor:pointer}
+.thumb .k{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);color:#fff;font-size:11px;text-align:center;padding:1px 0}
+.inote{display:none;margin-top:9px}
+.inote.on{display:block}
+.inote input{width:100%;font-size:16px;padding:11px 12px;border:1.5px solid var(--line);border-radius:11px;background:#fff;font-family:inherit}
+.switch{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid #f0cfd9;background:var(--pink-soft);border-radius:13px;margin-top:6px}
+.switch input{width:24px;height:24px;accent-color:var(--pink);flex:none}
+.switch span{font-size:16px;font-weight:700;color:#7a2338}
+.bar{
+  position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(6px);z-index:20;
+}
+.bar .in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.bar .cnt{font-size:14.5px;font-weight:700;color:var(--sub);line-height:1.3}
+.bar .cnt b{color:var(--ink);font-size:16px}
+.bar .cnt .abn{color:var(--bad)}
+.bar button{
+  -webkit-appearance:none;appearance:none;font-family:inherit;flex:1;border:0;border-radius:14px;background:var(--pink);
+  color:#fff;font-size:18px;font-weight:800;padding:15px 10px;min-height:54px;cursor:pointer;box-shadow:0 3px 10px rgba(223,91,131,.3)
+}
+.bar button:disabled{background:#c9d3db;box-shadow:none}
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(104px + env(safe-area-inset-bottom));
+  background:#243444;color:#fff;font-size:15px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:40;
+  max-width:90%;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s
+}
+.toast.on{opacity:1}
+.done{text-align:center;padding:34px 10px 10px}
+.done .mark{font-size:60px;line-height:1}
+.done h2{font-size:24px;margin:10px 0 6px;justify-content:center}
+.done p{color:var(--sub);margin:6px 0}
+.done .sum{display:inline-block;margin:14px auto;padding:12px 16px;border-radius:13px;background:var(--ok-soft);border:1px solid #b8e0c9;font-weight:800;color:#156b46}
+.kakao{margin:16px 0 4px;text-align:left;background:#fffbe8;border:1px solid #f0e0a8;border-radius:13px;padding:14px}
+.kakao .lb{font-size:13px;font-weight:800;color:#8a6d12;margin-bottom:8px}
+.kakao pre{white-space:pre-wrap;word-break:keep-all;font-family:inherit;font-size:15px;line-height:1.55;margin:0 0 10px;color:#3b3524}
+.copybtn{-webkit-appearance:none;appearance:none;font-family:inherit;width:100%;border:0;border-radius:12px;background:#f2c94c;color:#3b2f00;font-size:16px;font-weight:800;padding:13px;min-height:50px;cursor:pointer}
+.guide{font-size:15px;color:var(--sub);background:#f4f8fb;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:14px;text-align:left}
+footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
+.spin{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.pgbar{height:6px;background:#e3edf4;border-radius:99px;overflow:hidden;margin:8px 0 2px}
+.pgbar i{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="clinic" id="clinicName">동물병원</div>
+    <h1 id="pageTitle">미용 전 건강관리표</h1>
+    <div class="intro" id="intro">
+      미용하면서 꼼꼼히 체크해 주셔서 고맙습니다.<br>
+      <b>① 12곳 체크</b>하고 <b>② 완료·전송</b>을 눌러 주세요.<br>
+      건강관리에 최선을 다하겠습니다.
+    </div>
+    <div class="steps"><span class="st on" id="step1">① 체크</span><span class="ar">→</span><span class="st" id="step2">② 완료 · 전송</span></div>
+  </header>
+
+  <form id="form" autocomplete="on">
+  <section class="card" id="whoCard">
+    <h2><span class="n">1</span>누구를 미용하나요?</h2>
+    <div class="field" id="petFixedWrap" style="display:none">
+      <label>아이 이름</label>
+      <div class="fixed"><span id="petFixed">—</span><span class="lock">병원에서 보낸 링크</span></div>
+    </div>
+    <div class="field" id="petInputWrap">
+      <label>아이 이름 <span class="hint">(필수)</span></label>
+      <input type="text" id="pet" placeholder="예: 누아" enterkeyhint="next">
+    </div>
+    <div class="field">
+      <label>보호자 이름 <span class="hint">(선택)</span></label>
+      <input type="text" id="guardian" placeholder="예: 김지영" enterkeyhint="next">
+    </div>
+    <div class="field">
+      <label>미용사 또는 미용실 이름 <span class="hint">(하나만 적어 주세요)</span></label>
+      <input type="text" id="groomer" placeholder="예: 해피독 유진" enterkeyhint="next">
+    </div>
+    <div class="field">
+      <label>미용일</label>
+      <input type="date" id="groomDate">
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>미용 전 12곳 체크</h2>
+    <p class="hint" style="margin:0 0 6px">만지는 순서대로 확인하세요. <b>이상 있음</b>을 고르면 그 자리에서 사진·영상을 남길 수 있습니다.</p>
+    <div id="list"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>메모 · 병원에 전할 것</h2>
+    <div class="field">
+      <label>눈에 띈 점 <span class="hint">(선택 · 자유롭게)</span></label>
+      <textarea id="memo" placeholder="예: 오른쪽 귀에서 냄새가 나고 귀지가 검붉게 묻어 있어요. 자꾸 긁어요."></textarea>
+    </div>
+    <label class="switch"><input type="checkbox" id="mustTell"><span>병원에 꼭 전할 것이 있어요</span></label>
+  </section>
+  </form>
+
+  <div id="doneView" style="display:none"></div>
+
+  <footer>미용 전 체크 · 사진·영상은 병원에서만 확인합니다.</footer>
+</div>
+
+<div class="bar" id="bar">
+  <div class="in">
+    <div class="cnt"><b id="cntDone">0/12</b> 확인<br><span id="cntAbn">이상 0곳</span></div>
+    <button type="button" id="submitBtn">완료 · 전송</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<input type="file" id="fPhotoCam" accept="image/*" capture="environment" hidden>
+<input type="file" id="fPhotoPick" accept="image/*" multiple hidden>
+<input type="file" id="fVideoCam" accept="video/*" capture="environment" hidden>
+<input type="file" id="fVideoPick" accept="video/*" hidden>
+
+<script>
+(function(){
+  'use strict';
+  var API = 'https://script.google.com/macros/s/AKfycbwogzgIJoyeF6H19M4nb8q3woW3I_XHxLo6i9KSj6CA33IL5R8QfRN2UFWQNXQ3mICj/exec';
+  var PHOTO_MAX = 1280, PHOTO_Q = 0.8, VIDEO_SEC = 15, VIDEO_MAX_BYTES = 8 * 1024 * 1024;
+
+  var ITEMS = [
+    {no:1, key:'head',  label:'머리·얼굴',                 hint:'이마·볼·털 밑 피부, 상처·발진·털 엉킴'},
+    {no:2, key:'eye',   label:'눈',                        hint:'눈곱·충혈·눈물자국·눈 흰자 색'},
+    {no:3, key:'ear',   label:'귀(양쪽)',                  hint:'냄새·붉음·진물·귀지 색'},
+    {no:4, key:'nose',  label:'코',                        hint:'콧물·건조·갈라짐·출혈'},
+    {no:5, key:'mouth', label:'입·치아·잇몸',              hint:'치석·잇몸 색·입 냄새·빠진 이'},
+    {no:6, key:'neck',  label:'목',                        hint:'멍울·피부 접힘·목줄 자국'},
+    {no:7, key:'back',  label:'등',                        hint:'털 사이 상처·각질·벼룩·진드기'},
+    {no:8, key:'belly', label:'배',                        hint:'발진·붉음·배꼽 주변'},
+    {no:9, key:'front', label:'앞다리·발',                 hint:'절뚝임·관절·발가락 사이'},
+    {no:10,key:'hind',  label:'뒷다리·발',                 hint:'절뚝임·무릎·발가락 사이'},
+    {no:11,key:'paw',   label:'발바닥·발톱·항문 주변',     hint:'패드 갈라짐·발톱 길이·항문 주변 오염·종기'},
+    {no:12,key:'skin',  label:'피부 전체(혹·발진·상처)',   hint:'목욕 후 털 사이 — 새로 생긴 혹·발진·상처·각질'}
+  ];
+
+  var $ = function(s){ return document.querySelector(s); };
+  var params = new URLSearchParams(location.search);
+  var clinic = (params.get('clinic') || '').trim();
+  var qPet = (params.get('pet') || '').trim();
+  var qGuardian = (params.get('guardian') || '').trim();
+  var qDate = (params.get('date') || '').trim();
+  var fromLink = !!qPet;
+
+  var state = {};     /* key -> {v:'', note:'', media:[]} */
+  var current = null; /* 지금 미디어를 넣을 항목 */
+  var submitId = null;
+
+  ITEMS.forEach(function(it){ state[it.key] = {v:'', note:'', media:[]}; });
+
+  /* ---------- 초기화 ---------- */
+  function todayStr(){
+    var d = new Date(), p = function(n){ return (n<10?'0':'')+n; };
+    return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+  }
+  if(clinic) $('#clinicName').textContent = clinic;
+  if(qPet){
+    $('#petFixed').textContent = qPet;
+    $('#petFixedWrap').style.display = 'block';
+    $('#petInputWrap').style.display = 'none';
+    $('#pageTitle').innerHTML = '<span class="pet">'+esc(qPet)+'</span> 건강관리표';
+    document.title = qPet+' 건강관리표';
+  }
+  if(qGuardian){ $('#guardian').value = qGuardian; }
+  $('#groomDate').value = /^\d{4}-\d{2}-\d{2}$/.test(qDate) ? qDate : todayStr();
+  try{
+    var saved = JSON.parse(localStorage.getItem('gbn_groom_'+(qPet||'any')) || '{}');
+    if(saved.groomer) $('#groomer').value = saved.groomer;
+    if(!qGuardian && saved.guardian) $('#guardian').value = saved.guardian;
+    if(saved.memo) $('#memo').value = saved.memo;
+    if(saved.mustTell) $('#mustTell').checked = true;
+    if(saved.states) Object.keys(saved.states).forEach(function(k){
+      if(state[k]) state[k].v = saved.states[k];
+    });
+  }catch(e){}
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  /* ---------- 목록 그리기 ---------- */
+  var listEl = $('#list');
+  listEl.innerHTML = ITEMS.map(function(it){
+    return '<div class="item" id="it-'+it.key+'" data-key="'+it.key+'">'+
+      '<div class="ihead"><span class="no">'+it.no+'</span><span class="t">'+esc(it.label)+
+        '<span class="h">'+esc(it.hint)+'</span></span></div>'+
+      '<div class="seg3" role="group" aria-label="'+esc(it.label)+' 상태">'+
+        '<button type="button" data-v="ok" aria-pressed="false">정상</button>'+
+        '<button type="button" data-v="bad" aria-pressed="false">이상 있음</button>'+
+        '<button type="button" data-v="na" aria-pressed="false">해당 없음</button>'+
+      '</div>'+
+      '<div class="media" id="m-'+it.key+'">'+
+        '<div class="mrow">'+
+          '<button type="button" class="mbtn" data-act="shot">📷 사진 촬영</button>'+
+          '<button type="button" class="mbtn" data-act="pick">🖼 사진 선택</button>'+
+          '<button type="button" class="mbtn" data-act="video">🎥 영상 15초</button>'+
+        '</div>'+
+        '<div class="thumbs" id="th-'+it.key+'"></div>'+
+      '</div>'+
+      '<div class="inote" id="n-'+it.key+'"><input type="text" placeholder="어떤 점이 이상한가요? (예: 붉고 진물)" maxlength="60"></div>'+
+    '</div>';
+  }).join('');
+
+  function refreshItem(key){
+    var it = state[key], box = $('#it-'+key);
+    box.querySelectorAll('.seg3 button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === it.v));
+    });
+    box.classList.toggle('done', it.v === 'ok');
+    box.classList.toggle('abn', it.v === 'bad');
+    $('#m-'+key).classList.toggle('on', it.v === 'bad');
+    $('#n-'+key).classList.toggle('on', it.v === 'bad');
+    var note = $('#n-'+key).querySelector('input');
+    if(note.value !== it.note) note.value = it.note || '';
+    renderThumbs(key);
+  }
+
+  function renderThumbs(key){
+    var box = $('#th-'+key), arr = state[key].media;
+    box.innerHTML = '';
+    arr.forEach(function(m, i){
+      var d = document.createElement('div');
+      d.className = 'thumb';
+      if(m.kind === 'video'){
+        var v = document.createElement('video');
+        v.src = m.url; v.muted = true; v.playsInline = true; v.preload = 'metadata';
+        d.appendChild(v);
+      }else{
+        var im = document.createElement('img'); im.src = m.url; im.alt = '첨부 사진';
+        d.appendChild(im);
+      }
+      var k = document.createElement('span'); k.className='k'; k.textContent = m.kind==='video'?'영상':'사진';
+      var x = document.createElement('button'); x.type='button'; x.className='x'; x.textContent='✕';
+      x.setAttribute('aria-label','첨부 삭제');
+      x.addEventListener('click', function(){ state[key].media.splice(i,1); renderThumbs(key); saveLocal(); });
+      d.appendChild(k); d.appendChild(x);
+      box.appendChild(d);
+    });
+  }
+
+  function pickSeg(e){
+    var btn = e.target.closest('.seg3 button'); if(!btn) return;
+    var key = btn.closest('.item').getAttribute('data-key');
+    var v = btn.getAttribute('data-v');
+    state[key].v = state[key].v === v ? '' : v;   /* 한 번 더 누르면 해제 */
+    if(state[key].v !== 'bad'){ /* 이상 없음으로 바뀌면 첨부는 남겨 두되 화면만 접는다 */ }
+    refreshItem(key); updateBar(); saveLocal();
+  }
+  listEl.addEventListener('click', function(e){
+    if(e.target.closest('.seg3')) { pickSeg(e); return; }
+    var mb = e.target.closest('.mbtn');
+    if(mb){
+      var key = mb.closest('.item').getAttribute('data-key');
+      current = key;
+      var act = mb.getAttribute('data-act');
+      if(act === 'shot') $('#fPhotoCam').click();
+      else if(act === 'pick') $('#fPhotoPick').click();
+      else $('#fVideoCam').click();
+    }
+  });
+  /* 영상은 촬영이 안 되는 기기·PC를 위해 길게 눌러 파일 선택 */
+  listEl.addEventListener('contextmenu', function(e){
+    var mb = e.target.closest('.mbtn[data-act=video]');
+    if(!mb) return;
+    e.preventDefault();
+    current = mb.closest('.item').getAttribute('data-key');
+    $('#fVideoPick').click();
+  });
+
+  /* ---------- 사진 ---------- */
+  function loadImg(file){
+    return new Promise(function(res, rej){
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function(){ res({img:img, url:url}); };
+      img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('사진을 읽지 못했습니다')); };
+      img.src = url;
+    });
+  }
+  async function compressImage(file){
+    var o = await loadImg(file);
+    try{
+      var img = o.img, w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+      var sc = Math.min(1, PHOTO_MAX / Math.max(w, h));
+      var cw = Math.max(1, Math.round(w*sc)), ch = Math.max(1, Math.round(h*sc));
+      var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+      cv.getContext('2d').drawImage(img, 0, 0, cw, ch);
+      var blob = await new Promise(function(r){ cv.toBlob(r, 'image/jpeg', PHOTO_Q); });
+      if(!blob) throw new Error('압축 실패');
+      return blob.size <= file.size ? blob : file;
+    } finally { URL.revokeObjectURL(o.url); }
+  }
+  async function addPhotos(files){
+    if(!current) return;
+    var key = current, arr = Array.prototype.slice.call(files || []);
+    for(var i=0;i<arr.length;i++){
+      var f = arr[i];
+      if(!/^image\//.test(f.type)) continue;
+      toast('사진 준비 중…');
+      try{
+        var blob = await compressImage(f);
+        addMediaTo(key, blob, 'photo');
+        toast('');
+      }catch(e){
+        addMediaTo(key, f, 'photo');   /* 압축 실패 시 원본 그대로 */
+        toast('');
+      }
+    }
+    saveLocal();
+  }
+  function addMediaTo(key, blob, kind, dur){
+    var url = URL.createObjectURL(blob);
+    state[key].media.push({kind:kind, blob:blob, url:url, dur:dur||0});
+    renderThumbs(key);
+  }
+
+  /* ---------- 영상 ---------- */
+  function videoDuration(file){
+    return new Promise(function(res, rej){
+      var url = URL.createObjectURL(file);
+      var v = document.createElement('video');
+      v.preload = 'metadata';
+      v.onloadedmetadata = function(){ var d = v.duration; URL.revokeObjectURL(url); res(d||0); };
+      v.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('영상을 읽지 못했습니다')); };
+      v.src = url;
+    });
+  }
+  async function shrinkVideo(file){
+    try{
+      var url = URL.createObjectURL(file);
+      var v = document.createElement('video');
+      v.src = url; v.playsInline = true; v.muted = false;
+      await new Promise(function(res, rej){ v.onloadedmetadata = res; v.onerror = rej; });
+      var W = 720, H = Math.max(2, Math.round(W * (v.videoHeight||720) / (v.videoWidth||1280) / 2) * 2);
+      var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      var ctx = cv.getContext('2d');
+      var stream = cv.captureStream(30);
+      try{
+        if(v.captureStream){ var as = v.captureStream(); as.getAudioTracks().forEach(function(t){ stream.addTrack(t); }); }
+      }catch(e){}
+      var mime = (window.MediaRecorder && MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus'))
+        ? 'video/webm;codecs=vp8,opus' : 'video/webm';
+      if(!window.MediaRecorder) return null;
+      var rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 1100000 });
+      var chunks = [];
+      rec.ondataavailable = function(e){ if(e.data && e.data.size) chunks.push(e.data); };
+      var stopped = new Promise(function(r){ rec.onstop = r; });
+      rec.start(200);
+      await v.play();
+      await new Promise(function(res){
+        var draw = function(){
+          if(v.ended || v.paused){ res(); return; }
+          ctx.drawImage(v, 0, 0, W, H);
+          requestAnimationFrame(draw);
+        };
+        draw();
+      });
+      rec.stop();
+      await stopped;
+      try{ v.pause(); }catch(e){}
+      URL.revokeObjectURL(url);
+      var blob = new Blob(chunks, { type: 'video/webm' });
+      return blob.size ? blob : null;
+    }catch(e){ return null; }
+  }
+  async function addVideos(files, extra){
+    var key = extra && extra.key ? extra.key : current;
+    if(!key) return;
+    var arr = Array.prototype.slice.call(files || []);
+    for(var i=0;i<arr.length;i++){
+      var f = arr[i];
+      if(!/^video\//.test(f.type)) continue;
+      var dur = 0;
+      try{ dur = await videoDuration(f); }catch(e){ dur = 0; }
+      if(dur > VIDEO_SEC + 0.5){
+        toast('영상은 '+VIDEO_SEC+'초까지만 올릴 수 있어요 (이 영상 '+Math.round(dur)+'초)');
+        continue;
+      }
+      var blob = f;
+      if(f.size > VIDEO_MAX_BYTES){
+        toast('영상이 커서 줄이는 중…');
+        var small = await shrinkVideo(f);
+        if(!small){ toast('영상이 너무 커요. '+VIDEO_SEC+'초 이내로 짧게 다시 찍어 주세요'); continue; }
+        blob = small;
+      }
+      addMediaTo(key, blob, 'video', dur);
+      toast('');
+    }
+    saveLocal();
+  }
+
+  $('#fPhotoCam').addEventListener('change', function(e){ addPhotos(e.target.files); e.target.value=''; });
+  $('#fPhotoPick').addEventListener('change', function(e){ addPhotos(e.target.files); e.target.value=''; });
+  $('#fVideoCam').addEventListener('change', function(e){
+    var key = current;
+    addVideos(e.target.files, {key:key}); e.target.value='';
+  });
+  $('#fVideoPick').addEventListener('change', function(e){
+    var key = current;
+    addVideos(e.target.files, {key:key}); e.target.value='';
+  });
+
+  /* ---------- 메모 입력 ---------- */
+  listEl.addEventListener('input', function(e){
+    var inp = e.target.closest('.inote input'); if(!inp) return;
+    var key = inp.closest('.item').getAttribute('data-key');
+    state[key].note = inp.value; saveLocal();
+  });
+
+  /* ---------- 저장(글자만) ---------- */
+  var tSave = null;
+  function saveLocal(){
+    clearTimeout(tSave);
+    tSave = setTimeout(function(){
+      var states = {};
+      ITEMS.forEach(function(it){ if(state[it.key].v) states[it.key] = state[it.key].v; });
+      try{
+        localStorage.setItem('gbn_groom_'+(qPet||'any'), JSON.stringify({
+          states: states,
+          groomer: $('#groomer').value,
+          guardian: $('#guardian').value,
+          memo: $('#memo').value,
+          mustTell: $('#mustTell').checked
+        }));
+      }catch(e){}
+    }, 300);
+  }
+  ['groomer','guardian','memo'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', saveLocal);
+  });
+  $('#mustTell').addEventListener('change', saveLocal);
+
+  /* ---------- 진행 표시 ---------- */
+  function counts(){
+    var done = 0, abn = 0, photos = 0, videos = 0;
+    ITEMS.forEach(function(it){
+      var s = state[it.key];
+      if(s.v) done++;
+      if(s.v === 'bad') abn++;
+      s.media.forEach(function(m){ if(m.kind==='video') videos++; else photos++; });
+    });
+    return {done:done, abn:abn, photos:photos, videos:videos};
+  }
+  function updateBar(){
+    var c = counts();
+    $('#cntDone').textContent = c.done + '/' + ITEMS.length;
+    $('#cntAbn').innerHTML = '이상 <span class="'+(c.abn?'abn':'')+'">' + c.abn + '곳</span>' +
+      (c.photos + c.videos ? ' · 사진 '+c.photos+' · 영상 '+c.videos : '');
+  }
+
+  var toastT = null;
+  function toast(msg){
+    var t = $('#toast');
+    if(!msg){ t.classList.remove('on'); return; }
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ t.classList.remove('on'); }, 2600);
+  }
+
+  /* ---------- 서버 통신 ---------- */
+  function post(obj){
+    return fetch(API, {
+      method:'POST',
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify(obj)
+    }).then(function(r){ return r.text(); }).then(function(t){
+      var j = null;
+      try{ j = JSON.parse(t); }catch(e){ throw new Error('서버 응답을 읽지 못했습니다'); }
+      if(!j || j.ok === false) throw new Error((j && j.error) || '전송하지 못했습니다');
+      return j;
+    });
+  }
+  function blobToB64(blob){
+    return new Promise(function(res, rej){
+      var fr = new FileReader();
+      fr.onload = function(){
+        var s = String(fr.result || '');
+        var i = s.indexOf(',');
+        res(i >= 0 ? s.slice(i+1) : s);
+      };
+      fr.onerror = function(){ rej(new Error('파일을 읽지 못했습니다')); };
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  /* ---------- 제출 ---------- */
+  var submitting = false;
+  $('#submitBtn').addEventListener('click', function(){ submit(); });
+
+  function submit(){
+    if(submitting) return;
+    var pet = fromLink ? qPet : ($('#pet').value || '').trim();
+    var groomer = ($('#groomer').value || '').trim();
+    if(!pet){ toast('아이 이름을 적어 주세요'); $('#pet').focus(); return; }
+    if(!groomer){ toast('미용사 또는 미용실 이름을 적어 주세요'); $('#groomer').focus(); return; }
+    var missing = null;
+    ITEMS.forEach(function(it){ if(!state[it.key].v && !missing) missing = it; });
+    if(missing){
+      toast(missing.no+'번 '+missing.label+'을 확인해 주세요');
+      var el = $('#it-'+missing.key);
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    submitting = true;
+    var btn = $('#submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>전송 중…';
+    $('#step2').classList.add('on');
+
+    var answers = ITEMS.map(function(it){
+      return { no:it.no, label:it.label, state:state[it.key].v, note:(state[it.key].note||'').trim() };
+    });
+    var payload = {
+      action:'submit',
+      pet:pet,
+      guardian:($('#guardian').value || '').trim(),
+      groomer:groomer,
+      groomDate:$('#groomDate').value || todayStr(),
+      answers:answers,
+      memo:($('#memo').value || '').trim(),
+      mustTell:$('#mustTell').checked
+    };
+
+    var media = [];
+    ITEMS.forEach(function(it){
+      state[it.key].media.forEach(function(m){ media.push({key:it.key, label:it.label, kind:m.kind, blob:m.blob}); });
+    });
+
+    post(payload).then(function(res){
+      submitId = res.id;
+      /* 텍스트는 이미 저장됨 — 미디어는 하나씩, 실패해도 계속 */
+      var ok = 0, fail = 0, idx = 0;
+      function next(){
+        if(idx >= media.length) return afterMedia(ok, fail, res);
+        var m = media[idx++];
+        btn.innerHTML = '<span class="spin"></span>사진·영상 ' + idx + '/' + media.length + ' 전송…';
+        return blobToB64(m.blob).then(function(b64){
+          return post({
+            action:'media', id:res.id, kind:m.kind, seq:idx, label:m.label,
+            name:(m.blob.name || (m.kind==='video'?'video.webm':'photo.jpg')),
+            mime:(m.blob.type || (m.kind==='video'?'video/webm':'image/jpeg')),
+            data:b64
+          }).then(function(){ ok++; }).catch(function(){ fail++; });
+        }).catch(function(){ fail++; }).then(next);
+      }
+      return next();
+    }).then(function(){ /* afterMedia에서 처리 */ })
+    .catch(function(err){
+      submitting = false;
+      btn.disabled = false;
+      btn.textContent = '완료 · 전송';
+      $('#step2').classList.remove('on');
+      toast(err.message || '전송하지 못했습니다. 잠시 후 다시 눌러 주세요');
+    });
+  }
+
+  function afterMedia(okCount, failCount, res){
+    post({ action:'finalize', id:res.id }).catch(function(){});
+    showDone(res, okCount, failCount);
+  }
+
+  /* ---------- 완료 화면 ---------- */
+  function showDone(res, okMedia, failMedia){
+    var pet = fromLink ? qPet : ($('#pet').value || '').trim();
+    var guardian = ($('#guardian').value || '').trim();
+    var groomer = ($('#groomer').value || '').trim();
+    var date = $('#groomDate').value || todayStr();
+    var c = counts();
+    var badList = ITEMS.filter(function(it){ return state[it.key].v === 'bad'; })
+      .map(function(it){ return it.label + (state[it.key].note ? '(' + state[it.key].note + ')' : ''); });
+    var okN = ITEMS.filter(function(it){ return state[it.key].v === 'ok'; }).length;
+    var naN = ITEMS.filter(function(it){ return state[it.key].v === 'na'; }).length;
+    var memo = ($('#memo').value || '').trim();
+    var mustTell = $('#mustTell').checked;
+
+    var kk = [];
+    kk.push('[' + pet + ' 건강관리표]');
+    kk.push((guardian ? '보호자 ' + guardian + ' · ' : '') + date + (groomer ? ' · ' + groomer : ''));
+    kk.push('');
+    kk.push(badList.length ? '이상 ' + badList.length + '곳: ' + badList.join(', ') : '이상 없음 (12곳 확인)');
+    kk.push('정상 ' + okN + '곳' + (naN ? ' · 해당 없음 ' + naN + '곳' : ''));
+    if(memo) kk.push('메모: ' + memo);
+    if(mustTell) kk.push('병원에 꼭 전할 것 있음');
+    if(c.photos || c.videos) kk.push('사진 ' + c.photos + '장' + (c.videos ? ' · 영상 ' + c.videos + '개' : ''));
+    kk.push('');
+    kk.push('미용 전에 확인해 병원으로 보냈습니다.');
+    if(badList.length) kk.push('병원에서 확인하고 안내드립니다.');
+    var kakao = kk.join('\n');
+    if(kakao.length > 400) kakao = kakao.slice(0, 397) + '…';
+
+    $('#form').style.display = 'none';
+    $('#whoCard').style.display = 'none';
+    $('#bar').style.display = 'none';
+    var v = $('#doneView');
+    v.style.display = 'block';
+    v.innerHTML =
+      '<section class="card done">'+
+        '<div class="mark">✅</div>'+
+        '<h2>'+esc(pet)+' 건강관리표 전송 완료</h2>'+
+        '<p>병원으로 바로 접수되었습니다.</p>'+
+        '<div class="sum">이상 '+badList.length+'곳 · 정상 '+okN+'곳 · 사진 '+c.photos+'장'+(c.videos?' · 영상 '+c.videos+'개':'')+'</div>'+
+        (failMedia ? '<p style="color:#b4451f">사진·영상 '+failMedia+'개는 전송되지 않았습니다. 체크 내용은 저장되었습니다.</p>' : '')+
+        '<div class="guide">병원 안내: 이상이 있는 곳은 원장님이 확인한 뒤 보호자님께 안내드립니다. 미용은 그대로 마무리해 주세요.<br>'+
+        '접수번호 '+esc(res.id || '')+'</div>'+
+        '<div class="kakao"><div class="lb">📋 카톡으로 보낼 요약 ('+kakao.length+'자)</div>'+
+          '<pre id="kkText">'+esc(kakao)+'</pre>'+
+          '<button type="button" class="copybtn" id="copyKk">카톡 요약 복사</button>'+
+        '</div>'+
+        '<p class="hint">같은 내용을 보호자님이나 병원 카톡으로 붙여넣어 보내실 수 있습니다.</p>'+
+      '</section>';
+
+    $('#copyKk').addEventListener('click', function(){
+      var t = kakao;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(t).then(function(){ toast('복사했어요 — 카톡에 붙여넣기 하세요'); })
+        .catch(function(){ fallbackCopy(t); });
+      }else fallbackCopy(t);
+    });
+    window.scrollTo(0, 0);
+    try{ localStorage.removeItem('gbn_groom_'+(qPet||'any')); }catch(e){}
+  }
+  function fallbackCopy(t){
+    var ta = document.createElement('textarea');
+    ta.value = t; ta.style.position='fixed'; ta.style.top='-1000px';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast('복사했어요 — 카톡에 붙여넣기 하세요'); }
+    catch(e){ toast('길게 눌러 직접 복사해 주세요'); }
+    document.body.removeChild(ta);
+  }
+
+  ITEMS.forEach(function(it){ refreshItem(it.key); });
+  updateBar();
+  saveLocal();
+})();
+</script>
+</body>
+</html>
