@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/g-common.css?v=20261128h">
-<link rel="stylesheet" href="assets/g-newpages.css?v=20261128i">
+<link rel="stylesheet" href="assets/g-newpages.css?v=20261128j">
 </head>
 <body data-code="NEWCARE">
 <div id="g-top"></div>
@@ -239,7 +239,7 @@
           item.sources.map(function (k) {
             var s = G_CARE.SOURCES[k];
             if (!s) return '';
-            return '<li>' + G.esc(s.label) + '<br><a href="' + G.esc(s.url) + '" target="_blank" rel="noopener">' + G.esc(s.url) + '</a><br><span class="np-muted">확인 ' + G.esc(s.checked) + ' · ' + G.esc(s.publisher) + '</span></li>';
+            return '<li>' + G.esc(s.label) + '<br><a href="' + G.esc(s.url) + '" target="_blank" rel="noopener">공식 자료 열기 ↗</a> <span class="np-muted">· 확인 ' + G.esc(s.checked) + ' · ' + G.esc(s.publisher) + '</span></li>';
           }).join('') + '</ul>';
       } else if (item.srcUrl) {
         ev += '<div class="np-gap"></div><div class="np-muted">출처: <a href="' + G.esc(item.srcUrl) + '" target="_blank" rel="noopener">' + G.esc(item.srcUrl) + '</a> · 확인 ' + G.esc(item.updated || '') + '</div>';
