@@ -867,7 +867,7 @@ body.scrolled .menu-btn span { background: var(--navy); }
 
 @media (min-width: 900px) {
   .prep-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .prep-main { grid-row: span 2; padding: 30px; }
+  .prep-main { padding: 30px; }
   .prep-main .pc-title { font-size: 24px; }
   .prep-main .pc-desc { font-size: 14.5px; }
   .prep-card { padding: 28px; }
@@ -1120,6 +1120,41 @@ body.scrolled .menu-btn span { background: var(--navy); }
 }
 .foot-bottom p { margin: 0; }
 .foot-note { opacity: .5; }
+
+/* ---------- 모바일 빠른 문의 바 ---------- */
+.quickbar { display: none; }
+
+@media (max-width: 899px) {
+  .quickbar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 80;
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(247,245,240,.96);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    transform: translateY(115%);
+    transition: transform .32s cubic-bezier(.2,.7,.2,1);
+  }
+  .quickbar.show { transform: none; }
+  .qb-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 14px; font-weight: 700; letter-spacing: -0.02em;
+  }
+  .qb-btn svg { width: 17px; height: 17px; flex: none; }
+  .qb-kakao { flex: 1.7; background: #FEE500; color: #3A1D1D; }
+  .qb-kakao svg { fill: currentColor; stroke: none; }
+  .qb-call {
+    flex: 1; background: var(--navy); color: #fff;
+  }
+  .qb-call svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .foot-bottom { padding-bottom: 72px; }
+  .toast { bottom: 84px; }
+}
 
 /* ---------- 토스트 ---------- */
 .toast {

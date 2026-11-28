@@ -181,7 +181,23 @@
     });
   }
 
-  /* ---------- 6. 영상은 누를 때만 내려받기 ---------- */
+  /* ---------- 6. 모바일 빠른 문의 바 ---------- */
+  var quickbar = document.getElementById("quickbar");
+  var contactSec = document.getElementById("contact");
+
+  function toggleQuickbar() {
+    if (!quickbar) return;
+    var show = window.scrollY > 620;
+    if (show && contactSec) {
+      var rect = contactSec.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) show = false;
+    }
+    quickbar.classList.toggle("show", show);
+  }
+  toggleQuickbar();
+  window.addEventListener("scroll", toggleQuickbar, { passive: true });
+
+  /* ---------- 7. 영상은 누를 때만 내려받기 ---------- */
   var video = document.getElementById("introVideo");
   if (video) {
     video.addEventListener("play", function once() {
