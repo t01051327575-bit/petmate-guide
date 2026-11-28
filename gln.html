@@ -105,11 +105,11 @@
     <div class="field" style="margin-top:11px"><label>주의 한 줄 <span class="hint">봉투에 함께 인쇄·필기</span></label><input id="rxCau" type="text" placeholder="예: 식후 30분, 물과 함께 / 산책 전에는 먹이지 마세요"></div>
 
     <div class="lbl-card" id="lblCard">
-      <div class="lbl-top"><span class="lbl-hosp">굿모닝펫동물병원</span><span class="lbl-date" id="lblDate">2026. 11. 28</span></div>
+      <div class="lbl-top"><span class="lbl-hosp" id="lblHosp">굿모닝펫동물병원</span><span class="lbl-date" id="lblDate">2026. 11. 28</span></div>
       <div class="lbl-pet" id="lblPet">아이 이름</div>
       <ul class="lbl-lines" id="lblLines"><li>· 약 이름을 위에 적으면 여기에 나옵니다</li></ul>
       <div class="lbl-cau" id="lblCau">주의: 식후 30분, 물과 함께</div>
-      <div class="lbl-foot">약봉투 하단에는 조제일을 적습니다 · 문의 031-715-7119</div>
+      <div class="lbl-foot" id="lblFoot">약봉투 하단에는 조제일을 적습니다 · 문의 031-715-7119</div>
     </div>
 
     <div class="btns">
@@ -300,6 +300,9 @@
     var pet = rxPetStr();
     var lines = rxLines();
     var cau = ($('#rxCau').value || '').trim();
+    var s = G.settings();
+    $('#lblHosp').textContent = s.hospital || '굿모닝펫동물병원';
+    $('#lblFoot').textContent = '약봉투 하단에는 조제일을 적습니다 · 문의 ' + (s.phone || '031-715-7119');
     $('#lblDate').textContent = rxDateStr();
     $('#lblPet').textContent = pet || '아이 이름';
     $('#lblLines').innerHTML = (lines.length ? lines : ['· 약 이름을 위에 적으면 여기에 나옵니다'])
@@ -312,7 +315,7 @@
     var cau = ($('#rxCau').value || '').trim();
     var head = (rxPetStr() ? rxPetStr() + '\n' : '');
     var body = (lines.length ? lines.join('\n') : '· 약 이름을 적어 주세요');
-    var tail = (cau ? '주의: ' + cau + '\n' : '') + rxDateStr() + ' · 굿모닝펫동물병원';
+    var tail = (cau ? '주의: ' + cau + '\n' : '') + rxDateStr() + ' · ' + (G.settings().hospital || '굿모닝펫동물병원');
     return head + body + '\n' + tail;
   }
 
