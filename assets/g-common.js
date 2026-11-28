@@ -39,6 +39,7 @@ var G = (function () {
     hospital: '굿모닝펫동물병원',
     slogan: 'since 2003 · 평생 주치의',
     theme: 'sky',
+    tone: 'normal',
     kakao: '',
     phone: '031-715-7119'
   };
@@ -48,6 +49,12 @@ var G = (function () {
     { id:'pink',  name:'핑크',   color:'#f5a3bd' },
     { id:'navy',  name:'네이비', color:'#2b5f8a' },
     { id:'cream', name:'크림',   color:'#dcb877' }
+  ];
+  /* 색 진하기 — 같은 테마에서 글자·배경색을 진하게/흐리게 */
+  var TONES = [
+    { id:'soft',   name:'흐리게', hint:'은은하게' },
+    { id:'normal', name:'보통',   hint:'기본' },
+    { id:'strong', name:'진하게', hint:'또렷하게' }
   ];
   var KEY = 'gnet_settings_v1';
   var SHORT_KEY = 'gnet_short_v1';
@@ -80,7 +87,7 @@ var G = (function () {
     var out = {};
     try {
       var sp = new URLSearchParams(window.location.search);
-      ['hospital', 'slogan', 'theme', 'kakao', 'phone'].forEach(function (k) {
+      ['hospital', 'slogan', 'theme', 'tone', 'kakao', 'phone'].forEach(function (k) {
         var v = sp.get(k);
         if (v) out[k] = v;
       });
@@ -105,6 +112,7 @@ var G = (function () {
       save(merged);
     }
     if (!/^(sky|mint|pink|navy|cream)$/.test(s.theme)) s.theme = 'sky';
+    if (!/^(soft|normal|strong)$/.test(s.tone)) s.tone = 'normal';
     return s;
   }
 
@@ -122,6 +130,7 @@ var G = (function () {
     if (h.hospital) sp.set('hospital', h.hospital);
     if (h.slogan) sp.set('slogan', h.slogan);
     if (h.theme) sp.set('theme', h.theme);
+    if (h.tone) sp.set('tone', h.tone);
     if (h.kakao) sp.set('kakao', h.kakao);
     if (h.phone) sp.set('phone', h.phone);
     base.search = sp.toString();
@@ -131,7 +140,7 @@ var G = (function () {
   function syncUrl(h) {
     try {
       var u = new URL(window.location.href);
-      ['hospital', 'slogan', 'theme', 'kakao', 'phone'].forEach(function (k) {
+      ['hospital', 'slogan', 'theme', 'tone', 'kakao', 'phone'].forEach(function (k) {
         if (h && h[k]) u.searchParams.set(k, h[k]);
         else u.searchParams.delete(k);
       });
@@ -164,6 +173,7 @@ var G = (function () {
     save(cur);
     syncUrl(cur);
     applyTheme(cur.theme);
+    applyTone(cur.tone);
     paintChrome(cur);
     try { document.dispatchEvent(new CustomEvent('g-settings', { detail: cur })); } catch (e) {}
     return cur;
@@ -172,6 +182,7 @@ var G = (function () {
     save(DEFAULTS);
     syncUrl(null);
     applyTheme(DEFAULTS.theme);
+    applyTone(DEFAULTS.tone);
     paintChrome(DEFAULTS);
     try { document.dispatchEvent(new CustomEvent('g-settings', { detail: DEFAULTS })); } catch (e) {}
     return DEFAULTS;
@@ -186,6 +197,12 @@ var G = (function () {
       var map = { sky:'#eaf6fb', mint:'#e9f8f4', pink:'#fdeef4', navy:'#e9f1f8', cream:'#fbf4e4' };
       meta.setAttribute('content', map[id] || '#eaf6fb');
     }
+  }
+  /* 색 진하기(흐리게·보통·진하게) — html[data-tone]에 CSS로 적용 */
+  function applyTone(id) {
+    var t = (id === 'soft' || id === 'strong') ? id : 'normal';
+    document.documentElement.setAttribute('data-tone', t);
+    return t;
   }
 
   function toast(text) {
@@ -517,6 +534,7 @@ var G = (function () {
           '<div class="g-field"><label>카톡 링크 <span class="hint">(선택 · 오픈채팅/채널 주소)</span></label><input id="g-in-kakao" type="text" placeholder="https://open.kakao.com/o/..." inputmode="url"></div>' +
           '<div class="g-field"><label>대표 전화</label><input id="g-in-phone" type="tel" placeholder="031-000-0000" inputmode="tel"></div>' +
           '<div class="g-field"><label>배경 테마</label><div class="themes" id="g-themes"></div></div>' +
+          '<div class="g-field"><label>색 진하기 <span class="hint">(같은 테마에서 글자·배경을 진하게 / 흐리게)</span></label><div class="tones" id="g-tones"></div></div>' +
           '<div class="btnrow"><button class="btn solid" id="g-save" type="button">저장</button><button class="btn ghost" id="g-reset" type="button">기본값</button></div>' +
           '<p class="g-hint">이 기기 브라우저에 저장되고 주소에도 담깁니다. 주소 끝에 <b>?hospital=병원명&amp;slogan=슬로건&amp;theme=mint</b>를 붙여 보내면 그 값이 우선 적용됩니다.</p>' +
         '</div>' +
@@ -524,6 +542,7 @@ var G = (function () {
 
     var s = settings();
     applyTheme(s.theme);
+    applyTone(s.tone);
     var nameEl = q('#g-hosp');
     if (nameEl) nameEl.textContent = s.hospital;
     var ih = q('#g-in-hosp'), isg = q('#g-in-slogan'), ik = q('#g-in-kakao'), ip = q('#g-in-phone');
@@ -544,6 +563,25 @@ var G = (function () {
       });
       th.appendChild(b);
     });
+
+    var tn = q('#g-tones');
+    if (tn) {
+      TONES.forEach(function (t) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tone';
+        b.setAttribute('aria-pressed', t.id === s.tone ? 'true' : 'false');
+        b.innerHTML = '<i class="td td-' + t.id + '"></i><b>' + t.name + '</b><span>' + t.hint + '</span>';
+        b.addEventListener('click', function () {
+          applyTone(t.id);
+          qa('.tone', tn).forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          var cur = settings(); cur.tone = t.id; save(cur);
+          toast(t.name + '으로 보기 — 모든 페이지에 함께 적용됩니다');
+        });
+        tn.appendChild(b);
+      });
+    }
 
     var panel = q('#g-panel'), map = q('#g-map');
     function toggle(el, btn) {
@@ -574,6 +612,8 @@ var G = (function () {
       resetSettings();
       ih.value = DEFAULTS.hospital; isg.value = DEFAULTS.slogan; ik.value = ''; ip.value = DEFAULTS.phone;
       qa('.sw', th).forEach(function (x, i) { x.setAttribute('aria-pressed', THEMES[i].id === DEFAULTS.theme ? 'true' : 'false'); });
+      var tn2 = q('#g-tones');
+      if (tn2) qa('.tone', tn2).forEach(function (x, i) { x.setAttribute('aria-pressed', TONES[i].id === DEFAULTS.tone ? 'true' : 'false'); });
       toast('기본값으로 되돌렸습니다');
       footer();
     });
@@ -605,6 +645,7 @@ var G = (function () {
     var s = settings();
     host.innerHTML =
       '<div class="b">' + esc(s.hospital) + ' · G-시리즈 A~Z 그물망</div>' +
+      '<div class="mentor">진심경영멘토 유희진 · 경영부원장</div>' +
       '직원도 편하고 · 보호자도 편하고 · 병원에도 좋은 평생 주치의 시스템<br>' +
       '<span class="small">G = Goodmorningpet · A~Z = 26개 연결 · N = Net(그물망)</span>';
   }
@@ -679,9 +720,9 @@ var G = (function () {
   else init();
 
   return {
-    LIST: LIST, THEMES: THEMES, DEFAULTS: DEFAULTS,
+    LIST: LIST, THEMES: THEMES, TONES: TONES, DEFAULTS: DEFAULTS,
     q: q, qa: qa, esc: esc,
-    settings: settings, save: save, applyTheme: applyTheme,
+    settings: settings, save: save, applyTheme: applyTheme, applyTone: applyTone,
     applySettings: applySettings, resetSettings: resetSettings, hasSaved: hasSaved,
     paintChrome: paintChrome, settingsUrl: settingsUrl, syncUrl: syncUrl,
     toast: toast, count: count, cut: cut,

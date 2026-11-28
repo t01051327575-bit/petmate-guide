@@ -1,0 +1,24 @@
+/* 굿모닝펫 A~Z 그물망 시리즈 · 직접 연습해 보기 칸 (G-practice.js 전용) */
+.gp-lead{font-size:13.5px;color:var(--ink-soft,#465a66);line-height:1.6;margin:6px 0 10px}
+.gp-task{border:1px solid var(--line,#e4eef3);border-radius:16px;padding:12px 12px 13px;background:var(--bg,#f6fafc);margin-top:10px}
+.gp-q{display:flex;gap:9px;align-items:flex-start}
+.gp-n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--soft,#eaf7fd);color:var(--brand-d,#1f6f96);font-size:12.5px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.gp-q>div{min-width:0}
+.gp-q b{display:inline-block;font-size:11px;font-weight:900;color:var(--brand-d,#1f6f96);background:var(--soft,#eaf7fd);border-radius:999px;padding:1px 7px;margin-bottom:3px}
+.gp-q p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink,#1d2a33);font-weight:700}
+.gp-q .gp-hint{margin-top:5px;font-size:11.5px;font-weight:600;color:var(--muted,#71858f);line-height:1.5}
+.gp-in{width:100%;margin-top:9px;font-family:inherit;font-size:15px;line-height:1.6;color:var(--ink,#1d2a33);background:#fff;border:1px solid var(--line,#e4eef3);border-radius:12px;padding:10px 11px;resize:vertical;min-height:88px}
+.gp-in:focus{outline:none;border-color:var(--brand,#2f86b5);box-shadow:0 0 0 3px rgba(47,134,181,.12)}
+.gp-btns{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}
+.gp-btn{flex:0 0 auto;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;border-radius:11px;padding:10px 14px;min-height:42px;border:1px solid var(--line,#e4eef3)}
+.gp-btn.solid{background:var(--brand,#2f86b5);border-color:var(--brand,#2f86b5);color:#fff;box-shadow:0 5px 14px rgba(47,134,181,.16)}
+.gp-btn.ghost{background:#fff;color:var(--brand-d,#1f6f96)}
+.gp-btn:active{transform:scale(.98)}
+.gp-score{font-size:12px;font-weight:800;color:var(--muted,#71858f)}
+.gp-score.ok{color:var(--ok,#1f8a63)}
+.gp-score.warn{color:var(--warn,#b46a12)}
+.gp-ans{margin-top:9px;border:1px solid var(--badge-line,#d6ecf7);background:var(--soft,#eaf7fd);border-radius:12px;padding:10px 11px}
+.gp-ans b{display:block;font-size:11.5px;font-weight:900;color:var(--brand-d,#1f6f96);margin-bottom:3px}
+.gp-ans p{margin:0;font-size:13px;line-height:1.65;color:var(--ink-soft,#465a66)}
+.gp-miss{font-size:11.5px;font-weight:700;color:var(--muted,#71858f);margin-top:6px;line-height:1.5}
+.gp-miss s{display:inline-block;color:#b0564a;text-decoration:none;background:#fdeeea;border-radius:999px;padding:1px 7px;margin:1px 2px 0 0;font-weight:800}

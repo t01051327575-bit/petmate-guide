@@ -24,7 +24,8 @@
 <meta name="twitter:title" content="GQN · 보고 퀴즈 · 행운의 7">
 <meta name="twitter:description" content="굿모닝펫 GQN — 신제품·이슈를 7문제 퀴즈로 만들고, 직원에게 보낼 문제와 정답·해설을 나눠 복사할 수 있습니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
-<link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128e">
+<link rel="stylesheet" href="assets/g-practice.css?v=20261128a">
 </head>
 <body data-code="GQN">
 <div id="g-top"></div>
@@ -69,6 +70,17 @@
   <div id="out"></div>
 
   <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>GAN에서 🆕 신제품 → 여기 7문제<small>새로 들어온 제품은 퀴즈로 외웁니다</small></h2></div>
+    <p>사입 거래명세서를 올렸을 때 기존 품목에 없던 것이 <b>🆕 신제품</b>으로 잡히면, 그 품목이 이 칸의 <b>[🍀 신제품] 7문제</b>로 넘어옵니다. 새 제품은 팔아야 하고 설명도 해야 하니, 모르는 채로 두지 않는 것이 목적입니다.</p>
+    <ul class="clean">
+      <li><b>GAN</b> — 거래명세서에서 처음 보는 품목이 🆕 신제품으로 표시됩니다.</li>
+      <li><b>GQN</b> — 그 품목의 성분·하는 일·주의로 7문제를 만듭니다.</li>
+      <li><b>직원</b> — [🍀 신제품] 7문제를 풀고, 틀린 문제만 이미지로 저장해 복습합니다.</li>
+      <li><b>GTN</b> — 현장에서 자주 틀리는 답은 보호자 안내 문구로 정리합니다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
     <div class="sec-head"><span class="num">4</span><h2>정답 · 해설<small>직원에게는 보내지 말고, 실장님만 보세요</small></h2></div>
     <div class="copybox" id="ansBox">정답을 입력하면 여기에 정리됩니다.</div>
     <div class="btns"><button class="btn ghost wide" id="copyAns" type="button">📋 정답·해설 복사</button></div>
@@ -100,7 +112,7 @@
   <div id="g-footer"></div>
 </div>
 
-<script src="assets/g-common.js?v=20261128d"></script>
+<script src="assets/g-common.js?v=20261128e"></script>
 <script>
 
 (function () {
@@ -159,6 +171,7 @@
 })();
 
 </script>
+<script src="assets/g-practice.js?v=20261128a"></script>
 <script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

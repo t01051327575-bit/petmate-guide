@@ -24,7 +24,8 @@
 <meta name="twitter:title" content="GNN · AI 자동화 루틴">
 <meta name="twitter:description" content="굿모닝펫 GNN — 아침 브리핑·메일 감시·미내원 정리 같은 반복 업무를 AI 자동화 루틴으로 설계하고, 그대로 붙여넣을 지시문을 만듭니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
-<link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128e">
+<link rel="stylesheet" href="assets/g-practice.css?v=20261128a">
 </head>
 <body data-code="GNN">
 <div id="g-top"></div>
@@ -79,6 +80,27 @@
 
   <div id="out"></div>
 
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>우리 병원 12대 정기 업무<small>자동화할 일의 실제 목록 — 요일·시간이 이미 정해져 있습니다</small></h2></div>
+    <p>자동화는 이 12가지 중에서 고르면 됩니다. 정해진 요일·시간을 그대로 트리거로 쓰면 됩니다.</p>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>#</th><th>업무</th><th>언제</th><th>담당</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>진료 코멘트</td><td>월·화·수 14:30</td><td>원무과</td></tr>
+        <tr><td>2</td><td>오시지 않음·백신 경과</td><td>월·화·수</td><td>원무과</td></tr>
+        <tr><td>3</td><td>내일·다음 주 예약 안내</td><td>월·화·수</td><td>진료과</td></tr>
+        <tr><td>4·5·6</td><td>3일 뒤 안부 · 약 떨어짐 · 백신 안내</td><td>목요일 오전</td><td>진료과</td></tr>
+        <tr><td>7</td><td>생일 안내</td><td>목요일 오전</td><td>원무과</td></tr>
+        <tr><td>8</td><td>금식·금수·안정제 전날 안내</td><td>수요일</td><td>진료과</td></tr>
+        <tr><td>9</td><td>검사 결과 파일 발송</td><td>목요일</td><td>진료과</td></tr>
+        <tr><td>10</td><td>실장님 담당</td><td>—</td><td>경영부원장</td></tr>
+        <tr><td>11</td><td>재고·사입·품절</td><td>목요일 17:00</td><td>진료검사과·원무과</td></tr>
+        <tr><td>12</td><td>PPT 업로드 업무 컨펌</td><td>—</td><td>원무과</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">자동화는 “보내기”가 아니라 <b>초안 만들기</b>까지만 맡기세요. 보호자에게 나가는 마지막 버튼은 사람이 누릅니다.</p>
+  </section>
+
   <section class="card flat">
     <div class="sec-head"><span class="num">4</span><h2>자동화를 거는 순서<small>한 번에 하나씩</small></h2></div>
     <ul class="clean">
@@ -105,7 +127,7 @@
   <div id="g-footer"></div>
 </div>
 
-<script src="assets/g-common.js?v=20261128d"></script>
+<script src="assets/g-common.js?v=20261128e"></script>
 <script>
 
 (function () {
@@ -175,6 +197,7 @@
 })();
 
 </script>
+<script src="assets/g-practice.js?v=20261128a"></script>
 <script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

@@ -50,6 +50,60 @@ html[data-theme="cream"]{
   --badge-line:#eddfc2; --line:#efe7d6; --bg:#fdfaf4;
 }
 
+/* 색 진하기 3단 — 상단 ⚙ 세팅에서 즉시 변경 (테마 × 진하기 조합) */
+/* 진하게 */
+html[data-theme][data-tone="strong"]{
+  --ink:#101b23; --ink-soft:#2f434e; --muted:#5a6d77;
+  --line:#cfe1ea; --bg:#eef6fb; --brand:#1f78aa; --brand-d:#14577a;
+  --soft:#dceffb; --badge-line:#bcdff2;
+}
+html[data-theme="mint"][data-tone="strong"]{
+  --ink:#12241f; --ink-soft:#33544b; --muted:#5c7a71;
+  --brand:#0d7a67; --brand-d:#065a4b; --soft:#d8f2ea; --badge-line:#b3e2d5;
+  --line:#cde6df; --bg:#effaf6;
+}
+html[data-theme="pink"][data-tone="strong"]{
+  --ink:#2a1620; --ink-soft:#573c48; --muted:#7d616c;
+  --brand:#b83761; --brand-d:#95244b; --soft:#fbdfe9; --badge-line:#f0bcd2;
+  --line:#edd2dd; --bg:#fceff5;
+}
+html[data-theme="navy"][data-tone="strong"]{
+  --ink:#0b141c; --ink-soft:#2c4456; --muted:#566d7d;
+  --brand:#123f63; --brand-d:#0b2f4b; --soft:#dbe8f3; --badge-line:#b9d0e3;
+  --line:#cfdde9; --bg:#f0f6fa;
+}
+html[data-theme="cream"][data-tone="strong"]{
+  --ink:#211d14; --ink-soft:#463d2c; --muted:#746a53;
+  --brand:#8d641f; --brand-d:#6d4b12; --soft:#f6edd7; --badge-line:#e2cfa6;
+  --line:#e6d9bf; --bg:#fbf5e6;
+}
+/* 흐리게 */
+html[data-theme][data-tone="soft"]{
+  --ink:#33424c; --ink-soft:#61737e; --muted:#8c9ca6;
+  --line:#eff6f9; --bg:#fbfdfe; --brand:#63a9cd; --brand-d:#4a87a7;
+  --soft:#f3fafe; --badge-line:#e4f2fa;
+}
+html[data-theme="mint"][data-tone="soft"]{
+  --ink:#33443f; --ink-soft:#627a73; --muted:#8fa39c;
+  --brand:#4fb8a5; --brand-d:#35927f; --soft:#f2fcf8; --badge-line:#e3f5f0;
+  --line:#eef7f4; --bg:#fcfefd;
+}
+html[data-theme="pink"][data-tone="soft"]{
+  --ink:#3f2f35; --ink-soft:#6f5a62; --muted:#9c868e;
+  --brand:#e07a9b; --brand-d:#c25e80; --soft:#fef5f8; --badge-line:#fbe4ec;
+  --line:#f9eef2; --bg:#fffcfd;
+}
+html[data-theme="navy"][data-tone="soft"]{
+  --ink:#2b3944; --ink-soft:#586c7a; --muted:#8496a2;
+  --brand:#487ba2; --brand-d:#35638a; --soft:#f0f5fa; --badge-line:#e2edf5;
+  --line:#ebf2f7; --bg:#fbfdfe;
+}
+html[data-theme="cream"][data-tone="soft"]{
+  --ink:#3c372c; --ink-soft:#6a6151; --muted:#9a917e;
+  --brand:#c09a5e; --brand-d:#a07c3e; --soft:#fdf9f0; --badge-line:#f4ecdc;
+  --line:#f6f0e4; --bg:#fffdf9;
+}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
@@ -110,6 +164,22 @@ b,strong{color:var(--ink)}
 }
 .sw i{width:14px;height:14px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
 .sw[aria-pressed="true"]{border-color:var(--brand);background:var(--soft);color:var(--brand-d)}
+.tones{display:flex;gap:6px;margin:2px 0 12px}
+.tone{
+  flex:1;appearance:none;font-family:inherit;cursor:pointer;text-align:center;
+  border:2px solid transparent;background:var(--bg);border-radius:13px;
+  padding:8px 4px 7px;color:var(--ink-soft);line-height:1.15;
+}
+.tone .td{display:block;width:100%;height:7px;border-radius:999px;margin:0 0 6px;background:var(--line)}
+.tone .td-soft{background:linear-gradient(90deg,#eef4f8,#cfe0e9)}
+.tone .td-normal{background:linear-gradient(90deg,#d7e8f2,#8fbdd6)}
+.tone .td-strong{background:linear-gradient(90deg,#8fbdd6,#1f6f96)}
+.tone b{display:block;font-size:12.5px;font-weight:900;letter-spacing:-.01em}
+.tone span{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-top:1px}
+.tone[aria-pressed="true"]{border-color:var(--brand);background:var(--soft);color:var(--brand-d)}
+#g-footer .mentor{margin:2px 0 6px;font-size:12px;font-weight:800;color:var(--brand-d);opacity:.9}
+html[data-tone="strong"] .hex .face{filter:saturate(1.16) brightness(.985)}
+html[data-tone="soft"] .hex .face{filter:saturate(.82) brightness(1.015)}
 .g-panel .btnrow{display:flex;gap:8px}
 .g-panel .btnrow .btn{flex:1}
 .g-hint{font-size:11.5px;color:var(--muted);line-height:1.55;margin:8px 0 0}
