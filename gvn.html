@@ -71,6 +71,14 @@
 
   .tbl td.l,.tbl th.l{text-align:left}
   #apply,#way{scroll-margin-top:76px}
+
+  .routes{margin-top:10px}
+  .rt{border-bottom:1px dashed var(--line);padding:10px 0}
+  .rt:last-child{border-bottom:0;padding-bottom:0}
+  .rt-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .rt-from{font-size:14px;font-weight:800;color:var(--ink)}
+  .rt-time{flex:0 0 auto;font-size:12.5px;font-weight:800;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+  .rt-path{font-size:12.5px;color:var(--ink-soft);margin-top:3px;line-height:1.55}
   .tbl td .s{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-top:1px}
   @media (max-width:380px){
     .stats{grid-template-columns:1fr}
@@ -88,7 +96,7 @@
       <span class="eng-chip">V · Visit</span>
     </div>
     <h1>강아지도, 고양이도<br><span class="em">스무 살까지</span> 건강하게</h1>
-    <p>2003년부터 23년, 한 아이를 끝까지 보는 평생 주치의.<br>진료 신청부터 오시는 길까지 담았습니다.</p>
+    <p>2003년부터 23년, 한 아이를 끝까지 보는 병원.<br>진료 신청부터 오시는 길까지 담았습니다.</p>
     <div class="hero-photo">
       <img src="assets/gvn-hero.jpg" alt="굿모닝펫 진료실에서 아이를 안고 있는 모습" width="1080" height="770" fetchpriority="high">
     </div>
@@ -209,19 +217,14 @@
 
   <section class="card">
     <div class="sec-head"><span class="num">6</span><h2>지방에서 오시는 방법<small>전국에서 오시는 보호자님께</small></h2></div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th>출발</th><th>경로</th><th>소요</th></tr></thead>
-        <tbody>
-          <tr><th>강남역</th><td class="l">신분당선 → 미금역(6정거장) → 도보</td><td>약 40분</td></tr>
-          <tr><th>고속터미널</th><td class="l">3호선 → 양재 → 신분당선 → 미금역</td><td>약 45분</td></tr>
-          <tr><th>SRT 수서역</th><td class="l">수인분당선(죽전 방면) → 미금역 25분 → 도보</td><td>약 40분</td></tr>
-          <tr><th>성남종합버스터미널</th><td class="l">야탑역(도보 4분) → 수인분당선 → 미금역 11분</td><td>약 25분</td></tr>
-          <tr><th>김포공항</th><td class="l">9호선 → 신논현 → 신분당선 → 미금역</td><td>약 1시간 20분</td></tr>
-          <tr><th>인천공항 T1</th><td class="l">리무진 5400-1 → 미금역·청솔마을 하차</td><td>약 1시간 45분</td></tr>
-          <tr><th>자가용</th><td class="l">경부고속도로 판교IC 또는 분당수서로 금곡IC</td><td>5~10분</td></tr>
-        </tbody>
-      </table>
+    <div class="routes">
+      <div class="rt"><div class="rt-h"><span class="rt-from">강남역</span><span class="rt-time">약 40분</span></div><div class="rt-path">신분당선 → 미금역(6정거장, 21분) → 도보 10분</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">고속터미널역</span><span class="rt-time">약 45분</span></div><div class="rt-path">3호선 → 양재에서 신분당선 환승 → 미금역 → 도보 10분</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">SRT 수서역</span><span class="rt-time">약 40분</span></div><div class="rt-path">수인분당선(죽전 방면) 환승 없이 미금역까지 25분 → 도보 10분</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">성남종합버스터미널</span><span class="rt-time">약 25분</span></div><div class="rt-path">야탑역까지 도보 4분 → 수인분당선 미금역 11분 → 도보</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">김포공항</span><span class="rt-time">약 1시간 20분</span></div><div class="rt-path">9호선 → 신논현에서 신분당선 환승 → 미금역 → 도보</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">인천공항 제1여객터미널</span><span class="rt-time">약 1시간 45분</span></div><div class="rt-path">리무진 5400-1번 → 미금역·청솔마을 하차 → 도보</div></div>
+      <div class="rt"><div class="rt-h"><span class="rt-from">자가용</span><span class="rt-time">5~10분</span></div><div class="rt-path">경부고속도로 판교IC 또는 분당수서로 금곡IC → 내비 ‘굿모닝펫동물병원’</div></div>
     </div>
     <p class="note">소요 시간은 2026년 11월 28일 조회한 평일 오전 9시 30분 출발 기준입니다. 당일 운행·교통 상황에 따라 달라질 수 있습니다. 지방에서 기차로 오시면 <b>SRT 수서역에서 수인분당선으로 환승 없이 미금역까지</b> 오시는 길이 가장 편합니다.</p>
     <div class="callout"><b>멀리서 오시는 날</b>은 비대기 접수 마감을 놓치지 않도록 오시기 전에 카톡 <b>GoodPet</b>으로 도착 시간을 알려 주세요. 대기 상황을 미리 확인해 드립니다.</div>
