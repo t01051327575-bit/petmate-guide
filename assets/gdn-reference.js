@@ -21,7 +21,7 @@ window.GDN_REF = {
    "stype": "제조사 참고치표"
   },
   "idexx-cat-rev": {
-   "short": "같은 표 개정판 대조",
+   "short": "",
    "doc": "Reference Ranges for the Catalyst One and Catalyst Dx Chemistry Analyzers (catalyst-species-reference-ranges.pdf, 개정판)",
    "org": "IDEXX Laboratories",
    "year": "2024(판본 확인)",
@@ -3084,7 +3084,8 @@ window.GDN_REF = {
    ],
    "notes": [
     "Catalyst One에는 혈액검사(CBC) 기능이 없습니다. CBC는 ProCyte 계열 장비로 따로 나옵니다.",
-    "장비 소프트웨어(VetLab Station)에 표시되는 참고구간이 항상 우선입니다."
+    "장비 소프트웨어(VetLab Station)에 표시되는 참고구간이 항상 우선입니다.",
+    "제조사 참고치표의 정판과 개정판 두 판본을 대조했고, 값이 모두 같았습니다."
    ]
   },
   {

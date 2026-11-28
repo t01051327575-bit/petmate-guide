@@ -112,7 +112,8 @@
     return s.short || (s.org + ' ' + s.year);
   }
   function srcLine(r) {
-    var ids = r.src || [];
+    var ids = (r.src || []).filter(function (id) { var s = REF.sources[id]; return !s || s.short !== ''; });
+    if (!ids.length) ids = r.src || [];
     var parts = ids.map(function (id) { return srcLabel(id); });
     var full = ids.map(function (id) { return srcLabel(id, true); }).join('\n');
     var t = '출처: ' + parts.join(' / ');
