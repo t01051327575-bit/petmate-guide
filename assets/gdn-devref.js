@@ -237,7 +237,7 @@
       var nm = (REF.analytes[row.code] || {}).name || row.code;
       if (row.ref) {
         a.push('- ' + nm + ' ' + fmt(row.value) + ' ' + (row.unit || row.ref.unit) + ' (참고 ' + fmt(row.ref.lo) + '–' + fmt(row.ref.hi) + ') — ' + row.j.label);
-        b.push('- ' + nm + ': ' + srcLine(row.ref).short.replace(/^출처: /, '') + (row.ref.conflict ? ' (출처 간 차이 있음)' : ''));
+        b.push('- ' + nm + ': ' + srcLine(row.ref).short.replace(/^출처: /, ''));
         if (row.j.level !== 'ok') abn.push(nm);
       } else if (unres[row.code]) {
         a.push('- ' + nm + ' ' + fmt(row.value) + ' — 판정 보류(참고치 확인 필요)');
