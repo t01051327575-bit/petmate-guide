@@ -314,6 +314,7 @@
 
   <div class="philo">
     <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d" style="font-weight:800;color:#2f6f7e;margin-top:-2px">진심경영멘토 유희진</div>
     <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
     <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
   </div>
@@ -505,11 +506,10 @@
     var due = 0, done = 0, now = Date.now();
     planItems(ds).forEach(function (it) {
       var at = slotDate(ds, it.slot).getTime();
+      var c = chkGet(chkKey(ds, it.slot, it.med.id));
+      if (c) { due++; done++; return; }
       if (notStartedYet(ds, it.slot)) return;
-      if (at <= now + 15 * 60000) {
-        due++;
-        if (chkGet(chkKey(ds, it.slot, it.med.id))) done++;
-      }
+      if (at <= now + 15 * 60000) due++;
     });
     return { due: due, done: done };
   }
@@ -1023,7 +1023,7 @@
         };
       });
     }
-    saveState(); renderMeds(); renderSchedule(); renderLink(); kit && kit.refresh(true);
+    saveState(); renderMeds(); refreshSummary(); renderSchedule(); renderLink(); try { kit.refresh(true); } catch (e) {}
   }
 
   /* ================= 사진 ================= */
@@ -1183,7 +1183,7 @@
 
   function slotLines(compact) {
     var map = slotMap(G.isoDate(startDate()));
-    var lines = [];
+    var groups = [], index = {};
     Object.keys(map).sort().forEach(function (t) {
       var parts = [];
       map[t].others.forEach(function (m) {
@@ -1195,9 +1195,16 @@
           return (i ? '→ ' + state.interval + '분 후 ' : '') + m.name + ' ' + (m.side ? m.side + ' ' : '') + (m.dose || '1방울');
         }).join(' '));
       }
-      lines.push((compact ? t.replace(':00', '시') : t) + ' — ' + parts.join(' / '));
+      var key = parts.join(' / ');
+      if (key in index) groups[index[key]].times.push(t);
+      else { index[key] = groups.length; groups.push({ times: [t], text: key }); }
     });
-    return lines;
+    return groups.map(function (g) {
+      var label;
+      if (compact) label = g.times.map(function (t) { return t.replace(/:00$/, '').replace(/^0/, ''); }).join('·') + '시';
+      else label = g.times.join(' · ');
+      return label + ' — ' + g.text;
+    });
   }
 
   var kit = G.outKit({
