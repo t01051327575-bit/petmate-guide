@@ -274,7 +274,7 @@ var G = (function () {
     date: ['date', 'visit', 'day'],
     next: ['next', 'nextDate'],
     nextItem: ['nextItem', 'nextWhat'],
-    note: ['note', 'comment', 'opinion', 'memo', 'worry', 'abn', 'extra'],
+    note: ['note', 'comment', 'opinion', 'memo', 'worry', 'abn'],
     rx: ['rx', 'med', 'meds', 'extra'],
     feed: ['feed', 'food'],
     exam: ['exam', 'test'],
