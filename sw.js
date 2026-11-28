@@ -3,10 +3,11 @@
    - HTML은 네트워크 우선(최신 유지), 실패하면 캐시.
    - CSS/JS/이미지는 캐시 우선 + 뒤에서 갱신.
    - 다른 사이트(is.gd 등)는 건드리지 않습니다. */
-var CACHE = 'gmp-shell-v2';
+var CACHE = 'gmp-shell-v3';
 var CORE = [
   './',
   './net.html',
+  './tips.html',
   './ghn.html',
   './gcn.html',
   './gdn.html',
@@ -20,6 +21,7 @@ var CORE = [
   './manifest.webmanifest',
   './assets/g-common.css',
   './assets/g-common.js',
+  './assets/g-tips.js',
   './assets/g-products.js',
   './assets/pwa.js',
   './assets/icon-192.png',

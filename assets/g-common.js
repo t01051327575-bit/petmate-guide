@@ -51,6 +51,7 @@ var G = (function () {
   ];
   var KEY = 'gnet_settings_v1';
   var SHORT_KEY = 'gnet_short_v1';
+  var TITLE0 = (typeof document !== 'undefined' && document.title) || '';
 
   /* ---------- 작은 도구들 ---------- */
   function q(sel, root) { return (root || document).querySelector(sel); }
@@ -89,14 +90,94 @@ var G = (function () {
   function settings() {
     var s = load();
     var p = readParams();
-    for (var k in p) { if (Object.prototype.hasOwnProperty.call(p, k)) s[k] = p[k]; }
-    if (p.theme) {
+    var hasParam = false;
+    for (var k in p) {
+      if (!Object.prototype.hasOwnProperty.call(p, k)) continue;
+      s[k] = p[k];
+      hasParam = true;
+    }
+    /* 주소로 들어온 값은 이 기기에도 저장한다.
+       그래야 ?hospital=로 들어온 다른 병원이 하위 페이지(prev/next·벌집)로
+       이동해도 그대로 이어지고, 새로고침해도 유지된다. */
+    if (hasParam) {
       var merged = load();
-      merged.theme = p.theme;
+      for (var q2 in p) { if (Object.prototype.hasOwnProperty.call(p, q2)) merged[q2] = p[q2]; }
       save(merged);
     }
     if (!/^(sky|mint|pink|navy|cream)$/.test(s.theme)) s.theme = 'sky';
     return s;
+  }
+
+  /* ---------- 병원 설정 한 번에 적용(저장 → 주소 → 화면 → 하위 페이지) ---------- */
+  function settingsUrl(h, pagePath) {
+    var base;
+    try {
+      if (pagePath) {
+        base = new URL(pagePath, window.location.href);
+      } else {
+        base = new URL(window.location.href);
+      }
+    } catch (e) { return ''; }
+    var sp = new URLSearchParams();
+    if (h.hospital) sp.set('hospital', h.hospital);
+    if (h.slogan) sp.set('slogan', h.slogan);
+    if (h.theme) sp.set('theme', h.theme);
+    if (h.kakao) sp.set('kakao', h.kakao);
+    if (h.phone) sp.set('phone', h.phone);
+    base.search = sp.toString();
+    base.hash = '';
+    return base.href;
+  }
+  function syncUrl(h) {
+    try {
+      var u = new URL(window.location.href);
+      ['hospital', 'slogan', 'theme', 'kakao', 'phone'].forEach(function (k) {
+        if (h && h[k]) u.searchParams.set(k, h[k]);
+        else u.searchParams.delete(k);
+      });
+      var next = u.pathname + (u.search ? u.search : '') + (u.hash || '');
+      if (window.history && window.history.replaceState) window.history.replaceState({}, '', next);
+    } catch (e) {}
+  }
+  function setTitle(hospital) {
+    if (!TITLE0) return;
+    var h = String(hospital || '').trim();
+    var t = TITLE0;
+    if (h && t.indexOf('굿모닝펫') >= 0) t = t.replace(/굿모닝펫(동물병원)?/g, h);
+    if (document.title !== t) { try { document.title = t; } catch (e) {} }
+  }
+  function paintChrome(h) {
+    h = h || settings();
+    var nameEl = q('#g-hosp');
+    if (nameEl) nameEl.textContent = h.hospital;
+    setTitle(h.hospital);
+    var philo = q('.philo .q');
+    if (philo) philo.textContent = h.hospital + ' A~Z 그물망 시리즈 · 평생 주치의 시스템';
+  }
+  function applySettings(next) {
+    var cur = load();
+    for (var k in next) {
+      if (!Object.prototype.hasOwnProperty.call(next, k)) continue;
+      if (next[k] == null) continue;
+      cur[k] = next[k];
+    }
+    save(cur);
+    syncUrl(cur);
+    applyTheme(cur.theme);
+    paintChrome(cur);
+    try { document.dispatchEvent(new CustomEvent('g-settings', { detail: cur })); } catch (e) {}
+    return cur;
+  }
+  function resetSettings() {
+    save(DEFAULTS);
+    syncUrl(null);
+    applyTheme(DEFAULTS.theme);
+    paintChrome(DEFAULTS);
+    try { document.dispatchEvent(new CustomEvent('g-settings', { detail: DEFAULTS })); } catch (e) {}
+    return DEFAULTS;
+  }
+  function hasSaved() {
+    try { return !!window.localStorage.getItem(KEY); } catch (e) { return false; }
   }
   function applyTheme(id) {
     document.documentElement.setAttribute('data-theme', id || 'sky');
@@ -424,7 +505,7 @@ var G = (function () {
       '</div>' +
       '<div class="g-panel" id="g-map">' +
         '<div class="inner">' +
-          '<div class="g-field"><label>굿모닝펫 A~Z 그물망 26칸</label></div>' +
+          '<div class="g-field"><label>G-시리즈 A~Z 그물망 26칸</label></div>' +
           '<div class="hexmap" id="g-hexmap"></div>' +
           '<p class="g-hint">칸을 누르면 그 자리의 전용 페이지가 열립니다. 지금 보시는 칸은 테두리로 표시됩니다.</p>' +
         '</div>' +
@@ -437,7 +518,7 @@ var G = (function () {
           '<div class="g-field"><label>대표 전화</label><input id="g-in-phone" type="tel" placeholder="031-000-0000" inputmode="tel"></div>' +
           '<div class="g-field"><label>배경 테마</label><div class="themes" id="g-themes"></div></div>' +
           '<div class="btnrow"><button class="btn solid" id="g-save" type="button">저장</button><button class="btn ghost" id="g-reset" type="button">기본값</button></div>' +
-          '<p class="g-hint">이 설정은 이 기기 브라우저에만 저장됩니다. 주소 끝에 <b>?hospital=병원명&amp;slogan=슬로건&amp;theme=mint</b>를 붙여 보내면 그 값이 우선 적용됩니다.</p>' +
+          '<p class="g-hint">이 기기 브라우저에 저장되고 주소에도 담깁니다. 주소 끝에 <b>?hospital=병원명&amp;slogan=슬로건&amp;theme=mint</b>를 붙여 보내면 그 값이 우선 적용됩니다.</p>' +
         '</div>' +
       '</div>';
 
@@ -484,22 +565,17 @@ var G = (function () {
       cur.slogan = isg.value.trim();
       cur.kakao = ik.value.trim();
       cur.phone = ip.value.trim();
-      save(cur);
-      if (nameEl) nameEl.textContent = cur.hospital;
+      applySettings({ hospital: cur.hospital, slogan: cur.slogan, kakao: cur.kakao, phone: cur.phone });
       panel.classList.remove('open');
       toast('저장했습니다 — 모든 페이지에 함께 적용됩니다');
       footer();
-      document.dispatchEvent(new CustomEvent('g-settings', { detail: cur }));
     });
     q('#g-reset').addEventListener('click', function () {
-      save(DEFAULTS);
+      resetSettings();
       ih.value = DEFAULTS.hospital; isg.value = DEFAULTS.slogan; ik.value = ''; ip.value = DEFAULTS.phone;
-      applyTheme(DEFAULTS.theme);
-      if (nameEl) nameEl.textContent = DEFAULTS.hospital;
       qa('.sw', th).forEach(function (x, i) { x.setAttribute('aria-pressed', THEMES[i].id === DEFAULTS.theme ? 'true' : 'false'); });
       toast('기본값으로 되돌렸습니다');
       footer();
-      document.dispatchEvent(new CustomEvent('g-settings', { detail: DEFAULTS }));
     });
 
     var code = document.body.getAttribute('data-code') || '';
@@ -591,7 +667,13 @@ var G = (function () {
   function init() {
     header();
     footer();
+    paintChrome();
     document.documentElement.classList.add('js');
+    /* 다른 곳(포털 상단 패널 등)에서 병원 정보를 바꾸면 상단 바·제목·꼬리말도 함께 갱신 */
+    document.addEventListener('g-settings', function (e) {
+      paintChrome(e && e.detail);
+      footer();
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
@@ -600,6 +682,8 @@ var G = (function () {
     LIST: LIST, THEMES: THEMES, DEFAULTS: DEFAULTS,
     q: q, qa: qa, esc: esc,
     settings: settings, save: save, applyTheme: applyTheme,
+    applySettings: applySettings, resetSettings: resetSettings, hasSaved: hasSaved,
+    paintChrome: paintChrome, settingsUrl: settingsUrl, syncUrl: syncUrl,
     toast: toast, count: count, cut: cut,
     josa: josa, hasBatchim: hasBatchim,
     money: money, today: today, addDays: addDays, fmtDate: fmtDate, isoDate: isoDate, dday: dday,

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>26종 특징·장점·키워드·실전 3팁 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="G-시리즈 26종(GAN~GZN)의 특징 한 줄, 장점, 3가지 키워드, 다른 병원에서도 그대로 쓰는 실전 3가지 방법을 한 페이지에 정리했습니다. 세미나·공유·인쇄용.">
+<meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="26종 한눈에">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="G-시리즈 26종 — 특징·장점·키워드·실전 3팁 한눈에">
+<meta property="og:description" content="26칸 각각의 특징 한 줄, 장점, 3가지 키워드, 실전 3가지 방법. 병원 이름만 바꾸면 그대로 쓰는 범용 정리본.">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128c">
+<style>
+.tipsw{max-width:1000px}
+.g-top .bar{max-width:1000px}
+#g-top .bar{height:auto;background:transparent;border-radius:0;overflow:visible}
+#g-map-btn,#g-map{display:none !important}
+.tipsw .page-hero{margin-bottom:12px}
+.page-hero h1 .h1sub{display:block;font-size:.5em;letter-spacing:-.01em;color:var(--accent-d);margin-top:6px}
+.tipsw #g-footer{margin:26px 0 8px;text-align:center;font-size:11.5px;line-height:1.75;color:var(--muted)}
+.tipsw #g-footer .b{font-weight:800;color:var(--ink-soft);font-size:12.5px;margin-bottom:2px}
+
+/* ---------- 도구 막대 ---------- */
+.tools{padding:12px 13px}
+.searchrow{display:flex;gap:7px}
+.searchrow input{flex:1 1 auto;min-width:0;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:12px;padding:11px 13px;min-height:46px}
+.searchrow input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(47,134,181,.12)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.chip{appearance:none;font-family:inherit;cursor:pointer;font-size:12.5px;font-weight:800;color:var(--ink-soft);
+  background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 12px;min-height:38px}
+.chip[aria-pressed="true"]{background:var(--soft);border-color:var(--brand);color:var(--brand-d);box-shadow:inset 0 0 0 1px var(--badge-line)}
+.chip .n{font-weight:900;opacity:.75;margin-left:3px}
+.toolbtns{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.toolbtns .btn{font-size:12.5px;min-height:42px;padding:9px 12px}
+.toolbtns .btn.link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.tipcnt{margin:9px 2px 0;font-size:11.5px;font-weight:800;color:var(--muted)}
+.tipcnt b{color:var(--ink-soft)}
+
+/* ---------- 26장 카드 ---------- */
+.tlist{display:grid;grid-template-columns:1fr;gap:11px;margin-top:12px}
+@media (min-width:820px){.tlist{grid-template-columns:1fr 1fr;align-items:start}}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 14px 15px;box-shadow:var(--shadow)}
+.tcard[data-cat="guardian"]{border-color:#d5ecf8}
+.tcard[data-cat="clinic"]{border-color:#cfeee3}
+.tcard[data-cat="admin"]{border-color:#e0d9f3}
+.tcard.hide{display:none}
+.tch{display:flex;align-items:flex-start;gap:10px}
+.tcode{flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:15px;
+  font-size:14px;font-weight:900;letter-spacing:.01em;color:var(--brand-d);
+  background:linear-gradient(150deg,var(--soft),var(--soft2));border:1px solid var(--badge-line)}
+.tcard[data-cat="clinic"] .tcode{color:#0d7462;background:linear-gradient(150deg,#f1fbf7,#e3f6f0);border-color:#c8e9dd}
+.tcard[data-cat="admin"] .tcode{color:#5b4a9a;background:linear-gradient(150deg,#faf8fe,#efeafb);border-color:#d8d0ef}
+.tid{flex:1 1 auto;min-width:0}
+.tid h2{margin:0;font-size:16px;line-height:1.3;letter-spacing:-.02em}
+.tid h2 small{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.02em;margin-top:2px}
+.tid .prog{margin:4px 0 0;font-size:11.5px;font-weight:800;color:var(--brand-d);line-height:1.4}
+.topen{flex:0 0 auto;font-size:11.5px;font-weight:900;color:var(--brand-d);text-decoration:none;
+  border:1px solid var(--badge-line);background:#fff;border-radius:999px;padding:6px 10px;white-space:nowrap}
+.tfeat{margin:11px 0 0;padding:10px 12px;border:1px solid var(--line);background:var(--bg);border-radius:13px}
+.tfeat .lb{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.06em;color:var(--brand-d);
+  background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:2px 8px;margin-bottom:4px}
+.tfeat p{margin:0;font-size:13px;line-height:1.55;color:var(--ink);font-weight:700}
+.twords{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.twords span{font-size:11.5px;font-weight:900;color:var(--brand-d);background:#fff;border:1px solid var(--badge-line);border-radius:999px;padding:5px 9px}
+.tben{margin-top:10px}
+.tben h3,.ttips h3{margin:0 0 5px;font-size:11.5px;font-weight:900;letter-spacing:.02em;color:var(--muted)}
+.tben ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.tben li{display:flex;gap:6px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+.tben li b{flex:0 0 34px;font-size:10.5px;font-weight:900;color:var(--brand-d);padding-top:2px}
+.ttips{margin-top:11px;padding:11px 12px 12px;border:1px solid #f2d79a;border-radius:15px;
+  background:linear-gradient(160deg,#fffdf3,#fff6dc)}
+.ttips h3{color:#8a631f;font-size:12px}
+.ttips ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ttips li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.55;color:#4a3c22}
+.ttips li .n{flex:0 0 auto;width:19px;height:19px;border-radius:50%;background:#f0c96a;color:#5c4212;
+  font-size:10.5px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.printhead{display:none}
+
+/* ---------- 인쇄 ---------- */
+@media print{
+  @page{margin:12mm 10mm}
+  body{background:#fff}
+  #g-top,#g-footer,.tools,.no-print{display:none !important}
+  .tipsw{max-width:none;padding:0}
+  .page-hero{display:none}
+  .printhead{display:block;margin:0 0 8mm;padding-bottom:3mm;border-bottom:1.5px solid #333}
+  .printhead b{display:block;font-size:15pt;letter-spacing:-.02em}
+  .printhead span{display:block;font-size:9pt;color:#555;margin-top:1mm}
+  .tlist{display:block;margin:0}
+  .tcard{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc;border-radius:6px;
+    padding:4mm;margin-bottom:4mm}
+  .topen{display:none}
+  .ttips{background:#fffdf3}
+}
+</style>
+</head>
+<body data-code="TIPS">
+<div id="g-top"></div>
+
+<div class="wrap tipsw">
+  <div class="printhead" id="printHead">
+    <b id="printTitle">G-시리즈 26종 정리</b>
+    <span id="printSub">특징 · 장점 · 3가지 키워드 · 실전 3가지 방법</span>
+  </div>
+
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">G · 26</span>
+      <span class="eng-chip">A~Z · 한눈에</span>
+    </div>
+    <h1 id="heroTitle">굿모닝펫 A~Z 그물망 시리즈<span class="h1sub">26종 — 특징 · 장점 · 키워드 · 실전 3팁</span></h1>
+    <p id="heroCopy">26칸이 각각 무엇을 하는 도구인지, 어디에 좋은지, 다른 병원에서 어떻게 시작하면 되는지를 한 페이지에 담았습니다. 세미나에서 그대로 띄우거나 인쇄해 나눠 주세요.</p>
+    <div class="marks"><span>특징 한 줄</span><span>3가지 키워드</span><span>실전 3가지 방법</span><span>인쇄 가능</span></div>
+  </header>
+
+  <section class="card tools no-print" aria-label="찾기와 인쇄">
+    <div class="searchrow">
+      <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="코드·이름·키워드로 찾기 (예: GKN, 처방, #재구매)" aria-label="26종 검색">
+      <button class="mini" id="qClear" type="button" aria-label="검색어 지우기">✕</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="역할별 필터">
+      <button class="chip" type="button" data-cat="all" aria-pressed="true">전체 <span class="n">26</span></button>
+      <button class="chip" type="button" data-cat="guardian" aria-pressed="false">보호자용 <span class="n">13</span></button>
+      <button class="chip" type="button" data-cat="clinic" aria-pressed="false">진료·검사 <span class="n">5</span></button>
+      <button class="chip" type="button" data-cat="admin" aria-pressed="false">원무·운영 <span class="n">8</span></button>
+    </div>
+    <div class="toolbtns">
+      <button class="btn solid" id="doPrint" type="button">🖨 인쇄 · PDF 저장</button>
+      <button class="btn ghost" id="doCopy" type="button">📋 전체 텍스트 복사</button>
+      <a class="btn ghost link" id="backPortal" href="net.html">▦ 26칸 포털로</a>
+    </div>
+    <p class="tipcnt" id="tipCount">26종 전체 · 병원 이름은 <b id="tipHosp">굿모닝펫동물병원</b> 기준으로 표시됩니다</p>
+  </section>
+
+  <section class="tlist" id="tlist" aria-label="26종 정리"></section>
+
+  <div id="g-footer"></div>
+</div>
+
+<script src="assets/g-common.js?v=20261128d"></script>
+<script src="assets/g-tips.js?v=20261128a"></script>
+<script>
+(function () {
+  var $ = G.q;
+  var CATNAME = { guardian:'보호자용', clinic:'진료·검사', admin:'원무·운영' };
+  var BENLABEL = ['직원', '보호자', '병원'];
+  var BENICON = ['👩‍⚕️', '🐶', '🏥'];
+  var filterCat = 'all', query = '';
+
+  function settings() { return G.settings(); }
+  function pageLink(x) {
+    return G.settingsUrl(settings(), x.href);
+  }
+  function esc(s) { return G.esc(s); }
+
+  function card(x) {
+    var tips = (x.t || []).map(function (t, k) {
+      return '<li><span class="n">' + (k + 1) + '</span><span>' + esc(t) + '</span></li>';
+    }).join('');
+    var ben = (x.b || []).map(function (t, k) {
+      return '<li><b>' + BENICON[k] + ' ' + BENLABEL[k] + '</b><span>' + esc(t) + '</span></li>';
+    }).join('');
+    var words = (x.k || []).map(function (w) { return '<span>' + esc(w) + '</span>'; }).join('');
+    return '<article class="tcard" data-code="' + x.code + '" data-cat="' + x.cat + '" id="card-' + x.code + '">' +
+      '<div class="tch">' +
+        '<span class="tcode">' + x.code + '</span>' +
+        '<div class="tid"><h2>' + esc(x.ko) + '<small>' + x.letter + ' · ' + esc(x.eng) + ' · ' + esc(CATNAME[x.cat] || '') + '</small></h2>' +
+          '<p class="prog">프로그램 · ' + esc(x.program) + '</p></div>' +
+        '<a class="topen" href="' + pageLink(x) + '" target="_blank" rel="noopener">열기 ›</a>' +
+      '</div>' +
+      '<div class="tfeat"><span class="lb">특징</span><p>' + esc(x.f) + '</p></div>' +
+      '<div class="twords">' + words + '</div>' +
+      '<div class="tben"><h3>장점</h3><ul>' + ben + '</ul></div>' +
+      '<div class="ttips"><h3>💡 실전 3가지 방법</h3><ol>' + tips + '</ol></div>' +
+    '</article>';
+  }
+
+  function matches(x) {
+    if (filterCat !== 'all' && x.cat !== filterCat) return false;
+    if (!query) return true;
+    var hay = [x.code, x.letter, x.eng, x.ko, x.short, x.program, x.f, (x.k || []).join(' '), (x.t || []).join(' '), (x.b || []).join(' ')]
+      .join(' ').toLowerCase().replace(/\s+/g, '');
+    return hay.indexOf(query) >= 0;
+  }
+
+  function apply() {
+    var shown = 0;
+    GTIPS.LIST.forEach(function (x) {
+      var el = document.getElementById('card-' + x.code);
+      if (!el) return;
+      var ok = matches(x);
+      el.classList.toggle('hide', !ok);
+      if (ok) shown++;
+    });
+    var c = $('#tipCount');
+    var h = esc(settings().hospital);
+    if (shown === GTIPS.LIST.length) {
+      c.innerHTML = '26종 전체 · 병원 이름은 <b>' + h + '</b> 기준으로 표시됩니다';
+    } else if (shown) {
+      c.innerHTML = '<b>' + shown + '종</b> 표시 중 · 병원 이름은 <b>' + h + '</b> 기준';
+    } else {
+      c.innerHTML = '조건에 맞는 항목이 없습니다 — 코드(GKN)나 키워드(#재구매)로 다시 찾아보세요';
+    }
+  }
+
+  function paint() {
+    var s = settings();
+    var b = String(s.hospital || '').replace(/\s*동물병원$/, '').replace(/\s*병원$/, '') || '굿모닝펫';
+    $('#heroTitle').innerHTML = esc(b) + ' A~Z 그물망 시리즈<span class="h1sub">26종 — 특징 · 장점 · 키워드 · 실전 3팁</span>';
+    document.title = b + ' G-시리즈 26종 — 특징·장점·키워드·실전 3팁';
+    $('#printTitle').textContent = s.hospital + ' G-시리즈 26종 정리';
+    $('#printSub').textContent = '특징 · 장점 · 3가지 키워드 · 실전 3가지 방법  ·  ' + G.today().replace(/-/g, '. ') + '.';
+    $('#backPortal').href = G.settingsUrl(s, 'net.html');
+  }
+
+  function textAll() {
+    var s = settings();
+    var head = s.hospital + ' G-시리즈 26종 — 특징 · 장점 · 3가지 키워드 · 실전 3가지 방법\n' +
+      '(다른 병원에서도 그대로 쓸 수 있는 범용 정리 · ' + G.today() + ')\n';
+    var body = GTIPS.LIST.map(function (x, i) {
+      if (!matches(x)) return '';
+      return '\n' + (i + 1) + '. ' + x.code + ' ' + x.ko + ' (' + x.letter + ' · ' + x.eng + ')\n' +
+        '특징 : ' + x.f + '\n' +
+        '키워드 : ' + (x.k || []).join(' ') + '\n' +
+        '장점 : ' + (x.b || []).join(' / ') + '\n' +
+        '방법 : ' + (x.t || []).map(function (t, k) { return (k + 1) + ') ' + t; }).join(' ') + '\n';
+    }).join('');
+    return head + body;
+  }
+
+  $('#q').addEventListener('input', function () {
+    query = $('#q').value.trim().toLowerCase().replace(/\s+/g, '');
+    apply();
+  });
+  $('#qClear').addEventListener('click', function () { $('#q').value = ''; query = ''; apply(); $('#q').focus(); });
+  G.qa('.chip', $('#chips')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterCat = btn.getAttribute('data-cat');
+      G.qa('.chip', $('#chips')).forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      apply();
+    });
+  });
+  $('#doPrint').addEventListener('click', function () {
+    G.toast('인쇄 창에서 “PDF로 저장”을 고르면 파일로도 남길 수 있어요');
+    setTimeout(function () { window.print(); }, 350);
+  });
+  $('#doCopy').addEventListener('click', function () {
+    G.copy(textAll()).then(function (ok) {
+      G.toast(ok ? '26종 전체 텍스트를 복사했습니다 — 문서·카톡에 붙여넣으세요'
+                 : '복사가 막혔어요 — 인쇄로 저장해 주세요');
+    });
+  });
+
+  /* 해시로 특정 칸을 바로 열기: tips.html#GKN */
+  function fromHash() {
+    var code = (window.location.hash || '').replace('#', '').toUpperCase();
+    if (!code) return;
+    var el = document.getElementById('card-' + code);
+    if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 120);
+  }
+
+  function init() {
+    $('#tlist').innerHTML = GTIPS.LIST.map(card).join('');
+    paint();
+    apply();
+    fromHash();
+    document.addEventListener('g-settings', function () {
+      paint();
+      $('#tlist').innerHTML = GTIPS.LIST.map(card).join('');
+      apply();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+<script src="assets/pwa.js?v=20261128a"></script>
+</body>
+</html>
