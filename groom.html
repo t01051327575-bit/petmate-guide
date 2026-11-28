@@ -268,7 +268,8 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
         '<div class="mrow">'+
           '<button type="button" class="mbtn" data-act="shot">📷 사진 촬영</button>'+
           '<button type="button" class="mbtn" data-act="pick">🖼 사진 선택</button>'+
-          '<button type="button" class="mbtn" data-act="video">🎥 영상 15초</button>'+
+          '<button type="button" class="mbtn" data-act="video">🎥 영상 촬영</button>'+
+          '<button type="button" class="mbtn" data-act="vpick">🎞 영상 선택</button>'+
         '</div>'+
         '<div class="thumbs" id="th-'+it.key+'"></div>'+
       '</div>'+
@@ -292,8 +293,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
 
   function renderThumbs(key){
     var box = $('#th-'+key), arr = state[key].media;
-    box.innerHTML = '';
-    arr.forEach(function(m, i){
+    box.innerHTML = '';    arr.forEach(function(m, i){
       var d = document.createElement('div');
       d.className = 'thumb';
       if(m.kind === 'video'){
@@ -311,6 +311,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       d.appendChild(k); d.appendChild(x);
       box.appendChild(d);
     });
+    try { updateBar(); } catch (e) { }
   }
 
   function pickSeg(e){
@@ -330,6 +331,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       var act = mb.getAttribute('data-act');
       if(act === 'shot') $('#fPhotoCam').click();
       else if(act === 'pick') $('#fPhotoPick').click();
+      else if(act === 'vpick') $('#fVideoPick').click();
       else $('#fVideoCam').click();
     }
   });
