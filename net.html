@@ -743,7 +743,10 @@ html.sheet-open body{overflow:hidden}
     $('#setText').textContent = s.hospital + (s.slogan ? ' · ' + s.slogan : '') + ' · ' + themeName;
     $('#shareUrlText').textContent = portalUrl();
     if ($('#setNow')) $('#setNow').textContent = s.hospital + (s.slogan ? ' · ' + s.slogan : '');
-    if ($('#setLinkText')) $('#setLinkText').textContent = customLink(s);
+    if ($('#setLinkText')) {
+      $('#setLinkText').textContent = readableLink(s);
+      $('#setLinkText').title = customLink(s);
+    }
     var tipsUrl = G.settingsUrl(s, 'tips.html');
     if ($('#tipsCta')) $('#tipsCta').href = tipsUrl;
     if ($('#shAll')) $('#shAll').href = tipsUrl;
@@ -755,6 +758,16 @@ html.sheet-open body{overflow:hidden}
     h = h || G.settings();
     return G.settingsUrl({ hospital: h.hospital, slogan: h.slogan, theme: h.theme, kakao: h.kakao, phone: h.phone },
       window.location.pathname);
+  }
+  /* 화면에는 읽을 수 있는 형태로, 복사는 실제 주소(customLink)로 */
+  function readableLink(h) {
+    var parts = [];
+    if (h.hospital) parts.push('hospital=' + h.hospital);
+    if (h.slogan) parts.push('slogan=' + h.slogan);
+    if (h.theme) parts.push('theme=' + h.theme);
+    if (h.kakao) parts.push('kakao=' + h.kakao);
+    if (h.phone) parts.push('phone=' + h.phone);
+    return 'net.html?' + parts.join('&');
   }
   function panelFields() {
     return {
@@ -795,7 +808,8 @@ html.sheet-open body{overflow:hidden}
     var saved = G.applySettings(f);   /* 링크에 담긴 값이 이 기기에도 그대로 적용되게 */
     fillPanel(saved);
     var url = customLink(saved);
-    $('#setLinkText').textContent = url;
+    $('#setLinkText').textContent = readableLink(saved);
+    $('#setLinkText').title = url;
     G.copy(url).then(function (ok) {
       G.toast(ok ? '우리 병원 전용 링크를 복사했습니다 — 붙여넣어 보내세요'
                  : '복사가 막혔어요 — 아래 전용 링크를 길게 눌러 복사해 주세요');
