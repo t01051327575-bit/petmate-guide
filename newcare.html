@@ -21,8 +21,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/g-common.css?v=20261128g">
-<link rel="stylesheet" href="assets/g-newpages.css?v=20261128g">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128h">
+<link rel="stylesheet" href="assets/g-newpages.css?v=20261128h">
 </head>
 <body data-code="NEWCARE">
 <div id="g-top"></div>
@@ -147,9 +147,9 @@
   <div id="g-footer"></div>
 </div>
 
-<script src="assets/g-common.js?v=20261128g"></script>
-<script src="assets/g-care-data.js?v=20261128g"></script>
-<script src="assets/g-care-core.js?v=20261128g"></script>
+<script src="assets/g-common.js?v=20261128h"></script>
+<script src="assets/g-care-data.js?v=20261128h"></script>
+<script src="assets/g-care-core.js?v=20261128h"></script>
 <script>
 (function () {
   var $ = G.q, C = G_CARE_CORE;
@@ -219,6 +219,7 @@
     $('#staffText').textContent = sym.staff || '직원용 문장이 아직 없습니다.';
     var kakao = C.buildKakao(sym, { hospital: G_CARE.hospital, phone: G_CARE.phone });
     $('#kakao').value = kakao;
+    kakaoAutoGrow();
     var n = C.count(kakao);
     $('#kakaoCount').innerHTML = '<b>' + n + '</b> / 400자';
     $('#kakaoCount').classList.toggle('over', n > 400);
@@ -287,6 +288,14 @@
     custom.forEach(function (s) { if (s.item) arr.push(s.item); });
     return arr;
   }
+
+  function kakaoAutoGrow() {
+    var el = $('#kakao');
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = Math.max(150, el.scrollHeight + 4) + 'px';
+  }
+  $('#kakao').addEventListener('input', kakaoAutoGrow);
 
   function renderSaved() {
     var host = $('#savedList');
