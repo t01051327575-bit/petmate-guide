@@ -214,7 +214,7 @@
 
   function paint() {
     var s = settings();
-    var b = String(s.hospital || '').replace(/\s*동물병원$/, '').replace(/\s*병원$/, '') || '굿모닝펫';
+    var b = String(s.hospital || '굿모닝펫동물병원').trim() || '굿모닝펫동물병원';
     $('#heroTitle').innerHTML = esc(b) + ' A~Z 그물망 시리즈<span class="h1sub">26종 — 특징 · 장점 · 키워드 · 실전 3팁</span>';
     document.title = b + ' G-시리즈 26종 — 특징·장점·키워드·실전 3팁';
     $('#printTitle').textContent = s.hospital + ' G-시리즈 26종 정리';

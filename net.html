@@ -734,7 +734,7 @@ html.sheet-open body{overflow:hidden}
   /* ---------- 상단 텍스트 · 세팅 ---------- */
   function paint() {
     var s = G.settings();
-    var b = brand(s.hospital);
+    var b = s.hospital;   /* 입력한 병원명 그대로 — '행복한동물병원 A~Z 그물망 시리즈' */
     var h1 = $('#heroTitle');
     if (h1) h1.innerHTML = G.esc(b) + ' A~Z 그물망 시리즈<span class="h1sub">평생 주치의 시스템</span>';
     document.title = b + ' A~Z 그물망 시리즈 · 평생 주치의 시스템 | 26칸 벌집 포털';
