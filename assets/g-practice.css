@@ -22,3 +22,9 @@
 .gp-ans p{margin:0;font-size:13px;line-height:1.65;color:var(--ink-soft,#465a66)}
 .gp-miss{font-size:11.5px;font-weight:700;color:var(--muted,#71858f);margin-top:6px;line-height:1.5}
 .gp-miss s{display:inline-block;color:#b0564a;text-decoration:none;background:#fdeeea;border-radius:999px;padding:1px 7px;margin:1px 2px 0 0;font-weight:800}
+/* GSN(rebuy.html)은 자체 CSS만 쓰므로 이 칸만 따로 모양을 잡아 줍니다 */
+body[data-code="GSN"] #g-practice{background:#fff;border:1px solid #e4eef3;border-radius:18px;padding:16px 14px 18px;box-shadow:0 1px 2px rgba(23,58,72,.05)}
+body[data-code="GSN"] #g-practice .sec-head{display:flex;gap:9px;align-items:flex-start;margin-bottom:4px}
+body[data-code="GSN"] #g-practice .num{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:#eaf7fd;color:#1f6f96;display:flex;align-items:center;justify-content:center;font-size:15px}
+body[data-code="GSN"] #g-practice h2{font-size:17px;font-weight:900;margin:0;line-height:1.35;letter-spacing:-.02em;color:#1d2a33}
+body[data-code="GSN"] #g-practice h2 small{display:block;font-size:11.5px;font-weight:700;color:#71858f;margin-top:4px;letter-spacing:0}
