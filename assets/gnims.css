@@ -67,7 +67,7 @@
   appearance:none;border:1px solid var(--line);background:#fff;color:var(--muted);
   border-radius:8px;width:28px;height:28px;font-size:14px;line-height:1;cursor:pointer;
 }
-.gn-tbl .done{color:var(--ok);font-weight:800;font-size:11.5px}
+.gn-tbl .done{color:var(--ok);font-weight:800;font-size:11.5px;cursor:pointer;text-decoration:underline dotted}
 
 /* ---------- 보고 대기함 ---------- */
 .qcard{

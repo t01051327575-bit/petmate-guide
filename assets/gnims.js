@@ -214,10 +214,10 @@
       var cls = (r.done ? '' : (due != null && due <= 0 ? 'bad' : (due != null && due <= 2 ? 'warn' : '')));
       var report;
       if (r.done) {
-        report = '<span class="done">' + esc(r.rid || '완료') + '</span><span class="sub">' + esc(dot(r.doneDate)) + '</span>';
+        report = '<span class="done" title="누르면 보고 완료를 취소합니다">' + esc(r.rid || '완료') + '</span><span class="sub">' + esc(dot(r.doneDate)) + '</span>';
       } else {
         report = '<input class="tin" data-rid="' + r.id + '" placeholder="—" title="보고 후 번호가 자동으로 들어갑니다">' +
-          '<span class="sub">' + (due == null ? (left != null ? left + '일 경과' : '') : (due <= 0 ? (due === 0 ? '오늘까지' : 'D+' + Math.abs(due)) : 'D-' + due)) + '</span>';
+          '<span class="sub">' + (due == null ? (left === 0 ? '오늘 사용' : (left != null ? left + '일 경과' : '')) : (due <= 0 ? (due === 0 ? '오늘까지' : 'D+' + Math.abs(due)) : 'D-' + due)) + '</span>';
       }
       return '<tr class="' + cls + '">' +
         '<td class="d">' + dot(r.date) + '</td>' +
@@ -374,6 +374,7 @@
     return s;
   }
   function downloadCSV(rows, name, withHead) {
+    rows = rows.slice().sort(function (a, b) { return (a.date || '') < (b.date || '') ? -1 : 1; });
     var lines = [];
     if (withHead) lines.push(CSV_HEAD.map(csvCell).join(','));
     rows.forEach(function (r) { lines.push(nimsCells(r).map(csvCell).join(',')); });
