@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>🛒 동물병원 재구매 안내 · 이전 구매이력 조회 &amp; 문구 만들기</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta name="description" content="판매내역 엑셀만 올리면 보호자·아이별 이전 구매이력을 찾아 재구매 안내 카톡 문구까지 1분 만에 완성됩니다. 서버 전송 없이 우리 병원 기기 안에서만 처리되는 범용 도구입니다.">
 
 <!-- Open Graph (카카오톡 공유 카드) -->
@@ -472,6 +478,12 @@
     .mk-go,.pv-copy,.linkbtn,#toast,.wipe,.xlsxrow,.sbox,.drop{display:none}
     .step{break-inside:avoid;box-shadow:none}
   }
+  /* 링크로 넘어온 권장 품목 배너 (GTN 3종 생성기 → GSN) */
+  .recbanner{margin-top:10px;border:1px solid #cfe8e2;background:#f0fbf8;border-radius:14px;padding:11px 12px;font-size:12.5px;line-height:1.6;color:#3c5f5a}
+  .recbanner b{display:block;font-size:12px;font-weight:900;color:#0f7f72;margin-bottom:6px;letter-spacing:.02em}
+  .recbanner .rc{display:inline-block;background:#fff;border:1px solid #cfe8e2;border-radius:999px;padding:3px 9px;margin:0 4px 5px 0;font-weight:800;color:#116b60}
+  .recbanner .rh{display:block;margin-top:3px;color:#5b7671;font-size:11.5px}
+
 </style>
 </head>
 <body>
@@ -606,6 +618,7 @@
         <input type="search" id="searchInput" autocomplete="off" spellcheck="false"
                placeholder="보호자 이름 또는 아이 이름 검색 (예: 김주원, 몽이)">
         <div class="slist" id="searchList"></div>
+        <div class="recbanner" id="recBanner" hidden></div>
       </div>
       <div id="pairWrap" hidden>
         <div class="pairhead" id="pairHead"></div>
@@ -1654,7 +1667,7 @@
 
   searchInput.addEventListener('input', renderSearch);
 
-  function selectPair(pair){
+  function selectPair(pair, silent){
     if(!pair) return;
     if(curPair && curPair.g === pair.g && curPair.p === pair.p) return;
     curPair = pair;
@@ -1664,7 +1677,7 @@
     renderHistory();
     loadNextDate();
     renderSearch();
-    pairWrap.scrollIntoView({ behavior:'smooth', block:'start' });
+    if(!silent) pairWrap.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
   function petsOfGuardian(g){
@@ -2407,11 +2420,42 @@
     return null;
   }
 
+  function applyWhoParams(){
+    var g = readParam(['guardian','owner','ownerName']) || '';
+    var p = readParam(['pet','dog','cat','petName']) || '';
+    var items = readParam(['items','item','recs','recommend']) || '';
+    if(!g && !p && !items) return false;
+    var b = $('recBanner');
+    if(items && b){
+      var list = items.split(/[;|]/).map(function(x){ return String(x).trim(); }).filter(Boolean);
+      if(list.length){
+        b.hidden = false;
+        b.innerHTML = '<b>🩺 원장님 권장 품목</b>' +
+          list.map(function(n){ return '<span class="rc">' + esc(n) + '</span>'; }).join('') +
+          '<span class="rh">아래 이전 구매이력에 있으면 체크해 바로 주문할 수 있어요. 이력에 없으면 병원으로 문의해 주세요.</span>';
+      }
+    }
+    if(g || p){
+      searchInput.value = (g || p);
+      renderSearch();
+      var q = normName(g || p);
+      var hit = PAIRS.filter(function(it){
+        return normName(it.g).indexOf(q) >= 0 || normName(it.p).indexOf(q) >= 0;
+      });
+      var exact = hit.filter(function(it){
+        return (!g || normName(it.g) === normName(g)) && (!p || normName(it.p) === normName(p));
+      });
+      var one = exact[0] || (hit.length === 1 ? hit[0] : null);
+      if(one) selectPair(one, true);
+    }
+    return true;
+  }
+
   function applyUrlParams(){
     var pName   = cleanName(readParam(['hospital','hosp','h','name']) || '');
     var pSlogan = readParam(['slogan','slogun','s']);
     var pLink   = readParam(['link','url','l']);
-    if(!pName && pSlogan == null && pLink == null) return false;
+    if(!pName && pSlogan == null && pLink == null){ applyWhoParams(); return false; }
 
     if(pName && pName !== curHospital){
       hospInput.value = pName;
@@ -2428,6 +2472,7 @@
     if(!$('result').hidden) refreshMessageIfOpen();
     renderLinkState();
     say('링크로 병원 세팅을 불러왔어요');
+    applyWhoParams();
     /* 한 번 채웠으면 주소창의 파라미터는 지워, 다음에 고친 내용이 그대로 남게 */
     try{
       if(window.history && window.history.replaceState){
@@ -2456,5 +2501,6 @@
 
 })();
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

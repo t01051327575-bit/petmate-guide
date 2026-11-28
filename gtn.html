@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GTN 진료 코멘트 → 3종 카톡 + 권장 사료·처방제 Best 1·2·3 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GTN — 원장님 결과 코멘트를 붙여넣으면 소견을 자동으로 읽어, 결과 코멘트·검사 해설·급여 안내 3종 카톡과 그 아이에게 맞는 사료·처방제 Best 1·2·3, 재구매 링크까지 한 화면에서 만듭니다.">
+<meta name="theme-color" content="#eaf6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="굿모닝펫동물병원">
+<meta property="og:title" content="GTN · 진료 코멘트 하나로 3종 카톡 + 권장 Best 1·2·3">
+<meta property="og:description" content="원장님 코멘트를 붙여넣으면 소견 자동 감지 → 이 아이에게 맞는 사료·처방제 Best 1·2·3 → 결과 코멘트·검사 해설·급여 안내 + 재구매 링크까지 400자로.">
+<meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gtn.html">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GTN · 진료 코멘트 → 3종 카톡 + 권장 Best 1·2·3">
+<meta name="twitter:description" content="코멘트 하나로 결과 코멘트·검사 해설·급여 안내 3종과 이 아이에게 맞는 사료·처방제 Best 1·2·3.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
+<link rel="stylesheet" href="assets/g-common.css?v=20261128a">
+<style>
+.gtnw{max-width:860px}
+/* ---------- 흐름 안내 ---------- */
+.flow{display:grid;grid-template-columns:1fr;gap:7px;margin:2px 0 0}
+.flow .fx{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;padding:9px 11px;background:var(--bg)}
+.flow .fx b{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.flow .fx span{font-size:12.5px;line-height:1.55;color:var(--ink-soft)}
+.flow .fx span em{font-style:normal;font-weight:800;color:var(--brand-d)}
+@media (min-width:720px){.flow{grid-template-columns:1fr 1fr 1fr}}
+
+/* ---------- 코멘트 입력 ---------- */
+#comment{width:100%;min-height:150px;font-family:inherit;font-size:14px;line-height:1.7;color:var(--ink);
+  background:#fffdf6;border:1px solid #f0e6c8;border-radius:14px;padding:12px 13px;resize:vertical}
+#comment:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(47,134,181,.12)}
+.detect{margin-top:9px;border:1px dashed var(--badge-line);background:var(--soft);border-radius:13px;padding:10px 11px}
+.detect .dh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:900;color:var(--brand-d);letter-spacing:.02em}
+.detect .dh .mini{min-height:34px;font-size:11.5px;padding:0 10px}
+.detect .dtxt{font-size:12px;color:var(--ink-soft);margin:5px 0 0;line-height:1.5}
+
+/* 소견 칩 */
+.tagchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.tg{appearance:none;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;
+  font-size:12.5px;font-weight:800;color:var(--ink-soft);background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:8px 11px;min-height:38px}
+.tg[aria-pressed="true"]{background:var(--soft);border-color:var(--brand);color:var(--brand-d);box-shadow:inset 0 0 0 1px var(--badge-line)}
+.tg .em{font-size:13px}
+
+/* ---------- 추천 ---------- */
+.recnote{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin:2px 0 0}
+.recnote b{color:var(--ink-soft)}
+.picklist{display:grid;gap:9px;margin-top:10px}
+.pk{border:1px solid var(--line);border-radius:16px;background:#fff;padding:11px 12px 12px;transition:border-color .15s,opacity .15s}
+.pk.off{opacity:.55;background:var(--bg)}
+.pk.on{border-color:var(--brand);box-shadow:0 3px 14px rgba(47,134,181,.11)}
+.pk-top{display:flex;align-items:flex-start;gap:9px}
+.pk-rank{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,var(--soft),var(--soft2));
+  border:1px solid var(--badge-line);color:var(--brand-d);font-size:11.5px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1}
+.pk-name{min-width:0;flex:1 1 auto}
+.pk-name b{display:block;font-size:14px;color:var(--ink);line-height:1.35;word-break:keep-all}
+.pk-meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pill-t{font-size:10.5px;font-weight:900;border-radius:6px;padding:2px 6px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.pill-t.food{background:#fff6e6;border-color:#f0dfb8;color:#8a631f}
+.pill-t.care{background:#eef8f4;border-color:#c9e8dd;color:#0d7462}
+.pill-t.hosp{background:#fdeef1;border-color:#f3ccd6;color:#a84057}
+.pk-why{margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-soft)}
+.pk-why b{color:var(--brand-d);font-weight:900}
+.pk-on{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:12.5px;font-weight:800;color:var(--ink-soft);cursor:pointer;user-select:none}
+.pk-on input{width:18px;height:18px;accent-color:var(--brand);margin:0}
+.pk-swap{margin-top:8px;display:flex;align-items:center;gap:7px}
+.pk-swap label{font-size:11px;font-weight:800;color:var(--muted);flex:0 0 auto}
+.pk-swap select{flex:1 1 auto;min-width:0;font-family:inherit;font-size:12px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 8px;min-height:38px}
+.pkmatch{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:900;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:2px 7px}
+.emptyrec{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;font-size:12.5px;color:var(--muted);line-height:1.6;background:var(--bg)}
+
+/* ---------- 결과 3종 ---------- */
+.outcard{position:relative}
+.stepbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.step{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:900;letter-spacing:.04em;color:#fff;background:var(--brand);border-radius:999px;padding:4px 10px}
+.step.s2{background:#0f9d8f}
+.step.s3{background:#8a631f}
+.stepbar .st{font-size:11.5px;color:var(--muted);font-weight:800}
+.outcard .msg{min-height:150px;font-size:13px}
+.bigcopy{min-height:52px;font-size:16px;font-weight:900}
+.linkrow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0 0;font-size:11.5px;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:7px 9px}
+.linkrow code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--ink-soft);word-break:break-all;flex:1 1 150px;min-width:0;max-height:34px;overflow:hidden}
+.linkrow .mini{min-height:34px;font-size:11.5px}
+.stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:none;gap:7px}
+.stickybar .btn{flex:1 1 0;min-height:48px;font-size:13.5px;padding:0 8px}
+.stickybar.show{display:flex}
+body.hasbar{padding-bottom:76px}
+.rv{font-size:11.5px;color:var(--muted);margin-top:6px}
+</style>
+</head>
+<body data-code="GTN">
+<div id="g-top"></div>
+
+<div class="wrap gtnw">
+  <header class="page-hero">
+    <div class="hero-top">
+      <span class="code-chip">GTN</span>
+      <span class="eng-chip">T · Talk</span>
+    </div>
+    <h1>진료 코멘트 → 3종 카톡</h1>
+    <p>원장님 결과 코멘트를 <b>그대로 붙여넣으면</b>, 소견을 읽고 <b>그 아이에게 맞는 사료·처방제 Best 1·2·3</b>을 골라 드립니다. 결과 코멘트 · 검사 해설 · 급여 안내를 한 화면에서 400자로 만들어 바로 복사합니다.</p>
+    <div class="marks"><span>코멘트 붙여넣기</span><span>소견 자동 감지</span><span>Best 1·2·3</span><span>재구매 링크</span></div>
+  </header>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">≡</span><h2>직원이 하는 일은 세 번뿐<small>붙여넣기 → 추천 확인 → 두 번 복사</small></h2></div>
+    <div class="flow">
+      <div class="fx"><b>1</b><span><em>원장님 코멘트를 붙여넣기</em><br>검사 결과·소견 그대로 넣으면 됩니다.</span></div>
+      <div class="fx"><b>2</b><span><em>추천 Best 1·2·3 확인</em><br>이 아이에게 맞는 이유까지 함께 뜹니다. 안 맞으면 체크 해제·교체.</span></div>
+      <div class="fx"><b>3</b><span><em>① 결과 코멘트 복사 → ② 급여/재구매 복사</em><br>카톡에 그대로 붙여넣습니다.</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">1</span><h2>아이 정보<small>보호자·아이 이름은 문구 첫 줄에 들어갑니다</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 전희자" autocomplete="off"></div>
+      <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 까미" autocomplete="off"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>종</label><select id="species"><option value="개">강아지</option><option value="고양이">고양이</option></select></div>
+      <div class="field"><label>체중 (kg)</label><input id="weight" type="number" inputmode="decimal" step="0.1" min="0.2" placeholder="예: 4.8"></div>
+      <div class="field"><label>진료일</label><input id="date" type="date"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>다음 재검·예약일 <span class="hint">선택</span></label><input id="next" type="date"></div>
+      <div class="field"><label>재검 항목 <span class="hint">예: 면역</span></label><input id="nextItem" type="text" placeholder="예: 면역 수치" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">2</span><h2>원장님 결과 코멘트<small>그대로 붙여넣으면 소견을 자동으로 읽습니다</small></h2></div>
+    <textarea id="comment" spellcheck="false" placeholder="예)
+❤️ 까미 (전희자 님)
+1. 면역글로블린 검사(면역력을 대표하는 혈액 단백질 검사)
+면역글로블린 수치가 기준보다 낮게 나왔습니다. 장내 유익균의 안착되는 시간이 필요합니다.
+재검까지 급여관리와 함께 유익균 관리를 꾸준히 해 주세요."></textarea>
+    <div class="detect">
+      <div class="dh"><span>🔎 이 코멘트에서 잡은 소견</span><button class="mini" id="redetect" type="button">다시 읽기</button></div>
+      <p class="dtxt" id="detectText">코멘트를 붙여넣으면 여기에 소견이 뜹니다. 자동으로 잡히지 않으면 아래에서 직접 골라 주세요.</p>
+      <div class="tagchips" id="tagChips" role="group" aria-label="소견 선택"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label>급여·관리 핵심 한 줄 <span class="hint">비우면 소견에 맞춰 자동</span></label>
+      <input id="care" type="text" placeholder="예: 유익균 안착 위한 관리 꾸준히" autocomplete="off"></div>
+    <div class="grid2">
+      <div class="field"><label>처방·주의 <span class="hint">선택</span></label><input id="rx" type="text" placeholder="예: 처방식 유지, 간식 금지" autocomplete="off"></div>
+      <div class="field"><label>검사명 <span class="hint">검사 해설용</span></label><input id="exam" type="text" placeholder="예: 면역글로블린(IgG)" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <section class="card" id="recCard">
+    <div class="sec-head"><span class="num">3</span><h2>이 아이에게 맞는 사료·처방제 Best 1·2·3<small>판매량이 아니라 ‘이 아이에게 왜 맞는지’로 고릅니다</small></h2></div>
+    <div class="recnote" id="recNote">코멘트를 넣으면 추천이 뜹니다 · <b>병원 실제 판매 품목</b> 기준</div>
+    <div class="picklist" id="pickList"></div>
+    <p class="note">이미 급여 중이거나 아이에게 안 맞으면 <b>체크를 풀고</b>, 아래 칸에서 <b>다른 후보로 교체</b>하세요. 최종 선택은 원장님 판단이 우선입니다.</p>
+  </section>
+
+  <section class="card outcard">
+    <span class="stepbar"><span class="step">STEP 1</span><span class="st">먼저 이것만 보내면 됩니다</span></span>
+    <div class="sec-head"><span class="num">4</span><h2>결과 코멘트 (GTN)<small>원장님 코멘트 그대로 · 400자 이내</small></h2></div>
+    <textarea class="msg" id="msg1" spellcheck="false"></textarea>
+    <div class="msg-foot"><div class="count"><b id="cnt1">0</b> / 400자</div><span class="note" id="note1"></span></div>
+    <div class="btns">
+      <button class="btn primary bigcopy" id="copy1" type="button">📋 결과 코멘트 복사</button>
+      <button class="btn ghost" id="share1" type="button">카톡으로 공유</button>
+    </div>
+  </section>
+
+  <section class="card outcard">
+    <span class="stepbar"><span class="step s2">STEP 2</span><span class="st">이어서 급여·재구매 안내</span></span>
+    <div class="sec-head"><span class="num">5</span><h2>급여/관리안내 + Best 1·2·3 (GSN)<small>권장 이유 + 바로 재구매·주문 링크 · 400자 이내</small></h2></div>
+    <textarea class="msg" id="msg2" spellcheck="false"></textarea>
+    <div class="msg-foot"><div class="count"><b id="cnt2">0</b> / 400자</div><span class="note" id="note2"></span></div>
+    <div class="linkrow" id="linkRow">
+      <span>🛒 재구매·주문 링크</span>
+      <code id="linkText">—</code>
+      <button class="mini" id="linkCopy" type="button">링크 복사</button>
+      <button class="mini" id="linkOpen" type="button">미리보기</button>
+      <button class="mini" id="linkShort" type="button">짧게</button>
+    </div>
+    <div class="btns">
+      <button class="btn primary bigcopy" id="copy2" type="button">📋 급여·재구매 안내 복사</button>
+      <button class="btn ghost" id="share2" type="button">카톡으로 공유</button>
+    </div>
+  </section>
+
+  <section class="card outcard">
+    <span class="stepbar"><span class="step s3">보조</span><span class="st">검사·혹 결과를 설명해 드릴 때</span></span>
+    <div class="sec-head"><span class="num">6</span><h2>검사·혹 해설 안내 (GDN)<small>수치를 보호자 언어로 · 400자 이내</small></h2></div>
+    <textarea class="msg" id="msg3" spellcheck="false"></textarea>
+    <div class="msg-foot"><div class="count"><b id="cnt3">0</b> / 400자</div><span class="note" id="note3"></span></div>
+    <div class="btns">
+      <button class="btn primary bigcopy" id="copy3" type="button">📋 검사 해설 복사</button>
+      <button class="btn ghost" id="share3" type="button">카톡으로 공유</button>
+    </div>
+  </section>
+
+  <section class="card flat">
+    <div class="sec-head"><span class="num">✓</span><h2>보내기 전 규격<small>카톡이 접히지 않는 기준</small></h2></div>
+    <ul class="clean">
+      <li><b>400자 이내</b> — 넘으면 카톡에서 접혀 보입니다. 칸 아래 숫자를 보세요.</li>
+      <li><b>문단 사이는 빈 줄</b> — 붙여 쓰면 한 덩어리로 보여 읽지 않습니다.</li>
+      <li><b>앞뒤 큰따옴표 없이</b> — 복사 버튼을 쓰면 자동으로 빠집니다.</li>
+      <li>링크는 <b>짧게</b> 버튼으로 줄여 넣습니다(긴 주소는 400자를 잡아먹습니다).</li>
+    </ul>
+    <div class="callout"><b>그물망 연결:</b> 결과 코멘트는 <b>GTN</b>, 검사 해설은 <b>GDN</b>, 급여·재구매는 <b>GSN</b>(재구매 수첩)으로 이어집니다. 재구매 수첩에는 아이의 이전 구매이력이 함께 보여, 보호자가 필요한 것만 체크해 주문합니다.</div>
+  </section>
+
+  <nav class="webnav" aria-label="그물망 이웃 칸">
+    <a class="prev" href="gkn.html"><span class="k">◀ 이전 칸 · GKN</span><span class="v">처방·복약</span></a>
+    <a class="next" href="gun.html"><span class="k">다음 칸 · GUN ▶</span><span class="v">응급 대처</span></a>
+  </nav>
+
+  <div class="philo">
+    <div class="q">굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템</div>
+    <div class="d">한 칸이 비면 그물이 풀립니다. 26칸이 서로를 연결해, 직원은 손이 덜 가고 보호자는 궁금증이 풀리고 병원은 자연스럽게 다시 찾게 됩니다.</div>
+    <div class="three"><span>직원도 편하고</span><span>보호자도 편하고</span><span>병원에도 좋은</span></div>
+  </div>
+
+  <div id="g-footer"></div>
+</div>
+
+<div class="stickybar" id="stickybar">
+  <button class="btn primary" id="barCopy1" type="button">① 결과 코멘트</button>
+  <button class="btn solid" id="barCopy2" type="button">② 급여·재구매</button>
+</div>
+
+<script src="assets/g-products.js?v=20261128a"></script>
+<script src="assets/g-common.js?v=20261128a"></script>
+<script>
+
+(function () {
+  'use strict';
+  var $ = G.q, LIMIT = 400;
+  var P = (typeof G_PRODUCTS !== 'undefined') ? G_PRODUCTS : null;
+
+  /* ---------- 상태 ---------- */
+  var state = {
+    tags: [],          /* 선택된 소견 id (앞이 우선) */
+    slots: [],         /* [{id, why, tags:[], on:true}] */
+    touched: false,    /* 직원이 손댔는지 (자동 재계산 방지) */
+    shortOrder: '',    /* is.gd 짧은 링크 */
+    shortFor: ''       /* 어떤 긴 링크를 줄였는지 */
+  };
+
+  /* ---------- 값 읽기 ---------- */
+  function val(id) { var el = $('#' + id); return el ? String(el.value || '').trim() : ''; }
+  function isoToday() { return G.today(); }
+  function ymd(dateStr) {
+    if (!dateStr) return '';
+    var p = String(dateStr).split('-');
+    if (p.length !== 3) return dateStr;
+    return (+p[0]) + '. ' + (+p[1]) + '. ' + (+p[2]) + '.';
+  }
+  function shortDate(dateStr) {
+    if (!dateStr) return '';
+    var p = String(dateStr).split('-');
+    if (p.length !== 3) return dateStr;
+    return (+p[1]) + '/' + (+p[2]);
+  }
+  function hosp() { var s = G.settings(); return s.hospital || '굿모닝펫동물병원'; }
+  function phone() { var s = G.settings(); return s.phone || ''; }
+  function kakao() { var s = G.settings(); return s.kakao || ''; }
+  function petName() { return val('pet') || '우리 아이'; }
+  function guardianName() { return val('guardian') || '보호자'; }
+
+  /* ---------- 소견 칩 ---------- */
+  function buildChips() {
+    var host = $('#tagChips');
+    if (!host || !P) return;
+    host.innerHTML = P.TAGS.map(function (t) {
+      return '<button class="tg" type="button" data-tag="' + t.id + '" aria-pressed="false">' +
+        '<span class="em">' + t.em + '</span>' + G.esc(t.short) + '</button>';
+    }).join('');
+    host.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.tg') : null;
+      if (!b) return;
+      toggleTag(b.getAttribute('data-tag'));
+      state.touched = true;
+      render(true);
+    });
+    paintChips();
+  }
+  function paintChips() {
+    G.qa('.tg').forEach(function (b) {
+      b.setAttribute('aria-pressed', state.tags.indexOf(b.getAttribute('data-tag')) >= 0 ? 'true' : 'false');
+    });
+  }
+  function toggleTag(id) {
+    var i = state.tags.indexOf(id);
+    if (i >= 0) state.tags.splice(i, 1);
+    else { if (state.tags.length >= 4) state.tags.pop(); state.tags.unshift(id); }
+    paintChips();
+  }
+
+  /* ---------- 추천 계산 ---------- */
+  /* 소견이 여러 개면: 앞 소견일수록 무게 3,2,1 · 각 소견의 1순위가 더 강함.
+     같은 제품이 두 소견에 걸리면 가중치를 합산해 복합 소견에서 먼저 올라온다. */
+  function computeSlots() {
+    if (!P) return [];
+    var tags = state.tags.slice();
+    if (!tags.length) return [];
+    var score = {}, whyOf = {}, tagsOf = {}, order = {};
+    var seq = 0;
+    tags.forEach(function (tid, ti) {
+      var w = Math.max(1, 3 - ti);
+      for (var r = 0; r < 3; r++) {
+        var p = P.pick(tid, r);
+        if (!p) continue;
+        var s = w * (4 - r);
+        score[p.id] = (score[p.id] || 0) + s;
+        if (!whyOf[p.id] || s > whyOf[p.id].s) whyOf[p.id] = { s: s, why: p.why, tag: tid };
+        tagsOf[p.id] = tagsOf[p.id] || [];
+        if (tagsOf[p.id].indexOf(tid) < 0) tagsOf[p.id].push(tid);
+        if (order[p.id] == null) order[p.id] = seq++;
+      }
+    });
+    var ids = Object.keys(score).sort(function (a, b) {
+      return score[b] - score[a] || order[a] - order[b];
+    }).slice(0, 3);
+    return ids.map(function (id) {
+      var d = P.byId(id);
+      return {
+        id: id, name: d ? d.n : id, type: d ? d.t : '',
+        why: whyOf[id].why, tags: tagsOf[id] || [], on: true
+      };
+    });
+  }
+
+  function typeClass(t) {
+    if (t === '처방식' || t === '사료') return 'food';
+    if (t === '병원') return 'hosp';
+    if (t === '간식' || t === '처방제') return 'care';
+    return '';
+  }
+
+  function tagName(id) { var t = P.tag(id); return t ? t.short : id; }
+
+  /* 교체 후보: 선택된 소견들의 1~3순위 + 대체 후보 전부 */
+  function candidates() {
+    var seen = {}, out = [];
+    state.tags.forEach(function (tid) {
+      for (var r = 0; r < 3; r++) {
+        var p = P.pick(tid, r);
+        if (p && !seen[p.id]) { seen[p.id] = 1; out.push(p); }
+      }
+      P.alt(tid).forEach(function (a) {
+        if (!seen[a.id]) { seen[a.id] = 1; out.push({ id: a.id, name: a.name, type: a.type, why: '' }); }
+      });
+    });
+    return out;
+  }
+
+  function renderPicks() {
+    var host = $('#pickList');
+    if (!host || !P) return;
+    var list = state.slots;
+    if (!list.length) {
+      host.innerHTML = '<div class="emptyrec">코멘트를 붙여넣거나 위에서 <b>소견을 직접 골라 주세요</b>.<br>그 소견에 맞는 사료·처방제 Best 1·2·3이 여기에 뜹니다.</div>';
+      return;
+    }
+    var cands = candidates();
+    host.innerHTML = list.map(function (s, i) {
+      var opts = cands.filter(function (c) { return c.id !== s.id; });
+      if (opts.length < 1) opts = [];
+      var sel = '<option value="">다른 후보로 교체…</option>' + opts.map(function (c) {
+        return '<option value="' + G.esc(c.id) + '">' + G.esc(c.name) + (c.type ? ' · ' + G.esc(c.type) : '') + '</option>';
+      }).join('');
+      var matchTags = s.tags.map(function (t) { return '<span class="pkmatch">' + G.esc(tagName(t)) + '</span>'; }).join('');
+      return '<div class="pk ' + (s.on ? 'on' : 'off') + '" data-idx="' + i + '">' +
+        '<div class="pk-top">' +
+          '<span class="pk-rank">' + (s.on ? 'Best ' + (rankOf(i) + 1) : '제외') + '</span>' +
+          '<span class="pk-name"><b>' + G.esc(s.name) + '</b>' +
+            '<span class="pk-meta">' + (s.type ? '<span class="pill-t ' + typeClass(s.type) + '">' + G.esc(s.type) + '</span>' : '') + matchTags + '</span>' +
+          '</span>' +
+        '</div>' +
+        (s.why ? '<p class="pk-why"><b>왜 맞나</b> · ' + G.esc(s.why) + '</p>' : '') +
+        '<label class="pk-on"><input type="checkbox" data-act="toggle" ' + (s.on ? 'checked' : '') + '> 이 아이에게 포함</label>' +
+        '<div class="pk-swap"><label>교체</label><select data-act="swap">' + sel + '</select></div>' +
+      '</div>';
+    }).join('');
+  }
+  function rankOf(i) {
+    var n = 0;
+    for (var k = 0; k < i; k++) if (state.slots[k].on) n++;
+    return n;
+  }
+
+  /* ---------- 결과 문구 ---------- */
+  /* 코멘트 원문을 400자에 맞춰 자른다. 문단(빈 줄)은 유지. */
+  function cleanBlock(s) {
+    return String(s || '')
+      .replace(/^[\s"'“”‘’]+/, '').replace(/[\s"'“”‘’]+$/, '')
+      .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n')
+      .replace(/["“”]/g, '');
+  }
+
+  function pickLines() {
+    var picked = state.slots.filter(function (s) { return s.on; });
+    return picked.map(function (s, i) {
+      return (i + 1) + '. ' + s.name + (s.why ? ' — ' + s.why : '');
+    });
+  }
+
+  function careLine() {
+    var typed = val('care');
+    if (typed) return typed;
+    if (!state.tags.length || !P) return '';
+    var t = P.tag(state.tags[0]);
+    return t ? t.care : '';
+  }
+
+  function nextLine() {
+    var d = val('next'), it = val('nextItem');
+    if (!d && !it) return '';
+    var left = d ? G.dday(d) : '';
+    var when = d ? (shortDate(d) + (left ? ' (' + left + ')' : '')) : '';
+    return (when + (it ? ' · ' + it : '')).replace(/^ · /, '');
+  }
+
+  function tail() {
+    var p = phone();
+    return (p ? '문의 ' + p + '\n' : '') + '- ' + hosp();
+  }
+
+  /* STEP 1 — 결과 코멘트 */
+  function buildGtn() {
+    var c = cleanBlock($('#comment').value);
+    var head = '❤️ ' + petName() + ' (' + guardianName() + ' 님)';
+    var extra = [];
+    var rx = val('rx');
+    if (rx) extra.push('●처방·주의 : ' + rx);
+    var nl = nextLine();
+    if (nl) extra.push('●다음 : ' + nl);
+    var foot = tail();
+    if (!c) {
+      return head + '\n\n원장님 결과 코멘트를 위에 붙여넣으면 이 칸이 완성됩니다.\n\n' + foot;
+    }
+    var mid = extra.length ? '\n\n' + extra.join('\n') : '';
+    var text = head + '\n\n' + c + mid + '\n\n' + foot;
+    if (G.count(text) <= LIMIT) return text;
+    /* 넘치면 코멘트 본문만 줄인다 (머리·꼬리는 유지) */
+    var room = LIMIT - G.count(head) - G.count(mid) - G.count(foot) - 4;
+    return head + '\n\n' + cutSentences(c, room) + mid + '\n\n' + foot;
+  }
+
+  function cutSentences(s, room) {
+    if (room <= 0) return '';
+    var arr = Array.from(s);
+    if (arr.length <= room) return s;
+    /* 문장 단위로 자르고, 마지막에 … */
+    var out = '', cur = '';
+    for (var i = 0; i < arr.length; i++) {
+      cur += arr[i];
+      if (/[.!?。\n]/.test(arr[i])) {
+        if (Array.from(out + cur).length > room - 1) break;
+        out += cur; cur = '';
+      }
+    }
+    if (!out) out = arr.slice(0, room - 1).join('');
+    return (out.trim() + '…');
+  }
+
+  /* STEP 2 — 급여/관리안내 + Best 1·2·3 + 재구매 링크 */
+  function buildGsn(compact) {
+    var lines = ['❤️' + petName() + ' 급여/관리안내'];
+    var nl = nextLine();
+    var it = val('nextItem');
+    if (nl) lines.push('●' + nl + (it && nl.indexOf(it) < 0 ? ' : ' + it : ''));
+    var care = careLine();
+    if (care) lines.push('●급여관리 : ' + care);
+
+    var picked = state.slots.filter(function (s) { return s.on; });
+    if (picked.length) {
+      lines.push('');
+      lines.push('●권장 사료·처방제 Best 1·2·3');
+      picked.forEach(function (s, i) {
+        var why = s.why || '';
+        if (compact) why = shortWhy(why);
+        lines.push((i + 1) + '. ' + s.name + (why ? ' — ' + why : ''));
+      });
+    }
+    var link = orderLink();
+    var short = state.shortOrder && state.shortFor === link ? state.shortOrder : '';
+    var tailUrl = short || link || rebuyLink();
+    lines.push('');
+    lines.push('🛒 바로 재구매·주문');
+    lines.push(tailUrl);
+    var text = lines.join('\n');
+    if (G.count(text) <= LIMIT) return text;
+
+    /* 1차: 이유를 짧게 */
+    text = buildGsn(true);
+    if (G.count(text) <= LIMIT) return text;
+
+    /* 2차: 링크를 페이지 주소로 */
+    var t2 = lines.slice(0, lines.length - 1).join('\n') + '\n' + pageRebuy();
+    if (G.count(t2) <= LIMIT) return t2;
+
+    /* 3차: 급여관리·재검 줄 줄이기 */
+    var minimal = ['❤️' + petName() + ' 급여/관리안내'];
+    if (care) minimal.push('●급여관리 : ' + care);
+    if (picked.length) {
+      minimal.push('');
+      picked.forEach(function (s, i) {
+        minimal.push((i + 1) + '. ' + s.name);
+      });
+    }
+    minimal.push('');
+    minimal.push('🛒 재구매·주문');
+    minimal.push(pageRebuy());
+    return minimal.join('\n');
+  }
+  function shortWhy(w) {
+    var s = String(w || '');
+    var core = s.split(/[—·,]/)[0].trim();
+    return core.length > 18 ? core.slice(0, 17) + '…' : core;
+  }
+
+  /* STEP 3 — 검사·혹 해설 */
+  function buildGdn() {
+    var c = cleanBlock($('#comment').value);
+    var head = '🔎 ' + petName() + ' 검사 결과 안내 (' + guardianName() + ' 님)';
+    var exam = val('exam') || (state.tags.length && P ? P.tag(state.tags[0]).ko : '검사 결과');
+    var foot = tail();
+    var body = [];
+    body.push('●검사 : ' + exam);
+    var t = state.tags.length && P ? P.tag(state.tags[0]) : null;
+    if (t) body.push('●쉽게 말하면 : ' + t.explain);
+    if (c) {
+      var brief = firstSentences(c, 150);
+      if (brief) body.push('●결과 : ' + brief);
+    }
+    var care = careLine();
+    if (care) body.push('●집에서 할 일 : ' + care);
+    var nl = nextLine();
+    if (nl) body.push('●다음 : ' + nl);
+    var text = head + '\n\n' + body.join('\n') + '\n\n' + foot;
+    if (G.count(text) <= LIMIT) return text;
+    var room = LIMIT - G.count(head) - G.count(foot) - 4 - G.count(body.join('\n'));
+    if (room < 0) {
+      body = body.filter(function (b) { return b.indexOf('●결과 :') !== 0; });
+      text = head + '\n\n' + body.join('\n') + '\n\n' + foot;
+    }
+    return G.count(text) <= LIMIT ? text : G.cut(text, LIMIT);
+  }
+  function firstSentences(s, max) {
+    var arr = Array.from(s);
+    if (arr.length <= max) return s.replace(/\n+/g, ' ');
+    var out = '', cur = '';
+    for (var i = 0; i < arr.length; i++) {
+      cur += arr[i];
+      if (/[.!?。\n]/.test(arr[i])) {
+        if (Array.from(out + cur).length > max) break;
+        out += cur; cur = '';
+      }
+    }
+    if (!out) out = arr.slice(0, max).join('');
+    return out.replace(/\s+/g, ' ').trim();
+  }
+
+  /* ---------- 링크 ---------- */
+  function todayCode() { return daysCode(isoToday()); }
+  function daysCode(iso) {
+    var p = String(iso || '').split('-');
+    if (p.length !== 3) return '';
+    var d = Date.UTC(+p[0], (+p[1]) - 1, +p[2]);
+    var n = Math.round((d - Date.UTC(2000, 0, 1)) / 86400000);
+    return n.toString(36);
+  }
+
+  /* order.html 과 같은 비트패킹 (7bit ASCII / 14bit 한글) */
+  function packStr(s) {
+    var bits = [];
+    var arr = Array.from(String(s || ''));
+    for (var i = 0; i < arr.length; i++) {
+      var code = arr[i].codePointAt(0);
+      if (code < 128) {
+        bits.push(0);
+        for (var b = 6; b >= 0; b--) bits.push((code >> b) & 1);
+      } else if (code >= 0xAC00 && code <= 0xAC00 + 0x3FFF) {
+        var v = code - 0xAC00;
+        bits.push(1);
+        for (var c = 13; c >= 0; c--) bits.push((v >> c) & 1);
+      } else {
+        /* 그 밖의 문자는 '?' 처리 */
+        bits.push(0);
+        var q = 63;
+        for (var e = 6; e >= 0; e--) bits.push((q >> e) & 1);
+      }
+    }
+    while (bits.length % 8) bits.push(0);
+    var bytes = [];
+    for (var k = 0; k < bits.length; k += 8) {
+      var byte = 0;
+      for (var m = 0; m < 8; m++) byte = (byte << 1) | bits[k + m];
+      bytes.push(byte);
+    }
+    return bytes;
+  }
+  function b64url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    var s = (typeof btoa === 'function') ? btoa(bin) : '';
+    return s.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function catOf(name) {
+    var s = String(name || '');
+    if (/사료|처방식|화식|습관|습식|건식|키블|파우치|캔|스튜|알러컷/.test(s)) return '7';
+    if (/유산균|프로바이오|엠바이옴|락토|신바이오|FMT/i.test(s)) return '4';
+    if (/영양제|비타민|오메가|관절|콘드로|글루코|칼슘|보조제/.test(s)) return '5';
+    if (/안약|눈|인공누액/.test(s)) return '2';
+    if (/치약|덴탈|구강|치아|오랄/.test(s)) return '3';
+    if (/예방|사상충|구충|넥스가드|브라벡토/.test(s)) return '1';
+    return '8';
+  }
+  function orderLink() {
+    var picked = state.slots.filter(function (s) { return s.on; });
+    if (!picked.length) return '';
+    var items = picked.map(function (s) {
+      return s.name.replace(/,/g, ' ') + ',' + todayCode() + ',1,' + catOf(s.name);
+    }).join(';');
+    var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '|' +
+      (G.settings().slogan || '') + '|' + kakao() + '||' + items;
+    return G.baseUrl().replace(/[^/]*$/, '') + 'order.html?r=1&d=' + b64url(packStr(d));
+  }
+  function rebuyLink() {
+    var sp = new URLSearchParams();
+    sp.set('hospital', hosp());
+    if (G.settings().slogan) sp.set('slogan', G.settings().slogan);
+    if (kakao()) sp.set('link', kakao());
+    if (val('guardian')) sp.set('guardian', val('guardian'));
+    if (val('pet')) sp.set('pet', val('pet'));
+    var picked = state.slots.filter(function (s) { return s.on; });
+    if (picked.length) sp.set('items', picked.map(function (s) { return s.name; }).join(';'));
+    return G.baseUrl().replace(/[^/]*$/, '') + 'rebuy.html?' + sp.toString();
+  }
+  function pageRebuy() { return G.baseUrl().replace(/[^/]*$/, '') + 'rebuy.html'; }
+
+  /* ---------- 그리기 ---------- */
+  var kits = {};
+  function refreshAll(force) {
+    var t1 = buildGtn(), t2 = buildGsn(false), t3 = buildGdn();
+    if (kits.m1) kits.m1.refresh(force); else $('#msg1').value = t1;
+    if (kits.m2) kits.m2.refresh(force); else $('#msg2').value = t2;
+    if (kits.m3) kits.m3.refresh(force); else $('#msg3').value = t3;
+    var l = orderLink() || rebuyLink();
+    $('#linkText').textContent = l || '—';
+    $('#linkText').setAttribute('data-url', l);
+    paintNotes(t1, t2, t3);
+  }
+  function paintNotes(t1, t2, t3) {
+    $('#note1').textContent = G.count(t1) > LIMIT ? '400자를 넘어 뒤가 잘렸습니다 — 처방·주의를 줄여 주세요' : '';
+    $('#note2').textContent = state.shortOrder && state.shortFor === orderLink() ? '짧은 링크로 넣었습니다' : (G.count(t2) > LIMIT ? '400자 초과' : '');
+    $('#note3').textContent = '';
+  }
+
+  function render(rebuildSlots) {
+    if (rebuildSlots) {
+      state.slots = computeSlots();
+      state.touched = false;
+      state.shortOrder = ''; state.shortFor = '';
+    }
+    renderPicks();
+    refreshAll();
+    scheduleShort();
+    paintRecNote();
+  }
+  function paintRecNote() {
+    if (!state.tags.length) {
+      $('#recNote').innerHTML = '코멘트를 넣으면 추천이 뜹니다 · <b>병원 실제 판매 품목</b> 기준';
+      return;
+    }
+    var names = state.tags.map(function (t) { return tagName(t); });
+    $('#recNote').innerHTML = '감지·선택된 소견 <b>' + G.esc(names.join(' + ')) + '</b> · 병원 실제 판매 품목에서 이 아이 기준으로 고름';
+  }
+
+  /* ---------- 짧은 링크 ---------- */
+  var shortTimer = null;
+  function scheduleShort() {
+    var link = orderLink();
+    if (!link) return;
+    if (state.shortFor === link && state.shortOrder) return;
+    clearTimeout(shortTimer);
+    shortTimer = setTimeout(function () {
+      G.shorten(link, function (err, url) {
+        if (err || !url) return;
+        state.shortOrder = url;
+        state.shortFor = link;
+        refreshAll(true);
+      });
+    }, 1100);
+  }
+
+  /* ---------- 입력 연결 ---------- */
+  function detectNow() {
+    if (!P) return;
+    var text = $('#comment').value + ' ' + val('rx') + ' ' + val('exam');
+    var found = P.detect(text, 3);
+    if (!found.length) {
+      $('#detectText').textContent = '코멘트에서 소견 낱말을 찾지 못했습니다. 아래에서 직접 골라 주세요.';
+      if (!state.tags.length) render(false);
+      return;
+    }
+    state.tags = found;
+    paintChips();
+    $('#detectText').innerHTML = '소견 <b>' + G.esc(found.map(function (f) { return tagName(f); }).join(' · ')) +
+      '</b> — 아래 추천이 이 소견에 맞춰 바뀌었습니다.';
+    $('#care').placeholder = P.tag(found[0]) ? '예: ' + P.tag(found[0]).care : '예: 유익균 안착 위한 관리 꾸준히';
+    render(true);
+  }
+
+  function initFields() {
+    $('#date').value = isoToday();
+    ['guardian', 'pet', 'species', 'weight', 'date', 'next', 'nextItem', 'care', 'rx', 'exam']
+      .forEach(function (id) { $('#' + id).addEventListener('input', onMeta); $('#' + id).addEventListener('change', onMeta); });
+    var ct = null;
+    $('#comment').addEventListener('input', function () {
+      clearTimeout(ct);
+      ct = setTimeout(detectNow, 320);
+      refreshAll();
+    });
+    $('#redetect').addEventListener('click', function () { detectNow(); G.toast('코멘트를 다시 읽었습니다'); });
+  }
+  function onMeta() {
+    refreshAll();
+    scheduleShort();
+  }
+
+  /* 추천 카드 조작 */
+  function bindPicks() {
+    $('#pickList').addEventListener('change', function (e) {
+      var el = e.target, box = el.closest ? el.closest('.pk') : null;
+      if (!box) return;
+      var i = parseInt(box.getAttribute('data-idx'), 10);
+      if (isNaN(i) || !state.slots[i]) return;
+      if (el.getAttribute('data-act') === 'toggle') {
+        state.slots[i].on = !!el.checked;
+      } else if (el.getAttribute('data-act') === 'swap' && el.value) {
+        var d = P.byId(el.value);
+        if (!d) return;
+        var old = state.slots[i];
+        state.slots[i] = { id: el.value, name: d.n, type: d.t, why: whyFor(el.value, old.tags), tags: old.tags, on: true };
+        G.toast('다른 후보로 교체했습니다');
+      }
+      state.touched = true;
+      renderPicks();
+      refreshAll(true);
+      scheduleShort();
+    });
+  }
+  function whyFor(pid, tags) {
+    if (!P) return '';
+    var found = '';
+    (tags || state.tags).forEach(function (tid) {
+      var t = P.tag(tid);
+      if (!t) return;
+      t.pick.forEach(function (p) { if (!found && p.id === pid) found = p.why; });
+      if (!found) {
+        var a = P.alt(tid);
+        a.forEach(function (x) { if (!found && x.id === pid) found = x.name + ' — ' + t.ko + ' 관리에 함께 쓰는 품목'; });
+      }
+    });
+    return found || '';
+  }
+
+  /* ---------- 복사·공유 ---------- */
+  function bindOut() {
+    function copyEl(sel, label) {
+      return function () {
+        var v = $(sel).value;
+        if (!v) { G.toast('먼저 위 내용을 채워 주세요'); return; }
+        var n = G.count(v);
+        G.copy(v).then(function (ok) {
+          if (ok) G.toast(n > LIMIT ? '복사했습니다 — 400자를 넘어 일부가 접힐 수 있습니다' : '복사했습니다 — 카톡에 그대로 붙여넣으세요');
+          else G.toast('복사가 막혔어요 — 문구를 길게 눌러 직접 복사해 주세요');
+        });
+      };
+    }
+    $('#copy1').addEventListener('click', copyEl('#msg1'));
+    $('#copy2').addEventListener('click', copyEl('#msg2'));
+    $('#copy3').addEventListener('click', copyEl('#msg3'));
+    $('#barCopy1').addEventListener('click', copyEl('#msg1'));
+    $('#barCopy2').addEventListener('click', copyEl('#msg2'));
+    $('#share1').addEventListener('click', function () { G.share($('#msg1').value); });
+    $('#share2').addEventListener('click', function () { G.share($('#msg2').value); });
+    $('#share3').addEventListener('click', function () { G.share($('#msg3').value); });
+
+    $('#linkCopy').addEventListener('click', function () {
+      var u = $('#linkText').getAttribute('data-url');
+      if (!u) { G.toast('추천을 먼저 골라 주세요'); return; }
+      G.copy(u).then(function (ok) { G.toast(ok ? '재구매·주문 링크를 복사했습니다' : '복사가 막혔어요'); });
+    });
+    $('#linkOpen').addEventListener('click', function () {
+      var u = $('#linkText').getAttribute('data-url');
+      if (!u) { G.toast('추천을 먼저 골라 주세요'); return; }
+      window.open(u, '_blank', 'noopener');
+    });
+    $('#linkShort').addEventListener('click', function () {
+      var l = orderLink();
+      if (!l) { G.toast('추천을 먼저 골라 주세요'); return; }
+      G.shorten(l, function (err, url) {
+        if (err) { G.toast('단축이 지연돼요 — 긴 링크 그대로도 열립니다'); return; }
+        state.shortOrder = url; state.shortFor = l;
+        refreshAll(true);
+        G.toast('짧은 링크로 바꿨어요: ' + url);
+      });
+    });
+    document.addEventListener('g-settings', function () { refreshAll(true); });
+  }
+
+  /* ---------- 주소 파라미터로 미리 채우기 ---------- */
+  function prefill() {
+    var sp;
+    try { sp = new URLSearchParams(window.location.search); } catch (e) { return; }
+    function set(id, key) {
+      var v = sp.get(key);
+      if (v) { var el = $('#' + id); if (el) el.value = v; }
+    }
+    set('guardian', 'guardian'); set('pet', 'pet'); set('species', 'species');
+    set('weight', 'weight'); set('date', 'date'); set('next', 'next');
+    set('nextItem', 'nextItem'); set('care', 'care'); set('rx', 'rx');
+    set('comment', 'note'); set('exam', 'exam');
+    var tagp = (sp.get('tag') || sp.get('tags') || '').split(/[,;|]/).filter(Boolean);
+    if (val('comment')) detectNow();
+    else if (tagp.length && P) {
+      state.tags = tagp.filter(function (t) { return !!P.tag(t); });
+      paintChips(); render(true);
+    }
+  }
+
+  /* ---------- 시작 ---------- */
+  function init() {
+    if (!P) {
+      $('#recNote').textContent = '추천 목록을 불러오지 못했습니다 — 새로고침해 주세요.';
+    }
+    buildChips();
+    bindPicks();
+    bindOut();
+    initFields();
+    prefill();
+    render(true);
+    if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+      document.body.classList.add('hasbar');
+      $('#stickybar').classList.add('show');
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+<script src="assets/pwa.js?v=20261128a"></script>
+</body>
+</html>

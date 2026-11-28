@@ -6,6 +6,12 @@
 <title>GYN 연간 백신 · 건강검진 플래너 | 굿모닝펫 A~Z 그물망 시리즈</title>
 <meta name="description" content="굿모닝펫 GYN — 생년월일과 마지막 접종일로 다음 백신·심장사상충·건강검진 시기를 계산해 연간 플랜과 보호자 안내를 만듭니다.">
 <meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
 <meta property="og:title" content="GYN · 연간 백신 · 건강검진 플래너 | 굿모닝펫 A~Z 그물망 시리즈">
@@ -196,8 +202,10 @@
     if (kit) kit.refresh();
   }
   refresh();
+  try { G.prefill(); } catch (e) {}
 })();
 
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

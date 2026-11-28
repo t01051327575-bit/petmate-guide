@@ -6,6 +6,12 @@
 <title>GCN 진료보드 | 굿모닝펫 A~Z 그물망 시리즈</title>
 <meta name="description" content="굿모닝펫 GCN — 진료보드로 오늘 예약·내원·미내원·검사 대기를 한눈에 보고, 원장님께 드릴 진료 요약 문구를 만듭니다.">
 <meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
 <meta property="og:title" content="GCN · 진료보드 | 굿모닝펫 A~Z 그물망 시리즈">
@@ -19,6 +25,11 @@
 <meta name="twitter:description" content="굿모닝펫 GCN — 진료보드로 오늘 예약·내원·미내원·검사 대기를 한눈에 보고, 원장님께 드릴 진료 요약 문구를 만듭니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+.hoff{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.hoff .btn.wide{grid-column:1 / -1}
+@media (max-width:420px){.hoff{grid-template-columns:1fr}}
+</style>
 </head>
 <body data-code="GCN">
 <div id="g-top"></div>
@@ -65,6 +76,24 @@
       <div class="kv"><span class="k">내원율</span><span class="v" id="rate">-</span></div>
       <div class="kv"><span class="k">남은 예약</span><span class="v" id="left">-</span></div>
     </div>
+  </section>
+
+  <section class="card" id="handoff">
+    <div class="sec-head"><span class="num">↗</span><h2>같은 아이 정보 그대로 넘기기<small>보호자·아이·메모를 한 번만 입력</small></h2></div>
+    <p>여기 적은 이름과 메모가 <b>GDN·GKN·GTN·GSN·GHN</b>으로 그대로 넘어갑니다. 직원이 같은 내용을 두 번 치지 않습니다.</p>
+    <div class="grid2">
+      <div class="field"><label>보호자</label><input id="hoGuardian" type="text" placeholder="예: 전희자" autocomplete="off"></div>
+      <div class="field"><label>아이</label><input id="hoPet" type="text" placeholder="예: 까미" autocomplete="off"></div>
+    </div>
+    <div class="field"><label>진료 메모·소견 <span class="hint">선택</span></label><textarea id="hoNote" style="min-height:74px" placeholder="예: 면역글로블린 낮음, 유익균 안착 관리"></textarea></div>
+    <div class="btns hoff">
+      <a class="btn solid wide" id="hoGtn" href="gtn.html">✨ 3종 생성기 (GTN) — 결과·해설·급여 + 권장 Best</a>
+      <a class="btn ghost" id="hoGdn" href="gdn.html">검사 해설 (GDN)</a>
+      <a class="btn ghost" id="hoGkn" href="gkn.html">복약 안내 (GKN)</a>
+      <a class="btn ghost" id="hoGsn" href="rebuy.html">재구매 (GSN)</a>
+      <a class="btn ghost" id="hoGhn" href="ghn.html">건강관리표 (GHN)</a>
+    </div>
+    <p class="note">새 탭에서 열립니다. 3종 생성기는 메모까지 읽어 <b>소견 자동 감지</b>와 <b>권장 사료·처방제</b>까지 바로 띄웁니다.</p>
   </section>
 
   <div id="out"></div>
@@ -131,8 +160,42 @@
     if (kit) kit.refresh();
   }
   refresh();
+  try { G.prefill(); } catch (e) {}
+
+  /* ---------- 같은 아이 정보를 이웃 칸으로 넘기기 ---------- */
+  (function () {
+    var g = $('#hoGuardian'), p = $('#hoPet'), m = $('#hoNote');
+    if (!g || !p) return;
+    function qs(extra) {
+      var sp = new URLSearchParams();
+      if (g.value.trim()) sp.set('guardian', g.value.trim());
+      if (p.value.trim()) sp.set('pet', p.value.trim());
+      if (m.value.trim()) sp.set('note', m.value.trim());
+      if ($('#date').value) sp.set('date', $('#date').value);
+      for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k) && extra[k]) sp.set(k, extra[k]); }
+      return sp.toString();
+    }
+    function paint() {
+      $('#hoGtn').href = 'gtn.html?' + qs({});
+      $('#hoGdn').href = 'gdn.html?' + qs({});
+      $('#hoGkn').href = 'gkn.html?' + qs({});
+      $('#hoGhn').href = 'ghn.html?' + qs({});
+      var sp = new URLSearchParams();
+      var s = G.settings();
+      sp.set('hospital', s.hospital);
+      if (s.slogan) sp.set('slogan', s.slogan);
+      if (s.kakao) sp.set('link', s.kakao);
+      if (g.value.trim()) sp.set('guardian', g.value.trim());
+      if (p.value.trim()) sp.set('pet', p.value.trim());
+      $('#hoGsn').href = 'rebuy.html?' + sp.toString();
+    }
+    [g, p, m].forEach(function (el) { el.addEventListener('input', paint); el.addEventListener('change', paint); });
+    document.addEventListener('g-settings', paint);
+    paint();
+  })();
 })();
 
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

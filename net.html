@@ -6,6 +6,12 @@
 <title>굿모닝펫 A~Z 그물망 시리즈 · 평생 주치의 시스템 | 26칸 벌집 포털</title>
 <meta name="description" content="굿모닝펫 A~Z 그물망 시리즈 26칸 벌집 포털 — 직원도 편하고, 보호자도 편하고, 병원에도 좋은 보호자 이탈 없는 평생 주치의 그물망. 칸을 누르면 바로 열립니다.">
 <meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
 <meta property="og:title" content="굿모닝펫 A~Z 그물망 시리즈 · 26칸 벌집 포털">
@@ -34,6 +40,42 @@
 .page-hero h1 .h1sub{display:block;font-size:.58em;letter-spacing:-.01em;color:var(--accent-d);margin-top:5px}
 .netw #g-footer{margin:24px 0 6px;text-align:center;font-size:11.5px;line-height:1.75;color:var(--muted)}
 .netw #g-footer .b{font-weight:800;color:var(--ink-soft);font-size:12.5px;margin-bottom:2px}
+
+/* ===== 4대 핵심 바로가기 ===== */
+.qk{padding:13px 13px 12px}
+.qk-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 9px;padding:0 2px}
+.qk-head h2{margin:0;font-size:14.5px;letter-spacing:-.02em}
+.qk-head h2 b{color:var(--brand-d)}
+.qk-head span{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.qb{position:relative;display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit;
+  border:1px solid var(--line);border-radius:15px;padding:11px 11px 10px;background:#fff;min-height:78px;
+  transition:transform .14s ease,border-color .14s ease}
+.qb:active{transform:scale(.985)}
+.qb:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(47,134,181,.18)}
+.qb .qc{font-size:11px;font-weight:900;letter-spacing:.03em;color:var(--brand-d)}
+.qb .qn{font-size:14.5px;font-weight:900;line-height:1.3;color:var(--ink);letter-spacing:-.02em;margin-top:1px}
+.qb .qd{font-size:11px;font-weight:700;color:var(--muted);line-height:1.42;margin-top:2px}
+.qb .qem{position:absolute;right:10px;top:9px;font-size:16px;opacity:.9}
+.qb.ghn{background:linear-gradient(160deg,#f7fcff,#e9f5fd);border-color:#cfe6f3}
+.qb.gcn{background:linear-gradient(160deg,#f5fdfa,#e3f6f0);border-color:#c8e9dd}
+.qb.gsn{background:linear-gradient(160deg,#fffcf3,#fbf0d9);border-color:#eee0bf}
+.qb.gkn{background:linear-gradient(160deg,#faf8fe,#efeafb);border-color:#ddd5f0}
+.qwide{margin-top:7px;display:flex;align-items:center;gap:9px;text-decoration:none;color:#fff;
+  background:linear-gradient(140deg,#2f86b5 0%,#3f9ecb 58%,#56b2d8 100%);
+  border-radius:15px;padding:12px 13px;box-shadow:0 6px 18px rgba(47,134,181,.22)}
+.qwide:active{transform:scale(.99)}
+.qwide .wi{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;font-size:17px}
+.qwide .wt{min-width:0;flex:1 1 auto}
+.qwide .wt b{display:block;font-size:13.5px;font-weight:900;letter-spacing:-.01em}
+.qwide .wt span{display:block;font-size:11px;line-height:1.42;color:rgba(255,255,255,.9);margin-top:1px}
+.qwide .wg{flex:0 0 auto;font-size:16px;font-weight:900;opacity:.85}
+.qk-note{margin:8px 2px 0;font-size:11px;color:var(--muted);font-weight:700;line-height:1.5}
+@media (min-width:700px){
+  .qgrid{grid-template-columns:repeat(4,1fr)}
+  .qb{min-height:86px}
+}
 
 /* 필터 · 검색 */
 .honey-card{padding:16px 13px 14px}
@@ -207,6 +249,22 @@ html.sheet-open body{overflow:hidden}
     <div class="marks"><span>26칸 벌집</span><span>한 번 눌러 바로 열기</span><span>병원 이름만 바꿔 그대로</span></div>
   </header>
 
+  <section class="card qk" id="quick" aria-label="4대 핵심 바로가기">
+    <div class="qk-head"><h2>오늘 가장 많이 쓰는 <b>4대 핵심</b></h2><span>한 번 눌러 바로</span></div>
+    <div class="qgrid">
+      <a class="qb ghn" href="ghn.html" id="qkGhn"><span class="qem">📋</span><span class="qc">GHN</span><span class="qn">건강관리표</span><span class="qd">내원 전 8항목 · 표 복사</span></a>
+      <a class="qb gcn" href="gcn.html" id="qkGcn"><span class="qem">🩺</span><span class="qc">GCN</span><span class="qn">진료보드</span><span class="qd">오늘 예약·내원·검사 대기</span></a>
+      <a class="qb gsn" href="rebuy.html" id="qkGsn"><span class="qem">🛒</span><span class="qc">GSN</span><span class="qn">재구매 수첩</span><span class="qd">구매이력 · 체크 주문</span></a>
+      <a class="qb gkn" href="gkn.html" id="qkGkn"><span class="qem">💊</span><span class="qc">GKN</span><span class="qn">처방·복약</span><span class="qd">복약 안내 · 상비약 주의</span></a>
+    </div>
+    <a class="qwide" href="gtn.html" id="qkGtn">
+      <span class="wi">✨</span>
+      <span class="wt"><b>진료 코멘트 3종 생성기 (GTN)</b><span>코멘트 하나로 결과·검사 해설·급여 안내 + 이 아이에게 맞는 사료·처방제 Best 1·2·3</span></span>
+      <span class="wg">›</span>
+    </a>
+    <p class="qk-note">진료가 끝나면 <b>3종 생성기</b> → 결과 코멘트 복사 → 급여·재구매 안내 복사. 보호자는 링크로 바로 주문합니다.</p>
+  </section>
+
   <section class="card honey-card">
     <div class="chips" id="chips" role="group" aria-label="역할별 필터">
       <button class="chip" type="button" data-cat="all" aria-pressed="true">전체 <span class="n">26</span>종</button>
@@ -347,9 +405,9 @@ html.sheet-open body{overflow:hidden}
     { code:'GSN', letter:'S', eng:'Stock', ko:'재구매', short:'재구매', program:'구매이력·재구매 체크주문', cat:'guardian', tint:'stock', href:'rebuy.html',
       b:['판매 엑셀을 올리면 재구매 시기 아이를 바로 찾습니다.','지난 구매이력을 보고 필요한 것만 체크해 주문합니다.','재구매 안내가 추측이 아니라 기록으로 나갑니다.'],
       s:['병원 정보·카톡 주소 세팅','판매내역 엑셀 업로드','보호자·아이 조회 후 400자 문구·주문 링크 복사'] },
-    { code:'GTN', letter:'T', eng:'Talk', ko:'카톡안내', short:'카톡안내', program:'진료 코멘트 400자 안내', cat:'guardian', tint:'care', href:'universal.html',
-      b:['메모만 넣으면 400자 보호자 문구가 완성됩니다.','짧고 정중한 안내를 카톡으로 받습니다.','직원마다 다른 말투가 사라집니다.'],
-      s:['병원명·슬로건·배경색 세팅','진료 메모 입력','400자 문구 복사·카톡 발송'] },
+    { code:'GTN', letter:'T', eng:'Talk', ko:'카톡안내', short:'카톡안내', program:'진료 코멘트 3종 + 권장 Best 1·2·3', cat:'guardian', tint:'care', href:'gtn.html',
+      b:['코멘트 하나로 결과·검사 해설·급여 안내 3종이 한 번에 나옵니다.','이 아이에게 맞는 사료·처방제 Best 1·2·3과 재구매 링크를 받습니다.','직원마다 다른 말투와 추천이 사라집니다.'],
+      s:['원장님 결과 코멘트를 그대로 붙여넣기','소견 자동 감지 → Best 1·2·3 확인·교체','결과 코멘트 복사 → 급여·재구매 안내 복사'] },
     { code:'GUN', letter:'U', eng:'Urgent', ko:'응급대처', short:'응급대처', program:'응급 대처·내원 판단', cat:'guardian', tint:'care', href:'gun.html',
       b:['12증상별로 지금·당일·관찰을 바로 판단합니다.','전화로 물어보지 않아도 대처법을 안내받습니다.','응급 대응이 늦지 않습니다.'],
       s:['증상 선택(12종)','지금·당일·관찰 판단 확인','오는 길 대처·금지사항과 안내 문구 복사'] },
@@ -621,5 +679,6 @@ html.sheet-open body{overflow:hidden}
   });
 })();
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

@@ -26,7 +26,7 @@ var G = (function () {
     { code:'GQN', letter:'Q', eng:'Quiz',       ko:'보고 퀴즈',     href:'gqn.html',      grp:'원무·운영' },
     { code:'GRN', letter:'R', eng:'Recruit',    ko:'채용·면접',     href:'grn.html',      grp:'원무·운영' },
     { code:'GSN', letter:'S', eng:'Stock',      ko:'재구매·주문',   href:'rebuy.html',    grp:'보호자·진료' },
-    { code:'GTN', letter:'T', eng:'Talk',       ko:'카톡 안내',     href:'universal.html',grp:'보호자·진료' },
+    { code:'GTN', letter:'T', eng:'Talk',       ko:'카톡 안내',     href:'gtn.html',     grp:'보호자·진료' },
     { code:'GUN', letter:'U', eng:'Urgent',     ko:'응급 대처',     href:'gun.html',      grp:'보호자·진료' },
     { code:'GVN', letter:'V', eng:'Visit',      ko:'진료 신청',     href:'gvn.html',      grp:'보호자·진료' },
     { code:'GWN', letter:'W', eng:'Weight',     ko:'체중·만성질환', href:'gwn.html',      grp:'보호자·진료' },
@@ -261,6 +261,67 @@ var G = (function () {
   }
   function baseUrl() {
     return window.location.origin + window.location.pathname;
+  }
+
+  /* ---------- 주소 파라미터로 입력칸 미리 채우기 (데이터 한 줄기) ----------
+     다른 칸에서 ?guardian=&pet=&note=&rx=&feed=&date=… 로 넘어오면
+     같은 이름의 입력칸을 채우고 input/change 이벤트를 쏘아 계산을 다시 돌립니다. */
+  var PREFILL_MAP = {
+    guardian: ['guardian', 'owner', 'name'],
+    pet: ['pet', 'dog', 'cat'],
+    species: ['species', 'kind'],
+    weight: ['weight', 'kg'],
+    date: ['date', 'visit', 'day'],
+    next: ['next', 'nextDate'],
+    nextItem: ['nextItem', 'nextWhat'],
+    note: ['note', 'comment', 'opinion', 'memo', 'worry', 'abn', 'extra'],
+    rx: ['rx', 'med', 'meds', 'extra'],
+    feed: ['feed', 'food'],
+    exam: ['exam', 'test'],
+    care: ['care', 'manage'],
+    phone: ['phone'],
+    hospital: ['hospital'],
+    slogan: ['slogan']
+  };
+  var PREFILL_FORCE = ['date', 'next', 'nextItem', 'species', 'weight', 'exam', 'care', 'rx', 'feed', 'note'];
+
+  function prefill(extra) {
+    var sp = null;
+    try { sp = new URLSearchParams(window.location.search); } catch (e) { return {}; }
+    if (!sp) return {};
+    var filled = {};
+    function setVal(el, v) {
+      if (!el) return false;
+      if (el.type === 'date' && !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
+      if (el.type === 'number' && isNaN(parseFloat(v))) return false;
+      el.value = v;
+      try {
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      } catch (e) {}
+      return true;
+    }
+    var map = {};
+    for (var k in PREFILL_MAP) { if (Object.prototype.hasOwnProperty.call(PREFILL_MAP, k)) map[k] = PREFILL_MAP[k].slice(); }
+    if (extra && typeof extra === 'object') {
+      for (var e in extra) {
+        if (!Object.prototype.hasOwnProperty.call(extra, e)) continue;
+        map[e] = [].concat(extra[e]);
+      }
+    }
+    Object.keys(map).forEach(function (param) {
+      var v = sp.get(param);
+      if (!v) return;
+      var force = PREFILL_FORCE.indexOf(param) >= 0;
+      var ids = map[param];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (!el || el.tagName === 'TEXTAREA' && el.readOnly) continue;
+        if (!force && String(el.value || '').trim()) continue;
+        if (setVal(el, v)) { filled[ids[i]] = v; break; }
+      }
+    });
+    return filled;
   }
 
   /* ---------- 카톡 문구 키트 (400자 · 복사 · 단축 · 공유) ---------- */
@@ -542,7 +603,7 @@ var G = (function () {
     toast: toast, count: count, cut: cut,
     josa: josa, hasBatchim: hasBatchim,
     money: money, today: today, addDays: addDays, fmtDate: fmtDate, isoDate: isoDate, dday: dday,
-    copy: copy, share: share, shorten: shorten, baseUrl: baseUrl,
+    copy: copy, share: share, shorten: shorten, baseUrl: baseUrl, prefill: prefill,
     msgKit: msgKit, outKit: outKit, relate: relate
   };
 })();

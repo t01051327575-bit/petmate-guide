@@ -1,0 +1,27 @@
+{
+  "name": "굿모닝펫 A~Z 그물망 (G-시리즈)",
+  "short_name": "굿모닝펫",
+  "description": "직원도 편하고 보호자도 편한 굿모닝펫 업무 도구 — GHN·GCN·GSN·GKN 4대 핵심과 진료 코멘트 3종 생성기.",
+  "lang": "ko",
+  "dir": "ltr",
+  "start_url": "net.html?utm_source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#f6fbfd",
+  "theme_color": "#2f86b5",
+  "categories": ["medical", "productivity", "business"],
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "건강관리표 (GHN)", "short_name": "GHN", "url": "ghn.html?utm_source=pwa" },
+    { "name": "진료보드 (GCN)", "short_name": "GCN", "url": "gcn.html?utm_source=pwa" },
+    { "name": "재구매 수첩 (GSN)", "short_name": "GSN", "url": "rebuy.html?utm_source=pwa" },
+    { "name": "처방·복약 (GKN)", "short_name": "GKN", "url": "gkn.html?utm_source=pwa" },
+    { "name": "진료 코멘트 3종 (GTN)", "short_name": "3종 생성", "url": "gtn.html?utm_source=pwa" }
+  ]
+}

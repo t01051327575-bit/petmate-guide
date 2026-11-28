@@ -6,6 +6,12 @@
 <title>GKN 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈</title>
 <meta name="description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
 <meta name="theme-color" content="#eaf6fb">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
 <meta property="og:title" content="GKN · 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈">
@@ -186,8 +192,10 @@
     if (kit) kit.refresh();
   }
   refresh();
+  try { G.prefill(); } catch (e) {}
 })();
 
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>

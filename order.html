@@ -7,6 +7,12 @@
 <meta name="description" content="병원에서 받은 링크로 우리 아이의 이전 구매이력과 심장사상충 예방일·다음 예약일을 확인하고, 필요한 품목을 체크해 바로 주문할 수 있는 보호자 전용 페이지입니다.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0f9d8f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:title" content="🐾 우리 아이 케어 &amp; 재구매 수첩">
 <meta property="og:description" content="이전 구매이력 · 심장사상충 예방일 · 다음 예약일을 한눈에. 필요한 품목은 체크해서 바로 주문하세요.">
@@ -279,7 +285,7 @@
     </section>
 
     <div class="listhead">
-      <h2>이전 구매이력 <span class="cnt" id="histCnt">0건</span></h2>
+      <h2><span id="histTitle">이전 구매이력</span> <span class="cnt" id="histCnt">0건</span></h2>
       <span class="hint">체크하면 주문서에 담겨요</span>
     </div>
     <div id="items"></div>
@@ -864,6 +870,13 @@
     }
     $('errBox').hidden = true;
     $('body').hidden = false;
+    /* 원장님 권장 품목으로 넘어온 링크(?r=1) — 이력이 아니라 '권장'으로 표기 */
+    if(getParam('r') === '1'){
+      if($('histTitle')) $('histTitle').textContent = '원장님 권장 품목';
+      if($('heroSub')) $('heroSub').textContent = '원장님이 권장한 품목입니다. 필요한 것만 체크해 주문하세요.';
+      if($('orderSub')) $('orderSub').textContent = '필요한 품목을 체크하면 여기에 담깁니다.';
+      if($('footNote')) {}
+    }
     KAKAO = kakaoUrl(DATA.kakao);
     render();
     /* 주문서가 화면에 보이면 하단 바는 숨겨서 버튼을 가리지 않게 */
@@ -882,5 +895,6 @@
 
 })();
 </script>
+<script src="assets/pwa.js?v=20261128a"></script>
 </body>
 </html>
