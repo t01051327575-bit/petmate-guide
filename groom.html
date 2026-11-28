@@ -528,7 +528,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   var toastT = null;
   function toast(msg){
     var t = $('#toast');
-    if(!msg){ t.classList.remove('on'); return; }
+    if(!msg){ t.classList.remove('on'); t.textContent = ''; return; }
     t.textContent = msg;
     t.classList.add('on');
     clearTimeout(toastT);
