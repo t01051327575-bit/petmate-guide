@@ -1428,6 +1428,7 @@
   renderSchedule();
   renderLink();
   notiBox();
+  if (API) setSync('', '병원 서버에 연결되어 있습니다 — 체크하면 바로 기록됩니다.');
   scheduleNoti();
   kit.refresh(true);
   pullRx();
