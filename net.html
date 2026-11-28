@@ -256,8 +256,9 @@ html.sheet-open body{overflow:hidden}
 .setbtns{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .setbtns .btn{flex:1 1 auto;font-size:12.5px;min-height:42px;padding:9px 12px}
 .setlink{margin:9px 0 0;font-size:11px;line-height:1.6;color:var(--muted);word-break:break-all}
-.setlink code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--ink-soft);
-  background:#fff;border:1px solid var(--line);border-radius:7px;padding:2px 6px}
+.setlink code{display:block;margin-top:4px;padding:6px 8px;border-radius:8px;line-height:1.55;word-break:break-all;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--ink-soft);
+  background:#fff;border:1px solid var(--line)}
 .setcard .g-hint{margin:8px 0 0;font-size:11px;line-height:1.55;color:var(--muted)}
 
 /* ===== 상세 시트 · 특징/키워드/팁 ===== */
@@ -764,7 +765,6 @@ html.sheet-open body{overflow:hidden}
     var parts = [];
     if (h.hospital) parts.push('hospital=' + h.hospital);
     if (h.slogan) parts.push('slogan=' + h.slogan);
-    if (h.theme) parts.push('theme=' + h.theme);
     if (h.kakao) parts.push('kakao=' + h.kakao);
     if (h.phone) parts.push('phone=' + h.phone);
     return 'net.html?' + parts.join('&');
