@@ -108,13 +108,12 @@ function saveWeight_(b) {
   if (photo) { vals[CW.photo - 1] = photo.url; vals[CW.photoN - 1] = photo.count; }
   vals[CW.id - 1] = id;
   if (hadRow) {
-    sh.getRange(row, 1).setNumberFormat('@');
     sh.getRange(row, 1, 1, HW.length).setValues([vals]);
   } else {
     sh.appendRow(vals);
     row = sh.getLastRow();
-    sh.getRange(row, 1).setNumberFormat('@').setValue(vals[0]);
   }
+  sh.getRange(row, 1).setNumberFormat('@').setValue(String(vals[0] || ''));
   return { ok: true, updated: hadRow, row: row, id: id, photoUrl: photo ? photo.url : '', photoError: photoErr, version: VERSION };
 }
 
@@ -176,13 +175,13 @@ function saveDiet_(b) {
   if (photo) { vals[CD.photo - 1] = photo.url; vals[CD.photoN - 1] = photo.count; }
   vals[CD.id - 1] = id;
   if (hadRow) {
-    sh.getRange(row, 1).setNumberFormat('@');
     sh.getRange(row, 1, 1, HD.length).setValues([vals]);
   } else {
     sh.appendRow(vals);
     row = sh.getLastRow();
-    sh.getRange(row, 1).setNumberFormat('@').setValue(vals[0]);
   }
+  sh.getRange(row, 1).setNumberFormat('@').setValue(String(vals[0] || ''));
+  sh.getRange(row, 8, 1, 2).setNumberFormat('@').setValues([[String(vals[7] || ''), String(vals[8] || '')]]);
   return { ok: true, updated: hadRow, row: row, id: id, photoUrl: photo ? photo.url : '', photoError: photoErr, version: VERSION };
 }
 
@@ -291,11 +290,16 @@ function num_(v) { var n = Number(v); return isFinite(n) ? n : ''; }
 function norm_(v) { return String(v == null ? '' : v).replace(/[\s()\[\]{}·.,-]/g, '').toLowerCase(); }
 function fmt_(v, kind) {
   if (v instanceof Date) {
-    if (v.getFullYear() < 1900) return Utilities.formatDate(v, 'Asia/Seoul', 'HH:mm');
-    if (kind === '접수시각') return Utilities.formatDate(v, 'Asia/Seoul', 'yyyy-MM-dd HH:mm');
-    return Utilities.formatDate(v, 'Asia/Seoul', 'yyyy-MM-dd');
+    var tz = tz_();
+    if (v.getFullYear() < 1900) return Utilities.formatDate(v, tz, 'HH:mm');
+    if (kind === '접수시각') return Utilities.formatDate(v, tz, 'yyyy-MM-dd HH:mm');
+    return Utilities.formatDate(v, tz, 'yyyy-MM-dd');
   }
   return String(v == null ? '' : v).trim().replace(/\//g, '-').slice(0, 10);
+}
+function tz_() {
+  try { return SpreadsheetApp.openById(SHEET_ID).getSpreadsheetTimeZone() || 'Asia/Seoul'; }
+  catch (e) { return 'Asia/Seoul'; }
 }
 function nowStr_() { return Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm'); }
 function todayStr_() { return Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd'); }
