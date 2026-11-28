@@ -267,7 +267,11 @@
 
   /* ---------- 날짜 · 저장 키 ---------- */
   var RKEY = 'gpn_route_v1', WKEY = 'gpn_who_v1', LKEY = 'gpn_lab_v1', PKEY = 'gpn_prac_v1';
-  function dateStr() { return ($('#date').value || G.today()); }
+  function dateStr() {
+    var v = ($('#date').value || '');
+    return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : G.today();
+  }
+  function dateLabel() { return dateStr().replace(/-/g, '. '); }
   function keyFor(r) { return RKEY + '_' + dateStr() + '_' + r.id; }
   function read(k) { try { return JSON.parse(localStorage.getItem(k) || '{}') || {}; } catch (e) { return {}; } }
   function write(k, o) { try { localStorage.setItem(k, JSON.stringify(o)); } catch (e) {} }
@@ -350,7 +354,7 @@
     var miss = labMissing(), r = route('lab');
     var memo = (($('#labMemo') && $('#labMemo').value) || '').trim();
     var short = (($('#labShort') && $('#labShort').value) || '').trim();
-    var head = '[검사실 인계] ' + dateStr().replace(/-/g, '. ') + ' · ' + ((($('#who') && $('#who').value) || '').trim() || '진료검사과') + '\n';
+    var head = '[검사실 인계] ' + dateLabel() + ' · ' + ((($('#who') && $('#who').value) || '').trim() || '진료검사과') + '\n';
     var body = '· 완료 ' + (r.total - miss.length) + '/' + r.total + '항목\n' +
       (miss.length
         ? '· 미완료: ' + miss.slice(0, 3).map(function (x) { return x.n + '. ' + x.t; }).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n'
@@ -397,7 +401,7 @@
     sub: '400자 이내 · 퇴근 전 한 번',
     build: function () {
       var d = G.settings();
-      var date = dateStr().replace(/-/g, '. ');
+      var date = dateLabel();
       var memo = ($('#memo').value || '').trim();
       var head = '[일일 마감] ' + date + '\n';
       var body = '매출 ' + G.money(n('sales')) + '원\n' +
@@ -441,7 +445,7 @@
     $('#pracBar').style.width = (st.total ? (st.done / st.total * 100) : 0) + '%';
     var miss = pracItems().filter(function (x) { return !st.o[x.n]; });
     var note = ($('#pracNote').value || '').trim();
-    var head = '[연습] ' + route(pracPos).name + ' · ' + dateStr().replace(/-/g, '. ') + '\n';
+    var head = '[연습] ' + route(pracPos).name + ' · ' + dateLabel() + '\n';
     var body = '완료 ' + st.done + '/' + st.total + '\n' +
       (miss.length ? '미완료: ' + miss.slice(0, 4).map(function (x) { return x.t; }).join(', ') + (miss.length > 4 ? ' 외 ' + (miss.length - 4) + '건' : '') + '\n'
         : '미완료 없음 — 마감까지 끝냈습니다\n');
