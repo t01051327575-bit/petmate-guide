@@ -409,8 +409,10 @@
     if (hint) hint.textContent = d.rule;
   }
   function addRow() {
+    var dv = $('#fDate').value;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dv)) dv = today();
     var r = {
-      id: ++seq, date: $('#fDate').value || today(),
+      id: ++seq, date: dv,
       pet: ($('#fPet').value || '').trim(), owner: ($('#fOwner').value || '').trim(),
       rrn: rrnFmt($('#fRrn').value), weight: ($('#fWeight').value || '').trim(),
       drug: $('#fDrug').value, qty: fmtQty($('#fQty').value), unit: $('#fUnit').value,
