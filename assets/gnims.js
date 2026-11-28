@@ -254,7 +254,7 @@
       if (g.dday) {
         badge = g.dday.due <= 0
           ? '<div class="dbadge over">' + (g.dday.due === 0 ? 'D-DAY' : 'D+' + Math.abs(g.dday.due)) + '<s>' + esc(g.dday.drug) + '</s></div>'
-          : '<div class="dbadge soon">D-' + g.dday.due + '<s>' + esc(g.dday.drug) + '</s></div>';
+          : '<div class="dbadge ' + (g.dday.due <= 2 ? 'soon' : '') + '">D-' + g.dday.due + '<s>' + esc(g.dday.drug) + '</s></div>';
       } else {
         badge = '<div class="dbadge none">기한 미정<s>매뉴얼에 기한 없음</s></div>';
       }
