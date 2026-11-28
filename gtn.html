@@ -526,7 +526,7 @@ body.hasbar{padding-bottom:78px}
     }
     var link = orderLink();
     var short = (state.shortOrder && state.shortFor === link) ? state.shortOrder : '';
-    var url = short || link || rebuyLink();
+    var url = short || link || pageRebuy();
     if (mode < 3) {
       lines.push('');
       lines.push('🛒 바로 재구매·주문');
@@ -627,6 +627,7 @@ body.hasbar{padding-bottom:78px}
     var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '|' + (G.settings().slogan || '') + '|' + kakao() + '|||' + items;
     return dirUrl() + 'order.html?r=1&d=' + b64url(packStr(d));
   }
+  function pageRebuy() { return dirUrl() + 'rebuy.html'; }
   function rebuyLink() {
     var sp = new URLSearchParams();
     sp.set('hospital', hosp());
@@ -663,7 +664,7 @@ body.hasbar{padding-bottom:78px}
   /* ---------- 짧은 링크 ---------- */
   var shortTimer = null;
   function scheduleShort() {
-    var link = orderLink();
+    var link = orderLink() || rebuyLink();
     if (!link) return;
     if (state.shortFor === link && state.shortOrder) return;
     clearTimeout(shortTimer);
