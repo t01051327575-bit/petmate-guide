@@ -15,7 +15,7 @@ body{margin:0;background:#2b3238;font-family:sans-serif;display:flex;justify-con
   var h = parseInt(q.get('h') || '700', 10) || 700;
   var sc = parseInt(q.get('scroll') || '0', 10) || 0;
   var z = parseFloat(q.get('z') || '1') || 1;
-  document.write('<iframe id="f" class="frame" height="' + h + '" style="zoom:' + z + '" src="' + p + '.html?v=390"></iframe>');
+  document.write('<iframe id="f" class="frame" height="' + h + '" style="zoom:' + z + '" src="' + p + '.html?v=390&t=' + Date.now() + '"></iframe>');
   window.addEventListener('load', function () {
     setTimeout(function () {
       try { document.getElementById('f').contentWindow.scrollTo(0, sc); } catch (e) {}
