@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GVN 진료 신청 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GVN — 진료 신청 페이지와 함께, 증상·희망일을 정리해 보호자에게 보낼 접수 확인 문구를 만듭니다.">
+<title>진료 신청 · 병원 안내 | 분당 굿모닝펫동물병원</title>
+<meta name="description" content="분당 굿모닝펫동물병원 진료 신청 페이지. 2003년부터 23년, 수술 21,425건·건강검진 19,617건의 평생 주치의. 진료 시간(월·화·수), 병원 소개 영상, 오시는 길과 지방에서 오는 방법까지 한 장에 담았습니다.">
 <meta name="theme-color" content="#eaf6fb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,17 +14,69 @@
 <meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
-<meta property="og:title" content="GVN · 진료 신청 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GVN — 진료 신청 페이지와 함께, 증상·희망일을 정리해 보호자에게 보낼 접수 확인 문구를 만듭니다.">
+<meta property="og:title" content="진료 신청 · 병원 안내 | 분당 굿모닝펫동물병원">
+<meta property="og:description" content="2003년부터 23년, 수술 21,425건·건강검진 19,617건의 평생 주치의. 진료 시간·병원 소개 영상·오시는 길·지방에서 오는 방법까지 한 장에.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gvn.html">
-<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-gvn.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GVN · 진료 신청">
-<meta name="twitter:description" content="굿모닝펫 GVN — 진료 신청 페이지와 함께, 증상·희망일을 정리해 보호자에게 보낼 접수 확인 문구를 만듭니다.">
-<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
+<meta name="twitter:title" content="진료 신청 · 병원 안내 | 굿모닝펫동물병원">
+<meta name="twitter:description" content="2003년부터 23년, 수술 21,425건·건강검진 19,617건의 평생 주치의. 진료 시간·병원 소개 영상·오시는 길까지 한 장에.">
+<meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-gvn.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+  /* GVN 확장 — 병원 소개 · 영상 · 오시는 길 */
+  .page-hero .hero-photo{margin:16px -8px 0;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(23,58,72,.14);position:relative;z-index:1}
+  .page-hero .hero-photo img{display:block;width:100%;height:auto}
+  .page-hero .hero-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .page-hero .hero-cta .btn{font-size:13.5px}
+  .page-hero .hero-cta .btn.solid{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+  .stat{background:linear-gradient(160deg,var(--soft),var(--soft2));border:1px solid var(--badge-line);border-radius:14px;padding:12px}
+  .stat .k{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:.02em}
+  .stat .v{font-size:19px;font-weight:900;letter-spacing:-.03em;color:var(--brand-d);line-height:1.25;margin-top:2px}
+  .stat .v .u{font-size:12px;color:var(--ink-soft);font-weight:800;margin-left:2px;letter-spacing:0}
+  .stat .d{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+  .tl{list-style:none;margin:12px 0 0;padding:0 0 0 15px;border-left:2px solid var(--badge-line)}
+  .tl li{position:relative;padding:0 0 15px 14px}
+  .tl li:last-child{padding-bottom:0}
+  .tl li::before{content:"";position:absolute;left:-23px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--brand)}
+  .tl li.now::before{border-color:var(--accent);box-shadow:0 0 0 3px rgba(226,86,127,.16)}
+  .tl .y{font-size:12.5px;font-weight:900;color:var(--accent-d);letter-spacing:.02em}
+  .tl .t{display:block;font-size:14.5px;font-weight:800;color:var(--ink);margin-top:1px}
+  .tl .d{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px;line-height:1.55}
+
+  .video-box{margin:12px auto 0;max-width:320px;border-radius:18px;overflow:hidden;background:#0e1a15;box-shadow:0 12px 30px rgba(14,26,21,.22)}
+  .video-box video{display:block;width:100%;height:auto;aspect-ratio:9/16;background:#0e1a15}
+
+  .steps{counter-reset:s;list-style:none;margin:10px 0 0;padding:0}
+  .steps li{position:relative;padding:0 0 13px 40px;counter-increment:s}
+  .steps li:last-child{padding-bottom:0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--brand-d);font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center;border:1px solid var(--badge-line)}
+  .steps .t{display:block;font-weight:800;font-size:14px;color:var(--ink)}
+  .steps .d{display:block;font-size:13px;color:var(--ink-soft);line-height:1.55}
+
+  .faq{margin-top:6px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{display:flex;gap:8px;align-items:flex-start;list-style:none;cursor:pointer;padding:12px 2px;font-size:14px;font-weight:800;color:var(--ink);line-height:1.45}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .q{flex:0 0 auto;color:var(--accent-d);font-weight:900}
+  .faq summary .arw{margin-left:auto;color:var(--muted);font-weight:800;transition:transform .2s}
+  .faq details[open] summary .arw{transform:rotate(180deg)}
+  .faq .a{padding:0 2px 13px 20px;font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+  .faq .a b{color:var(--brand-d)}
+
+  .tbl td.l,.tbl th.l{text-align:left}
+  #apply,#way{scroll-margin-top:76px}
+  .tbl td .s{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-top:1px}
+  @media (max-width:380px){
+    .stats{grid-template-columns:1fr}
+    .page-hero .hero-cta{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body data-code="GVN">
 <div id="g-top"></div>
@@ -35,40 +87,179 @@
       <span class="code-chip">GVN</span>
       <span class="eng-chip">V · Visit</span>
     </div>
-    <h1>진료 신청</h1>
-    <p>증상과 희망일만 남기면 접수되고, 확인 안내까지 카톡으로 이어집니다.</p>
-    <div class="marks"><span>진료 신청</span><span>비대기 접수</span><span>확인 안내</span></div>
+    <h1>강아지도, 고양이도<br><span class="em">스무 살까지</span> 건강하게</h1>
+    <p>2003년부터 23년, 한 아이를 끝까지 보는 평생 주치의.<br>진료 신청부터 오시는 길까지 이 한 장에 담았습니다.</p>
+    <div class="hero-photo">
+      <img src="assets/gvn-hero.jpg" alt="굿모닝펫 진료실에서 아이를 안고 있는 모습" width="1080" height="770" fetchpriority="high">
+    </div>
+    <div class="hero-cta">
+      <a class="btn solid" href="#apply">📅 진료 신청하기</a>
+      <a class="btn ghost" href="#way">📍 오시는 길</a>
+    </div>
+    <div class="marks"><span>월·화·수 진료</span><span>비대기 08:30–11:00</span><span>주차 3시간 무료</span></div>
   </header>
 
   <section class="card">
-    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>V · Visit — 예약이 ‘방문’으로 이어지는 칸</small></h2></div>
-    <p>진료는 <b>월·화·수</b>입니다. 신청을 받고, 확인 안내를 한 번 더 보내면 노쇼가 줄어듭니다.</p>
-    <div class="btns">
-      <a class="btn solid wide" href="https://claude.ai/public/artifacts/7eYkPq2Yna4ei4k4ntfnLV" target="_blank" rel="noopener">📅 진료 신청 페이지 열기</a>
-      <a class="btn ghost" href="welcome.html">진료 시간·오시는 길</a>
-      <a class="btn ghost" href="ghn.html">내원 전 건강관리표</a>
+    <div class="sec-head"><span class="num">1</span><h2>23년의 기록<small>분당의 작은 1인 동물병원에서 시작했습니다</small></h2></div>
+    <p>2003년 분당에서 첫 진료를 시작했습니다. 그때부터 지금까지 아이를 끝까지 보는 평생 주치의로 같은 자리를 지키고 있습니다.</p>
+    <div class="stats">
+      <div class="stat"><div class="k">개원</div><div class="v">2003<span class="u">년</span></div><div class="d">분당에서 첫 진료</div></div>
+      <div class="stat"><div class="k">2026년</div><div class="v">23<span class="u">년차</span></div><div class="d">보호자님의 소개로 이어온 시간</div></div>
+      <div class="stat"><div class="k">수술</div><div class="v">21,425<span class="u">건</span></div><div class="d">원장님이 직접 집도</div></div>
+      <div class="stat"><div class="k">건강검진</div><div class="v">19,617<span class="u">건</span></div><div class="d">원내에서 직접 검사</div></div>
     </div>
+    <div class="callout"><b>내 아이라면, 나라면.</b> 말 못 하는 아이들의 입장과 엄마·아빠 보호자의 입장에서 먼저 판단합니다. 수술은 <b>최다 경험 · 최소 절개 · 최단 시간 · 완벽 봉합 · 완전 무통</b> 5원칙으로 합니다.</div>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>진료 시간·접수<small>보호자에게 그대로 안내하세요</small></h2></div>
+    <div class="sec-head"><span class="num">2</span><h2>2003 → 2026<small>한 줄씩 이어온 시간</small></h2></div>
+    <ol class="tl">
+      <li><span class="y">2003</span><span class="t">분당의 작은 1인 동물병원</span><span class="d">첫 진료를 시작했습니다. 그해부터 지금까지 매달 빠짐없이 사료 기부와 봉사를 이어오고 있습니다.</span></li>
+      <li><span class="y">2005</span><span class="t">수술 268건 · 건강검진 246건에서 시작</span><span class="d">모든 기록을 원장님이 직접 남기며 한 건씩 쌓았습니다.</span></li>
+      <li><span class="y">2007</span><span class="t">수술 1,150건 · 건강검진 1,053건</span><span class="d">누적 기록이 네 자리로 늘었습니다.</span></li>
+      <li><span class="y">2017 – 2022</span><span class="t">“예방이 곧 치료”라는 믿음</span><span class="d">그물망 솔루션 · 뚜아검진 · 오픈 수술실을 갖췄습니다.</span></li>
+      <li><span class="y">2023</span><span class="t">MBN 뉴스7 · 서울수의컨퍼런스에 소개된 1인 동물병원</span></li>
+      <li><span class="y">2024 – 2025</span><span class="t">위기를 이겨낸 복귀</span><span class="d">아이해듀 1~5기 · 1년치 예약 마감 · 보호자 CPR 교육을 진행했습니다.</span></li>
+      <li><span class="y">2026</span><span class="t">세계가 주목한 병원</span><span class="d">중국 수의사 35명 방문 · 부산수의컨퍼런스 · 킨텍스 300명 강연.</span></li>
+      <li class="now"><span class="y">2026 · 11</span><span class="t">굿모닝펫 G-시리즈 10종</span><span class="d">진료·안내·재방문을 하나로 잇는 그물망을 만들었습니다. “내 아이라면, 나라면.”</span></li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>병원 소개 영상<small>29초 · 소리를 켜고 보세요</small></h2></div>
+    <div class="video-box">
+      <video controls playsinline preload="none" poster="assets/gvn-intro-poster.jpg">
+        <source src="assets/gvn-intro.mp4" type="video/mp4">
+        영상을 재생할 수 없는 브라우저입니다. <a href="assets/gvn-intro.mp4">영상 파일 열기</a>
+      </video>
+    </div>
+    <p class="note">숫자는 자랑이 아니라 경험의 깊이입니다. 수술 21,425건, 건강검진 19,617건 — 모두 원장님이 직접 해온 기록입니다.</p>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">4</span><h2>진료 안내<small>오시기 전에 이것만 확인하세요</small></h2></div>
     <div class="tbl-wrap">
       <table class="tbl">
         <thead><tr><th>구분</th><th>내용</th></tr></thead>
         <tbody>
           <tr><th>진료일</th><td class="l">월 · 화 · 수</td></tr>
-          <tr><th>진료 시간</th><td class="l">09:00 – 12:00</td></tr>
-          <tr><th>비대기 접수</th><td class="l">08:30 – 11:00 (선착순, 조기 마감 가능)</td></tr>
-          <tr><th>우선순위</th><td class="l">응급 &gt; 예약 &gt; 비대기</td></tr>
-          <tr><th>문의</th><td class="l">카톡 GoodPet · 031-715-7119</td></tr>
+          <tr><th>진료 시간</th><td class="l">09:00 – 12:00<span class="s">오전 진료 · 예약제</span></td></tr>
+          <tr><th>오후</th><td class="l">14:00 – 18:00<span class="s">수술·검진</span></td></tr>
+          <tr><th>비대기 접수</th><td class="l">08:30 – 11:00<span class="s">선착순 · 조기 마감될 수 있습니다</span></td></tr>
+          <tr><th>진료 순서</th><td class="l">응급 &gt; 예약 &gt; 비대기</td></tr>
+          <tr><th>휴진</th><td class="l">목 · 금 · 토 · 일 · 공휴일</td></tr>
+          <tr><th>문의</th><td class="l">카톡 GoodPet · <a href="tel:0317157119">031-715-7119</a></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>내원 전 카톡 한 줄:</b> 대기 상황과 조기 마감을 알려 드릴 수 있습니다. 특히 월요일 오전은 일찍 마감됩니다.</div>
+    <p class="note">목요일은 연구일, 금요일은 분야별 전문병원 탐방, 토요일은 국제 소동물 외과 인증 과정 이수로 휴진합니다. 사료·용품 구매는 <b>월~목요일 17시까지</b> 가능합니다.</p>
+
+    <h3>접수와 예약</h3>
+    <ul class="clean">
+      <li><b>당일(비대기) 접수</b>는 오전 <b>08:30 ~ 11:00</b> 선착순이며, 수술·진료 상황에 따라 일찍 마감될 수 있습니다. <b>내원 전 카톡 문의</b>를 먼저 부탁드립니다.</li>
+      <li>진료 순서는 <b>① 응급 ② 확정 예약 ③ 당일 비대기</b>입니다. 예약 없이 오시면 진료가 어려울 수 있습니다.</li>
+      <li>진료가 끝나면 <b>다음 일정이 영수증에 표기</b>됩니다. ‘오전 9시 이전’으로 적혀 있으면 그날 예약이 가득 차 대기 후 진료가 가능하다는 뜻입니다.</li>
+      <li>진료 중에는 전화 연결이 어려울 수 있습니다. 카톡에 <b>‘전화 필요’</b>라고 남겨 주시면 확인 후 연락드립니다.</li>
+    </ul>
+
+    <h3>첫 내원 순서</h3>
+    <ol class="steps">
+      <li><span class="t">주차</span><span class="d">분당두산위브 1층 주차장에서 차단기 인터폰에 “굿모닝펫 방문차량입니다”라고 말씀하시면 문이 열립니다. <b>3시간 무료</b>입니다.</span></li>
+      <li><span class="t">키오스크 접수</span><span class="d">키오스크에 전화번호를 입력하고, 아이를 체중계에 올려 체중을 잰 뒤 ‘접수완료’를 눌러 주세요.</span></li>
+      <li><span class="t">대기</span><span class="d">나만의 대기실에서 기다리시면 됩니다(강아지·고양이 모두 이용 가능). 도서관 책과 패드도 준비되어 있습니다.</span></li>
+      <li><span class="t">진료</span><span class="d">원장님이 진료하고, 진료 후 결과와 소견을 카톡으로 보내드립니다.</span></li>
+      <li><span class="t">결제</span><span class="d">키오스크 또는 원무과에서 결제하시면 됩니다.</span></li>
+      <li><span class="t">주차 인증</span><span class="d">원무과에서 하시거나, 대기실 패드에서 차량번호를 조회해 직접 인증하실 수 있습니다.</span></li>
+    </ol>
+    <div class="callout">대기실에서는 <b>아이를 품에 안고</b> 기다려 주세요. 낯선 아이와 마주치면 서로 긴장하기 때문입니다. 낑김이가 있다면 <b>매너벨트</b>를 채워 주시고, 배변은 바로 치워 주시면 감사하겠습니다.</div>
+
+    <h3>검사·수술 전 준비</h3>
+    <ul class="clean">
+      <li>내원 <b>6시간 전부터 금식</b>, <b>3시간 전부터 금수</b>입니다.</li>
+      <li>목욕을 시키고 대소변을 보고 오시면 좋습니다. <b>종합검진</b>은 대소변 검사를 위해 보지 않고 오세요.</li>
+      <li>집 냄새가 밴 담요·수건·옷을 챙겨 주시면 아이가 마음을 편히 합니다.</li>
+      <li>수술 전 <b>혈액검사 45종</b>을 하고, 필요하면 방사선·초음파 검사를 더합니다. 수술 전날 <b>금식·금수·안정제</b> 안내를 카톡으로 다시 보내드립니다.</li>
+    </ul>
+
+    <h3>미용</h3>
+    <p>미용은 <b>예약제</b>로 진행하며, 예약 전 아이의 진료 이력과 접종 상태를 확인합니다. 컨디션에 따라 미용이 어려울 수 있어 <b>카톡으로 먼저 문의</b>해 주세요.</p>
+    <div class="callout ok"><b>진료 시간 외에도</b> 처방약·용품 픽업은 건물 외부 <b>키오스크에서 365일 24시간</b> 가능합니다.</div>
+  </section>
+
+  <section class="card" id="way">
+    <div class="sec-head"><span class="num">5</span><h2>오시는 길<small>주차 3시간 무료</small></h2></div>
+    <p><b>경기 성남시 분당구 정자일로 55</b><br>분당두산위브 108동 1층 110호 (금곡동 192)</p>
+    <div class="btns">
+      <a class="btn solid" href="http://place.map.kakao.com/8218269" target="_blank" rel="noopener">카카오맵</a>
+      <a class="btn ghost" href="https://map.naver.com/p/search/%EA%B5%BF%EB%AA%A8%EB%8B%9D%ED%8E%AB%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn ghost wide" href="https://surl.tmap.co.kr/850df45b" target="_blank" rel="noopener">🚗 내비게이션으로 길 안내 받기</a>
+    </div>
+    <div class="callout warn">
+      <b>주차</b>는 분당두산위브 지상 1층·지하 1층 상가 주차장을 쓰시고 <b>3시간까지 무료</b>입니다. 108동 바로 앞이라 편합니다. 차단기 인터폰에 <b>“굿모닝펫 방문차량입니다”</b>라고 말씀하시면 열립니다. 내비게이션에는 <b>‘굿모닝펫동물병원’</b> 또는 <b>‘분당두산위브 상가주차장’</b>을 검색하세요.
+    </div>
+    <h3>대중교통</h3>
+    <ul class="clean">
+      <li><b>미금역</b>(수인분당·신분당선) 7·8번 출구 → 도보 약 10분</li>
+      <li><b>정자역</b>(수인분당·신분당선) 3번 출구 앞 <b>마을버스 2번</b> 탑승 → 5분</li>
+      <li><b>마을버스 1·2번</b> → ‘두산위브’ 정류장 하차, 바로 앞</li>
+      <li><b>일반·광역버스</b> → ‘분당경영고·청솔중’ 하차 후 도보 5분</li>
+      <li>날씨 좋은 날엔 <b>정자역에서 탄천 산책로</b>를 따라 걸어오셔도 됩니다(아이와 산책 겸).</li>
+    </ul>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">3</span><h2>접수 확인 안내 만들기<small>신청을 받은 뒤 바로</small></h2></div>
+    <div class="sec-head"><span class="num">6</span><h2>지방에서 오시는 방법<small>전국에서 오시는 보호자님께</small></h2></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>출발</th><th>경로</th><th>소요</th></tr></thead>
+        <tbody>
+          <tr><th>강남역</th><td class="l">신분당선 → 미금역(6정거장) → 도보</td><td>약 40분</td></tr>
+          <tr><th>고속터미널</th><td class="l">3호선 → 양재 → 신분당선 → 미금역</td><td>약 45분</td></tr>
+          <tr><th>SRT 수서역</th><td class="l">수인분당선(죽전 방면) → 미금역 25분 → 도보</td><td>약 40분</td></tr>
+          <tr><th>성남종합버스터미널</th><td class="l">야탑역(도보 4분) → 수인분당선 → 미금역 11분</td><td>약 25분</td></tr>
+          <tr><th>김포공항</th><td class="l">9호선 → 신논현 → 신분당선 → 미금역</td><td>약 1시간 20분</td></tr>
+          <tr><th>인천공항 T1</th><td class="l">리무진 5400-1 → 미금역·청솔마을 하차</td><td>약 1시간 45분</td></tr>
+          <tr><th>자가용</th><td class="l">경부고속도로 판교IC 또는 분당수서로 금곡IC</td><td>5~10분</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">소요 시간은 2026년 11월 28일 조회한 평일 오전 9시 30분 출발 기준입니다. 당일 운행·교통 상황에 따라 달라질 수 있습니다. 지방에서 기차로 오시면 <b>SRT 수서역에서 수인분당선으로 환승 없이 미금역까지</b> 오시는 길이 가장 편합니다.</p>
+    <div class="callout"><b>멀리서 오시는 날</b>은 비대기 접수 마감을 놓치지 않도록 오시기 전에 카톡 <b>GoodPet</b>으로 도착 시간을 알려 주세요. 대기 상황을 미리 확인해 드립니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">7</span><h2>자주 묻는 질문<small>보호자님이 가장 많이 물으시는 것</small></h2></div>
+    <div class="faq">
+      <details>
+        <summary><span class="q">Q</span><span>예약 없이 그냥 가도 되나요?</span><span class="arw">▾</span></summary>
+        <div class="a">진료일(월·화·수) 오전 <b>08:30 ~ 11:00</b>에 당일 접수를 받습니다. 선착순이라 일찍 마감될 수 있으니, 오시기 전에 카톡 <b>GoodPet</b>으로 당일 접수 가능한지 먼저 물어봐 주세요.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q</span><span>주차는 어떻게 하나요?</span><span class="arw">▾</span></summary>
+        <div class="a">분당두산위브 지상 1층·지하 1층 상가 주차장을 쓰시면 <b>3시간 무료</b>입니다. 차단기 인터폰에 <b>“굿모닝펫 방문차량입니다”</b>라고 말씀하시면 열립니다. 인증은 원무과에서 하거나 대기실 패드에서 직접 하실 수 있습니다.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q</span><span>검사 전에 금식해야 하나요?</span><span class="arw">▾</span></summary>
+        <div class="a">수술은 <b>6시간 전 금식 · 3시간 전 금수</b>입니다. 종합검진은 대소변 검사를 위해 <b>보지 않고</b> 오시면 됩니다. 그 밖의 검사 금식 여부는 아이 상태에 따라 달라지므로, 예약하실 때 카톡으로 안내드립니다.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q</span><span>건강관리표를 미리 작성해야 하나요?</span><span class="arw">▾</span></summary>
+        <div class="a">필수는 아니지만, 내원 전에 <b>건강관리표(GHN)</b>를 미리 적어 오시면 증상 설명이 빨라져 진료가 수월합니다. 내원 전날 링크를 카톡으로 함께 보내드립니다. <a href="ghn.html">건강관리표 미리 쓰기</a></div>
+      </details>
+      <details>
+        <summary><span class="q">Q</span><span>미용도 예약해야 하나요?</span><span class="arw">▾</span></summary>
+        <div class="a">미용은 <b>예약제</b>입니다. 예약 전에 진료 이력과 접종 상태를 확인하고, 컨디션에 따라 미용이 어려울 수 있어 <b>카톡 GoodPet</b>으로 먼저 문의해 주세요.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q</span><span>오늘은 진료일이 아닌데 응급이에요.</span><span class="arw">▾</span></summary>
+        <div class="a">생명이 위급하면 바로 내원해 주세요. 진료가 없는 날은 <b>서현 해마루이차진료동물병원(031-781-2992)</b>에서 봅니다. 차트가 연동되어 있어 아이 상태를 바로 확인할 수 있습니다. <a href="gun.html">응급 대처 안내</a></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="card" id="apply">
+    <div class="sec-head"><span class="num">8</span><h2>진료 신청<small>증상과 희망일만 남겨 주세요</small></h2></div>
+    <p>아래 내용을 적어 보내시면 접수되고, <b>언제 오시면 되는지</b>까지 정리된 확인 문구를 바로 만들어 드립니다.</p>
     <div class="grid2">
       <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
       <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
@@ -86,12 +277,16 @@
         <option>오늘은 조기 마감될 수 있어 먼저 카톡 주세요</option>
       </select>
     </div>
+    <div class="btns">
+      <a class="btn ghost" href="welcome.html">진료 시간·이용 가이드</a>
+      <a class="btn ghost" href="ghn.html">내원 전 건강관리표</a>
+    </div>
   </section>
 
   <div id="out"></div>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">5</span><h2>신청을 방문으로 바꾸는 3가지<small>안내가 한 번 더 있으면 달라집니다</small></h2></div>
+    <div class="sec-head"><span class="num">9</span><h2>신청을 방문으로 바꾸는 3가지<small>안내가 한 번 더 있으면 달라집니다</small></h2></div>
     <ul class="clean">
       <li>신청 접수 후 <b>당일 안에</b> 확인 문구를 보냅니다.</li>
       <li>내원 전날 <b>GHN</b> 건강관리표 링크를 함께 보냅니다.</li>
@@ -126,7 +321,7 @@
   });
 
   var kit = G.outKit({
-    num: 4,
+    num: 8,
     title: '보호자에게 보낼 접수 확인',
     sub: '400자 이내 · 신청 당일 안에',
     build: function () {
