@@ -8,7 +8,7 @@
 <script>
   var q = new URLSearchParams(location.search);
   var to = (q.get('to') || '').replace(/[^a-zA-Z0-9_-]/g, '');
-  var src = 'gkn.html?pet=%EC%BD%A9%EC%9D%B4&guardian=%EA%B9%80%EB%AF%BC%EC%A7%80&v=390' + (to ? '#' + to : '');
+  var src = 'gkn.html?pet=%EC%BD%A9%EC%9D%B4&guardian=%EA%B9%80%EB%AF%BC%EC%A7%80&v=390' + (to ? '&to=' + to : '');
   document.write('<iframe class="frame" src="' + src + '"></iframe>');
 </script>
 </body></html>

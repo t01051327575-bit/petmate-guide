@@ -379,6 +379,7 @@
   var qGuardian = (params.get('guardian') || '').trim();
   var qSlot = (params.get('slot') || '').trim();
   var qDateP = (params.get('date') || '').trim();
+  var qTo = (params.get('to') || '').replace(/[^A-Za-z0-9_-]/g, '');
   var linked = !!qPet;
 
   var seqN = 0;
@@ -1433,6 +1434,8 @@
 
   if (qSlot) {
     setTimeout(function () { jumpSlot(qSlot); }, 400);
+  } else if (qTo) {
+    setTimeout(function () { var el = document.getElementById(qTo); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 500);
   }
 
   /* 30초마다 시간표만 갱신 (남은 간격·지금 표시) */
