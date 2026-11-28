@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GLN 검사실 루틴 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<title>GLN 라벨 · 재고관리 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GLN — 약봉투 라벨과 품목 이름표를 만들고, 사입·판매 이름을 하나로 붙이는 재고관리 첫 단계입니다. 최소수량 계산과 GAN 연결까지.">
 <meta name="theme-color" content="#eaf6fb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,17 +14,54 @@
 <meta name="apple-mobile-web-app-title" content="굿모닝펫">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
-<meta property="og:title" content="GLN · 검사실 루틴 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<meta property="og:title" content="GLN · 라벨·재고관리 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="굿모닝펫 GLN — 약봉투 라벨과 품목 이름표를 만들고, 사입·판매 이름을 하나로 붙이는 재고관리 첫 단계입니다.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gln.html">
 <meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GLN · 검사실 루틴">
-<meta name="twitter:description" content="굿모닝펫 GLN — 검사실 장비·시약·QC·검체·결과 확인 12단계 루틴을 체크하고, 근무 인계 문구를 만듭니다.">
+<meta name="twitter:title" content="GLN · 라벨·재고관리">
+<meta name="twitter:description" content="굿모닝펫 GLN — 약봉투 라벨과 품목 이름표를 만들고, 사입·판매 이름을 하나로 붙이는 재고관리 첫 단계입니다.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* GLN 전용 — 약봉투 라벨 · 이름표 */
+.lbl-card{border:1.5px dashed #b9d9e8;border-radius:16px;padding:14px 15px;background:#fffdf8;margin-top:12px;color:#22323c}
+.lbl-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid #ecebe4;padding-bottom:7px}
+.lbl-hosp{font-size:11px;font-weight:800;letter-spacing:.06em;color:#7d8b93}
+.lbl-date{font-size:11.5px;font-weight:800;color:#7d8b93}
+.lbl-pet{font-size:15px;font-weight:900;margin:9px 0 2px;color:#1d2a33}
+.lbl-lines{list-style:none;margin:6px 0 0;padding:0}
+.lbl-lines li{font-size:15px;font-weight:800;line-height:1.55;padding:5px 0;border-bottom:1px dashed #ecebe4;word-break:keep-all}
+.lbl-lines li:last-child{border-bottom:0}
+.lbl-cau{margin-top:9px;font-size:13px;font-weight:800;color:#a2503c;line-height:1.5;word-break:keep-all}
+.lbl-foot{margin-top:9px;font-size:10.5px;color:#8d979c;font-weight:700}
+.plate{border:1px solid var(--line);border-radius:14px;background:#fff;padding:13px 14px;margin-top:10px}
+.plate .pos{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:#8a631f;background:#fbf3df;border:1px solid #ecdcb8;border-radius:999px;padding:3px 9px}
+.plate .nm{font-size:17px;font-weight:900;letter-spacing:-.02em;margin:9px 0 4px;line-height:1.35;word-break:keep-all}
+.plate .rowx{display:flex;gap:7px;font-size:12.5px;line-height:1.6;padding:3px 0;color:var(--ink-soft)}
+.plate .rowx b{flex:0 0 auto;color:var(--muted);font-weight:800;min-width:66px}
+.plate .min{margin-top:8px;border-top:1px dashed var(--line);padding-top:8px;font-size:13px;font-weight:900;color:#8a631f}
+.plate .std{margin-top:9px;font-size:12px;color:var(--muted);line-height:1.55;word-break:keep-all}
+.plate .std b{color:var(--brand-d)}
+.photo-slot{border:1.5px dashed var(--badge-line);border-radius:16px;background:var(--bg);padding:18px 14px;text-align:center;margin-top:12px}
+.photo-slot .ic{font-size:22px}
+.photo-slot p{margin:7px 0 0;font-size:12.5px;color:var(--muted);line-height:1.65}
+.photo-slot b{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px}
+.shot{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;margin-top:10px}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:11.5px;color:var(--muted);padding:8px 11px;line-height:1.5;border-top:1px solid var(--line)}
+.go-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.go-row .btn{flex:1 1 160px}
+.tbl td.sl{padding:5px 4px}
+.tbl select.tin{min-width:78px;padding:8px 4px;font-size:14px}
+@media (max-width:420px){
+  .tbl th,.tbl td{padding:8px 4px}
+  .tbl select.tin{min-width:70px;font-size:13px}
+  .tin.name{min-width:82px;font-size:14px}
+}
+</style>
 </head>
 <body data-code="GLN">
 <div id="g-top"></div>
@@ -33,53 +70,167 @@
   <header class="page-hero">
     <div class="hero-top">
       <span class="code-chip">GLN</span>
-      <span class="eng-chip">L · Lab</span>
+      <span class="eng-chip">L · Label</span>
     </div>
-    <h1>검사실 루틴</h1>
-    <p>매일 같은 순서로 확인하면, 검사 결과가 흔들리지 않습니다. 체크는 오늘 날짜로 저장됩니다.</p>
-    <div class="marks"><span>검사실 12체크</span><span>진행률 저장</span><span>인계 문구</span></div>
+    <h1>라벨 · 재고관리</h1>
+    <p>약봉투에 적는 이름과 제품 이름표를 같은 이름으로 만듭니다. 이름이 하나면 재고가 맞습니다.</p>
+    <div class="marks"><span>약봉투 라벨</span><span>이름표 6칸</span><span>최소수량</span><span>GAN 연결</span></div>
   </header>
 
   <section class="card">
-    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>L · Lab — 결과의 신뢰를 매일 지키는 칸</small></h2></div>
-    <p>검사 결과가 흔들리면 <b>진단도 처방도 흔들립니다</b>. 장비·시약·검체 라벨을 같은 순서로 확인하는 것만으로 대부분의 오류가 막힙니다.</p>
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>L · Label — 재고관리의 첫 단계, 이름을 통일하는 칸</small></h2></div>
+    <p>재고가 안 맞는 이유는 수량을 안 세서가 아니라 <b>이름이 제각각</b>이어서입니다. 사입 명세서는 ‘미니 3K’, 전산은 ‘미니어덜트 3kg’, 직원은 ‘미니’라고 적습니다. 같은 물건이 세 줄로 갈라지면 아무리 세도 맞지 않습니다. 그래서 이 칸은 <b>이름을 정하는 일</b>부터 합니다.</p>
     <ul class="clean">
-      <li>검사 전·중·후 <b>12단계를 체크</b>합니다(오늘 날짜로 저장).</li>
-      <li>미완료 항목이 있으면 <b>인계 문구</b>에 자동으로 들어갑니다.</li>
-      <li>2인 체제에서 <b>다음 근무자가 바로 이어받게</b> 만듭니다.</li>
+      <li><b>약봉투 라벨</b> — 보호자에게 나가는 봉투에 약 이름과 용법을 한 줄로 적습니다.</li>
+      <li><b>품목 이름표</b> — 제품마다 위치·구분·이름·하는 일·성분·최소수량 6칸을 만들어 붙입니다.</li>
+      <li><b>이름 통일</b> — 사입·판매·진열 이름을 하나로 붙이는 규칙을 정합니다.</li>
     </ul>
+    <div class="callout"><b>그물망 연결:</b> 재고관리 순서는 <b>GLN(라벨·이름 붙이기) → GAN(사입 명세서·단가 비교·정산)</b>입니다. “재고관리 뭘 해야 되나요?”라는 질문에는 <b>GLN으로 시작해서 GAN까지</b>라고 답해 주세요.<br>검사실 12단계 루틴은 <b>GPN</b>(포지션·자리 지도)으로 옮겼습니다. 이 칸은 라벨과 재고만 봅니다.</div>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>오늘의 검사실 루틴<small>체크하면 자동 저장 · 날짜가 바뀌면 새로 시작</small></h2></div>
+    <div class="sec-head"><span class="num">2</span><h2>약봉투 라벨<small>보호자가 집에서 보는 이름표 — 약 이름과 용법을 그대로</small></h2></div>
+    <p>약 이름·1일 몇 회·식전·식후만 넣으면 봉투에 적을 문구가 나옵니다. 보호자가 “이거 어떻게 먹이죠?”라고 다시 묻지 않게, <b>약 이름을 봉투에 적어 드리는 것</b>이 라벨의 핵심입니다.</p>
     <div class="grid2">
-      <div class="field"><label>날짜</label><input id="date" type="date"></div>
-      <div class="field"><label>담당</label><input id="who" type="text" placeholder="예: 진료검사과"></div>
+      <div class="field"><label>아이 이름 <span class="hint">선택</span></label><input id="rxPet" type="text" placeholder="예: 콩이"></div>
+      <div class="field"><label>조제일</label><input id="rxDate" type="date"></div>
     </div>
-    <div id="checks"></div>
-    <div class="progress">
-      <div class="t"><span>완료</span><span id="progT">0 / 12</span></div>
-      <div class="bar"><i id="progBar"></i></div>
+    <div class="tbl-wrap">
+      <table class="tbl" id="rxTable">
+        <thead><tr><th style="min-width:96px">약 이름 · 용량</th><th style="min-width:78px">1일</th><th style="min-width:78px">식전·식후</th><th></th></tr></thead>
+        <tbody id="rxBody"></tbody>
+      </table>
     </div>
-    <div class="btns"><button class="btn ghost wide" id="reset" type="button">오늘 체크 초기화</button></div>
+    <div class="btns"><button class="btn ghost wide" id="rxAdd" type="button">+ 약 한 줄 더</button></div>
+    <div class="field" style="margin-top:11px"><label>주의 한 줄 <span class="hint">봉투에 함께 인쇄·필기</span></label><input id="rxCau" type="text" placeholder="예: 식후 30분, 물과 함께 / 산책 전에는 먹이지 마세요"></div>
+
+    <div class="lbl-card" id="lblCard">
+      <div class="lbl-top"><span class="lbl-hosp">굿모닝펫동물병원</span><span class="lbl-date" id="lblDate">2026. 11. 28</span></div>
+      <div class="lbl-pet" id="lblPet">아이 이름</div>
+      <ul class="lbl-lines" id="lblLines"><li>· 약 이름을 위에 적으면 여기에 나옵니다</li></ul>
+      <div class="lbl-cau" id="lblCau">주의: 식후 30분, 물과 함께</div>
+      <div class="lbl-foot">약봉투 하단에는 조제일을 적습니다 · 문의 031-715-7119</div>
+    </div>
+
+    <div class="btns">
+      <button class="btn primary" id="rxCopy" type="button">📋 라벨 문구 복사</button>
+      <button class="btn ghost" id="rxReset" type="button">라벨 지우기</button>
+    </div>
+    <p class="note">1회 몇 정인지는 <b>약 이름 칸에 함께</b> 적어 주세요(예: 아목시실린 250mg 0.5정). 실제 병원에서는 봉투 사진을 찍어 조제방에 남기고, 새 약이 나갈 때 <b>봉투에 안내문을 넣는 기간</b>을 정해 두면 안내 누락이 줄어듭니다.</p>
+
+    <div class="photo-slot">
+      <span class="ic">✍️</span>
+      <b>원장님이 약봉투에 직접 쓴 편지</b>
+      <p>보호자 안내 자료에서 이 이미지를 찾는 대로 이 자리에 넣습니다. (자료 준비 중)</p>
+    </div>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">3</span><h2>인계 메모<small>다음 근무자가 먼저 봐야 할 것</small></h2></div>
-    <div class="field"><label>특이사항 <span class="hint">한 줄씩</span></label><textarea id="memo" style="min-height:88px" placeholder="예: 혈액검사 장비 QC 재확인 필요&#10;콩이 SDMA 재검 예정"></textarea></div>
-    <div class="field"><label>다음 근무자에게</label><select id="next"><option>진료검사과</option><option>원무과</option><option>원장님</option></select></div>
+    <div class="sec-head"><span class="num">3</span><h2>품목 이름표 6칸<small>제품마다 하나 — 직원이 물어보지 않게</small></h2></div>
+    <p>이름표는 참관 브리핑에서 쓰는 <b>5요소(위치·구분·이름·하는 일·최소수량)</b>에 검색용 <b>성분·제형</b> 한 칸을 더해 6칸으로 적습니다. 이 칸이 있으면 원무과 직원이 모르는 제품도 찾아서 답할 수 있습니다.</p>
+    <div class="grid2">
+      <div class="field"><label>위치 <span class="hint">선반 자리</span></label><input id="pPos" type="text" placeholder="예: 9-10.2 / 사료장 2열 3번"></div>
+      <div class="field"><label>구분</label>
+        <select id="pCat">
+          <option>처방제</option><option>처방식</option><option>일반식</option><option>간식</option>
+          <option>영양제</option><option>백신</option><option>키트</option><option>원내 소모품</option><option>미용·용품</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>이름 <span class="hint">라벨에 인쇄된 그대로 · 브랜드+제품명+용량</span></label><input id="pName" type="text" placeholder="예: ○○ 간 서포트 60정"></div>
+    <div class="grid2">
+      <div class="field"><label>하는 일 <span class="hint">기능</span></label><input id="pUse" type="text" placeholder="예: 간 보조"></div>
+      <div class="field"><label>성분 · 제형</label><input id="pIng" type="text" placeholder="예: 밀크시슬 · 알약"></div>
+    </div>
+    <div class="field"><label>최소수량 <span class="hint">이 수량 이하 = 바로 발주</span></label><input id="pMin" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 4"></div>
+
+    <div class="plate" id="plate">
+      <span class="pos" id="plPos">9-10.2 · 처방제</span>
+      <div class="nm" id="plName">제품 이름을 적으면 여기에 나옵니다</div>
+      <div class="rowx"><b>하는 일</b><span id="plUse">—</span></div>
+      <div class="rowx"><b>성분·제형</b><span id="plIng">—</span></div>
+      <div class="min" id="plMin">최소수량 — 개 (이하이면 발주)</div>
+      <div class="std" id="plStd">표준 이름: <b>[구분] 이름 (성분·제형)</b></div>
+    </div>
+    <div class="btns"><button class="btn primary wide" id="pCopy" type="button">📋 이름표 문구 복사</button></div>
+    <p class="note">전산(인투) 상품명도 같은 틀입니다 — <b>위치코드 + [구분] + 제품명 + 용량 + (기능·성분)</b>. 예: <b>#9-10.2[처방제] 제품명 250mg</b>. 이름표를 이 틀에 맞춰 두면 사입 명세서·전산 판매·진열이 한 이름으로 붙습니다.</p>
   </section>
 
-  <div id="out"></div>
+  <section class="card">
+    <div class="sec-head"><span class="num">4</span><h2>사입품 품목명 통일<small>사입·판매·진열을 한 이름으로</small></h2></div>
+    <p>형식은 <b>브랜드 + 제품명 + 용량</b> 하나입니다. 제형·기능은 이름이 아니라 이름표의 속성 칸에 적습니다.</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>좋은 이름</th><th>이렇게 갈라진 이름</th></tr></thead>
+        <tbody>
+          <tr><td class="l">로얄캐닌 미니어덜트 3kg</td><td class="l">로얄캐닌 미니 3K / 미니어덜트 / 미니3</td></tr>
+          <tr><td class="l">힐스 c/d 1.5kg</td><td class="l">힐스 씨디 / c/d 멀티케어</td></tr>
+          <tr><td class="l">○○ 간 서포트 60정</td><td class="l">간영양제 / 간에좋은거</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="clean" style="margin-top:11px">
+      <li><b>라벨 그대로</b> — 제품 겉면에 인쇄된 이름을 씁니다. 직원 줄임말·애칭은 금지입니다.</li>
+      <li><b>용량은 소문자 kg·g·ml·정</b> — <span class="small">3kg · 500ml · 60정</span></li>
+      <li><b>한 품목 한 이름</b> — 이미 있는 품목은 새 이름을 만들지 않고 검색해서 씁니다.</li>
+      <li><b>신제품은 등록 뒤에</b> — 원장님(또는 실장님)이 판매가·용도(판매용/원내 소모품)를 확정한 뒤 등록하고, 그 전에는 ‘🆕 신제품’으로 표시합니다.</li>
+      <li><b>바코드·거래처 코드는 비고에</b> — 검색 보조용이고, 이름에는 넣지 않습니다.</li>
+    </ul>
+    <div class="callout"><b>실제 데이터:</b> 2026년 1~10월 사입은 <b>2,860건</b>인데 품목명은 <b>876개</b>, 거래처는 <b>85곳</b>이었습니다. 이름이 갈라진 만큼 같은 약이 여러 줄로 나옵니다. 합치는 순서는 ① 라벨·성분을 사진으로 한 번 모으고 ② 같은 물건을 하나로 합치고 ③ <b>사입 이름 ↔ 전산 이름</b>을 나란히 놓고 짝을 맞히는 것입니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">5</span><h2>재고관리 규칙 5가지<small>외우지 말고 이 다섯 줄만</small></h2></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="text-align:left">규칙</th><th style="text-align:left">없으면 생기는 일</th></tr></thead>
+        <tbody>
+          <tr><td class="l"><b>① 이름표 붙이기</b></td><td class="l">직원이 물건 위치를 매번 묻습니다</td></tr>
+          <tr><td class="l"><b>② 최소수량 표시</b></td><td class="l">주문할까 말까 매번 물어보고, 결국 품절됩니다</td></tr>
+          <tr><td class="l"><b>③ 선입선출</b></td><td class="l">뒤에서 유통기한이 터집니다</td></tr>
+          <tr><td class="l"><b>④ 이름 통일</b></td><td class="l">사입과 판매가 안 맞아 마진이 틀어집니다</td></tr>
+          <tr><td class="l"><b>⑤ 입출고 기록</b></td><td class="l">재고 수량을 아무도 모릅니다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-head" style="margin-top:16px"><span class="num" style="background:#fbf3df;color:#8a631f;border-color:#ecdcb8">계산</span><h2 style="font-size:15px">최소수량 정하기<small>“이거 주문할까요?”를 없애는 숫자</small></h2></div>
+    <div class="grid2">
+      <div class="field"><label>지난 3개월 판매량</label><input id="q3" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 30"></div>
+      <div class="field"><label>배송 소요(주)</label><input id="wk" type="number" inputmode="numeric" min="1" step="1" value="2"></div>
+    </div>
+    <div class="result">
+      <div class="kv"><span class="k">일주일 평균</span><span class="v"><span id="rAvg">—</span>개</span></div>
+      <div class="kv"><span class="k">배송 오는 동안 쓸 양</span><span class="v"><span id="rNeed">—</span>개</span></div>
+      <div class="kv"><span class="k">최소수량 (올림)</span><span class="v ok"><span id="rMin">—</span>개</span></div>
+    </div>
+    <p class="note">계산은 <b>3개월 판매량 ÷ 13주 = 일주일 평균</b>, 여기에 <b>배송 소요(보통 2주)</b>를 곱해 올림한 값입니다. 처음에는 감으로 잡아도 됩니다. <b>3개월 뒤에 한 번만 손보세요.</b> 정답을 맞히는 것보다 기준이 있는 게 먼저입니다. 이 숫자를 읽어 최소수량 이하 품목을 발주 목록으로 뽑는 곳이 <b>GAN</b>입니다.</p>
+  </section>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">5</span><h2>검사실 오류의 3대 원인<small>장비보다 사람에서 많이 납니다</small></h2></div>
+    <div class="sec-head"><span class="num">6</span><h2>굿모닝펫은 이렇게 합니다<small>지금 쓰는 방식 그대로</small></h2></div>
     <ul class="clean">
-      <li><b>검체 라벨</b> — 보호자·아이 이름을 소리 내어 확인합니다.</li>
-      <li><b>시약 유효기간</b> — 개봉일을 적어 두고, 만료 전에 교체합니다.</li>
-      <li><b>QC 생략</b> — 바쁜 날일수록 생략됩니다. QC 없는 결과는 다시 뽑아야 합니다.</li>
+      <li><b>목요일 17:00</b> — 재고·사입 입고·유통기한·품절을 정리합니다. 12대 정기 업무 중 11번이고, <b>원무과와 진료검사과가 함께</b> 봅니다.</li>
+      <li><b>사입 명세서는 드라이브에</b> — `04_정산_H총팀장_작업실 &gt; 사입_명세서_이미지`에 과별로 올립니다(원무과 / 진료검사과).</li>
+      <li><b>상품명에 자리를 함께 적습니다</b> — 인투 상품명은 위치코드(#)·구분([ ])·성분·제형이 한 줄에 들어 있습니다. 위치코드는 선반 자리 37곳을 씁니다. 이름표도 같은 틀로 맞춥니다.</li>
+      <li><b>박스와 낱개를 나눠 셉니다</b> — 입고는 박스·낱개로 나눠 적고, 반품도 같은 표에 남깁니다(용품입고·처방약품입고·백신입고·반품).</li>
+      <li><b>거래처 이름 뒤에 조건을 붙입니다</b> — 결제 주기와 주문 방법을 이름에 함께 적어 두면(예: ○○(홈/즉카/3달전)) 발주·정산할 때 다시 묻지 않습니다.</li>
     </ul>
-    <div class="callout"><b>그물망 연결:</b> 결과는 <b>GDN</b>으로 해설하고, 보호자 안내는 <b>GTN</b>으로 보냅니다. 검사실에서 끝나지 않게 이어 주세요.</div>
+    <div class="callout ok"><b>이 칸의 결론 한 줄:</b> 라벨과 이름표는 첫 달에 한 번만 만들면 되고, 그 뒤로는 <b>신제품만 추가</b>됩니다. 재고 관리가 안 되는 건 의지 문제가 아니라 <b>적어 둔 게 없어서</b>입니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">7</span><h2>이름을 정했으면 GAN으로<small>사입 명세서를 올려 단가를 비교합니다</small></h2></div>
+    <p>라벨로 이름을 정했으면, 이제 <b>GAN에서 사입 명세서를 올려 단가를 비교</b>하세요. 같은 이름으로 올려야 이전 단가와 달라진 품목이 자동으로 표시됩니다.</p>
+    <figure class="shot">
+      <img src="assets/previews/gan.jpg" width="480" height="360" alt="GAN 사입·정산 계산기 화면" loading="lazy" decoding="async">
+      <figcaption>GAN 사입·정산 계산기 — 품목·수량·단가를 넣으면 마진율과 발주 문구가 나옵니다.</figcaption>
+    </figure>
+    <div class="go-row">
+      <a class="btn solid" href="gan.html">GAN 사입·정산 열기</a>
+      <a class="btn ghost" href="rebuy.html">GSN 재구매·주문 보기</a>
+    </div>
+    <div class="callout"><b>그물망 연결:</b> 이름표에 없는 품목은 ‘🆕 신제품’으로 뽑아 확인하고, 확정되면 <b>GQN</b> 보고 퀴즈로 넘겨 직원이 같이 공부합니다. 판매 이력으로 재구매를 보는 곳은 <b>GSN</b>입니다.</div>
   </section>
 
   <nav class="webnav" aria-label="그물망 이웃 칸">
@@ -101,81 +252,169 @@
 
 (function () {
   var $ = G.q;
-  var ITEMS = [
-    '장비 전원·프린터 상태 확인', '냉장 보관 시약 온도 확인', '시약 유효기간·개봉일 확인',
-    '장비 QC(정도관리) 실시', '검체 라벨(보호자·아이 이름) 확인', '검사 항목·의뢰 내용 대조',
-    '검체 처리·원심분리 순서 준수', '결과 값 이상치 표시 확인', '결과 입력·차트 반영',
-    '이상 결과 원장님께 즉시 보고', '폐기물·날카로운 도구 정리', '장비 청소·다음 근무 인계'
-  ];
-  var KEY = 'gln_check_v1';
-  var host = $('#checks');
-  host.innerHTML = ITEMS.map(function (t, i) {
-    return '<label class="check"><input type="checkbox" data-i="' + i + '"><span><b>' + (i + 1) + '.</b> ' + t + '</span></label>';
-  }).join('');
+  var qa = G.qa;
 
-  function key() { return KEY + '_' + ($('#date').value || G.today()); }
-  function load() {
-    try {
-      var o = JSON.parse(localStorage.getItem(key()) || '{}');
-      G.qa('input[type=checkbox]', host).forEach(function (c) {
-        c.checked = !!o[c.getAttribute('data-i')];
-      });
-    } catch (e) {}
-    progress();
-    if (kit) kit.refresh();
+  /* ---------- 2. 약봉투 라벨 ---------- */
+  var rxBody = $('#rxBody');
+  var DAYS = ['1일 1회', '1일 2회', '1일 3회', '1일 4회'];
+  var WHEN = ['식후', '식전', '공복', '아무 때나'];
+
+  function opts(arr, pick) {
+    return arr.map(function (v) {
+      return '<option' + (v === pick ? ' selected' : '') + '>' + v + '</option>';
+    }).join('');
   }
-  function save() {
-    var o = {};
-    G.qa('input[type=checkbox]', host).forEach(function (c) {
-      if (c.checked) o[c.getAttribute('data-i')] = 1;
+  function rxRow() {
+    return '<tr>' +
+      '<td><input class="tin name rxname" type="text" placeholder="약 이름·용량"></td>' +
+      '<td class="sl"><select class="tin rxday">' + opts(DAYS, '1일 2회') + '</select></td>' +
+      '<td class="sl"><select class="tin rxwhen">' + opts(WHEN, '식후') + '</select></td>' +
+      '<td><button class="del" type="button" aria-label="줄 삭제">×</button></td>' +
+    '</tr>';
+  }
+  for (var i = 0; i < 3; i++) rxBody.insertAdjacentHTML('beforeend', rxRow());
+
+  function rxItems() {
+    return qa('tr', rxBody).map(function (tr) {
+      return {
+        name: $('.rxname', tr).value.trim(),
+        day: $('.rxday', tr).value,
+        when: $('.rxwhen', tr).value
+      };
+    }).filter(function (x) { return x.name; });
+  }
+  function rxDateStr() {
+    var v = $('#rxDate').value || G.today();
+    return v.replace(/-/g, '. ');
+  }
+  function rxPetStr() {
+    var p = ($('#rxPet').value || '').trim();
+    return p ? p : '';
+  }
+  function rxLines() {
+    return rxItems().map(function (x) {
+      return '· ' + x.name + ' ' + x.day + ' ' + x.when;
     });
-    try { localStorage.setItem(key(), JSON.stringify(o)); } catch (e) {}
-    progress();
-    if (kit) kit.refresh();
   }
-  function progress() {
-    var n = G.qa('input[type=checkbox]', host).filter(function (c) { return c.checked; }).length;
-    $('#progT').textContent = n + ' / ' + ITEMS.length;
-    $('#progBar').style.width = (n / ITEMS.length * 100) + '%';
+  function paintLabel() {
+    var pet = rxPetStr();
+    var lines = rxLines();
+    var cau = ($('#rxCau').value || '').trim();
+    $('#lblDate').textContent = rxDateStr();
+    $('#lblPet').textContent = pet || '아이 이름';
+    $('#lblLines').innerHTML = (lines.length ? lines : ['· 약 이름을 위에 적으면 여기에 나옵니다'])
+      .map(function (t) { return '<li>' + G.esc(t) + '</li>'; }).join('');
+    $('#lblCau').textContent = cau ? '주의: ' + cau : '주의: —';
+    $('#lblCau').style.display = '';
   }
-  function missing() {
-    return ITEMS.filter(function (t, i) {
-      var c = q('input[data-i="' + i + '"]', host);
-      return c && !c.checked;
+  function rxText() {
+    var lines = rxLines();
+    var cau = ($('#rxCau').value || '').trim();
+    var head = (rxPetStr() ? rxPetStr() + '\n' : '');
+    var body = (lines.length ? lines.join('\n') : '· 약 이름을 적어 주세요');
+    var tail = (cau ? '주의: ' + cau + '\n' : '') + rxDateStr() + ' · 굿모닝펫동물병원';
+    return head + body + '\n' + tail;
+  }
+
+  rxBody.addEventListener('input', paintLabel);
+  rxBody.addEventListener('change', paintLabel);
+  rxBody.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.del') : null;
+    if (!b) return;
+    var tr = b.parentNode.parentNode;
+    if (rxBody.children.length <= 1) {
+      qa('input', tr).forEach(function (x) { x.value = ''; });
+    } else {
+      tr.parentNode.removeChild(tr);
+    }
+    paintLabel();
+  });
+  $('#rxAdd').addEventListener('click', function () {
+    rxBody.insertAdjacentHTML('beforeend', rxRow());
+    paintLabel();
+  });
+  $('#rxDate').value = G.today();
+  ['rxPet', 'rxDate', 'rxCau'].forEach(function (id) {
+    $('#' + id).addEventListener('input', paintLabel);
+    $('#' + id).addEventListener('change', paintLabel);
+  });
+  $('#rxReset').addEventListener('click', function () {
+    $('#rxPet').value = '';
+    $('#rxCau').value = '';
+    $('#rxDate').value = G.today();
+    rxBody.innerHTML = '';
+    for (var k = 0; k < 3; k++) rxBody.insertAdjacentHTML('beforeend', rxRow());
+    paintLabel();
+    G.toast('라벨을 비웠습니다');
+  });
+  $('#rxCopy').addEventListener('click', function () {
+    G.copy(rxText()).then(function (ok) {
+      G.toast(ok ? '약봉투 라벨 문구를 복사했습니다' : '복사하지 못했습니다. 미리보기에서 직접 선택해 주세요');
     });
+  });
+  paintLabel();
+
+  /* ---------- 3. 품목 이름표 ---------- */
+  function plateText() {
+    var pos = ($('#pPos').value || '').trim();
+    var cat = $('#pCat').value;
+    var name = ($('#pName').value || '').trim();
+    var use = ($('#pUse').value || '').trim();
+    var ing = ($('#pIng').value || '').trim();
+    var min = ($('#pMin').value || '').trim();
+    var t = '[이름표]\n' +
+      (pos ? pos + ' | ' : '') + cat + '\n' +
+      (name || '(제품 이름)') + '\n' +
+      '하는 일: ' + (use || '—') + '\n' +
+      '성분·제형: ' + (ing || '—') + '\n' +
+      '최소수량: ' + (min ? min + '개 (이하이면 바로 발주)' : '—') + '\n' +
+      '\n[표준 이름] [' + cat + '] ' + (name || '(제품 이름)') + (ing ? ' (' + ing + ')' : '');
+    return t;
   }
-  function q(sel, root) { return (root || document).querySelector(sel); }
-
-  host.addEventListener('change', save);
-  $('#date').value = G.today();
-  $('#date').addEventListener('change', load);
-  ['who', 'memo', 'next'].forEach(function (id) { $('#' + id).addEventListener('input', function () { kit && kit.refresh(); }); });
-  $('#reset').addEventListener('click', function () {
-    G.qa('input[type=checkbox]', host).forEach(function (c) { c.checked = false; });
-    save();
+  function paintPlate() {
+    var pos = ($('#pPos').value || '').trim();
+    var cat = $('#pCat').value;
+    var name = ($('#pName').value || '').trim();
+    var use = ($('#pUse').value || '').trim();
+    var ing = ($('#pIng').value || '').trim();
+    var min = ($('#pMin').value || '').trim();
+    $('#plPos').textContent = (pos ? pos + ' · ' : '') + cat;
+    $('#plName').textContent = name || '제품 이름을 적으면 여기에 나옵니다';
+    $('#plUse').textContent = use || '—';
+    $('#plIng').textContent = ing || '—';
+    $('#plMin').textContent = '최소수량 ' + (min ? min + '개' : '—') + ' (이하이면 발주)';
+    $('#plStd').innerHTML = '표준 이름: <b>[' + G.esc(cat) + '] ' + G.esc(name || '제품 이름') + (ing ? ' (' + G.esc(ing) + ')' : '') + '</b>';
+  }
+  ['pPos', 'pName', 'pUse', 'pIng', 'pMin', 'pCat'].forEach(function (id) {
+    $('#' + id).addEventListener('input', paintPlate);
+    $('#' + id).addEventListener('change', paintPlate);
   });
-
-  var kit = G.outKit({
-    num: 4,
-    title: '다음 근무자에게 보낼 인계',
-    sub: '400자 이내 · 미완료 항목은 자동으로 들어갑니다',
-    build: function () {
-      var d = G.settings();
-      var date = ($('#date').value || G.today()).replace(/-/g, '. ');
-      var miss = missing();
-      var memo = ($('#memo').value || '').trim();
-      var head = '[검사실 인계] ' + date + ' · ' + (($('#who').value || '').trim() || '진료검사과') + '\n';
-      var body = '· 완료 ' + (ITEMS.length - miss.length) + '/' + ITEMS.length + '항목\n' +
-        (miss.length ? '· 미완료: ' + miss.slice(0, 3).join(', ') + (miss.length > 3 ? ' 외 ' + (miss.length - 3) + '건' : '') + '\n' : '· 미완료 없음\n') +
-        (memo ? '· 특이: ' + memo.split('\n').slice(0, 3).join(' / ') + '\n' : '');
-      var tail = '\n다음 근무: ' + $('#next').value + '\n- ' + d.hospital;
-      var text = head + body + tail;
-      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
-    },
-    noShort: true
+  $('#pCopy').addEventListener('click', function () {
+    G.copy(plateText()).then(function (ok) {
+      G.toast(ok ? '이름표 문구를 복사했습니다' : '복사하지 못했습니다. 미리보기에서 직접 선택해 주세요');
+    });
   });
+  paintPlate();
 
-  load();
+  /* ---------- 5. 최소수량 ---------- */
+  function calcMin() {
+    var q3 = parseFloat($('#q3').value);
+    var wk = parseFloat($('#wk').value) || 2;
+    if (!(q3 > 0)) {
+      $('#rAvg').textContent = '—';
+      $('#rNeed').textContent = '—';
+      $('#rMin').textContent = '—';
+      return;
+    }
+    var avg = q3 / 13;
+    var need = avg * wk;
+    $('#rAvg').textContent = (Math.round(avg * 10) / 10).toFixed(1);
+    $('#rNeed').textContent = (Math.round(need * 10) / 10).toFixed(1);
+    $('#rMin').textContent = Math.ceil(need);
+  }
+  $('#q3').addEventListener('input', calcMin);
+  $('#wk').addEventListener('input', calcMin);
+  calcMin();
 })();
 
 </script>

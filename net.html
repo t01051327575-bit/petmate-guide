@@ -126,6 +126,7 @@
 .hex .ring{inset:1px;background:#c6e3f2;transition:background .16s ease}
 .hex .face{inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 5px;text-align:center;transition:filter .16s ease}
 .hex .hc{font-weight:900;letter-spacing:.02em;line-height:1.05;color:#1f6f96}
+.hex .he{font-weight:800;line-height:1.1;letter-spacing:.01em;color:#94a8b3;margin-top:1px;max-width:98%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hex .hl{font-weight:800;line-height:1.16;letter-spacing:-.02em;color:#5d727d;margin-top:2px;max-width:96%}
 .hex.t-care .face{background:linear-gradient(160deg,#f7fcff 0%,#e8f5fd 100%)}
 .hex.t-care .ring{background:#c6e3f2}
@@ -480,9 +481,9 @@ html.sheet-open body{overflow:hidden}
     { code:'GKN', letter:'K', eng:'Kit', ko:'처방복약', short:'처방복약', program:'처방 해설·복약 안내', cat:'guardian', tint:'clinic', href:'gkn.html',
       b:['약별 용량·횟수·일수만 넣으면 총 투약량과 안내가 나옵니다.','언제 몇 알 먹이는지 헷갈리지 않습니다.','복약 문의 전화가 줄고 오투약이 줄어듭니다.'],
       s:['약 이름·용량·횟수·일수 입력','총 투약량·복약 안내 확인','상비약 주의표와 함께 문구 복사'] },
-    { code:'GLN', letter:'L', eng:'Lab', ko:'검사루틴', short:'검사루틴', program:'검사실 12단계 루틴', cat:'clinic', tint:'clinic', href:'gln.html',
-      b:['12단계 체크가 날짜별로 저장돼 인계가 정확합니다.','검사가 같은 순서로 진행돼 기다림이 짧습니다.','빠뜨린 단계가 없어 재검·클레임이 줄어듭니다.'],
-      s:['그날 검사 목록 확인','12단계 체크(날짜별 자동 저장)','미완료 포함 인계 문구 복사'] },
+    { code:'GLN', letter:'L', eng:'Label', ko:'라벨·재고', short:'라벨재고', program:'라벨·이름 붙이기(재고관리 시작)', cat:'admin', tint:'stock', href:'gln.html',
+      b:['약봉투 라벨과 품목 이름표 6칸이 그 자리에서 만들어집니다.','약 이름과 용법이 봉투에 적혀 헷갈리지 않습니다.','이름이 하나로 붙어 재고·발주가 비로소 맞습니다.'],
+      s:['약 이름·1일 횟수·식전식후 입력','품목 이름표 6칸 만들기','최소수량 계산 → GAN에서 발주'] },
     { code:'GMN', letter:'M', eng:'Manual', ko:'온보딩', short:'온보딩', program:'신규 직원 매뉴얼·온보딩', cat:'admin', tint:'admin', href:'gmn.html',
       b:['신규 직원 12단계를 이름별로 체크하고 저장합니다.','새 직원도 같은 기준으로 응대합니다.','교육이 사람마다 달라지지 않습니다.'],
       s:['직원 이름 입력','첫 주 12단계 체크(이름별 저장)','첫 주 안내 문구 복사'] },
@@ -578,6 +579,7 @@ html.sheet-open body{overflow:hidden}
       ' aria-label="' + x.code + ' ' + G.esc(x.ko) + ' — 상세 보기">' +
       '<span class="ring"></span><span class="face">' +
       '<span class="hc" style="font-size:' + fs + 'px">' + x.code + '</span>' +
+      '<span class="he" style="font-size:' + Math.max(7.5, Math.round(W * 0.105)) + 'px">' + (x.eng || '') + '</span>' +
       '<span class="hl" style="font-size:' + ls + 'px">' + G.esc(x.short) + '</span>' +
       '</span></button>';
   }
