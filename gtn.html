@@ -515,16 +515,17 @@ body.hasbar{padding-bottom:78px}
     var lines = ['❤️' + petName() + ' 급여/관리안내'];
     if (nextLine()) lines.push('●' + nextLine());
     if (careLine()) lines.push('●급여관리 : ' + careLine());
-    /* 품목 수: 0~2단계는 전부, 3단계부터 3개, 4단계 2개, 5단계 1개 */
-    var maxN = level <= 2 ? 99 : (level === 3 ? 3 : (level === 4 ? 2 : 1));
+    /* 0 이유 그대로 · 1 이유 짧게 · 2 이유 없이 · 3~5 품목 3→2→1개 (링크는 항상 유지) */
+    var maxN = level <= 2 ? 99 : (level === 3 ? 3 : (level === 4 ? 3 : (level === 5 ? 2 : 1)));
+    var whyLevel = (level === 1 || level === 3) ? 1 : (level >= 2 ? 3 : 0);
     var pk = pkAll.slice(0, maxN);
     if (pk.length) {
       lines.push('');
       lines.push('●권장 사료·처방제 Best');
       pk.forEach(function (it, i) {
         var why = it.s.why || '';
-        if (level >= 1) why = shortWhy(why);
-        if (level >= 3) why = '';
+        if (whyLevel >= 1) why = shortWhy(why);
+        if (whyLevel >= 3) why = '';
         lines.push((i + 1) + '. ' + it.cat.em + ' ' + it.s.name + (why ? ' — ' + why.replace(/—/g, '·') : ''));
       });
     }
@@ -536,7 +537,7 @@ body.hasbar{padding-bottom:78px}
     lines.push(url);
     var text = lines.join('\n');
     if (G.count(text) <= LIMIT) return text;
-    if (level >= 6) return G.cut(text, LIMIT);
+    if (level >= 7) return G.cut(text, LIMIT);
     return buildGsn(level + 1);
   }
 
@@ -628,7 +629,8 @@ body.hasbar{padding-bottom:78px}
     var day = daysCode(G.today());
     var items = pk.map(function (it) { return it.s.name.replace(/,/g, ' ') + ',' + day + ',1,' + catOf(it.s.name); }).join(';');
     /* 형식: 1|병원|보호자|아이|슬로건|카톡|다음예약|심장사상충|품목 (빈 칸 2개 주의) */
-    var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '|' + (G.settings().slogan || '') + '|' + kakao() + '|||' + items;
+    /* 슬로건은 링크 길이를 줄이려고 넣지 않는다(주문 화면 표시용일 뿐) */
+    var d = '1|' + hosp() + '|' + guardianName() + '|' + petName() + '||' + kakao() + '|||' + items;
     return dirUrl() + 'order.html?r=1&d=' + b64url(packStr(d));
   }
   function pageRebuy() { return dirUrl() + 'rebuy.html'; }
