@@ -287,7 +287,7 @@
   <div id="out"></div>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">6</span><h2>상비약 · 복약 주의<small>보호자가 가장 많이 하는 실수</small></h2></div>
+    <div class="sec-head"><span class="num">7</span><h2>상비약 · 복약 주의<small>보호자가 가장 많이 하는 실수</small></h2></div>
     <div class="tbl-wrap">
       <table class="tbl">
         <thead><tr><th>상황</th><th>하지 말 것</th></tr></thead>
@@ -408,6 +408,8 @@
   var state = null;
   var CHK = lsGet(K_CHK, {});
   var viewDate = /^\d{4}-\d{2}-\d{2}$/.test(qDateP) ? qDateP : G.today();
+  state = loadState();
+  saveState();
 
   function loadState() {
     var pet = qPet || lsGet(K_LAST, '') || '';
@@ -1185,7 +1187,7 @@
   }
 
   var kit = G.outKit({
-    num: 5,
+    num: 6,
     title: '보호자에게 보낼 복약 안내',
     sub: '400자 이내 · 시간대·안약 순서까지',
     build: function (st) {
@@ -1383,9 +1385,6 @@
   var kitTimer = null;
 
   /* ================= 시작 ================= */
-  state = loadState();
-  saveState();
-
   $('#date').value = state.date || G.today();
   $('#guardian').value = state.guardian || '';
   $('#pet').value = state.pet || '';
