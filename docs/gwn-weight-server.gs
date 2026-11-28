@@ -107,8 +107,14 @@ function saveWeight_(b) {
   vals[CW.src - 1] = str_(b.src, 20) || 'GWN';
   if (photo) { vals[CW.photo - 1] = photo.url; vals[CW.photoN - 1] = photo.count; }
   vals[CW.id - 1] = id;
-  if (row) sh.getRange(row, 1, 1, HW.length).setValues([vals]);
-  else { sh.appendRow(vals); row = sh.getLastRow(); }
+  if (hadRow) {
+    sh.getRange(row, 1).setNumberFormat('@');
+    sh.getRange(row, 1, 1, HW.length).setValues([vals]);
+  } else {
+    sh.appendRow(vals);
+    row = sh.getLastRow();
+    sh.getRange(row, 1).setNumberFormat('@').setValue(vals[0]);
+  }
   return { ok: true, updated: hadRow, row: row, id: id, photoUrl: photo ? photo.url : '', photoError: photoErr, version: VERSION };
 }
 
@@ -169,8 +175,14 @@ function saveDiet_(b) {
   vals[CD.src - 1] = str_(b.src, 20) || 'GWN';
   if (photo) { vals[CD.photo - 1] = photo.url; vals[CD.photoN - 1] = photo.count; }
   vals[CD.id - 1] = id;
-  if (row) sh.getRange(row, 1, 1, HD.length).setValues([vals]);
-  else { sh.appendRow(vals); row = sh.getLastRow(); }
+  if (hadRow) {
+    sh.getRange(row, 1).setNumberFormat('@');
+    sh.getRange(row, 1, 1, HD.length).setValues([vals]);
+  } else {
+    sh.appendRow(vals);
+    row = sh.getLastRow();
+    sh.getRange(row, 1).setNumberFormat('@').setValue(vals[0]);
+  }
   return { ok: true, updated: hadRow, row: row, id: id, photoUrl: photo ? photo.url : '', photoError: photoErr, version: VERSION };
 }
 
@@ -188,7 +200,7 @@ function list_(sh, headers, pet, guardian, limit) {
     if (petQ && norm_(r[petCol]) !== petQ) continue;
     if (gQ && norm_(r[gCol]) !== gQ) continue;
     var o = {};
-    for (var k = 0; k < headers.length; k++) o[headers[k]] = r[k] instanceof Date ? fmt_(r[k]) : r[k];
+    for (var k = 0; k < headers.length; k++) o[headers[k]] = r[k] instanceof Date ? fmt_(r[k], headers[k]) : r[k];
     out.push(o);
   }
   return out.reverse();
@@ -277,8 +289,12 @@ function str_(v, max) {
 }
 function num_(v) { var n = Number(v); return isFinite(n) ? n : ''; }
 function norm_(v) { return String(v == null ? '' : v).replace(/[\s()\[\]{}·.,-]/g, '').toLowerCase(); }
-function fmt_(v) {
-  if (v instanceof Date) return Utilities.formatDate(v, 'Asia/Seoul', 'yyyy-MM-dd');
+function fmt_(v, kind) {
+  if (v instanceof Date) {
+    if (v.getFullYear() < 1900) return Utilities.formatDate(v, 'Asia/Seoul', 'HH:mm');
+    if (kind === '접수시각') return Utilities.formatDate(v, 'Asia/Seoul', 'yyyy-MM-dd HH:mm');
+    return Utilities.formatDate(v, 'Asia/Seoul', 'yyyy-MM-dd');
+  }
   return String(v == null ? '' : v).trim().replace(/\//g, '-').slice(0, 10);
 }
 function nowStr_() { return Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm'); }
