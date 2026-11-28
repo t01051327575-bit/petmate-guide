@@ -107,6 +107,7 @@ function saveWeight_(b) {
   vals[CW.src - 1] = str_(b.src, 20) || 'GWN';
   if (photo) { vals[CW.photo - 1] = photo.url; vals[CW.photoN - 1] = photo.count; }
   vals[CW.id - 1] = id;
+  vals[0] = atStr_(vals[0]);
   if (hadRow) {
     sh.getRange(row, 1, 1, HW.length).setValues([vals]);
   } else {
@@ -174,6 +175,7 @@ function saveDiet_(b) {
   vals[CD.src - 1] = str_(b.src, 20) || 'GWN';
   if (photo) { vals[CD.photo - 1] = photo.url; vals[CD.photoN - 1] = photo.count; }
   vals[CD.id - 1] = id;
+  vals[0] = atStr_(vals[0]);
   if (hadRow) {
     sh.getRange(row, 1, 1, HD.length).setValues([vals]);
   } else {
@@ -239,15 +241,8 @@ function upload_(photo, rootName, date, pet, guardian) {
   if (!data) throw new Error('사진 데이터가 없습니다.');
   var bytes = Utilities.base64Decode(data);
   if (bytes.length > 8 * 1024 * 1024) throw new Error('사진이 너무 큽니다(8MB 초과).');
-  var props = PropertiesService.getScriptProperties();
-  var key = 'ROOT_' + rootName;
-  var root = null, rootId = props.getProperty(key);
-  if (rootId) { try { root = DriveApp.getFolderById(rootId); } catch (e) { root = null; } }
-  if (!root) {
-    var it = DriveApp.getFoldersByName(rootName);
-    root = it.hasNext() ? it.next() : DriveApp.createFolder(rootName);
-    props.setProperty(key, root.getId());
-  }
+  var it = DriveApp.getFoldersByName(rootName);
+  var root = it.hasNext() ? it.next() : DriveApp.createFolder(rootName);
   var clean = function (s) { return String(s || '').replace(/[\\\/:*?"<>|]/g, '').slice(0, 30); };
   var name = date + '_' + clean(pet) + (guardian ? '_' + clean(guardian) : '');
   var fit = root.getFoldersByName(name);
@@ -296,6 +291,12 @@ function fmt_(v, kind) {
     return Utilities.formatDate(v, tz, 'yyyy-MM-dd');
   }
   return String(v == null ? '' : v).trim().replace(/\//g, '-').slice(0, 10);
+}
+function atStr_(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, tz_(), 'yyyy-MM-dd HH:mm');
+  var s = String(v == null ? '' : v).trim();
+  if (!s || s.indexOf('GMT') >= 0) return nowStr_();
+  return s;
 }
 function tz_() {
   try { return SpreadsheetApp.openById(SHEET_ID).getSpreadsheetTimeZone() || 'Asia/Seoul'; }
