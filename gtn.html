@@ -507,35 +507,39 @@ body.hasbar{padding-bottom:78px}
     return out;
   }
 
-  /* STEP 2 — 급여/관리안내 + Best 1·2·3 + 재구매 링크 */
-  function buildGsn(mode) {
-    /* mode: 0 기본, 1 이유 짧게, 2 이유 없이, 3 링크 없이 */
+  /* STEP 2 — 급여/관리안내 + Best 1·2·3 + 재구매 링크
+     링크는 절대 빼지 않고, 넘치면 이유→품목 수 순서로 줄인다. */
+  function buildGsn(level) {
+    level = level || 0;
+    var pkAll = pickedItems();
     var lines = ['❤️' + petName() + ' 급여/관리안내'];
     if (nextLine()) lines.push('●' + nextLine());
     if (careLine()) lines.push('●급여관리 : ' + careLine());
-    var pk = pickedItems();
+    /* 품목 수: 0~2단계는 전부, 3단계부터 3개, 4단계 2개, 5단계 1개 */
+    var maxN = level <= 2 ? 99 : (level === 3 ? 3 : (level === 4 ? 2 : 1));
+    var pk = pkAll.slice(0, maxN);
     if (pk.length) {
       lines.push('');
       lines.push('●권장 사료·처방제 Best');
       pk.forEach(function (it, i) {
         var why = it.s.why || '';
-        if (mode >= 1) why = shortWhy(why);
-        if (mode >= 2) why = '';
+        if (level >= 1) why = shortWhy(why);
+        if (level >= 3) why = '';
         lines.push((i + 1) + '. ' + it.cat.em + ' ' + it.s.name + (why ? ' — ' + why.replace(/—/g, '·') : ''));
       });
     }
     var link = orderLink();
     var short = (state.shortOrder && state.shortFor === link) ? state.shortOrder : '';
     var url = short || link || pageRebuy();
-    if (mode < 3) {
-      lines.push('');
-      lines.push('🛒 바로 재구매·주문');
-      lines.push(url);
-    }
+    lines.push('');
+    lines.push('🛒 바로 재구매·주문');
+    lines.push(url);
     var text = lines.join('\n');
-    if (G.count(text) <= LIMIT || mode >= 3) return text;
-    return buildGsn(mode + 1);
+    if (G.count(text) <= LIMIT) return text;
+    if (level >= 6) return G.cut(text, LIMIT);
+    return buildGsn(level + 1);
   }
+
   function shortWhy(w) {
     var s = String(w || '').split(/[—(]/)[0].trim();
     return s.length > 16 ? s.slice(0, 15) + '…' : s;
