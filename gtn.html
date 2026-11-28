@@ -557,7 +557,7 @@ body.hasbar{padding-bottom:78px}
     var c = stripHead(cleanBlock($('#comment').value));
     var head = '🔎 ' + petName() + ' 검사 결과 안내 (' + guardianName() + ' 님)';
     var t = (state.tags.length && P) ? P.tag(state.tags[0]) : null;
-    var exam = val('exam') || examGuess() || (t ? t.short : '검사 결과');
+    var exam = val('exam') || examGuess() || '검사 결과';
     var foot = tail();
     var body = ['●검사 : ' + exam];
     if (t) body.push('●쉽게 말하면 : ' + t.explain);
