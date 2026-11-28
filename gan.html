@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GAN 사입·정산 계산기 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta name="description" content="굿모닝펫 GAN — 사입 품목·수량·단가를 넣으면 사입액·판매액·마진율을 계산하고, 이전 단가와 비교해 오른 품목을 표시하며, 거래처에 보낼 발주 문구를 만들어 줍니다. 실제 원무과·진료검사과 매뉴얼 규칙 그대로.">
 <meta name="theme-color" content="#eaf6fb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -15,16 +15,56 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
 <meta property="og:title" content="GAN · 사입·정산 계산기 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta property="og:description" content="명세서가 오면 이름을 맞추고, 단가를 비교하고, 마진을 확정하고, 발주 문구까지. 사입의 6단계를 한 칸에서.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gan.html">
 <meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GAN · 사입·정산 계산기">
-<meta name="twitter:description" content="굿모닝펫 GAN — 사입 품목과 단가를 넣으면 사입액·판매액·마진율을 계산하고, 거래처에 보낼 발주·정산 카톡 문구를 만들어 줍니다.">
+<meta name="twitter:description" content="명세서가 오면 이름을 맞추고, 단가를 비교하고, 마진을 확정하고, 발주 문구까지. 사입의 6단계를 한 칸에서.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* GAN 전용 — 사입 흐름 · 단가 비교 · 매뉴얼 규칙 */
+.steps{list-style:none;margin:10px 0 0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:10px 0 10px 36px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:0;padding-bottom:2px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:11px;width:25px;height:25px;border-radius:8px;
+  background:linear-gradient(135deg,var(--soft),var(--soft2));border:1px solid var(--badge-line);
+  color:var(--brand-d);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;font-size:14px;line-height:1.45;margin-bottom:1px}
+.steps span{display:block;font-size:13px;color:var(--ink-soft);line-height:1.55}
+.srcchip{display:inline-block;font-size:10px;font-weight:800;color:var(--muted);background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:2px;white-space:nowrap}
+.rule-h{font-size:13.5px;font-weight:900;color:var(--brand-d);margin:15px 0 3px;padding-top:11px;border-top:1px solid var(--line);line-height:1.45}
+.rule-h.first{border-top:0;padding-top:0;margin-top:4px}
+.tbl .rate{font-weight:900;white-space:nowrap;font-size:12px}
+.tbl .rate.bad{color:var(--danger)}
+.tbl .rate.warn{color:var(--warn)}
+.tbl .rate.ok{color:var(--ok)}
+.chg{font-size:12px;font-weight:900;white-space:nowrap}
+.chg.up{color:var(--danger)}
+.chg.dn{color:var(--ok)}
+.chg.new{color:var(--brand-d)}
+.chg.same{color:var(--muted)}
+.ex{background:var(--bg);border:1px dashed var(--badge-line);border-radius:13px;padding:11px 13px;margin-top:11px}
+.ex p{margin:5px 0;font-size:13px;line-height:1.6}
+.ex b{color:var(--brand-d)}
+.ex .ans{color:var(--muted)}
+.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;margin-top:10px}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:11.5px;color:var(--muted);padding:7px 10px;line-height:1.5;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.two .shot{margin-top:0}
+.two figcaption{text-align:center}
+@media (max-width:420px){
+  .tbl th,.tbl td{padding:8px 3px}
+  .tin.name{min-width:78px;font-size:14px}
+  .tin{min-width:52px;padding:8px 4px;font-size:14px}
+  .srcchip{font-size:9.5px}
+}
+</style>
 </head>
 <body data-code="GAN">
 <div id="g-top"></div>
@@ -36,33 +76,58 @@
       <span class="eng-chip">A · Accounting</span>
     </div>
     <h1>사입·정산 계산기</h1>
-    <p>품명·수량·단가만 넣으면 사입액·판매액·마진과 거래처 발주 문구까지 한 번에 정리됩니다.</p>
-    <div class="marks"><span>마진율 자동</span><span>발주 문구</span><span>세금계산서</span></div>
+    <p>명세서가 오면 이름을 맞추고, 단가를 비교하고, 마진을 확정하고, 발주 문구까지 — 사입의 6단계를 한 칸에서.</p>
+    <div class="marks"><span>단가 비교</span><span>마진율 자동</span><span>명세서 대조</span><span>발주 문구</span></div>
   </header>
 
   <section class="card">
     <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>A · Accounting — 사입과 정산이 틀어지지 않게</small></h2></div>
-    <p>사입은 <b>단가 하나만 틀려도 마진이 사라집니다</b>. 품목을 넣는 순간 마진율이 보이고, 거래처에 보낼 발주 문구가 같이 만들어집니다.</p>
+    <p>사입은 <b>단가 하나만 틀려도 마진이 사라집니다</b>. 이 칸은 세 가지를 합니다.</p>
     <ul class="clean">
-      <li>사입단가·판매단가로 <b>마진액·마진율</b>을 바로 계산합니다.</li>
-      <li>수량이 바뀌면 합계가 그 자리에서 다시 계산됩니다.</li>
-      <li><b>발주 요청 문구</b>를 400자 이내로 만들어 복사합니다.</li>
+      <li>품목·수량·이번 단가·판매가를 넣으면 <b>사입액·판매액·마진율</b>이 바로 나옵니다.</li>
+      <li><b>이전 단가</b>를 함께 적으면 오른 품목·내린 품목이 표시됩니다. 오르면 <b>★선 보고</b>.</li>
+      <li>명세서 총액을 넣으면 <b>계산 합계와 같은지</b> 대조해 줍니다. 같아야 사입이 끝납니다.</li>
+      <li>거래처에 보낼 <b>발주 문구</b>를 400자 이내로 만들어 복사합니다.</li>
     </ul>
+    <div class="callout"><b>순서가 중요합니다.</b> 명세서가 오면 먼저 <b>GLN</b>에서 이름(라벨)을 맞추고, 이 칸에서 <b>단가를 비교</b>합니다. 이름이 갈라져 있으면 같은 약이 여러 줄로 보여 단가 비교가 안 됩니다.</div>
   </section>
 
   <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>품목 넣기<small>사입 단가와 판매 단가를 함께 적으면 마진이 보입니다</small></h2></div>
+    <div class="sec-head"><span class="num">2</span><h2>실제 사입 흐름 6단계<small>명세서 도착 → 발주 문구 전달까지, 병원에서 하는 순서 그대로</small></h2></div>
+    <ol class="steps">
+      <li><b>① 명세서 도착 — 사진부터 남깁니다</b><span>거래처 메일·카톡으로 온 명세서, 홈페이지 주문은 주문 화면 스샷. 찍어서 드라이브 <b>04_정산_H총팀장_작업실 &gt; 사입_명세서_이미지</b>의 과별 폴더(원무과 / 진료검사과)에 올립니다. 사진이 곧 증빙입니다.<span class="srcchip">진료검사과 매뉴얼</span></span></li>
+      <li><b>② 품목·수량·단가·유통기한 확인</b><span>포장 상태·수량·유통기한을 보고, <b>거래명세서에 사입한 것과 안 한 것을 체크</b>합니다. 입고 입력은 딱 3가지 — <b>입고단가·총수량·유효기간</b>.<span class="srcchip">원무과·진료검사과 매뉴얼</span></span></li>
+      <li><b>③ 이름 통일 — 라벨 기준 품목명</b><span>명세서 이름과 전산 이름이 다르면 <b>GLN 이름표</b>의 이름으로 맞춥니다. 여기 넣는 품명도 같은 이름으로. (예: ‘미니 3K’ → ‘로얄캐닌 미니어덜트 3kg’)<span class="srcchip">GLN</span></span></li>
+      <li><b>④ 단가 비교 — 이전 입고단가와</b><span>지난 입고단가를 ‘이전 단가’ 칸에 적으면 오른 품목이 바로 보입니다. <b>사입가가 바뀌면 ★선 보고</b>하고, 그 품목은 <b>판매가도 같이</b> 손봅니다.<span class="srcchip">원무과 매뉴얼</span></span></li>
+      <li><b>⑤ 판매가·마진 확정</b><span>마진율은 <b>(판매가 − 사입가) ÷ 판매가</b>. 아래 계산기가 줄마다 마진율을 보여 줍니다. 20% 아래는 빨강, 35% 아래는 주황으로 표시합니다(병원 기준선은 실장님이 정합니다).</span></li>
+      <li><b>⑥ 발주 문구 전달</b><span>다음 발주 때는 아래 <b>발주 문구</b>를 복사해 카톡·문자로 보냅니다. 품명·수량·단가·합계·입고 희망일·세금계산서까지 한 번에.<span class="srcchip">원무과 매뉴얼</span></span></li>
+    </ol>
+    <div class="two">
+      <figure class="shot"><img src="assets/prod-food.jpg" width="480" height="480" alt="사입 품목 예시 — 사료" loading="lazy" decoding="async"><figcaption>사료</figcaption></figure>
+      <figure class="shot"><img src="assets/prod-supplement.jpg" width="480" height="480" alt="사입 품목 예시 — 영양제·보조제" loading="lazy" decoding="async"><figcaption>영양제·보조제</figcaption></figure>
+    </div>
+    <p class="note">위 사진은 <b>품목 예시 이미지</b>입니다. 사입하는 품목은 사료·영양제·처방제·백신·원내 소모품처럼 종류가 많아도, 적는 이름은 하나입니다 — 라벨에 인쇄된 그대로.</p>
+    <div class="callout"><b>매주 한 번은 같이 봅니다.</b> 12대 정기 업무 11번 — <b>목요일 17:00</b>에 재고·사입 입고·유통기한·품절을 <b>원무과와 진료검사과가 함께</b> 정리합니다.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">3</span><h2>품목 넣기 · 직접 연습<small>이전 단가를 넣으면 단가 비교까지, 판매가를 넣으면 마진까지</small></h2></div>
     <div class="grid2">
-      <div class="field"><label>거래처</label><input id="vendor" type="text" placeholder="예: 대웅펫"></div>
+      <div class="field"><label>거래처</label><input id="vendor" type="text" placeholder="예: ○○벳"></div>
       <div class="field"><label>발주일</label><input id="date" type="date"></div>
     </div>
     <div class="tbl-wrap">
       <table class="tbl" id="rows">
-        <thead><tr><th style="min-width:96px">품명</th><th style="min-width:52px">수량</th><th style="min-width:78px">사입단가</th><th style="min-width:78px">판매단가</th><th></th></tr></thead>
+        <thead><tr><th style="min-width:82px">품명</th><th style="min-width:44px">수량</th><th style="min-width:60px">이전<br>단가</th><th style="min-width:62px">이번<br>사입단가</th><th style="min-width:62px">판매<br>단가</th><th style="min-width:46px">마진율</th><th></th></tr></thead>
         <tbody id="rowsBody"></tbody>
       </table>
     </div>
-    <div class="btns"><button class="btn ghost wide" id="addRow" type="button">+ 품목 한 줄 더</button></div>
+    <p class="note">표가 좁으면 <b>옆으로 밀어</b> 주세요. ‘이전 단가’는 지난 입고단가이고, 비워 두면 신규 품목으로 봅니다.</p>
+    <div class="btns">
+      <button class="btn ghost" id="addRow" type="button">+ 품목 한 줄 더</button>
+      <button class="btn ghost" id="exFill" type="button">연습 예시 채우기</button>
+      <button class="btn ghost wide" id="exClear" type="button">전부 지우고 새로 적기</button>
+    </div>
 
     <div class="result">
       <div class="kv"><span class="k">총 수량</span><span class="v"><span id="tQty">0</span>개</span></div>
@@ -70,12 +135,19 @@
       <div class="kv"><span class="k">총 판매액</span><span class="v"><span id="tSell">0</span>원</span></div>
       <div class="kv"><span class="k">예상 마진</span><span class="v ok"><span id="tMargin">0</span>원</span></div>
       <div class="kv"><span class="k">평균 마진율</span><span class="v"><span id="tRate">0</span>%</span></div>
+      <div class="kv"><span class="k">단가 변동</span><span class="v"><span id="tChg">—</span></span></div>
     </div>
-    <p class="note">마진율은 <b>(판매가 − 사입가) ÷ 판매가</b> 기준입니다. 부가세 포함·별도는 거래처마다 다르니 아래에서 골라 주세요.</p>
-    <div class="field" style="margin-top:10px"><label>부가세</label>
+
+    <div class="field" style="margin-top:11px"><label>명세서 총액 <span class="hint">적으면 계산 합계와 대조합니다</span></label><input id="bill" type="number" inputmode="numeric" min="0" step="100" placeholder="예: 550000"></div>
+    <div class="result">
+      <div class="kv"><span class="k">명세서와 차액</span><span class="v"><span id="tDiff">—</span></span></div>
+    </div>
+    <p class="note"><b>차액 0원</b>이면 사입이 끝난 것입니다. 원무과 매뉴얼의 마지막 확인도 같습니다 — 입고내역에서 업체명으로 검색해 <b>총입고액 = 거래명세서 금액</b>인지 보는 것.</p>
+
+    <div class="field" style="margin-top:12px"><label>부가세</label>
       <select id="vat">
-        <option value="별도">별도 (합계에 VAT 추가 안내)</option>
         <option value="포함">포함 (합계가 결제 금액)</option>
+        <option value="별도">별도 (합계에 VAT 추가 안내)</option>
         <option value="면세">면세</option>
       </select>
     </div>
@@ -85,18 +157,109 @@
         <select id="tax"><option>발행 요청</option><option>발행 불필요</option><option>이번 달 합산 발행</option></select>
       </div>
     </div>
+    <p class="note">사입가는 <b>부가세 포함·에누리 없이 정가</b>로 적습니다(원무과 매뉴얼). 그래서 부가세 기본값을 <b>포함</b>으로 두었습니다. 할인은 아래 <b>에누리</b>로 따로 뺍니다.</p>
+
+    <div class="ex">
+      <p><b>연습 1 · 이름</b> — ‘미니 3K’라고 적지 말고 <b>‘로얄캐닌 미니어덜트 3kg’</b>처럼 라벨 그대로 적습니다.
+      <p><b>연습 2 · 세트 할인</b> — 정가 13,000원 × 5개 = 65,000원인데 5개 세트가 55,000원이면, <b>에누리 10,000원</b>을 따로 빼서 사입단가 11,000원으로 봅니다.
+      <p><b>연습 3 · 마진</b> — 사입 11,000원 · 판매 16,000원이면 마진 5,000원, 마진율 <b>31.3%</b>. <span class="ans">‘연습 예시 채우기’를 누르면 세 줄이 그대로 들어가고, 계산기가 31.3%를 보여 줍니다.</span></p>
+    </div>
   </section>
 
   <div id="out"></div>
 
-  <section class="card flat">
-    <div class="sec-head"><span class="num">4</span><h2>정산이 틀어지지 않게<small>원무과 체크 3가지</small></h2></div>
-    <ul class="clean">
+  <section class="card">
+    <div class="sec-head"><span class="num">5</span><h2>매뉴얼·강의에서 가져온 규칙<small>직원 매뉴얼과 강의·참관 자료에 적힌 그대로 — 출처를 함께 적었습니다</small></h2></div>
+
+    <div class="rule-h first">① 입고할 때 — 3가지 확인 <span class="srcchip">원무과PPT 전체_수정.pptx</span></div>
+    <ul class="clean tight">
+      <li><b>주문 제품 확인</b> — 시킨 것이 왔는지.</li>
+      <li><b>포장 상태</b> — 파손·누수.</li>
+      <li><b>가격표 부착</b> — 우측 하단 고정, 낱개로 파는 것은 박스에 붙입니다.</li>
+      <li>진료검사과 매뉴얼도 같은 순서입니다 — <b>포장 상태·수량·유통기한 확인 → 거래명세서에 체크 표시(사입한 것과 안 한 것 구분) → 유통기한 보이게 정리</b>. <span class="srcchip">진료검사과 매뉴얼</span></li>
+    </ul>
+
+    <div class="rule-h">② 입력할 때 — 3칸과 4가지 약속 <span class="srcchip">원무과PPT 전체_수정.pptx</span></div>
+    <ul class="clean tight">
+      <li><b>입고단가 · 총수량 · 유효기간</b> 세 칸을 채웁니다.</li>
+      <li>사입가는 <b>부가세 포함, 에누리 없이 정가</b>로 입력합니다. <b>사입가가 바뀌면 ★선 보고.</b></li>
+      <li>총수량은 <b>증정까지 합친 수</b>로 넣습니다 (예: 10+2 = 12개).</li>
+      <li>총입고액은 <b>사입가 × 총갯수</b>. 할인 금액은 금액에서 깎지 말고 <b>에누리로</b> 뺍니다.</li>
+      <li>인투 입력은 <b>재고관리 &gt; 입고 &gt; 물품 검색 &gt; 물품 클릭 &gt; 수량·유통기한·입고금액 확인 후 저장</b>. 사입가가 달라지면 카톡방에 <b>노란별</b>로 남깁니다. <span class="srcchip">진료검사과 매뉴얼</span></li>
+    </ul>
+
+    <div class="rule-h">③ 할인·증정은 ‘에누리’로 — 3단계 <span class="srcchip">원무과PPT 전체_수정.pptx</span></div>
+    <ul class="clean tight">
+      <li>재고관리 &gt; 입고에서 전체검색 <b>‘에누리’</b> → 업체 선택 → <b>총입고수량 -1</b>, <b>총입고액 -(할인비용)</b> → 저장.</li>
+      <li>재고조회에서 <b>[에누리]</b> -1수량 업체를 찾아 <b>재고 0</b>으로 저장.</li>
+      <li>입고내역에서 업체명으로 검색해 <b>총입고액 = 거래명세서 금액</b>이면 사입 완료.</li>
+    </ul>
+    <p class="note">원가가 같아도 할인율이 다르면 단가가 틀어지기 때문입니다. 증정품은 <b>0원으로 분리</b>해 입력하고, 포인트·세트 할인도 같은 방식으로 뺍니다.</p>
+
+    <div class="rule-h">④ 신제품 — 등록하고, 공부하게 합니다</div>
+    <ul class="clean tight">
+      <li>신제품이 오면 <b>사입가·판매가·하는 일·업체</b>를 확인합니다. 사은품이라 가격이 없으면 <b>실장님 노란별로 컨펌</b>을 받습니다. <span class="srcchip">원무과·진료검사과 매뉴얼</span></li>
+      <li>게시글 표기는 <b>(노란별) [신제품 : 구분(특징) 제품명]</b> + 링크 + 사입가/판매가 + 급여량 + 특징. <span class="srcchip">원무과PPT 전체_수정.pptx</span></li>
+      <li>신제품을 만들 때는 <b>최소수량도 함께</b> 넣습니다. 이름표에 없던 품목은 <b>🆕 신제품</b>으로 뽑아 확인하고, 확정되면 <b>GQN</b> 보고 퀴즈로 넘겨 직원이 같이 공부합니다.</li>
+    </ul>
+
+    <div class="rule-h">⑤ 정산·보고 — 바뀐 것은 숨기지 않고 적습니다</div>
+    <ul class="clean tight">
+      <li>주간 특이사항에 <b>사입가변경 · 프로모션 · 입고지연 · 교환보고</b>를 적습니다. <span class="srcchip">원무과PPT 전체_수정.pptx</span></li>
+      <li>보고는 세 가지만 — <b>무슨 일 · 어떻게 처리 중 · 언제까지</b>. “언제까지”가 있어야 기억합니다. 매일 3줄, 금요일엔 한 주를 모아서. <span class="srcchip">강의PPT_v28 109장</span></li>
+      <li>직원 도구 중 하나가 <b>‘재고를 보이게 관리하기’</b> — <b>위치 · 구분 · 이름 · 하는 일 · 최소수량</b>. “기억과 참는 힘이 아니라, 기록과 시스템으로 일합니다.” <span class="srcchip">강의PPT_v28 135장</span></li>
+      <li>참관 자료의 <b>사입장부</b>는 <b>거래명세서 사진 → 월별 사입·결제 정리</b>입니다. 주 보고에 재고 2개 이하·유통기한, 월 보고에 다음 달 처리 건·재고 10개 이상을 함께 봅니다. <span class="srcchip">참관자료 261121</span></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">6</span><h2>월말에 한 번<small>모아서 보고, 다음 달 발주를 정합니다</small></h2></div>
+    <h3>월말정산 순서 <span class="srcchip">원무과PPT 전체_수정.pptx</span></h3>
+    <ol class="steps" style="margin-top:4px">
+      <li><b>마지막 전 주 수요일</b><span>금액만 확인하고 엑셀에 기록합니다.</span></li>
+      <li><b>마지막 주 화요일</b><span>업체에 이달 사입 리스트 엑셀 파일을 요청합니다.</span></li>
+      <li><b>수요일</b><span>금액을 더해 업체가 보낸 파일과 맞춰 봅니다.</span></li>
+      <li><b>월말보고</b><span>엑셀은 카톡과 게시글에, 입금한 업체만 캡처해서 올립니다.</span></li>
+    </ol>
+    <p class="note">업체 알림은 <b>해당 월 1~31일 사입업체 중 금액이 찍힌 곳</b>에만 보냅니다. 주문은 없는데 결제 기록이 있으면 따로 확인합니다.</p>
+
+    <h3 style="margin-top:16px">월말 점검 6가지</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="text-align:left">볼 것</th><th style="text-align:left">할 일</th></tr></thead>
+        <tbody>
+          <tr><td class="l"><b>최소수량 이하</b></td><td class="l">이번 주 발주 목록으로 바로 뽑기</td></tr>
+          <tr><td class="l"><b>유통기한 3개월 내</b></td><td class="l">할인·소진 계획 세우기</td></tr>
+          <tr><td class="l"><b>3개월 무판매</b></td><td class="l">발주 중단 또는 반품 검토</td></tr>
+          <tr><td class="l"><b>마진 낮은 품목</b></td><td class="l">판매가 조정 또는 대체품 검토</td></tr>
+          <tr><td class="l"><b>마진 좋은데 안 팔림</b></td><td class="l">권장 문구(GTN)에 얹어 밀어보기</td></tr>
+          <tr><td class="l"><b>잘 나가는 품목·계절성</b></td><td class="l">다음 달 발주량과 초점 정하기</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">판매 내역은 한 달에 한 번 전산에서 내려받아 올립니다. 사입은 들어온 날, 판매는 한 달에 한 번 — 병원이 준비할 것은 이 <b>두 가지</b>뿐입니다. 월말에는 품목별 판매 순위와 부진 품목, 우리 병원 성격, 다음 달 초점을 함께 봅니다.</p>
+
+    <h3 style="margin-top:16px">정산이 틀어지지 않게 — 체크 3가지</h3>
+    <ul class="clean tight">
       <li>거래명세서와 <b>품목·수량·단가</b>를 한 줄씩 대조합니다.</li>
       <li>사입가가 바뀐 품목은 <b>판매가도 같이</b> 손봅니다.</li>
       <li>세금계산서 발행일과 입금일을 <b>같은 달</b>로 맞춥니다.</li>
     </ul>
     <div class="callout"><b>그물망 연결:</b> 정산이 끝나면 <b>GSN</b>(재구매·주문)으로 재고를, <b>GPN</b>(포지션·마감)으로 일보를 이어서 정리하세요.</div>
+  </section>
+
+  <section class="card">
+    <div class="sec-head"><span class="num">7</span><h2>이름(라벨)을 먼저 통일하고, 여기서 단가를 비교하세요<small>GLN → GAN 순서</small></h2></div>
+    <p>사입 명세서·전산 판매·진열 이름이 갈라져 있으면 같은 약이 여러 줄로 나와 <b>단가 비교가 되지 않습니다</b>. GAN에 넣기 전에 <b>GLN에서 이름표 이름을 먼저</b> 정해 두세요.</p>
+    <figure class="shot">
+      <img src="assets/previews/gln.jpg" width="480" height="360" alt="GLN 라벨·재고관리 화면" loading="lazy" decoding="async">
+      <figcaption>GLN 라벨·재고관리 — 약봉투 라벨과 품목 이름표(위치·구분·이름·하는 일·성분·최소수량)를 만드는 칸입니다.</figcaption>
+    </figure>
+    <div class="btns">
+      <a class="btn solid" href="gln.html">GLN에서 이름표 만들기</a>
+      <a class="btn ghost" href="rebuy.html">GSN 재구매·주문 보기</a>
+    </div>
+    <div class="callout"><b>그물망 연결:</b> 이름표에 없는 품목은 <b>🆕 신제품</b>으로 뽑아 확인하고, 확정되면 <b>GQN</b> 보고 퀴즈로 직원이 같이 공부합니다. 최소수량 이하 품목을 발주 목록으로 뽑는 것도 이름표가 기준입니다.</div>
   </section>
 
   <nav class="webnav" aria-label="그물망 이웃 칸">
@@ -126,8 +289,10 @@
     return '<tr>' +
       '<td><input class="tin name" type="text" inputmode="text" placeholder="품명"></td>' +
       '<td><input class="tin qty" type="number" inputmode="numeric" min="0" step="1" placeholder="0"></td>' +
+      '<td><input class="tin prev" type="number" inputmode="numeric" min="0" step="10" placeholder="—"></td>' +
       '<td><input class="tin buy" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></td>' +
       '<td><input class="tin sell" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></td>' +
+      '<td class="rate">—</td>' +
       '<td><button class="del" type="button" aria-label="줄 삭제">×</button></td>' +
     '</tr>';
   }
@@ -147,7 +312,7 @@
     refresh();
   });
   body.addEventListener('input', refresh);
-  ['vendor', 'date', 'vat', 'hope', 'tax'].forEach(function (id) {
+  ['vendor', 'date', 'vat', 'hope', 'tax', 'bill'].forEach(function (id) {
     $('#' + id).addEventListener('input', refresh);
     $('#' + id).addEventListener('change', refresh);
   });
@@ -157,10 +322,11 @@
       return {
         name: $('.name', tr).value.trim(),
         qty: parseFloat($('.qty', tr).value) || 0,
+        prev: parseFloat($('.prev', tr).value) || 0,
         buy: parseFloat($('.buy', tr).value) || 0,
         sell: parseFloat($('.sell', tr).value) || 0
       };
-    }).filter(function (x) { return x.name || x.qty || x.buy || x.sell; });
+    }).filter(function (x) { return x.name || x.qty || x.prev || x.buy || x.sell; });
   }
   function totals() {
     var t = { qty: 0, buy: 0, sell: 0 };
@@ -171,9 +337,46 @@
     t.rate = t.sell > 0 ? (t.margin / t.sell) * 100 : 0;
     return t;
   }
+  function changeCount() {
+    var c = { up: 0, dn: 0, nw: 0, same: 0 };
+    items().forEach(function (x) {
+      if (x.buy <= 0) return;
+      if (x.prev <= 0) { c.nw++; return; }
+      if (x.buy > x.prev) c.up++;
+      else if (x.buy < x.prev) c.dn++;
+      else c.same++;
+    });
+    return c;
+  }
+  function paintRows() {
+    G.qa('tr', body).forEach(function (tr) {
+      var buy = parseFloat($('.buy', tr).value) || 0;
+      var prev = parseFloat($('.prev', tr).value) || 0;
+      var sell = parseFloat($('.sell', tr).value) || 0;
+      var cell = $('.rate', tr);
+      if (!cell) return;
+      if (sell > 0 && buy > 0) {
+        var r = (sell - buy) / sell * 100;
+        cell.textContent = r.toFixed(1) + '%';
+        cell.className = 'rate ' + (r < 20 ? 'bad' : (r < 35 ? 'warn' : 'ok'));
+      } else {
+        cell.textContent = '—';
+        cell.className = 'rate';
+      }
+      var p = $('.prev', tr);
+      if (p) {
+        p.style.color = '';
+        p.style.fontWeight = '';
+        if (buy > 0 && prev > 0 && buy !== prev) {
+          p.style.color = buy > prev ? 'var(--danger)' : 'var(--ok)';
+          p.style.fontWeight = '900';
+        }
+      }
+    });
+  }
 
   var kit = G.outKit({
-    num: 3,
+    num: 4,
     title: '거래처에 보낼 발주 문구',
     sub: '400자 이내 · 복사해서 카톡·문자로',
     build: function () {
@@ -202,8 +405,67 @@
     $('#tMargin').textContent = G.money(t.margin);
     $('#tRate').textContent = t.rate.toFixed(1);
     $('#tRate').parentNode.className = 'v ' + (t.rate < 20 ? 'bad' : (t.rate < 35 ? 'warn' : 'ok'));
+
+    var c = changeCount();
+    var chg = [];
+    if (c.up) chg.push('<span class="chg up">▲ 오름 ' + c.up + '</span>');
+    if (c.dn) chg.push('<span class="chg dn">▼ 내림 ' + c.dn + '</span>');
+    if (c.nw) chg.push('<span class="chg new">신규 ' + c.nw + '</span>');
+    if (!chg.length) $('#tChg').innerHTML = t.qty ? '<span class="chg same">비교할 이전 단가 없음</span>' : '—';
+    else $('#tChg').innerHTML = chg.join(' · ');
+
+    var bill = parseFloat($('#bill').value) || 0;
+    var dEl = $('#tDiff');
+    if (!bill) { dEl.textContent = '—'; dEl.className = ''; }
+    else {
+      var d = bill - t.buy;
+      if (Math.abs(d) < 1) { dEl.textContent = '0원 · 명세서와 일치'; dEl.className = 'ok'; }
+      else if (d > 0) { dEl.textContent = G.money(d) + '원 · 계산이 적음'; dEl.className = 'bad'; }
+      else { dEl.textContent = G.money(d) + '원 · 계산이 많음'; dEl.className = 'bad'; }
+    }
+
+    paintRows();
     if (kit) kit.refresh();
   }
+
+  /* 연습 예시 — 실제 사입 입력이 아니라 계산 연습용 */
+  var SAMPLE = [
+    { name: '○○ 미니어덜트 3kg', qty: 5, prev: 11000, buy: 11000, sell: 16000 },
+    { name: '○○ 간 서포트 60정', qty: 12, prev: 10000, buy: 9000, sell: 15000 },
+    { name: '○○ 유산균 30포', qty: 20, prev: 0, buy: 6500, sell: 12000 }
+  ];
+  $('#exFill').addEventListener('click', function () {
+    G.qa('tr', body).forEach(function (tr) {
+      G.qa('input', tr).forEach(function (x) { x.value = ''; });
+    });
+    while (body.children.length > SAMPLE.length) body.removeChild(body.lastElementChild);
+    while (body.children.length < SAMPLE.length) addRow();
+    G.qa('tr', body).forEach(function (tr, i) {
+      var s = SAMPLE[i];
+      if (!s) return;
+      $('.name', tr).value = s.name;
+      $('.qty', tr).value = s.qty;
+      $('.prev', tr).value = s.prev || '';
+      $('.buy', tr).value = s.buy;
+      $('.sell', tr).value = s.sell;
+    });
+    $('#vendor').value = '';
+    $('#bill').value = '';
+    refresh();
+    G.toast('연습 예시를 채웠습니다 — 실제 사입이면 ‘전부 지우고 새로 적기’를 눌러 주세요');
+  });
+  $('#exClear').addEventListener('click', function () {
+    G.qa('tr', body).forEach(function (tr) {
+      G.qa('input', tr).forEach(function (x) { x.value = ''; });
+    });
+    while (body.children.length > 1) body.removeChild(body.lastElementChild);
+    $('#vendor').value = '';
+    $('#bill').value = '';
+    $('#hope').value = '';
+    $('#date').value = G.today();
+    refresh();
+    G.toast('지웠습니다');
+  });
 
   /* 최초 마운트는 outKit 안에서 refresh를 부르므로, 그 뒤 값 채우기 */
   refresh();
