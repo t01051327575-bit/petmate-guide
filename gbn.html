@@ -47,6 +47,7 @@
       <div class="field"><label>아이 이름</label><input id="gpPet" type="text" placeholder="예: 누아"></div>
       <div class="field"><label>보호자 이름 <span class="hint">선택</span></label><input id="gpGuardian" type="text" placeholder="예: 김지영"></div>
     </div>
+    <div class="field"><label>원내 미용실 이름 <span class="hint">이 이름과 같으면 '🏠 원내', 다르면 '🏪 외부'로 표시됩니다</span></label><input id="gpInhouse" type="text" placeholder="예: 굿모닝펫 미용실"></div>
     <div class="field"><label>만들어진 링크</label><div class="copybox" id="gpUrlBox">아이 이름을 넣으면 링크가 만들어집니다.</div></div>
     <div class="btns">
       <button class="btn primary wide" id="gpCopy" type="button">🔗 미용사 링크 복사</button>
@@ -261,8 +262,10 @@
     var u = new URL(base.href);
     var pet = ($('#gpPet').value || '').trim();
     var g = ($('#gpGuardian').value || '').trim();
+    var ih = ($('#gpInhouse').value || '').trim();
     if (pet) u.searchParams.set('pet', pet);
     if (g) u.searchParams.set('guardian', g);
+    if (ih) u.searchParams.set('inhouse', ih);
     if (s.hospital) u.searchParams.set('clinic', s.hospital);
     return u.href;
   }
@@ -290,8 +293,11 @@
     $('#gpMsgBox').style.opacity = pet ? '1' : '.7';
   }
 
-  ['gpPet', 'gpGuardian'].forEach(function (id) {
-    $('#' + id).addEventListener('input', draw);
+  ['gpPet', 'gpGuardian', 'gpInhouse'].forEach(function (id) {
+    $('#' + id).addEventListener('input', function () {
+      if (id === 'gpInhouse') { try { localStorage.setItem('gbn_inhouse', $('#' + id).value); } catch (e) { } }
+      draw();
+    });
   });
 
   $('#gpCopy').addEventListener('click', function () {
@@ -304,6 +310,8 @@
       G.toast(ok ? '안내 문구를 복사했어요 — 카톡에 붙여넣기 하세요' : '복사가 막혔어요. 길게 눌러 직접 복사해 주세요');
     });
   });
+
+  try { $('#gpInhouse').value = localStorage.getItem('gbn_inhouse') || '굿모닝펫 미용실'; } catch (e) { $('#gpInhouse').value = '굿모닝펫 미용실'; }
 
   draw();
   try { G.prefill(); } catch (e) { }

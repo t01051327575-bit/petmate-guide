@@ -147,8 +147,13 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       <input type="text" id="guardian" placeholder="예: 김지영" enterkeyhint="next">
     </div>
     <div class="field">
-      <label>미용사 또는 미용실 이름 <span class="hint">(하나만 적어 주세요)</span></label>
-      <input type="text" id="groomer" placeholder="예: 해피독 유진" enterkeyhint="next">
+      <label>미용실 이름 <span class="hint">(필수)</span></label>
+      <input type="text" id="shop" placeholder="예: 해피독 미용실" enterkeyhint="next">
+      <div class="hint" style="margin-top:6px">미용실 이름을 정확히 적어 주세요. 병원에서 원내·외부를 구분합니다.</div>
+    </div>
+    <div class="field">
+      <label>미용사 이름 <span class="hint">(선택)</span></label>
+      <input type="text" id="groomer" placeholder="예: 유진" enterkeyhint="next">
     </div>
     <div class="field">
       <label>미용일</label>
@@ -217,6 +222,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   var qPet = (params.get('pet') || '').trim();
   var qGuardian = (params.get('guardian') || '').trim();
   var qDate = (params.get('date') || '').trim();
+  var qInhouse = (params.get('inhouse') || '').trim();
   var fromLink = !!qPet;
 
   var state = {};     /* key -> {v:'', note:'', media:[]} */
@@ -242,6 +248,8 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   $('#groomDate').value = /^\d{4}-\d{2}-\d{2}$/.test(qDate) ? qDate : todayStr();
   try{
     var saved = JSON.parse(localStorage.getItem('gbn_groom_'+(qPet||'any')) || '{}');
+    if(saved.shop) $('#shop').value = saved.shop;
+    else if(qInhouse) $('#shop').value = qInhouse;
     if(saved.groomer) $('#groomer').value = saved.groomer;
     if(!qGuardian && saved.guardian) $('#guardian').value = saved.guardian;
     if(saved.memo) $('#memo').value = saved.memo;
@@ -494,6 +502,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       try{
         localStorage.setItem('gbn_groom_'+(qPet||'any'), JSON.stringify({
           states: states,
+          shop: $('#shop').value,
           groomer: $('#groomer').value,
           guardian: $('#guardian').value,
           memo: $('#memo').value,
@@ -502,7 +511,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       }catch(e){}
     }, 300);
   }
-  ['groomer','guardian','memo'].forEach(function(id){
+  ['shop','groomer','guardian','memo'].forEach(function(id){
     document.getElementById(id).addEventListener('input', saveLocal);
   });
   $('#mustTell').addEventListener('change', saveLocal);
@@ -568,9 +577,9 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   function submit(){
     if(submitting) return;
     var pet = fromLink ? qPet : ($('#pet').value || '').trim();
-    var groomer = ($('#groomer').value || '').trim();
+    var shop = ($('#shop').value || '').trim();
     if(!pet){ toast('아이 이름을 적어 주세요'); $('#pet').focus(); return; }
-    if(!groomer){ toast('미용사 또는 미용실 이름을 적어 주세요'); $('#groomer').focus(); return; }
+    if(!shop){ toast('미용실 이름을 적어 주세요'); $('#shop').focus(); return; }
     var missing = null;
     ITEMS.forEach(function(it){ if(!state[it.key].v && !missing) missing = it; });
     if(missing){
@@ -593,7 +602,10 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
       action:'submit',
       pet:pet,
       guardian:($('#guardian').value || '').trim(),
-      groomer:groomer,
+      shop:shop,
+      groomerName:($('#groomer').value || '').trim(),
+      inhouse:qInhouse,
+      clinic:clinic,
       groomDate:$('#groomDate').value || todayStr(),
       answers:answers,
       memo:($('#memo').value || '').trim(),
@@ -642,6 +654,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
   function showDone(res, okMedia, failMedia){
     var pet = fromLink ? qPet : ($('#pet').value || '').trim();
     var guardian = ($('#guardian').value || '').trim();
+    var shop = ($('#shop').value || '').trim();
     var groomer = ($('#groomer').value || '').trim();
     var date = $('#groomDate').value || todayStr();
     var c = counts();
@@ -654,7 +667,7 @@ footer{text-align:center;color:#8ba0b0;font-size:12.5px;padding:18px 0 4px}
 
     var kk = [];
     kk.push('[' + pet + ' 건강관리표]');
-    kk.push((guardian ? '보호자 ' + guardian + ' · ' : '') + date + (groomer ? ' · ' + groomer : ''));
+    kk.push((guardian ? '보호자 ' + guardian + ' · ' : '') + date + (shop ? ' · ' + shop : '') + (groomer ? ' ' + groomer : ''));
     kk.push('');
     kk.push(badList.length ? '이상 ' + badList.length + '곳: ' + badList.join(', ') : '이상 없음 (12곳 확인)');
     kk.push('정상 ' + okN + '곳' + (naN ? ' · 해당 없음 ' + naN + '곳' : ''));
