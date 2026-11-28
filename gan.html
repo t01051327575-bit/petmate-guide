@@ -416,12 +416,13 @@
 
     var bill = parseFloat($('#bill').value) || 0;
     var dEl = $('#tDiff');
-    if (!bill) { dEl.textContent = '—'; dEl.className = ''; }
+    var dWrap = dEl.parentNode;
+    if (!bill) { dEl.textContent = '—'; dWrap.className = 'v'; }
     else {
       var d = bill - t.buy;
-      if (Math.abs(d) < 1) { dEl.textContent = '0원 · 명세서와 일치'; dEl.className = 'ok'; }
-      else if (d > 0) { dEl.textContent = G.money(d) + '원 · 계산이 적음'; dEl.className = 'bad'; }
-      else { dEl.textContent = G.money(d) + '원 · 계산이 많음'; dEl.className = 'bad'; }
+      if (Math.abs(d) < 1) { dEl.textContent = '0원 · 명세서와 일치'; dWrap.className = 'v ok'; }
+      else if (d > 0) { dEl.textContent = G.money(d) + '원 · 계산이 적음'; dWrap.className = 'v bad'; }
+      else { dEl.textContent = G.money(d) + '원 · 계산이 많음'; dWrap.className = 'v bad'; }
     }
 
     paintRows();
