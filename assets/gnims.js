@@ -285,7 +285,7 @@
           '<span>' + esc(g.pet || '아이 미입력') + ' · ' + dot(g.date) + ' 사용' +
           (g.oldest ? ' (' + g.oldest + '일 경과)' : '') + ' · ' + g.rows.length + '건</span></div>' + badge + '</div>' +
         lines + rxopt +
-        '<div class="num">보고 전: ' + (screenOnly ? 'NIMS 화면에서 직접 투약보고(동물병원 신규보고)' : 'NIMS ≫ 보고관리 ≫ 투약보고(동물병원엑셀) 업로드') +
+        '<div class="qnum">보고 전: ' + (screenOnly ? 'NIMS 화면에서 직접 투약보고(동물병원 신규보고)' : 'NIMS ≫ 보고관리 ≫ 투약보고(동물병원엑셀) 업로드') +
           ' · 이 묶음 ' + (g.rows.length) + '줄</div>' +
         '<div class="qfoot">' +
           '<button class="btn primary" type="button" data-done="' + gi + '">✅ 보고 완료</button>' +

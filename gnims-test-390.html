@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NIMS 390 미리보기</title>
+<style>body{margin:0;background:#2b3238;font-family:sans-serif;display:flex;justify-content:center;padding:12px}
+.frame{width:390px;border:0;background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+body.z2{zoom:2;justify-content:flex-start}</style>
+</head><body>
+<script>
+  var q = new URLSearchParams(location.search);
+  var to = (q.get('to') || '').replace(/[^a-zA-Z0-9_-]/g, '');
+  var h = parseInt(q.get('h') || '844', 10) || 844;
+  var z = q.get('z');
+  if (z === '2') document.body.classList.add('z2');
+  var src = 'gnims.html?v=390' + (to ? '#' + to : '');
+  document.write('<iframe class="frame" height="' + h + '" src="' + src + '"></iframe>');
+</script>
+</body></html>
