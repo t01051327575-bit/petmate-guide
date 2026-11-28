@@ -14,7 +14,8 @@ body{margin:0;background:#2b3238;font-family:sans-serif;display:flex;justify-con
   if (p !== 'newcare') p = 'promo';
   var h = parseInt(q.get('h') || '700', 10) || 700;
   var sc = parseInt(q.get('scroll') || '0', 10) || 0;
-  document.write('<iframe id="f" class="frame" height="' + h + '" src="' + p + '.html?v=390"></iframe>');
+  var z = parseFloat(q.get('z') || '1') || 1;
+  document.write('<iframe id="f" class="frame" height="' + h + '" style="zoom:' + z + '" src="' + p + '.html?v=390"></iframe>');
   window.addEventListener('load', function () {
     setTimeout(function () {
       try { document.getElementById('f').contentWindow.scrollTo(0, sc); } catch (e) {}
