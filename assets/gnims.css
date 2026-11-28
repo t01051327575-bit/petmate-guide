@@ -1,0 +1,187 @@
+/* =========================================================
+   G-NIMS · 마약류 기록·보고 (전용 스타일)
+   g-common.css 뒤에 붙여 씁니다. 인쇄·390px 대응.
+   ========================================================= */
+
+/* ---------- 아침 요약 띠 ---------- */
+.gn-sum{
+  position:sticky; top:0; z-index:30;
+  margin:0 -16px 12px; padding:10px 16px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:10px;
+}
+.gn-sum .t{flex:1 1 auto;min-width:0}
+.gn-sum .t b{display:block;font-size:14px;font-weight:900;letter-spacing:-.02em;color:var(--ink)}
+.gn-sum .t span{display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-top:1px}
+.gn-sum .n{
+  flex:0 0 auto;min-width:52px;height:46px;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--soft);border:1px solid var(--badge-line);color:var(--brand-d);
+  font-weight:900;line-height:1;
+}
+.gn-sum .n i{font-style:normal;font-size:19px;letter-spacing:-.03em}
+.gn-sum .n s{text-decoration:none;font-size:9.5px;font-weight:800;margin-top:3px;opacity:.75}
+.gn-sum.hot .n{background:#fff1ef;border-color:#f2cfc9;color:var(--danger)}
+.gn-sum.hot .t b{color:var(--danger)}
+.gn-sum a.go{flex:0 0 auto;font-size:11.5px;font-weight:900;color:var(--brand-d);text-decoration:none;border:1px solid var(--badge-line);background:#fff;border-radius:999px;padding:8px 11px}
+
+/* ---------- 배너 ---------- */
+.gn-alert{
+  border-radius:16px;padding:12px 13px;margin:0 0 12px;
+  font-size:13px;line-height:1.6;
+  background:#fff5f4;border:1px solid #f6d9d5;color:#7d3b33;
+}
+.gn-alert b{color:var(--danger)}
+.gn-alert ul{margin:7px 0 0;padding-left:16px}
+.gn-alert li{margin:3px 0}
+.gn-alert.soft{background:#fffbf3;border-color:#f3e3c6;color:#7a5a20}
+.gn-alert.soft b{color:#94631a}
+.gn-alert.ok{background:#f1fbf6;border-color:#d5eddf;color:#2b6350}
+.gn-alert.ok b{color:var(--ok)}
+
+/* ---------- 표 안 작은 입력 ---------- */
+.tin.num{min-width:58px}
+.tin.sel{min-width:78px;padding:8px 4px}
+.rrn{font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.eye{
+  appearance:none;border:1px solid var(--line);background:#fff;color:var(--muted);
+  border-radius:7px;padding:2px 6px;font-size:10.5px;font-weight:800;cursor:pointer;margin-left:4px;
+}
+.eye:active{transform:scale(.96)}
+
+/* ---------- 대장 표 ---------- */
+.gn-tbl{width:100%;border-collapse:collapse;min-width:660px}
+.gn-tbl th,.gn-tbl td{padding:8px 6px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:middle;text-align:center}
+.gn-tbl thead th{background:var(--soft);color:var(--brand-d);font-weight:800;font-size:11.5px;white-space:nowrap}
+.gn-tbl td.l{text-align:left}
+.gn-tbl tbody tr:last-child td{border-bottom:0}
+.gn-tbl .nm{font-weight:800;color:var(--ink);display:block;white-space:nowrap}
+.gn-tbl .sub{display:block;font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap}
+.gn-tbl .d{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink-soft);font-weight:700}
+.gn-tbl .qty{font-weight:900;color:var(--brand-d);white-space:nowrap}
+.gn-tbl tr.warn td{background:#fffaf2}
+.gn-tbl tr.bad td{background:#fff5f4}
+.gn-tbl .x{
+  appearance:none;border:1px solid var(--line);background:#fff;color:var(--muted);
+  border-radius:8px;width:28px;height:28px;font-size:14px;line-height:1;cursor:pointer;
+}
+.gn-tbl .done{color:var(--ok);font-weight:800;font-size:11.5px}
+
+/* ---------- 보고 대기함 ---------- */
+.qcard{
+  border:1px solid var(--line);border-radius:16px;background:#fff;
+  padding:12px 13px;margin:0 0 10px;box-shadow:0 1px 2px rgba(23,58,72,.04);
+}
+.qcard.over{border-color:#f0c9c3;background:#fffafa;box-shadow:0 0 0 2px #fbe9e6 inset}
+.qcard.soon{border-color:#f0dcb8;background:#fffdf7}
+.qcard .qh{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.qcard .qh .who{flex:1 1 auto;min-width:0}
+.qcard .qh .who b{display:block;font-size:14.5px;font-weight:900;color:var(--ink);letter-spacing:-.02em}
+.qcard .qh .who span{display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-top:2px}
+.dbadge{
+  flex:0 0 auto;border-radius:10px;padding:6px 9px;text-align:center;line-height:1.15;
+  background:var(--soft);border:1px solid var(--badge-line);color:var(--brand-d);
+  font-weight:900;font-size:12px;min-width:58px;
+}
+.dbadge s{display:block;text-decoration:none;font-size:9.5px;font-weight:800;opacity:.8;margin-top:2px}
+.dbadge.over{background:#fff1ef;border-color:#f2cfc9;color:var(--danger)}
+.dbadge.soon{background:#fffbf3;border-color:#f0dcb8;color:#94631a}
+.dbadge.none{background:#f4f7f9;border-color:var(--line);color:var(--muted);font-weight:800}
+.qcard .drugline{
+  display:grid;grid-template-columns:1fr auto;gap:4px 10px;
+  padding:7px 0;border-top:1px dashed var(--line);font-size:12.5px;
+}
+.qcard .drugline:first-of-type{border-top:0}
+.qcard .drugline .nm{font-weight:800;color:var(--ink)}
+.qcard .drugline .nm em{font-style:normal;font-weight:700;color:var(--muted);font-size:11px;display:block;margin-top:1px}
+.qcard .drugline .qt{font-weight:900;color:var(--brand-d);white-space:nowrap;text-align:right}
+.qcard .drugline .meta{grid-column:1 / -1;font-size:11px;color:var(--muted);line-height:1.5}
+.qcard .qfoot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:9px}
+.qcard .qfoot .btn{flex:1 1 auto;padding:10px 12px;font-size:12.5px;min-height:40px}
+.qcard .num{
+  flex:1 1 100%;font-size:11.5px;color:var(--muted);background:var(--bg);
+  border:1px dashed var(--line);border-radius:10px;padding:7px 9px;margin-top:2px;
+}
+.qcard .num b{color:var(--brand-d);font-weight:900;font-variant-numeric:tabular-nums}
+.qcard.done{border-color:#d5eddf;background:#fbfefc}
+.qcard .rxopt{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin-top:6px}
+.qcard .rxopt label{display:flex;gap:5px;align-items:center;font-weight:700;cursor:pointer}
+.qcard .rxopt input{accent-color:var(--brand)}
+
+/* ---------- 약별 제품 정보 ---------- */
+.prod{display:grid;grid-template-columns:1fr;gap:8px}
+.pcard{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+.pcard .ph{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:7px}
+.pcard .ph b{font-size:13px;font-weight:900;color:var(--ink)}
+.pcard .ph i{font-style:normal;font-size:10.5px;font-weight:800;color:var(--muted)}
+.pcard .g4{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.pcard .field{margin:0}
+.pcard .field label{font-size:10.5px}
+.pcard input{font-size:12.5px;padding:8px 8px;min-height:38px}
+
+/* ---------- 직원 안내 카드 ---------- */
+.guide{counter-reset:g;}
+.guide .gitem{
+  display:grid;grid-template-columns:26px 1fr;gap:9px;
+  padding:11px 0;border-bottom:1px dashed var(--line);
+}
+.guide .gitem:last-child{border-bottom:0}
+.guide .gitem .no{
+  width:26px;height:26px;border-radius:8px;background:var(--soft);border:1px solid var(--badge-line);
+  color:var(--brand-d);font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center;
+}
+.guide .gitem .b{font-size:13px;line-height:1.6;color:var(--ink-soft)}
+.guide .gitem .b b{color:var(--ink);font-weight:800}
+.guide .gitem .b .pg{
+  display:inline-block;font-size:10.5px;font-weight:800;color:var(--muted);
+  background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:1px 7px;margin-left:4px;white-space:nowrap;
+}
+
+/* ---------- 월 마감 ---------- */
+.mstat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.mstat .box{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+.mstat .box span{display:block;font-size:11px;font-weight:800;color:var(--muted)}
+.mstat .box b{display:block;font-size:19px;font-weight:900;letter-spacing:-.03em;color:var(--brand-d);margin-top:2px}
+.mstat .box b small{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:0;margin-left:2px}
+.mstat .box.bad b{color:var(--danger)}
+
+/* ---------- 공통 잔손질 ---------- */
+.lead{font-size:13.5px;color:var(--ink-soft);line-height:1.7;margin:0 0 10px}
+.hr{border:0;border-top:1px dashed var(--line);margin:12px 0}
+.tip{font-size:11.5px;color:var(--muted);line-height:1.6;margin:8px 0 0}
+.tip b{color:var(--ink-soft)}
+.req{color:var(--accent-d);font-weight:900;margin-left:2px}
+.print-only{display:none}
+.btn.sm{padding:9px 11px;font-size:12.5px;min-height:40px}
+.btnrow.wrap{display:flex;flex-wrap:wrap;gap:7px}
+.btnrow.wrap .btn{flex:1 1 46%}
+
+@media (max-width:380px){
+  .pcard .g4{grid-template-columns:1fr}
+  .mstat{grid-template-columns:1fr}
+  .gn-sum{margin:0 -12px 10px;padding:9px 12px}
+}
+@media (min-width:600px){
+  .prod{grid-template-columns:1fr 1fr}
+  .mstat{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ---------- 인쇄 ---------- */
+@media print{
+  body{background:#fff}
+  .g-top,.gn-sum,.btns,.btnrow,.webnav,.no-print,.philo,.eye,.x,#g-footer{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
+  .page-hero{background:#fff;border:1px solid #ccc;padding:14px}
+  .page-hero::after{display:none}
+  .gn-tbl{min-width:0;font-size:10px}
+  .gn-tbl th,.gn-tbl td{padding:4px 3px}
+  .tbl-wrap{overflow:visible;border:0}
+  .print-only{display:block}
+  .print-h{font-size:13px;font-weight:900;margin:14px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}
+  .qcard{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  .mstat{grid-template-columns:repeat(4,1fr)}
+  .mstat .box{border:1px solid #ccc}
+}
