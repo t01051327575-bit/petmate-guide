@@ -134,8 +134,8 @@ a{color:inherit;text-decoration:none}
 }
 .award-badge .seal svg{width:16px;height:16px}
 .award-badge .txt{line-height:1.35;text-align:left}
-.award-badge .t1{display:block;font-size:11.5px;letter-spacing:.02em;color:#7C6330;font-weight:500}
-.award-badge .t2{display:block;font-size:13.5px;font-weight:700;color:#5B4820;letter-spacing:-.01em}
+.award-badge .t1{display:block;font-size:12px;letter-spacing:.01em;color:#7C6330;font-weight:500}
+.award-badge .t2{display:block;font-size:14.5px;font-weight:700;color:#5B4820;letter-spacing:-.01em;margin-top:1px}
 
 .hero-eyebrow{
   margin:22px 0 14px;
@@ -338,11 +338,11 @@ section{position:relative}
 .press-item .arw{color:var(--line-2);font-size:15px;transition:.2s}
 .press-item:hover .arw{color:var(--mint)}
 @media (max-width:640px){
-  .press-item{grid-template-columns:1fr 18px;gap:4px 12px;padding:16px 2px}
-  .press-item .src{grid-column:1/2;font-size:11.5px}
+  .press-item{grid-template-columns:1fr 18px;grid-template-rows:auto auto;gap:3px 12px;padding:16px 2px}
+  .press-item .src{grid-column:1;grid-row:1;font-size:11.5px}
   .press-item .src span{display:inline;margin-left:6px}
-  .press-item .ttl{grid-column:1/2;font-size:14px}
-  .press-item .arw{grid-row:1/3;align-self:center}
+  .press-item .ttl{grid-column:1;grid-row:2;font-size:14px}
+  .press-item .arw{grid-column:2;grid-row:1 / 3;align-self:center;justify-self:end}
 }
 
 /* ── voices ── */
@@ -384,8 +384,8 @@ blockquote footer b{color:var(--mint);font-weight:500}
 .aside-band p b{color:var(--navy);font-weight:600}
 .aside-band .btn{margin-top:18px;background:transparent;border-color:rgba(30,58,95,.28);color:var(--navy);min-height:44px;padding:10px 20px;font-size:13.5px}
 .aside-band .btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-.aside-fig{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.7);box-shadow:0 16px 34px -26px rgba(30,58,95,.5)}
-.aside-fig img{width:100%;aspect-ratio:1200/709;object-fit:cover}
+.aside-fig{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.7);box-shadow:0 16px 34px -26px rgba(30,58,95,.5);background:var(--mint-soft);align-self:start}
+.aside-fig img{width:100%;height:auto;aspect-ratio:1200/709;object-fit:cover;background:var(--mint-soft)}
 .aside-fig figcaption{font-size:11.5px;color:#5C6E66;padding:8px 2px 0;line-height:1.6}
 
 /* ── apply ── */
@@ -469,7 +469,14 @@ html{scroll-behavior:smooth}
   h1{letter-spacing:-.045em}
   .hero-acts .btn{flex:1 1 46%}
   .award-badge{align-items:flex-start;padding-right:14px}
+  .award-badge .seal{width:26px;height:26px;flex-basis:26px}
+  .award-badge .t1{font-size:11px}
+  .award-badge .t2{font-size:13px}
   .apply-card .v{font-size:1.18rem}
+  .card-top{align-items:flex-start}
+  .card-num{font-size:11px;letter-spacing:.16em}
+  .ill{width:74px;height:74px;flex-basis:74px;border-radius:12px}
+  .ill svg{width:46px;height:46px}
 }
 </style>
 </head>
@@ -607,7 +614,7 @@ html{scroll-behavior:smooth}
             <span class="n">02</span>
             <div>
               <h3>주 2.5일 진료</h3>
-              <p>월·화·수에 진료를 모아 집중하고, 남은 시간은 연구와 가르침에 씁니다. 진료를 줄여 만든 시간입니다.</p>
+              <p>월·화·수에 진료를 모아 고효율로 운영하고, 남은 시간은 연구와 가르침에 씁니다. 진료를 줄여 만든 시간입니다.</p>
             </div>
           </div>
           <div class="pillar">
@@ -859,7 +866,7 @@ html{scroll-behavior:smooth}
           <a class="btn" href="gen.html">참관 신청 페이지 열기 <span aria-hidden="true">→</span></a>
         </div>
         <figure class="aside-fig">
-          <img src="assets/class-visit.jpg" width="1200" height="709" loading="lazy"
+          <img src="assets/class-visit.jpg" width="1200" height="709"
                alt="굿모닝펫동물병원 앞에서 국제 교류 프로그램으로 방문한 수의사들이 기념촬영을 하고 있다.">
           <figcaption>해외 수의사 교류 프로그램 · 진료와 운영을 그대로 보여 주는 참관</figcaption>
         </figure>
