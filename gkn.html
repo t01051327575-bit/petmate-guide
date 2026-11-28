@@ -273,7 +273,7 @@
       · 아이폰은 <b>홈 화면에 추가한 앱</b>에서만 웹 알림이 되고, 예전 iOS 버전은 안 됩니다.<br>
       · 카톡 알림은 병원이 보내는 것이라 여기서 자동 발송하지 않습니다.
     </div>
-    <div class="gk-sync" id="pushBox">앱을 닫아도 오는 푸시(FCM)는 준비 상태를 여기에 표시합니다.</div>
+    <div class="gk-sync" id="pushBox">앱을 닫아도 오는 푸시는 아직 켜지 않았습니다 — 병원 구글 계정의 2단계 인증과 푸시 키가 필요해 다음 단계로 남겼습니다. 그때까지는 위 <b>캘린더 파일</b>이 앱을 닫아도 오는 확실한 길입니다.</div>
   </section>
 
   <section class="card" id="link">
@@ -1060,7 +1060,7 @@
           body: JSON.stringify({ action: 'med_photo', pet: state.pet || '', medName: m.name || '', data: big })
         }).then(function (r) { return r.json(); }).then(function (res) {
           if (res && res.ok && res.url) {
-            m.photoUrl = res.url; saveState();
+            m.photoUrl = res.url; saveState(); syncSoon();
             G.toast('사진을 병원에도 올렸습니다');
           }
         }).catch(function () {});
