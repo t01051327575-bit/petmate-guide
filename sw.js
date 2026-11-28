@@ -3,7 +3,7 @@
    - HTML은 네트워크 우선(최신 유지), 실패하면 캐시.
    - CSS/JS/이미지는 캐시 우선 + 뒤에서 갱신.
    - 다른 사이트(is.gd 등)는 건드리지 않습니다. */
-var CACHE = 'gmp-shell-v3';
+var CACHE = 'gmp-shell-v4';
 var CORE = [
   './',
   './net.html',
@@ -79,6 +79,26 @@ self.addEventListener('fetch', function (e) {
         return res;
       }).catch(function () { return hit; });
       return hit || net;
+    })
+  );
+});
+
+
+/* ---------- 알림 눌렀을 때 (GKN 복약) ---------- */
+self.addEventListener('notificationclick', function (e) {
+  var d = (e.notification && e.notification.data) || {};
+  var url = d.url || './';
+  try { e.notification.close(); } catch (err) {}
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        var c = list[i];
+        if (c.url.indexOf('gkn.html') >= 0 && 'focus' in c) {
+          try { c.postMessage({ type: 'gkn-slot', slot: d.slot || '' }); } catch (err) {}
+          return c.focus();
+        }
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(url);
     })
   );
 });

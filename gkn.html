@@ -3,28 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GKN 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈</title>
-<meta name="description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<title>GKN 처방 · 복약 관리 | 굿모닝펫 A~Z 그물망 시리즈</title>
+<meta name="description" content="굿모닝펫 GKN — 내복약과 안약을 한 시간표에 묶어, 시간대별 체크와 안약 순서·간격, 폰 알림까지. 복약을 '먹었다/안 먹었다'로 남깁니다.">
 <meta name="theme-color" content="#eaf6fb">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="gkn.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" href="assets/icon-192.png" sizes="192x192">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="굿모닝펫">
+<meta name="apple-mobile-web-app-title" content="복약관리">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="굿모닝펫동물병원">
-<meta property="og:title" content="GKN · 처방 · 복약 안내 | 굿모닝펫 A~Z 그물망 시리즈">
-<meta property="og:description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<meta property="og:title" content="GKN · 처방 · 복약 관리 | 굿모닝펫 A~Z 그물망 시리즈">
+<meta property="og:description" content="내복약·안약·보조제를 한 시간표에. 안약은 순서와 5분 간격까지, 시간마다 체크. 폰 알림·캘린더 등록.">
 <meta property="og:url" content="https://t01051327575-bit.github.io/petmate-guide/gkn.html">
 <meta property="og:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GKN · 처방 · 복약 안내">
-<meta name="twitter:description" content="굿모닝펫 GKN — 처방 약과 용량·횟수·일수를 넣으면 보호자용 복약 안내 문구와 총 투약량을 정리해 드립니다.">
+<meta name="twitter:title" content="GKN · 처방 · 복약 관리">
+<meta name="twitter:description" content="내복약·안약·보조제를 한 시간표에. 안약은 순서와 5분 간격까지, 시간마다 체크.">
 <meta name="twitter:image" content="https://t01051327575-bit.github.io/petmate-guide/assets/og-g-net.png">
 <link rel="stylesheet" href="assets/g-common.css?v=20261125a">
+<style>
+/* ===== GKN 복약 관리 전용 ===== */
+.gk-lead{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 2px}
+.gk-lead span{font-size:11px;font-weight:800;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:10px;padding:7px 3px;text-align:center;line-height:1.3}
+@media(max-width:380px){.gk-lead{grid-template-columns:repeat(2,1fr)}}
+
+/* 처방 입력 카드 */
+.gk-med{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 10px 8px;margin-bottom:8px}
+.gk-med-top{display:flex;align-items:center;gap:6px}
+.gk-ico{flex:0 0 auto;width:26px;height:26px;border-radius:9px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:13px}
+.gk-name{flex:1 1 auto;min-width:0;font-size:15px;font-weight:700;padding:8px 9px;border:1px solid var(--line);border-radius:9px;background:var(--bg);font-family:inherit;color:var(--ink)}
+.gk-med .del{flex:0 0 auto}
+.gk-fields{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.gk-f{flex:1 1 68px;min-width:64px;display:block}
+.gk-f>span{display:block;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.02em;margin:0 0 2px 1px}
+.gk-f select,.gk-f input{width:100%;font-size:13px;padding:7px 6px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-family:inherit;color:var(--ink);min-height:34px}
+.gk-times{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:7px}
+.gk-tlabel{font-size:10px;font-weight:800;color:var(--muted);margin-right:1px}
+.gk-time{width:74px!important;font-size:12.5px!important;padding:6px 4px!important;min-height:32px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-family:inherit;color:var(--ink);text-align:center}
+.gk-mini-btn{appearance:none;font-family:inherit;font-size:10.5px;font-weight:800;color:var(--brand-d);background:var(--soft);border:1px solid var(--badge-line);border-radius:999px;padding:5px 8px;cursor:pointer;min-height:30px}
+.gk-photo-row{display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
+.gk-cap-sel{font-size:12px!important;padding:6px 6px!important;min-height:32px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-family:inherit;color:var(--ink)}
+.gk-thumb{width:34px;height:34px;border-radius:9px;object-fit:cover;border:1px solid var(--line);display:none;cursor:zoom-in}
+.gk-thumb.on{display:block}
+.gk-note{width:100%;font-size:12.5px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-family:inherit;color:var(--ink);margin-top:7px}
+.gk-addrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+.gk-addrow .btn{font-size:12.5px;padding:10px 6px;min-height:42px}
+.gk-addrow .btn.wide{grid-column:1/-1}
+
+/* 붙여넣기 */
+.gk-paste{margin:2px 0 12px;background:var(--soft2);border:1px dashed var(--badge-line);border-radius:13px;padding:10px}
+.gk-paste textarea{min-height:64px;font-size:13.5px;border-radius:9px;padding:9px 10px;background:#fff}
+.gk-paste .row{display:flex;gap:6px;align-items:center;margin-top:6px}
+.gk-paste .row .btn{min-height:40px;font-size:12.5px;padding:9px 12px}
+.gk-paste .hint{flex:1;font-size:10.5px;color:var(--muted);line-height:1.4}
+
+/* 오늘의 복약표 */
+.gk-today-bar{display:flex;align-items:center;gap:6px;justify-content:space-between;margin:2px 0 8px}
+.gk-date-nav{display:flex;gap:4px}
+.gk-date-nav button{appearance:none;font-family:inherit;font-size:11.5px;font-weight:800;color:var(--ink-soft);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:7px 10px;cursor:pointer;min-height:34px}
+.gk-date-nav button[aria-pressed="true"]{background:var(--soft);border-color:var(--brand);color:var(--brand-d)}
+.gk-date{font-size:12.5px;font-weight:800;color:var(--muted)}
+.gk-nowbar{background:linear-gradient(135deg,#fff7ea,#fdf3f7);border:1px solid #f3e3c6;border-radius:13px;padding:9px 11px;font-size:12.5px;color:#7a5a20;margin:0 0 9px;line-height:1.5}
+.gk-nowbar b{color:#94631a}
+.gk-slot{background:#fff;border:1px solid var(--line);border-radius:15px;padding:9px 10px 10px;margin-bottom:9px;border-left:4px solid var(--line)}
+.gk-slot.now{border-left-color:var(--accent);box-shadow:0 4px 16px rgba(226,86,127,.10)}
+.gk-slot.miss{border-left-color:var(--danger);background:#fffafa}
+.gk-slot.all{border-left-color:var(--ok)}
+.gk-slot-head{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.gk-time{font-size:16px;font-weight:900;letter-spacing:-.02em;color:var(--brand-d)}
+.gk-now{font-size:10px;font-weight:900;color:#fff;background:var(--accent);border-radius:999px;padding:3px 7px;letter-spacing:.02em}
+.gk-later{font-size:10px;font-weight:800;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 7px}
+.gk-cnt{margin-left:auto;font-size:11.5px;font-weight:900;color:var(--muted)}
+.gk-cnt.ok{color:var(--ok)}
+.gk-item{display:flex;align-items:center;gap:7px;padding:5px 0;border-top:1px dashed var(--line)}
+.gk-item:first-of-type{border-top:0}
+.gk-item.done .gk-tx b{color:var(--muted);text-decoration:line-through}
+.gk-media{flex:0 0 auto;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden;padding:0;cursor:pointer}
+.gk-media img{width:100%;height:100%;object-fit:cover;display:block}
+.gk-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.12);display:inline-block}
+.gk-tx{flex:1 1 auto;min-width:0}
+.gk-tx b{display:block;font-size:13.5px;line-height:1.35;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gk-sub{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:1px}
+.gk-badge{display:inline-block;font-size:9.5px;font-weight:900;border-radius:6px;padding:1px 5px;margin-left:4px;vertical-align:1px;letter-spacing:.02em}
+.gk-badge.supp{color:#1f8a63;background:#edf9f2;border:1px solid #cfeadd}
+.gk-badge.inj{color:#8a4b9c;background:#f7f0fb;border:1px solid #e6d5f0}
+.gk-badge.oint{color:#94631a;background:#fffbf3;border:1px solid #f3e3c6}
+.gk-chk{flex:0 0 auto;appearance:none;font-family:inherit;font-size:12px;font-weight:900;color:#fff;background:var(--brand);border:0;border-radius:999px;padding:0 12px;height:36px;cursor:pointer;letter-spacing:-.01em}
+.gk-chk:active{transform:scale(.97)}
+.gk-cell{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.gk-v{font-size:12px;font-weight:900;color:var(--ok);white-space:nowrap}
+.gk-undo{appearance:none;background:none;border:0;font-family:inherit;font-size:9.5px;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0}
+.gk-chain{margin-top:4px;border-top:1px dashed var(--line);padding-top:6px}
+.gk-step{display:flex;align-items:center;gap:7px;padding:4px 0}
+.gk-step.done .gk-tx b{color:var(--muted);text-decoration:line-through}
+.gk-step-no{flex:0 0 auto;width:19px;height:19px;border-radius:50%;background:var(--soft);border:1px solid var(--badge-line);color:var(--brand-d);font-size:10.5px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.gk-gap{font-size:10.5px;font-weight:800;color:var(--accent-d);margin:1px 0 1px 26px;line-height:1.4}
+.gk-gap b{color:var(--accent-d)}
+.gk-chain-note{font-size:10.5px;color:var(--muted);margin:5px 0 0 26px}
+
+/* 진행률 */
+.gk-stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 2px}
+.gk-stat{background:var(--soft2);border:1px solid var(--badge-line);border-radius:12px;padding:9px 10px}
+.gk-stat .t{font-size:10.5px;font-weight:800;color:var(--muted)}
+.gk-stat .v{font-size:19px;font-weight:900;color:var(--brand-d);letter-spacing:-.03em;line-height:1.2}
+.gk-stat .v small{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:0}
+.gk-stat.bad .v{color:var(--danger)}
+.gk-bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:6px}
+.gk-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent));border-radius:999px;transition:width .3s}
+
+/* 알림 */
+.gk-alarm{display:flex;gap:9px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line)}
+.gk-alarm:last-child{border-bottom:0}
+.gk-alarm .ic{flex:0 0 auto;width:32px;height:32px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:15px}
+.gk-alarm .tx{flex:1 1 auto;min-width:0}
+.gk-alarm .tx b{display:block;font-size:13px}
+.gk-alarm .tx span{display:block;font-size:11px;color:var(--muted);line-height:1.45;margin-top:1px}
+.gk-alarm .btn{flex:0 0 auto;min-height:38px;font-size:12px;padding:8px 11px}
+.gk-limit{font-size:11px;color:var(--muted);line-height:1.55;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin-top:9px}
+.gk-sync{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;margin-top:8px;padding:7px 10px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.gk-sync.ok{background:#f1fbf6;border-color:#d5eddf;color:#2b6350}
+.gk-sync.err{background:#fff5f4;border-color:#f6d9d5;color:#7d3b33}
+
+/* 링크 */
+.gk-linkbox{background:var(--soft2);border:1px solid var(--badge-line);border-radius:12px;padding:9px 10px;margin-top:8px}
+.gk-linkbox code{display:block;font-size:11px;color:var(--ink-soft);word-break:break-all;font-family:ui-monospace,Menlo,monospace;line-height:1.5}
+.gk-linkbox .btns{margin-top:7px}
+
+/* 사진 크게 */
+#gk-view{position:fixed;inset:0;background:rgba(10,25,32,.86);display:none;align-items:center;justify-content:center;z-index:120;padding:18px}
+#gk-view.on{display:flex}
+#gk-view img{max-width:100%;max-height:86vh;border-radius:14px;background:#fff}
+#gk-view .x{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:20px;font-weight:900}
+</style>
 </head>
 <body data-code="GKN">
 <div id="g-top"></div>
@@ -35,53 +149,145 @@
       <span class="code-chip">GKN</span>
       <span class="eng-chip">K · Kit</span>
     </div>
-    <h1>처방 · 복약 안내</h1>
-    <p>약 이름과 용량을 넣으면 보호자가 놓치지 않는 복약 안내문이 만들어집니다.</p>
-    <div class="marks"><span>복약 안내문</span><span>용량 계산</span><span>상비약 주의</span></div>
+    <h1>처방 · 복약 관리</h1>
+    <p>내복약과 안약을 <b>한 시간표</b>에 묶어, 시간마다 체크하고 안약은 <b>순서와 간격</b>까지 지키게 합니다.</p>
+    <div class="marks"><span>시간표</span><span>안약 순서</span><span>체크·이행률</span><span>폰 알림</span></div>
   </header>
 
   <section class="card">
-    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>K · Kit — 약을 ‘먹었다/안 먹었다’로 갈라놓는 칸</small></h2></div>
+    <div class="sec-head"><span class="num">1</span><h2>이 칸이 하는 일<small>보호가 ‘넣었나 안 넣었나’ 헷갈리지 않게</small></h2></div>
     <p>복약이 실패하는 이유는 대부분 <b>설명이 길어서</b>입니다. 언제, 몇 알, 며칠을 먹는지만 분명하게 남깁니다.</p>
+    <div class="gk-lead"><span>한 표에<br>모두</span><span>안약<br>순서·간격</span><span>체크<br>시각 남김</span><span>폰으로<br>알림</span></div>
     <ul class="clean">
       <li>약별 용량·횟수·일수로 <b>총 투약량</b>을 계산합니다.</li>
       <li>보호자에게 보낼 <b>복약 안내</b>를 400자로 만듭니다.</li>
-      <li>상비약에서 <b>흔히 틀리는 주의</b>를 바로 확인합니다.</li>
+      <li>같은 시간에 안약이 여럿이면 <b>순서와 5분 간격</b>을 단계로 나눠 줍니다.</li>
     </ul>
   </section>
 
-  <section class="card">
-    <div class="sec-head"><span class="num">2</span><h2>처방 입력<small>한 줄에 한 약씩</small></h2></div>
+  <section class="card" id="rx">
+    <div class="sec-head"><span class="num">2</span><h2>처방 입력<small>약마다 한 칸 · 안약은 뚜껑색·사진까지</small></h2></div>
+
     <div class="grid2">
-      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지"></div>
+      <div class="field"><label>보호자</label><input id="guardian" type="text" placeholder="예: 김민지" autocomplete="name"></div>
       <div class="field"><label>아이</label><input id="pet" type="text" placeholder="예: 콩이"></div>
     </div>
     <div class="grid2">
       <div class="field"><label>처방일</label><input id="date" type="date"></div>
       <div class="field"><label>복약 시작</label><select id="start"><option>오늘 저녁부터</option><option>오늘 아침부터</option><option>내일 아침부터</option></select></div>
     </div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th style="min-width:96px">약 이름</th><th style="min-width:56px">1회</th><th style="min-width:52px">횟수/일</th><th style="min-width:52px">일수</th><th></th></tr></thead>
-        <tbody id="meds"></tbody>
-      </table>
+
+    <div class="gk-paste">
+      <label class="lbl">원장님 코멘트 붙여넣기 <span class="hint">예: 31번 하루 두 번 / 33번 안약 하루 네 번 우안</span></label>
+      <textarea id="paste" placeholder="코멘트를 그대로 붙여넣으세요. 번호와 횟수를 읽어 표에 채웁니다."></textarea>
+      <div class="row">
+        <button class="btn ghost" id="pasteFill" type="button">표에 채우기</button>
+        <span class="hint">번호·횟수·일수·좌우·안약을 읽습니다. 읽은 뒤 꼭 눈으로 확인해 주세요.</span>
+      </div>
     </div>
-    <div class="btns"><button class="btn ghost wide" id="addMed" type="button">+ 약 한 줄 더</button></div>
+
+    <div id="medList"></div>
+    <div class="gk-addrow">
+      <button class="btn ghost" data-add="oral" type="button">+ 내복약</button>
+      <button class="btn ghost" data-add="eye" type="button">+ 안약</button>
+      <button class="btn ghost" data-add="supp" type="button">+ 보조제</button>
+      <button class="btn ghost" data-add="ear" type="button">+ 귀약</button>
+      <button class="btn ghost" data-add="oint" type="button">+ 연고</button>
+      <button class="btn ghost" data-add="inj" type="button">+ 주사</button>
+    </div>
+
+    <div class="grid2" style="margin-top:12px">
+      <div class="field"><label>안약 사이 간격</label>
+        <select id="interval">
+          <option value="3">3분</option><option value="5">5분 (기본)</option>
+          <option value="10">10분</option><option value="15">15분</option>
+        </select>
+      </div>
+      <div class="field"><label>식전·식후(내복약 기본)</label>
+        <select id="meal"><option>식후 30분</option><option>식전 30분</option><option>식사와 관계없이</option><option>아침 식후</option></select>
+      </div>
+    </div>
+    <div class="field"><label>보호자에게 꼭 말할 것 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 물과 함께, 산책 전에는 먹이지 마세요"></div>
+
     <div class="result">
       <div class="kv"><span class="k">처방 약 종류</span><span class="v"><span id="mKinds">0</span>종</span></div>
       <div class="kv"><span class="k">총 투약 일수</span><span class="v"><span id="mDays">0</span>일</span></div>
       <div class="kv"><span class="k">가장 긴 약</span><span class="v" id="mLong">-</span></div>
+      <div class="kv"><span class="k">하루 체크 수</span><span class="v"><span id="mChecks">0</span>번</span></div>
     </div>
-    <div class="field" style="margin-top:12px"><label>식전·식후</label>
-      <select id="meal"><option>식후 30분</option><option>식전 30분</option><option>식사와 관계없이</option><option>아침 식후</option></select>
+    <div class="btns"><button class="btn solid wide" id="saveRx" type="button">병원에 처방 저장 · 보호자 링크 만들기</button></div>
+    <div class="gk-sync" id="syncRx">이 기기에 저장됩니다.</div>
+  </section>
+
+  <section class="card" id="today">
+    <div class="sec-head"><span class="num">3</span><h2>복약 시간표 · 체크<small>내복약·보조제·안약을 같은 시간대에</small></h2></div>
+
+    <div class="gk-today-bar">
+      <div class="gk-date-nav">
+        <button type="button" data-day="-1">어제</button>
+        <button type="button" data-day="0" aria-pressed="true">오늘</button>
+        <button type="button" data-day="1">내일</button>
+      </div>
+      <span class="gk-date" id="dateLabel"></span>
     </div>
-    <div class="field"><label>보호자에게 꼭 말할 것 <span class="hint">선택</span></label><input id="extra" type="text" placeholder="예: 물과 함께, 산책 전에는 먹이지 마세요"></div>
+
+    <div id="nowBar"></div>
+    <div id="sched"></div>
+
+    <div class="gk-stats">
+      <div class="gk-stat"><div class="t">오늘 이행</div><div class="v"><span id="stDone">0</span> / <span id="stDue">0</span> <small>회</small></div><div class="gk-bar"><i id="stBar" style="width:0%"></i></div></div>
+      <div class="gk-stat" id="wkBox"><div class="t">최근 7일 이행률</div><div class="v"><span id="wkPct">-</span> <small>%</small></div><div class="gk-bar"><i id="wkBar" style="width:0%"></i></div></div>
+    </div>
+
+    <div class="callout warn"><b>복약을 놓쳤을 때:</b> 시간이 많이 지났으면 <b>두 배로 먹이지 말고</b> 병원에 전화하게 안내합니다. 임의 조정은 보호자 판단에 맡기지 않습니다. <b>031-715-7119</b></div>
+  </section>
+
+  <section class="card" id="alarm">
+    <div class="sec-head"><span class="num">4</span><h2>알림<small>잊지 않게 — 두 가지 길을 같이</small></h2></div>
+
+    <div class="gk-alarm">
+      <div class="ic">🔔</div>
+      <div class="tx"><b>웹 알림(이 폰)</b><span id="notiState">아직 켜지 않았습니다.</span></div>
+      <button class="btn primary" id="notiBtn" type="button">알림 허용</button>
+    </div>
+    <div class="gk-alarm">
+      <div class="ic">⏱</div>
+      <div class="tx"><b>1분 뒤 테스트 알림</b><span>눌러 두고 폰을 잠가 보세요. 1분 뒤 알림이 오면 정상입니다.</span></div>
+      <button class="btn ghost" id="notiTest" type="button">테스트</button>
+    </div>
+    <div class="gk-alarm">
+      <div class="ic">📅</div>
+      <div class="tx"><b>폰 캘린더에 알림 넣기</b><span id="icsState">앱을 닫아도 오는 확실한 방법입니다.</span></div>
+      <button class="btn ghost" id="icsBtn" type="button">캘린더 파일</button>
+    </div>
+    <div class="gk-alarm">
+      <div class="ic">📲</div>
+      <div class="tx"><b>홈 화면에 추가</b><span id="pwaState">브라우저 메뉴(⋮) → 홈 화면에 추가</span></div>
+      <button class="btn ghost" id="pwaBtn" type="button">설치</button>
+    </div>
+
+    <div class="gk-limit">
+      <b>정확히 말씀드립니다.</b><br>
+      · 웹 알림은 <b>폰 설정에서 알림을 허용</b>하고 <b>홈 화면에 추가</b>해야 옵니다. 앱을 완전히 닫으면 오지 않을 수 있습니다.<br>
+      · <b>캘린더 파일(ICS)</b>은 앱이 꺼져 있어도 오는 유일하게 믿을 만한 길입니다. 둘 다 켜 두시면 가장 안전합니다.<br>
+      · 아이폰은 <b>홈 화면에 추가한 앱</b>에서만 웹 알림이 되고, 예전 iOS 버전은 안 됩니다.<br>
+      · 카톡 알림은 병원이 보내는 것이라 여기서 자동 발송하지 않습니다.
+    </div>
+    <div class="gk-sync" id="pushBox">앱을 닫아도 오는 푸시(FCM)는 준비 상태를 여기에 표시합니다.</div>
+  </section>
+
+  <section class="card" id="link">
+    <div class="sec-head"><span class="num">5</span><h2>보호자 링크 · 안내 문구<small>이 아이 것만 보입니다</small></h2></div>
+    <p class="small">링크를 열면 <b>그 아이 처방표만</b> 뜹니다. 보호자 폰에서 바로 체크할 수 있습니다.</p>
+    <div class="gk-linkbox"><code id="guardLink">-</code>
+      <div class="btns"><button class="btn solid" id="copyLink" type="button">링크 복사</button><button class="btn ghost" id="shareLink" type="button">카톡으로 보내기</button></div>
+    </div>
   </section>
 
   <div id="out"></div>
 
   <section class="card flat">
-    <div class="sec-head"><span class="num">4</span><h2>상비약 · 복약 주의<small>보호자가 가장 많이 하는 실수</small></h2></div>
+    <div class="sec-head"><span class="num">6</span><h2>상비약 · 복약 주의<small>보호자가 가장 많이 하는 실수</small></h2></div>
     <div class="tbl-wrap">
       <table class="tbl">
         <thead><tr><th>상황</th><th>하지 말 것</th></tr></thead>
@@ -91,11 +297,14 @@
           <tr><th>스테로이드</th><td class="l">갑자기 끊기 — 부신 위기. 반드시 감량 지시대로</td></tr>
           <tr><th>심장약</th><td class="l">시간을 건너뛰고 두 배로 먹이기</td></tr>
           <tr><th>구충·예방</th><td class="l">체중 확인 없이 다른 아이 약을 나눠 먹이기</td></tr>
-          <tr><th>눈·귀 약</th><td class="l">사람용 안약·귀약 임의 사용</td></tr>
+          <tr><th>눈·귀 약</th><td class="l">사람용 안약·귀약 임의 사용. 여러 개면 <b>5분 간격·묽은 것부터</b></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>복약을 놓쳤을 때:</b> 시간이 많이 지났으면 <b>두 배로 먹이지 말고</b> 병원에 전화하게 안내합니다. 임의 조정은 보호자 판단에 맡기지 않습니다.</div>
+    <div class="callout">
+      <b>안약 순서의 근거</b> — 점안액(액) → 현탁액 → 겔 → 연고 순으로, 서로 <b>5분 이상</b> 간격을 두고 넣습니다. 점성이 높은 제형을 먼저 넣으면 뒤 약의 흡수를 막기 때문입니다.<br>
+      <span class="small">출처: Merck Veterinary Manual, <i>Routes of Administration for Ocular Medications in Animals</i> (N. Whelan, DACVO, 2024 개정) · ACVO public <i>Tips for Eye Medication</i> · University of Tennessee UTCVM 안과 <i>Eye Drop Dosing Chart</i>.</span>
+    </div>
   </section>
 
   <nav class="webnav" aria-label="그물망 이웃 칸">
@@ -112,87 +321,1114 @@
   <div id="g-footer"></div>
 </div>
 
+<div id="gk-view"><button class="x" type="button" id="gkViewX">✕</button><img id="gkViewImg" alt="약 사진"></div>
+<input type="file" id="photoIn" accept="image/*" capture="environment" hidden>
+
 <script src="assets/g-common.js?v=20261128d"></script>
 <script>
 
 (function () {
-  var $ = G.q;
-  var body = $('#meds');
-  $('#date').value = G.today();
+  'use strict';
+  var $ = G.q, qa = G.qa;
 
-  function row() {
-    return '<tr>' +
-      '<td><input class="tin name" type="text" placeholder="약 이름"></td>' +
-      '<td><input class="tin dose" type="text" placeholder="1정"></td>' +
-      '<td><input class="tin freq" type="number" inputmode="numeric" min="1" max="4" placeholder="2"></td>' +
-      '<td><input class="tin days" type="number" inputmode="numeric" min="1" max="90" placeholder="7"></td>' +
-      '<td><button class="del" type="button" aria-label="줄 삭제">×</button></td>' +
-    '</tr>';
+  /* ================= 병원 저장 서버 (Apps Script 웹앱) ================= */
+  var API = '';
+
+  /* ================= 저장 키 ================= */
+  var K_STATE = 'gkn_state_v3::';
+  var K_CHK = 'gkn_checks_v1';
+  var K_LAST = 'gkn_last_pet_v1';
+  var K_NOTI = 'gkn_noti_v1';
+
+  var KINDS = {
+    oral: { label: '내복약', icon: '💊', verb: '먹었어요' },
+    eye:  { label: '안약',   icon: '👁', verb: '넣었어요' },
+    ear:  { label: '귀약',   icon: '👂', verb: '넣었어요' },
+    oint: { label: '연고',   icon: '🧴', verb: '발랐어요' },
+    inj:  { label: '주사',   icon: '💉', verb: '맞았어요' },
+    supp: { label: '보조제', icon: '🌿', verb: '먹었어요' }
+  };
+  var KIND_ORDER = ['oral', 'supp', 'eye', 'ear', 'oint', 'inj'];
+  var CAPS = [
+    { id: 'orange', name: '주황', hex: '#f08a24' },
+    { id: 'blue',   name: '파랑', hex: '#2f86b5' },
+    { id: 'green',  name: '초록', hex: '#2f9e6a' },
+    { id: 'red',    name: '빨강', hex: '#d64545' },
+    { id: 'yellow', name: '노랑', hex: '#e5b62b' },
+    { id: 'pink',   name: '분홍', hex: '#e2567f' },
+    { id: 'purple', name: '보라', hex: '#8a5bb5' },
+    { id: 'white',  name: '흰색', hex: '#f4f4f4' },
+    { id: 'clear',  name: '투명', hex: '#dfeef5' },
+    { id: 'black',  name: '검정', hex: '#333333' }
+  ];
+  var FORMS = ['액', '현탁액', '겔', '연고'];
+  var FORM_RANK = { '액': 0, '현탁액': 1, '겔': 2, '연고': 3 };
+  var DEF_TIMES = {
+    1: ['09:00'],
+    2: ['08:00', '20:00'],
+    3: ['08:00', '14:00', '20:00'],
+    4: ['07:00', '12:00', '17:00', '22:00'],
+    5: ['07:00', '11:00', '15:00', '19:00', '23:00'],
+    6: ['07:00', '10:00', '13:00', '16:00', '19:00', '22:00']
+  };
+  var HOSPITAL_PHONE = '031-715-7119';
+
+  var params = new URLSearchParams(location.search);
+  var qPet = (params.get('pet') || '').trim();
+  var qGuardian = (params.get('guardian') || '').trim();
+  var qSlot = (params.get('slot') || '').trim();
+  var qDateP = (params.get('date') || '').trim();
+  var linked = !!qPet;
+
+  var seqN = 0;
+  function nid() { seqN++; return 'm' + Date.now().toString(36) + seqN.toString(36); }
+  function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function petKey(n) { return String(n || '').trim() || '우리 아이'; }
+
+  function newMed(kind, meds) {
+    kind = kind || 'oral';
+    var eyes = (meds || []).filter(function (m) { return m.kind === 'eye' || m.kind === 'ear'; }).length;
+    var dose = '1정';
+    if (kind === 'eye' || kind === 'ear') dose = '1방울';
+    if (kind === 'oint') dose = '쌀알만큼';
+    if (kind === 'inj') dose = '병원에서';
+    if (kind === 'supp') dose = '1정';
+    return {
+      id: nid(), name: '', kind: kind, side: '', form: '액', dose: dose,
+      freq: 2, days: 7, times: DEF_TIMES[2].slice(), meal: '', cap: '',
+      photo: '', photoUrl: '', note: '', pname: '',
+      seq: (kind === 'eye' || kind === 'ear') ? eyes + 1 : 0
+    };
   }
-  for (var i = 0; i < 2; i++) body.insertAdjacentHTML('beforeend', row());
-  $('#addMed').addEventListener('click', function () { body.insertAdjacentHTML('beforeend', row()); refresh(); });
-  body.addEventListener('click', function (e) {
-    var b = e.target.closest ? e.target.closest('.del') : null;
-    if (!b) return;
-    var tr = b.parentNode.parentNode;
-    if (body.children.length <= 1) G.qa('input', tr).forEach(function (x) { x.value = ''; });
-    else tr.parentNode.removeChild(tr);
-    refresh();
-  });
-  body.addEventListener('input', refresh);
-  ['guardian', 'pet', 'date', 'start', 'meal', 'extra'].forEach(function (id) {
-    $('#' + id).addEventListener('input', refresh);
-    $('#' + id).addEventListener('change', refresh);
-  });
+  function blankState(pet) {
+    return { pet: pet || '', guardian: '', date: G.today(), start: '오늘 저녁부터', meal: '식후 30분', interval: 5, extra: '', meds: [], rxAt: 0 };
+  }
 
-  function meds() {
-    return G.qa('tr', body).map(function (tr) {
-      return {
-        name: $('.name', tr).value.trim(),
-        dose: $('.dose', tr).value.trim() || '1정',
-        freq: parseInt($('.freq', tr).value, 10) || 0,
-        days: parseInt($('.days', tr).value, 10) || 0
+  var state = null;
+  var CHK = lsGet(K_CHK, {});
+  var viewDate = /^\d{4}-\d{2}-\d{2}$/.test(qDateP) ? qDateP : G.today();
+
+  function loadState() {
+    var pet = qPet || lsGet(K_LAST, '') || '';
+    var st = pet ? lsGet(K_STATE + petKey(pet), null) : null;
+    if (!st || !st.meds) st = blankState(pet);
+    if (qPet) st.pet = qPet;
+    if (qGuardian) st.guardian = qGuardian;
+    if (!st.meds.length) st.meds.push(newMed('oral'));
+    if (!st.interval) st.interval = 5;
+    return st;
+  }
+  function saveState() {
+    lsSet(K_STATE + petKey(state.pet), state);
+    lsSet(K_LAST, state.pet || '');
+  }
+
+  /* ================= 작은 도구 ================= */
+  function parseDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || ''));
+    if (!m) return null;
+    var d = new Date(+m[1], +m[2] - 1, +m[3]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function slotDate(ds, t) {
+    var d = parseDate(ds) || new Date();
+    var a = String(t || '00:00').split(':');
+    d.setHours(parseInt(a[0], 10) || 0, parseInt(a[1], 10) || 0, 0, 0);
+    return d;
+  }
+  function hhmm(ts) { var d = new Date(ts); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function chkKey(ds, t, id) { return ds + '|' + t + '|' + id; }
+  function chkGet(k) { var p = CHK[petKey(state.pet)]; return (p && p[k]) || null; }
+  function chkSet(k, rec) {
+    var pn = petKey(state.pet);
+    CHK[pn] = CHK[pn] || {};
+    if (rec) CHK[pn][k] = rec; else delete CHK[pn][k];
+    lsSet(K_CHK, CHK);
+  }
+  function capOf(m) {
+    for (var i = 0; i < CAPS.length; i++) { if (CAPS[i].id === m.cap) return CAPS[i]; }
+    return null;
+  }
+  function timesOf(m) {
+    var t = (m.times && m.times.length) ? m.times.slice() : (DEF_TIMES[m.freq] || DEF_TIMES[2]).slice();
+    t = t.filter(function (x) { return /^\d{2}:\d{2}$/.test(x); });
+    return t.length ? t.sort() : DEF_TIMES[2].slice();
+  }
+  function startDate() {
+    var d = parseDate(state.date) || new Date();
+    if (state.start === '내일 아침부터') d = G.addDays(d, 1);
+    return d;
+  }
+  function activeOn(m, ds) {
+    var d = parseDate(ds); if (!d) return false;
+    var t0 = startDate();
+    var days = m.days || 1;
+    d.setHours(0, 0, 0, 0); t0.setHours(0, 0, 0, 0);
+    return d.getTime() >= t0.getTime() && d.getTime() < G.addDays(t0, days).getTime();
+  }
+  function notStartedYet(ds, t) {
+    return state.start === '오늘 저녁부터' && ds === state.date && String(t) < '17:00';
+  }
+
+  function slotMap(ds) {
+    var out = {};
+    (state.meds || []).forEach(function (m) {
+      if (!m.name) return;
+      if (!activeOn(m, ds)) return;
+      timesOf(m).forEach(function (t) {
+        if (!out[t]) out[t] = { eyes: [], others: [], all: [] };
+        out[t].all.push(m);
+        if (m.kind === 'eye' || m.kind === 'ear') out[t].eyes.push(m); else out[t].others.push(m);
+      });
+    });
+    Object.keys(out).forEach(function (t) {
+      out[t].eyes.sort(function (a, b) {
+        var sa = (a.seq || 99), sb = (b.seq || 99);
+        if (sa !== sb) return sa - sb;
+        return (FORM_RANK[a.form] || 0) - (FORM_RANK[b.form] || 0);
+      });
+      out[t].others.sort(function (a, b) { return KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind); });
+    });
+    return out;
+  }
+  function planItems(ds) {
+    var map = slotMap(ds), out = [];
+    Object.keys(map).sort().forEach(function (t) {
+      map[t].all.forEach(function (m) { out.push({ slot: t, med: m }); });
+    });
+    return out;
+  }
+  function statsFor(ds) {
+    var due = 0, done = 0, now = Date.now();
+    planItems(ds).forEach(function (it) {
+      var at = slotDate(ds, it.slot).getTime();
+      if (notStartedYet(ds, it.slot)) return;
+      if (at <= now + 15 * 60000) {
+        due++;
+        if (chkGet(chkKey(ds, it.slot, it.med.id))) done++;
+      }
+    });
+    return { due: due, done: done };
+  }
+  function weekStats() {
+    var n = 0, d = 0;
+    for (var i = 6; i >= 0; i--) {
+      var s = statsFor(G.isoDate(G.addDays(new Date(), -i)));
+      n += s.due; d += s.done;
+    }
+    return { n: n, d: d, pct: n ? Math.round(d * 100 / n) : 0 };
+  }
+  function missedOn(ds) {
+    var out = [];
+    planItems(ds).forEach(function (it) {
+      if (notStartedYet(ds, it.slot)) return;
+      var at = slotDate(ds, it.slot).getTime();
+      if (at < Date.now() - 60 * 60000 && !chkGet(chkKey(ds, it.slot, it.med.id))) out.push(it);
+    });
+    return out;
+  }
+
+  /* ================= 처방 입력 화면 ================= */
+  function opts(list, cur) {
+    return list.map(function (o) {
+      return '<option value="' + G.esc(o.v) + '"' + (o.v === cur ? ' selected' : '') + '>' + G.esc(o.l) + '</option>';
+    }).join('');
+  }
+  function sideOptions(kind, cur) {
+    var a = ['-'];
+    if (kind === 'ear') a = a.concat(['좌이', '우이', '양이']);
+    else a = a.concat(['좌안', '우안', '양안']);
+    return a.map(function (v) {
+      return '<option value="' + (v === '-' ? '' : v) + '"' + ((v === '-' ? '' : v) === cur ? ' selected' : '') + '>' + v + '</option>';
+    }).join('');
+  }
+  function medCard(m, idx) {
+    var k = KINDS[m.kind] || KINDS.oral;
+    var isEye = (m.kind === 'eye' || m.kind === 'ear');
+    var times = timesOf(m);
+    var cap = capOf(m);
+    var h = '<div class="gk-med" data-id="' + m.id + '">';
+    h += '<div class="gk-med-top">';
+    h += '<span class="gk-ico">' + k.icon + '</span>';
+    h += '<input class="gk-name" type="text" placeholder="약 이름 (예: 33번 · 레보플록사신)" value="' + G.esc(m.name) + '">';
+    h += '<button class="del" type="button" data-del="' + m.id + '" aria-label="이 약 삭제">×</button>';
+    h += '</div>';
+    h += '<div class="gk-fields">';
+    h += '<label class="gk-f"><span>종류</span><select class="gk-kind">' + opts(KIND_ORDER.map(function (x) { return { v: x, l: KINDS[x].label }; }), m.kind) + '</select></label>';
+    if (isEye) h += '<label class="gk-f"><span>' + (m.kind === 'ear' ? '좌우' : '눈') + '</span><select class="gk-side">' + sideOptions(m.kind, m.side) + '</select></label>';
+    h += '<label class="gk-f"><span>1회</span><input class="gk-dose" type="text" value="' + G.esc(m.dose) + '"></label>';
+    h += '<label class="gk-f"><span>하루</span><select class="gk-freq">' + opts([1, 2, 3, 4, 5, 6].map(function (n) { return { v: String(n), l: n + '회' }; }), String(m.freq)) + '</select></label>';
+    h += '<label class="gk-f"><span>일수</span><input class="gk-days" type="number" inputmode="numeric" min="1" max="90" value="' + (m.days || '') + '"></label>';
+    if (isEye || m.kind === 'oint') {
+      h += '<label class="gk-f"><span>제형</span><select class="gk-form">' + opts(FORMS.map(function (f) { return { v: f, l: f }; }), m.form) + '</select></label>';
+    }
+    if (isEye) {
+      h += '<label class="gk-f" style="flex:0 0 52px"><span>순서</span><input class="gk-seq" type="number" inputmode="numeric" min="1" max="9" value="' + (m.seq || '') + '"></label>';
+    }
+    h += '</div>';
+    h += '<div class="gk-times"><span class="gk-tlabel">시간</span>';
+    for (var i = 0; i < times.length; i++) {
+      h += '<input type="time" class="gk-time" data-i="' + i + '" value="' + times[i] + '">';
+    }
+    h += '<button class="gk-mini-btn" type="button" data-auto="' + m.id + '">자동</button>';
+    h += '</div>';
+    h += '<div class="gk-photo-row">';
+    h += '<button class="gk-mini-btn" type="button" data-photo="' + m.id + '">📷 사진</button>';
+    h += '<img class="gk-thumb' + (m.photo ? ' on' : '') + '" data-thumb="' + m.id + '" src="' + (m.photo || '') + '" alt="약 사진">';
+    h += '<select class="gk-cap-sel" title="뚜껑·라벨 색">' + opts([{ v: '', l: '뚜껑색' }].concat(CAPS.map(function (c) { return { v: c.id, l: c.name }; })), m.cap) + '</select>';
+    if (cap) h += '<span class="gk-dot" style="background:' + cap.hex + '"></span>';
+    h += '<select class="gk-cap-sel gk-meal-sel">' + opts([{ v: '', l: '식전·식후' }, { v: '식후 30분', l: '식후' }, { v: '식전 30분', l: '식전' }, { v: '관계없이', l: '관계없이' }], m.meal) + '</select>';
+    h += '</div>';
+    h += '<input class="gk-note" type="text" placeholder="특이사항 (예: 잘 흔들어서, 물과 함께)" value="' + G.esc(m.note || '') + '">';
+    h += '</div>';
+    return h;
+  }
+  function renderMeds() {
+    var host = $('#medList');
+    host.innerHTML = (state.meds || []).map(medCard).join('') || '';
+  }
+
+  function findMed(id) {
+    for (var i = 0; i < state.meds.length; i++) if (state.meds[i].id === id) return state.meds[i];
+    return null;
+  }
+
+  /* ================= 오늘의 복약표 ================= */
+  function mediaHTML(m) {
+    var cap = capOf(m);
+    if (m.photo) return '<button type="button" class="gk-media" data-view="' + m.id + '" aria-label="약 사진 크게 보기"><img src="' + m.photo + '" alt=""></button>';
+    if (cap) return '<span class="gk-media"><span class="gk-dot" style="background:' + cap.hex + '"></span></span>';
+    return '<span class="gk-media">' + (KINDS[m.kind] || KINDS.oral).icon + '</span>';
+  }
+  function badges(m) {
+    var h = '';
+    if (m.kind === 'supp') h += '<span class="gk-badge supp">보조제</span>';
+    if (m.kind === 'inj') h += '<span class="gk-badge inj">병원 주사</span>';
+    if (m.kind === 'oint') h += '<span class="gk-badge oint">연고</span>';
+    return h;
+  }
+  function subLine(m) {
+    var a = [];
+    if (m.side) a.push(m.side);
+    if (m.dose) a.push(m.dose);
+    if ((m.kind === 'eye' || m.kind === 'ear') && m.form) a.push(m.form);
+    var meal = m.meal || ((m.kind === 'oral' || m.kind === 'supp') ? state.meal : '');
+    if (meal && m.kind !== 'inj') a.push(meal);
+    if (m.note) a.push(m.note);
+    return a.join(' · ');
+  }
+  function checkCell(m, ds, t) {
+    var k = chkKey(ds, t, m.id), c = getChk(k), kd = KINDS[m.kind] || KINDS.oral;
+    if (c) {
+      return '<div class="gk-cell"><span class="gk-v">✔ ' + hhmm(c.at) + '</span>' +
+        '<button type="button" class="gk-undo" data-undo="' + k + '">되돌리기</button></div>';
+    }
+    return '<button type="button" class="gk-chk" data-chk="' + k + '" data-med="' + m.id + '" data-slot="' + t + '">' + kd.verb + '</button>';
+  }
+  function getChk(k) { return chkGet(k); }
+
+  function itemHTML(m, ds, t) {
+    var c = getChk(chkKey(ds, t, m.id));
+    return '<div class="gk-item' + (c ? ' done' : '') + '">' +
+      mediaHTML(m) +
+      '<div class="gk-tx"><b>' + G.esc(m.name) + badges(m) + '</b><span class="gk-sub">' + G.esc(subLine(m)) + '</span></div>' +
+      checkCell(m, ds, t) + '</div>';
+  }
+  function stepHTML(m, ds, t, n) {
+    var c = getChk(chkKey(ds, t, m.id));
+    return '<div class="gk-step' + (c ? ' done' : '') + '">' +
+      '<span class="gk-step-no">' + n + '</span>' +
+      mediaHTML(m) +
+      '<div class="gk-tx"><b>' + G.esc(m.name) + '</b><span class="gk-sub">' + G.esc(subLine(m)) + '</span></div>' +
+      checkCell(m, ds, t) + '</div>';
+  }
+  function gapHTML(prev, ds, t) {
+    var pc = getChk(chkKey(ds, t, prev.id));
+    var label = state.interval + '분 후';
+    if (pc) {
+      var left = (pc.at + state.interval * 60000) - Date.now();
+      if (left > 3000) label = '<b>' + Math.floor(left / 60000) + '분 ' + Math.floor((left % 60000) / 1000) + '초 남음</b>';
+      else label = '간격 지났습니다';
+    }
+    return '<div class="gk-gap">↓ ' + label + '</div>';
+  }
+
+  function renderSchedule() {
+    var host = $('#sched');
+    var ds = viewDate;
+    var map = slotMap(ds);
+    var times = Object.keys(map).sort();
+    var now = Date.now();
+
+    if (!times.length) {
+      host.innerHTML = '<div class="callout">' + (state.pet ? '<b>' + G.esc(state.pet) + '</b> ' : '') +
+        '복약 시간표가 아직 없습니다. 위 <b>처방 입력</b>에서 약을 넣어 주세요.</div>';
+      renderStats(); return;
+    }
+
+    var html = '';
+    times.forEach(function (t) {
+      var due = slotDate(ds, t).getTime();
+      var isNow = (now >= due - 15 * 60000 && now <= due + 45 * 60000);
+      var past = now > due + 45 * 60000;
+      var items = map[t].all, total = items.length, doneN = 0;
+      items.forEach(function (m) { if (getChk(chkKey(ds, t, m.id))) doneN++; });
+      var cls = 'gk-slot' + (isNow ? ' now' : '') + ((past && doneN < total) ? ' miss' : '') + (doneN === total ? ' all' : '');
+      html += '<div class="' + cls + '" id="slot-' + t.replace(':', '') + '">';
+      html += '<div class="gk-slot-head"><b class="gk-time">' + t + '</b>' +
+        (isNow ? '<span class="gk-now">지금</span>' : '') +
+        (notStartedYet(ds, t) ? '<span class="gk-later">시작 전</span>' : '') +
+        '<span class="gk-cnt' + (doneN === total ? ' ok' : '') + '">' + doneN + '/' + total + '</span></div>';
+      map[t].others.forEach(function (m) { html += itemHTML(m, ds, t); });
+      if (map[t].eyes.length) {
+        html += '<div class="gk-chain">';
+        map[t].eyes.forEach(function (m, i) {
+          if (i > 0) html += gapHTML(map[t].eyes[i - 1], ds, t);
+          html += stepHTML(m, ds, t, i + 1);
+        });
+        html += '</div>';
+        if (map[t].eyes.length > 1) {
+          html += '<div class="gk-chain-note">한꺼번에 넣지 말고 <b>' + state.interval + '분 간격</b>으로 순서대로 넣어 주세요 · 묽은 것(액)부터, 연고는 마지막</div>';
+        }
+      }
+      html += '</div>';
+    });
+    host.innerHTML = html;
+    renderStats();
+    renderNowBar();
+  }
+
+  function renderNowBar() {
+    var ds = G.today();
+    var host = $('#nowBar');
+    if (viewDate !== ds) { host.innerHTML = ''; return; }
+    var map = slotMap(ds), now = Date.now(), cur = null;
+    Object.keys(map).sort().forEach(function (t) {
+      var due = slotDate(ds, t).getTime();
+      if (now >= due - 20 * 60000 && now <= due + 90 * 60000) {
+        var undone = map[t].all.filter(function (m) { return !getChk(chkKey(ds, t, m.id)); });
+        if (undone.length) cur = { t: t, undone: undone, eyes: map[t].eyes.length };
+      }
+    });
+    if (!cur) { host.innerHTML = ''; return; }
+    host.innerHTML = '<div class="gk-nowbar"><b>' + cur.t + '</b> 복약 시간입니다 — ' +
+      cur.undone.length + '개 남았습니다' + (cur.eyes > 1 ? ' (안약 ' + cur.eyes + '개 · ' + state.interval + '분 간격)' : '') +
+      '. 아래에서 체크해 주세요.</div>';
+  }
+
+  function renderStats() {
+    var s = statsFor(viewDate);
+    $('#stDone').textContent = s.done;
+    $('#stDue').textContent = s.due;
+    var pct = s.due ? Math.round(s.done * 100 / s.due) : 0;
+    $('#stBar').style.width = pct + '%';
+    var w = weekStats();
+    $('#wkPct').textContent = w.n ? w.pct : '-';
+    $('#wkBar').style.width = (w.n ? w.pct : 0) + '%';
+
+    var miss = missedOn(viewDate);
+    var box = $('#missBox');
+    if (box) box.parentNode.removeChild(box);
+    if (miss.length) {
+      var names = miss.map(function (it) { return it.slot + ' ' + it.med.name; }).join(' · ');
+      var el = document.createElement('div');
+      el.id = 'missBox';
+      el.className = 'callout bad';
+      el.style.marginTop = '9px';
+      el.innerHTML = '<b>아직 안 한 복약이 있습니다</b> — ' + G.esc(names) +
+        '<br>두 배로 먹이거나 넣지 말고, 병원에 먼저 전화해 주세요. <b>' + HOSPITAL_PHONE + '</b>';
+      var anchor = $('#sched');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    }
+    $('#dateLabel').textContent = viewDate.replace(/-/g, '. ') + (viewDate === G.today() ? ' (오늘)' : '');
+  }
+
+  /* ================= 체크 저장 ================= */
+  function mark(k, slot, medId) {
+    if (getChk(k)) { G.toast('이미 체크했어요 — ' + hhmm(getChk(k).at)); return; }
+    chkSet(k, { at: Date.now(), by: '보호자' });
+    if (navigator.vibrate) { try { navigator.vibrate(25); } catch (e) {} }
+    renderSchedule(); syncSoon();
+    G.toast('체크했습니다 · ' + hhmm(Date.now()));
+  }
+
+  /* ================= 알림 ================= */
+  var noti = lsGet(K_NOTI, { enabled: false });
+  var timers = {};
+
+  function permiss() {
+    if (!('Notification' in window)) return 'unsupported';
+    return Notification.permission;
+  }
+  function notiBox() {
+    var p = permiss(), t = $('#notiState'), b = $('#notiBtn');
+    if (p === 'unsupported') {
+      t.textContent = '이 브라우저는 웹 알림을 지원하지 않습니다. 캘린더 파일을 써 주세요.';
+      b.textContent = '지원 안 됨'; b.disabled = true;
+      return;
+    }
+    if (p === 'granted' && noti.enabled) {
+      var map = slotMap(G.today()), now = Date.now(), left = [];
+      Object.keys(map).sort().forEach(function (s) {
+        if (slotDate(G.today(), s).getTime() > now) left.push(s);
+      });
+      t.textContent = left.length ? ('켜짐 · 오늘 남은 알림 ' + left.join(', ')) : '켜짐 · 오늘 남은 알림 없음';
+      b.textContent = '켜짐'; b.disabled = false;
+    } else if (p === 'denied') {
+      t.textContent = '폰 브라우저 설정에서 이 사이트 알림을 허용해야 옵니다. (지금은 캘린더 파일을 써 주세요)';
+      b.textContent = '차단됨'; b.disabled = false;
+    } else {
+      t.textContent = '아직 켜지 않았습니다. 한 번만 허용하면 시간마다 알려 드립니다.';
+      b.textContent = '알림 허용'; b.disabled = false;
+    }
+  }
+  function askNoti() {
+    var p = permiss();
+    if (p === 'unsupported') { G.toast('이 브라우저는 알림을 지원하지 않습니다'); return; }
+    if (p === 'denied') { G.toast('폰 설정 > 사이트 설정에서 알림을 허용해 주세요'); return; }
+    if (p === 'granted') {
+      noti.enabled = !noti.enabled;
+      lsSet(K_NOTI, noti);
+      notiBox(); scheduleNoti();
+      G.toast(noti.enabled ? '웹 알림을 켰습니다' : '웹 알림을 껐습니다');
+      return;
+    }
+    Notification.requestPermission().then(function (r) {
+      noti.enabled = (r === 'granted');
+      lsSet(K_NOTI, noti);
+      notiBox(); scheduleNoti();
+      G.toast(r === 'granted' ? '알림을 켰습니다 — 시간마다 알려 드립니다' : '알림이 꺼져 있습니다. 폰 설정에서 허용해 주세요');
+    });
+  }
+  function scheduleNoti() {
+    Object.keys(timers).forEach(function (k) { clearTimeout(timers[k]); delete timers[k]; });
+    if (permiss() !== 'granted' || !noti.enabled) return;
+    var ds = G.today(), map = slotMap(ds), now = Date.now();
+    Object.keys(map).sort().forEach(function (t) {
+      var at = slotDate(ds, t).getTime();
+      var gap = at - now;
+      if (gap > 0 && gap < 14 * 3600 * 1000) {
+        timers[t] = setTimeout(function () { fireSlot(t); }, gap);
+      }
+    });
+  }
+  function fireSlot(t) {
+    var map = slotMap(G.today()), s = map[t];
+    if (!s) return;
+    var names = s.all.map(function (m) { return m.name; }).join(' · ');
+    var body = t + ' — ' + names + ' 체크해 주세요';
+    if (s.eyes.length > 1) body += ' (안약 ' + s.eyes.length + '개, ' + state.interval + '분 간격)';
+    notify('💊 ' + (state.pet || '우리 아이') + ' 복약 시간', body, t);
+  }
+  function notify(title, body, slot) {
+    var url = location.origin + location.pathname + '?pet=' + encodeURIComponent(state.pet || '') +
+      '&guardian=' + encodeURIComponent(state.guardian || '') + '&slot=' + encodeURIComponent(slot || '') + '#today';
+    if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+      navigator.serviceWorker.ready.then(function (reg) {
+        reg.showNotification(title, {
+          body: body, tag: 'gkn-' + (slot || 'x'), data: { url: url, slot: slot },
+          icon: 'assets/icon-192.png', badge: 'assets/icon-192.png', requireInteraction: true
+        });
+      }).catch(function () { try { new Notification(title, { body: body }); } catch (e) {} });
+    } else {
+      try { new Notification(title, { body: body, icon: 'assets/icon-192.png' }); } catch (e) {}
+    }
+  }
+  function testNoti() {
+    if (permiss() !== 'granted') { G.toast('먼저 알림을 허용해 주세요'); return; }
+    G.toast('1분 뒤 테스트 알림을 보냅니다 — 폰을 잠가 보세요');
+    setTimeout(function () {
+      notify('알림 테스트 — ' + (state.pet || '우리 아이'), '이 알림이 보이면 정상입니다. ' + hhmm(Date.now()), '');
+    }, 60000);
+  }
+
+  /* ================= ICS (폰 캘린더) ================= */
+  function pad2(n) { return ('0' + n).slice(-2); }
+  function utcStamp(d) {
+    return d.getUTCFullYear() + pad2(d.getUTCMonth() + 1) + pad2(d.getUTCDate()) + 'T' +
+      pad2(d.getUTCHours()) + pad2(d.getUTCMinutes()) + pad2(d.getUTCSeconds()) + 'Z';
+  }
+  function icsEsc(s) {
+    return String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+  }
+  function fold(line) {
+    if (line.length <= 72) return line;
+    var out = '', rest = line;
+    out = rest.slice(0, 72); rest = rest.slice(72);
+    while (rest.length) { out += '\r\n ' + rest.slice(0, 71); rest = rest.slice(71); }
+    return out;
+  }
+  function icsText() {
+    var L = [];
+    var pet = state.pet || '우리 아이';
+    L.push('BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Goodmorningpet//GKN Medication//KO',
+      'CALSCALE:GREGORIAN', 'METHOD:PUBLISH');
+    L.push('X-WR-CALNAME:' + icsEsc('복약 · ' + pet));
+    L.push('X-WR-TIMEZONE:Asia/Seoul');
+    L.push('BEGIN:VTIMEZONE', 'TZID:Asia/Seoul', 'BEGIN:STANDARD', 'DTSTART:19700101T000000',
+      'TZOFFSETFROM:+0900', 'TZOFFSETTO:+0900', 'TZNAME:KST', 'END:STANDARD', 'END:VTIMEZONE');
+
+    var first = G.isoDate(startDate());
+    var map = slotMap(first);
+    var stamp = utcStamp(new Date());
+    var slug = String(pet).replace(/[^0-9A-Za-z가-힣]/g, '').slice(0, 12) || 'pet';
+
+    Object.keys(map).sort().forEach(function (t) {
+      var items = map[t].all;
+      var days = items.reduce(function (a, m) { return Math.max(a, m.days || 1); }, 1);
+      var d0 = slotDate(first, t);
+      var d1 = new Date(d0.getTime() + 10 * 60000);
+      var names = items.map(function (m) { return m.name; }).join(', ');
+      var desc = items.map(function (m) {
+        var a = [m.name];
+        if (m.side) a.push(m.side);
+        if (m.dose) a.push(m.dose);
+        if (m.form && (m.kind === 'eye' || m.kind === 'ear')) a.push(m.form);
+        return a.join(' ');
+      }).join('\n');
+      var eyes = map[t].eyes;
+      if (eyes.length > 1) {
+        desc = eyes.map(function (m, i) {
+          return (i + 1) + ') ' + m.name + ' ' + (m.side ? m.side + ' ' : '') + (m.dose || '');
+        }).join('\n→ ' + state.interval + '분 후 ') + '\n(안약은 5분 이상 간격, 묽은 것부터·연고는 마지막)';
+      }
+      var start = d0.getFullYear() + pad2(d0.getMonth() + 1) + pad2(d0.getDate()) + 'T' + pad2(d0.getHours()) + pad2(d0.getMinutes()) + '00';
+      var end = d1.getFullYear() + pad2(d1.getMonth() + 1) + pad2(d1.getDate()) + 'T' + pad2(d1.getHours()) + pad2(d1.getMinutes()) + '00';
+
+      L.push('BEGIN:VEVENT');
+      L.push('UID:gkn-' + slug + '-' + t.replace(':', '') + '@goodmorningpet');
+      L.push('DTSTAMP:' + stamp);
+      L.push('DTSTART;TZID=Asia/Seoul:' + start);
+      L.push('DTEND;TZID=Asia/Seoul:' + end);
+      L.push('RRULE:FREQ=DAILY;COUNT=' + days);
+      L.push('SUMMARY:' + icsEsc('💊 ' + pet + ' 복약 ' + t + ' — ' + names));
+      L.push('DESCRIPTION:' + icsEsc(desc));
+      L.push('LOCATION:' + icsEsc('굿모닝펫동물병원 ' + HOSPITAL_PHONE));
+      L.push('BEGIN:VALARM', 'TRIGGER:PT0S', 'ACTION:DISPLAY',
+        'DESCRIPTION:' + icsEsc(pet + ' 복약 시간입니다'), 'END:VALARM');
+      L.push('END:VEVENT');
+    });
+    L.push('END:VCALENDAR');
+    return L.map(fold).join('\r\n') + '\r\n';
+  }
+  function downloadICS() {
+    var txt = icsText();
+    var name = '복약_' + (state.pet || '아이') + '_' + G.today().replace(/-/g, '') + '.ics';
+    try {
+      var blob = new Blob([txt], { type: 'text/calendar;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+      G.toast('캘린더 파일을 받았습니다 — 열어서 추가해 주세요');
+      $('#icsState').textContent = '파일을 받았습니다. 폰에서 열어 캘린더에 추가하세요.';
+    } catch (e) {
+      G.toast('파일을 만들지 못했습니다 — 브라우저를 바꿔 보세요');
+    }
+  }
+
+  /* ================= 병원 저장 ================= */
+  var syncTimer = null, syncAt = 0;
+  function setSync(kind, msg) {
+    ['#syncRx'].forEach(function (sel) {
+      var el = $(sel); if (!el) return;
+      el.className = 'gk-sync' + (kind === 'ok' ? ' ok' : kind === 'err' ? ' err' : '');
+      el.textContent = msg;
+    });
+  }
+  function payload() {
+    var ds = G.today();
+    var checks = [];
+    planItems(ds).forEach(function (it) {
+      var c = getChk(chkKey(ds, it.slot, it.med.id));
+      if (c) checks.push({ slot: it.slot, medId: it.med.id, at: c.at });
+    });
+    return {
+      action: 'med_submit',
+      pet: state.pet || '', guardian: state.guardian || '',
+      rxDate: state.date, start: state.start, interval: state.interval,
+      meal: state.meal, extra: state.extra || '', date: ds,
+      meds: (state.meds || []).filter(function (m) { return m.name; }).map(function (m) {
+        return {
+          id: m.id, name: m.name, kind: m.kind, side: m.side || '', dose: m.dose || '',
+          freq: m.freq || 0, days: m.days || 0, times: timesOf(m), form: m.form || '',
+          cap: m.cap || '', photoUrl: m.photoUrl || '', note: m.note || '', seq: m.seq || 0
+        };
+      }),
+      checks: checks
+    };
+  }
+  function syncSoon() {
+    if (!API) { setSync('', '이 기기에만 저장됩니다 — 병원 서버 주소가 아직 없습니다.'); return; }
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncNow, 1200);
+  }
+  function syncNow() {
+    if (!API) return;
+    setSync('', '병원에 보내는 중…');
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload())
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      if (res && res.ok) {
+        syncAt = Date.now();
+        setSync('ok', '병원에도 기록되었습니다 · ' + hhmm(syncAt) + (res.rows ? ' (' + res.rows + '행)' : ''));
+      } else {
+        setSync('err', '병원 기록 실패 — 이 기기에는 저장됐습니다. ' + ((res && res.error) || ''));
+      }
+    }).catch(function () {
+      setSync('err', '병원에 연결하지 못했습니다 — 이 기기에는 저장됐습니다.');
+    });
+  }
+  function pullRx() {
+    if (!API || !linked) return;
+    var u = API + '?action=med_get&pet=' + encodeURIComponent(state.pet || '') +
+      '&guardian=' + encodeURIComponent(state.guardian || '');
+    fetch(u).then(function (r) { return r.json(); }).then(function (res) {
+      if (!res || !res.ok || !res.rx) return;
+      var hasLocal = (state.meds || []).some(function (m) { return m.name; });
+      if (!hasLocal || (res.rx.rxAt && res.rx.rxAt > (state.rxAt || 0))) applyRx(res.rx);
+      if (res.checks && res.checks.length) {
+        var pn = petKey(state.pet);
+        CHK[pn] = CHK[pn] || {};
+        res.checks.forEach(function (c) {
+          var k = chkKey(res.date || G.today(), c.slot, c.medId);
+          if (!CHK[pn][k]) CHK[pn][k] = { at: c.at, by: '병원' };
+        });
+        lsSet(K_CHK, CHK);
+        renderSchedule();
+      }
+    }).catch(function () {});
+  }
+  function applyRx(rx) {
+    state.date = rx.rxDate || state.date;
+    state.start = rx.start || state.start;
+    state.interval = rx.interval || state.interval;
+    state.meal = rx.meal || state.meal;
+    state.extra = rx.extra || state.extra;
+    state.rxAt = rx.rxAt || 0;
+    if (rx.meds && rx.meds.length) {
+      state.meds = rx.meds.map(function (m) {
+        return {
+          id: m.id || nid(), name: m.name, kind: m.kind || 'oral', side: m.side || '',
+          form: m.form || '액', dose: m.dose || '', freq: m.freq || 1, days: m.days || 1,
+          times: (m.times && m.times.length) ? m.times : (DEF_TIMES[m.freq] || DEF_TIMES[2]).slice(),
+          meal: m.meal || '', cap: m.cap || '', photo: '', photoUrl: m.photoUrl || '',
+          note: m.note || '', pname: m.pname || '', seq: m.seq || 0
+        };
+      });
+    }
+    saveState(); renderMeds(); renderSchedule(); renderLink(); kit && kit.refresh(true);
+  }
+
+  /* ================= 사진 ================= */
+  var pendingPhoto = null;
+  function compress(file, max, q, cb) {
+    var r = new FileReader();
+    r.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var w = img.width, h = img.height;
+        var s = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        cb(c.toDataURL('image/jpeg', q));
       };
-    }).filter(function (m) { return m.name; });
+      img.onerror = function () { cb(''); };
+      img.src = r.result;
+    };
+    r.onerror = function () { cb(''); };
+    r.readAsDataURL(file);
+  }
+  function onPhoto(file) {
+    var m = findMed(pendingPhoto); if (!m || !file) return;
+    compress(file, 360, 0.62, function (small) {
+      if (!small) { G.toast('사진을 읽지 못했습니다'); return; }
+      m.photo = small; saveState(); renderMeds(); renderSchedule();
+      G.toast('사진을 넣었습니다');
+      compress(file, 760, 0.72, function (big) {
+        if (!API || !big) return;
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'med_photo', pet: state.pet || '', medName: m.name || '', data: big })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          if (res && res.ok && res.url) {
+            m.photoUrl = res.url; saveState();
+            G.toast('사진을 병원에도 올렸습니다');
+          }
+        }).catch(function () {});
+      });
+    });
+  }
+
+  /* ================= 코멘트 파싱 ================= */
+  var KO_NUM = { '한': 1, '두': 2, '세': 3, '네': 4, '다섯': 5, '여섯': 6, '일': 1, '이': 2, '삼': 3, '사': 4 };
+  function parseComment(text) {
+    var segs = String(text || '').split(/[\n\r·•,;、]+/);
+    var out = [];
+    segs.forEach(function (seg) {
+      var s = seg.trim();
+      if (!s) return;
+      var num = s.match(/(\d{1,3})\s*번/);
+      if (!num) return;
+      var name = num[1] + '번';
+      var freq = 0;
+      var m1 = s.match(/하루\s*(한|두|세|네|다섯|여섯|\d)\s*번/);
+      if (m1) freq = /\d/.test(m1[1]) ? parseInt(m1[1], 10) : (KO_NUM[m1[1]] || 0);
+      if (!freq) {
+        var m2 = s.match(/(?:1일|하루)\s*(\d)\s*회/);
+        if (m2) freq = parseInt(m2[1], 10);
+      }
+      if (!freq) {
+        var m3 = s.match(/\b(SID|BID|TID|QID)\b/i);
+        if (m3) freq = { SID: 1, BID: 2, TID: 3, QID: 4 }[m3[1].toUpperCase()] || 0;
+      }
+      var days = 0;
+      var md = s.match(/(\d{1,2})\s*일/);
+      if (md) days = parseInt(md[1], 10);
+      if (!days && /일주일|1주/.test(s)) days = 7;
+      if (!days && /이주|2주/.test(s)) days = 14;
+
+      var kind = 'oral';
+      if (/안약|점안/.test(s)) kind = 'eye';
+      if (/귀약|점이/.test(s)) kind = 'ear';
+      if (/안연고|연고/.test(s)) kind = 'oint';
+      if (/주사/.test(s)) kind = 'inj';
+      if (/영양제|유산균|보조제|관절|오메가/.test(s)) kind = 'supp';
+
+      var side = '';
+      if (/우안|오른쪽 눈/.test(s)) side = '우안';
+      else if (/좌안|왼쪽 눈/.test(s)) side = '좌안';
+      else if (/양안|양쪽 눈/.test(s)) side = '양안';
+      if (kind === 'ear') {
+        if (/우이|오른쪽 귀/.test(s)) side = '우이';
+        else if (/좌이|왼쪽 귀/.test(s)) side = '좌이';
+        else if (/양이|양쪽 귀/.test(s)) side = '양이';
+      }
+      out.push({ name: name, kind: kind, side: side, freq: freq || 0, days: days || 0 });
+    });
+    return out;
+  }
+  function fillFromComment() {
+    var txt = $('#paste').value;
+    var list = parseComment(txt);
+    if (!list.length) { G.toast('번호와 횟수를 찾지 못했습니다 — "31번 하루 두 번"처럼 적어 주세요'); return; }
+    state.meds = (state.meds || []).filter(function (m) { return m.name; });
+    list.forEach(function (p) {
+      var exists = state.meds.filter(function (m) { return m.name === p.name && m.kind === p.kind; })[0];
+      if (exists) {
+        if (p.freq) { exists.freq = p.freq; exists.times = (DEF_TIMES[p.freq] || DEF_TIMES[2]).slice(); }
+        if (p.days) exists.days = p.days;
+        if (p.side) exists.side = p.side;
+        return;
+      }
+      var m = newMed(p.kind, state.meds);
+      m.name = p.name;
+      m.side = p.side || '';
+      m.freq = p.freq || 2;
+      m.times = (DEF_TIMES[m.freq] || DEF_TIMES[2]).slice();
+      m.days = p.days || 7;
+      if (m.kind === 'eye') m.form = '액';
+      state.meds.push(m);
+    });
+    if (!state.meds.length) state.meds.push(newMed('oral'));
+    saveState(); renderMeds(); renderSchedule(); refreshSummary(); syncSoon();
+    G.toast(list.length + '개 약을 표에 채웠습니다 — 확인해 주세요');
+  }
+
+  /* ================= 요약 · 링크 · 문구 ================= */
+  function refreshSummary() {
+    var list = (state.meds || []).filter(function (m) { return m.name; });
+    var days = list.reduce(function (a, m) { return Math.max(a, m.days || 0); }, 0);
+    var longest = list.slice().sort(function (a, b) { return (b.days || 0) - (a.days || 0); })[0];
+    $('#mKinds').textContent = list.length;
+    $('#mDays').textContent = days;
+    $('#mLong').textContent = longest ? longest.name + ' (' + (longest.days || 0) + '일)' : '-';
+    var n = 0;
+    var map = slotMap(G.isoDate(startDate()));
+    Object.keys(map).forEach(function (t) { n += map[t].all.length; });
+    $('#mChecks').textContent = n;
+  }
+  function guardUrl() {
+    var base = location.origin + location.pathname;
+    var q = [];
+    if (state.pet) q.push('pet=' + encodeURIComponent(state.pet));
+    if (state.guardian) q.push('guardian=' + encodeURIComponent(state.guardian));
+    return base + (q.length ? '?' + q.join('&') : '');
+  }
+  function renderLink() {
+    $('#guardLink').textContent = state.pet ? guardUrl() : '아이 이름을 넣으면 링크가 만들어집니다.';
+  }
+
+  function slotLines(compact) {
+    var map = slotMap(G.isoDate(startDate()));
+    var lines = [];
+    Object.keys(map).sort().forEach(function (t) {
+      var parts = [];
+      map[t].others.forEach(function (m) {
+        var pre = m.kind === 'supp' ? '[보조제] ' : (m.kind === 'inj' ? '[주사] ' : (m.kind === 'oint' ? '[연고] ' : ''));
+        parts.push(pre + m.name + (m.dose && !compact ? ' ' + m.dose : ''));
+      });
+      if (map[t].eyes.length) {
+        parts.push(map[t].eyes.map(function (m, i) {
+          return (i ? '→ ' + state.interval + '분 후 ' : '') + m.name + ' ' + (m.side ? m.side + ' ' : '') + (m.dose || '1방울');
+        }).join(' '));
+      }
+      lines.push((compact ? t.replace(':00', '시') : t) + ' — ' + parts.join(' / '));
+    });
+    return lines;
   }
 
   var kit = G.outKit({
-    num: 3,
+    num: 5,
     title: '보호자에게 보낼 복약 안내',
-    sub: '400자 이내 · 약 이름·횟수·일수만 분명하게',
-    build: function () {
+    sub: '400자 이내 · 시간대·안약 순서까지',
+    build: function (st) {
       var d = G.settings();
-      var g = ($('#guardian').value || '').trim() || '보호자';
-      var p = ($('#pet').value || '').trim() || '우리 아이';
-      var list = meds();
+      var g = (state.guardian || '').trim() || '보호자';
+      var p = (state.pet || '').trim() || '우리 아이';
+      var link = (st && st.short) ? st.short : guardUrl();
       var head = '🐾 ' + g + '님, ' + p + ' 복약 안내입니다.\n\n';
-      if (!list.length) return head + '처방 약을 위 표에 적으면 복약 안내가 만들어집니다.\n- ' + d.hospital;
-      var lines = list.map(function (m) {
-        return '· ' + m.name + ' — ' + m.dose + ', 하루 ' + m.freq + '회, ' + m.days + '일';
-      });
-      var body = lines.join('\n') + '\n\n' + $('#meal').value + '에 먹입니다. ' + $('#start').value + ' 시작합니다.\n';
-      var extra = ($('#extra').value || '').trim();
-      var tail = (extra ? '· ' + extra + '\n' : '') +
-        '\n빠뜨린 약이 있으면 두 배로 먹이지 말고 병원에 먼저 전화해 주세요.\n문의: ' + (d.phone || '') + '\n- ' + d.hospital;
-      var text = head + body + tail;
-      return G.count(text) > 400 ? G.cut(head + body, 400 - G.count(tail) - 2) + tail : text;
+      var lines = slotLines(false);
+      if (!lines.length) return head + '처방을 위에 적으면 복약 안내가 만들어집니다.\n- ' + d.hospital;
+      var eyesN = (state.meds || []).filter(function (m) { return m.name && (m.kind === 'eye' || m.kind === 'ear'); }).length;
+      var extra = (state.extra || '').trim();
+      var tail = (eyesN > 1 ? '\n안약은 한꺼번에 넣지 말고 ' + state.interval + '분 간격으로 순서대로 넣어 주세요.' : '') +
+        '\n빠뜨렸으면 두 배로 먹이지 말고 병원에 먼저 전화해 주세요.' +
+        (extra ? '\n' + extra : '') +
+        '\n문의: ' + (d.phone || HOSPITAL_PHONE) +
+        '\n- ' + d.hospital +
+        '\n체크표: ' + link;
+      var text = head + lines.join('\n') + '\n' + tail;
+      if (G.count(text) > 400) {
+        text = head + slotLines(true).join('\n') + '\n' + tail;
+      }
+      if (G.count(text) > 400) {
+        var t2 = (eyesN > 1 ? '\n안약은 ' + state.interval + '분 간격으로 순서대로.' : '') +
+          '\n놓치면 두 배로 먹이지 말고 병원에 전화해 주세요.' +
+          '\n' + (d.phone || HOSPITAL_PHONE) +
+          '\n체크표: ' + link;
+        text = head + slotLines(true).join('\n') + '\n' + t2;
+      }
+      return text;
     },
+    link: function () { return guardUrl(); },
     noShort: true,
-    note: '보호자는 대개 <b>“하루 두 번”</b>까지만 기억합니다. 아침·저녁처럼 시간을 붙여 주세요.'
+    note: '보호자는 대개 <b>“하루 두 번”</b>까지만 기억합니다. 시간을 붙여 주고, 안약은 순서까지 적어 주세요.'
   });
 
-  function refresh() {
-    var list = meds();
-    var kinds = list.length;
-    var days = list.reduce(function (a, m) { return Math.max(a, m.days); }, 0);
-    var longest = list.slice().sort(function (a, b) { return b.days - a.days; })[0];
-    $('#mKinds').textContent = kinds;
-    $('#mDays').textContent = days;
-    $('#mLong').textContent = longest ? longest.name + ' (' + longest.days + '일)' : '-';
-    if (kit) kit.refresh();
+  /* ================= 이벤트 ================= */
+  function bindTop() {
+    ['#guardian', '#pet', '#date', '#extra'].forEach(function (sel) {
+      var el = $(sel);
+      el.addEventListener('input', function () {
+        if (sel === '#guardian') state.guardian = el.value;
+        if (sel === '#pet') { state.pet = el.value; lsSet(K_LAST, el.value); }
+        if (sel === '#date') state.date = el.value;
+        if (sel === '#extra') state.extra = el.value;
+        saveState(); refreshSummary(); renderSchedule(); renderLink(); kit.refresh(true);
+      });
+    });
+    ['#start', '#meal', '#interval'].forEach(function (sel) {
+      var el = $(sel);
+      el.addEventListener('change', function () {
+        if (sel === '#start') state.start = el.value;
+        if (sel === '#meal') state.meal = el.value;
+        if (sel === '#interval') state.interval = parseInt(el.value, 10) || 5;
+        saveState(); refreshSummary(); renderSchedule(); kit.refresh(true); scheduleNoti();
+      });
+    });
+    qa('[data-add]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.meds.push(newMed(b.getAttribute('data-add'), state.meds));
+        saveState(); renderMeds(); refreshSummary(); renderSchedule();
+      });
+    });
+    $('#pasteFill').addEventListener('click', fillFromComment);
   }
-  refresh();
-  try { G.prefill(); } catch (e) {}
+
+  function bindMeds() {
+    var host = $('#medList');
+    host.addEventListener('input', function (e) {
+      var card = e.target.closest ? e.target.closest('.gk-med') : null;
+      if (!card) return;
+      var m = findMed(card.getAttribute('data-id'));
+      if (!m) return;
+      var t = e.target;
+      if (t.classList.contains('gk-name')) m.name = t.value;
+      else if (t.classList.contains('gk-dose')) m.dose = t.value;
+      else if (t.classList.contains('gk-days')) m.days = parseInt(t.value, 10) || 0;
+      else if (t.classList.contains('gk-note')) m.note = t.value;
+      else if (t.classList.contains('gk-seq')) m.seq = parseInt(t.value, 10) || 0;
+      else if (t.classList.contains('gk-time')) {
+        var i = parseInt(t.getAttribute('data-i'), 10);
+        var arr = timesOf(m).slice();
+        if (/^\d{2}:\d{2}$/.test(t.value)) { arr[i] = t.value; m.times = arr.sort(); }
+      } else return;
+      saveState(); refreshSummary(); renderSchedule();
+      clearTimeout(kitTimer); kitTimer = setTimeout(function () { kit.refresh(true); }, 500);
+    });
+    host.addEventListener('change', function (e) {
+      var card = e.target.closest ? e.target.closest('.gk-med') : null;
+      if (!card) return;
+      var m = findMed(card.getAttribute('data-id'));
+      if (!m) return;
+      var t = e.target;
+      if (t.classList.contains('gk-kind')) {
+        m.kind = t.value;
+        if (m.kind === 'eye' || m.kind === 'ear') {
+          if (!m.dose || m.dose === '1정') m.dose = '1방울';
+          if (!m.seq) m.seq = (state.meds.filter(function (x) { return x.kind === 'eye' || x.kind === 'ear'; }).length);
+        }
+      } else if (t.classList.contains('gk-freq')) {
+        m.freq = parseInt(t.value, 10) || 1;
+        m.times = (DEF_TIMES[m.freq] || DEF_TIMES[2]).slice();
+      } else if (t.classList.contains('gk-form')) m.form = t.value;
+      else if (t.classList.contains('gk-side')) m.side = t.value;
+      else if (t.classList.contains('gk-cap-sel') && !t.classList.contains('gk-meal-sel')) m.cap = t.value;
+      else if (t.classList.contains('gk-meal-sel')) m.meal = t.value;
+      else return;
+      saveState(); renderMeds(); refreshSummary(); renderSchedule(); kit.refresh(true); syncSoon(); scheduleNoti();
+    });
+    host.addEventListener('click', function (e) {
+      var del = e.target.closest ? e.target.closest('[data-del]') : null;
+      if (del) {
+        var id = del.getAttribute('data-del');
+        if (state.meds.length <= 1) {
+          state.meds = [newMed('oral')];
+        } else {
+          state.meds = state.meds.filter(function (m) { return m.id !== id; });
+        }
+        saveState(); renderMeds(); refreshSummary(); renderSchedule(); return;
+      }
+      var auto = e.target.closest ? e.target.closest('[data-auto]') : null;
+      if (auto) {
+        var m2 = findMed(auto.getAttribute('data-auto'));
+        if (m2) { m2.times = (DEF_TIMES[m2.freq] || DEF_TIMES[2]).slice(); saveState(); renderMeds(); renderSchedule(); }
+        return;
+      }
+      var ph = e.target.closest ? e.target.closest('[data-photo]') : null;
+      if (ph) { pendingPhoto = ph.getAttribute('data-photo'); $('#photoIn').value = ''; $('#photoIn').click(); return; }
+      var th = e.target.closest ? e.target.closest('[data-thumb]') : null;
+      if (th) { var m3 = findMed(th.getAttribute('data-thumb')); if (m3 && m3.photo) openView(m3.photo); }
+    });
+    $('#photoIn').addEventListener('change', function (e) {
+      if (e.target.files && e.target.files[0]) onPhoto(e.target.files[0]);
+      e.target.value = '';
+    });
+  }
+
+  function bindSchedule() {
+    $('#sched').addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-chk],[data-undo],[data-view]') : null;
+      if (!b) return;
+      if (b.hasAttribute('data-chk')) {
+        mark(b.getAttribute('data-chk'), b.getAttribute('data-slot'), b.getAttribute('data-med'));
+      } else if (b.hasAttribute('data-undo')) {
+        chkSet(b.getAttribute('data-undo'), null);
+        renderSchedule(); syncSoon();
+        G.toast('되돌렸습니다 — 다시 체크할 수 있어요');
+      } else if (b.hasAttribute('data-view')) {
+        var m = findMed(b.getAttribute('data-view'));
+        if (m && m.photo) openView(m.photo);
+      }
+    });
+    qa('.gk-date-nav button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var d = parseInt(b.getAttribute('data-day'), 10) || 0;
+        viewDate = G.isoDate(G.addDays(new Date(), d));
+        qa('.gk-date-nav button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        renderSchedule();
+      });
+    });
+    $('#notiBtn').addEventListener('click', askNoti);
+    $('#notiTest').addEventListener('click', testNoti);
+    $('#icsBtn').addEventListener('click', downloadICS);
+    $('#pwaBtn').addEventListener('click', function () {
+      G.toast('브라우저 메뉴(⋮) → 홈 화면에 추가를 눌러 주세요');
+      if (window.G_PWA && window.G_PWA.standalone && window.G_PWA.standalone()) G.toast('이미 앱으로 열려 있습니다');
+    });
+    $('#copyLink').addEventListener('click', function () {
+      G.copy(guardUrl()).then(function (ok) { G.toast(ok ? '링크를 복사했습니다' : '복사가 막혔어요 — 길게 눌러 복사해 주세요'); });
+    });
+    $('#shareLink').addEventListener('click', function () { G.share('🐾 ' + (state.pet || '') + ' 복약 표: ' + guardUrl()); });
+    $('#saveRx').addEventListener('click', function () {
+      saveState(); syncNow();
+      G.toast('처방을 저장했습니다');
+    });
+    $('#gkViewX').addEventListener('click', closeView);
+    $('#gk-view').addEventListener('click', function (e) { if (e.target.id === 'gk-view') closeView(); });
+    window.addEventListener('message', function (e) {
+      var d = e.data || {};
+      if (d.type === 'gkn-slot' && d.slot) { jumpSlot(d.slot); }
+    });
+  }
+  function openView(src) { $('#gkViewImg').src = src; $('#gk-view').classList.add('on'); }
+  function closeView() { $('#gk-view').classList.remove('on'); $('#gkViewImg').src = ''; }
+  function jumpSlot(slot) {
+    var id = 'slot-' + String(slot).replace(':', '');
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.style.outline = '3px solid #e2567f';
+    setTimeout(function () { el.style.outline = ''; }, 2500);
+  }
+
+  var kitTimer = null;
+
+  /* ================= 시작 ================= */
+  state = loadState();
+  saveState();
+
+  $('#date').value = state.date || G.today();
+  $('#guardian').value = state.guardian || '';
+  $('#pet').value = state.pet || '';
+  $('#start').value = state.start || '오늘 저녁부터';
+  $('#meal').value = state.meal || '식후 30분';
+  $('#interval').value = String(state.interval || 5);
+  $('#extra').value = state.extra || '';
+
+  if (linked) {
+    $('#pet').setAttribute('readonly', 'readonly');
+    $('#pet').style.background = '#eef7fb';
+  }
+
+  bindTop();
+  bindMeds();
+  bindSchedule();
+  renderMeds();
+  refreshSummary();
+  renderSchedule();
+  renderLink();
+  notiBox();
+  scheduleNoti();
+  kit.refresh(true);
+  pullRx();
+
+  if (qSlot) {
+    setTimeout(function () { jumpSlot(qSlot); }, 400);
+  }
+
+  /* 30초마다 시간표만 갱신 (남은 간격·지금 표시) */
+  setInterval(function () {
+    if (document.hidden) return;
+    renderSchedule();
+    notiBox();
+  }, 30000);
+
+  /* 웹 알림이 꺼져 있으면 조용히 한 번만 안내 */
+  window.GKN = {
+    state: function () { return state; },
+    ics: icsText,
+    sync: syncNow,
+    parse: parseComment
+  };
 })();
 
 </script>
