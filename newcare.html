@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/g-common.css?v=20261128g">
-<link rel="stylesheet" href="assets/g-newpages.css?v=20261128b">
+<link rel="stylesheet" href="assets/g-newpages.css?v=20261128c">
 </head>
 <body data-code="NEWCARE">
 <div id="g-top"></div>
@@ -148,8 +148,8 @@
 </div>
 
 <script src="assets/g-common.js?v=20261128g"></script>
-<script src="assets/g-care-data.js?v=20261128b"></script>
-<script src="assets/g-care-core.js?v=20261128b"></script>
+<script src="assets/g-care-data.js?v=20261128c"></script>
+<script src="assets/g-care-core.js?v=20261128c"></script>
 <script>
 (function () {
   var $ = G.q, C = G_CARE_CORE;
@@ -196,7 +196,7 @@
 
   function renderAll() {
     var sym = current();
-    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var item = (sym.itemId && itemOf(sym.itemId)) || customItem(sym);
     var isCustom = custom.some(function (s) { return s.id === sym.id; });
 
     $('#symInfo').innerHTML =
@@ -331,14 +331,14 @@
   });
   $('#copyQuizQ').addEventListener('click', function () {
     var sym = current();
-    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var item = (sym.itemId && itemOf(sym.itemId)) || customItem(sym);
     var quiz = item && item.status === 'verified' ? C.generateQuiz(item, allItems()) : [];
     if (!quiz.length) { G.toast('이 증상은 연결된 제품 근거가 없어 퀴즈가 없습니다'); return; }
     G.copy(C.quizQuestionsText(quiz, '🍀 신제품')).then(function (ok) { G.toast(ok ? '직원에게 보낼 문제를 복사했어요 (정답 제외)' : '복사가 막혔어요'); });
   });
   $('#copyQuizA').addEventListener('click', function () {
     var sym = current();
-    var item = sym.itemId ? itemOf(sym.itemId) : customItem(sym);
+    var item = (sym.itemId && itemOf(sym.itemId)) || customItem(sym);
     var quiz = item && item.status === 'verified' ? C.generateQuiz(item, allItems()) : [];
     if (!quiz.length) { G.toast('이 증상은 연결된 제품 근거가 없어 퀴즈가 없습니다'); return; }
     G.copy(C.quizAnswersText(quiz)).then(function (ok) { G.toast(ok ? '정답·해설을 복사했어요 (실장님 보관용)' : '복사가 막혔어요'); });

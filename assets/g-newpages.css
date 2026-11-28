@@ -95,7 +95,7 @@
 .qi .ans{margin-top:7px;font-size:13px;line-height:1.55;color:var(--ok);font-weight:800}
 .qi .ans .why{display:block;color:var(--ink-soft);font-weight:600;margin-top:2px}
 .qi .ans .hint{display:block;color:var(--muted);font-weight:600;font-size:12.5px}
-.qi.hide .ans,.qi.hide .opts{display:none}
+.qi.hide .ans{display:none}
 
 /* ---------- 근거 표 ---------- */
 .facts{margin-top:6px}
